@@ -106,7 +106,7 @@ export default function Hero() {
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
                 alt="Locksy Extension"
-                className="relative h-96 w-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                className="relative h-48 sm:h-64 md:h-80 lg:h-96 w-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
