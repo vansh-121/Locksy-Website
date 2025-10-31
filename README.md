@@ -1,9 +1,6 @@
 # 🔐 Locksy - Tab Protection Extension Website
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/kiediieibclgkcnkkmjlhmdainpoidim?label=Chrome%20Web%20Store&logo=google-chrome&logoColor=white&color=4285F4)](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
-[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/kiediieibclgkcnkkmjlhmdainpoidim?label=Users&logo=google-chrome&logoColor=white&color=34A853)](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
-[![Chrome Web Store Rating](https://img.shields.io/chrome-web-store/rating/kiediieibclgkcnkkmjlhmdainpoidim?label=Rating&logo=google-chrome&logoColor=white&color=FBBC04)](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vansh-121/Locksy-Website)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://locksy.vercel.app)
 
 Official landing page for **Locksy** - A powerful browser extension that provides military-grade tab protection with SHA-256 encryption.
