@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-6">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Locksy%20Logo-9NGIJHmj2xGARtJwVybmwl9f1hbtiZ.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
               alt="Locksy"
               className="h-12 w-auto"
             />
@@ -203,6 +203,40 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Browser Compatibility Section */}
+        <div className="mt-16 mb-12 text-center">
+          <h4 className="text-sm font-semibold text-neutral-400 mb-4">Compatible with All Chromium Browsers</h4>
+          <div className="flex flex-wrap items-center justify-center gap-8">
+            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
+              <img src="/browsers/chrome.png" alt="Chrome" className="w-6 h-6 opacity-70" />
+              <span className="text-sm">Chrome</span>
+            </div>
+            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
+              <img src="/browsers/edge.png" alt="Edge" className="w-6 h-6 opacity-70" />
+              <span className="text-sm">Edge</span>
+            </div>
+            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
+              <span className="text-lg">🦁</span>
+              <span className="text-sm">Brave</span>
+            </div>
+            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
+              <span className="text-lg">🎭</span>
+              <span className="text-sm">Opera</span>
+            </div>
+            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
+              <span className="text-lg">🌊</span>
+              <span className="text-sm">Vivaldi</span>
+            </div>
+            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
+              <span className="text-lg">🎯</span>
+              <span className="text-sm">Arc</span>
+            </div>
+            <div className="flex items-center gap-2 text-neutral-400">
+              <span className="text-sm">+ More</span>
+            </div>
           </div>
         </div>
 
