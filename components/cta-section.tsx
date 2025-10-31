@@ -15,7 +15,15 @@ export default function CTASection() {
             rel="noopener noreferrer"
             className="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
           >
-            Add to Chrome - Free Forever
+            Get for Chrome
+          </a>
+          <a
+            href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+          >
+            Get for Edge
           </a>
           <a
             href="https://github.com/vansh-121/Secure-Tab-Extension"

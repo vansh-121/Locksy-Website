@@ -1,6 +1,7 @@
 # 🔐 Locksy - Tab Protection Extension Website
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/kiediieibclgkcnkkmjlhmdainpoidim?label=Chrome%20Web%20Store&logo=google-chrome&logoColor=white&color=4285F4)](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
+[![Microsoft Edge Add-ons](https://img.shields.io/badge/Edge%20Add--ons-Available-0078D4?logo=microsoft-edge&logoColor=white)](https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://locksy.vercel.app)
 
 Official landing page for **Locksy** - A powerful browser extension that provides military-grade tab protection with SHA-256 encryption.
@@ -54,7 +55,8 @@ locksy-website/
 
 ## 🔗 Links
 
-- **Extension:** [Chrome Web Store](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
+- **Chrome:** [Chrome Web Store](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
+- **Edge:** [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn)
 - **Source Code:** [GitHub Repository](https://github.com/vansh-121/Secure-Tab-Extension)
 - **Report Issues:** [GitHub Issues](https://github.com/vansh-121/Locksy/issues)
 

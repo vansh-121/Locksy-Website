@@ -44,6 +44,17 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors flex items-center gap-2 group"
+                >
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Edge Add-ons
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://github.com/vansh-121/Secure-Tab-Extension"
                   target="_blank"
                   rel="noopener noreferrer"

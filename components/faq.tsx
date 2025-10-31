@@ -18,7 +18,7 @@ export default function FAQ() {
     },
     {
       q: "Does it work in incognito mode?",
-      a: 'Yes! Just enable "Allow in Incognito" in chrome://extensions/. Your master password works in both normal and incognito windows.',
+      a: 'Yes! Just enable "Allow in Incognito" in your browser\'s extension settings. Your master password works in both normal and incognito windows.',
     },
     {
       q: "Is my password safe?",

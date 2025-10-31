@@ -3,7 +3,7 @@ export default function HowItWorks() {
     {
       num: 1,
       title: "Install & Set Password",
-      desc: "Add Locksy to Chrome and create your master password in 30 seconds.",
+      desc: "Add Locksy to your browser and create your master password in 30 seconds.",
       icon: "🚀",
     },
     {
@@ -38,14 +38,22 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary inline-block"
           >
-            Try It Now - Add to Chrome
+            Get for Chrome
+          </a>
+          <a
+            href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary inline-block"
+          >
+            Get for Edge
           </a>
         </div>
       </div>

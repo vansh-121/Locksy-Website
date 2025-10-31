@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [showDownloadDropdown, setShowDownloadDropdown] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,23 +79,67 @@ export default function Header() {
           </a>
         </nav>
 
-        {/* CTA Button */}
-        <a
-          href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 group"
-        >
-          Add to Chrome
-          <svg
-            className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {/* CTA Button with Dropdown */}
+        <div className="hidden md:relative md:inline-block">
+          <button
+            onClick={() => setShowDownloadDropdown(!showDownloadDropdown)}
+            onBlur={() => setTimeout(() => setShowDownloadDropdown(false), 200)}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 group"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </a>
+            Install Now
+            <svg
+              className={`w-4 h-4 transition-transform ${showDownloadDropdown ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          {showDownloadDropdown && (
+            <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">
+              <a
+                href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors border-b border-border/30"
+              >
+                <img
+                  src="/browsers/chrome.png"
+                  alt="Chrome"
+                  className="w-8 h-8 object-contain"
+                />
+                <div className="flex-1">
+                  <div className="font-semibold text-foreground">Chrome</div>
+                  <div className="text-xs text-muted-foreground">Chrome Web Store</div>
+                </div>
+                <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a
+                href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors"
+              >
+                <img
+                  src="/browsers/edge.png"
+                  alt="Edge"
+                  className="w-8 h-8 object-contain"
+                />
+                <div className="flex-1">
+                  <div className="font-semibold text-foreground">Edge</div>
+                  <div className="text-xs text-muted-foreground">Edge Add-ons</div>
+                </div>
+                <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          )}
+        </div>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -151,12 +196,34 @@ export default function Header() {
               >
                 Contact Developer
               </a>
-              <a
-                href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                className="btn-primary text-center mt-4"
-              >
-                Add to Chrome
-              </a>
+              <div className="mt-4 space-y-2">
+                <a
+                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-center flex items-center justify-center gap-2"
+                >
+                  <img
+                    src="/browsers/chrome.png"
+                    alt="Chrome"
+                    className="w-5 h-5 object-contain"
+                  />
+                  Get for Chrome
+                </a>
+                <a
+                  href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-center flex items-center justify-center gap-2"
+                >
+                  <img
+                    src="/browsers/edge.png"
+                    alt="Edge"
+                    className="w-5 h-5 object-contain"
+                  />
+                  Get for Edge
+                </a>
+              </div>
             </div>
           </div>
         )}

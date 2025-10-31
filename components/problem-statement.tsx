@@ -12,7 +12,7 @@ export default function ProblemStatement() {
     <section className="py-24 md:py-32 bg-gradient-to-b from-background to-accent/50 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      
+
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-destructive/10 border border-destructive/20 rounded-full text-sm font-medium text-destructive backdrop-blur-sm mb-6">
@@ -46,7 +46,7 @@ export default function ProblemStatement() {
         <div className="relative group">
           {/* Glow effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary blur-2xl opacity-20 group-hover:opacity-30 transition-opacity" />
-          
+
           <div className="relative bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary rounded-3xl p-12 md:p-16 text-white text-center shadow-2xl shadow-primary/20">
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-3xl">
@@ -57,17 +57,30 @@ export default function ProblemStatement() {
             <p className="text-xl md:text-2xl opacity-95 mb-8 max-w-3xl mx-auto">
               Lock any tab with a password in seconds. Simple. Secure. Private.
             </p>
-            <a
-              href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:scale-105"
-            >
-              Get Protected Now
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:scale-105"
+              >
+                Get for Chrome
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+              <a
+                href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:scale-105"
+              >
+                Get for Edge
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
-              Now Available on Chrome Web Store
+              Now Available on Chrome & Edge
             </div>
 
             <div className="space-y-6">
@@ -40,13 +40,37 @@ export default function Hero() {
                 href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] p-2 border border-primary/10"
+                className="inline-flex items-center justify-center bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] px-6 py-3 border border-primary/10 group"
               >
-                <img
-                  src="https://developer.chrome.com/static/docs/webstore/branding/image/YT2Grfi9vEBa2wAPzhWa.png"
-                  alt="Available in the Chrome Web Store"
-                  className="h-14 w-auto"
-                />
+                <span className="flex items-center gap-3">
+                  <img
+                    src="/browsers/chrome.png"
+                    alt="Google Chrome"
+                    className="w-8 h-8 object-contain"
+                  />
+                  <span className="flex flex-col items-start">
+                    <span className="text-xs text-muted-foreground">Get it for</span>
+                    <span className="font-semibold text-foreground group-hover:text-primary transition-colors">Google Chrome</span>
+                  </span>
+                </span>
+              </a>
+              <a
+                href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] px-6 py-3 border border-primary/10 group"
+              >
+                <span className="flex items-center gap-3">
+                  <img
+                    src="/browsers/edge.png"
+                    alt="Microsoft Edge"
+                    className="w-8 h-8 object-contain"
+                  />
+                  <span className="flex flex-col items-start">
+                    <span className="text-xs text-muted-foreground">Get it for</span>
+                    <span className="font-semibold text-foreground group-hover:text-primary transition-colors">Microsoft Edge</span>
+                  </span>
+                </span>
               </a>
               <a
                 href="https://github.com/vansh-121/Secure-Tab-Extension"
@@ -55,52 +79,12 @@ export default function Hero() {
                 className="btn-secondary text-center group flex items-center justify-center"
               >
                 <span className="flex items-center justify-center gap-2">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
                     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
                   </svg>
                   View on GitHub
                 </span>
               </a>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-2 gap-4 pt-10 border-t border-border/50">
-              <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center text-2xl">
-                  ⭐
-                </div>
-                <div>
-                  <div className="font-bold text-foreground">5-Star Rating</div>
-                  <div className="text-sm text-muted-foreground">User Verified</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-2xl">
-                  🔒
-                </div>
-                <div>
-                  <div className="font-bold text-foreground">SHA-256</div>
-                  <div className="text-sm text-muted-foreground">Encrypted</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center text-2xl">
-                  📴
-                </div>
-                <div>
-                  <div className="font-bold text-foreground">100% Offline</div>
-                  <div className="text-sm text-muted-foreground">No Tracking</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center text-2xl">
-                  ✓
-                </div>
-                <div>
-                  <div className="font-bold text-foreground">Free Forever</div>
-                  <div className="text-sm text-muted-foreground">No Hidden Fees</div>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -114,6 +98,46 @@ export default function Hero() {
                 alt="Locksy Extension"
                 className="relative h-96 w-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
               />
+            </div>
+          </div>
+        </div>
+
+        {/* Trust Indicators - Full Width */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 mt-10 border-t border-border/50 z-10 relative">
+          <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
+            <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center text-2xl">
+              ⭐
+            </div>
+            <div>
+              <div className="font-bold text-foreground">5-Star Rating</div>
+              <div className="text-sm text-muted-foreground">User Verified</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
+            <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-2xl">
+              🔒
+            </div>
+            <div>
+              <div className="font-bold text-foreground">SHA-256</div>
+              <div className="text-sm text-muted-foreground">Encrypted</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
+            <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center text-2xl">
+              📴
+            </div>
+            <div>
+              <div className="font-bold text-foreground">100% Offline</div>
+              <div className="text-sm text-muted-foreground">No Tracking</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
+            <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center text-2xl">
+              ✓
+            </div>
+            <div>
+              <div className="font-bold text-foreground">Free Forever</div>
+              <div className="text-sm text-muted-foreground">No Hidden Fees</div>
             </div>
           </div>
         </div>
