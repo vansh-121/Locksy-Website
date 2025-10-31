@@ -18,7 +18,7 @@ export default function FAQ() {
     },
     {
       q: "Does it work in incognito mode?",
-      a: 'Yes! Just enable "Allow in Incognito" in chrome://extensions/. Your master password works in both normal and incognito windows.',
+      a: 'Yes! Just enable "Allow in Incognito" in your browser\'s extension settings. Your master password works in both normal and incognito windows.',
     },
     {
       q: "Is my password safe?",
@@ -27,6 +27,10 @@ export default function FAQ() {
     {
       q: "Can someone bypass the lock?",
       a: "No. Locksy has 8+ security layers that prevent all known bypass methods, including DevTools inspection and DOM tampering.",
+    },
+    {
+      q: "Which browsers are supported?",
+      a: "Locksy works on all Chromium-based browsers including Google Chrome, Microsoft Edge, Brave, Opera, Comet, Vivaldi, Arc, and many more. You can install it from the Chrome Web Store or Edge Add-ons store.",
     },
   ]
 
