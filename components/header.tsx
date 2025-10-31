@@ -1,11 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [showDownloadDropdown, setShowDownloadDropdown] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +15,20 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Click outside handler for dropdown
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDownloadDropdown(false)
+      }
+    }
+
+    if (showDownloadDropdown) {
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [showDownloadDropdown])
 
   return (
     <header
@@ -80,10 +95,9 @@ export default function Header() {
         </nav>
 
         {/* CTA Button with Dropdown */}
-        <div className="hidden md:relative md:inline-block">
+        <div ref={dropdownRef} className="hidden md:relative md:inline-block">
           <button
             onClick={() => setShowDownloadDropdown(!showDownloadDropdown)}
-            onBlur={() => setTimeout(() => setShowDownloadDropdown(false), 200)}
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 group"
           >
             Install Now
