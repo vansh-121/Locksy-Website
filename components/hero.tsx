@@ -40,20 +40,19 @@ export default function Hero() {
                 href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-center group"
+                className="inline-flex items-center justify-center bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] p-2 border border-primary/10"
               >
-                <span className="flex items-center justify-center gap-2">
-                  Add to Chrome - It's Free
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </span>
+                <img
+                  src="https://developer.chrome.com/static/docs/webstore/branding/image/YT2Grfi9vEBa2wAPzhWa.png"
+                  alt="Available in the Chrome Web Store"
+                  className="h-14 w-auto"
+                />
               </a>
               <a
                 href="https://github.com/vansh-121/Secure-Tab-Extension"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary text-center group"
+                className="btn-secondary text-center group flex items-center justify-center"
               >
                 <span className="flex items-center justify-center gap-2">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

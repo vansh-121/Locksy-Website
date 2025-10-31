@@ -4,7 +4,7 @@ export default function Footer() {
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      
+
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         {/* Logo and Description */}
         <div className="text-center mb-16">
@@ -115,9 +115,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:support@locksy.dev" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <a href="mailto:vansh.sethi98760@gmail.com" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Contact
+                  Contact Developer
                 </a>
               </li>
             </ul>
@@ -202,7 +202,7 @@ export default function Footer() {
               <p className="text-sm text-neutral-400 mb-1">© 2025 Locksy - Tab Protection Extension</p>
               <p className="text-xs text-neutral-500">Made with ❤️ for Privacy & Security</p>
             </div>
-            
+
             <div className="flex items-center gap-6">
               <a
                 href="https://github.com/vansh-121/Secure-Tab-Extension"
@@ -216,7 +216,7 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          
+
           <div className="text-center mt-8 pt-8 border-t border-neutral-800/30">
             <p className="text-sm text-neutral-500 italic">"Security is not a feature, it's a necessity."</p>
           </div>
