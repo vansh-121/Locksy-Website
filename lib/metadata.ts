@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { faqData } from './faq-data'
 
 const siteUrl = 'https://locksy.dev' // Update with your actual domain
 const siteName = 'Locksy'
@@ -172,46 +173,12 @@ export const jsonLdSoftwareApplication = {
 export const jsonLdFAQPage = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-        {
-            '@type': 'Question',
-            name: 'Is Locksy really free?',
-            acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Yes, Locksy is completely free forever. No hidden costs, no subscriptions, no premium features. All features are available to everyone at no cost.'
-            }
-        },
-        {
-            '@type': 'Question',
-            name: 'How secure is Locksy?',
-            acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Locksy uses military-grade AES-256 encryption, the same standard used by governments and financial institutions. Your passwords never leave your device, ensuring maximum security and privacy.'
-            }
-        },
-        {
-            '@type': 'Question',
-            name: 'Does Locksy work offline?',
-            acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Yes, Locksy works completely offline. No internet connection is required, and your data never leaves your device, ensuring complete privacy.'
-            }
-        },
-        {
-            '@type': 'Question',
-            name: 'Which browsers does Locksy support?',
-            acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Locksy is available for Google Chrome and Microsoft Edge browsers. Support for additional browsers may be added in the future.'
-            }
-        },
-        {
-            '@type': 'Question',
-            name: 'Can I recover my password if I forget it?',
-            acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'No, passwords cannot be recovered. This is by design to ensure maximum security. If you forget your password, you will need to close and reopen the tab. We recommend using memorable passwords.'
-            }
+    mainEntity: faqData.map(faq => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer
         }
-    ]
+    }))
 }

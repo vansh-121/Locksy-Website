@@ -1,39 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import { faqData } from "@/lib/faq-data"
 
 export default function FAQ() {
-  const faqs = [
-    {
-      q: "Is Locksy really free?",
-      a: "Yes, 100% free with no hidden fees, premium tiers, or subscriptions. It will always be free.",
-    },
-    {
-      q: "Do I need to create an account?",
-      a: "No account needed! Just install the extension, set your password, and start locking tabs.",
-    },
-    {
-      q: "What happens if I forget my password?",
-      a: "For security reasons, passwords cannot be recovered. You'll need to reset your password, which will unlock all currently locked tabs.",
-    },
-    {
-      q: "Does it work in incognito mode?",
-      a: 'Yes! Just enable "Allow in Incognito" in your browser\'s extension settings. Your master password works in both normal and incognito windows.',
-    },
-    {
-      q: "Is my password safe?",
-      a: "Absolutely. We use SHA-256 encryption (military-grade) and never store your actual password - only an encrypted hash.",
-    },
-    {
-      q: "Can someone bypass the lock?",
-      a: "No. Locksy has 8+ security layers that prevent all known bypass methods, including DevTools inspection and DOM tampering.",
-    },
-    {
-      q: "Which browsers are supported?",
-      a: "Locksy works on all Chromium-based browsers including Google Chrome, Microsoft Edge, Brave, Opera, Comet, Vivaldi, Arc, and many more. You can install it from the Chrome Web Store or Edge Add-ons store.",
-    },
-  ]
-
   const [openIdx, setOpenIdx] = useState<number | null>(null)
 
   return (
@@ -48,7 +18,7 @@ export default function FAQ() {
         <p className="text-lg text-neutral-300 text-center mb-12">Everything you need to know about Locksy.</p>
 
         <div className="space-y-3">
-          {faqs.map((faq, idx) => (
+          {faqData.map((faq, idx) => (
             <div 
               key={idx} 
               className="border border-neutral-700 rounded-lg overflow-hidden"
@@ -60,7 +30,7 @@ export default function FAQ() {
                 onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
                 className="w-full p-6 flex items-center justify-between hover:bg-neutral-700/50 transition"
               >
-                <span className="font-semibold text-lg" itemProp="name">{faq.q}</span>
+                <span className="font-semibold text-lg" itemProp="name">{faq.question}</span>
                 <span className={`text-2xl transition-transform ${openIdx === idx ? "rotate-45" : ""}`}>+</span>
               </button>
               {openIdx === idx && (
@@ -70,7 +40,7 @@ export default function FAQ() {
                   itemProp="acceptedAnswer" 
                   itemType="https://schema.org/Answer"
                 >
-                  <div itemProp="text">{faq.a}</div>
+                  <div itemProp="text">{faq.answer}</div>
                 </div>
               )}
             </div>
