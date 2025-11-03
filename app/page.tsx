@@ -9,21 +9,30 @@ import Testimonials from "@/components/testimonials"
 import FAQ from "@/components/faq"
 import CTASection from "@/components/cta-section"
 import Footer from "@/components/footer"
+import { jsonLdFAQPage } from "@/lib/metadata"
 
 export default function Home() {
   return (
-    <main className="w-full">
-      <Header />
-      <Hero />
-      <ProblemStatement />
-      <Features />
-      <HowItWorks />
-      <Security />
-      <Comparison />
-      <Testimonials />
-      <FAQ />
-      <CTASection />
-      <Footer />
-    </main>
+    <>
+      {/* FAQ Schema for rich snippets in search results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQPage) }}
+      />
+      
+      <main className="w-full" itemScope itemType="https://schema.org/WebPage">
+        <Header />
+        <Hero />
+        <ProblemStatement />
+        <Features />
+        <HowItWorks />
+        <Security />
+        <Comparison />
+        <Testimonials />
+        <FAQ />
+        <CTASection />
+        <Footer />
+      </main>
+    </>
   )
 }

@@ -1,16 +1,17 @@
 import type React from "react"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
+import { 
+  metadata as seoMetadata, 
+  jsonLdWebsite, 
+  jsonLdOrganization, 
+  jsonLdSoftwareApplication 
+} from "@/lib/metadata"
 
 const geist = Geist({ subsets: ["latin"] })
 const geistMono = Geist_Mono({ subsets: ["latin"] })
 
-export const metadata = {
-  title: "Locksy - Password-Protect Browser Tabs | Available for Chrome & Edge",
-  description:
-    "Lock any browser tab with a password. Military-grade security, 100% offline, free forever. Protect sensitive tabs on shared computers. Available for Chrome and Microsoft Edge.",
-  generator: 'v0.app'
-}
+export const metadata = seoMetadata
 
 export default function RootLayout({
   children,
@@ -19,6 +20,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="overflow-x-hidden">
+      <head>
+        {/* JSON-LD Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSoftwareApplication) }}
+        />
+      </head>
       <body className={`${geist.className} overflow-x-hidden`}>{children}</body>
     </html>
   )
