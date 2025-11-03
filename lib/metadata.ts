@@ -153,13 +153,6 @@ export const jsonLdSoftwareApplication = {
     softwareVersion: '1.0',
     browserRequirements: 'Requires Chrome or Microsoft Edge',
     screenshot: `${siteUrl}/screenshot.png`,
-    aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        ratingCount: '1250',
-        bestRating: '5',
-        worstRating: '1'
-    },
     featureList: [
         'Password protect any browser tab',
         'Military-grade AES-256 encryption',
