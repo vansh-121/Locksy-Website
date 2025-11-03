@@ -111,63 +111,63 @@ export default function Header() {
 
           {/* Install Now Button with Dropdown */}
           <div ref={dropdownRef} className="relative inline-block">
-          <button
-            onClick={() => setShowDownloadDropdown(!showDownloadDropdown)}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 group"
-          >
-            Install Now
-            <svg
-              className={`w-4 h-4 transition-transform ${showDownloadDropdown ? 'rotate-180' : ''}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <button
+              onClick={() => setShowDownloadDropdown(!showDownloadDropdown)}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 group"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
+              Install Now
+              <svg
+                className={`w-4 h-4 transition-transform ${showDownloadDropdown ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
-          {showDownloadDropdown && (
-            <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">
-              <a
-                href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors border-b border-border/30"
-              >
-                <img
-                  src="/browsers/chrome.png"
-                  alt="Chrome"
-                  className="w-8 h-8 object-contain"
-                />
-                <div className="flex-1">
-                  <div className="font-semibold text-foreground">Chrome</div>
-                  <div className="text-xs text-muted-foreground">Chrome Web Store</div>
-                </div>
-                <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-              <a
-                href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors"
-              >
-                <img
-                  src="/browsers/edge.png"
-                  alt="Edge"
-                  className="w-8 h-8 object-contain"
-                />
-                <div className="flex-1">
-                  <div className="font-semibold text-foreground">Edge</div>
-                  <div className="text-xs text-muted-foreground">Edge Add-ons</div>
-                </div>
-                <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          )}
+            {showDownloadDropdown && (
+              <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">
+                <a
+                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors border-b border-border/30"
+                >
+                  <img
+                    src="/browsers/chrome.png"
+                    alt="Chrome"
+                    className="w-8 h-8 object-contain"
+                  />
+                  <div className="flex-1">
+                    <div className="font-semibold text-foreground">Chrome</div>
+                    <div className="text-xs text-muted-foreground">Chrome Web Store</div>
+                  </div>
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a
+                  href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors"
+                >
+                  <img
+                    src="/browsers/edge.png"
+                    alt="Edge"
+                    className="w-8 h-8 object-contain"
+                  />
+                  <div className="flex-1">
+                    <div className="font-semibold text-foreground">Edge</div>
+                    <div className="text-xs text-muted-foreground">Edge Add-ons</div>
+                  </div>
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
         </div>
 

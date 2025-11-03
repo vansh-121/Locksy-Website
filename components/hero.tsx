@@ -49,8 +49,8 @@ export default function Hero() {
                     className="w-6 h-6 sm:w-8 sm:h-8 object-contain flex-shrink-0"
                   />
                   <span className="flex flex-col items-start">
-                    <span className="text-xs text-muted-foreground">Get it for</span>
-                    <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors">Google Chrome</span>
+                    <span className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors">Get it for</span>
+                    <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-white transition-colors">Google Chrome</span>
                   </span>
                 </span>
               </a>
@@ -67,8 +67,8 @@ export default function Hero() {
                     className="w-6 h-6 sm:w-8 sm:h-8 object-contain flex-shrink-0"
                   />
                   <span className="flex flex-col items-start">
-                    <span className="text-xs text-muted-foreground">Get it for</span>
-                    <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors">Microsoft Edge</span>
+                    <span className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors">Get it for</span>
+                    <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-white transition-colors">Microsoft Edge</span>
                   </span>
                 </span>
               </a>
