@@ -125,11 +125,20 @@
 
 @layer components {
   .btn-primary {
-    @apply px-8 py-4 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02];
+    @apply px-4 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02];
   }
 
   .btn-secondary {
-    @apply px-8 py-4 bg-white border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+    @apply px-4 py-3 sm:px-8 sm:py-4 bg-white border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+  }
+
+  /* Size variants for CTAs (optional) */
+  .btn-lg {
+    @apply px-6 py-4 sm:px-12 sm:py-5 text-base sm:text-lg;
+  }
+
+  .btn-sm {
+    @apply px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm;
   }
 
   .feature-card {
