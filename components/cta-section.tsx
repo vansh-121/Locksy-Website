@@ -53,7 +53,9 @@ export default function CTASection() {
             Report Issue
           </a>
           <a
-            href="/privacy-policy"
+            href="https://github.com/vansh-121/Locksy/blob/main/PRIVACY.md"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
           >
             Privacy Policy
