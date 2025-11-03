@@ -34,13 +34,13 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
+            {/* CTAs - All 4 buttons in one container */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
               <a
                 href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] px-4 sm:px-6 py-3 border border-primary/10 group w-full sm:w-auto"
+                className="btn-secondary inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group"
               >
                 <span className="flex items-center gap-2 sm:gap-3">
                   <img
@@ -49,8 +49,8 @@ export default function Hero() {
                     className="w-6 h-6 sm:w-8 sm:h-8 object-contain flex-shrink-0"
                   />
                   <span className="flex flex-col items-start">
-                    <span className="text-xs text-muted-foreground">Get it for</span>
-                    <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors">Google Chrome</span>
+                    <span className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors">Get it for</span>
+                    <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-white transition-colors">Google Chrome</span>
                   </span>
                 </span>
               </a>
@@ -58,7 +58,7 @@ export default function Hero() {
                 href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] px-4 sm:px-6 py-3 border border-primary/10 group w-full sm:w-auto"
+                className="btn-secondary inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group"
               >
                 <span className="flex items-center gap-2 sm:gap-3">
                   <img
@@ -67,16 +67,29 @@ export default function Hero() {
                     className="w-6 h-6 sm:w-8 sm:h-8 object-contain flex-shrink-0"
                   />
                   <span className="flex flex-col items-start">
-                    <span className="text-xs text-muted-foreground">Get it for</span>
-                    <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors">Microsoft Edge</span>
+                    <span className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors">Get it for</span>
+                    <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-white transition-colors">Microsoft Edge</span>
                   </span>
+                </span>
+              </a>
+              <a
+                href="https://www.youtube.com/watch?v=C99yuKTqEFA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary text-center group flex items-center justify-center"
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                  <span className="text-sm sm:text-base">Watch Tutorial</span>
                 </span>
               </a>
               <a
                 href="https://github.com/vansh-121/Secure-Tab-Extension"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary text-center group flex items-center justify-center px-4 sm:px-6 py-3 w-full sm:w-auto"
+                className="btn-secondary text-center group flex items-center justify-center"
               >
                 <span className="flex items-center justify-center gap-2">
                   <svg className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -107,6 +120,29 @@ export default function Hero() {
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
                 alt="Locksy Extension"
                 className="relative h-48 sm:h-64 md:h-80 lg:h-96 w-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Video Demo Section */}
+        <div className="mt-16 z-10 relative">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              See Locksy in Action
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Watch how easy it is to protect your browser tabs
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20 bg-black">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/C99yuKTqEFA"
+                title="Locksy Extension Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
               />
             </div>
           </div>
