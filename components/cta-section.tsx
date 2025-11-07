@@ -1,3 +1,5 @@
+import Link from "next/dist/client/link";
+
 export default function CTASection() {
   return (
     <section className="py-20 md:py-32 bg-gradient-to-r from-primary via-secondary to-primary">
@@ -52,14 +54,12 @@ export default function CTASection() {
           >
             Report Issue
           </a>
-          <a
+          <Link
             href="/privacy-policy"
-            target="_blank"
-            rel="noopener noreferrer"
             className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
           >
             Privacy Policy
-          </a>
+          </Link>
         </div>
 
         <p className="text-sm opacity-80 mb-8">
