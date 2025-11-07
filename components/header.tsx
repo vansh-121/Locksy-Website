@@ -228,7 +228,7 @@ export default function Header() {
                 className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Report / Request
+                Report Issue
               </a>
               <a
                 href="mailto:vansh.sethi98760@gmail.com"
