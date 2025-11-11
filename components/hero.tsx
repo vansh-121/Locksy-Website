@@ -1,3 +1,5 @@
+import ProductHuntBadge from "@/components/product-hunt-badge"
+
 export default function Hero() {
   return (
     <section className="relative py-24 md:py-40 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
@@ -98,6 +100,11 @@ export default function Hero() {
                   <span className="text-sm sm:text-base">View on GitHub</span>
                 </span>
               </a>
+            </div>
+
+            {/* Product Hunt Badge - Centered */}
+            <div className="flex justify-center -mt-2">
+              <ProductHuntBadge />
             </div>
 
             {/* Browser Compatibility Note */}
