@@ -14,13 +14,22 @@ export default function Hero() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left: Content */}
           <div className="space-y-10 z-10">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              Available for All Chromium Browsers
+            {/* Badges */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="#domain-lock"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+              >
+                <span>🆕</span>
+                NEW: Domain Lock Feature
+              </a>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                All Chromium Browsers
+              </div>
             </div>
 
             <div className="space-y-6">
@@ -32,7 +41,7 @@ export default function Hero() {
                 Protection
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Password-protect any browser tab in one click. Ultimate privacy, zero compromise.
+                Password-protect any browser tab or lock entire domains with persistent protection. Ultimate privacy, zero compromise.
               </p>
             </div>
 

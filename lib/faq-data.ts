@@ -8,6 +8,10 @@ export interface FAQItem {
 
 export const faqData: FAQItem[] = [
   {
+    question: "What is Domain Lock?",
+    answer: "Domain Lock lets you lock all tabs matching a domain pattern (like *.google.com or github.com). New tabs matching locked domains are automatically protected, and locks persist across browser restarts. You can manage unlock preferences for each domain.",
+  },
+  {
     question: "Is Locksy really free?",
     answer: "Yes, 100% free with no hidden fees, premium tiers, or subscriptions. It will always be free.",
   },
@@ -30,6 +34,10 @@ export const faqData: FAQItem[] = [
   {
     question: "Can someone bypass the lock?",
     answer: "No. Locksy has 8+ security layers that prevent all known bypass methods, including DevTools inspection and DOM tampering.",
+  },
+  {
+    question: "How do wildcard domain patterns work?",
+    answer: "Use *.example.com to lock all subdomains of example.com (like mail.example.com, docs.example.com). Or use just example.com to lock only that specific domain. Wildcard patterns give you flexible, powerful protection.",
   },
   {
     question: "Which browsers are supported?",

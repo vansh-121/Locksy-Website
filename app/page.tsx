@@ -1,5 +1,6 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
+import DomainLock from "@/components/domain-lock"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
 import HowItWorks from "@/components/how-it-works"
@@ -23,6 +24,9 @@ export default function Home() {
       <main className="w-full" itemScope itemType="https://schema.org/WebPage">
         <Header />
         <Hero />
+        <div id="domain-lock">
+          <DomainLock />
+        </div>
         <ProblemStatement />
         <Features />
         <HowItWorks />
