@@ -1,10 +1,16 @@
 export default function Features() {
   const features = [
     {
+      icon: "🌐",
+      title: "Domain Lock",
+      desc: "Lock entire domains with wildcard patterns. Auto-lock new tabs matching locked domains with persistent protection.",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
       icon: "🔐",
       title: "One-Click Locking",
       desc: "Lock any tab instantly with a single click. No complex setup needed.",
-      gradient: "from-blue-500 to-cyan-500",
+      gradient: "from-cyan-500 to-teal-500",
     },
     {
       icon: "🔒",
@@ -36,16 +42,16 @@ export default function Features() {
       desc: "Everything stored locally on your device. No data sent to servers.",
       gradient: "from-indigo-500 to-blue-500",
     },
-    {
-      icon: "🎨",
-      title: "Modern UI",
-      desc: "Beautiful gradient interface with smooth animations.",
-      gradient: "from-pink-500 to-purple-500",
-    },
+    // {
+    //   icon: "🎨",
+    //   title: "Modern UI",
+    //   desc: "Beautiful gradient interface with smooth animations.",
+    //   gradient: "from-pink-500 to-purple-500",
+    // },
     {
       icon: "🔄",
-      title: "Cross-Window Protection",
-      desc: "One master password protects tabs across all windows.",
+      title: "Smart Unlock Preferences",
+      desc: "Choose to unlock just the current tab or all tabs for a domain. Locksy remembers your preference.",
       gradient: "from-teal-500 to-cyan-500",
     },
     {
@@ -60,7 +66,7 @@ export default function Features() {
     <section id="features" className="py-24 md:py-32 bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      
+
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-6">
@@ -81,7 +87,7 @@ export default function Features() {
             >
               {/* Gradient overlay on hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-              
+
               <div className="relative z-10">
                 <div className={`inline-flex w-16 h-16 items-center justify-center text-4xl mb-6 bg-gradient-to-br ${feature.gradient} rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-500`}>
                   {feature.icon}
