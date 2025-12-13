@@ -1,6 +1,18 @@
 export default function Features() {
   const features = [
     {
+      icon: "⌨️",
+      title: "Keyboard Shortcuts",
+      desc: "Lock tabs instantly with Alt+Shift+9, open manager with Alt+Shift+0, or lock all tabs with Alt+Shift+8. Fully customizable shortcuts.",
+      gradient: "from-violet-500 to-purple-500",
+    },
+    {
+      icon: "🎨",
+      title: "Visual Lock Indicators",
+      desc: "Red lock icon on tab favicons and real-time badge counter on extension icon. Always know which tabs are protected at a glance.",
+      gradient: "from-rose-500 to-pink-500",
+    },
+    {
       icon: "🌐",
       title: "Domain Lock",
       desc: "Lock entire domains with wildcard patterns. Auto-lock new tabs matching locked domains with persistent protection.",
@@ -42,12 +54,12 @@ export default function Features() {
       desc: "Everything stored locally on your device. No data sent to servers.",
       gradient: "from-indigo-500 to-blue-500",
     },
-    // {
-    //   icon: "🎨",
-    //   title: "Modern UI",
-    //   desc: "Beautiful gradient interface with smooth animations.",
-    //   gradient: "from-pink-500 to-purple-500",
-    // },
+    {
+      icon: "🎨",
+      title: "Modern UI",
+      desc: "Beautiful gradient interface with smooth animations.",
+      gradient: "from-pink-500 to-purple-500",
+    },
     {
       icon: "🔄",
       title: "Smart Unlock Preferences",

@@ -3,6 +3,7 @@ import Hero from "@/components/hero"
 import DomainLock from "@/components/domain-lock"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
+import KeyboardShortcuts from "@/components/keyboard-shortcuts"
 import HowItWorks from "@/components/how-it-works"
 import Security from "@/components/security"
 import Comparison from "@/components/comparison"
@@ -20,7 +21,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQPage) }}
       />
-      
+
       <main className="w-full" itemScope itemType="https://schema.org/WebPage">
         <Header />
         <Hero />
@@ -29,6 +30,7 @@ export default function Home() {
         </div>
         <ProblemStatement />
         <Features />
+        <KeyboardShortcuts />
         <HowItWorks />
         <Security />
         <Comparison />
