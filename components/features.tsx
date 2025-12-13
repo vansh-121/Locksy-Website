@@ -82,7 +82,7 @@ export default function Features() {
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-6">
-            <span>✨</span>
+            <span aria-hidden="true">✨</span>
             Powerful Features
           </div>
           <h2 className="section-title">Everything You Need.<br />Nothing You Don't.</h2>
@@ -102,7 +102,7 @@ export default function Features() {
 
               <div className="relative z-10">
                 <div className={`inline-flex w-16 h-16 items-center justify-center text-4xl mb-6 bg-gradient-to-br ${feature.gradient} rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-                  {feature.icon}
+                  <span aria-hidden="true">{feature.icon}</span>
                 </div>
                 <h3 className="font-bold text-xl mb-3 text-foreground group-hover:text-primary transition-colors">
                   {feature.title}
