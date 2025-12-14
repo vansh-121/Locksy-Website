@@ -2,6 +2,44 @@
 
 import { useState, useEffect, useRef } from "react"
 
+const PRIMARY_BROWSERS = [
+  {
+    name: "Chrome",
+    icon: "/browsers/chrome.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+    storeName: "Chrome Web Store",
+  },
+  {
+    name: "Edge",
+    icon: "/browsers/edge.png",
+    url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
+    storeName: "Edge Add-ons",
+  },
+]
+
+const SECONDARY_BROWSERS = [
+  {
+    name: "Brave",
+    icon: "/browsers/brave.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+  {
+    name: "Opera",
+    icon: "/browsers/opera.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+  {
+    name: "Comet",
+    icon: "/browsers/comet.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+  {
+    name: "Vivaldi",
+    icon: "/browsers/vivaldi.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+]
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -33,8 +71,8 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled
-        ? "bg-white/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
-        : "bg-transparent"
+          ? "bg-white/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
+          : "bg-transparent"
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
@@ -119,7 +157,7 @@ export default function Header() {
               <span className="hidden xl:inline">Install Now</span>
               <span className="xl:hidden">Install</span>
               <svg
-                className={`w-4 h-4 transition-transform ${showDownloadDropdown ? 'rotate-180' : ''}`}
+                className={`w-4 h-4 transition-transform ${showDownloadDropdown ? "rotate-180" : ""}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -130,44 +168,45 @@ export default function Header() {
 
             {showDownloadDropdown && (
               <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">
-                <a
-                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors border-b border-border/30"
-                >
-                  <img
-                    src="/browsers/chrome.png"
-                    alt="Chrome"
-                    className="w-8 h-8 object-contain"
-                  />
-                  <div className="flex-1">
-                    <div className="font-semibold text-foreground">Chrome</div>
-                    <div className="text-xs text-muted-foreground">Chrome Web Store</div>
-                  </div>
-                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-                <a
-                  href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors"
-                >
-                  <img
-                    src="/browsers/edge.png"
-                    alt="Edge"
-                    className="w-8 h-8 object-contain"
-                  />
-                  <div className="flex-1">
-                    <div className="font-semibold text-foreground">Edge</div>
-                    <div className="text-xs text-muted-foreground">Edge Add-ons</div>
-                  </div>
-                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+                {/* Primary Browsers */}
+                {PRIMARY_BROWSERS.map((browser) => (
+                  <a
+                    key={browser.name}
+                    href={browser.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors border-b border-border/30"
+                  >
+                    <img src={browser.icon} alt={browser.name} className="w-8 h-8 object-contain" />
+                    <div className="flex-1">
+                      <div className="font-semibold text-foreground">{browser.name}</div>
+                      <div className="text-xs text-muted-foreground">{browser.storeName}</div>
+                    </div>
+                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ))}
+                {/* Secondary Browsers */}
+                {SECONDARY_BROWSERS.map((browser, index) => (
+                  <a
+                    key={browser.name}
+                    href={browser.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors ${index < SECONDARY_BROWSERS.length - 1 ? "border-b border-border/30" : ""
+                      }`}
+                  >
+                    <img src={browser.icon} alt={browser.name} className="w-8 h-8 object-contain" />
+                    <div className="flex-1">
+                      <div className="font-semibold text-foreground">{browser.name}</div>
+                      <div className="text-xs text-muted-foreground">Chrome Web Store</div>
+                    </div>
+                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ))}
               </div>
             )}
           </div>
@@ -238,32 +277,35 @@ export default function Header() {
                 Contact Developer
               </a>
               <div className="mt-4 space-y-2">
-                <a
-                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-center flex items-center justify-center gap-2"
-                >
-                  <img
-                    src="/browsers/chrome.png"
-                    alt="Chrome"
-                    className="w-5 h-5 object-contain"
-                  />
-                  Get for Chrome
-                </a>
-                <a
-                  href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-center flex items-center justify-center gap-2"
-                >
-                  <img
-                    src="/browsers/edge.png"
-                    alt="Edge"
-                    className="w-5 h-5 object-contain"
-                  />
-                  Get for Edge
-                </a>
+                <div className="text-sm font-semibold text-foreground/70 mb-2">Install Extension</div>
+                {/* Primary Browsers */}
+                {PRIMARY_BROWSERS.map((browser) => (
+                  <a
+                    key={browser.name}
+                    href={browser.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary text-center flex items-center justify-center gap-2"
+                  >
+                    <img src={browser.icon} alt={browser.name} className="w-5 h-5 object-contain" />
+                    Get for {browser.name}
+                  </a>
+                ))}
+                {/* Secondary Browsers Grid */}
+                <div className="grid grid-cols-2 gap-2">
+                  {SECONDARY_BROWSERS.map((browser) => (
+                    <a
+                      key={browser.name}
+                      href={browser.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary text-center flex items-center justify-center gap-2 py-2.5"
+                    >
+                      <img src={browser.icon} alt={browser.name} className="w-5 h-5 object-contain" />
+                      <span className="text-sm">{browser.name}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
