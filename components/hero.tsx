@@ -3,13 +3,64 @@
 import ProductHuntBadge from "@/components/product-hunt-badge"
 import { useEffect, useRef, useState } from "react"
 
+declare global {
+  interface Window {
+    YT: any
+    onYouTubeIframeAPIReady: () => void
+  }
+}
+
 export default function Hero() {
-  const videoRef = useRef<HTMLIFrameElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const playerRef = useRef<any>(null)
   const [isVideoVisible, setIsVideoVisible] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showControls, setShowControls] = useState(false)
+  const [playerReady, setPlayerReady] = useState(false)
+
+  useEffect(() => {
+    // Load YouTube IFrame API
+    const tag = document.createElement('script')
+    tag.src = 'https://www.youtube.com/iframe_api'
+    const firstScriptTag = document.getElementsByTagName('script')[0]
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
+
+    // Initialize player when API is ready
+    window.onYouTubeIframeAPIReady = () => {
+      playerRef.current = new window.YT.Player('youtube-player', {
+        videoId: '6uyd4sN5WiA',
+        playerVars: {
+          controls: 0,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          iv_load_policy: 3,
+          disablekb: 1,
+          enablejsapi: 1,
+        },
+        events: {
+          onReady: () => {
+            setPlayerReady(true)
+            playerRef.current.mute()
+          },
+          onStateChange: (event: any) => {
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              setIsPlaying(true)
+            } else if (event.data === window.YT.PlayerState.PAUSED) {
+              setIsPlaying(false)
+            }
+          },
+        },
+      })
+    }
+
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy()
+      }
+    }
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -17,14 +68,13 @@ export default function Hero() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVideoVisible(true)
-            if (videoRef.current) {
-              // Play video when scrolled into view
-              const iframe = videoRef.current
-              const src = iframe.src
-              if (!src.includes('autoplay=1')) {
-                iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1'
-                setIsPlaying(true)
-              }
+            if (playerReady && playerRef.current) {
+              playerRef.current.playVideo()
+            }
+          } else {
+            // Pause video when scrolled out of view
+            if (playerReady && playerRef.current) {
+              playerRef.current.pauseVideo()
             }
           }
         })
@@ -41,40 +91,34 @@ export default function Hero() {
         observer.unobserve(containerRef.current)
       }
     }
-  }, [])
+  }, [playerReady])
 
   const toggleMute = () => {
-    if (videoRef.current) {
-      const iframe = videoRef.current
-      const newMuteState = !isMuted
-      const src = iframe.src.replace(
-        isMuted ? 'mute=1' : 'mute=0',
-        newMuteState ? 'mute=1' : 'mute=0'
-      )
-      iframe.src = src
-      setIsMuted(newMuteState)
+    if (playerRef.current) {
+      if (isMuted) {
+        playerRef.current.unMute()
+        setIsMuted(false)
+      } else {
+        playerRef.current.mute()
+        setIsMuted(true)
+      }
     }
   }
 
   const togglePlayPause = () => {
-    if (videoRef.current) {
-      const iframe = videoRef.current
-      const src = iframe.src
+    if (playerRef.current) {
       if (isPlaying) {
-        // Pause by removing autoplay
-        iframe.src = src.replace('&autoplay=1', '').replace('?autoplay=1&', '?').replace('?autoplay=1', '')
-        setIsPlaying(false)
+        playerRef.current.pauseVideo()
       } else {
-        // Play by adding autoplay
-        iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1'
-        setIsPlaying(true)
+        playerRef.current.playVideo()
       }
     }
   }
 
   const openFullscreen = () => {
-    if (videoRef.current) {
-      videoRef.current.requestFullscreen?.()
+    const playerElement = document.getElementById('youtube-player')
+    if (playerElement) {
+      playerElement.requestFullscreen?.()
     }
   }
 
@@ -234,19 +278,15 @@ export default function Hero() {
           >
             <div
               className={`relative aspect-video rounded-2xl overflow-hidden bg-black transition-all duration-1000 group/video ${isVideoVisible
-                  ? 'opacity-100 scale-100 shadow-[0_0_60px_rgba(139,92,246,0.4)]'
-                  : 'opacity-0 scale-95 shadow-2xl'
+                ? 'opacity-100 scale-100 shadow-[0_0_60px_rgba(139,92,246,0.4)]'
+                : 'opacity-0 scale-95 shadow-2xl'
                 }`}
               onMouseEnter={() => setShowControls(true)}
               onMouseLeave={() => setShowControls(false)}
             >
-              <iframe
-                ref={videoRef}
-                className="absolute inset-0 w-full h-full pointer-events-none"
-                src="https://www.youtube.com/embed/6uyd4sN5WiA?mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
-                title="Locksy Extension Demo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+              <div
+                id="youtube-player"
+                className="absolute inset-0 w-full h-full"
               />
 
               {/* Custom Video Controls Overlay */}
