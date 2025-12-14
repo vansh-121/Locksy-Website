@@ -134,7 +134,7 @@ export default function Header() {
                   href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors border-b border-border/30"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors border-b border-border/30"
                 >
                   <img
                     src="/browsers/chrome.png"
@@ -153,7 +153,7 @@ export default function Header() {
                   href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-4 hover:bg-accent transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors border-b border-border/30"
                 >
                   <img
                     src="/browsers/edge.png"
@@ -163,6 +163,82 @@ export default function Header() {
                   <div className="flex-1">
                     <div className="font-semibold text-foreground">Edge</div>
                     <div className="text-xs text-muted-foreground">Edge Add-ons</div>
+                  </div>
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a
+                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors border-b border-border/30"
+                >
+                  <img
+                    src="/browsers/brave.png"
+                    alt="Brave"
+                    className="w-8 h-8 object-contain"
+                  />
+                  <div className="flex-1">
+                    <div className="font-semibold text-foreground">Brave</div>
+                    <div className="text-xs text-muted-foreground">Chrome Web Store</div>
+                  </div>
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a
+                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors border-b border-border/30"
+                >
+                  <img
+                    src="/browsers/opera.png"
+                    alt="Opera"
+                    className="w-8 h-8 object-contain"
+                  />
+                  <div className="flex-1">
+                    <div className="font-semibold text-foreground">Opera</div>
+                    <div className="text-xs text-muted-foreground">Chrome Web Store</div>
+                  </div>
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a
+                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors border-b border-border/30"
+                >
+                  <img
+                    src="/browsers/comet.png"
+                    alt="Comet"
+                    className="w-8 h-8 object-contain"
+                  />
+                  <div className="flex-1">
+                    <div className="font-semibold text-foreground">Comet</div>
+                    <div className="text-xs text-muted-foreground">Chrome Web Store</div>
+                  </div>
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a
+                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors"
+                >
+                  <img
+                    src="/browsers/vivaldi.png"
+                    alt="Vivaldi"
+                    className="w-8 h-8 object-contain"
+                  />
+                  <div className="flex-1">
+                    <div className="font-semibold text-foreground">Vivaldi</div>
+                    <div className="text-xs text-muted-foreground">Chrome Web Store</div>
                   </div>
                   <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -238,6 +314,7 @@ export default function Header() {
                 Contact Developer
               </a>
               <div className="mt-4 space-y-2">
+                <div className="text-sm font-semibold text-foreground/70 mb-2">Install Extension</div>
                 <a
                   href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
                   target="_blank"
@@ -264,6 +341,60 @@ export default function Header() {
                   />
                   Get for Edge
                 </a>
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-center flex items-center justify-center gap-2 py-2.5"
+                  >
+                    <img
+                      src="/browsers/brave.png"
+                      alt="Brave"
+                      className="w-5 h-5 object-contain"
+                    />
+                    <span className="text-sm">Brave</span>
+                  </a>
+                  <a
+                    href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-center flex items-center justify-center gap-2 py-2.5"
+                  >
+                    <img
+                      src="/browsers/opera.png"
+                      alt="Opera"
+                      className="w-5 h-5 object-contain"
+                    />
+                    <span className="text-sm">Opera</span>
+                  </a>
+                  <a
+                    href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-center flex items-center justify-center gap-2 py-2.5"
+                  >
+                    <img
+                      src="/browsers/comet.png"
+                      alt="Comet"
+                      className="w-5 h-5 object-contain"
+                    />
+                    <span className="text-sm">Comet</span>
+                  </a>
+                  <a
+                    href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-center flex items-center justify-center gap-2 py-2.5"
+                  >
+                    <img
+                      src="/browsers/vivaldi.png"
+                      alt="Vivaldi"
+                      className="w-5 h-5 object-contain"
+                    />
+                    <span className="text-sm">Vivaldi</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
