@@ -232,7 +232,7 @@ export default function Hero() {
               </div>
 
               {/* Other Chromium Browsers - All link to Chrome Web Store */}
-              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 w-full">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 w-full">
                 {SECONDARY_BROWSERS.map((browser) => (
                   <a
                     key={browser.name}
