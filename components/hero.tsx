@@ -10,6 +10,44 @@ declare global {
   }
 }
 
+const PRIMARY_BROWSERS = [
+  {
+    name: "Google Chrome",
+    icon: "/browsers/chrome.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+    storeName: "Chrome Web Store",
+  },
+  {
+    name: "Microsoft Edge",
+    icon: "/browsers/edge.png",
+    url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
+    storeName: "Edge Add-ons",
+  },
+]
+
+const SECONDARY_BROWSERS = [
+  {
+    name: "Brave",
+    icon: "/browsers/brave.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+  {
+    name: "Opera",
+    icon: "/browsers/opera.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+  {
+    name: "Comet",
+    icon: "/browsers/comet.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+  {
+    name: "Vivaldi",
+    icon: "/browsers/vivaldi.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+]
+
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<any>(null)
@@ -170,110 +208,50 @@ export default function Hero() {
             <div className="space-y-4">
               {/* Primary Browsers - Chrome & Edge */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
-                <a
-                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group"
-                >
-                  <span className="flex items-center gap-2 sm:gap-3">
-                    <img
-                      src="/browsers/chrome.png"
-                      alt="Google Chrome"
-                      className="w-6 h-6 sm:w-8 sm:h-8 object-contain flex-shrink-0"
-                    />
-                    <span className="flex flex-col items-start">
-                      <span className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors">Get it for</span>
-                      <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-white transition-colors">Google Chrome</span>
+                {PRIMARY_BROWSERS.map((browser) => (
+                  <a
+                    key={browser.name}
+                    href={browser.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group"
+                  >
+                    <span className="flex items-center gap-2 sm:gap-3">
+                      <img
+                        src={browser.icon}
+                        alt={browser.name}
+                        className="w-6 h-6 sm:w-8 sm:h-8 object-contain flex-shrink-0"
+                      />
+                      <span className="flex flex-col items-start">
+                        <span className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors">Get it for</span>
+                        <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-white transition-colors">{browser.name}</span>
+                      </span>
                     </span>
-                  </span>
-                </a>
-                <a
-                  href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group"
-                >
-                  <span className="flex items-center gap-2 sm:gap-3">
-                    <img
-                      src="/browsers/edge.png"
-                      alt="Microsoft Edge"
-                      className="w-6 h-6 sm:w-8 sm:h-8 object-contain flex-shrink-0"
-                    />
-                    <span className="flex flex-col items-start">
-                      <span className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors">Get it for</span>
-                      <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-white transition-colors">Microsoft Edge</span>
-                    </span>
-                  </span>
-                </a>
+                  </a>
+                ))}
               </div>
 
               {/* Other Chromium Browsers - All link to Chrome Web Store */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full">
-                <a
-                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group py-2 sm:py-3"
-                  title="Install from Chrome Web Store"
-                >
-                  <span className="flex items-center gap-1.5 sm:gap-2">
-                    <img
-                      src="/browsers/brave.png"
-                      alt="Brave"
-                      className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0"
-                    />
-                    <span className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-white transition-colors">Brave</span>
-                  </span>
-                </a>
-                <a
-                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group py-2 sm:py-3"
-                  title="Install from Chrome Web Store"
-                >
-                  <span className="flex items-center gap-1.5 sm:gap-2">
-                    <img
-                      src="/browsers/opera.png"
-                      alt="Opera"
-                      className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0"
-                    />
-                    <span className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-white transition-colors">Opera</span>
-                  </span>
-                </a>
-                <a
-                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group py-2 sm:py-3"
-                  title="Install from Chrome Web Store"
-                >
-                  <span className="flex items-center gap-1.5 sm:gap-2">
-                    <img
-                      src="/browsers/comet.png"
-                      alt="Comet"
-                      className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0"
-                    />
-                    <span className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-white transition-colors">Comet</span>
-                  </span>
-                </a>
-                <a
-                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group py-2 sm:py-3"
-                  title="Install from Chrome Web Store"
-                >
-                  <span className="flex items-center gap-1.5 sm:gap-2">
-                    <img
-                      src="/browsers/vivaldi.png"
-                      alt="Vivaldi"
-                      className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0"
-                    />
-                    <span className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-white transition-colors">Vivaldi</span>
-                  </span>
-                </a>
+              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 w-full">
+                {SECONDARY_BROWSERS.map((browser) => (
+                  <a
+                    key={browser.name}
+                    href={browser.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group py-2 sm:py-3"
+                    title="Install from Chrome Web Store"
+                  >
+                    <span className="flex items-center gap-1.5 sm:gap-2">
+                      <img
+                        src={browser.icon}
+                        alt={browser.name}
+                        className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0"
+                      />
+                      <span className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-white transition-colors">{browser.name}</span>
+                    </span>
+                  </a>
+                ))}
               </div>
 
               {/* Additional Links - Watch & GitHub */}
