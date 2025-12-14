@@ -98,7 +98,7 @@ export default function Header() {
         <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
           {/* Watch Demo Button */}
           <a
-            href="https://www.youtube.com/watch?v=C99yuKTqEFA"
+            href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-white border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg text-sm xl:text-base"
@@ -206,7 +206,7 @@ export default function Header() {
                 Security
               </a>
               <a
-                href="https://www.youtube.com/watch?v=C99yuKTqEFA"
+                href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"

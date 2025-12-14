@@ -1,6 +1,83 @@
+"use client"
+
 import ProductHuntBadge from "@/components/product-hunt-badge"
+import { useEffect, useRef, useState } from "react"
 
 export default function Hero() {
+  const videoRef = useRef<HTMLIFrameElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isVideoVisible, setIsVideoVisible] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [showControls, setShowControls] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVideoVisible(true)
+            if (videoRef.current) {
+              // Play video when scrolled into view
+              const iframe = videoRef.current
+              const src = iframe.src
+              if (!src.includes('autoplay=1')) {
+                iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1'
+                setIsPlaying(true)
+              }
+            }
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current)
+      }
+    }
+  }, [])
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      const iframe = videoRef.current
+      const newMuteState = !isMuted
+      const src = iframe.src.replace(
+        isMuted ? 'mute=1' : 'mute=0',
+        newMuteState ? 'mute=1' : 'mute=0'
+      )
+      iframe.src = src
+      setIsMuted(newMuteState)
+    }
+  }
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      const iframe = videoRef.current
+      const src = iframe.src
+      if (isPlaying) {
+        // Pause by removing autoplay
+        iframe.src = src.replace('&autoplay=1', '').replace('?autoplay=1&', '?').replace('?autoplay=1', '')
+        setIsPlaying(false)
+      } else {
+        // Play by adding autoplay
+        iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1'
+        setIsPlaying(true)
+      }
+    }
+  }
+
+  const openFullscreen = () => {
+    if (videoRef.current) {
+      videoRef.current.requestFullscreen?.()
+    }
+  }
+
   return (
     <section className="relative py-24 md:py-40 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
       {/* Animated Background Elements */}
@@ -84,7 +161,7 @@ export default function Hero() {
                 </span>
               </a>
               <a
-                href="https://www.youtube.com/watch?v=C99yuKTqEFA"
+                href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary text-center group flex items-center justify-center"
@@ -151,15 +228,110 @@ export default function Hero() {
               Watch how easy it is to protect your browser tabs
             </p>
           </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20 bg-black">
+          <div
+            ref={containerRef}
+            className="max-w-4xl mx-auto"
+          >
+            <div
+              className={`relative aspect-video rounded-2xl overflow-hidden bg-black transition-all duration-1000 group/video ${isVideoVisible
+                  ? 'opacity-100 scale-100 shadow-[0_0_60px_rgba(139,92,246,0.4)]'
+                  : 'opacity-0 scale-95 shadow-2xl'
+                }`}
+              onMouseEnter={() => setShowControls(true)}
+              onMouseLeave={() => setShowControls(false)}
+            >
               <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/C99yuKTqEFA"
+                ref={videoRef}
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                src="https://www.youtube.com/embed/6uyd4sN5WiA?mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
                 title="Locksy Extension Demo"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
+
+              {/* Custom Video Controls Overlay */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'
+                  }`}
+              >
+                {/* Top Bar - Live Badge */}
+                <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between">
+                  {isPlaying && (
+                    <div className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                      </span>
+                      LIVE DEMO
+                    </div>
+                  )}
+                </div>
+
+                {/* Center Play/Pause Button */}
+                {!isPlaying && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <button
+                      onClick={togglePlayPause}
+                      className="w-20 h-20 rounded-full bg-gradient-to-r from-primary to-secondary text-white flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-2xl pointer-events-auto"
+                      aria-label="Play video"
+                    >
+                      <svg className="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+
+                {/* Bottom Control Bar */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    {/* Play/Pause Button */}
+                    <button
+                      onClick={togglePlayPause}
+                      className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto"
+                      aria-label={isPlaying ? "Pause" : "Play"}
+                    >
+                      {isPlaying ? (
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      )}
+                    </button>
+
+                    {/* Volume Button */}
+                    <button
+                      onClick={toggleMute}
+                      className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto"
+                      aria-label={isMuted ? "Unmute" : "Mute"}
+                    >
+                      {isMuted ? (
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Right Side - Fullscreen */}
+                  <button
+                    onClick={openFullscreen}
+                    className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto"
+                    aria-label="Fullscreen"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -56,7 +56,7 @@ export default function HowItWorks() {
             Get for Edge
           </a>
           <a
-            href="https://www.youtube.com/watch?v=C99yuKTqEFA"
+            href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary inline-flex items-center justify-center gap-2"
