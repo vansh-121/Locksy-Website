@@ -15,6 +15,12 @@ const PRIMARY_BROWSERS = [
     url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
     storeName: "Edge Add-ons",
   },
+  {
+    name: "Firefox",
+    icon: "/browsers/firefox.png",
+    url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/",
+    storeName: "Firefox Add-ons",
+  },
 ]
 
 const SECONDARY_BROWSERS = [
