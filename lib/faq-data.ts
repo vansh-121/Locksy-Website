@@ -41,6 +41,6 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Which browsers are supported?",
-    answer: "Locksy works on all Chromium-based browsers including Google Chrome, Microsoft Edge, Brave, Opera, Comet, Vivaldi, Arc, and many more. You can install it from the Chrome Web Store or Edge Add-ons store.",
+    answer: "Locksy works on all major browsers including Firefox, Google Chrome, Microsoft Edge, Brave, Opera, Comet, Vivaldi, Arc, and many more. You can install it from the Firefox Add-ons, Chrome Web Store or Edge Add-ons store.",
   },
 ]

@@ -63,7 +63,7 @@ export default function CTASection() {
         </div>
 
         <p className="text-sm opacity-80 mb-8">
-          Works on Chrome, Edge, Brave, Opera, Comet, Vivaldi, Arc & all Chromium browsers
+          Works on Firefox, Chrome, Edge, Brave, Opera, Comet, Vivaldi, Arc & more
         </p>
 
         <div className="grid md:grid-cols-4 gap-4 text-sm">

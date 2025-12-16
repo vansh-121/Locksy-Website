@@ -219,7 +219,7 @@ export default function Footer() {
 
         {/* Browser Compatibility Section */}
         <div className="mt-16 mb-12 text-center">
-          <h4 className="text-sm font-semibold text-neutral-400 mb-4">Compatible with All Chromium Browsers</h4>
+          <h4 className="text-sm font-semibold text-neutral-400 mb-4">Compatible with All Major Browsers</h4>
           <div className="flex flex-wrap items-center justify-center gap-8">
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
               <img src="/browsers/chrome.png" alt="Chrome" className="w-6 h-6 opacity-70" />

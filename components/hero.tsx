@@ -23,6 +23,12 @@ const PRIMARY_BROWSERS = [
     url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
     storeName: "Edge Add-ons",
   },
+  {
+    name: "Mozilla Firefox",
+    icon: "/browsers/firefox.png",
+    url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/",
+    storeName: "Firefox Add-ons",
+  },
 ]
 
 const SECONDARY_BROWSERS = [
@@ -187,7 +193,7 @@ export default function Hero() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
-                All Chromium Browsers
+                All Major Browsers
               </div>
             </div>
 
@@ -206,25 +212,25 @@ export default function Hero() {
 
             {/* Browser Download Buttons */}
             <div className="space-y-4">
-              {/* Primary Browsers - Chrome & Edge */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
+              {/* Primary Browsers - Chrome, Edge & Firefox */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
                 {PRIMARY_BROWSERS.map((browser) => (
                   <a
                     key={browser.name}
                     href={browser.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-secondary inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group"
+                    className="btn-secondary inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group px-4 py-3.5"
                   >
-                    <span className="flex items-center gap-2 sm:gap-3">
+                    <span className="flex items-center gap-2.5">
                       <img
                         src={browser.icon}
                         alt={browser.name}
-                        className="w-6 h-6 sm:w-8 sm:h-8 object-contain flex-shrink-0"
+                        className="w-7 h-7 object-contain flex-shrink-0"
                       />
                       <span className="flex flex-col items-start">
                         <span className="text-xs text-muted-foreground group-hover:text-white/80 transition-colors">Get it for</span>
-                        <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-white transition-colors">{browser.name}</span>
+                        <span className="font-semibold text-sm text-foreground group-hover:text-white transition-colors whitespace-nowrap">{browser.name}</span>
                       </span>
                     </span>
                   </a>
@@ -296,7 +302,7 @@ export default function Hero() {
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
               <p className="text-sm text-foreground/80 font-medium">
-                Works on all Chromium-based browsers including Arc, Kiwi, Yandex & more
+                Coming soon on Apple Safari (waiting for salary to sponsor Apple’s $99/year).
               </p>
             </div>
           </div>

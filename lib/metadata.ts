@@ -3,7 +3,7 @@ import { faqData } from './faq-data'
 
 const siteUrl = 'https://locksy.dev' // Update with your actual domain
 const siteName = 'Locksy'
-const siteDescription = 'Lock any browser tab with a password. Military-grade AES-256 encryption, 100% offline, free forever. Protect sensitive tabs on shared computers. Available for Chrome and Microsoft Edge.'
+const siteDescription = 'Lock any browser tab with a password. Military-grade AES-256 encryption, 100% offline, free forever. Protect sensitive tabs on shared computers. Available for Chrome, Firefox, and Microsoft Edge.'
 const keywords = [
     'password protect tabs',
     'browser tab security',
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
         'ai:description': siteDescription,
         'ai:category': 'Browser Extension for Tab Security',
         'ai:use_case': 'Password protection for browser tabs with offline AES-256 encryption',
-        'ai:features': 'Password protect tabs, AES-256 encryption, offline operation, Chrome and Edge support, free forever',
+        'ai:features': 'Password protect tabs, AES-256 encryption, offline operation, Chrome, Firefox and Edge support, free forever',
         'ai:target_audience': 'Users who need to secure sensitive browser tabs on shared computers',
     }
 }
@@ -151,7 +151,7 @@ export const jsonLdSoftwareApplication = {
     },
     description: siteDescription,
     softwareVersion: '1.0',
-    browserRequirements: 'Requires Chrome or Microsoft Edge',
+    browserRequirements: 'Requires Chrome, Firefox, or Microsoft Edge',
     screenshot: `${siteUrl}/screenshot.png`,
     featureList: [
         'Password protect any browser tab',
@@ -159,7 +159,7 @@ export const jsonLdSoftwareApplication = {
         '100% offline operation',
         'No data collection',
         'Free forever',
-        'Works on Chrome and Edge'
+        'Works on Chrome, Firefox and Edge'
     ]
 }
 
