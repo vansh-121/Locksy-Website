@@ -230,19 +230,19 @@ export default function Footer() {
               <span className="text-sm">Edge</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <span className="text-lg">🦁</span>
+              <img src="/browsers/brave.png" alt="Brave" className="w-6 h-6 opacity-70" />
               <span className="text-sm">Brave</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <span className="text-lg">🎭</span>
+              <img src="/browsers/opera.png" alt="Opera" className="w-6 h-6 opacity-70" />
               <span className="text-sm">Opera</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <span className="text-lg">🌊</span>
+              <img src="/browsers/vivaldi.png" alt="Vivaldi" className="w-6 h-6 opacity-70" />
               <span className="text-sm">Vivaldi</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <span className="text-lg">🎯</span>
+              <img src="/browsers/arc.png" alt="Arc" className="w-6 h-6 opacity-70" />
               <span className="text-sm">Arc</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400">
