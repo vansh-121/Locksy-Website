@@ -206,14 +206,14 @@ export default function Hero() {
                 Protection
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Password-protect any browser tab or lock entire domains with persistent protection. Now with keyboard shortcuts, visual lock indicators, and real-time badge counters. Ultimate privacy, zero compromise.
+                Password-protect any browser tab or lock entire domains with persistent protection. Ultimate privacy, zero compromise.
               </p>
             </div>
 
             {/* Browser Download Buttons */}
             <div className="space-y-4">
               {/* Primary Browsers - Chrome, Edge & Firefox */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 w-full">
                 {PRIMARY_BROWSERS.map((browser) => (
                   <a
                     key={browser.name}
@@ -238,7 +238,7 @@ export default function Hero() {
               </div>
 
               {/* Other Chromium Browsers - All link to Chrome Web Store */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 w-full">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 w-full">
                 {SECONDARY_BROWSERS.map((browser) => (
                   <a
                     key={browser.name}
