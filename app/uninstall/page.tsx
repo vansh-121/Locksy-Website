@@ -55,7 +55,7 @@ export default function UninstallPage() {
         setError("")
 
         try {
-            // Replace with your Web3Forms access key from https://web3forms.com
+            // Call Web3Forms directly (they're designed for client-side use)
             const response = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
                 headers: {
@@ -63,7 +63,7 @@ export default function UninstallPage() {
                     Accept: "application/json",
                 },
                 body: JSON.stringify({
-                    access_key: "5cc7d0eb-fbcb-4205-bb25-46b717696aa7", // Get this from https://web3forms.com
+                    access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
                     subject: "Locksy Extension Uninstall Feedback",
                     from_name: "Locksy Uninstall Page",
                     reasons: selectedReasons.join(", "),
