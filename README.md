@@ -10,7 +10,7 @@ Official landing page for **Locksy** - A powerful browser extension that provide
 
 ## 🔒 Security Features (v2.0.0)
 
-- 🛡️ **PBKDF2 with 600k Iterations** - OWASP 2023 compliant encryption
+- 🛡️ **PBKDF2 with 600k Iterations** - Ultimate Key Derivation Function (KDF) Encryption
 - ⚡ **120 Years Crack Resistance** - Military-grade password protection
 - 🚫 **Rate Limiting & Brute-Force Protection** - Advanced timing attack prevention
 - 🔐 **Zero Data Collection** - Everything stored locally on your device
