@@ -34,11 +34,6 @@ export default function KeyboardShortcuts() {
 
             <div className="relative max-w-7xl mx-auto px-4 md:px-6">
                 <div className="text-center mb-20">
-                    <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white rounded-full text-sm font-bold shadow-2xl mb-6 animate-pulse">
-                        <span className="text-lg">⌨️</span>
-                        <span>Version 1.0.7</span>
-                        <span className="px-2 py-0.5 bg-white/20 rounded-full text-xs">NEW</span>
-                    </div>
                     <h2 className="text-5xl md:text-6xl font-black leading-tight text-foreground mb-6">
                         Lightning-Fast{" "}
                         <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">

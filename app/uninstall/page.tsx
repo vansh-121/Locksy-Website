@@ -256,7 +256,7 @@ export default function UninstallPage() {
                                 </div>
                                 <h3 className="text-xl font-bold mb-3">Military-Grade Protection</h3>
                                 <p className="text-muted-foreground leading-relaxed">
-                                    SHA-256 encryption with 8+ security layers protecting your sensitive banking, email, and work tabs from unauthorized access.
+                                    PBKDF2 with 600k iterations with 8+ security layers protecting your sensitive banking, email, and work tabs. 120 years crack resistance.
                                 </p>
                             </div>
                         </div>
