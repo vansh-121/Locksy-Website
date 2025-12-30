@@ -29,7 +29,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Is my password safe?",
-    answer: "Absolutely. We use SHA-256 encryption (military-grade) and never store your actual password - only an encrypted hash.",
+    answer: "Absolutely. We use PBKDF2 with 600,000 iterations (military-grade) and never store your actual password - only an encrypted hash. 120 years crack resistance with timing attack protection.",
   },
   {
     question: "Can someone bypass the lock?",

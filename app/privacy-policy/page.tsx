@@ -41,7 +41,7 @@ export default function PrivacyPolicy() {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                             </span>
-                            Last Updated: November 08, 2025
+                            Last Updated: December 30, 2025
                         </div>
                         <div>
                             <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6">
@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {[
                                         "All data stays on YOUR device only",
-                                        "Passwords hashed with SHA-256",
+                                        "PBKDF2 with 600k iterations",
                                         "Zero tracking or analytics",
                                         "No third-party services",
                                         "Open source & verifiable"
@@ -129,7 +129,7 @@ export default function PrivacyPolicy() {
                                 {
                                     icon: "🔐",
                                     title: "Master Password (Hashed)",
-                                    desc: "Your password is hashed using SHA-256 before storage. We never see or store your actual password.",
+                                    desc: "Your password is hashed using PBKDF2 with 600k iterations before storage. Military-grade security with 120 years crack resistance.",
                                     gradient: "from-blue-500 to-cyan-500"
                                 },
                                 {
@@ -237,10 +237,10 @@ export default function PrivacyPolicy() {
                                 </h3>
                                 <ul className="space-y-3">
                                     {[
-                                        "SHA-256 encryption",
+                                        "PBKDF2 with 600k iterations",
                                         "No plain text storage",
                                         "Chrome secure APIs",
-                                        "Brute-force protection"
+                                        "Rate limiting & brute-force protection"
                                     ].map((item, idx) => (
                                         <li key={idx} className="flex items-start gap-3">
                                             <CheckCircle className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
@@ -279,11 +279,11 @@ export default function PrivacyPolicy() {
                                     purpose: "Identify which tabs you want to lock",
                                     note: "We don't read page content"
                                 },
-                                {
-                                    name: "scripting",
-                                    purpose: "Show the lock overlay on locked tabs",
-                                    note: "Only when you lock a tab"
-                                },
+                                // {
+                                //     name: "scripting",
+                                //     purpose: "Show the lock overlay on locked tabs",
+                                //     note: "Only when you lock a tab"
+                                // },
                                 {
                                     name: "activeTab",
                                     purpose: "Lock the current tab with one click",
