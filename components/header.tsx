@@ -83,7 +83,7 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
+        <a href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
             <img
@@ -100,21 +100,21 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
           <a
-            href="#features"
+            href="/#features"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
             Features
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
-            href="#security"
+            href="/#security"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
             Security
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
-            href="#faq"
+            href="/#faq"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
             FAQ
@@ -237,14 +237,14 @@ export default function Header() {
           <div className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-border/50 shadow-xl lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
             <div className="flex flex-col gap-2 p-6">
               <a
-                href="#features"
+                href="/#features"
                 className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Features
               </a>
               <a
-                href="#security"
+                href="/#security"
                 className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -260,7 +260,7 @@ export default function Header() {
                 Watch Demo
               </a>
               <a
-                href="#faq"
+                href="/#faq"
                 className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
