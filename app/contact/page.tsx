@@ -50,6 +50,15 @@ const SOCIAL_LINKS = [
         color: "from-blue-600 to-blue-800",
         hoverColor: "hover:from-blue-700 hover:to-blue-900",
     },
+    {
+        name: "Sponsor",
+        icon: Heart,
+        href: "https://github.com/sponsors/vansh-121",
+        username: "GitHub Sponsors",
+        description: "Support the project development",
+        color: "from-primary to-secondary",
+        hoverColor: "hover:from-primary hover:to-secondary",
+    },
 ]
 
 const QUICK_ACTIONS = [
@@ -153,7 +162,7 @@ Timestamp: ${new Date().toISOString()}
             {/* Header */}
             <Header />
 
-            <main className="relative max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20">
+            <main className="relative max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
                 {/* Hero Section */}
                 <div className="text-center space-y-6 mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
@@ -169,7 +178,7 @@ Timestamp: ${new Date().toISOString()}
                 </div>
 
                 {/* Social Media Links */}
-                <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 max-w-6xl mx-auto">
                     {SOCIAL_LINKS.map((social) => {
                         const Icon = social.icon
                         return (

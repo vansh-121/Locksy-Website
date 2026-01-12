@@ -76,7 +76,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
         ? "bg-white/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
         : "bg-transparent"
         }`}
@@ -140,18 +140,18 @@ export default function Header() {
 
         {/* CTA Buttons */}
         <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
-          {/* Watch Demo Button */}
+          {/* Sponsor Button */}
           <a
-            href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
+            href="https://github.com/sponsors/vansh-121"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-white border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg text-sm xl:text-base"
           >
             <svg className="w-4 h-4 xl:w-5 xl:h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
-            <span className="hidden xl:inline">Watch Demo</span>
-            <span className="xl:hidden">Demo</span>
+            <span className="hidden xl:inline">Sponsor</span>
+            <span className="xl:hidden">♥</span>
           </a>
 
           {/* Install Now Button with Dropdown */}
@@ -251,15 +251,6 @@ export default function Header() {
                 Security
               </a>
               <a
-                href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Watch Demo
-              </a>
-              <a
                 href="/#faq"
                 className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
                 onClick={() => setIsMenuOpen(false)}
@@ -281,6 +272,18 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact Developer
+              </a>
+              <a
+                href="https://github.com/sponsors/vansh-121"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-secondary font-semibold p-3 rounded-lg hover:bg-accent transition-all flex items-center gap-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+                Sponsor Project
               </a>
               <div className="mt-4 space-y-2">
                 <div className="text-sm font-semibold text-foreground/70 mb-2">Install Extension</div>

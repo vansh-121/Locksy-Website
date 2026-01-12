@@ -97,7 +97,7 @@ export default function UninstallPage() {
             {/* Header */}
             <Header />
 
-            <main className="relative max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-20">
+            <main className="relative max-w-6xl mx-auto px-4 md:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
                 {/* Hero Section */}
                 <div className="text-center space-y-6 mb-16">
                     <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg mb-4">
