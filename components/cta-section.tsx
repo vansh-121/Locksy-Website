@@ -28,6 +28,17 @@ export default function CTASection() {
             Get for Edge
           </a>
           <a
+            href="https://github.com/sponsors/vansh-121"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 text-center inline-flex items-center justify-center gap-2"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            Sponsor Project
+          </a>
+          {/* <a
             href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
             target="_blank"
             rel="noopener noreferrer"
@@ -37,7 +48,7 @@ export default function CTASection() {
               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
             </svg>
             Watch Demo
-          </a>
+          </a> */}
           <a
             href="https://github.com/vansh-121/Secure-Tab-Extension"
             target="_blank"

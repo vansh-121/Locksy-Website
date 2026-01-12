@@ -208,6 +208,17 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a
+                  href="https://github.com/sponsors/vansh-121"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors flex items-center gap-2 group"
+                >
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Sponsor Project ♥
+                </a>
+              </li>
+              <li>
                 <a href="#" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Follow Updates
@@ -260,6 +271,17 @@ export default function Footer() {
             </div>
 
             <div className="flex items-center gap-6">
+              <a
+                href="https://github.com/sponsors/vansh-121"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-neutral-800/50 hover:bg-gradient-to-r hover:from-primary hover:to-secondary rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                title="Sponsor on GitHub"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+              </a>
               <a
                 href="https://github.com/vansh-121/Secure-Tab-Extension"
                 target="_blank"
