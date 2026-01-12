@@ -5,17 +5,39 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function PageLoader({ children }: { children: React.ReactNode }) {
     const [isLoading, setIsLoading] = useState(true)
+    const [showSkeleton, setShowSkeleton] = useState(false)
 
     useEffect(() => {
-        // Simulate minimum loading time for better UX
-        const timer = setTimeout(() => {
-            setIsLoading(false)
-        }, 500)
+        // Only show skeleton if loading takes longer than 200ms (prevents flash)
+        const skeletonTimer = setTimeout(() => {
+            setShowSkeleton(true)
+        }, 200)
 
-        return () => clearTimeout(timer)
+        // Detect actual page ready state
+        const handleLoad = () => {
+            setIsLoading(false)
+            setShowSkeleton(false)
+        }
+
+        // Check if already loaded
+        if (document.readyState === 'complete') {
+            handleLoad()
+        } else {
+            window.addEventListener('load', handleLoad)
+        }
+
+        return () => {
+            clearTimeout(skeletonTimer)
+            window.removeEventListener('load', handleLoad)
+        }
     }, [])
 
-    if (isLoading) {
+    // Don't show anything if loading is fast (< 200ms)
+    if (!showSkeleton) {
+        return isLoading ? null : <>{children}</>
+    }
+
+    if (isLoading && showSkeleton) {
         return (
             <div className="min-h-screen bg-background">
                 {/* Header Skeleton */}
