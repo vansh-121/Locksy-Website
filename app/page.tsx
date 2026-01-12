@@ -11,6 +11,7 @@ import Testimonials from "@/components/testimonials"
 import FAQ from "@/components/faq"
 import CTASection from "@/components/cta-section"
 import Footer from "@/components/footer"
+import PageLoader from "@/components/page-loader"
 import { jsonLdFAQPage } from "@/lib/metadata"
 
 export default function Home() {
@@ -22,23 +23,25 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQPage) }}
       />
 
-      <main className="w-full" itemScope itemType="https://schema.org/WebPage">
-        <Header />
-        <Hero />
-        <div id="domain-lock">
-          <DomainLock />
-        </div>
-        <ProblemStatement />
-        <Features />
-        <KeyboardShortcuts />
-        <HowItWorks />
-        <Security />
-        <Comparison />
-        <Testimonials />
-        <FAQ />
-        <CTASection />
-        <Footer />
-      </main>
+      <PageLoader>
+        <main className="w-full" itemScope itemType="https://schema.org/WebPage">
+          <Header />
+          <Hero />
+          <div id="domain-lock">
+            <DomainLock />
+          </div>
+          <ProblemStatement />
+          <Features />
+          <KeyboardShortcuts />
+          <HowItWorks />
+          <Security />
+          <Comparison />
+          <Testimonials />
+          <FAQ />
+          <CTASection />
+          <Footer />
+        </main>
+      </PageLoader>
     </>
   )
 }
