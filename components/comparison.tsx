@@ -171,23 +171,23 @@ export default function Comparison() {
                         <td className="py-4 px-4 md:px-6 font-medium">{row[0]}</td>
                         <td className="py-4 px-4 md:px-6 text-center">
                           {row[1] ? (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold" aria-label="Supported">✓</span>
+                            <span aria-label="Yes" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold">✓</span>
                           ) : (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold" aria-label="Not supported">×</span>
+                            <span aria-label="No" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold">×</span>
                           )}
                         </td>
                         <td className="py-4 px-4 md:px-6 text-center">
                           {row[2] ? (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold" aria-label="Supported">✓</span>
+                            <span aria-label="Yes" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold">✓</span>
                           ) : (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold" aria-label="Not supported">×</span>
+                            <span aria-label="No" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold">×</span>
                           )}
                         </td>
                         <td className="py-4 px-4 md:px-6 text-center">
                           {row[3] ? (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold" aria-label="Supported">✓</span>
+                            <span aria-label="Yes" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold">✓</span>
                           ) : (
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold" aria-label="Not supported">×</span>
+                            <span aria-label="No" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold">×</span>
                           )}
                         </td>
                       </tr>
