@@ -27,6 +27,7 @@ export default function Home() {
         <main className="w-full" itemScope itemType="https://schema.org/WebPage">
           <Header />
           <Hero />
+          <Comparison />
           <div id="domain-lock">
             <DomainLock />
           </div>
@@ -35,7 +36,6 @@ export default function Home() {
           <KeyboardShortcuts />
           <HowItWorks />
           <Security />
-          <Comparison />
           <Testimonials />
           <FAQ />
           <CTASection />
