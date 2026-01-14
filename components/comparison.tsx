@@ -29,7 +29,7 @@ export default function Comparison() {
                 <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
                 <div className="relative bg-background/80 backdrop-blur-sm border-2 border-red-200/50 dark:border-red-900/50 rounded-2xl p-8 shadow-xl">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center text-2xl">
+                    <div aria-hidden="true" className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center text-2xl">
                       ❌
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold">Device Lock Limitations</h4>
