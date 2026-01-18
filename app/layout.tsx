@@ -7,6 +7,7 @@ import {
   jsonLdOrganization, 
   jsonLdSoftwareApplication 
 } from "@/lib/metadata"
+import ChatSupport from "@/components/chat-support"
 
 const geist = Geist({ subsets: ["latin"] })
 const geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -35,7 +36,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSoftwareApplication) }}
         />
       </head>
-      <body className={`${geist.className} overflow-x-hidden`}>{children}</body>
+      <body className={`${geist.className} overflow-x-hidden`}>
+        {children}
+        <ChatSupport />
+      </body>
     </html>
   )
 }
