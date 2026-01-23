@@ -276,7 +276,7 @@ export default function Hero() {
                   </span>
                 </a>
                 <a
-                  href="https://github.com/vansh-121/Secure-Tab-Extension"
+                  href="https://github.com/vansh-121/Locksy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-secondary text-center group flex items-center justify-center"

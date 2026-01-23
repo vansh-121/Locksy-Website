@@ -5,7 +5,8 @@ import {
   metadata as seoMetadata, 
   jsonLdWebsite, 
   jsonLdOrganization, 
-  jsonLdSoftwareApplication 
+  jsonLdSoftwareApplication,
+  jsonLdHowToInstall
 } from "@/lib/metadata"
 import ChatSupport from "@/components/chat-support"
 
@@ -34,6 +35,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSoftwareApplication) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHowToInstall) }}
         />
       </head>
       <body className={`${geist.className} overflow-x-hidden`}>

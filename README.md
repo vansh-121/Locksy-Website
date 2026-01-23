@@ -4,7 +4,7 @@
 [![Microsoft Edge Add-ons](https://img.shields.io/badge/Edge%20Add--ons-Available-0078D4?logo=microsoft-edge&logoColor=white)](https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn)
 [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Available-FF7139?logo=firefox&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/locksy/)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://locksy.vercel.app)
-[![Version](https://img.shields.io/badge/version-2.0.0-blue)](https://github.com/vansh-121/Secure-Tab-Extension)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue)](https://github.com/vansh-121/Locksy)
 
 Official landing page for **Locksy** - A powerful browser extension that provides military-grade tab protection with PBKDF2 encryption (600,000 iterations, OWASP 2023 compliant).
 
@@ -154,7 +154,7 @@ pnpm start
 
 ### Resources
 - **Website:** [locksy.vercel.app](https://locksy.vercel.app)
-- **Extension Source:** [GitHub Repository](https://github.com/vansh-121/Secure-Tab-Extension)
+- **Extension Source:** [GitHub Repository](https://github.com/vansh-121/Locksy)
 - **Video Tutorial:** [YouTube](https://www.youtube.com/watch?v=6uyd4sN5WiA)
 - **Product Hunt:** [Locksy on Product Hunt](https://www.producthunt.com/products/locksy-tab-locker-password-protection)
 - **Report Issues:** [GitHub Issues](https://github.com/vansh-121/Locksy/issues)

@@ -66,7 +66,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/vansh-121/Secure-Tab-Extension"
+                  href="https://github.com/vansh-121/Locksy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
@@ -153,20 +153,20 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="#" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <a href="/terms-of-service" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Terms of Service
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <a href="/privacy-policy" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Privacy Policy
                 </a>
               </li>
               <li>
                 <a
-                  href="https://github.com/vansh-121/Secure-Tab-Extension/blob/main/LICENSE"
+                  href="https://github.com/vansh-121/Locksy/blob/main/LICENSE"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
@@ -187,7 +187,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <a
-                  href="https://github.com/vansh-121/Secure-Tab-Extension"
+                  href="https://github.com/vansh-121/Locksy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
@@ -198,7 +198,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/vansh-121/Secure-Tab-Extension/stargazers"
+                  href="https://github.com/vansh-121/Locksy/stargazers"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
@@ -283,7 +283,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://github.com/vansh-121/Secure-Tab-Extension"
+                href="https://github.com/vansh-121/Locksy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-neutral-800/50 hover:bg-gradient-to-r hover:from-primary hover:to-secondary rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"

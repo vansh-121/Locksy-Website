@@ -30,7 +30,7 @@ export default function Security() {
         <div className="text-center">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://github.com/vansh-121/Secure-Tab-Extension"
+              href="https://github.com/vansh-121/Locksy"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary inline-block"
