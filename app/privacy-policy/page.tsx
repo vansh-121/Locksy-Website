@@ -1,6 +1,8 @@
 ﻿import { Metadata } from "next"
 import { generateBreadcrumbSchema } from "@/lib/metadata"
 import PrivacyPolicyClient from "./privacy-client"
+import fs from "fs"
+import path from "path"
 
 export const metadata: Metadata = {
     title: 'Privacy Policy - Your Data is 100% Private | Locksy',
@@ -44,6 +46,22 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ])
 
 export default function PrivacyPolicyPage() {
+    // Get the last modified date of this file
+    const filePath = path.join(process.cwd(), 'app', 'privacy-policy', 'privacy-client.tsx')
+    let lastUpdated = 'January 24, 2026'
+    
+    try {
+        const stats = fs.statSync(filePath)
+        const date = new Date(stats.mtime)
+        lastUpdated = date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        })
+    } catch (error) {
+        console.error('Error reading file stats:', error)
+    }
+
     return (
         <>
             {/* Breadcrumb Schema */}
@@ -51,7 +69,7 @@ export default function PrivacyPolicyPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
-            <PrivacyPolicyClient />
+            <PrivacyPolicyClient lastUpdated={lastUpdated} />
         </>
     )
 }

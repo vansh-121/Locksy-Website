@@ -3,7 +3,11 @@
 import Link from "next/link"
 import { Shield, Lock, CheckCircle, XCircle, Github, ArrowLeft, Database, Eye, AlertTriangle, FileText, Globe, Trash2 } from "lucide-react"
 
-export default function PrivacyPolicyClient() {
+interface PrivacyPolicyClientProps {
+    lastUpdated: string
+}
+
+export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClientProps) {
     return (
         <>
             <div className="min-h-screen">
@@ -42,7 +46,7 @@ export default function PrivacyPolicyClient() {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                             </span>
-                            Last Updated: December 30, 2025
+                            Last Updated: {lastUpdated}
                         </div>
                         <div>
                             <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6">
