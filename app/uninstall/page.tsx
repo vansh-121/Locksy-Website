@@ -556,12 +556,12 @@ export default function UninstallPage() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                     <Button variant="outline" size="lg" className="gap-2">
-                                         <span>🐞</span>
-                                         GitHub Support
+                                    <Button variant="outline" size="lg" className="gap-2">
+                                        <span>🐞</span>
+                                        GitHub Support
                                     </Button>
                                 </a>
-                                <a href="mailto:support@locksy.dev">
+                                <a href="mailto:vansh.sethi98760@gmail.com">
                                     <Button variant="outline" size="lg" className="gap-2">
                                         <span>✉️</span>
                                         Email Support
