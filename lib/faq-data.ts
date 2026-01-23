@@ -43,4 +43,36 @@ export const faqData: FAQItem[] = [
     question: "Which browsers are supported?",
     answer: "Locksy works on all major browsers including Firefox, Google Chrome, Microsoft Edge, Brave, Opera, Comet, Vivaldi, Arc, and many more. You can install it from the Firefox Add-ons, Chrome Web Store or Edge Add-ons store.",
   },
+  {
+    question: "How do I password protect a tab in Chrome?",
+    answer: "Click the Locksy icon in your Chrome toolbar, or use the keyboard shortcut Alt+Shift+9 to instantly lock the current tab. You'll need to set your password first if it's your first time using Locksy.",
+  },
+  {
+    question: "Can I lock multiple tabs at once?",
+    answer: "Yes! Use Alt+Shift+8 to lock all open tabs at once, or use Domain Lock to automatically protect all tabs matching a specific domain pattern.",
+  },
+  {
+    question: "Does Locksy slow down my browser?",
+    answer: "No! Locksy is ultra-lightweight and has zero performance impact. It only activates when you lock tabs and uses minimal resources.",
+  },
+  {
+    question: "How is Locksy different from password managers?",
+    answer: "Password managers store your passwords, while Locksy locks your actual browser tabs with encryption. Use both together for complete security - password managers for credentials, Locksy for tab protection.",
+  },
+  {
+    question: "Can I use Locksy on my work computer?",
+    answer: "Absolutely! Locksy is perfect for shared or work computers. Lock sensitive tabs when stepping away, and no one can access them without your password. It's 100% offline and private.",
+  },
+  {
+    question: "What is PBKDF2 encryption?",
+    answer: "PBKDF2 is a key derivation function that applies 600,000 iterations of SHA-256 hashing to your password, making it virtually impossible to crack. This is military-grade encryption exceeding OWASP 2023 security standards.",
+  },
+  {
+    question: "Is Locksy open source?",
+    answer: "Yes! Locksy is completely open source. You can inspect the code, contribute, or verify the security yourself on GitHub. Transparency is core to our privacy-first approach.",
+  },
+  {
+    question: "How do I customize keyboard shortcuts?",
+    answer: "Go to your browser's extension settings (chrome://extensions/shortcuts or about:addons in Firefox), find Locksy, and customize the shortcuts to your preference.",
+  },
 ]

@@ -39,7 +39,22 @@ const keywords = [
     'browser tab lock',
     'tab password protection',
     'offline encryption',
-    'zero knowledge encryption'
+    'zero knowledge encryption',
+    'how to password protect a tab',
+    'lock tabs on shared computer',
+    'secure browser tabs with password',
+    'free tab locker',
+    'private browsing security',
+    'protect tabs from others',
+    'tab security software',
+    'browser privacy tool',
+    'lock chrome tabs',
+    'lock firefox tabs',
+    'lock edge tabs',
+    'best tab security extension',
+    'military grade encryption browser',
+    'PBKDF2 browser extension',
+    'offline tab protection'
 ]
 
 export const metadata: Metadata = {
@@ -264,3 +279,49 @@ export const generateBreadcrumbSchema = (items: { name: string; url: string }[])
         }))
     }
 }
+
+// HowTo Schema for Installation Guide
+export const jsonLdHowToInstall = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Install Locksy Browser Extension',
+    description: 'Step-by-step guide to install and set up Locksy tab protection extension',
+    totalTime: 'PT1M',
+    tool: [
+        {
+            '@type': 'HowToTool',
+            name: 'Chrome, Firefox, or Edge browser'
+        }
+    ],
+    step: [
+        {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Visit Extension Store',
+            text: 'Go to Chrome Web Store, Firefox Add-ons, or Microsoft Edge Add-ons store',
+            url: `${siteUrl}#download`
+        },
+        {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Add to Browser',
+            text: 'Click the "Add to Browser" or "Add to Chrome/Firefox/Edge" button and confirm installation',
+            url: `${siteUrl}#download`
+        },
+        {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Set Master Password',
+            text: 'Click the Locksy icon in your browser toolbar and create your secure master password',
+            url: `${siteUrl}#how-it-works`
+        },
+        {
+            '@type': 'HowToStep',
+            position: 4,
+            name: 'Start Locking Tabs',
+            text: 'Click the lock button or use keyboard shortcut Alt+Shift+9 to protect any tab',
+            url: `${siteUrl}#features`
+        }
+    ]
+}
+
