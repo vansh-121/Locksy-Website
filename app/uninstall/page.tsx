@@ -8,6 +8,49 @@ import { Textarea } from "@/components/ui/textarea"
 import { Shield, Lock, Zap, Heart, ArrowRight, CheckCircle2, Download, Star, Frown } from "lucide-react"
 import Link from "next/link"
 import Header from "@/components/header"
+import { Metadata } from "next"
+import { generateBreadcrumbSchema } from "@/lib/metadata"
+
+export const metadata: Metadata = {
+    title: 'Uninstall Locksy - We\'re Sorry to See You Go | Browser Tab Security',
+    description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve. Learn how to uninstall the extension and explore alternatives if needed.',
+    keywords: 'uninstall locksy, remove locksy extension, locksy feedback, browser extension uninstall',
+    alternates: {
+        canonical: 'https://locksy.dev/uninstall',
+    },
+    openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        url: 'https://locksy.dev/uninstall',
+        siteName: 'Locksy',
+        title: 'Uninstall Locksy - We\'re Sorry to See You Go',
+        description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve our browser tab security extension.',
+        images: [
+            {
+                url: 'https://locksy.dev/web-app-manifest-512x512.png',
+                width: 512,
+                height: 512,
+                alt: 'Uninstall Locksy',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Uninstall Locksy - We\'re Sorry to See You Go',
+        description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve.',
+        images: ['https://locksy.dev/web-app-manifest-512x512.png'],
+        creator: '@locksy',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+}
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Uninstall', url: '/uninstall' }
+])
 
 const PRIMARY_BROWSERS = [
     {
@@ -88,7 +131,14 @@ export default function UninstallPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
+        <>
+            {/* Breadcrumb Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+
+            <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -603,5 +653,6 @@ export default function UninstallPage() {
                 </div>
             </footer>
         </div>
+        </>
     )
 }

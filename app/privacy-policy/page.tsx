@@ -2,10 +2,60 @@
 
 import Link from "next/link"
 import { Shield, Lock, CheckCircle, XCircle, Github, ArrowLeft, Database, Eye, AlertTriangle, FileText, Globe, Trash2 } from "lucide-react"
+import { Metadata } from "next"
+import { generateBreadcrumbSchema } from "@/lib/metadata"
+
+export const metadata: Metadata = {
+    title: 'Privacy Policy - Your Data is 100% Private | Locksy',
+    description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. All passwords are encrypted locally with AES-256. 100% offline, completely private browser tab security.',
+    keywords: 'locksy privacy policy, browser extension privacy, zero data collection, offline encryption, AES-256 encryption, privacy-first, no tracking',
+    alternates: {
+        canonical: 'https://locksy.dev/privacy-policy',
+    },
+    openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        url: 'https://locksy.dev/privacy-policy',
+        siteName: 'Locksy',
+        title: 'Privacy Policy - Your Data is 100% Private | Locksy',
+        description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. All passwords are encrypted locally with AES-256.',
+        images: [
+            {
+                url: 'https://locksy.dev/web-app-manifest-512x512.png',
+                width: 512,
+                height: 512,
+                alt: 'Locksy Privacy Policy - 100% Private',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Privacy Policy - Your Data is 100% Private | Locksy',
+        description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. 100% offline and completely private.',
+        images: ['https://locksy.dev/web-app-manifest-512x512.png'],
+        creator: '@locksy',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+}
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Privacy Policy', url: '/privacy-policy' }
+])
 
 export default function PrivacyPolicy() {
     return (
-        <div className="min-h-screen">
+        <>
+            {/* Breadcrumb Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+
+            <div className="min-h-screen">
             <header className="sticky top-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5">
                 <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
                     <Link href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
@@ -588,5 +638,6 @@ export default function PrivacyPolicy() {
                 </div>
             </footer>
         </div>
+        </>
     )
 }

@@ -21,6 +21,49 @@ import {
 import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { Metadata } from "next"
+import { generateBreadcrumbSchema } from "@/lib/metadata"
+
+export const metadata: Metadata = {
+    title: 'Contact Us - Get Support for Locksy | Browser Tab Security',
+    description: 'Contact the Locksy team for support, report bugs, request features, or ask questions about our browser tab security extension. We\'re here to help!',
+    keywords: 'contact locksy, locksy support, browser extension help, report bug, feature request, customer support',
+    alternates: {
+        canonical: 'https://locksy.dev/contact',
+    },
+    openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        url: 'https://locksy.dev/contact',
+        siteName: 'Locksy',
+        title: 'Contact Us - Get Support for Locksy | Browser Tab Security',
+        description: 'Contact the Locksy team for support, report bugs, request features, or ask questions about our browser tab security extension.',
+        images: [
+            {
+                url: 'https://locksy.dev/web-app-manifest-512x512.png',
+                width: 512,
+                height: 512,
+                alt: 'Contact Locksy - Browser Tab Security Support',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Contact Us - Get Support for Locksy',
+        description: 'Contact the Locksy team for support, report bugs, request features, or ask questions.',
+        images: ['https://locksy.dev/web-app-manifest-512x512.png'],
+        creator: '@locksy',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+}
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Contact', url: '/contact' }
+])
 
 const SOCIAL_LINKS = [
     {
@@ -153,7 +196,14 @@ Timestamp: ${new Date().toISOString()}
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
+        <>
+            {/* Breadcrumb Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+
+            <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -392,5 +442,6 @@ Timestamp: ${new Date().toISOString()}
 
             <Footer />
         </div>
+        </>
     )
 }
