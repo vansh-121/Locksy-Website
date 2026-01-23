@@ -9,6 +9,7 @@ import Security from "@/components/security"
 import Comparison from "@/components/comparison"
 import Testimonials from "@/components/testimonials"
 import FAQ from "@/components/faq"
+import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
 import Footer from "@/components/footer"
 import PageLoader from "@/components/page-loader"
@@ -38,6 +39,7 @@ export default function Home() {
           <Security />
           <Testimonials />
           <FAQ />
+          <SupportChatCTA />
           <CTASection />
           <Footer />
         </main>

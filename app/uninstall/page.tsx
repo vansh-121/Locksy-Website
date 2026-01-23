@@ -136,6 +136,69 @@ export default function UninstallPage() {
                     </div>
                 </div>
 
+                {/* Support Section - After Uninstalling */}
+                <div className="max-w-4xl mx-auto mb-12">
+                    <div className="relative group">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-60 group-hover:opacity-80 transition-opacity" />
+                        <Card className="relative border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-secondary/5 backdrop-blur-sm shadow-xl">
+                            <CardContent className="pt-8 pb-8">
+                                <div className="text-center space-y-6">
+                                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-secondary shadow-lg mb-4">
+                                        <span className="text-4xl">💬</span>
+                                    </div>
+                                    <h2 className="text-3xl md:text-4xl font-bold">
+                                        Had Issues or Questions?
+                                    </h2>
+                                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                                        We'd love to help! If you uninstalled because of a problem or confusion, <strong className="text-foreground">our support team can assist you.</strong> Many issues have simple solutions, and we're here to make things right.
+                                    </p>
+                                    <div className="bg-background/60 border border-primary/30 rounded-xl p-6 max-w-2xl mx-auto">
+                                        <p className="text-base text-muted-foreground mb-4">
+                                            Reach out for help with:
+                                        </p>
+                                        <div className="grid md:grid-cols-2 gap-3 text-left text-sm">
+                                            <div className="flex items-start gap-2">
+                                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                                                <span>Setup & configuration help</span>
+                                            </div>
+                                            <div className="flex items-start gap-2">
+                                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                                                <span>Troubleshooting issues</span>
+                                            </div>
+                                            <div className="flex items-start gap-2">
+                                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                                                <span>Feature explanations</span>
+                                            </div>
+                                            <div className="flex items-start gap-2">
+                                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                                                <span>Reinstallation guidance</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <Button
+                                        onClick={() => {
+                                            // Trigger chat support
+                                            if (typeof window !== 'undefined' && (window as any).$crisp) {
+                                                (window as any).$crisp.push(['do', 'chat:open']);
+                                            }
+                                        }}
+                                        size="lg"
+                                        className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-base md:text-lg px-6 py-4 md:px-8 md:py-6"
+                                    >
+                                        <span className="mr-2">💬</span>
+                                        <span className="hidden sm:inline">Chat With Support Now</span>
+                                        <span className="sm:hidden">Chat With Support</span>
+                                        <ArrowRight className="ml-2 h-5 w-5" />
+                                    </Button>
+                                    <p className="text-sm text-muted-foreground">
+                                        Usually responds within a few hours • Available 24/7
+                                    </p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+
                 {/* Feedback Section */}
                 <div className="max-w-4xl mx-auto mb-20">
                     {!submitted ? (
@@ -464,11 +527,24 @@ export default function UninstallPage() {
                             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-lg mb-2">
                                 <Heart className="h-8 w-8 text-white" />
                             </div>
-                            <h3 className="text-3xl font-bold">We're Here to Help</h3>
+                            <h3 className="text-3xl font-bold">Still Need Help?</h3>
                             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                                Encountered an issue? Have questions? Our team is ready to assist you.
+                                We're committed to your success. Reach out through any channel that works best for you.
                             </p>
                             <div className="flex flex-wrap justify-center gap-4 pt-4">
+                                <Button
+                                    onClick={() => {
+                                        // Trigger Crisp chat
+                                        if (typeof window !== 'undefined' && (window as any).$crisp) {
+                                            (window as any).$crisp.push(['do', 'chat:open']);
+                                        }
+                                    }}
+                                    size="lg"
+                                    className="gap-2 bg-gradient-to-r from-primary to-secondary text-white font-semibold"
+                                >
+                                    <span>💬</span>
+                                    Live Chat Support
+                                </Button>
                                 <Link href="/#faq">
                                     <Button variant="outline" size="lg" className="gap-2">
                                         <span>📚</span>
@@ -480,9 +556,9 @@ export default function UninstallPage() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <Button variant="outline" size="lg" className="gap-2">
-                                        <span>💬</span>
-                                        GitHub Support
+                                     <Button variant="outline" size="lg" className="gap-2">
+                                         <span>🐞</span>
+                                         GitHub Support
                                     </Button>
                                 </a>
                                 <a href="mailto:support@locksy.dev">
