@@ -3,64 +3,34 @@ import { faqData } from './faq-data'
 
 const siteUrl = 'https://locksy.dev' // Update with your actual domain
 const siteName = 'Locksy'
-const siteDescription = 'Password-protect your tabs with military-grade PBKDF2 encryption. Instant locking, offline security, 100% private.'
+const siteDescription = 'Password-protect your tabs with military-grade PBKDF2 encryption. Instant locking, offline security, 100% private. Works on Chrome, Edge, Firefox, Brave, Opera & all Chromium browsers.'
 const keywords = [
     'password protect tabs',
-    'browser tab security',
     'lock browser tabs',
-    'tab protection',
-    'secure browser tabs',
+    'tab locker',
     'password protect chrome tabs',
     'password protect edge tabs',
     'password protect firefox tabs',
     'password protect brave tabs',
-    'browser security extension',
-    'browser privacy',
-    'tab locker',
-    'secure browsing',
-    'password manager',
-    'privacy extension',
-    'offline password protection',
-    'KDF encryption',
-    'AES-256 encryption',
-    'PBKDF2',
-    'PBKDF2-SHA256',
-    'tab privacy',
-    'protect sensitive data',
-    'browser tab password',
-    'chrome security',
-    'edge security',
-    'firefox security',
-    'brave security',
-    'chromium extension',
-    'universal browser extension',
-    'tab encryption',
-    'secure tabs extension',
-    'browser tab lock',
-    'tab password protection',
-    'offline encryption',
-    'zero knowledge encryption',
-    'how to password protect a tab',
-    'lock tabs on shared computer',
-    'secure browser tabs with password',
-    'free tab locker',
-    'private browsing security',
-    'protect tabs from others',
-    'tab security software',
-    'browser privacy tool',
-    'lock chrome tabs',
-    'lock firefox tabs',
-    'lock edge tabs',
-    'best tab security extension',
-    'military grade encryption browser',
-    'PBKDF2 browser extension',
-    'offline tab protection'
+    'chrome extension tab security',
+    'edge extension tab security',
+    'firefox tab security',
+    'brave tab security',
+    'chromium extension tab lock',
+    'opera tab security',
+    'vivaldi tab security',
+    'tab protection extension',
+    'PBKDF2 encryption browser',
+    'offline tab security',
+    'browser privacy extension',
+    'free tab locker extension',
+    'locksy tab locker'
 ]
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),
     title: {
-        default: 'Locksy - Password-Protect Browser Tabs | Browser Extension',
+        default: 'Locksy - Tab Locker & Password Protection | Chrome, Edge, Firefox, Brave Extension',
         template: '%s | Locksy'
     },
     description: siteDescription,
@@ -78,7 +48,7 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: siteUrl,
         siteName: siteName,
-        title: 'Locksy - Password-Protect Browser Tabs | Browser Extension',
+        title: 'Locksy - Tab Locker & Password Protection | Chrome, Edge, Firefox, Brave Extension',
         description: siteDescription,
         images: [
             {
@@ -181,7 +151,7 @@ export const jsonLdSoftwareApplication = {
     },
     description: siteDescription,
     softwareVersion: '1.0',
-    browserRequirements: 'Requires any Chromium-based browser (Chrome, Edge, Brave, Opera, Vivaldi, Arc)',
+    browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
     featureList: [
         'Password protect any browser tab',
