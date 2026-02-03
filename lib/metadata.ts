@@ -3,7 +3,7 @@ import { faqData } from './faq-data'
 
 const siteUrl = 'https://www.locksy.dev' // Update with your actual domain
 const siteName = 'Locksy'
-const siteDescription = 'Password-protect your tabs with military-grade PBKDF2 encryption. Instant locking, offline security, 100% private. Works on Chrome, Edge, Firefox, Brave, Opera & all Chromium browsers.'
+const siteDescription = 'Password-protect browser tabs with military-grade encryption. Instant locking, offline security. For Chrome, Edge, Firefox, Brave & more.'
 const keywords = [
     'password protect tabs',
     'lock browser tabs',
@@ -30,7 +30,7 @@ const keywords = [
 export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),
     title: {
-        default: 'Locksy - Tab Locker & Password Protection | Chrome, Edge, Firefox, Brave Extension',
+        default: 'Password Protect & Lock Browser Tabs – Locksy Tab Locker',
         template: '%s | Locksy'
     },
     description: siteDescription,
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: siteUrl,
         siteName: siteName,
-        title: 'Locksy - Tab Locker & Password Protection | Chrome, Edge, Firefox, Brave Extension',
+        title: 'Password Protect & Lock Browser Tabs – Locksy Tab Locker',
         description: siteDescription,
         images: [
             {
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Locksy - Password-Protect Browser Tabs',
+        title: 'Password Protect & Lock Browser Tabs – Locksy Tab Locker',
         description: siteDescription,
         images: [`${siteUrl}/web-app-manifest-512x512.png`],
         creator: '@locksy',
