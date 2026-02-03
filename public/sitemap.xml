@@ -8,32 +8,32 @@
   
   <!-- Main Homepage -->
   <url>
-    <loc>https://locksy.dev/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <loc>https://www.locksy.dev/</loc>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Contact Page -->
   <url>
-    <loc>https://locksy.dev/contact</loc>
-    <lastmod>2026-01-24</lastmod>
+    <loc>https://www.locksy.dev/contact</loc>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Privacy Policy -->
   <url>
-    <loc>https://locksy.dev/privacy-policy</loc>
-    <lastmod>2026-01-24</lastmod>
+    <loc>https://www.locksy.dev/privacy-policy</loc>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Uninstall Page -->
   <url>
-    <loc>https://locksy.dev/uninstall</loc>
-    <lastmod>2026-01-24</lastmod>
+    <loc>https://www.locksy.dev/uninstall</loc>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

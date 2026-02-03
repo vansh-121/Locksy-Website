@@ -7,18 +7,18 @@ export const metadata: Metadata = {
     description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve. Learn how to uninstall the extension and explore alternatives if needed.',
     keywords: 'uninstall locksy, remove locksy extension, locksy feedback, browser extension uninstall',
     alternates: {
-        canonical: 'https://locksy.dev/uninstall',
+        canonical: 'https://www.locksy.dev/uninstall',
     },
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: 'https://locksy.dev/uninstall',
+        url: 'https://www.locksy.dev/uninstall',
         siteName: 'Locksy',
         title: 'Uninstall Locksy - We\'re Sorry to See You Go',
         description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve our browser tab security extension.',
         images: [
             {
-                url: 'https://locksy.dev/web-app-manifest-512x512.png',
+                url: 'https://www.locksy.dev/web-app-manifest-512x512.png',
                 width: 512,
                 height: 512,
                 alt: 'Uninstall Locksy',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Uninstall Locksy - We\'re Sorry to See You Go',
         description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve.',
-        images: ['https://locksy.dev/web-app-manifest-512x512.png'],
+        images: ['https://www.locksy.dev/web-app-manifest-512x512.png'],
         creator: '@locksy',
     },
     robots: {

@@ -9,7 +9,7 @@ Disallow: /_next/
 Disallow: /admin/
 
 # Sitemap location
-Sitemap: https://locksy.dev/sitemap.xml
+Sitemap: https://www.locksy.dev/sitemap.xml
 
 # Google Bot
 User-agent: Googlebot

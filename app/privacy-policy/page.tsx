@@ -9,18 +9,18 @@ export const metadata: Metadata = {
     description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. All passwords are encrypted locally with AES-256. 100% offline, completely private browser tab security.',
     keywords: 'locksy privacy policy, browser extension privacy, zero data collection, offline encryption, AES-256 encryption, privacy-first, no tracking',
     alternates: {
-        canonical: 'https://locksy.dev/privacy-policy',
+        canonical: 'https://www.locksy.dev/privacy-policy',
     },
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: 'https://locksy.dev/privacy-policy',
+        url: 'https://www.locksy.dev/privacy-policy',
         siteName: 'Locksy',
         title: 'Privacy Policy - Your Data is 100% Private | Locksy',
         description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. All passwords are encrypted locally with AES-256.',
         images: [
             {
-                url: 'https://locksy.dev/web-app-manifest-512x512.png',
+                url: 'https://www.locksy.dev/web-app-manifest-512x512.png',
                 width: 512,
                 height: 512,
                 alt: 'Locksy Privacy Policy - 100% Private',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Privacy Policy - Your Data is 100% Private | Locksy',
         description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. 100% offline and completely private.',
-        images: ['https://locksy.dev/web-app-manifest-512x512.png'],
+        images: ['https://www.locksy.dev/web-app-manifest-512x512.png'],
         creator: '@locksy',
     },
     robots: {

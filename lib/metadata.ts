@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { faqData } from './faq-data'
 
-const siteUrl = 'https://locksy.dev' // Update with your actual domain
+const siteUrl = 'https://www.locksy.dev' // Update with your actual domain
 const siteName = 'Locksy'
 const siteDescription = 'Password-protect your tabs with military-grade PBKDF2 encryption. Instant locking, offline security, 100% private. Works on Chrome, Edge, Firefox, Brave, Opera & all Chromium browsers.'
 const keywords = [

@@ -7,18 +7,18 @@ export const metadata: Metadata = {
     description: 'Contact the Locksy team for support, report bugs, request features, or ask questions about our browser tab security extension. We\'re here to help!',
     keywords: 'contact locksy, locksy support, browser extension help, report bug, feature request, customer support',
     alternates: {
-        canonical: 'https://locksy.dev/contact',
+        canonical: 'https://www.locksy.dev/contact',
     },
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: 'https://locksy.dev/contact',
+        url: 'https://www.locksy.dev/contact',
         siteName: 'Locksy',
         title: 'Contact Us - Get Support for Locksy | Browser Tab Security',
         description: 'Contact the Locksy team for support, report bugs, request features, or ask questions about our browser tab security extension.',
         images: [
             {
-                url: 'https://locksy.dev/web-app-manifest-512x512.png',
+                url: 'https://www.locksy.dev/web-app-manifest-512x512.png',
                 width: 512,
                 height: 512,
                 alt: 'Contact Locksy - Browser Tab Security Support',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Contact Us - Get Support for Locksy',
         description: 'Contact the Locksy team for support, report bugs, request features, or ask questions.',
-        images: ['https://locksy.dev/web-app-manifest-512x512.png'],
+        images: ['https://www.locksy.dev/web-app-manifest-512x512.png'],
         creator: '@locksy',
     },
     robots: {
