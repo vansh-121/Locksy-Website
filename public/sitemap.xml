@@ -22,6 +22,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Newsletter Page -->
+  <url>
+    <loc>https://www.locksy.dev/newsletter</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Privacy Policy -->
   <url>
     <loc>https://www.locksy.dev/privacy-policy</loc>

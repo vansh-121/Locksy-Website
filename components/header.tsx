@@ -121,12 +121,10 @@ export default function Header() {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
-            href="https://github.com/vansh-121/Locksy/issues"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/newsletter"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
-            Report Issue
+            Newsletter
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
@@ -235,87 +233,68 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-border/50 shadow-xl lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
-            <div className="flex flex-col gap-2 p-6">
-              <a
-                href="/#features"
-                className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Features
-              </a>
-              <a
-                href="/#security"
-                className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Security
-              </a>
-              <a
-                href="/#faq"
-                className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                FAQ
-              </a>
-              <a
-                href="https://github.com/vansh-121/Locksy/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Report Issue
-              </a>
-              <a
-                href="/contact"
-                className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact Developer
-              </a>
-              <a
-                href="https://github.com/sponsors/vansh-121"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:text-secondary font-semibold p-3 rounded-lg hover:bg-accent transition-all flex items-center gap-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                </svg>
-                Sponsor Project
-              </a>
-              <div className="mt-4 space-y-2">
-                <div className="text-sm font-semibold text-foreground/70 mb-2">Install Extension</div>
-                {/* Primary Browsers */}
-                {PRIMARY_BROWSERS.map((browser) => (
-                  <a
-                    key={browser.name}
-                    href={browser.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary text-center flex items-center justify-center gap-2"
-                  >
-                    <img src={browser.icon} alt={browser.name} className="w-5 h-5 object-contain" />
-                    Get for {browser.name}
-                  </a>
-                ))}
-                {/* Secondary Browsers Grid */}
-                <div className="grid grid-cols-2 gap-2">
-                  {SECONDARY_BROWSERS.map((browser) => (
-                    <a
-                      key={browser.name}
-                      href={browser.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary text-center flex items-center justify-center gap-2 py-2.5"
-                    >
-                      <img src={browser.icon} alt={browser.name} className="w-5 h-5 object-contain" />
-                      <span className="text-sm">{browser.name}</span>
-                    </a>
-                  ))}
-                </div>
+            <div className="flex flex-col p-6">
+              {/* Navigation Section */}
+              <div className="space-y-1 mb-4">
+                <a
+                  href="/#features"
+                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Features
+                </a>
+                <a
+                  href="/#security"
+                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Security
+                </a>
+                <a
+                  href="/#faq"
+                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  FAQ
+                </a>
+                <a
+                  href="/contact"
+                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Contact Developer
+                </a>
               </div>
+
+              {/* Divider */}
+              <div className="h-px bg-border/50 my-4" />
+
+              {/* CTA Section */}
+              <div className="space-y-3 mb-4">
+                <a
+                  href="/newsletter"
+                  className="flex items-center justify-center gap-2 p-3 bg-primary/10 hover:bg-primary/20 border border-primary/20 text-primary font-semibold rounded-lg transition-all"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                  </svg>
+                  Newsletter
+                </a>
+                <a
+                  href="https://github.com/sponsors/vansh-121"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20 border border-primary/20 text-primary font-semibold rounded-lg transition-all"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg>
+                  Sponsor Project
+                </a>
+              </div>
+
             </div>
           </div>
         )}
