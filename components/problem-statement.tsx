@@ -34,8 +34,15 @@ export default function ProblemStatement() {
   const securityRisks = [
     { 
       icon: (
-        <svg className="w-8 h-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="5" width="18" height="14" rx="2" fill="url(#emerald-gradient)" fillOpacity="0.2"/>
+          <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke="url(#emerald-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <defs>
+            <linearGradient id="emerald-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#10b981" />
+              <stop offset="100%" stopColor="#14b8a6" />
+            </linearGradient>
+          </defs>
         </svg>
       ),
       title: "Banking", 
@@ -45,8 +52,15 @@ export default function ProblemStatement() {
     },
     { 
       icon: (
-        <svg className="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="5" width="18" height="14" rx="2" fill="url(#blue-gradient)" fillOpacity="0.2"/>
+          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="url(#blue-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <defs>
+            <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#06b6d4" />
+            </linearGradient>
+          </defs>
         </svg>
       ),
       title: "Email", 
@@ -56,8 +70,15 @@ export default function ProblemStatement() {
     },
     { 
       icon: (
-        <svg className="w-8 h-8 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="6" width="18" height="14" rx="2" fill="url(#purple-gradient)" fillOpacity="0.2"/>
+          <path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="url(#purple-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <defs>
+            <linearGradient id="purple-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#a855f7" />
+              <stop offset="100%" stopColor="#ec4899" />
+            </linearGradient>
+          </defs>
         </svg>
       ),
       title: "Work", 
@@ -67,8 +88,15 @@ export default function ProblemStatement() {
     },
     { 
       icon: (
-        <svg className="w-8 h-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+          <path d="M5 9h14l1 12H4L5 9z" fill="url(#orange-gradient)" fillOpacity="0.2"/>
+          <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke="url(#orange-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <defs>
+            <linearGradient id="orange-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#f97316" />
+              <stop offset="100%" stopColor="#ef4444" />
+            </linearGradient>
+          </defs>
         </svg>
       ),
       title: "Shopping", 
@@ -78,8 +106,15 @@ export default function ProblemStatement() {
     },
     { 
       icon: (
-        <svg className="w-8 h-8 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+          <rect x="4" y="11" width="16" height="10" rx="2" fill="url(#indigo-gradient)" fillOpacity="0.2"/>
+          <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke="url(#indigo-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <defs>
+            <linearGradient id="indigo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#6366f1" />
+              <stop offset="100%" stopColor="#a855f7" />
+            </linearGradient>
+          </defs>
         </svg>
       ),
       title: "Privacy", 
@@ -89,8 +124,16 @@ export default function ProblemStatement() {
     },
     { 
       icon: (
-        <svg className="w-8 h-8 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="7" r="3" fill="url(#rose-gradient)" fillOpacity="0.2"/>
+          <ellipse cx="12" cy="15" rx="9" ry="5" fill="url(#rose-gradient)" fillOpacity="0.2"/>
+          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke="url(#rose-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <defs>
+            <linearGradient id="rose-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#f43f5e" />
+              <stop offset="100%" stopColor="#ec4899" />
+            </linearGradient>
+          </defs>
         </svg>
       ),
       title: "Family", 
