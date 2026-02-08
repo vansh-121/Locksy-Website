@@ -4,26 +4,16 @@ import { useState, useEffect } from "react"
 
 export default function AutomationFeatures() {
   const [timeRemaining, setTimeRemaining] = useState(900) // 15 minutes in seconds
-  const [progress, setProgress] = useState(40)
   const [activeActivity, setActiveActivity] = useState(0)
   
   const activities = ['🖱️ Mouse', '⌨️ Keyboard', '📜 Scroll', '▶️ Video']
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeRemaining((prev) => {
-        if (prev <= 0) return 900 // Reset to 15 minutes
-        return prev - 1
-      })
-      
-      setProgress((prev) => {
-        const newProgress = prev - (100 / 900) // Decrease proportionally
-        if (newProgress <= 0) return 40 // Reset to 40%
-        return newProgress
-      })
-    }, 1000)
+      setTimeRemaining((prev) => (prev > 1 ? prev - 1 : 900));
+    }, 1000);
 
-    return () => clearInterval(interval)
+    return () => clearInterval(interval);
   }, [])
 
   // Simulate activity detection
@@ -40,6 +30,9 @@ export default function AutomationFeatures() {
     const secs = seconds % 60
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
   }
+
+  // Compute progress from timeRemaining to keep them in sync
+  const progress = (timeRemaining / 900) * 40
 
   const automationFeatures = [
     {
