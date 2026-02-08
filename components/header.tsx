@@ -269,6 +269,30 @@ export default function Header() {
               {/* Divider */}
               <div className="h-px bg-border/50 my-4" />
 
+              {/* Browser Installation Section */}
+              <div className="space-y-3 mb-4">
+                <p className="text-sm font-medium text-muted-foreground px-3">Install Locksy</p>
+                {PRIMARY_BROWSERS.map((browser) => (
+                  <a
+                    key={browser.name}
+                    href={browser.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-3 bg-accent hover:bg-accent/80 border border-border/50 rounded-lg transition-all"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <img src={browser.icon} alt={browser.name} className="w-8 h-8 object-contain" />
+                    <div className="flex-1 text-left">
+                      <div className="font-semibold text-foreground">{browser.name}</div>
+                      <div className="text-xs text-muted-foreground">{browser.storeName}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-border/50 my-4" />
+
               {/* CTA Section */}
               <div className="space-y-3 mb-4">
                 <a
