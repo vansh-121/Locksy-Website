@@ -1,11 +1,11 @@
 const SecurityRisk = ({ icon, title, description, color, delay }: any) => (
-  <div 
+  <div
     className="group relative"
     style={{ animationDelay: `${delay}ms` }}
   >
     {/* Glow effect on hover */}
     <div className={`absolute inset-0 ${color} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-700 rounded-3xl`} />
-    
+
     <div className="relative h-full bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 transition-all duration-500 hover:border-destructive/30 hover:shadow-xl hover:shadow-destructive/5 hover:-translate-y-2">
       {/* Icon container with custom design */}
       <div className="relative mb-6">
@@ -23,7 +23,7 @@ const SecurityRisk = ({ icon, title, description, color, delay }: any) => (
       <p className="text-muted-foreground leading-relaxed text-[15px]">
         {description}
       </p>
-      
+
       {/* Corner accent */}
       <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-destructive/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </div>
@@ -32,11 +32,11 @@ const SecurityRisk = ({ icon, title, description, color, delay }: any) => (
 
 export default function ProblemStatement() {
   const securityRisks = [
-    { 
+    {
       icon: (
         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="5" width="18" height="14" rx="2" fill="url(#emerald-gradient)" fillOpacity="0.2"/>
-          <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke="url(#emerald-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <rect x="3" y="5" width="18" height="14" rx="2" fill="url(#emerald-gradient)" fillOpacity="0.2" />
+          <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke="url(#emerald-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           <defs>
             <linearGradient id="emerald-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#10b981" />
@@ -45,16 +45,16 @@ export default function ProblemStatement() {
           </defs>
         </svg>
       ),
-      title: "Banking", 
-      description: "Financial accounts and transactions exposed on shared computers", 
+      title: "Banking",
+      description: "Financial accounts and transactions exposed on shared computers",
       color: "from-emerald-500 to-teal-500",
       delay: 0
     },
-    { 
+    {
       icon: (
         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="5" width="18" height="14" rx="2" fill="url(#blue-gradient)" fillOpacity="0.2"/>
-          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="url(#blue-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <rect x="3" y="5" width="18" height="14" rx="2" fill="url(#blue-gradient)" fillOpacity="0.2" />
+          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="url(#blue-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           <defs>
             <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#3b82f6" />
@@ -63,16 +63,16 @@ export default function ProblemStatement() {
           </defs>
         </svg>
       ),
-      title: "Email", 
-      description: "Private conversations and confidential messages at risk", 
+      title: "Email",
+      description: "Private conversations and confidential messages at risk",
       color: "from-blue-500 to-cyan-500",
       delay: 100
     },
-    { 
+    {
       icon: (
         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="6" width="18" height="14" rx="2" fill="url(#purple-gradient)" fillOpacity="0.2"/>
-          <path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="url(#purple-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <rect x="3" y="6" width="18" height="14" rx="2" fill="url(#purple-gradient)" fillOpacity="0.2" />
+          <path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="url(#purple-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           <defs>
             <linearGradient id="purple-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#a855f7" />
@@ -81,16 +81,16 @@ export default function ProblemStatement() {
           </defs>
         </svg>
       ),
-      title: "Work", 
-      description: "Sensitive documents and company data vulnerable to exposure", 
+      title: "Work",
+      description: "Sensitive documents and company data vulnerable to exposure",
       color: "from-purple-500 to-pink-500",
       delay: 200
     },
-    { 
+    {
       icon: (
         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <path d="M5 9h14l1 12H4L5 9z" fill="url(#orange-gradient)" fillOpacity="0.2"/>
-          <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke="url(#orange-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M5 9h14l1 12H4L5 9z" fill="url(#orange-gradient)" fillOpacity="0.2" />
+          <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke="url(#orange-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           <defs>
             <linearGradient id="orange-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#f97316" />
@@ -99,16 +99,16 @@ export default function ProblemStatement() {
           </defs>
         </svg>
       ),
-      title: "Shopping", 
-      description: "Payment methods and purchase history visible to others", 
+      title: "Shopping",
+      description: "Payment methods and purchase history visible to others",
       color: "from-orange-500 to-red-500",
       delay: 300
     },
-    { 
+    {
       icon: (
         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <rect x="4" y="11" width="16" height="10" rx="2" fill="url(#indigo-gradient)" fillOpacity="0.2"/>
-          <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke="url(#indigo-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <rect x="4" y="11" width="16" height="10" rx="2" fill="url(#indigo-gradient)" fillOpacity="0.2" />
+          <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke="url(#indigo-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           <defs>
             <linearGradient id="indigo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#6366f1" />
@@ -117,17 +117,17 @@ export default function ProblemStatement() {
           </defs>
         </svg>
       ),
-      title: "Privacy", 
-      description: "Personal browsing activities you'd prefer to keep private", 
+      title: "Privacy",
+      description: "Personal browsing activities you'd prefer to keep private",
       color: "from-indigo-500 to-purple-500",
       delay: 400
     },
-    { 
+    {
       icon: (
         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="7" r="3" fill="url(#rose-gradient)" fillOpacity="0.2"/>
-          <ellipse cx="12" cy="15" rx="9" ry="5" fill="url(#rose-gradient)" fillOpacity="0.2"/>
-          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke="url(#rose-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="12" cy="7" r="3" fill="url(#rose-gradient)" fillOpacity="0.2" />
+          <ellipse cx="12" cy="15" rx="9" ry="5" fill="url(#rose-gradient)" fillOpacity="0.2" />
+          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke="url(#rose-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           <defs>
             <linearGradient id="rose-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#f43f5e" />
@@ -136,8 +136,8 @@ export default function ProblemStatement() {
           </defs>
         </svg>
       ),
-      title: "Family", 
-      description: "Shared devices compromise everyone's digital privacy", 
+      title: "Family",
+      description: "Shared devices compromise everyone's digital privacy",
       color: "from-rose-500 to-pink-500",
       delay: 500
     },
@@ -196,13 +196,13 @@ export default function ProblemStatement() {
         <div className="relative group max-w-5xl mx-auto">
           {/* Outer glow */}
           <div className="absolute -inset-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
-          
+
           {/* Main card */}
           <div className="relative bg-gradient-to-br from-primary/95 via-[oklch(0.50_0.23_282)] to-secondary/95 rounded-3xl overflow-hidden shadow-2xl">
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-black/10 rounded-full blur-3xl" />
-            
+
             <div className="relative p-12 md:p-16 text-center">
               {/* Icon with shield */}
               <div className="flex items-center justify-center mb-8">
@@ -220,10 +220,10 @@ export default function ProblemStatement() {
                 Locksy Protects Your Privacy
               </h3>
               <p className="text-xl md:text-2xl text-white/95 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Lock any tab with a password in seconds. 
+                Lock any tab with a password in seconds.
                 <span className="block mt-2 font-semibold">Simple. Secure. Private.</span>
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center flex-wrap">
                 <a
                   href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
@@ -232,9 +232,7 @@ export default function ProblemStatement() {
                   className="group/btn inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-primary font-bold text-sm sm:text-base rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden w-full sm:w-auto"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000" />
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm5.894 13.185l-1.63 7.394c-.12.543-.435.674-.882.42l-2.433-1.794-1.173 1.13c-.13.13-.238.238-.489.238l.174-2.474 4.498-4.064c.195-.174-.043-.27-.303-.096l-5.56 3.502-2.397-.749c-.52-.163-.532-.52.11-.772l9.38-3.617c.435-.163.815.105.673.772z"/>
-                  </svg>
+                  <img src="/browsers/chrome.png" alt="Chrome" className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                   <span className="flex-1 text-center sm:flex-initial">Get for Chrome</span>
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -247,9 +245,7 @@ export default function ProblemStatement() {
                   className="group/btn inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-primary font-bold text-sm sm:text-base rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden w-full sm:w-auto"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000" />
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8.824 7.287c.008 0 .004 0 0 0zm-2.8-1.4c.006 0 .003 0 0 0zm16.754 2.161c-.505-1.215-1.53-2.528-2.333-2.943.654 1.283 1.033 2.57 1.177 3.53l.002.02c-1.314-3.278-3.544-4.6-5.366-7.477-.091-.147-.184-.292-.273-.446a3.545 3.545 0 01-.13-.24 2.118 2.118 0 01-.172-.46.03.03 0 00-.027-.03.038.038 0 00-.021 0l-.006.001a.037.037 0 00-.01.005L15.624 0c-2.585 1.515-3.657 4.168-3.932 5.856a6.197 6.197 0 00-2.305.587.297.297 0 00-.147.37c.057.162.24.24.396.17a5.364 5.364 0 012.305-.586c0 .778-.096 1.524-.281 2.224a6.262 6.262 0 00-2.046.087.288.288 0 00-.153.37.265.265 0 00.337.164 5.91 5.91 0 011.996-.076c-.245.566-.539 1.1-.879 1.595a5.19 5.19 0 00-1.77.36.273.273 0 00-.033.508.25.25 0 00.27-.015 4.617 4.617 0 011.77-.36c-2.075 2.716-5.338 3.68-7.674 1.073.496 1.993 2.216 4.23 5.735 4.632.683.078 1.343.07 1.962-.022a8.712 8.712 0 002.861-.81c1.547-.71 2.883-1.79 3.876-3.03a9.177 9.177 0 002.048-5.433 6.61 6.61 0 00-.041-.82c.368.023.744.043 1.127.062L21.778 8a.03.03 0 00.011-.024c0-.007-.002-.01-.005-.014l-.748-.087z"/>
-                  </svg>
+                  <img src="/browsers/firefox.png" alt="Firefox" className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                   <span className="flex-1 text-center sm:flex-initial">Get for Firefox</span>
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -262,16 +258,14 @@ export default function ProblemStatement() {
                   className="group/btn inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-primary font-bold text-sm sm:text-base rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden w-full sm:w-auto"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000" />
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm-.004 17.877a5.882 5.882 0 1 1 0-11.764 5.882 5.882 0 0 1 0 11.764z"/>
-                  </svg>
+                  <img src="/browsers/edge.png" alt="Edge" className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                   <span className="flex-1 text-center sm:flex-initial">Get for Edge</span>
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </a>
               </div>
-              
+
               {/* Trust indicators */}
               <div className="mt-10 pt-8 border-t border-white/20">
                 <div className="flex flex-wrap items-center justify-center gap-6 text-white/80 text-sm">
@@ -286,7 +280,7 @@ export default function ProblemStatement() {
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    <span className="font-medium">10,000+ Users</span>
+                    <span className="font-medium">1000+ Users</span>
                   </div>
                   <div className="hidden sm:block w-px h-4 bg-white/20" />
                   <div className="flex items-center gap-2">

@@ -15,24 +15,27 @@ export default function CTASection() {
             href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 text-center"
+            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
           >
+            <img src="/browsers/chrome.png" alt="Chrome" className="w-5 h-5 flex-shrink-0" />
             Get for Chrome
           </a>
           <a
             href="https://addons.mozilla.org/en-US/firefox/addon/locksy/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 text-center"
+            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
           >
+            <img src="/browsers/firefox.png" alt="Firefox" className="w-5 h-5 flex-shrink-0" />
             Get for Firefox
           </a>
           <a
             href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 text-center"
+            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
           >
+            <img src="/browsers/edge.png" alt="Edge" className="w-5 h-5 flex-shrink-0" />
             Get for Edge
           </a>
 

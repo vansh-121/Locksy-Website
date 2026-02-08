@@ -43,24 +43,27 @@ export default function HowItWorks() {
             href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary inline-block"
+            className="btn-primary inline-flex items-center justify-center gap-2"
           >
+            <img src="/browsers/chrome.png" alt="Chrome" className="w-5 h-5 flex-shrink-0" />
             Get for Chrome
           </a>
           <a
             href="https://addons.mozilla.org/en-US/firefox/addon/locksy/"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary inline-block"
+            className="btn-primary inline-flex items-center justify-center gap-2"
           >
+            <img src="/browsers/firefox.png" alt="Firefox" className="w-5 h-5 flex-shrink-0" />
             Get for Firefox
           </a>
           <a
             href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary inline-block"
+            className="btn-primary inline-flex items-center justify-center gap-2"
           >
+            <img src="/browsers/edge.png" alt="Edge" className="w-5 h-5 flex-shrink-0" />
             Get for Edge
           </a>
         </div>
