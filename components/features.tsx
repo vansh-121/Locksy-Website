@@ -1,17 +1,29 @@
 export default function Features() {
   const features = [
     {
+      icon: "⏱️",
+      title: "Auto-Lock Timer",
+      desc: "Automatic protection after inactivity. Set your timeout duration (1-480 min) and let Locksy lock your tabs automatically when you step away. Smart activity detection won't interrupt video playback.",
+      gradient: "from-indigo-500 to-violet-500",
+    },
+    {
+      icon: "📅",
+      title: "Scheduled Locking",
+      desc: "Time-based security on autopilot. Lock tabs during specific hours and days automatically—perfect for work hours or sleep time. Overnight schedule support included.",
+      gradient: "from-emerald-500 to-teal-500",
+    },
+    {
       icon: "⌨️",
       title: "Keyboard Shortcuts",
       desc: "Lock tabs instantly with Alt+Shift+9, open manager with Alt+Shift+0, or lock all tabs with Alt+Shift+8. Fully customizable shortcuts.",
       gradient: "from-violet-500 to-purple-500",
     },
-    {
-      icon: "🎨",
-      title: "Visual Lock Indicators",
-      desc: "Red lock icon on tab favicons and real-time badge counter on extension icon. Always know which tabs are protected at a glance.",
-      gradient: "from-rose-500 to-pink-500",
-    },
+    // {
+    //   icon: "🎨",
+    //   title: "Visual Lock Indicators",
+    //   desc: "Red lock icon on tab favicons and real-time badge counter on extension icon. Always know which tabs are protected at a glance.",
+    //   gradient: "from-rose-500 to-pink-500",
+    // },
     {
       icon: "🌐",
       title: "Domain Lock",
@@ -42,12 +54,12 @@ export default function Features() {
       desc: "Works seamlessly in private browsing windows with same security.",
       gradient: "from-green-500 to-emerald-500",
     },
-    {
-      icon: "🪶",
-      title: "Ultra Lightweight",
-      desc: "Zero performance impact on your browser. Optimized for speed.",
-      gradient: "from-yellow-500 to-orange-500",
-    },
+    // {
+    //   icon: "🪶",
+    //   title: "Ultra Lightweight",
+    //   desc: "Zero performance impact on your browser. Optimized for speed.",
+    //   gradient: "from-yellow-500 to-orange-500",
+    // },
     {
       icon: "🔐",
       title: "8+ Security Layers",

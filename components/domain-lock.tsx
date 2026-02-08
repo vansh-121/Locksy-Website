@@ -43,15 +43,15 @@ export default function DomainLock() {
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-bold mb-6 shadow-lg animate-pulse">
-            <span>🆕</span>
-            NEW FEATURE
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-full text-sm font-bold mb-6 backdrop-blur-sm">
+            <span>🌐</span>
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">DOMAIN LOCK</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-            Introducing Domain Lock
+            Lock Entire Domains at Once
           </h2>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Lock entire domains at once with intelligent patterns. The most powerful way to protect multiple tabs automatically.
+            Protect all tabs matching a domain pattern with intelligent wildcard support. The most powerful way to safeguard multiple tabs automatically.
           </p>
         </div>
 

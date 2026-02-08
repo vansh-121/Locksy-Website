@@ -6,34 +6,39 @@ export default function Testimonials() {
   const testimonials = [
     {
       quote:
-        "Finally! A simple way to lock tabs without switching profiles. Exactly what I needed for my banking tabs.",
-      author: "Sarah M.",
-      role: "Financial Analyst",
+        "It works really well, and usually the extension lets you right in on other tab lockers, but this one always asks for your pin, making it my favorite one. Recommend it to all of the people that consider this.",
+      author: "Anthony Moeller",
+      role: "Chrome Web Store",
       rating: 5,
     },
     {
-      quote: "Perfect for when I'm working at coffee shops. I can step away without worrying about my open tabs.",
-      author: "Jake T.",
-      role: "Freelance Developer",
+      quote: "It is really nice extension, happy to use it! Clean interface and works seamlessly across all my tabs. Highly recommended for anyone who values privacy.",
+      author: "Sai Smruti Ranjan Das",
+      role: "Chrome Web Store",
       rating: 5,
     },
     {
-      quote: "The incognito mode support is a game changer. Same password works everywhere. Simple and effective.",
-      author: "Anonymous User",
-      role: "Privacy Enthusiast",
+      quote: "Domain lock feature is really helpful for shared computers. The extension provides peace of mind knowing my personal tabs stay private. Great work by the developer!",
+      author: "Avneet Singh",
+      role: "Chrome Web Store",
       rating: 5,
     },
     {
-      quote:
-        "As a security professional, I appreciate the multiple protection layers. This is how you build secure extensions.",
-      author: "Alex K.",
-      role: "Cybersecurity Engineer",
+      quote: "So now I do not have to worry about handing over my laptop :)",
+      author: "Devansh Varshney",
+      role: "Chrome Web Store",
       rating: 5,
     },
     {
-      quote: "My family shares a computer and this gives everyone their privacy. Easy for everyone to use!",
-      author: "Maria L.",
-      role: "Teacher",
+      quote: "Amazing, Great Product. 100% Satisfied.",
+      author: "Simran Singh",
+      role: "Firefox Add-ons",
+      rating: 5,
+    },
+    {
+      quote: "10/10 for personal security.",
+      author: "Ratanveer",
+      role: "Microsoft Edge Add-ons",
       rating: 5,
     },
   ]
@@ -46,9 +51,9 @@ export default function Testimonials() {
         <h2 className="section-title">Trusted by Privacy-Conscious Users Worldwide</h2>
         <p className="section-subtitle">See what real users are saying about Locksy.</p>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, idx) => (
-            <div key={idx} className="feature-card">
+            <div key={idx} className="feature-card flex flex-col min-h-[240px]">
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <span key={i} className="text-yellow-400">
@@ -56,8 +61,8 @@ export default function Testimonials() {
                   </span>
                 ))}
               </div>
-              <p className="text-neutral-700 mb-4 italic">"{testimonial.quote}"</p>
-              <div>
+              <p className="text-neutral-700 mb-6 italic flex-grow">"{testimonial.quote}"</p>
+              <div className="mt-auto pt-4 border-t border-neutral-200">
                 <p className="font-semibold">{testimonial.author}</p>
                 <p className="text-sm text-neutral-600">{testimonial.role}</p>
               </div>

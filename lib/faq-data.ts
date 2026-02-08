@@ -8,6 +8,14 @@ export interface FAQItem {
 
 export const faqData: FAQItem[] = [
   {
+    question: "What is the Auto-Lock Timer?",
+    answer: "Auto-Lock Timer automatically locks your browser tabs after a period of inactivity. Set a timeout duration (1-480 minutes), and Locksy will lock your tabs when you step away. It features smart activity detection that monitors mouse movement, keyboard input, scrolling, and video playback—so it only locks when you're truly inactive.",
+  },
+  {
+    question: "How does Scheduled Locking work?",
+    answer: "Scheduled Locking enforces time-based security by automatically locking your tabs during specific hours and days of the week. Set custom start/end times (24-hour format), choose which days to apply the schedule, and Locksy handles the rest. Perfect for locking personal tabs during work hours (9-5) or securing everything at night (10 PM - 6 AM). Works reliably even after browser restarts.",
+  },
+  {
     question: "What is Domain Lock?",
     answer: "Domain Lock lets you lock all tabs matching a domain pattern (like *.google.com or github.com). New tabs matching locked domains are automatically protected, and locks persist across browser restarts. You can manage unlock preferences for each domain.",
   },
@@ -50,6 +58,14 @@ export const faqData: FAQItem[] = [
   {
     question: "Can I lock multiple tabs at once?",
     answer: "Yes! Use Alt+Shift+8 to lock all open tabs at once, or use Domain Lock to automatically protect all tabs matching a specific domain pattern.",
+  },
+  {
+    question: "Can Auto-Lock and Scheduled Locking work together?",
+    answer: "Yes! Both automation features can run simultaneously. For example, you can have Scheduled Locking active during work hours (9-5) while Auto-Lock Timer provides protection during breaks. Both features offer scope options to lock all tabs or just the active tab.",
+  },
+  {
+    question: "Will Auto-Lock interrupt my video playback?",
+    answer: "No! Auto-Lock Timer has smart activity detection that monitors video playback. The timer won't activate while you're watching videos, listening to music, or consuming any media content. It only locks when you're truly inactive.",
   },
   {
     question: "Does Locksy slow down my browser?",
