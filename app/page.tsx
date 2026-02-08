@@ -1,5 +1,6 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
+import AutomationFeatures from "@/components/automation-features"
 import DomainLock from "@/components/domain-lock"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
@@ -28,17 +29,40 @@ export default function Home() {
         <main className="w-full" itemScope itemType="https://schema.org/WebPage">
           <Header />
           <Hero />
+
+          {/* Establish the problem first */}
+          <ProblemStatement />
+
+          {/* Show why Locksy is better than alternatives */}
           <Comparison />
+
+          {/* Showcase NEW v2.2.0 automation features prominently */}
+          <AutomationFeatures />
+
+          {/* Another major feature - Domain Lock */}
           <div id="domain-lock">
             <DomainLock />
           </div>
-          <ProblemStatement />
+
+          {/* Comprehensive features overview */}
           <Features />
-          <KeyboardShortcuts />
+
+          {/* How easy it is to use */}
           <HowItWorks />
+
+          {/* Power user feature */}
+          <KeyboardShortcuts />
+
+          {/* Technical credibility and trust */}
           <Security />
+
+          {/* Social proof */}
           <Testimonials />
+
+          {/* Handle objections and questions */}
           <FAQ />
+
+          {/* Support and final CTAs */}
           <SupportChatCTA />
           <CTASection />
           <Footer />

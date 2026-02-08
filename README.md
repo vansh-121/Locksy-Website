@@ -4,11 +4,11 @@
 [![Microsoft Edge Add-ons](https://img.shields.io/badge/Edge%20Add--ons-Available-0078D4?logo=microsoft-edge&logoColor=white)](https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn)
 [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Available-FF7139?logo=firefox&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/locksy/)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://locksy.vercel.app)
-[![Version](https://img.shields.io/badge/version-2.0.0-blue)](https://github.com/vansh-121/Locksy)
+[![Version](https://img.shields.io/badge/version-2.2.0-blue)](https://github.com/vansh-121/Locksy)
 
-Official landing page for **Locksy** - A powerful browser extension that provides military-grade tab protection with PBKDF2 encryption (600,000 iterations, OWASP 2023 compliant).
+Official landing page for **Locksy** - A powerful browser extension that provides military-grade tab protection with PBKDF2 encryption (600,000 iterations, OWASP 2023 compliant). Now with Auto-Lock Timer and Scheduled Locking for automatic security.
 
-## 🔒 Security Features (v2.0.0)
+## 🔒 Security Features (v2.2.0)
 
 - 🛡️ **PBKDF2 with 600k Iterations** - Ultimate Key Derivation Function (KDF) Encryption
 - ⚡ **120 Years Crack Resistance** - Military-grade password protection
@@ -19,6 +19,8 @@ Official landing page for **Locksy** - A powerful browser extension that provide
 
 ## 🌟 Key Features
 
+- ⏱️ **Auto-Lock Timer** - Automatic protection after inactivity (1-480 min)
+- 📅 **Scheduled Locking** - Time-based security with day-of-week selection
 - ⌨️ **Keyboard Shortcuts** - Lock tabs instantly with Alt+Shift+9
 - 🌐 **Domain Lock** - Lock entire domains with wildcard patterns
 - 🎨 **Visual Lock Indicators** - Red lock icon on tab favicons

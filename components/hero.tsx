@@ -182,7 +182,7 @@ export default function Hero() {
             {/* Badges */}
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="#features"
+                href="#automation"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 <span>🔒</span>
@@ -206,7 +206,7 @@ export default function Hero() {
                 Protection
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Password-protect any browser tab or lock entire domains with persistent protection. Ultimate privacy, zero compromise.
+                Password-protect any browser tab or lock entire domains with persistent protection. Now with Auto-Lock Timer and Scheduled Locking for ultimate privacy on autopilot.
               </p>
             </div>
 

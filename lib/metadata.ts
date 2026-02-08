@@ -3,11 +3,17 @@ import { faqData } from './faq-data'
 
 const siteUrl = 'https://www.locksy.dev' // Update with your actual domain
 const siteName = 'Locksy'
-const siteDescription = 'Password-protect browser tabs with military-grade encryption. Instant locking, offline security. For Chrome, Edge, Firefox, Brave & more.'
+const siteDescription = 'Password-protect browser tabs with military-grade encryption. Auto-lock tabs after inactivity, schedule locks for specific hours. Instant locking, offline security. For Chrome, Edge, Firefox, Brave & more.'
 const keywords = [
     'password protect tabs',
     'lock browser tabs',
     'tab locker',
+    'auto-lock browser tabs',
+    'scheduled tab locking',
+    'automatic browser security',
+    'auto lock tabs after inactivity',
+    'schedule browser tab lock',
+    'timer lock browser tabs',
     'password protect chrome tabs',
     'password protect edge tabs',
     'password protect firefox tabs',
@@ -24,13 +30,15 @@ const keywords = [
     'offline tab security',
     'browser privacy extension',
     'free tab locker extension',
-    'locksy tab locker'
+    'locksy tab locker',
+    'automated tab security',
+    'browser tab automation'
 ]
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),
     title: {
-        default: 'Password Protect & Lock Browser Tabs – Locksy Tab Locker',
+        default: 'Password Protect & Auto-Lock Browser Tabs – Locksy Tab Locker',
         template: '%s | Locksy'
     },
     description: siteDescription,
@@ -48,7 +56,7 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: siteUrl,
         siteName: siteName,
-        title: 'Password Protect & Lock Browser Tabs – Locksy Tab Locker',
+        title: 'Password Protect & Auto-Lock Browser Tabs – Locksy Tab Locker',
         description: siteDescription,
         images: [
             {
@@ -61,7 +69,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Password Protect & Lock Browser Tabs – Locksy Tab Locker',
+        title: 'Password Protect & Auto-Lock Browser Tabs – Locksy Tab Locker',
         description: siteDescription,
         images: [`${siteUrl}/web-app-manifest-512x512.png`],
         creator: '@locksy',
@@ -150,10 +158,12 @@ export const jsonLdSoftwareApplication = {
         priceCurrency: 'USD'
     },
     description: siteDescription,
-    softwareVersion: '1.0',
+    softwareVersion: '2.2.0',
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
     featureList: [
+        'Auto-lock timer with smart activity detection',
+        'Scheduled locking with day-of-week selection',
         'Password protect any browser tab',
         'PBKDF2 with 600k iterations',
         'Rate limiting & brute-force protection',
