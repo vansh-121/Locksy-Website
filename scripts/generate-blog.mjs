@@ -309,6 +309,10 @@ function appendBlogPost(post, coverImage) {
         throw new Error('Could not find blogPosts array closing bracket')
     }
 
+    // Helper: escape a string for use inside single-quoted JS literals
+    // Must escape backslashes FIRST, then single quotes
+    const escSQ = (str) => str.replace(/\\/g, '\\\\').replace(/'/g, "\\'")
+
     // Escape backticks and ${} in the blog content for template literal safety
     const escapedContent = post.content
         .replace(/\\/g, '\\\\')
@@ -317,18 +321,18 @@ function appendBlogPost(post, coverImage) {
 
     const newEntry = `,
     {
-        slug: '${post.slug}',
-        title: '${post.title.replace(/'/g, "\\'")}',
-        description: '${post.description.replace(/'/g, "\\'")}',
+        slug: '${escSQ(post.slug)}',
+        title: '${escSQ(post.title)}',
+        description: '${escSQ(post.description)}',
         author: 'Locksy Security Team',
         publishDate: '${post.publishDate}',
         lastModified: '${post.lastModified}',
         readTime: '${post.readTime}',
-        category: '${post.category}',
-        tags: [${post.tags.map(t => `'${t}'`).join(', ')}],
-        keywords: [${post.keywords.map(k => `'${k.replace(/'/g, "\\'")}'`).join(', ')}],
-        image: '${coverImage.url}',
-        imageAlt: '${coverImage.alt.replace(/'/g, "\\'")}',
+        category: '${escSQ(post.category)}',
+        tags: [${post.tags.map(t => `'${escSQ(t)}'`).join(', ')}],
+        keywords: [${post.keywords.map(k => `'${escSQ(k)}'`).join(', ')}],
+        image: '${escSQ(coverImage.url)}',
+        imageAlt: '${escSQ(coverImage.alt)}',
         content: \`
 ${escapedContent}
 \`
