@@ -90,7 +90,7 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                             </Badge>
                             <span className="flex items-center gap-1">
                                 <Calendar className="h-4 w-4" />
-                                {new Date(post.publishDate).toLocaleDateString('en-US', {
+                                {new Date(post.publishDate.replace(/-/g, '/')).toLocaleDateString('en-US', {
                                     year: 'numeric',
                                     month: 'long',
                                     day: 'numeric'
@@ -258,36 +258,43 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                                             {children}
                                         </td>
                                     ),
-                                    a: ({ children, href }) => (
-                                        <a
-                                            href={href}
-                                            className="text-primary font-medium underline decoration-primary/30 underline-offset-4 hover:decoration-primary transition-colors"
-                                            target={href?.startsWith('http') ? '_blank' : undefined}
-                                            rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                        >
-                                            {children}
-                                        </a>
-                                    ),
+                                    a: ({ children, href }) => {
+                                        const safeHref = href && /^(https?:|mailto:|tel:|\/|#)/.test(href) ? href : undefined
+                                        return (
+                                            <a
+                                                href={safeHref}
+                                                className="text-primary font-medium underline decoration-primary/30 underline-offset-4 hover:decoration-primary transition-colors"
+                                                target={safeHref?.startsWith('http') ? '_blank' : undefined}
+                                                rel={safeHref?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                            >
+                                                {children}
+                                            </a>
+                                        )
+                                    },
                                     hr: () => (
                                         <div className="my-10 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
                                     ),
-                                    img: ({ src, alt }) => (
-                                        <figure className="my-8">
-                                            <div className="relative rounded-xl overflow-hidden shadow-lg border border-border/30">
-                                                <img
-                                                    src={src}
-                                                    alt={alt || ''}
-                                                    className="w-full h-auto object-cover"
-                                                    loading="lazy"
-                                                />
-                                            </div>
-                                            {alt && (
-                                                <figcaption className="text-center text-sm text-muted-foreground mt-3 italic">
-                                                    {alt}
-                                                </figcaption>
-                                            )}
-                                        </figure>
-                                    ),
+                                    img: ({ src, alt }) => {
+                                        const safeSrc = typeof src === 'string' && /^https?:\/\//.test(src) ? src : undefined
+                                        if (!safeSrc) return null
+                                        return (
+                                            <figure className="my-8">
+                                                <div className="relative rounded-xl overflow-hidden shadow-lg border border-border/30">
+                                                    <img
+                                                        src={safeSrc}
+                                                        alt={alt || ''}
+                                                        className="w-full h-auto object-cover"
+                                                        loading="lazy"
+                                                    />
+                                                </div>
+                                                {alt && (
+                                                    <figcaption className="text-center text-sm text-muted-foreground mt-3 italic">
+                                                        {alt}
+                                                    </figcaption>
+                                                )}
+                                            </figure>
+                                        )
+                                    },
                                     strong: ({ children }) => (
                                         <strong className="font-bold text-foreground">{children}</strong>
                                     ),
@@ -309,7 +316,7 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                             <div>
                                 <p className="font-semibold text-foreground">{post.author}</p>
                                 <p className="text-sm text-muted-foreground">
-                                    Updated {new Date(post.lastModified).toLocaleDateString('en-US', {
+                                    Updated {new Date(post.lastModified.replace(/-/g, '/')).toLocaleDateString('en-US', {
                                         year: 'numeric',
                                         month: 'long',
                                         day: 'numeric'

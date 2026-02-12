@@ -236,7 +236,7 @@ export function BlogClient() {
                                     <CardFooter className="flex items-center justify-between pt-3 border-t border-border/30">
                                         <div className="flex items-center gap-1 text-sm text-muted-foreground">
                                             <Calendar className="h-3 w-3" />
-                                            {new Date(post.publishDate).toLocaleDateString('en-US', {
+                                            {new Date(post.publishDate.replace(/-/g, '/')).toLocaleDateString('en-US', {
                                                 year: 'numeric',
                                                 month: 'short',
                                                 day: 'numeric'

@@ -303,8 +303,13 @@ Write ONLY the markdown content, starting with the first ## heading. The article
 function appendBlogPost(post, coverImage) {
     let content = readFileSync(BLOG_DATA_PATH, 'utf-8')
 
-    // Find the closing bracket of the blogPosts array
-    const insertIndex = content.lastIndexOf(']')
+    // Find the insertion point using a unique marker after the blogPosts array
+    const insertionMarker = `\n]\n\n// Helper function`
+    const functionIndex = content.indexOf(insertionMarker)
+    if (functionIndex === -1) {
+        throw new Error('Could not find the anchor point after blogPosts array.')
+    }
+    const insertIndex = content.lastIndexOf(']', functionIndex)
     if (insertIndex === -1) {
         throw new Error('Could not find blogPosts array closing bracket')
     }
