@@ -171,10 +171,48 @@ const TOPIC_POOL = [
     },
 ]
 
+// Pool of high-quality Unsplash images for blog cover photos
+const COVER_IMAGE_POOL = [
+    { url: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Developer coding on a laptop with security focus' },
+    { url: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Cybersecurity concept with digital shield and lock' },
+    { url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Green encrypted data streaming on a monitor' },
+    { url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Monitor displaying code in a development environment' },
+    { url: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Secure online payment with laptop and credit card' },
+    { url: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Backlit mechanical keyboard close-up' },
+    { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Modern open office with shared workstations' },
+    { url: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Padlock on a laptop keyboard symbolizing security' },
+    { url: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Digital shield icon on a technology background' },
+    { url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Team collaborating on laptops in a tech workspace' },
+    { url: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Code editor window on a developer screen' },
+    { url: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Abstract blue technology light background' },
+]
+
+// Pool of inline images for article content
+const INLINE_IMAGE_POOL = [
+    '![A padlock resting on a laptop keyboard](https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Digital shield protecting data](https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Streams of encrypted code on a dark screen](https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Developer working at a laptop](https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Team working on laptops in a modern office](https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Close-up of hands typing on a keyboard](https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Smartphone and laptop on a desk](https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Person working at a computer in a bright office](https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Data analytics dashboard on a screen](https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop&auto=format&q=80)',
+    '![Abstract technology with blue light](https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&h=450&fit=crop&auto=format&q=80)',
+]
+
 function getExistingSlugs() {
     const content = readFileSync(BLOG_DATA_PATH, 'utf-8')
     const slugMatches = content.matchAll(/slug:\s*['"]([^'"]+)['"]/g)
     return new Set([...slugMatches].map(m => m[1]))
+}
+
+function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]]
+    }
+    return arr
 }
 
 function slugify(title) {
@@ -262,7 +300,7 @@ Write ONLY the markdown content, starting with the first ## heading. The article
     return data.candidates[0].content.parts[0].text
 }
 
-function appendBlogPost(post) {
+function appendBlogPost(post, coverImage) {
     let content = readFileSync(BLOG_DATA_PATH, 'utf-8')
 
     // Find the closing bracket of the blogPosts array
@@ -289,8 +327,8 @@ function appendBlogPost(post) {
         category: '${post.category}',
         tags: [${post.tags.map(t => `'${t}'`).join(', ')}],
         keywords: [${post.keywords.map(k => `'${k.replace(/'/g, "\\'")}'`).join(', ')}],
-        image: '/web-app-manifest-512x512.png',
-        imageAlt: '${post.title.replace(/'/g, "\\'")} - Locksy Blog',
+        image: '${coverImage.url}',
+        imageAlt: '${coverImage.alt.replace(/'/g, "\\'")}',
         content: \`
 ${escapedContent}
 \`
@@ -351,7 +389,8 @@ async function main() {
         }
 
         // Append to blog-data.ts
-        appendBlogPost(post)
+        const coverImage = COVER_IMAGE_POOL[Math.floor(Math.random() * COVER_IMAGE_POOL.length)]
+        appendBlogPost(post, coverImage)
         console.log(`\n✅ Blog post added successfully!`)
         console.log(`📄 Slug: ${slug}`)
         console.log(`📅 Date: ${today}`)

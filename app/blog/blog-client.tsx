@@ -181,9 +181,17 @@ export function BlogClient() {
                         {sortedPosts.map((post) => (
                             <div key={post.slug} className="group relative">
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 blur-xl opacity-0 group-hover:opacity-50 transition-opacity rounded-2xl" />
-                                <Card className="relative border-2 border-border/50 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/20 hover:-translate-y-1 h-full flex flex-col">
-                                    {/* Category Color Bar */}
-                                    <div className="h-1.5 bg-gradient-to-r from-primary to-secondary rounded-t-lg" />
+                                <Card className="relative border-2 border-border/50 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/20 hover:-translate-y-1 h-full flex flex-col overflow-hidden">
+                                    {/* Cover Image */}
+                                    <div className="relative h-48 overflow-hidden">
+                                        <img
+                                            src={post.image}
+                                            alt={post.imageAlt}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
+                                    </div>
 
                                     <CardHeader className="pb-3">
                                         <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">

@@ -132,6 +132,18 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                     </div>
                 </div>
 
+                {/* Hero Image */}
+                <div className="max-w-4xl mx-auto mb-10">
+                    <div className="relative rounded-2xl overflow-hidden shadow-xl border border-border/30">
+                        <img
+                            src={post.image}
+                            alt={post.imageAlt}
+                            className="w-full h-64 md:h-[420px] object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+                    </div>
+                </div>
+
                 {/* Divider */}
                 <div className="max-w-4xl mx-auto">
                     <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent mb-12" />
@@ -237,6 +249,23 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                                     hr: () => (
                                         <div className="my-10 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
                                     ),
+                                    img: ({ src, alt }) => (
+                                        <figure className="my-8">
+                                            <div className="relative rounded-xl overflow-hidden shadow-lg border border-border/30">
+                                                <img
+                                                    src={src}
+                                                    alt={alt || ''}
+                                                    className="w-full h-auto object-cover"
+                                                    loading="lazy"
+                                                />
+                                            </div>
+                                            {alt && (
+                                                <figcaption className="text-center text-sm text-muted-foreground mt-3 italic">
+                                                    {alt}
+                                                </figcaption>
+                                            )}
+                                        </figure>
+                                    ),
                                     strong: ({ children }) => (
                                         <strong className="font-bold text-foreground">{children}</strong>
                                     ),
@@ -288,8 +317,16 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                             {relatedPosts.map((relatedPost) => (
                                 <div key={relatedPost.slug} className="group relative">
                                     <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 blur-xl opacity-0 group-hover:opacity-50 transition-opacity rounded-2xl" />
-                                    <Card className="relative border-2 border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
-                                        <div className="h-1 bg-gradient-to-r from-primary to-secondary rounded-t-lg" />
+                                    <Card className="relative border-2 border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col overflow-hidden">
+                                        <div className="relative h-36 overflow-hidden">
+                                            <img
+                                                src={relatedPost.image}
+                                                alt={relatedPost.imageAlt}
+                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                loading="lazy"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent" />
+                                        </div>
                                         <CardHeader>
                                             <Badge variant="secondary" className="w-fit mb-2 bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 text-primary">
                                                 {relatedPost.category}

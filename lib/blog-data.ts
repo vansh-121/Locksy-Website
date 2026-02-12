@@ -26,8 +26,8 @@ export const blogPosts: BlogPost[] = [
         category: 'Tutorial',
         tags: ['Browser Security', 'Password Protection', 'Tab Security'],
         keywords: ['password protect browser tabs', 'lock chrome tabs', 'secure browser tabs', 'tab password protection'],
-        image: '/web-app-manifest-512x512.png',
-        imageAlt: 'Password protect browser tabs guide',
+        image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Laptop showing code with security lock overlay — password protecting browser tabs',
         content: `
 ## The Tab You Forgot to Close
 
@@ -50,6 +50,8 @@ This isn't just a "shared computer" problem. It's an **anyone-who-walks-by** pro
 Password protecting your tabs adds a dead-simple layer of defense: even if someone gets to your browser, they can't see what's behind the lock without your password.
 
 ## The Browser Doesn't Do This for You
+
+![A padlock resting on a laptop keyboard — a reminder that browsers lack built-in tab protection](https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=450&fit=crop&auto=format&q=80)
 
 Here's the uncomfortable truth: Chrome, Firefox, Edge — none of them have a built-in "lock this tab" feature. You can create separate profiles, sure. You can use incognito mode. But neither of those actually puts a password gate in front of a specific tab.
 
@@ -100,6 +102,8 @@ Once you've got the basics down, there are a few power moves worth knowing:
 
 ## What Good Encryption Actually Looks Like
 
+![Streams of encrypted data flowing across a monitor](https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=450&fit=crop&auto=format&q=80)
+
 Not all tab-locking extensions are created equal. Some use trivial encryption (or none at all) that any tech-savvy person could bypass. Here's what to look for:
 
 **PBKDF2 with high iterations.** Locksy uses 600,000+ iterations, which means each brute-force password guess takes real computational time. At that rate, trying every possible 8-character password would take longer than the age of the universe.
@@ -132,8 +136,8 @@ The setup takes 90 seconds. The keyboard shortcut takes less than one second. An
         category: 'Security',
         tags: ['Browser Security', 'Privacy', 'Best Practices'],
         keywords: ['browser security', 'tab security', 'browser privacy', 'secure browsing'],
-        image: '/web-app-manifest-512x512.png',
-        imageAlt: 'Browser tab security best practices',
+        image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Cybersecurity concept with digital shield and lock icons',
         content: `
 ## Your Browser Knows More About You Than Your Best Friend
 
@@ -144,6 +148,8 @@ And yet, most of us leave that window wide open.
 I'm not here to scare you into becoming a digital hermit. I'm here to share 15 practical habits that make a real difference — things that take minutes to set up but meaningfully improve how safe your browsing actually is.
 
 ## 1. Lock Your Sensitive Tabs — Not Just Your Screen
+
+![Digital shield icon on a blue technology background](https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=450&fit=crop&auto=format&q=80)
 
 Screen lock protects your entire computer, which is great when you walk away completely. But what about the dozen times a day someone glances at your screen while you're sitting right there? What about when your kid grabs your laptop to watch YouTube and your bank account is two tabs to the right?
 
@@ -220,6 +226,8 @@ Use it when you want no *local* trace — looking up a surprise gift, checking p
 
 ## 12. Enable Two-Factor on Everything That Matters
 
+![Person typing on a laptop with security in mind](https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=800&h=450&fit=crop&auto=format&q=80)
+
 This isn't strictly about tab security, but it's the single most impactful security habit you can adopt. If someone *does* get into your browser and sees your bank tab, they still can't do anything if your bank requires a second factor (phone code, authenticator app, or hardware key).
 
 Start with email and banking. Then expand to everything else. It takes two minutes per account and makes 90% of attacks irrelevant.
@@ -272,8 +280,8 @@ That's 15 minutes of work for a dramatically better security posture.
         category: 'Security',
         tags: ['Encryption', 'PBKDF2', 'Password Security'],
         keywords: ['PBKDF2 encryption', 'password encryption', 'PBKDF2 explained', 'encryption iterations'],
-        image: '/web-app-manifest-512x512.png',
-        imageAlt: 'PBKDF2 encryption explained',
+        image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Green matrix-style encryption code flowing on a dark screen',
         content: `
 ## The Acronym Everyone Mentions but Nobody Explains
 
@@ -282,6 +290,8 @@ If you've ever read the description of a password manager or a security tool, yo
 Here's the thing: you don't need a computer science degree to understand this. The core idea is surprisingly simple, and once you get it, you'll be able to evaluate security claims like a pro.
 
 ## Passwords Have a Fundamental Problem
+
+![Developer working on code at a laptop — understanding how passwords are stored](https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=450&fit=crop&auto=format&q=80)
 
 When you type a password into a website or an app, that password needs to be stored somewhere so the system can check if you typed the right one next time. But storing the actual password is a terrible idea — if the database gets hacked, every user's password is exposed in plain text.
 
@@ -329,6 +339,8 @@ A salt is a random string of data that's unique to each user and gets mixed in w
 Salt makes rainbow tables useless. Even if two people both use "password123" (please don't), their hashes will be completely different because each one has a unique salt mixed in.
 
 ## How This Protects Your Locked Tabs
+
+![Padlock on a metallic surface symbolizing encrypted tab protection](https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=450&fit=crop&auto=format&q=80)
 
 When you set a master password in a tab-locking extension like Locksy, here's what actually happens behind the scenes:
 
@@ -392,8 +404,8 @@ PBKDF2 takes a fundamentally simple idea — hash the password many, many times 
         category: 'Comparison',
         tags: ['Chrome', 'Firefox', 'Edge', 'Browser Comparison'],
         keywords: ['chrome vs firefox security', 'best browser for security', 'edge vs chrome', 'browser tab security comparison'],
-        image: '/web-app-manifest-512x512.png',
-        imageAlt: 'Chrome vs Firefox vs Edge security comparison',
+        image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Computer monitor displaying code — comparing browser security features',
         content: `
 ## The Browser Wars No One's Having
 
@@ -404,6 +416,8 @@ Not your passwords. Not your history. Your *tabs* — the live, active windows i
 Let's get into it. No benchmarks, no bias toward any brand. Just an honest look at what each browser does and doesn't do.
 
 ## Chrome: The Popular One
+
+![MacBook displaying a code editor in a modern workspace](https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=800&h=450&fit=crop&auto=format&q=80)
 
 Chrome dominates the browser market with roughly 65% share, which makes it both the most-used and the most-targeted browser on the planet. Here's what it offers in terms of tab security:
 
@@ -454,6 +468,8 @@ Microsoft Edge deserves more credit than it gets. Since rebuilding on Chromium, 
 **Tab-level protection:** None natively.
 
 ## The Feature None of Them Have
+
+![Team working on laptops in a modern office — physical access is the overlooked threat](https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=450&fit=crop&auto=format&q=80)
 
 If you've noticed a pattern here, you're paying attention. All three major browsers have invested heavily in protecting you from external threats — malware, phishing, trackers, compromised websites. And they've done a genuinely good job at it.
 
@@ -508,8 +524,8 @@ That entire setup takes about 10 minutes and gets you to a security posture that
         category: 'Tutorial',
         tags: ['Banking Security', 'Privacy', 'Tab Security'],
         keywords: ['protect banking tabs', 'secure online banking', 'banking browser security', 'lock bank account tabs'],
-        image: '/web-app-manifest-512x512.png',
-        imageAlt: 'Protect banking tabs guide',
+        image: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Person making a secure online payment with credit card and laptop',
         content: `
 ## The Tab That's Worth More Than Your Laptop
 
@@ -522,6 +538,8 @@ We spend enormous energy protecting our bank credentials — strong passwords, t
 Let's talk about how to fix that.
 
 ## The Physical Access Threat Is Real
+
+![Person working on a laptop at a desk — the physical access threat is closer than you think](https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450&fit=crop&auto=format&q=80)
 
 Cybersecurity conversations focus almost exclusively on remote threats: hackers, phishing, malware. And those are real. But the most common way someone sees your financial information isn't through some sophisticated exploit. It's much simpler than that:
 
@@ -572,6 +590,8 @@ Auto-lock removes the human element. The tab locks itself based on the domain. Y
 Think of it like a door that locks automatically behind you. You don't have to remember to lock it — it just locks. Much better than a door you have to manually deadbolt every time you close it.
 
 ## Beyond the Tab: Layered Banking Security
+
+![Digital shield protecting financial data](https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=450&fit=crop&auto=format&q=80)
 
 Tab locking is one piece of a broader strategy. Here's the full picture:
 
@@ -635,8 +655,8 @@ Your bank invests millions in protecting the login gate. Locksy protects everyth
         category: 'Productivity',
         tags: ['Keyboard Shortcuts', 'Productivity', 'Tab Security'],
         keywords: ['keyboard shortcuts tab security', 'browser keyboard shortcuts', 'lock tabs keyboard shortcut', 'quick lock tabs'],
-        image: '/web-app-manifest-512x512.png',
-        imageAlt: 'Keyboard shortcuts for tab security',
+        image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Close-up of a mechanical keyboard with backlit keys',
         content: `
 ## You Have About Two Seconds
 
@@ -665,6 +685,8 @@ Alt+Shift+9 was chosen deliberately:
 If you don't like the default, you can customize it. In Chrome, go to **chrome://extensions/shortcuts**. In Firefox, go to **about:addons** → gear icon → Manage Extension Shortcuts. Set it to whatever feels natural for your hand position.
 
 ## Building Muscle Memory
+
+![Close-up of a developer's hands on a keyboard](https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=450&fit=crop&auto=format&q=80)
 
 The shortcut is only useful if you can execute it without thinking. Here's how to make it automatic:
 
@@ -701,6 +723,8 @@ From fastest to slowest, here's how different protection methods rank:
 The keyboard options are all sub-second. The mouse options are not. In a two-second window, only keyboard shortcuts are reliable.
 
 ## Real-World Scenarios
+
+![Two people working together at a shared workspace](https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=450&fit=crop&auto=format&q=80)
 
 **Open office environment.** People walk behind your desk constantly. The shortcut becomes as habitual as breathing. You lock, they pass, you unlock. Nobody notices.
 
@@ -744,8 +768,8 @@ Every security tool faces this tension between thoroughness and usability. The l
         category: 'Security',
         tags: ['Shared Computers', 'Privacy', 'Security Guide'],
         keywords: ['shared computer security', 'public computer privacy', 'shared PC security', 'family computer security'],
-        image: '/web-app-manifest-512x512.png',
-        imageAlt: 'Shared computer security guide',
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Modern open office workspace with shared desks and computers',
         content: `
 ## The Computer That Isn't Just Yours
 
@@ -774,6 +798,8 @@ When you use a shared computer and walk away, here's what you might be leaving b
 Most people are aware of some of these, but few people consistently clean up all of them. That's because manual cleanup is tedious and easy to forget.
 
 ## Strategy 1: Use a Separate Browser Profile
+
+![Team collaborating on laptops in a modern tech office](https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=450&fit=crop&auto=format&q=80)
 
 This is the single most impactful thing you can do on a shared computer. Create your own browser profile with your own settings, extensions, bookmarks, and passwords — completely isolated from other profiles on the same computer.
 
@@ -814,6 +840,8 @@ This is the right tool for public computers where you have no control over the s
 
 ## The Family Computer Playbook
 
+![Smartphone and laptop on a desk — shared devices in a household](https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=800&h=450&fit=crop&auto=format&q=80)
+
 Family computers have a unique dynamic: you trust the people using them (mostly), but you still want privacy. Here's a practical setup:
 
 **1. Create a profile for each family member.** Even for kids. This prevents history, passwords, and preferences from bleeding between users.
@@ -850,6 +878,8 @@ Office computers and hot-desking setups present different challenges:
 - Make sure it isn't set to restore previous session on restart
 
 ## The Public Computer Survival Guide
+
+![Data dashboard on a screen — public computers expose more than you think](https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop&auto=format&q=80)
 
 Public computers — libraries, internet cafes, hotel lobbies — are the highest-risk scenario. You have no control over the software, you don't know what's installed, and you have no idea who used it before you.
 
