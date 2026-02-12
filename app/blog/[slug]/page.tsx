@@ -34,9 +34,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             description: post.description,
             images: [
                 {
-                    url: `${siteUrl}${post.image}`,
-                    width: 512,
-                    height: 512,
+                    url: post.image,
+                    width: 1200,
+                    height: 630,
                     alt: post.imageAlt,
                 },
             ],
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             card: 'summary_large_image',
             title: post.title,
             description: post.description,
-            images: [`${siteUrl}${post.image}`],
+            images: [post.image],
             creator: '@locksy',
         },
         alternates: {
@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         '@type': 'BlogPosting',
         headline: post.title,
         description: post.description,
-        image: `${siteUrl}${post.image}`,
+        image: post.image,
         datePublished: post.publishDate,
         dateModified: post.lastModified,
         author: {
