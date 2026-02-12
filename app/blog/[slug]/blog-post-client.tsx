@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen } from 'lucide-react'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { useEffect, useState } from 'react'
 import Header from '@/components/header'
@@ -83,7 +84,7 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                         <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                             <Badge
                                 variant="secondary"
-                                className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 text-primary"
+                                className="bg-gradient-to-r from-primary to-secondary border-0 text-white"
                             >
                                 {post.category}
                             </Badge>
@@ -185,11 +186,24 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                                             {children}
                                         </h4>
                                     ),
-                                    p: ({ children }) => (
-                                        <p className="mb-4 leading-8 text-foreground/90 text-base md:text-lg">
-                                            {children}
-                                        </p>
-                                    ),
+                                    p: ({ children, node }) => {
+                                        // If paragraph contains an image, render as div to avoid invalid <figure> inside <p>
+                                        const hasImage = node?.children?.some(
+                                            (child: any) => child.tagName === 'img' || child.type === 'element' && child.tagName === 'img'
+                                        )
+                                        if (hasImage) {
+                                            return (
+                                                <div className="mb-4 leading-8 text-foreground/90 text-base md:text-lg">
+                                                    {children}
+                                                </div>
+                                            )
+                                        }
+                                        return (
+                                            <p className="mb-4 leading-8 text-foreground/90 text-base md:text-lg">
+                                                {children}
+                                            </p>
+                                        )
+                                    },
                                     ul: ({ children }) => (
                                         <ul className="my-4 ml-6 list-disc space-y-2 text-foreground/90">
                                             {children}

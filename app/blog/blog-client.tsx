@@ -196,7 +196,7 @@ export function BlogClient() {
                                         <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
                                             <Badge
                                                 variant="secondary"
-                                                className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 text-primary"
+                                                className="bg-gradient-to-r from-primary to-secondary border-0 text-white"
                                             >
                                                 {post.category}
                                             </Badge>
