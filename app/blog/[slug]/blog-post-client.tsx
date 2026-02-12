@@ -45,8 +45,16 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
         )
     }
 
-    const copyLink = () => {
-        navigator.clipboard.writeText(currentUrl)
+    const copyLink = async () => {
+        if (!navigator.clipboard) {
+            console.error('Clipboard API is not available in this browser.')
+            return
+        }
+        try {
+            await navigator.clipboard.writeText(currentUrl)
+        } catch (error) {
+            console.error('Failed to copy link to clipboard:', error)
+        }
     }
 
     return (

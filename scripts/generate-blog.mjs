@@ -1,11 +1,11 @@
 /**
  * Auto Blog Generator for Locksy
  * 
- * This script generates SEO-optimized blog posts using AI (OpenAI GPT-4)
+ * This script generates SEO-optimized blog posts using AI via the Google Gemini API
  * and appends them to the blog-data.ts file.
  * 
  * Usage:
- *   GEMINI_API_KEY=your-key node scripts/generate-blog.mjs
+ *   GEMINI_API_KEY=your-google-gemini-api-key node scripts/generate-blog.mjs
  * 
  * Triggered daily via GitHub Actions cron job.
  */

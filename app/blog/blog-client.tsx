@@ -105,19 +105,18 @@ export function BlogClient() {
                     <div className="flex flex-wrap items-center gap-2">
                         <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mr-1">Tags:</span>
                         {tags.map((tag) => (
-                            <Badge
+                            <button
                                 key={tag}
-                                variant={selectedTag === tag ? 'default' : 'outline'}
-                                className={`cursor-pointer transition-all duration-300 ${selectedTag === tag
-                                    ? 'bg-gradient-to-r from-primary to-secondary border-0'
-                                    : 'hover:border-primary/30'
-                                    }`}
                                 onClick={() => setSelectedTag(
                                     selectedTag === tag ? null : tag
                                 )}
+                                className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-all duration-300 cursor-pointer ${selectedTag === tag
+                                    ? 'bg-gradient-to-r from-primary to-secondary text-white border-0'
+                                    : 'border-border/50 hover:border-primary/30'
+                                    }`}
                             >
                                 {tag}
-                            </Badge>
+                            </button>
                         ))}
                     </div>
 
