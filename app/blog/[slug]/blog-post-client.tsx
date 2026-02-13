@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { BlogPost, getRelatedPosts } from '@/lib/blog-data'
+import type { BlogPost } from '@/lib/blog-data'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -14,10 +14,10 @@ import Footer from '@/components/footer'
 
 interface BlogPostClientProps {
     post: BlogPost
+    relatedPosts: BlogPost[]
 }
 
-export function BlogPostClient({ post }: BlogPostClientProps) {
-    const relatedPosts = getRelatedPosts(post.slug, 3)
+export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     const [currentUrl, setCurrentUrl] = useState('')
 
     useEffect(() => {

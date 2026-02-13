@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { blogPosts, getBlogPost } from '@/lib/blog-data'
+import { blogPosts, getBlogPost, getRelatedPosts } from '@/lib/blog-data'
 import { BlogPostClient } from './blog-post-client'
 
 export async function generateStaticParams() {
@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\u003c') }}
             />
-            <BlogPostClient post={post} />
+            <BlogPostClient post={post} relatedPosts={getRelatedPosts(post.slug, 3)} />
         </>
     )
 }

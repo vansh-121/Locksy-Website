@@ -935,7 +935,9 @@ Set up a browser profile with Locksy on it. Lock your screen when you walk away.
 
 ---
 
-*Shared computer? Private tabs. [Install Locksy,
+*Shared computer? Private tabs. [Install Locksy](/) — your tabs, your rules.*
+`
+    },
     {
         slug: 'complete-guide-to-pbkdf2-vs-bcrypt-vs-argon2-for-password-hashing',
         title: 'Complete Guide to PBKDF2 vs bcrypt vs Argon2 for Password Hashing',
@@ -1123,9 +1125,6 @@ So, the next time you create an account, remember that your "secure" password is
 
 ---
 *Secure your secrets, one tab at a time.*
-`
-    }
-](/) and keep your browsing yours.*
 `
     }
 ]

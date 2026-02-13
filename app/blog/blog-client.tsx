@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { blogPosts, getAllCategories, getAllTags } from '@/lib/blog-data'
+import type { BlogPost } from '@/lib/blog-data'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -11,15 +11,18 @@ import { Clock, Calendar, Filter, Search, BookOpen, ArrowRight } from 'lucide-re
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 
-export function BlogClient() {
+interface BlogClientProps {
+    posts: BlogPost[]
+    categories: string[]
+    tags: string[]
+}
+
+export function BlogClient({ posts, categories, tags }: BlogClientProps) {
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
     const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
-    const categories = getAllCategories()
-    const tags = getAllTags()
-
-    const filteredPosts = blogPosts.filter(post => {
+    const filteredPosts = posts.filter(post => {
         const matchesSearch = searchQuery === '' ||
             post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||

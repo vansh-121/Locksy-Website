@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { generatePageMetadata, jsonLdWebsite } from '@/lib/metadata'
+import { blogPosts, getAllCategories, getAllTags } from '@/lib/blog-data'
 import { BlogClient } from './blog-client'
 
 export const metadata: Metadata = generatePageMetadata(
@@ -10,6 +11,10 @@ export const metadata: Metadata = generatePageMetadata(
 )
 
 export default function BlogPage() {
+    const posts = blogPosts
+    const categories = getAllCategories()
+    const tags = getAllTags()
+
     return (
         <>
             <script
@@ -18,11 +23,11 @@ export default function BlogPage() {
                     __html: JSON.stringify({
                         ...jsonLdWebsite,
                         '@type': 'Blog',
-                        blogPost: [], // Will be populated by client
+                        blogPost: [],
                     })
                 }}
             />
-            <BlogClient />
+            <BlogClient posts={posts} categories={categories} tags={tags} />
         </>
     )
 }
