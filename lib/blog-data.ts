@@ -768,8 +768,8 @@ Every security tool faces this tension between thoroughness and usability. The l
         category: 'Security',
         tags: ['Shared Computers', 'Privacy', 'Security Guide'],
         keywords: ['shared computer security', 'public computer privacy', 'shared PC security', 'family computer security'],
-        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=630&fit=crop&auto=format&q=80',
-        imageAlt: 'Modern open office workspace with shared desks and computers',
+        image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Team collaborating on laptops in a tech workspace',
         content: `
 ## The Computer That Isn't Just Yours
 
@@ -1139,8 +1139,8 @@ So, the next time you create an account, remember that your "secure" password is
         category: 'Tutorial',
         tags: ['Students', 'Shared Computers', 'Tutorial'],
         keywords: ['student browser security', 'shared computer protection', 'school computer privacy', 'protect tabs at school'],
-        image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=630&fit=crop&auto=format&q=80',
-        imageAlt: 'Cybersecurity concept with digital shield and lock',
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=630&fit=crop&auto=format&q=80',
+        imageAlt: 'Modern open office with shared workstations',
         content: `
 ## The Digital Walk of Shame: Why Your Open Tabs Are Never Truly Private on a Shared Computer
 

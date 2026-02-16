@@ -206,7 +206,24 @@ function getExistingSlugs() {
     const slugMatches = content.matchAll(/slug:\s*['"]([^'"]+)['"]/g)
     return new Set([...slugMatches].map(m => m[1]))
 }
+function getRecentlyUsedImages(limit = 5) {
+    const content = readFileSync(BLOG_DATA_PATH, 'utf-8')
+    // Extract the last 'limit' image URLs from blog posts
+    const imageMatches = [...content.matchAll(/image:\s*['"]([^'"]+)['"]/g)]
+    // Get the most recent ones (they're at the end of the file)
+    const recentImages = imageMatches.slice(-limit).map(m => m[1])
+    return new Set(recentImages)
+}
 
+function getUnusedCoverImage() {
+    const recentlyUsed = getRecentlyUsedImages(5)
+    const availableImages = COVER_IMAGE_POOL.filter(img => !recentlyUsed.has(img.url))
+    
+    // If all images have been used recently, use the full pool
+    const imagePool = availableImages.length > 0 ? availableImages : COVER_IMAGE_POOL
+    
+    return imagePool[Math.floor(Math.random() * imagePool.length)]
+}
 function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -240,6 +257,10 @@ async function generateBlogContent(topic) {
         process.exit(1)
     }
 
+    // Select 2-3 random inline images for this article
+    const shuffledImages = shuffleArray([...INLINE_IMAGE_POOL])
+    const selectedImages = shuffledImages.slice(0, 3)
+
     const prompt = `You are a human writer who publishes long-form articles on Medium.com about browser security, digital privacy, and technology. You write in a conversational, opinionated, first-person style that feels like a smart friend explaining something over coffee — NOT like an AI or a corporate blog.
 
 Write an article for a browser extension called "Locksy" that password-protects browser tabs.
@@ -247,6 +268,13 @@ Write an article for a browser extension called "Locksy" that password-protects 
 Topic: "${topic.title}"
 Category: ${topic.category}
 Target Keywords (weave naturally, never force): ${topic.keywords.join(', ')}
+
+INLINE IMAGES — CRITICAL REQUIREMENT:
+You MUST include 2-3 inline images throughout the article at strategic points (after major sections or between long paragraphs). Use EXACTLY these markdown image syntaxes (copy them verbatim, don't modify):
+
+${selectedImages.join('\n')}
+
+Place these images naturally in the flow of the article where they make sense visually. Spread them out - don't put them all together. Each image should appear after a major section or between substantial paragraphs to break up text and enhance readability.
 
 STYLE REQUIREMENTS — THIS IS THE MOST IMPORTANT PART:
 - Write like a HUMAN. Use "I", "you", "we". Share opinions. Be direct.
@@ -268,6 +296,7 @@ STRUCTURE:
 - Use ### sparingly for subsections
 - Use **bold** for key terms and emphasis
 - Use code formatting for URLs, file paths, or technical terms
+- Include the inline images at strategic points throughout (REMEMBER THIS!)
 - End with a brief, punchy conclusion — no "In conclusion" opener
 - Add a --- divider and a short italic CTA line at the very end
 
@@ -395,8 +424,8 @@ async function main() {
             content: content.trim()
         }
 
-        // Append to blog-data.ts
-        const coverImage = COVER_IMAGE_POOL[Math.floor(Math.random() * COVER_IMAGE_POOL.length)]
+        // Append to blog-data.ts (select an unused cover image)
+        const coverImage = getUnusedCoverImage()
         appendBlogPost(post, coverImage)
         console.log(`\n✅ Blog post added successfully!`)
         console.log(`📄 Slug: ${slug}`)
