@@ -171,6 +171,51 @@ const TOPIC_POOL = [
         keywords: ["client side encryption browser", "locksy encryption method", "local encryption tabs", "private tab encryption"],
         tags: ["Locksy", "Encryption", "Technical"]
     },
+    // ── Feature-focused educational topics ──────────────────────────────────
+    // These cover Locksy features from a conceptual / technology-first angle.
+    // The AI prompt ensures they read as genuine deep-dives, not product pitches.
+    {
+        title: "How WebAuthn and FIDO2 Biometrics Are Changing Browser Security",
+        category: "Technical",
+        keywords: ["webauthn browser extension", "FIDO2 authentication", "biometric browser security", "fingerprint browser unlock"],
+        tags: ["Biometrics", "WebAuthn", "FIDO2", "Security"]
+    },
+    {
+        title: "Why an Idle Browser Is a Security Risk (And How Auto-Lock Timers Fix It)",
+        category: "Security",
+        keywords: ["browser auto lock timer", "idle session security", "automatic tab lock", "browser session timeout security"],
+        tags: ["Auto-Lock", "Session Security", "Best Practices"]
+    },
+    {
+        title: "Browser Security on a Schedule: How Time-Based Tab Locking Works",
+        category: "Tutorial",
+        keywords: ["scheduled browser lock", "time-based tab security", "browser security schedule", "automatic lock schedule browser"],
+        tags: ["Scheduled Locking", "Automation", "Security"]
+    },
+    {
+        title: "Why Smart People Use Domain Rules Instead of Manually Locking Tabs",
+        category: "Tutorial",
+        keywords: ["domain lock browser", "automatic tab lock by domain", "site-specific browser security", "domain security rules browser"],
+        tags: ["Domain Lock", "Automation", "Privacy"]
+    },
+    {
+        title: "The Case for One-Click Security: Why Friction Is the Enemy of Good Habits",
+        category: "Security",
+        keywords: ["one click browser security", "frictionless tab protection", "quick lock browser tab", "security ux design"],
+        tags: ["One-Click", "UX", "Security Habits"]
+    },
+    {
+        title: "How Browser Extensions Defend Against Brute-Force Password Attacks",
+        category: "Technical",
+        keywords: ["brute force protection browser extension", "rate limiting browser password", "password attack prevention browser", "browser extension security hardening"],
+        tags: ["Brute-Force", "Rate Limiting", "Technical"]
+    },
+    {
+        title: "Incognito Mode Won't Save You: The Case for Real Tab-Level Privacy",
+        category: "Security",
+        keywords: ["incognito mode not enough", "private browsing tab lock", "incognito tab protection real", "browser privacy beyond incognito"],
+        tags: ["Incognito", "Private Browsing", "Privacy"]
+    },
 ]
 
 // Pool of high-quality Unsplash images for blog cover photos
@@ -309,6 +354,7 @@ STYLE REQUIREMENTS — THIS IS THE MOST IMPORTANT PART:
 - Sound like you've personally used these tools and have strong opinions about them
 - The reader should forget they're reading a "blog post" and feel like they're reading a well-written essay
 - Mention Locksy naturally where relevant — as something you'd genuinely recommend, not as a sales pitch. Keep it to 2-3 natural mentions max.
+- CRITICAL FOR FEATURE TOPICS: If the topic is about a specific security feature (biometrics, auto-lock, domain rules, etc.), lead with the WHY and the underlying technology/problem. Explain it like a security journalist who happens to use these tools — not like someone demoing their own product. Locksy should appear as a real-world example you reached for, not as the subject of the article.
 
 STRUCTURE:
 - 2500-4000 words
@@ -353,6 +399,20 @@ Write ONLY the markdown content, starting with the first ## heading. The article
  * Create a new individual post file at lib/posts/[slug].ts
  */
 function createPostFile(post, coverImage) {
+    // Strictly sanitize the slug: only lowercase alphanumeric and hyphens allowed.
+    // This prevents path traversal regardless of where the slug originated.
+    const safeSlug = post.slug.replace(/[^a-z0-9-]/g, '').replace(/^-+|-+$/g, '')
+    if (!safeSlug) throw new Error(`Invalid slug after sanitization: "${post.slug}"`)
+
+    // Verify the resolved path stays within POSTS_DIR (belt-and-suspenders)
+    const resolvedPath = join(POSTS_DIR, `${safeSlug}.ts`)
+    if (!resolvedPath.startsWith(POSTS_DIR + (process.platform === 'win32' ? '\\' : '/'))) {
+        throw new Error(`Path traversal attempt detected for slug: "${post.slug}"`)
+    }
+
+    // Use the safe slug for everything from this point on
+    post = { ...post, slug: safeSlug }
+
     // Helper: escape a string for use inside single-quoted JS literals
     const escSQ = (str) => str.replace(/\\/g, '\\\\').replace(/'/g, "\\'")
 
@@ -387,7 +447,7 @@ ${escapedContent}
 export default post
 `
 
-    const filePath = join(POSTS_DIR, `${post.slug}.ts`)
+    const filePath = join(POSTS_DIR, `${safeSlug}.ts`)
     writeFileSync(filePath, fileContent, 'utf-8')
     return filePath
 }
@@ -401,15 +461,26 @@ function regenerateIndex() {
         .filter(f => f.endsWith('.ts') && f !== 'index.ts' && f !== 'legacy.ts')
         .sort()
 
+    // Strictly sanitize variable names: only a-z, 0-9, and underscores.
+    // Filenames should already be safe slugs, but we guard against any manually
+    // added files with unexpected characters that could inject code.
+    const toVarName = (f) => {
+        const raw = basename(f, '.ts').replace(/-/g, '_')
+        const safe = raw.replace(/[^a-zA-Z0-9_]/g, '')
+        if (!safe) throw new Error(`Cannot derive a safe variable name from filename: "${f}"`)
+        // Ensure it doesn't start with a digit (invalid JS identifier)
+        return /^[0-9]/.test(safe) ? `post_${safe}` : safe
+    }
+
     const importLines = individualFiles
         .map(f => {
-            const name = basename(f, '.ts').replace(/-/g, '_')
+            const name = toVarName(f)
             return `import post_${name} from './${basename(f, '.ts')}'`
         })
         .join('\n')
 
     const entryLines = individualFiles
-        .map(f => `    post_${basename(f, '.ts').replace(/-/g, '_')},`)
+        .map(f => `    post_${toVarName(f)},`)
         .join('\n')
 
     const indexContent = `// lib/posts/index.ts
