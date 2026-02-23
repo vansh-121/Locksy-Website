@@ -78,10 +78,6 @@ export default function AutomationFeatures() {
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-emerald-600 text-white rounded-full text-xs sm:text-sm font-bold mb-6 shadow-lg animate-pulse">
-            <span>🚀</span>
-            VERSION 2.2.0
-          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-indigo-600 via-violet-600 to-emerald-600 bg-clip-text text-transparent px-4">
             Set It and Forget It
           </h2>

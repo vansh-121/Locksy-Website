@@ -37,6 +37,12 @@ export default function Features() {
       gradient: "from-cyan-500 to-teal-500",
     },
     {
+      icon: "👆",
+      title: "Biometric Unlock (v2.3.0)",
+      desc: "Unlock protected tabs with Touch ID, Windows Hello, Face ID, or Android biometrics. WebAuthn / FIDO2 — no biometric data ever leaves your device.",
+      gradient: "from-violet-500 to-indigo-500",
+    },
+    {
       icon: "🔒",
       title: "PBKDF2 Key Derivation",
       desc: "600k iterations with SHA-256 - OWASP 2023 compliant. Military-grade password hashing with 120 years crack resistance.",
@@ -78,12 +84,12 @@ export default function Features() {
     //   desc: "Beautiful gradient interface with smooth animations.",
     //   gradient: "from-pink-500 to-purple-500",
     // },
-    {
-      icon: "🔄",
-      title: "Smart Unlock Preferences",
-      desc: "Choose to unlock just the current tab or all tabs for a domain. Locksy remembers your preference.",
-      gradient: "from-teal-500 to-cyan-500",
-    },
+    // {
+    //   icon: "🔄",
+    //   title: "Smart Unlock Preferences",
+    //   desc: "Choose to unlock just the current tab or all tabs for a domain. Locksy remembers your preference.",
+    //   gradient: "from-teal-500 to-cyan-500",
+    // },
     {
       icon: "🚫",
       title: "No Account Required",

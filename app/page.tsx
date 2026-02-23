@@ -2,6 +2,7 @@ import Header from "@/components/header"
 import Hero from "@/components/hero"
 import AutomationFeatures from "@/components/automation-features"
 import DomainLock from "@/components/domain-lock"
+import BiometricUnlock from "@/components/biometric-unlock"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
 import KeyboardShortcuts from "@/components/keyboard-shortcuts"
@@ -35,6 +36,9 @@ export default function Home() {
 
           {/* Show why Locksy is better than alternatives */}
           <Comparison />
+
+          {/* NEW v2.3.0 — Biometric Unlock */}
+          <BiometricUnlock />
 
           {/* Showcase NEW v2.2.0 automation features prominently */}
           <AutomationFeatures />

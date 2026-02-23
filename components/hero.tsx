@@ -182,11 +182,11 @@ export default function Hero() {
             {/* Badges */}
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="#automation"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                href="#biometric-unlock"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
-                <span>🔒</span>
-                NEW: Auto Lock & Scheduled Lock
+                <span>👆</span>
+                NEW: Biometric Unlock
               </a>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
