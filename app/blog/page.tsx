@@ -17,10 +17,30 @@ export default function BlogPage() {
     const categories = getAllCategories()
     const tags = getAllTags()
 
-    // Use the 10 most-recent posts for the Blog schema (keeps payload small)
-    const recentPosts = [...posts]
-        .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+    // Score each post by engagement potential using available metadata signals:
+    //   keywords.length  → broader search surface = more organic entry points
+    //   tags.length      → topical coverage breadth
+    //   readTime minutes → longer content tends to rank + hold attention better
+    // Then deduplicate by category (max 2 per category) to show variety to Google,
+    // and cap at 10 posts to keep payload lean.
+    const scoredPosts = [...posts]
+        .map(post => {
+            const mins = parseInt(post.readTime, 10) || 0
+            const score = post.keywords.length * 2 + post.tags.length + mins
+            return { post, score }
+        })
+        .sort((a, b) => b.score - a.score)
+
+    const categoryCounts: Record<string, number> = {}
+    const featuredPosts = scoredPosts
+        .filter(({ post }) => {
+            const count = categoryCounts[post.category] ?? 0
+            if (count >= 2) return false
+            categoryCounts[post.category] = count + 1
+            return true
+        })
         .slice(0, 10)
+        .map(({ post }) => post)
 
     const blogJsonLd = {
         '@context': 'https://schema.org',
@@ -35,7 +55,7 @@ export default function BlogPage() {
             url: siteUrl,
             logo: { '@type': 'ImageObject', url: `${siteUrl}/web-app-manifest-512x512.png` },
         },
-        blogPost: recentPosts.map(post => ({
+        blogPost: featuredPosts.map(post => ({
             '@type': 'BlogPosting',
             headline: post.title,
             description: post.description,
