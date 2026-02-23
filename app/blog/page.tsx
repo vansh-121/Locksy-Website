@@ -52,7 +52,7 @@ export default function BlogPage() {
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd).replace(/</g, '\u003c') }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd).replace(/</g, '\\u003c') }}
             />
             <BlogClient posts={posts} categories={categories} tags={tags} />
         </>

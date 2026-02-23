@@ -267,7 +267,9 @@ function getExistingSlugs() {
 }
 
 function getRecentlyUsedImages(limit = 5) {
-    // Read every post file and collect image URLs, ordered by file modification time
+    // Collect image URLs from all post files (in directory listing order).
+    // The last `limit` entries across all files are treated as "recently used"
+    // to avoid repeating the same cover image on consecutive posts.
     const files = getPostFiles()
     const allImages = []
     for (const file of files) {

@@ -117,11 +117,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(fullJsonLd).replace(/</g, '\u003c') }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(fullJsonLd).replace(/</g, '\\u003c') }}
             />
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\u003c') }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
             />
             <BlogPostClient post={post} relatedPosts={getRelatedPosts(post.slug, 3)} />
         </>
