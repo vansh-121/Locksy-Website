@@ -100,11 +100,28 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         wordCount: post.content.split(/\s+/).length,
     }
 
+    const breadcrumbJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
+            { '@type': 'ListItem', position: 3, name: post.title, item: postUrl },
+        ],
+    }
+
+    // Add inLanguage to the article schema
+    const fullJsonLd = { ...jsonLd, inLanguage: 'en-US' }
+
     return (
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\u003c') }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(fullJsonLd).replace(/</g, '\\u003c') }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
             />
             <BlogPostClient post={post} relatedPosts={getRelatedPosts(post.slug, 3)} />
         </>

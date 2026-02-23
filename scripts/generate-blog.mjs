@@ -267,7 +267,9 @@ function getExistingSlugs() {
 }
 
 function getRecentlyUsedImages(limit = 5) {
-    // Read every post file and collect image URLs, ordered by file modification time
+    // Collect image URLs from all post files (in directory listing order).
+    // The last `limit` entries across all files are treated as "recently used"
+    // to avoid repeating the same cover image on consecutive posts.
     const files = getPostFiles()
     const allImages = []
     for (const file of files) {
@@ -356,7 +358,13 @@ STYLE REQUIREMENTS — THIS IS THE MOST IMPORTANT PART:
 - Mention Locksy naturally where relevant — as something you'd genuinely recommend, not as a sales pitch. Keep it to 2-3 natural mentions max.
 - CRITICAL FOR FEATURE TOPICS: If the topic is about a specific security feature (biometrics, auto-lock, domain rules, etc.), lead with the WHY and the underlying technology/problem. Explain it like a security journalist who happens to use these tools — not like someone demoing their own product. Locksy should appear as a real-world example you reached for, not as the subject of the article.
 
-STRUCTURE:
+OUTPUT FORMAT — FOLLOW EXACTLY:
+First, output a single line in this exact format (no quotes, no extra text):
+META_DESC: {a compelling 140-155 character meta description that includes the primary keyword, tells the reader exactly what they will learn, and makes them want to click. Write it like a teaser, not a label.}
+
+Then output a blank line, then the article body starting with the first ## heading.
+
+ARTICLE STRUCTURE:
 - 2500-4000 words
 - Use ## for section headings (descriptive/interesting, not numbered)
 - Use ### sparingly for subsections
@@ -366,7 +374,7 @@ STRUCTURE:
 - End with a brief, punchy conclusion — no "In conclusion" opener
 - Add a --- divider and a short italic CTA line at the very end
 
-Write ONLY the markdown content, starting with the first ## heading. The article title is handled separately — do not include an H1.`
+Do NOT include an H1 — the article title is handled separately.`
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
         method: 'POST',
@@ -392,7 +400,20 @@ Write ONLY the markdown content, starting with the first ## heading. The article
     }
 
     const data = await response.json()
-    return data.candidates[0].content.parts[0].text
+    const raw = data.candidates[0].content.parts[0].text
+
+    // Parse the META_DESC line that the prompt asks Gemini to output first
+    const metaDescMatch = raw.match(/^META_DESC:\s*(.+)/m)
+    const metaDescription = metaDescMatch
+        ? metaDescMatch[1].trim().slice(0, 158) // hard cap at 158 chars
+        : null
+
+    // Strip the META_DESC line (and any trailing blank line after it) from article body
+    const articleBody = raw
+        .replace(/^META_DESC:.*\n?\n?/m, '')
+        .trim()
+
+    return { articleBody, metaDescription }
 }
 
 /**
@@ -529,25 +550,29 @@ async function main() {
 
     try {
         // Generate the blog content using AI
-        const content = await generateBlogContent(topic)
-        const wordCount = content.split(/\s+/).length
+        const { articleBody, metaDescription } = await generateBlogContent(topic)
+        const wordCount = articleBody.split(/\s+/).length
         const readTime = calculateReadTime(wordCount)
         const today = getTodayDate()
 
         console.log(`✍️  Generated ${wordCount} words (${readTime})`)
+        if (metaDescription) console.log(`📝 Meta description: ${metaDescription}`)
+
+        // Fallback description if Gemini didn't output a META_DESC line
+        const fallbackDescription = `${topic.keywords[0].charAt(0).toUpperCase() + topic.keywords[0].slice(1)}: ${topic.title.toLowerCase()}. Practical insights on ${topic.keywords.slice(1, 3).join(' and ')}.`
 
         // Create the blog post object
         const post = {
             slug,
             title: topic.title,
-            description: `${topic.title}. Learn about ${topic.keywords.slice(0, 2).join(' and ')} with practical tips and expert advice.`,
+            description: metaDescription || fallbackDescription,
             publishDate: today,
             lastModified: today,
             readTime,
             category: topic.category,
             tags: topic.tags,
             keywords: topic.keywords,
-            content: content.trim()
+            content: articleBody
         }
 
         // Create individual post file and regenerate the index
