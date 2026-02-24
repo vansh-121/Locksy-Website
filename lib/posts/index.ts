@@ -5,10 +5,10 @@
 
 import legacyPosts from './legacy'
 
-// Individual post imports (managed by generate-blog.mjs)
-// [POST_IMPORTS]
+// Individual post imports
+import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
 
 export const allPosts = [
     ...legacyPosts,
-    // [POST_ENTRIES]
+    post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
 ]
