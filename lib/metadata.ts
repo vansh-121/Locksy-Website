@@ -101,8 +101,8 @@ export const metadata: Metadata = {
     },
     verification: {
         google: '5BggLK44-62mJejhXTMZxlqSBtUa0l-v6wtcEY-qPOo',
-        // yandex: 'your-yandex-verification-code',
-        // bing: 'your-bing-verification-code',
+        // bing: 'PASTE_BING_VERIFICATION_CODE_HERE', // https://www.bing.com/webmasters → Add Site → Meta Tag value
+        // yandex: 'PASTE_YANDEX_CODE_HERE',
     },
     category: 'technology',
     classification: 'Browser Extension, Security Software, Privacy Tool',
@@ -158,7 +158,7 @@ export const jsonLdSoftwareApplication = {
         priceCurrency: 'USD'
     },
     description: siteDescription,
-    softwareVersion: '2.2.0',
+    softwareVersion: '2.3.0',
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
     featureList: [

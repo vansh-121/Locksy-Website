@@ -1,21 +1,23 @@
 /**
  * Auto Blog Generator for Locksy
- * 
- * This script generates SEO-optimized blog posts using AI via the Google Gemini API
- * and appends them to the blog-data.ts file.
- * 
+ *
+ * Generates an SEO-optimized blog post via Google Gemini API and saves it as
+ * its own TypeScript file inside lib/posts/. The lib/posts/index.ts aggregator
+ * is then regenerated automatically so the new post is picked up immediately.
+ *
  * Usage:
  *   GEMINI_API_KEY=your-google-gemini-api-key node scripts/generate-blog.mjs
- * 
+ *
  * Triggered daily via GitHub Actions cron job.
  */
 
-import { readFileSync, writeFileSync } from 'fs'
-import { join, dirname } from 'path'
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs'
+import { join, dirname, basename } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const BLOG_DATA_PATH = join(__dirname, '..', 'lib', 'blog-data.ts')
+const POSTS_DIR = join(__dirname, '..', 'lib', 'posts')
+const INDEX_PATH = join(POSTS_DIR, 'index.ts')
 
 // SEO topic pool — these rotate to ensure variety & ranking potential
 const TOPIC_POOL = [
@@ -169,6 +171,51 @@ const TOPIC_POOL = [
         keywords: ["client side encryption browser", "locksy encryption method", "local encryption tabs", "private tab encryption"],
         tags: ["Locksy", "Encryption", "Technical"]
     },
+    // ── Feature-focused educational topics ──────────────────────────────────
+    // These cover Locksy features from a conceptual / technology-first angle.
+    // The AI prompt ensures they read as genuine deep-dives, not product pitches.
+    {
+        title: "How WebAuthn and FIDO2 Biometrics Are Changing Browser Security",
+        category: "Technical",
+        keywords: ["webauthn browser extension", "FIDO2 authentication", "biometric browser security", "fingerprint browser unlock"],
+        tags: ["Biometrics", "WebAuthn", "FIDO2", "Security"]
+    },
+    {
+        title: "Why an Idle Browser Is a Security Risk (And How Auto-Lock Timers Fix It)",
+        category: "Security",
+        keywords: ["browser auto lock timer", "idle session security", "automatic tab lock", "browser session timeout security"],
+        tags: ["Auto-Lock", "Session Security", "Best Practices"]
+    },
+    {
+        title: "Browser Security on a Schedule: How Time-Based Tab Locking Works",
+        category: "Tutorial",
+        keywords: ["scheduled browser lock", "time-based tab security", "browser security schedule", "automatic lock schedule browser"],
+        tags: ["Scheduled Locking", "Automation", "Security"]
+    },
+    {
+        title: "Why Smart People Use Domain Rules Instead of Manually Locking Tabs",
+        category: "Tutorial",
+        keywords: ["domain lock browser", "automatic tab lock by domain", "site-specific browser security", "domain security rules browser"],
+        tags: ["Domain Lock", "Automation", "Privacy"]
+    },
+    {
+        title: "The Case for One-Click Security: Why Friction Is the Enemy of Good Habits",
+        category: "Security",
+        keywords: ["one click browser security", "frictionless tab protection", "quick lock browser tab", "security ux design"],
+        tags: ["One-Click", "UX", "Security Habits"]
+    },
+    {
+        title: "How Browser Extensions Defend Against Brute-Force Password Attacks",
+        category: "Technical",
+        keywords: ["brute force protection browser extension", "rate limiting browser password", "password attack prevention browser", "browser extension security hardening"],
+        tags: ["Brute-Force", "Rate Limiting", "Technical"]
+    },
+    {
+        title: "Incognito Mode Won't Save You: The Case for Real Tab-Level Privacy",
+        category: "Security",
+        keywords: ["incognito mode not enough", "private browsing tab lock", "incognito tab protection real", "browser privacy beyond incognito"],
+        tags: ["Incognito", "Private Browsing", "Privacy"]
+    },
 ]
 
 // Pool of high-quality Unsplash images for blog cover photos
@@ -201,18 +248,38 @@ const INLINE_IMAGE_POOL = [
     '![Abstract technology with blue light](https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&h=450&fit=crop&auto=format&q=80)',
 ]
 
-function getExistingSlugs() {
-    const content = readFileSync(BLOG_DATA_PATH, 'utf-8')
-    const slugMatches = content.matchAll(/slug:\s*['"]([^'"]+)['"]/g)
-    return new Set([...slugMatches].map(m => m[1]))
+/** Collect all .ts files in lib/posts/ (excluding index.ts) */
+function getPostFiles() {
+    return readdirSync(POSTS_DIR)
+        .filter(f => f.endsWith('.ts') && f !== 'index.ts')
+        .map(f => join(POSTS_DIR, f))
 }
+
+function getExistingSlugs() {
+    const slugs = new Set()
+    for (const file of getPostFiles()) {
+        const content = readFileSync(file, 'utf-8')
+        for (const m of content.matchAll(/slug:\s*['"]([^'"]+)['"]/g)) {
+            slugs.add(m[1])
+        }
+    }
+    return slugs
+}
+
 function getRecentlyUsedImages(limit = 5) {
-    const content = readFileSync(BLOG_DATA_PATH, 'utf-8')
-    // Extract the last 'limit' image URLs from blog posts
-    const imageMatches = [...content.matchAll(/image:\s*['"]([^'"]+)['"]/g)]
-    // Get the most recent ones (they're at the end of the file)
-    const recentImages = imageMatches.slice(-limit).map(m => m[1])
-    return new Set(recentImages)
+    // Collect image URLs from all post files (in directory listing order).
+    // The last `limit` entries across all files are treated as "recently used"
+    // to avoid repeating the same cover image on consecutive posts.
+    const files = getPostFiles()
+    const allImages = []
+    for (const file of files) {
+        const content = readFileSync(file, 'utf-8')
+        for (const m of content.matchAll(/image:\s*['"]([^'"]+)['"]/g)) {
+            allImages.push(m[1])
+        }
+    }
+    // The last `limit` images across all files are considered "recent"
+    return new Set(allImages.slice(-limit))
 }
 
 function getUnusedCoverImage() {
@@ -289,8 +356,15 @@ STYLE REQUIREMENTS — THIS IS THE MOST IMPORTANT PART:
 - Sound like you've personally used these tools and have strong opinions about them
 - The reader should forget they're reading a "blog post" and feel like they're reading a well-written essay
 - Mention Locksy naturally where relevant — as something you'd genuinely recommend, not as a sales pitch. Keep it to 2-3 natural mentions max.
+- CRITICAL FOR FEATURE TOPICS: If the topic is about a specific security feature (biometrics, auto-lock, domain rules, etc.), lead with the WHY and the underlying technology/problem. Explain it like a security journalist who happens to use these tools — not like someone demoing their own product. Locksy should appear as a real-world example you reached for, not as the subject of the article.
 
-STRUCTURE:
+OUTPUT FORMAT — FOLLOW EXACTLY:
+First, output a single line in this exact format (no quotes, no extra text):
+META_DESC: {a compelling 140-155 character meta description that includes the primary keyword, tells the reader exactly what they will learn, and makes them want to click. Write it like a teaser, not a label.}
+
+Then output a blank line, then the article body starting with the first ## heading.
+
+ARTICLE STRUCTURE:
 - 2500-4000 words
 - Use ## for section headings (descriptive/interesting, not numbered)
 - Use ### sparingly for subsections
@@ -300,7 +374,7 @@ STRUCTURE:
 - End with a brief, punchy conclusion — no "In conclusion" opener
 - Add a --- divider and a short italic CTA line at the very end
 
-Write ONLY the markdown content, starting with the first ## heading. The article title is handled separately — do not include an H1.`
+Do NOT include an H1 — the article title is handled separately.`
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
         method: 'POST',
@@ -326,52 +400,125 @@ Write ONLY the markdown content, starting with the first ## heading. The article
     }
 
     const data = await response.json()
-    return data.candidates[0].content.parts[0].text
+    const raw = data.candidates[0].content.parts[0].text
+
+    // Parse the META_DESC line that the prompt asks Gemini to output first
+    const metaDescMatch = raw.match(/^META_DESC:\s*(.+)/m)
+    const metaDescription = metaDescMatch
+        ? metaDescMatch[1].trim().slice(0, 158) // hard cap at 158 chars
+        : null
+
+    // Strip the META_DESC line (and any trailing blank line after it) from article body
+    const articleBody = raw
+        .replace(/^META_DESC:.*\n?\n?/m, '')
+        .trim()
+
+    return { articleBody, metaDescription }
 }
 
-function appendBlogPost(post, coverImage) {
-    let content = readFileSync(BLOG_DATA_PATH, 'utf-8')
+/**
+ * Create a new individual post file at lib/posts/[slug].ts
+ */
+function createPostFile(post, coverImage) {
+    // Strictly sanitize the slug: only lowercase alphanumeric and hyphens allowed.
+    // This prevents path traversal regardless of where the slug originated.
+    const safeSlug = post.slug.replace(/[^a-z0-9-]/g, '').replace(/^-+|-+$/g, '')
+    if (!safeSlug) throw new Error(`Invalid slug after sanitization: "${post.slug}"`)
 
-    // Find the insertion point — the array closing bracket ']' right before '// Helper function'
-    const insertionMarker = `\n]\n\n// Helper function`
-    const markerIndex = content.indexOf(insertionMarker)
-    if (markerIndex === -1) {
-        throw new Error('Could not find the anchor point after blogPosts array.')
+    // Verify the resolved path stays within POSTS_DIR (belt-and-suspenders)
+    const resolvedPath = join(POSTS_DIR, `${safeSlug}.ts`)
+    if (!resolvedPath.startsWith(POSTS_DIR + (process.platform === 'win32' ? '\\' : '/'))) {
+        throw new Error(`Path traversal attempt detected for slug: "${post.slug}"`)
     }
-    // The ']' is at markerIndex + 1 (marker starts with '\n')
-    const insertIndex = markerIndex + 1
+
+    // Use the safe slug for everything from this point on
+    post = { ...post, slug: safeSlug }
 
     // Helper: escape a string for use inside single-quoted JS literals
-    // Must escape backslashes FIRST, then single quotes
     const escSQ = (str) => str.replace(/\\/g, '\\\\').replace(/'/g, "\\'")
 
-    // Escape backticks and ${} in the blog content for template literal safety
+    // Escape backticks and ${} in content for template literal safety
     const escapedContent = post.content
         .replace(/\\/g, '\\\\')
         .replace(/`/g, '\\`')
         .replace(/\$\{/g, '\\${')
 
-    const newEntry = `,
-    {
-        slug: '${escSQ(post.slug)}',
-        title: '${escSQ(post.title)}',
-        description: '${escSQ(post.description)}',
-        author: 'Locksy Security Team',
-        publishDate: '${post.publishDate}',
-        lastModified: '${post.lastModified}',
-        readTime: '${post.readTime}',
-        category: '${escSQ(post.category)}',
-        tags: [${post.tags.map(t => `'${escSQ(t)}'`).join(', ')}],
-        keywords: [${post.keywords.map(k => `'${escSQ(k)}'`).join(', ')}],
-        image: '${escSQ(coverImage.url)}',
-        imageAlt: '${escSQ(coverImage.alt)}',
-        content: \`
+    const fileContent = `// lib/posts/${post.slug}.ts
+// Auto-generated by scripts/generate-blog.mjs on ${post.publishDate}
+// DO NOT EDIT MANUALLY — regenerate via the blog generator script.
+
+const post = {
+    slug: '${escSQ(post.slug)}',
+    title: '${escSQ(post.title)}',
+    description: '${escSQ(post.description)}',
+    author: 'Locksy Security Team',
+    publishDate: '${post.publishDate}',
+    lastModified: '${post.lastModified}',
+    readTime: '${post.readTime}',
+    category: '${escSQ(post.category)}',
+    tags: [${post.tags.map(t => `'${escSQ(t)}'`).join(', ')}],
+    keywords: [${post.keywords.map(k => `'${escSQ(k)}'`).join(', ')}],
+    image: '${escSQ(coverImage.url)}',
+    imageAlt: '${escSQ(coverImage.alt)}',
+    content: \`
 ${escapedContent}
 \`
-    }`
+}
 
-    content = content.slice(0, insertIndex) + newEntry + '\n' + content.slice(insertIndex)
-    writeFileSync(BLOG_DATA_PATH, content, 'utf-8')
+export default post
+`
+
+    const filePath = join(POSTS_DIR, `${safeSlug}.ts`)
+    writeFileSync(filePath, fileContent, 'utf-8')
+    return filePath
+}
+
+/**
+ * Regenerate lib/posts/index.ts by scanning all individual post files.
+ * legacy.ts is always included first; individual posts are sorted by filename.
+ */
+function regenerateIndex() {
+    const individualFiles = readdirSync(POSTS_DIR)
+        .filter(f => f.endsWith('.ts') && f !== 'index.ts' && f !== 'legacy.ts')
+        .sort()
+
+    // Strictly sanitize variable names: only a-z, 0-9, and underscores.
+    // Filenames should already be safe slugs, but we guard against any manually
+    // added files with unexpected characters that could inject code.
+    const toVarName = (f) => {
+        const raw = basename(f, '.ts').replace(/-/g, '_')
+        const safe = raw.replace(/[^a-zA-Z0-9_]/g, '')
+        if (!safe) throw new Error(`Cannot derive a safe variable name from filename: "${f}"`)
+        // Ensure it doesn't start with a digit (invalid JS identifier)
+        return /^[0-9]/.test(safe) ? `post_${safe}` : safe
+    }
+
+    const importLines = individualFiles
+        .map(f => {
+            const name = toVarName(f)
+            return `import post_${name} from './${basename(f, '.ts')}'`
+        })
+        .join('\n')
+
+    const entryLines = individualFiles
+        .map(f => `    post_${toVarName(f)},`)
+        .join('\n')
+
+    const indexContent = `// lib/posts/index.ts
+//
+// AUTO-GENERATED by scripts/generate-blog.mjs — DO NOT EDIT MANUALLY.
+// Each new post gets its own file in this directory. Run the generator to add posts.
+
+import legacyPosts from './legacy'
+${importLines ? `
+// Individual post imports\n${importLines}` : ''}
+
+export const allPosts = [
+    ...legacyPosts,
+${entryLines ? entryLines + '\n' : ''}]
+`
+
+    writeFileSync(INDEX_PATH, indexContent, 'utf-8')
 }
 
 async function main() {
@@ -403,31 +550,37 @@ async function main() {
 
     try {
         // Generate the blog content using AI
-        const content = await generateBlogContent(topic)
-        const wordCount = content.split(/\s+/).length
+        const { articleBody, metaDescription } = await generateBlogContent(topic)
+        const wordCount = articleBody.split(/\s+/).length
         const readTime = calculateReadTime(wordCount)
         const today = getTodayDate()
 
         console.log(`✍️  Generated ${wordCount} words (${readTime})`)
+        if (metaDescription) console.log(`📝 Meta description: ${metaDescription}`)
+
+        // Fallback description if Gemini didn't output a META_DESC line
+        const fallbackDescription = `${topic.keywords[0].charAt(0).toUpperCase() + topic.keywords[0].slice(1)}: ${topic.title.toLowerCase()}. Practical insights on ${topic.keywords.slice(1, 3).join(' and ')}.`
 
         // Create the blog post object
         const post = {
             slug,
             title: topic.title,
-            description: `${topic.title}. Learn about ${topic.keywords.slice(0, 2).join(' and ')} with practical tips and expert advice.`,
+            description: metaDescription || fallbackDescription,
             publishDate: today,
             lastModified: today,
             readTime,
             category: topic.category,
             tags: topic.tags,
             keywords: topic.keywords,
-            content: content.trim()
+            content: articleBody
         }
 
-        // Append to blog-data.ts (select an unused cover image)
+        // Create individual post file and regenerate the index
         const coverImage = getUnusedCoverImage()
-        appendBlogPost(post, coverImage)
-        console.log(`\n✅ Blog post added successfully!`)
+        const filePath = createPostFile(post, coverImage)
+        regenerateIndex()
+        console.log(`\n✅ Blog post created successfully!`)
+        console.log(`📄 File: lib/posts/${slug}.ts`)
         console.log(`📄 Slug: ${slug}`)
         console.log(`📅 Date: ${today}`)
         console.log(`🔗 URL: https://www.locksy.dev/blog/${slug}`)
