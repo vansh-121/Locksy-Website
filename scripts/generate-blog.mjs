@@ -218,20 +218,30 @@ const TOPIC_POOL = [
     },
 ]
 
-// Pool of high-quality Unsplash images for blog cover photos
+// Pool of high-quality Unsplash images for blog cover photos.
+// Each entry includes `tags` so the keyword-based fallback can score relevance
+// when the Unsplash API is not available.
 const COVER_IMAGE_POOL = [
-    { url: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Developer coding on a laptop with security focus' },
-    { url: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Cybersecurity concept with digital shield and lock' },
-    { url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Green encrypted data streaming on a monitor' },
-    { url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Monitor displaying code in a development environment' },
-    { url: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Secure online payment with laptop and credit card' },
-    { url: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Backlit mechanical keyboard close-up' },
-    { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Modern open office with shared workstations' },
-    { url: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Padlock on a laptop keyboard symbolizing security' },
-    { url: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Digital shield icon on a technology background' },
-    { url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Team collaborating on laptops in a tech workspace' },
-    { url: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Code editor window on a developer screen' },
-    { url: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Abstract blue technology light background' },
+    { url: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Developer coding on a laptop with security focus', tags: ['developer', 'coding', 'laptop', 'programming', 'security'] },
+    { url: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Cybersecurity concept with digital shield and lock', tags: ['cybersecurity', 'shield', 'digital', 'protection', 'network'] },
+    { url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Green encrypted data streaming on a monitor', tags: ['encryption', 'data', 'matrix', 'streams', 'hacker', 'code'] },
+    { url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Monitor displaying code in a development environment', tags: ['monitor', 'code', 'development', 'programming', 'screen'] },
+    { url: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Secure online payment with laptop and credit card', tags: ['payment', 'finance', 'banking', 'credit-card', 'ecommerce'] },
+    { url: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Backlit mechanical keyboard close-up', tags: ['keyboard', 'shortcuts', 'typing', 'hardware', 'hotkeys'] },
+    { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Modern open office with shared workstations', tags: ['office', 'workspace', 'team', 'shared', 'business', 'enterprise'] },
+    { url: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Padlock on a laptop keyboard symbolizing security', tags: ['padlock', 'lock', 'password', 'laptop', 'physical-security'] },
+    { url: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Digital shield icon on a technology background', tags: ['shield', 'digital', 'protection', 'security', 'icon', 'firewall'] },
+    { url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Team collaborating on laptops in a tech workspace', tags: ['team', 'collaboration', 'enterprise', 'remote', 'colleagues'] },
+    { url: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Code editor window on a developer screen', tags: ['code', 'editor', 'developer', 'terminal', 'ide'] },
+    { url: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Abstract blue technology light background', tags: ['abstract', 'technology', 'future', 'ai', 'innovation', 'trends'] },
+    { url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Person working at a bright and tidy home office', tags: ['home-office', 'remote-work', 'work-from-home', 'productivity', 'privacy'] },
+    { url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Data analytics dashboard on a screen', tags: ['analytics', 'dashboard', 'data', 'metrics', 'visualization', 'browser'] },
+    { url: 'https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Fingerprint scan biometric authentication', tags: ['fingerprint', 'biometrics', 'authentication', 'webauthn', 'fido2', 'identity'] },
+    { url: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Coffee shop with laptop on public WiFi', tags: ['public-wifi', 'coffee-shop', 'cafe', 'laptop', 'travel', 'vpn'] },
+    { url: 'https://images.unsplash.com/photo-1484981184820-2e84ea0af397?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Student studying with a laptop at a university library', tags: ['student', 'school', 'library', 'education', 'shared-computer'] },
+    { url: 'https://images.unsplash.com/photo-1559526324-593bc073d938?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Online banking on a smartphone with credit card', tags: ['banking', 'finance', 'mobile', 'credit-card', 'payment', 'transactions'] },
+    { url: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Parent showing a child something on a laptop at home', tags: ['family', 'parental-controls', 'kids', 'children', 'home', 'parenting'] },
+    { url: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Password manager app on a smartphone', tags: ['password', 'password-manager', 'authentication', 'credentials', 'login'] },
 ]
 
 // Pool of inline images for article content
@@ -282,14 +292,77 @@ function getRecentlyUsedImages(limit = 5) {
     return new Set(allImages.slice(-limit))
 }
 
-function getUnusedCoverImage() {
+/**
+ * Score a pool image by how many of its tags appear in the AI-provided keyword string.
+ * Higher = more relevant.
+ */
+function scoreImageByKeywords(img, keywordString) {
+    if (!keywordString || !img.tags) return 0
+    const lower = keywordString.toLowerCase()
+    return img.tags.reduce((score, tag) => score + (lower.includes(tag.toLowerCase()) ? 1 : 0), 0)
+}
+
+/**
+ * Fetch a content-related cover image.
+ *
+ * Priority:
+ *  1. Unsplash API (random photo matching AI-suggested keywords) — requires UNSPLASH_ACCESS_KEY env var
+ *  2. Keyword-scored fallback from COVER_IMAGE_POOL — free, no key needed
+ *
+ * In both cases recently-used images are avoided.
+ */
+async function getContentRelatedCoverImage(imageKeywords) {
     const recentlyUsed = getRecentlyUsedImages(5)
+    const unsplashKey = process.env.UNSPLASH_ACCESS_KEY
+
+    // ── Tier 1: Unsplash API ────────────────────────────────────────────────
+    if (unsplashKey && imageKeywords) {
+        try {
+            const query = encodeURIComponent(imageKeywords)
+            const apiUrl = `https://api.unsplash.com/photos/random?query=${query}&orientation=landscape&content_filter=high`
+            const res = await fetch(apiUrl, {
+                headers: { Authorization: `Client-ID ${unsplashKey}` }
+            })
+            if (res.ok) {
+                const photo = await res.json()
+                const url = `${photo.urls.raw}&w=1200&h=630&fit=crop&auto=format&q=80`
+                // Unsplash attribution: log photographer info
+                const photographer = photo.user?.name || 'Unknown'
+                console.log(`📸 Unsplash image by ${photographer} (${photo.id}): ${imageKeywords}`)
+                return {
+                    url,
+                    alt: photo.alt_description || photo.description || imageKeywords
+                }
+            } else {
+                console.warn(`⚠️  Unsplash API returned ${res.status} — falling back to local pool`)
+            }
+        } catch (err) {
+            console.warn(`⚠️  Unsplash API error: ${err.message} — falling back to local pool`)
+        }
+    }
+
+    // ── Tier 2: Keyword-scored local pool ───────────────────────────────────
     const availableImages = COVER_IMAGE_POOL.filter(img => !recentlyUsed.has(img.url))
-    
-    // If all images have been used recently, use the full pool
-    const imagePool = availableImages.length > 0 ? availableImages : COVER_IMAGE_POOL
-    
-    return imagePool[Math.floor(Math.random() * imagePool.length)]
+    const pool = availableImages.length > 0 ? availableImages : COVER_IMAGE_POOL
+
+    if (imageKeywords) {
+        // Sort by relevance score, then pick randomly among top scorers (score > 0)
+        const scored = pool
+            .map(img => ({ img, score: scoreImageByKeywords(img, imageKeywords) }))
+            .sort((a, b) => b.score - a.score)
+
+        const topScore = scored[0].score
+        const topImages = topScore > 0
+            ? scored.filter(s => s.score === topScore).map(s => s.img)
+            : pool // no keyword match — just use the whole pool
+
+        const chosen = topImages[Math.floor(Math.random() * topImages.length)]
+        console.log(`🖼️  Pool image selected by keyword match (score ${topScore}): ${chosen.alt}`)
+        return chosen
+    }
+
+    // Final fallback: fully random from non-recently-used pool
+    return pool[Math.floor(Math.random() * pool.length)]
 }
 function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -359,8 +432,9 @@ STYLE REQUIREMENTS — THIS IS THE MOST IMPORTANT PART:
 - CRITICAL FOR FEATURE TOPICS: If the topic is about a specific security feature (biometrics, auto-lock, domain rules, etc.), lead with the WHY and the underlying technology/problem. Explain it like a security journalist who happens to use these tools — not like someone demoing their own product. Locksy should appear as a real-world example you reached for, not as the subject of the article.
 
 OUTPUT FORMAT — FOLLOW EXACTLY:
-First, output a single line in this exact format (no quotes, no extra text):
+First, output these two lines (no quotes, no extra text on each line):
 META_DESC: {a compelling 140-155 character meta description that includes the primary keyword, tells the reader exactly what they will learn, and makes them want to click. Write it like a teaser, not a label.}
+IMAGE_KEYWORDS: {3-5 comma-separated visual search terms for a unique stock photo that represents this article's core idea. Be specific and visual — e.g. "fingerprint scanner laptop security" or "coffee shop public wifi hacker" or "parent child laptop home". Avoid generic terms like "technology" or "computer".}
 
 Then output a blank line, then the article body starting with the first ## heading.
 
@@ -408,12 +482,19 @@ Do NOT include an H1 — the article title is handled separately.`
         ? metaDescMatch[1].trim().slice(0, 158) // hard cap at 158 chars
         : null
 
-    // Strip the META_DESC line (and any trailing blank line after it) from article body
+    const imageKeywordsMatch = raw.match(/^IMAGE_KEYWORDS:\s*(.+)/m)
+    const imageKeywords = imageKeywordsMatch
+        ? imageKeywordsMatch[1].trim()
+        : null
+
+    // Strip the META_DESC and IMAGE_KEYWORDS lines from article body
     const articleBody = raw
-        .replace(/^META_DESC:.*\n?\n?/m, '')
+        .replace(/^META_DESC:.*\n?/m, '')
+        .replace(/^IMAGE_KEYWORDS:.*\n?/m, '')
+        .replace(/^\n/, '') // remove leading blank line left behind
         .trim()
 
-    return { articleBody, metaDescription }
+    return { articleBody, metaDescription, imageKeywords }
 }
 
 /**
@@ -550,13 +631,14 @@ async function main() {
 
     try {
         // Generate the blog content using AI
-        const { articleBody, metaDescription } = await generateBlogContent(topic)
+        const { articleBody, metaDescription, imageKeywords } = await generateBlogContent(topic)
         const wordCount = articleBody.split(/\s+/).length
         const readTime = calculateReadTime(wordCount)
         const today = getTodayDate()
 
         console.log(`✍️  Generated ${wordCount} words (${readTime})`)
         if (metaDescription) console.log(`📝 Meta description: ${metaDescription}`)
+        if (imageKeywords) console.log(`🔍 Image keywords: ${imageKeywords}`)
 
         // Fallback description if Gemini didn't output a META_DESC line
         const fallbackDescription = `${topic.keywords[0].charAt(0).toUpperCase() + topic.keywords[0].slice(1)}: ${topic.title.toLowerCase()}. Practical insights on ${topic.keywords.slice(1, 3).join(' and ')}.`
@@ -576,7 +658,7 @@ async function main() {
         }
 
         // Create individual post file and regenerate the index
-        const coverImage = getUnusedCoverImage()
+        const coverImage = await getContentRelatedCoverImage(imageKeywords)
         const filePath = createPostFile(post, coverImage)
         regenerateIndex()
         console.log(`\n✅ Blog post created successfully!`)

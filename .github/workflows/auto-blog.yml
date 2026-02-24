@@ -32,6 +32,9 @@ jobs:
       - name: Generate blog post
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Optional: add UNSPLASH_ACCESS_KEY secret for AI-matched unique cover photos.
+          # Without it, the script falls back to keyword-scored images from the local pool.
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
         run: node scripts/generate-blog.mjs
 
       - name: Check for changes
