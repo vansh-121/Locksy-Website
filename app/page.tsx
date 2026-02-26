@@ -15,6 +15,7 @@ import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
 import Footer from "@/components/footer"
 import PageLoader from "@/components/page-loader"
+import MilestoneBanner from "@/components/milestone-banner"
 import { jsonLdFAQPage } from "@/lib/metadata"
 
 export default function Home() {
@@ -30,6 +31,9 @@ export default function Home() {
         <main className="w-full" itemScope itemType="https://schema.org/WebPage">
           <Header />
           <Hero />
+
+          {/* 1000+ users milestone celebration */}
+          <MilestoneBanner />
 
           {/* Establish the problem first */}
           <ProblemStatement />
