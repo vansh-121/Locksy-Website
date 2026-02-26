@@ -6,9 +6,13 @@
 import legacyPosts from './legacy'
 
 // Individual post imports
+import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
+import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
 import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
 
 export const allPosts = [
     ...legacyPosts,
+    post_how_password_based_encryption_protects_your_locked_tabs,
+    post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
     post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
 ]
