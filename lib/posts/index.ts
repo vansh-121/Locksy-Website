@@ -9,6 +9,7 @@ import legacyPosts from './legacy'
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
 import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
 import post_how_remote_workers_can_protect_sensitive_browser_tabs from './how-remote-workers-can-protect-sensitive-browser-tabs'
+import post_how_to_set_up_auto_lock_for_banking_and_financial_tabs from './how-to-set-up-auto-lock-for-banking-and-financial-tabs'
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
 import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
 
@@ -17,6 +18,7 @@ export const allPosts = [
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
     post_how_password_based_encryption_protects_your_locked_tabs,
     post_how_remote_workers_can_protect_sensitive_browser_tabs,
+    post_how_to_set_up_auto_lock_for_banking_and_financial_tabs,
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
     post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
 ]
