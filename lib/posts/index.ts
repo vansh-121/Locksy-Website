@@ -6,6 +6,7 @@
 import legacyPosts from './legacy'
 
 // Individual post imports
+import post_essential_browser_security_checklist_for_small_businesses from './essential-browser-security-checklist-for-small-businesses'
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
 import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
 import post_how_remote_workers_can_protect_sensitive_browser_tabs from './how-remote-workers-can-protect-sensitive-browser-tabs'
@@ -16,6 +17,7 @@ import post_the_future_of_browser_security_predictions_for_2027 from './the-futu
 
 export const allPosts = [
     ...legacyPosts,
+    post_essential_browser_security_checklist_for_small_businesses,
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
     post_how_password_based_encryption_protects_your_locked_tabs,
     post_how_remote_workers_can_protect_sensitive_browser_tabs,
