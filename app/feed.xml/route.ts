@@ -22,13 +22,12 @@ export async function GET() {
       <pubDate>${pubDate}</pubDate>
       <author>noreply@locksy.dev (${post.author})</author>
       <category>${post.category}</category>
-      ${post.image ? `<media:content url="${post.image}" medium="image"/>` : ''}
     </item>`
         })
         .join('')
 
     const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${SITE_TITLE}</title>
     <link>${SITE_URL}/blog</link>
