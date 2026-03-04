@@ -1,10 +1,10 @@
 import type React from "react"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
-import { 
-  metadata as seoMetadata, 
-  jsonLdWebsite, 
-  jsonLdOrganization, 
+import {
+  metadata as seoMetadata,
+  jsonLdWebsite,
+  jsonLdOrganization,
   jsonLdSoftwareApplication,
   jsonLdHowToInstall
 } from "@/lib/metadata"
@@ -23,6 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden">
       <head>
+        {/* RSS Feed Auto-Discovery */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Locksy Blog RSS Feed"
+          href="https://www.locksy.dev/feed.xml"
+        />
         {/* JSON-LD Structured Data for SEO */}
         <script
           type="application/ld+json"
