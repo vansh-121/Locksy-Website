@@ -1,5 +1,8 @@
 import { blogPosts } from '@/lib/blog-data'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 const SITE_URL = 'https://www.locksy.dev'
 const SITE_TITLE = 'Locksy Blog'
 const SITE_DESCRIPTION = 'Security tips, browser tricks, and password management guides from the Locksy team.'
@@ -34,7 +37,9 @@ export async function GET() {
     <description>${SITE_DESCRIPTION}</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <ttl>60</ttl>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://pubsubhubbub.appspot.com" rel="hub"/>
 ${items}
   </channel>
 </rss>`
@@ -42,7 +47,7 @@ ${items}
     return new Response(rss, {
         headers: {
             'Content-Type': 'application/rss+xml; charset=utf-8',
-            'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
+            'Cache-Control': 'public, max-age=3600, must-revalidate',
         },
     })
 }
