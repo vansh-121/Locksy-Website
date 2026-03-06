@@ -7,6 +7,7 @@ import legacyPosts from './legacy'
 
 // Individual post imports
 import post_browser_security_mistakes_that_put_your_data_at_risk from './browser-security-mistakes-that-put-your-data-at-risk'
+import post_browser_tab_management_security_best_practices_for_teams from './browser-tab-management-security-best-practices-for-teams'
 import post_essential_browser_security_checklist_for_small_businesses from './essential-browser-security-checklist-for-small-businesses'
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
 import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
@@ -20,6 +21,7 @@ import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs f
 export const allPosts = [
     ...legacyPosts,
     post_browser_security_mistakes_that_put_your_data_at_risk,
+    post_browser_tab_management_security_best_practices_for_teams,
     post_essential_browser_security_checklist_for_small_businesses,
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
     post_how_password_based_encryption_protects_your_locked_tabs,
