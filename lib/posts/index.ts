@@ -10,6 +10,7 @@ import post_browser_security_mistakes_that_put_your_data_at_risk from './browser
 import post_browser_security_on_a_schedule_how_time_based_tab_locking_works from './browser-security-on-a-schedule-how-time-based-tab-locking-works'
 import post_browser_tab_management_security_best_practices_for_teams from './browser-tab-management-security-best-practices-for-teams'
 import post_essential_browser_security_checklist_for_small_businesses from './essential-browser-security-checklist-for-small-businesses'
+import post_how_browser_extensions_defend_against_brute_force_password_attacks from './how-browser-extensions-defend-against-brute-force-password-attacks'
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
 import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
 import post_how_remote_workers_can_protect_sensitive_browser_tabs from './how-remote-workers-can-protect-sensitive-browser-tabs'
@@ -25,6 +26,7 @@ export const allPosts = [
     post_browser_security_on_a_schedule_how_time_based_tab_locking_works,
     post_browser_tab_management_security_best_practices_for_teams,
     post_essential_browser_security_checklist_for_small_businesses,
+    post_how_browser_extensions_defend_against_brute_force_password_attacks,
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
     post_how_password_based_encryption_protects_your_locked_tabs,
     post_how_remote_workers_can_protect_sensitive_browser_tabs,
