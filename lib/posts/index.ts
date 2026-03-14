@@ -20,6 +20,7 @@ import post_how_to_protect_your_browser_on_public_wifi_networks from './how-to-p
 import post_how_to_set_up_auto_lock_for_banking_and_financial_tabs from './how-to-set-up-auto-lock-for-banking-and-financial-tabs'
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
 import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
+import post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits from './the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits'
 import post_the_future_of_browser_security_predictions_for_2027 from './the-future-of-browser-security-predictions-for-2027'
 import post_understanding_zero_knowledge_architecture_in_browser_extensions from './understanding-zero-knowledge-architecture-in-browser-extensions'
 import post_why_incognito_mode_is_not_enough_for_browser_privacy from './why-incognito-mode-is-not-enough-for-browser-privacy'
@@ -41,6 +42,7 @@ export const allPosts = [
     post_how_to_set_up_auto_lock_for_banking_and_financial_tabs,
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
     post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
+    post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits,
     post_the_future_of_browser_security_predictions_for_2027,
     post_understanding_zero_knowledge_architecture_in_browser_extensions,
     post_why_incognito_mode_is_not_enough_for_browser_privacy,
