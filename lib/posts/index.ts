@@ -23,6 +23,7 @@ import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy fro
 import post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits from './the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits'
 import post_the_future_of_browser_security_predictions_for_2027 from './the-future-of-browser-security-predictions-for-2027'
 import post_understanding_zero_knowledge_architecture_in_browser_extensions from './understanding-zero-knowledge-architecture-in-browser-extensions'
+import post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it from './why-an-idle-browser-is-a-security-risk-and-how-auto-lock-timers-fix-it'
 import post_why_incognito_mode_is_not_enough_for_browser_privacy from './why-incognito-mode-is-not-enough-for-browser-privacy'
 import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs from './why-smart-people-use-domain-rules-instead-of-manually-locking-tabs'
 
@@ -45,6 +46,7 @@ export const allPosts = [
     post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits,
     post_the_future_of_browser_security_predictions_for_2027,
     post_understanding_zero_knowledge_architecture_in_browser_extensions,
+    post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it,
     post_why_incognito_mode_is_not_enough_for_browser_privacy,
     post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs,
 ]
