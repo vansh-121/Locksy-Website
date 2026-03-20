@@ -216,6 +216,121 @@ const TOPIC_POOL = [
         keywords: ["incognito mode not enough", "private browsing tab lock", "incognito tab protection real", "browser privacy beyond incognito"],
         tags: ["Incognito", "Private Browsing", "Privacy"]
     },
+    // ── NEW TOPICS (2026) ──────────────────────────────────────────────────
+    {
+        title: "How AI-Powered Browser Security Is Changing Tab Protection",
+        category: "Research",
+        keywords: ["ai browser security", "machine learning tab protection", "ai security threats", "intelligent browser defense"],
+        tags: ["AI", "Security", "Future Tech"]
+    },
+    {
+        title: "Dark Mode Security: Why Your Eyes And Your Privacy Benefit",
+        category: "Productivity",
+        keywords: ["dark mode browser security", "dark mode privacy benefits", "eye strain security", "dark mode productivity"],
+        tags: ["Dark Mode", "Productivity", "Privacy"]
+    },
+    {
+        title: "API Security for Browser Tab Extension Developers",
+        category: "Technical",
+        keywords: ["browser extension api security", "chrome extension security", "extension vulnerability prevention", "secure extension development"],
+        tags: ["API", "Developer", "Security"]
+    },
+    {
+        title: "Why Your Browser History Is Worth More Than You Think",
+        category: "Security",
+        keywords: ["browser history security risk", "delete browser history", "history tracking threat", "browser history privacy"],
+        tags: ["Browser History", "Privacy", "Data Protection"]
+    },
+    {
+        title: "Cryptocurrency Wallet Tab Security: Protecting Your Digital Assets",
+        category: "Technical",
+        keywords: ["crypto wallet security", "protect crypto tabs", "bitcoin browser security", "blockchain tab protection"],
+        tags: ["Cryptocurrency", "Wallet", "Financial Security"]
+    },
+    {
+        title: "How Tab Locking Prevents VPN Bypass Attacks",
+        category: "Security",
+        keywords: ["vpn bypass prevention", "vpn security tab lock", "prevent dns leak", "secure vpn usage"],
+        tags: ["VPN", "Security", "Network Protection"]
+    },
+    {
+        title: "Browser Extension Permissions: The Hidden Security Risk You're Ignoring",
+        category: "Security",
+        keywords: ["extension permissions risk", "dangerous extension permissions", "prevent extension abuse", "browser permissions security"],
+        tags: ["Permissions", "Security Risks", "Privacy"]
+    },
+    {
+        title: "Social Engineering Attacks Through Browser Tabs: How to Defend",
+        category: "Security",
+        keywords: ["social engineering browser", "phishing tab attacks", "prevent browser takeover", "defend social engineering"],
+        tags: ["Social Engineering", "Phishing", "Defense"]
+    },
+    {
+        title: "Tab Overload: How Too Many Open Tabs Compromise Your Security",
+        category: "Productivity",
+        keywords: ["too many open tabs", "tab management security", "browser memory security", "reduce open tabs"],
+        tags: ["Tab Management", "Productivity", "Security"]
+    },
+    {
+        title: "GDPR Compliance and Browser Tab Data: What You Need to Know",
+        category: "Technical",
+        keywords: ["gdpr browser data", "browser data compliance", "privacy regulation browser", "data protection browser"],
+        tags: ["GDPR", "Compliance", "Legal"]
+    },
+    {
+        title: "How Zero-Trust Security Applies to Your Browser Tabs",
+        category: "Technical",
+        keywords: ["zero trust browser", "zero trust security", "browser trust model", "verify every tab"],
+        tags: ["Zero-Trust", "Security Model", "Enterprise"]
+    },
+    {
+        title: "Screen Recording Protection: Hiding Tabs From Screen Captures",
+        category: "Tutorial",
+        keywords: ["screen recording protection", "hide tabs from recording", "privacy screen recording", "prevent screen capture"],
+        tags: ["Screen Recording", "Privacy", "Protection"]
+    },
+    {
+        title: "Browser Cache Poisoning: Why Tab Isolation Matters",
+        category: "Technical",
+        keywords: ["browser cache poisoning", "cache attack prevention", "browser cache security", "isolated tab cache"],
+        tags: ["Cache", "Browser Security", "Attack Prevention"]
+    },
+    {
+        title: "How to Protect Healthcare Provider Tabs From Cybercriminals",
+        category: "Tutorial",
+        keywords: ["healthcare tab security", "hipaa browser security", "protect medical data", "healthcare data protection"],
+        tags: ["Healthcare", "Data Protection", "Compliance"]
+    },
+    {
+        title: "Real-Time Tab Anomaly Detection: The Future of Browser Security",
+        category: "Research",
+        keywords: ["anomaly detection browser", "ai threat detection tabs", "real-time browser security", "behavior analysis browser"],
+        tags: ["AI", "Threat Detection", "Innovation"]
+    },
+    {
+        title: "Why Browser Context Isolation Won't Protect You (Without Tab Locking)",
+        category: "Security",
+        keywords: ["browser context isolation", "site isolation bypass", "tab data leakage", "context isolation limits"],
+        tags: ["Browser Architecture", "Security", "Advanced"]
+    },
+    {
+        title: "Remote Access Software Security: Locking Sensitive Tabs During Screen Sharing",
+        category: "Tutorial",
+        keywords: ["remote access security", "screen sharing privacy", "protect tabs sharing", "teamviewer security"],
+        tags: ["Remote Work", "Screen Sharing", "Privacy"]
+    },
+    {
+        title: "How Passkeys Are Replacing Passwords (And Why Tab Protection Still Matters)",
+        category: "Research",
+        keywords: ["passkeys vs passwords", "webauthn adoption", "passwordless authentication", "passkey security"],
+        tags: ["Passkeys", "Authentication", "Future"]
+    },
+    {
+        title: "Protecting Your Tabs From Man-in-the-Middle Attacks on Open Networks",
+        category: "Security",
+        keywords: ["man in the middle attack", "mitm browser protect", "packet sniffing defense", "open network security"],
+        tags: ["Network Security", "MITM", "Open WiFi"]
+    },
 ]
 
 // Pool of high-quality Unsplash images for blog cover photos.
