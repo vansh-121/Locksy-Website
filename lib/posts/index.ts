@@ -19,6 +19,7 @@ import post_how_browser_extensions_defend_against_brute_force_password_attacks f
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
 import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
 import post_how_remote_workers_can_protect_sensitive_browser_tabs from './how-remote-workers-can-protect-sensitive-browser-tabs'
+import post_how_tab_locking_prevents_vpn_bypass_attacks from './how-tab-locking-prevents-vpn-bypass-attacks'
 import post_how_to_protect_healthcare_provider_tabs_from_cybercriminals from './how-to-protect-healthcare-provider-tabs-from-cybercriminals'
 import post_how_to_protect_your_browser_on_public_wifi_networks from './how-to-protect-your-browser-on-public-wifi-networks'
 import post_how_to_set_up_auto_lock_for_banking_and_financial_tabs from './how-to-set-up-auto-lock-for-banking-and-financial-tabs'
@@ -46,6 +47,7 @@ export const allPosts = [
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
     post_how_password_based_encryption_protects_your_locked_tabs,
     post_how_remote_workers_can_protect_sensitive_browser_tabs,
+    post_how_tab_locking_prevents_vpn_bypass_attacks,
     post_how_to_protect_healthcare_provider_tabs_from_cybercriminals,
     post_how_to_protect_your_browser_on_public_wifi_networks,
     post_how_to_set_up_auto_lock_for_banking_and_financial_tabs,
