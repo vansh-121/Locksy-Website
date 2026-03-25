@@ -7,6 +7,7 @@ import legacyPosts from './legacy'
 
 // Individual post imports
 import post_post_10_browser_security_extensions_everyone_should_install from './10-browser-security-extensions-everyone-should-install'
+import post_api_security_for_browser_tab_extension_developers from './api-security-for-browser-tab-extension-developers'
 import post_browser_cache_poisoning_why_tab_isolation_matters from './browser-cache-poisoning-why-tab-isolation-matters'
 import post_browser_security_mistakes_that_put_your_data_at_risk from './browser-security-mistakes-that-put-your-data-at-risk'
 import post_browser_security_on_a_schedule_how_time_based_tab_locking_works from './browser-security-on-a-schedule-how-time-based-tab-locking-works'
@@ -35,6 +36,7 @@ import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs f
 export const allPosts = [
     ...legacyPosts,
     post_post_10_browser_security_extensions_everyone_should_install,
+    post_api_security_for_browser_tab_extension_developers,
     post_browser_cache_poisoning_why_tab_isolation_matters,
     post_browser_security_mistakes_that_put_your_data_at_risk,
     post_browser_security_on_a_schedule_how_time_based_tab_locking_works,
