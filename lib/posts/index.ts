@@ -33,6 +33,7 @@ import post_understanding_zero_knowledge_architecture_in_browser_extensions from
 import post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it from './why-an-idle-browser-is-a-security-risk-and-how-auto-lock-timers-fix-it'
 import post_why_incognito_mode_is_not_enough_for_browser_privacy from './why-incognito-mode-is-not-enough-for-browser-privacy'
 import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs from './why-smart-people-use-domain-rules-instead-of-manually-locking-tabs'
+import post_why_your_browser_history_is_worth_more_than_you_think from './why-your-browser-history-is-worth-more-than-you-think'
 
 export const allPosts = [
     ...legacyPosts,
@@ -63,4 +64,5 @@ export const allPosts = [
     post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it,
     post_why_incognito_mode_is_not_enough_for_browser_privacy,
     post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs,
+    post_why_your_browser_history_is_worth_more_than_you_think,
 ]
