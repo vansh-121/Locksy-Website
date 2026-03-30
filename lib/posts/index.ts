@@ -13,6 +13,7 @@ import post_browser_security_mistakes_that_put_your_data_at_risk from './browser
 import post_browser_security_on_a_schedule_how_time_based_tab_locking_works from './browser-security-on-a-schedule-how-time-based-tab-locking-works'
 import post_browser_tab_management_security_best_practices_for_teams from './browser-tab-management-security-best-practices-for-teams'
 import post_comparing_tab_lockers_locksy_vs_other_browser_extension_solutions from './comparing-tab-lockers-locksy-vs-other-browser-extension-solutions'
+import post_cryptocurrency_wallet_tab_security_protecting_your_digital_assets from './cryptocurrency-wallet-tab-security-protecting-your-digital-assets'
 import post_essential_browser_security_checklist_for_small_businesses from './essential-browser-security-checklist-for-small-businesses'
 import post_firefox_vs_chrome_vs_edge_which_browser_is_most_secure_in_2026 from './firefox-vs-chrome-vs-edge-which-browser-is-most-secure-in-2026'
 import post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know from './gdpr-compliance-and-browser-tab-data-what-you-need-to-know'
@@ -46,6 +47,7 @@ export const allPosts = [
     post_browser_security_on_a_schedule_how_time_based_tab_locking_works,
     post_browser_tab_management_security_best_practices_for_teams,
     post_comparing_tab_lockers_locksy_vs_other_browser_extension_solutions,
+    post_cryptocurrency_wallet_tab_security_protecting_your_digital_assets,
     post_essential_browser_security_checklist_for_small_businesses,
     post_firefox_vs_chrome_vs_edge_which_browser_is_most_secure_in_2026,
     post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know,
