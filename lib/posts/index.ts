@@ -29,6 +29,7 @@ import post_how_to_set_up_auto_lock_for_banking_and_financial_tabs from './how-t
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
 import post_how_zero_trust_security_applies_to_your_browser_tabs from './how-zero-trust-security-applies-to-your-browser-tabs'
 import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
+import post_real_time_tab_anomaly_detection_the_future_of_browser_security from './real-time-tab-anomaly-detection-the-future-of-browser-security'
 import post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing from './remote-access-software-security-locking-sensitive-tabs-during-screen-sharing'
 import post_screen_recording_protection_hiding_tabs_from_screen_captures from './screen-recording-protection-hiding-tabs-from-screen-captures'
 import post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits from './the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits'
@@ -64,6 +65,7 @@ export const allPosts = [
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
     post_how_zero_trust_security_applies_to_your_browser_tabs,
     post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
+    post_real_time_tab_anomaly_detection_the_future_of_browser_security,
     post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing,
     post_screen_recording_protection_hiding_tabs_from_screen_captures,
     post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits,
