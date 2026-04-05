@@ -34,6 +34,7 @@ import post_protecting_your_tabs_from_man_in_the_middle_attacks_on_open_networks
 import post_real_time_tab_anomaly_detection_the_future_of_browser_security from './real-time-tab-anomaly-detection-the-future-of-browser-security'
 import post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing from './remote-access-software-security-locking-sensitive-tabs-during-screen-sharing'
 import post_screen_recording_protection_hiding_tabs_from_screen_captures from './screen-recording-protection-hiding-tabs-from-screen-captures'
+import post_tab_overload_how_too_many_open_tabs_compromise_your_security from './tab-overload-how-too-many-open-tabs-compromise-your-security'
 import post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits from './the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits'
 import post_the_future_of_browser_security_predictions_for_2027 from './the-future-of-browser-security-predictions-for-2027'
 import post_understanding_zero_knowledge_architecture_in_browser_extensions from './understanding-zero-knowledge-architecture-in-browser-extensions'
@@ -72,6 +73,7 @@ export const allPosts = [
     post_real_time_tab_anomaly_detection_the_future_of_browser_security,
     post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing,
     post_screen_recording_protection_hiding_tabs_from_screen_captures,
+    post_tab_overload_how_too_many_open_tabs_compromise_your_security,
     post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits,
     post_the_future_of_browser_security_predictions_for_2027,
     post_understanding_zero_knowledge_architecture_in_browser_extensions,
