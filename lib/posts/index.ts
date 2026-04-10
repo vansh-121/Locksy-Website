@@ -7,48 +7,82 @@ import legacyPosts from './legacy'
 
 // Individual post imports
 import post_post_10_browser_security_extensions_everyone_should_install from './10-browser-security-extensions-everyone-should-install'
+import post_api_security_for_browser_tab_extension_developers from './api-security-for-browser-tab-extension-developers'
+import post_browser_cache_poisoning_why_tab_isolation_matters from './browser-cache-poisoning-why-tab-isolation-matters'
 import post_browser_security_mistakes_that_put_your_data_at_risk from './browser-security-mistakes-that-put-your-data-at-risk'
 import post_browser_security_on_a_schedule_how_time_based_tab_locking_works from './browser-security-on-a-schedule-how-time-based-tab-locking-works'
 import post_browser_tab_management_security_best_practices_for_teams from './browser-tab-management-security-best-practices-for-teams'
 import post_comparing_tab_lockers_locksy_vs_other_browser_extension_solutions from './comparing-tab-lockers-locksy-vs-other-browser-extension-solutions'
+import post_cryptocurrency_wallet_tab_security_protecting_your_digital_assets from './cryptocurrency-wallet-tab-security-protecting-your-digital-assets'
+import post_dark_mode_security_why_your_eyes_and_your_privacy_benefit from './dark-mode-security-why-your-eyes-and-your-privacy-benefit'
 import post_essential_browser_security_checklist_for_small_businesses from './essential-browser-security-checklist-for-small-businesses'
 import post_firefox_vs_chrome_vs_edge_which_browser_is_most_secure_in_2026 from './firefox-vs-chrome-vs-edge-which-browser-is-most-secure-in-2026'
+import post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know from './gdpr-compliance-and-browser-tab-data-what-you-need-to-know'
+import post_how_ai_powered_browser_security_is_changing_tab_protection from './how-ai-powered-browser-security-is-changing-tab-protection'
 import post_how_browser_extensions_defend_against_brute_force_password_attacks from './how-browser-extensions-defend-against-brute-force-password-attacks'
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
+import post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters from './how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters'
 import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
 import post_how_remote_workers_can_protect_sensitive_browser_tabs from './how-remote-workers-can-protect-sensitive-browser-tabs'
+import post_how_tab_locking_prevents_vpn_bypass_attacks from './how-tab-locking-prevents-vpn-bypass-attacks'
+import post_how_to_protect_healthcare_provider_tabs_from_cybercriminals from './how-to-protect-healthcare-provider-tabs-from-cybercriminals'
 import post_how_to_protect_your_browser_on_public_wifi_networks from './how-to-protect-your-browser-on-public-wifi-networks'
 import post_how_to_set_up_auto_lock_for_banking_and_financial_tabs from './how-to-set-up-auto-lock-for-banking-and-financial-tabs'
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
+import post_how_zero_trust_security_applies_to_your_browser_tabs from './how-zero-trust-security-applies-to-your-browser-tabs'
 import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
+import post_protecting_your_tabs_from_man_in_the_middle_attacks_on_open_networks from './protecting-your-tabs-from-man-in-the-middle-attacks-on-open-networks'
+import post_real_time_tab_anomaly_detection_the_future_of_browser_security from './real-time-tab-anomaly-detection-the-future-of-browser-security'
+import post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing from './remote-access-software-security-locking-sensitive-tabs-during-screen-sharing'
+import post_screen_recording_protection_hiding_tabs_from_screen_captures from './screen-recording-protection-hiding-tabs-from-screen-captures'
+import post_social_engineering_attacks_through_browser_tabs_how_to_defend from './social-engineering-attacks-through-browser-tabs-how-to-defend'
+import post_tab_overload_how_too_many_open_tabs_compromise_your_security from './tab-overload-how-too-many-open-tabs-compromise-your-security'
 import post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits from './the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits'
 import post_the_future_of_browser_security_predictions_for_2027 from './the-future-of-browser-security-predictions-for-2027'
 import post_understanding_zero_knowledge_architecture_in_browser_extensions from './understanding-zero-knowledge-architecture-in-browser-extensions'
 import post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it from './why-an-idle-browser-is-a-security-risk-and-how-auto-lock-timers-fix-it'
 import post_why_incognito_mode_is_not_enough_for_browser_privacy from './why-incognito-mode-is-not-enough-for-browser-privacy'
 import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs from './why-smart-people-use-domain-rules-instead-of-manually-locking-tabs'
+import post_why_your_browser_history_is_worth_more_than_you_think from './why-your-browser-history-is-worth-more-than-you-think'
 
 export const allPosts = [
     ...legacyPosts,
     post_post_10_browser_security_extensions_everyone_should_install,
+    post_api_security_for_browser_tab_extension_developers,
+    post_browser_cache_poisoning_why_tab_isolation_matters,
     post_browser_security_mistakes_that_put_your_data_at_risk,
     post_browser_security_on_a_schedule_how_time_based_tab_locking_works,
     post_browser_tab_management_security_best_practices_for_teams,
     post_comparing_tab_lockers_locksy_vs_other_browser_extension_solutions,
+    post_cryptocurrency_wallet_tab_security_protecting_your_digital_assets,
+    post_dark_mode_security_why_your_eyes_and_your_privacy_benefit,
     post_essential_browser_security_checklist_for_small_businesses,
     post_firefox_vs_chrome_vs_edge_which_browser_is_most_secure_in_2026,
+    post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know,
+    post_how_ai_powered_browser_security_is_changing_tab_protection,
     post_how_browser_extensions_defend_against_brute_force_password_attacks,
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
+    post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters,
     post_how_password_based_encryption_protects_your_locked_tabs,
     post_how_remote_workers_can_protect_sensitive_browser_tabs,
+    post_how_tab_locking_prevents_vpn_bypass_attacks,
+    post_how_to_protect_healthcare_provider_tabs_from_cybercriminals,
     post_how_to_protect_your_browser_on_public_wifi_networks,
     post_how_to_set_up_auto_lock_for_banking_and_financial_tabs,
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
+    post_how_zero_trust_security_applies_to_your_browser_tabs,
     post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
+    post_protecting_your_tabs_from_man_in_the_middle_attacks_on_open_networks,
+    post_real_time_tab_anomaly_detection_the_future_of_browser_security,
+    post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing,
+    post_screen_recording_protection_hiding_tabs_from_screen_captures,
+    post_social_engineering_attacks_through_browser_tabs_how_to_defend,
+    post_tab_overload_how_too_many_open_tabs_compromise_your_security,
     post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits,
     post_the_future_of_browser_security_predictions_for_2027,
     post_understanding_zero_knowledge_architecture_in_browser_extensions,
     post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it,
     post_why_incognito_mode_is_not_enough_for_browser_privacy,
     post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs,
+    post_why_your_browser_history_is_worth_more_than_you_think,
 ]
