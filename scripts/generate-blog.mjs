@@ -505,6 +505,157 @@ function calculateReadTime(wordCount) {
     return `${minutes} min read`
 }
 
+/**
+ * Retry a function with exponential backoff
+ * Useful for handling temporary API failures (503, rate limits, etc.)
+ */
+async function retryWithBackoff(fn, maxRetries = 3, initialDelayMs = 2000) {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            return await fn()
+        } catch (error) {
+            if (attempt === maxRetries) {
+                throw error // Final attempt failed, throw the error
+            }
+
+            // Check if error is retryable (503, 429, network errors)
+            const isRetryable = error.message.includes('503') || 
+                               error.message.includes('429') || 
+                               error.message.includes('timeout') ||
+                               error.message.includes('ECONNRESET') ||
+                               error.message.includes('ETIMEDOUT')
+
+            if (!isRetryable) {
+                throw error // Not a retryable error, fail immediately
+            }
+
+            // Calculate backoff with exponential increase: 2s, 4s, 8s
+            const delayMs = initialDelayMs * Math.pow(2, attempt - 1)
+            console.log(`⏳ Attempt ${attempt}/${maxRetries} failed. Retrying in ${delayMs}ms...`)
+            await new Promise(resolve => setTimeout(resolve, delayMs))
+        }
+    }
+}
+
+/**
+ * Generate new Locksy-focused blog topics via Gemini API
+ * Used when the topic pool runs low (<5 available topics)
+ */
+async function generateTopicsAI(count = 20) {
+    const apiKey = process.env.GEMINI_API_KEY
+    if (!apiKey) {
+        console.error('GEMINI_API_KEY environment variable is required for AI topic generation')
+        return []
+    }
+
+    const prompt = `You are a content strategist for "Locksy", a browser extension that password-protects and organizes browser tabs.
+
+Generate ${count} unique, actionable blog topic ideas for a technical blog about browser security, privacy, and productivity. Each topic should:
+1. Be relevant to Locksy's features: tab locking, password protection, auto-lock timers, domain-based rules, biometric unlock, etc.
+2. Encourage users to adopt Locksy by positioning it as a solution to real problems
+3. Have action-oriented, specific titles (NOT generic)
+4. Cover different angles: tutorials, comparisons, technical deep-dives, use cases, best practices
+
+Examples of good topics:
+- "Why Incognito Mode Won't Protect Your Banking Tabs (But Locksy Will)"
+- "How Locksy's Domain Rules Eliminate Tab Management Chaos"
+- "Biometric Unlock for Tabs: The Future of Browser Security"
+- "Why Shared Computer Users Need a Password-Protected Tab Locker"
+
+Return ONLY a valid JSON array (no other text) with this structure:
+[
+    {
+        "title": "Specific, actionable title about Locksy feature or problem it solves",
+        "category": "Tutorial|Security|Technical|Productivity|Comparison|Research",
+        "keywords": ["keyword1", "keyword2", "keyword3", "keyword4"],
+        "tags": ["tag1", "tag2", "tag3"]
+    },
+    ...
+]
+
+Ensure titles are unique and specific. Include Locksy or its benefits naturally in titles.`
+
+    try {
+        const data = await retryWithBackoff(async () => {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    contents: [
+                        {
+                            parts: [{ text: prompt }]
+                        }
+                    ],
+                    generationConfig: {
+                        temperature: 0.9,
+                        maxOutputTokens: 4096
+                    }
+                })
+            })
+
+            if (!response.ok) {
+                const errorBody = await response.text()
+                throw new Error(`Gemini API error: ${response.status} - ${errorBody}`)
+            }
+
+            return await response.json()
+        }, 3, 2000)
+
+        const raw = data.candidates[0].content.parts[0].text
+
+        // Extract JSON array from response (Gemini might include markdown code blocks)
+        const jsonMatch = raw.match(/\[[\s\S]*\]/)
+        if (!jsonMatch) {
+            console.warn('⚠️  Could not parse JSON from Gemini response — skipping AI topic generation')
+            return []
+        }
+
+        const topics = JSON.parse(jsonMatch[0])
+        console.log(`🤖 Generated ${topics.length} new AI topics`)
+        return topics
+    } catch (error) {
+        console.warn(`⚠️  AI topic generation failed: ${error.message} — skipping`)
+        return []
+    }
+}
+
+/**
+ * Generate topic variations with different angles
+ * Each topic becomes 10 separate variations for different content angles
+ * 
+ * Angles: beginner, intermediate, advanced, mistakes, comparisons, how-to, benefits, pro-tips, use-cases, faq
+ */
+function generateVariations(topic) {
+    const angles = [
+        { suffix: 'beginners-guide', label: 'Beginner\'s Guide', instruction: 'Write this as an absolute beginner\'s guide for users new to Locksy. Use simple, non-technical language and explain basics thoroughly.' },
+        { suffix: 'intermediate-tips', label: 'Intermediate Tips', instruction: 'Write this targeting users who are comfortable with Locksy. Include intermediate techniques and workflow optimizations.' },
+        { suffix: 'advanced-techniques', label: 'Advanced Techniques', instruction: 'Write this for power users seeking advanced techniques, optimizations, and deep technical understanding.' },
+        { suffix: 'common-mistakes', label: 'Common Mistakes', instruction: 'Focus on mistakes users make and pitfalls to avoid. Help readers learn from errors.' },
+        { suffix: 'vs-alternatives', label: 'Comparisons', instruction: 'Write a comparison/competitive analysis that highlights why the Locksy approach (or Locksy itself) is superior. Be objective but emphasize advantages.' },
+        { suffix: 'how-to-guide', label: 'How-To Guide', instruction: 'Write a step-by-step how-to guide with actionable instructions and clear procedures.' },
+        { suffix: 'top-benefits', label: 'Top Benefits', instruction: 'Focus on benefits, advantages, and why this topic matters. Emphasize value proposition and real-world benefits.' },
+        { suffix: 'pro-tips', label: 'Pro Tips & Tricks', instruction: 'Write insider tips, tricks, and expert-level insights. Include practical, immediately-useful advice.' },
+        { suffix: 'real-world-cases', label: 'Real-World Use Cases', instruction: 'Use concrete real-world scenarios and practical examples. Tell stories about how this applies in actual use.' },
+        { suffix: 'faq', label: 'FAQ', instruction: 'Write in a Q&A format addressing common questions, misconceptions, and frequent concerns about this topic. Use conversational tone.' }
+    ]
+
+    return angles.map(angle => ({
+        ...topic,
+        slug: `${slugify(topic.title)}-${angle.suffix}`,
+        title: `${topic.title} - ${angle.label}`,
+        angle: angle.label,
+        variationAngle: angle.suffix,
+        variationInstruction: angle.instruction,
+        // Add variation-specific keywords
+        keywords: [
+            ...topic.keywords,
+            angle.label.toLowerCase().replace(/[^\w\s]/g, '')
+        ]
+    }))
+}
+
 async function generateBlogContent(topic) {
     const apiKey = process.env.GEMINI_API_KEY
     if (!apiKey) {
@@ -516,79 +667,129 @@ async function generateBlogContent(topic) {
     const shuffledImages = shuffleArray([...INLINE_IMAGE_POOL])
     const selectedImages = shuffledImages.slice(0, 3)
 
-    const prompt = `You are a human writer who publishes long-form articles on Medium.com about browser security, digital privacy, and technology. You write in a conversational, opinionated, first-person style that feels like a smart friend explaining something over coffee — NOT like an AI or a corporate blog.
+    // Build prompt with optional variation instruction
+    const variationInstruction = topic.variationInstruction ? `\nCONTENT ANGLE:\n${topic.variationInstruction}\n` : ''
 
-Write an article for a browser extension called "Locksy" that password-protects browser tabs.
+    const prompt = `You are a seasoned tech blogger who writes for Medium, who has deep expertise in browser security, privacy, and productivity. Your readers trust you because you write with authentic personality, real opinions, and genuine experience. You absolutely NEVER sound like an AI or corporate marketing.
 
+Your sole job: Write a compelling, human-sounding long-form essay about "${topic.title}"
+
+AUTHENTICITY & VOICE — THIS IS THE MOST CRITICAL PART:
+Your writing should feel like a trusted friend sharing hard-won knowledge over coffee. People should forget they're reading content generated by AI. You have a distinct personality:
+- Share genuine frustrations with existing solutions
+- Use vivid, specific examples and anecdotes (not generic scenarios)
+- Write with strong, unapologetic opinions. Don't hedge. Say what works and what doesn't.
+- Show your reasoning. Explain WHY you believe something, not just WHAT you believe
+- Use conversational language: contractions (don't, won't, it's), casual phrases, natural speech patterns
+- React authentically to ideas. Use phrases like "Here's the thing...", "I've learned...", "The reality is..."
+- Include personal anecdotes or specific real-world examples you've encountered
+- Challenge assumptions. Question conventional wisdom. Don't accept things at face value
+- Be willing to admit limitations or nuance. Real experts know that not everything is black-and-white
+
+STRUCTURE & STORYTELLING:
+- HOOK: Start with a specific story, scenario, or observation that makes readers think "Yes! This is what I've been experiencing!"
+  Examples: "I discovered this the hard way when..." or "Last week, a friend asked me..." or "Here's what nobody talks about..."
+- FLOW: Use natural transitions that feel like thinking out loud, not templated articles
+  Avoid: "In this article, we'll explore..." Instead: "Here's what I've learned..." or "So let me break this down..."
+- DEPTH: Go deeper than surface-level. Show nuance, complexity, trade-offs
+- REAL EXAMPLES: Use specific, concrete examples. Name actual tools, scenarios, mistakes you've seen
+- CONCLUSION: End with something memorable or actionable — a genuine insight or recommendation
+
+AI DETECTION RED FLAGS TO ABSOLUTELY AVOID:
+❌ "In today's digital landscape / world / age..."
+❌ "It's important to note that..."
+❌ "To summarize / In conclusion / Finally..."
+❌ "This article will explore / discuss / cover..."
+❌ "Let's dive into..." or "Let's take a look at..."
+❌ "Embracing X" or "Leveraging Y" or "Harnessing Z"
+❌ "It goes without saying..." or "At the end of the day..."
+❌ "Furthermore / Moreover / Additionally" (use "Also" or rewrite naturally)
+❌ Lists with semicolons: "First; second; third" — write in prose instead
+❌ Exactly three numbered points (classic AI pattern — vary your structure)
+❌ Generic motivational phrases like "The key is..." or "The bottom line is..."
+❌ Perfect bullet points with perfect grammar and symmetry
+❌ Bland transitions between paragraphs
+
+PERSONALITY REQUIREMENTS:
+- Use varied sentence length: Mix short. Punchy. Sentences. With longer, flowing ones that take their time.
+- Use parenthetical asides naturally (like this) — it's how humans think and talk
+- Use contractions constantly: don't, won't, can't, it's, that's, you're
+- Use first-person extensively: "I've found...", "I realized...", "What I've learned..."
+- Use second-person to engage: "You probably already know...", "Here's where things get interesting for you..."
+- Show emotion: frustration, excitement, skepticism. Real humans have feelings about ideas.
+- Use humor, sarcasm, or wit naturally (not forced). If a joke lands, great. If not, skip it.
+- Vary your tone. Be serious when discussing security risks, lighter when talking about workflows
+
+CONTENT DEPTH & SPECIFICITY:
+- Reference specific tools, technologies, or techniques by name
+- Use concrete numbers, percentages, timeframes when relevant
+- Explain the 'why' behind recommendations, not just the 'what'
+- Acknowledge counterarguments or different perspectives
+- Share lessons learned from real experience
+- Show your expertise through specific technical knowledge, not just cheerleading
+
+BRAND VOICE (Locksy):
+- Mention Locksy naturally and sparingly (2-3 times max) as a real example you use, not as product placement
+- If Locksy solves the problem you're discussing, mention it like "I use Locksy for this because..."
+- Never pitch. Never sell. Just mention it as one tool in a broader conversation
+- For feature-focused topics, lead with the underlying problem/technology, mention Locksy as an example of how it's implemented well
+
+ARTICLE STRUCTURE:
+- 2500-4000 words of genuine insight, not filler
+- Start with a hook/story (not a definition)
+- Use ## for descriptive section headings (e.g., "The browser tab chaos I see every day" NOT "Overview")
+- Write substantial paragraphs (150-300 words each)
+- Use images at natural breaks: after a major section or between paragraphs
+- End with a genuine conclusion or insight (not a summary)
+
+TOPIC & VARIATION:
 Topic: "${topic.title}"
 Category: ${topic.category}
-Target Keywords (weave naturally, never force): ${topic.keywords.join(', ')}
+Keywords to weave naturally: ${topic.keywords.join(', ')}${variationInstruction}
 
-INLINE IMAGES — CRITICAL REQUIREMENT:
-You MUST include 2-3 inline images throughout the article at strategic points (after major sections or between long paragraphs). Use EXACTLY these markdown image syntaxes (copy them verbatim, don't modify):
+INLINE IMAGES:
+Include these 2-3 images naturally throughout the article (at section breaks or between paragraphs). Use EXACTLY these markdown syntaxes verbatim:
 
 ${selectedImages.join('\n')}
 
-Place these images naturally in the flow of the article where they make sense visually. Spread them out - don't put them all together. Each image should appear after a major section or between substantial paragraphs to break up text and enhance readability.
-
-STYLE REQUIREMENTS — THIS IS THE MOST IMPORTANT PART:
-- Write like a HUMAN. Use "I", "you", "we". Share opinions. Be direct.
-- Open with a STORY, SCENARIO, or PROVOCATIVE OBSERVATION — never a definition or "In today's digital world..."
-- NO listicle-style numbered headings like "1. Do This" "2. Do That". Use descriptive, interesting ## headings instead.
-- NO bullet-point walls. Use paragraphs as your primary format. Bullets only when genuinely listing items.
-- Use rhetorical questions, humor, analogies, and real-world scenarios
-- Be opinionated — say what's good and what's bad, don't hedge everything
-- Vary sentence length. Mix short punchy sentences with longer flowing ones.
-- NO generic filler phrases: "In today's digital landscape", "It's important to note", "comprehensive guide", "In this article we will", "Let's dive in"
-- NO emoji in body text
-- Sound like you've personally used these tools and have strong opinions about them
-- The reader should forget they're reading a "blog post" and feel like they're reading a well-written essay
-- Mention Locksy naturally where relevant — as something you'd genuinely recommend, not as a sales pitch. Keep it to 2-3 natural mentions max.
-- CRITICAL FOR FEATURE TOPICS: If the topic is about a specific security feature (biometrics, auto-lock, domain rules, etc.), lead with the WHY and the underlying technology/problem. Explain it like a security journalist who happens to use these tools — not like someone demoing their own product. Locksy should appear as a real-world example you reached for, not as the subject of the article.
+Make sure they fit the flow and add visual breathing room to the text.
 
 OUTPUT FORMAT — FOLLOW EXACTLY:
 First, output these two lines (no quotes, no extra text on each line):
-META_DESC: {a compelling 140-155 character meta description that includes the primary keyword, tells the reader exactly what they will learn, and makes them want to click. Write it like a teaser, not a label.}
-IMAGE_KEYWORDS: {3-5 comma-separated visual search terms for a unique stock photo that represents this article's core idea. Be specific and visual — e.g. "fingerprint scanner laptop security" or "coffee shop public wifi hacker" or "parent child laptop home". Avoid generic terms like "technology" or "computer".}
+META_DESC: {a compelling 140-155 character meta description that reads like something a human expert would write, includes primary keyword, and makes readers want to click}
+IMAGE_KEYWORDS: {3-5 specific visual search terms that capture this article's essence — e.g. "frustrated developer staring at laptop screen" or "hands typing keyboard late night"}
 
 Then output a blank line, then the article body starting with the first ## heading.
 
-ARTICLE STRUCTURE:
-- 2500-4000 words
-- Use ## for section headings (descriptive/interesting, not numbered)
-- Use ### sparingly for subsections
-- Use **bold** for key terms and emphasis
-- Use code formatting for URLs, file paths, or technical terms
-- Include the inline images at strategic points throughout (REMEMBER THIS!)
-- End with a brief, punchy conclusion — no "In conclusion" opener
-- Add a --- divider and a short italic CTA line at the very end
-
 Do NOT include an H1 — the article title is handled separately.`
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            contents: [
-                {
-                    parts: [{ text: prompt }]
+    const data = await retryWithBackoff(async () => {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        parts: [{ text: prompt }]
+                    }
+                ],
+                generationConfig: {
+                    temperature: 0.85,
+                    maxOutputTokens: 8192
                 }
-            ],
-            generationConfig: {
-                temperature: 0.85,
-                maxOutputTokens: 8192
-            }
+            })
         })
-    })
 
-    if (!response.ok) {
-        const error = await response.text()
-        throw new Error(`Gemini API error: ${response.status} - ${error}`)
-    }
+        if (!response.ok) {
+            const errorBody = await response.text()
+            throw new Error(`Gemini API error: ${response.status} - ${errorBody}`)
+        }
 
-    const data = await response.json()
+        return await response.json()
+    }, 3, 2000)
+
     const raw = data.candidates[0].content.parts[0].text
 
     // Parse the META_DESC line that the prompt asks Gemini to output first
@@ -718,35 +919,87 @@ ${entryLines ? entryLines + '\n' : ''}]
 }
 
 async function main() {
-    console.log('🚀 Locksy Auto Blog Generator')
-    console.log('============================\n')
+    console.log('🚀 Locksy Auto Blog Generator (Infinite Topics Edition)')
+    console.log('=====================================================\n')
 
     // Get existing slugs to avoid duplicates
     const existingSlugs = getExistingSlugs()
     console.log(`📝 Found ${existingSlugs.size} existing blog posts\n`)
 
-    // Pick a topic that hasn't been written yet
-    const availableTopics = TOPIC_POOL.filter(topic => {
-        const slug = slugify(topic.title)
-        return !existingSlugs.has(slug)
-    })
+    // Generate variations for all human-curated topics (10 angles each)
+    let allVariations = []
+    
+    // First, add variations of human-curated topics
+    for (const topic of TOPIC_POOL) {
+        const variations = generateVariations(topic)
+        allVariations.push(...variations)
+    }
+    
+    console.log(`📚 Generated ${allVariations.length} topic variations from ${TOPIC_POOL.length} human topics`)
 
-    if (availableTopics.length === 0) {
-        console.log('✅ All topics in the pool have been written! Add more topics to TOPIC_POOL.')
-        process.exit(0)
+    // Filter out variations that have already been written
+    const availableVariations = allVariations.filter(variation => 
+        !existingSlugs.has(variation.slug)
+    )
+
+    console.log(`✨ ${availableVariations.length} variations available to write\n`)
+
+    // If running low on topics, generate new Locksy-focused topics via AI
+    let selectedVariation = null
+    const lowTopicThreshold = 5
+
+    if (availableVariations.length < lowTopicThreshold) {
+        console.log(`⚠️  Low on available topics (${availableVariations.length} < ${lowTopicThreshold})`)
+        console.log(`🤖 Generating new Locksy-focused topics via AI...\n`)
+
+        const aiTopics = await generateTopicsAI(20)
+        
+        if (aiTopics.length > 0) {
+            // Generate variations for AI-generated topics too
+            for (const topic of aiTopics) {
+                const variations = generateVariations(topic)
+                allVariations.push(...variations)
+            }
+            
+            console.log(`✨ Generated ${aiTopics.length * 10} variations from ${aiTopics.length} AI topics\n`)
+
+            // Re-filter with expanded pool
+            const allAvailable = allVariations.filter(variation => 
+                !existingSlugs.has(variation.slug)
+            )
+            
+            console.log(`🎯 Total available variations now: ${allAvailable.length}\n`)
+
+            if (allAvailable.length === 0) {
+                console.log('✅ All topics have been written! System is in steady state.')
+                process.exit(0)
+            }
+
+            selectedVariation = allAvailable[Math.floor(Math.random() * allAvailable.length)]
+        } else {
+            // AI generation failed, use existing available variations
+            if (availableVariations.length === 0) {
+                console.log('✅ All topics in the pool have been written! Add more topics to TOPIC_POOL or check Gemini API.')
+                process.exit(0)
+            }
+            
+            selectedVariation = availableVariations[Math.floor(Math.random() * availableVariations.length)]
+        }
+    } else {
+        // Plenty of topics available, pick one
+        selectedVariation = availableVariations[Math.floor(Math.random() * availableVariations.length)]
     }
 
-    // Pick a random topic from available ones
-    const topic = availableTopics[Math.floor(Math.random() * availableTopics.length)]
-    const slug = slugify(topic.title)
+    const slug = selectedVariation.slug
 
-    console.log(`📖 Generating: "${topic.title}"`)
-    console.log(`🏷️  Category: ${topic.category}`)
-    console.log(`🔑 Keywords: ${topic.keywords.join(', ')}\n`)
+    console.log(`📖 Generating: "${selectedVariation.title}"`)
+    console.log(`💡 Angle: ${selectedVariation.angle || 'Standard'}`)
+    console.log(`🏷️  Category: ${selectedVariation.category}`)
+    console.log(`🔑 Keywords: ${selectedVariation.keywords.join(', ')}\n`)
 
     try {
         // Generate the blog content using AI
-        const { articleBody, metaDescription, imageKeywords } = await generateBlogContent(topic)
+        const { articleBody, metaDescription, imageKeywords } = await generateBlogContent(selectedVariation)
         const wordCount = articleBody.split(/\s+/).length
         const readTime = calculateReadTime(wordCount)
         const today = getTodayDate()
@@ -756,19 +1009,19 @@ async function main() {
         if (imageKeywords) console.log(`🔍 Image keywords: ${imageKeywords}`)
 
         // Fallback description if Gemini didn't output a META_DESC line
-        const fallbackDescription = `${topic.keywords[0].charAt(0).toUpperCase() + topic.keywords[0].slice(1)}: ${topic.title.toLowerCase()}. Practical insights on ${topic.keywords.slice(1, 3).join(' and ')}.`
+        const fallbackDescription = `${selectedVariation.keywords[0].charAt(0).toUpperCase() + selectedVariation.keywords[0].slice(1)}: ${selectedVariation.title.toLowerCase()}. Practical insights on ${selectedVariation.keywords.slice(1, 3).join(' and ')}.`
 
         // Create the blog post object
         const post = {
             slug,
-            title: topic.title,
+            title: selectedVariation.title,
             description: metaDescription || fallbackDescription,
             publishDate: today,
             lastModified: today,
             readTime,
-            category: topic.category,
-            tags: topic.tags,
-            keywords: topic.keywords,
+            category: selectedVariation.category,
+            tags: selectedVariation.tags,
+            keywords: selectedVariation.keywords,
             content: articleBody
         }
 
@@ -788,3 +1041,4 @@ async function main() {
 }
 
 main()
+
