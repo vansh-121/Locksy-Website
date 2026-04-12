@@ -28,6 +28,7 @@ import post_how_tab_locking_prevents_vpn_bypass_attacks from './how-tab-locking-
 import post_how_to_protect_healthcare_provider_tabs_from_cybercriminals from './how-to-protect-healthcare-provider-tabs-from-cybercriminals'
 import post_how_to_protect_your_browser_on_public_wifi_networks from './how-to-protect-your-browser-on-public-wifi-networks'
 import post_how_to_set_up_auto_lock_for_banking_and_financial_tabs from './how-to-set-up-auto-lock-for-banking-and-financial-tabs'
+import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security_common_mistakes from './how-webauthn-and-fido2-biometrics-are-changing-browser-security-common-mistakes'
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
 import post_how_zero_trust_security_applies_to_your_browser_tabs from './how-zero-trust-security-applies-to-your-browser-tabs'
 import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
@@ -70,6 +71,7 @@ export const allPosts = [
     post_how_to_protect_healthcare_provider_tabs_from_cybercriminals,
     post_how_to_protect_your_browser_on_public_wifi_networks,
     post_how_to_set_up_auto_lock_for_banking_and_financial_tabs,
+    post_how_webauthn_and_fido2_biometrics_are_changing_browser_security_common_mistakes,
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
     post_how_zero_trust_security_applies_to_your_browser_tabs,
     post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
