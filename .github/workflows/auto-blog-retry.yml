@@ -1,0 +1,140 @@
+name: Auto Generate Blog Post - Retry
+
+on:
+  schedule:
+    # Retry 1: Run at 4:30 AM UTC = 10:00 AM India Time (2 hours after primary)
+    - cron: '30 4 * * *'
+    # Retry 2: Run at 6:00 AM UTC = 11:30 AM India Time (3 hours after primary)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual retry trigger
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  check-previous-failure:
+    runs-on: ubuntu-latest
+    outputs:
+      should-retry: ${{ steps.check-failure.outputs.should-retry }}
+    steps:
+      - name: Check if main workflow failed
+        id: check-failure
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Get the main blog generation workflow
+            const mainWorkflow = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'auto-blog.yml',
+              per_page: 1,
+              status: 'completed'
+            });
+
+            if (mainWorkflow.data.workflow_runs.length === 0) {
+              console.log('✅ No previous runs found');
+              core.setOutput('should-retry', 'false');
+              return;
+            }
+
+            const lastRun = mainWorkflow.data.workflow_runs[0];
+            const conclusion = lastRun.conclusion;
+            const timestamp = new Date(lastRun.completed_at);
+            const now = new Date();
+            const hoursSinceCompletion = (now - timestamp) / (1000 * 60 * 60);
+
+            console.log(`📊 Last run: ${lastRun.id}`);
+            console.log(`📅 Completed: ${lastRun.completed_at}`);
+            console.log(`⏱️  Hours since completion: ${hoursSinceCompletion.toFixed(2)}`);
+            console.log(`🔍 Conclusion: ${conclusion}`);
+
+            // Only retry if last run failed and it's been less than 6 hours
+            if (conclusion === 'failure' && hoursSinceCompletion < 6) {
+              console.log('🔄 Previous run failed - will retry');
+              core.setOutput('should-retry', 'true');
+            } else if (conclusion === 'success') {
+              console.log('✅ Previous run succeeded - skipping retry');
+              core.setOutput('should-retry', 'false');
+            } else {
+              console.log('⏳ Too much time since last failure - skipping');
+              core.setOutput('should-retry', 'false');
+            }
+
+  retry-blog-generation:
+    needs: check-previous-failure
+    runs-on: ubuntu-latest
+    if: needs.check-previous-failure.outputs.should-retry == 'true'
+    steps:
+      - name: 🔄 Retry notification
+        run: |
+          echo "⏰ Retrying blog generation (previous attempt failed)"
+          echo "🕐 Current time: $(date -u '+%H:%M UTC')"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: false
+
+      - name: "🚀 Retry: Generate blog post"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: |
+          echo "🔄 Retry attempt for blog generation"
+          node scripts/generate-blog.mjs
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Install dependencies
+        if: steps.git-check.outputs.changes == 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify build
+        if: steps.git-check.outputs.changes == 'true'
+        run: pnpm run build
+
+      - name: Commit and push (retry success)
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add lib/posts/
+          git commit -m "blog: auto-generated daily blog post - retry $(date +%Y-%m-%d\ %H:%M\ UTC)"
+          git push
+
+      - name: ✅ Retry successful
+        if: success()
+        run: |
+          echo "✨ Blog post generated successfully on retry!"
+          echo "📝 Changes committed and pushed"
+
+      - name: ❌ Retry failed
+        if: failure()
+        run: |
+          echo "❌ Retry attempt also failed"
+          echo "⏰ Will retry again in 3 hours if scheduled"
+          exit 1
+
+  skip-retry:
+    needs: check-previous-failure
+    runs-on: ubuntu-latest
+    if: needs.check-previous-failure.outputs.should-retry == 'false'
+    steps:
+      - name: ℹ️ Skipping retry
+        run: |
+          echo "✅ Skipping retry (previous run succeeded or too much time has passed)"

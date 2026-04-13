@@ -2,8 +2,8 @@ name: Auto Generate Blog Post
 
 on:
   schedule:
-    # Run daily at 8:00 AM UTC
-    - cron: '0 8 * * *'
+    # Run daily at 2:30 AM UTC = 8:00 AM India Time (IST)
+    - cron: '30 2 * * *'
   workflow_dispatch: # Allow manual triggering
 
 permissions:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4

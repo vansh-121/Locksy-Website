@@ -8,7 +8,7 @@
  * Usage:
  *   GEMINI_API_KEY=your-google-gemini-api-key node scripts/generate-blog.mjs
  *
- * Triggered daily via GitHub Actions cron job.
+ * Triggered daily at 8 AM UTC via GitHub Actions workflow.
  */
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs'
@@ -435,9 +435,9 @@ async function getContentRelatedCoverImage(imageKeywords) {
         try {
             const query = encodeURIComponent(imageKeywords)
             const apiUrl = `https://api.unsplash.com/photos/random?query=${query}&orientation=landscape&content_filter=high`
-            const res = await fetch(apiUrl, {
+            const res = await fetchWithTimeout(apiUrl, {
                 headers: { Authorization: `Client-ID ${unsplashKey}` }
-            })
+            }, 10000)
             if (res.ok) {
                 const photo = await res.json()
                 const url = `${photo.urls.raw}&w=1200&h=630&fit=crop&auto=format&q=80`
@@ -506,10 +506,40 @@ function calculateReadTime(wordCount) {
 }
 
 /**
- * Retry a function with exponential backoff
- * Useful for handling temporary API failures (503, rate limits, etc.)
+ * Fetch with timeout support
+ * Prevents hanging requests when API is slow
  */
-async function retryWithBackoff(fn, maxRetries = 3, initialDelayMs = 2000) {
+async function fetchWithTimeout(url, options = {}, timeoutMs = 30000) {
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+    
+    try {
+        const response = await fetch(url, {
+            ...options,
+            signal: controller.signal
+        })
+        clearTimeout(timeoutId)
+        return response
+    } catch (error) {
+        clearTimeout(timeoutId)
+        if (error.name === 'AbortError') {
+            throw new Error(`API request timeout after ${timeoutMs}ms`)
+        }
+        throw error
+    }
+}
+
+/**
+ * Retry a function with exponential backoff + jitter
+ * Useful for handling temporary API failures (503, rate limits, etc.)
+ * 
+ * Strategy:
+ * - Up to 6 attempts (vs 3) to handle sustained API load
+ * - Longer initial delays (5s) for Gemini's high-demand scenarios
+ * - Added jitter (±20%) to prevent thundering herd
+ * - Fetch timeouts to prevent hanging requests
+ */
+async function retryWithBackoff(fn, maxRetries = 6, initialDelayMs = 5000) {
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
             return await fn()
@@ -529,9 +559,13 @@ async function retryWithBackoff(fn, maxRetries = 3, initialDelayMs = 2000) {
                 throw error // Not a retryable error, fail immediately
             }
 
-            // Calculate backoff with exponential increase: 2s, 4s, 8s
-            const delayMs = initialDelayMs * Math.pow(2, attempt - 1)
-            console.log(`⏳ Attempt ${attempt}/${maxRetries} failed. Retrying in ${delayMs}ms...`)
+            // Calculate backoff with exponential increase: 5s, 10s, 20s, 40s, 80s
+            // Plus jitter (±20%) to avoid thundering herd
+            const baseDelayMs = initialDelayMs * Math.pow(2, attempt - 1)
+            const jitterFraction = (Math.random() - 0.5) * 0.4 // ±20% jitter
+            const delayMs = Math.max(1000, baseDelayMs * (1 + jitterFraction))
+            
+            console.log(`⏳ Attempt ${attempt}/${maxRetries} failed. Retrying in ${Math.round(delayMs)}ms...`)
             await new Promise(resolve => setTimeout(resolve, delayMs))
         }
     }
@@ -577,7 +611,7 @@ Ensure titles are unique and specific. Include Locksy or its benefits naturally 
 
     try {
         const data = await retryWithBackoff(async () => {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+            const response = await fetchWithTimeout(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -593,7 +627,7 @@ Ensure titles are unique and specific. Include Locksy or its benefits naturally 
                         maxOutputTokens: 4096
                     }
                 })
-            })
+            }, 60000)
 
             if (!response.ok) {
                 const errorBody = await response.text()
@@ -601,7 +635,7 @@ Ensure titles are unique and specific. Include Locksy or its benefits naturally 
             }
 
             return await response.json()
-        }, 3, 2000)
+        }, 6, 5000)
 
         const raw = data.candidates[0].content.parts[0].text
 
@@ -764,7 +798,7 @@ Then output a blank line, then the article body starting with the first ## headi
 Do NOT include an H1 — the article title is handled separately.`
 
     const data = await retryWithBackoff(async () => {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        const response = await fetchWithTimeout(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -780,7 +814,7 @@ Do NOT include an H1 — the article title is handled separately.`
                     maxOutputTokens: 8192
                 }
             })
-        })
+        }, 60000)
 
         if (!response.ok) {
             const errorBody = await response.text()
@@ -788,7 +822,7 @@ Do NOT include an H1 — the article title is handled separately.`
         }
 
         return await response.json()
-    }, 3, 2000)
+    }, 6, 5000)
 
     const raw = data.candidates[0].content.parts[0].text
 
@@ -972,7 +1006,7 @@ async function main() {
 
             if (allAvailable.length === 0) {
                 console.log('✅ All topics have been written! System is in steady state.')
-                process.exit(0)
+                return { success: true, message: 'All topics written' }
             }
 
             selectedVariation = allAvailable[Math.floor(Math.random() * allAvailable.length)]
@@ -980,7 +1014,7 @@ async function main() {
             // AI generation failed, use existing available variations
             if (availableVariations.length === 0) {
                 console.log('✅ All topics in the pool have been written! Add more topics to TOPIC_POOL or check Gemini API.')
-                process.exit(0)
+                return { success: true, message: 'All topics written' }
             }
             
             selectedVariation = availableVariations[Math.floor(Math.random() * availableVariations.length)]
@@ -1034,11 +1068,14 @@ async function main() {
         console.log(`📄 Slug: ${slug}`)
         console.log(`📅 Date: ${today}`)
         console.log(`🔗 URL: https://www.locksy.dev/blog/${slug}`)
+        
+        return { success: true, message: 'Blog post generated successfully' }
     } catch (error) {
         console.error(`\n❌ Error generating blog post:`, error.message)
-        process.exit(1)
+        return { success: false, error: error.message }
     }
 }
 
+// Run the generator
 main()
 
