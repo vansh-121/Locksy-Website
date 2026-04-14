@@ -19,6 +19,7 @@ import post_essential_browser_security_checklist_for_small_businesses from './es
 import post_firefox_vs_chrome_vs_edge_which_browser_is_most_secure_in_2026 from './firefox-vs-chrome-vs-edge-which-browser-is-most-secure-in-2026'
 import post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know from './gdpr-compliance-and-browser-tab-data-what-you-need-to-know'
 import post_how_ai_powered_browser_security_is_changing_tab_protection from './how-ai-powered-browser-security-is-changing-tab-protection'
+import post_how_browser_extensions_defend_against_brute_force_password_attacks_real_world_cases from './how-browser-extensions-defend-against-brute-force-password-attacks-real-world-cases'
 import post_how_browser_extensions_defend_against_brute_force_password_attacks from './how-browser-extensions-defend-against-brute-force-password-attacks'
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
 import post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters from './how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters'
@@ -62,6 +63,7 @@ export const allPosts = [
     post_firefox_vs_chrome_vs_edge_which_browser_is_most_secure_in_2026,
     post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know,
     post_how_ai_powered_browser_security_is_changing_tab_protection,
+    post_how_browser_extensions_defend_against_brute_force_password_attacks_real_world_cases,
     post_how_browser_extensions_defend_against_brute_force_password_attacks,
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
     post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters,
