@@ -1077,5 +1077,12 @@ async function main() {
 }
 
 // Run the generator
-main()
+main().then(result => {
+    if (!result.success) {
+        process.exit(1)
+    }
+}).catch(error => {
+    console.error('Unhandled error:', error)
+    process.exit(1)
+})
 
