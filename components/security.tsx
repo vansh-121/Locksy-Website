@@ -10,8 +10,14 @@ export default function Security() {
   ]
 
   return (
-    <section id="security" className="py-20 md:py-32 bg-gradient-to-br from-primary/10 to-secondary/10">
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
+    <section id="security" className="py-20 md:py-32 bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
+      {/* Animated background blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/10 dark:bg-secondary/20 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 md:px-6">
         <h2 className="section-title">Your Privacy is Our Priority</h2>
         <p className="section-subtitle">Built with security-first principles. Zero compromises.</p>
 

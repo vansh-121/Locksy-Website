@@ -46,8 +46,15 @@ export default function Testimonials() {
   const [currentIdx, setCurrentIdx] = useState(0)
 
   return (
-    <section className="py-20 md:py-32 bg-muted">
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
+    <section className="py-20 md:py-32 bg-muted relative overflow-hidden">
+      {/* Animated background blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 right-1/3 w-96 h-96 bg-primary/8 dark:bg-primary/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-secondary/8 dark:bg-secondary/15 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 right-1/5 w-72 h-72 bg-violet-500/6 dark:bg-violet-500/12 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 md:px-6">
         <h2 className="section-title">Trusted by Privacy-Conscious Users Worldwide</h2>
         <p className="section-subtitle">See what real users are saying about Locksy.</p>
 

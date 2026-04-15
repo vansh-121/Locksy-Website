@@ -1,7 +1,13 @@
 export default function Comparison() {
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-b from-background to-accent/30">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+    <section className="py-20 md:py-32 bg-gradient-to-b from-background to-accent/30 relative overflow-hidden">
+      {/* Animated background blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/8 dark:bg-primary/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/3 left-1/5 w-80 h-80 bg-secondary/8 dark:bg-secondary/15 rounded-full blur-3xl animate-pulse delay-1000" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         <h2 className="section-title">Why Choose Locksy?</h2>
         <p className="section-subtitle">The only extension designed specifically for tab protection.</p>
 

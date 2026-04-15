@@ -102,6 +102,12 @@ export default function Features() {
     <section id="features" className="py-24 md:py-32 bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      {/* Animated glow blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/5 w-96 h-96 bg-primary/8 dark:bg-primary/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-secondary/8 dark:bg-secondary/15 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-2/3 left-1/2 w-72 h-72 bg-violet-500/6 dark:bg-violet-500/12 rounded-full blur-3xl animate-pulse delay-300" />
+      </div>
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-20">

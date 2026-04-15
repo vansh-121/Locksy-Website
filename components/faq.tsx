@@ -9,9 +9,16 @@ export default function FAQ() {
   return (
     <section 
       id="faq" 
-      className="py-20 md:py-32 bg-gradient-to-br from-neutral-900 to-neutral-800 text-white"
+      className="py-20 md:py-32 bg-gradient-to-br from-neutral-900 to-neutral-800 text-white relative overflow-hidden"
     >
-      <div className="max-w-4xl mx-auto px-4 md:px-6">
+      {/* Animated background blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-secondary/15 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-1/2 right-1/5 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl animate-pulse delay-300" />
+      </div>
+
+      <div className="relative max-w-4xl mx-auto px-4 md:px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">Frequently Asked Questions</h2>
         <p className="text-lg text-neutral-300 text-center mb-12">Everything you need to know about Locksy.</p>
 
