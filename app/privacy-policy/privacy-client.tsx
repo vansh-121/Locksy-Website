@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import Link from "next/link"
 import { Shield, Lock, CheckCircle, XCircle, Github, ArrowLeft, Database, Eye, AlertTriangle, FileText, Globe, Trash2 } from "lucide-react"
@@ -104,7 +104,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                 </span>
                             </h2>
                         </div>
-                        <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-border">
+                        <div className="bg-card rounded-3xl p-8 md:p-10 shadow-xl border border-border">
                             <p className="text-lg text-muted-foreground leading-relaxed">
                                 Locksy (&quot;the Extension&quot;) is built with privacy at its core. This policy explains exactly what data we collect (spoiler: almost nothing), where it&apos;s stored (on your device only), and how you maintain complete control. We believe in radical transparency and your right to privacy.
                             </p>
@@ -158,7 +158,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                             ].map((item, idx) => (
                                 <div
                                     key={idx}
-                                    className="group relative bg-white rounded-3xl p-8 shadow-lg border border-border hover:shadow-2xl transition-all duration-300"
+                                    className="group relative bg-card rounded-3xl p-8 shadow-lg border border-border hover:shadow-2xl transition-all duration-300"
                                 >
                                     <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-5 transition-opacity rounded-3xl`} />
                                     <div className="relative">
@@ -190,7 +190,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                     "Analytics",
                                     "Device info"
                                 ].map((item, idx) => (
-                                    <div key={idx} className="flex items-center gap-2 bg-white/50 rounded-xl p-3">
+                                    <div key={idx} className="flex items-center gap-2 bg-card/50 rounded-xl p-3">
                                         <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
                                         <span className="font-semibold text-sm">{item}</span>
                                     </div>
@@ -307,7 +307,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                             ].map((perm, idx) => (
                                 <div
                                     key={idx}
-                                    className="bg-white rounded-2xl p-6 shadow-lg border border-border hover:border-primary/30 transition-colors"
+                                    className="bg-card rounded-2xl p-6 shadow-lg border border-border hover:border-primary/30 transition-colors"
                                 >
                                     <div className="flex flex-col md:flex-row md:items-center gap-4">
                                         <code className="bg-primary/10 text-primary px-4 py-2 rounded-lg font-mono text-sm font-bold inline-block">
@@ -356,7 +356,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                 "✓ We do NOT transmit online",
                                 "✓ We do NOT use analytics"
                             ].map((item, idx) => (
-                                <div key={idx} className="bg-white/80 backdrop-blur-sm rounded-xl p-4">
+                                <div key={idx} className="bg-card/80 backdrop-blur-sm rounded-xl p-4">
                                     <span className="font-bold text-green-700">{item}</span>
                                 </div>
                             ))}
@@ -396,7 +396,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                     steps: ["Settings", "Clear browsing data", "Hosted app data"]
                                 }
                             ].map((method, idx) => (
-                                <div key={idx} className="bg-white rounded-3xl p-6 shadow-lg border border-border">
+                                <div key={idx} className="bg-card rounded-3xl p-6 shadow-lg border border-border">
                                     <div className="text-5xl mb-4">{method.icon}</div>
                                     <h3 className="font-bold text-lg mb-4">{method.title}</h3>
                                     <ul className="space-y-2">
@@ -426,7 +426,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-8">
-                            <div className="bg-white rounded-3xl p-8 shadow-lg border border-border">
+                            <div className="bg-card rounded-3xl p-8 shadow-lg border border-border">
                                 <h3 className="text-2xl font-black mb-4">🇪🇺 GDPR Compliant</h3>
                                 <p className="text-muted-foreground mb-4">For users in the European Union:</p>
                                 <ul className="space-y-2">
@@ -444,7 +444,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                 </ul>
                             </div>
 
-                            <div className="bg-white rounded-3xl p-8 shadow-lg border border-border">
+                            <div className="bg-card rounded-3xl p-8 shadow-lg border border-border">
                                 <h3 className="text-2xl font-black mb-4">🇺🇸 CCPA Compliant</h3>
                                 <p className="text-muted-foreground mb-4">For California residents:</p>
                                 <ul className="space-y-2">
@@ -499,7 +499,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                             </h2>
                         </div>
 
-                        <div className="bg-white rounded-3xl p-8 shadow-lg border border-border">
+                        <div className="bg-card rounded-3xl p-8 shadow-lg border border-border">
                             <div className="space-y-6">
                                 <div>
                                     <h3 className="font-bold text-lg mb-2">GitHub Issues</h3>
@@ -570,7 +570,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                             <span className="font-black text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                                 Locksy
                             </span>
-                            <span className="text-neutral-400">• Privacy-First Security</span>
+                            <span className="text-muted-foreground">• Privacy-First Security</span>
                         </div>
                         <div className="flex items-center gap-6">
                             <Link href="/" className="hover:text-primary transition-colors">
@@ -587,7 +587,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                             </a>
                         </div>
                     </div>
-                    <div className="mt-8 text-center text-sm text-neutral-500">
+                    <div className="mt-8 text-center text-sm text-muted-foreground">
                         <p>© 2025 Locksy. Open source and privacy-focused.</p>
                     </div>
                 </div>

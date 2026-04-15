@@ -14,7 +14,7 @@ export default function Comparison() {
                 <span className="text-2xl">🔐</span>
                 <span>The Core Difference</span>
               </div> */}
-              <h3 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-purple-600 to-secondary bg-clip-text text-transparent">
+              <h3 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-purple-600 to-secondary dark:from-primary dark:via-purple-400 dark:to-secondary bg-clip-text text-transparent">
                 Locksy vs Device Lock
               </h3>
               <p className="text-muted-foreground text-lg max-w-3xl mx-auto">

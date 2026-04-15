@@ -21,7 +21,7 @@ export default function HowItWorks() {
   ]
 
   return (
-    <section className="py-20 md:py-32 bg-neutral-50">
+    <section className="py-20 md:py-32 bg-muted">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         <h2 className="section-title">Get Started in 3 Simple Steps</h2>
         <p className="section-subtitle">Start protecting your sensitive tabs right now.</p>
@@ -33,7 +33,7 @@ export default function HowItWorks() {
                 {step.icon}
               </div>
               <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-              <p className="text-neutral-600">{step.desc}</p>
+              <p className="text-muted-foreground">{step.desc}</p>
             </div>
           ))}
         </div>

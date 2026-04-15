@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const PRIMARY_BROWSERS = [
   {
@@ -77,7 +78,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? "bg-white/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
+        ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
         : "bg-transparent"
         }`}
     >
@@ -145,12 +146,15 @@ export default function Header() {
 
         {/* CTA Buttons */}
         <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
           {/* Sponsor Button */}
           <a
             href="https://github.com/sponsors/vansh-121"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-white border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg text-sm xl:text-base"
+            className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-card border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg text-sm xl:text-base"
           >
             <svg className="w-4 h-4 xl:w-5 xl:h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
@@ -178,7 +182,7 @@ export default function Header() {
             </button>
 
             {showDownloadDropdown && (
-              <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">
+              <div className="absolute right-0 mt-2 w-64 bg-card rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">
                 {/* Primary Browsers */}
                 {PRIMARY_BROWSERS.map((browser) => (
                   <a
@@ -223,23 +227,26 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="lg:hidden p-2 rounded-lg hover:bg-accent transition-colors flex-shrink-0"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {isMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
+        {/* Mobile: Theme Toggle + Menu Toggle */}
+        <div className="lg:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="p-2 rounded-lg hover:bg-accent transition-colors flex-shrink-0"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-border/50 shadow-xl lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
+          <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-xl lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
             <div className="flex flex-col p-6">
               {/* Navigation Section */}
               <div className="space-y-1 mb-4">

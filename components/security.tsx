@@ -17,11 +17,11 @@ export default function Security() {
 
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           {guarantees.map((item, idx) => (
-            <div key={idx} className="flex gap-4 p-6 bg-white rounded-lg">
+            <div key={idx} className="flex gap-4 p-6 bg-card rounded-lg border border-border/50">
               <div className="text-2xl font-bold text-primary flex-shrink-0">{item.icon}</div>
               <div>
                 <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
-                <p className="text-neutral-600">{item.desc}</p>
+                <p className="text-muted-foreground">{item.desc}</p>
               </div>
             </div>
           ))}

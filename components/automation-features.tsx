@@ -71,14 +71,14 @@ export default function AutomationFeatures() {
     <section id="automation" className="py-24 md:py-32 bg-gradient-to-br from-indigo-500/5 via-violet-500/5 to-emerald-500/5 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-500/20 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-indigo-600 via-violet-600 to-emerald-600 bg-clip-text text-transparent px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-indigo-600 via-violet-600 to-emerald-600 dark:from-indigo-400 dark:via-violet-400 dark:to-emerald-400 bg-clip-text text-transparent px-4">
             Set It and Forget It
           </h2>
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
@@ -127,7 +127,7 @@ export default function AutomationFeatures() {
                       className={`px-2 md:px-3 py-1 border rounded-full text-[10px] sm:text-xs font-medium transition-all duration-300 ${
                         idx === activeActivity 
                           ? 'bg-indigo-500 text-white border-indigo-500 shadow-md' 
-                          : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700'
+                          : 'bg-card border-border'
                       }`}
                     >
                       {activity}
@@ -172,7 +172,7 @@ export default function AutomationFeatures() {
                       className={`w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold ${
                         idx < 5
                           ? 'bg-emerald-500 text-white'
-                          : 'bg-gray-300 dark:bg-gray-700 text-gray-500'
+                          : 'bg-muted text-muted-foreground'
                       }`}
                     >
                       {day}
@@ -188,7 +188,7 @@ export default function AutomationFeatures() {
                 </div>
                 <div className="grid grid-cols-3 gap-1.5 md:gap-2">
                   {['Work Hours', 'Night Time', 'All Day'].map((preset, idx) => (
-                    <span key={idx} className="px-1.5 md:px-2 py-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-[10px] sm:text-xs font-medium text-center">
+                    <span key={idx} className="px-1.5 md:px-2 py-1 bg-card border border-border rounded-lg text-[10px] sm:text-xs font-medium text-center">
                       {preset}
                     </span>
                   ))}

@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useEffect, useRef, useState } from "react"
 
@@ -57,11 +57,7 @@ export default function MilestoneBanner() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-16 md:py-20"
-      style={{
-        background:
-          "linear-gradient(135deg, oklch(0.45 0.24 264 / 0.06) 0%, oklch(0.99 0 0) 40%, oklch(0.55 0.22 300 / 0.08) 100%)",
-      }}
+      className="relative overflow-hidden py-16 md:py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5"
     >
       {/* Animated floating particles */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -84,33 +80,24 @@ export default function MilestoneBanner() {
 
         {/* Big soft glow orbs */}
         <div
-          className="absolute -left-24 top-1/2 -translate-y-1/2 h-72 w-72 rounded-full opacity-20 blur-3xl"
-          style={{ background: "oklch(0.45 0.24 264)" }}
+          className="absolute -left-24 top-1/2 -translate-y-1/2 h-72 w-72 rounded-full opacity-20 blur-3xl bg-primary"
         />
         <div
-          className="absolute -right-24 top-1/2 -translate-y-1/2 h-72 w-72 rounded-full opacity-20 blur-3xl"
-          style={{ background: "oklch(0.55 0.22 300)" }}
+          className="absolute -right-24 top-1/2 -translate-y-1/2 h-72 w-72 rounded-full opacity-20 blur-3xl bg-secondary"
         />
         <div
-          className="absolute left-1/2 top-0 -translate-x-1/2 h-48 w-[600px] rounded-full opacity-10 blur-3xl"
-          style={{ background: "linear-gradient(90deg, oklch(0.45 0.24 264), oklch(0.55 0.22 300))" }}
+          className="absolute left-1/2 top-0 -translate-x-1/2 h-48 w-[600px] rounded-full opacity-10 blur-3xl bg-gradient-to-r from-primary to-secondary"
         />
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 md:px-6">
         {/* Pill badge */}
         <div className="flex justify-center mb-6">
-          <span className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
-            style={{
-              borderColor: "oklch(0.45 0.24 264 / 0.3)",
-              background: "oklch(0.45 0.24 264 / 0.08)",
-              color: "oklch(0.45 0.24 264)",
-            }}>
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
             <span
-              className="flex h-2 w-2 rounded-full"
+              className="flex h-2 w-2 rounded-full bg-primary"
               style={{
-                background: "oklch(0.45 0.24 264)",
-                boxShadow: "0 0 6px oklch(0.45 0.24 264)",
+                boxShadow: "0 0 6px var(--primary)",
                 animation: "pulse 2s infinite",
               }}
             />
@@ -127,8 +114,7 @@ export default function MilestoneBanner() {
         >
           {/* Inner card */}
           <div
-            className="relative rounded-[calc(1.5rem-1px)] px-5 py-8 sm:px-8 sm:py-10 md:px-14 md:py-14 text-center overflow-hidden"
-            style={{ background: "oklch(0.99 0 0 / 0.96)" }}
+            className="relative rounded-[calc(1.5rem-1px)] px-5 py-8 sm:px-8 sm:py-10 md:px-14 md:py-14 text-center overflow-hidden bg-background/96"
           >
             {/* Radial shimmer */}
             <div
@@ -189,16 +175,14 @@ export default function MilestoneBanner() {
             </div>
 
             <h3
-              className="text-2xl md:text-3xl font-bold mb-3"
-              style={{ color: "oklch(0.09 0 0)" }}
+              className="text-2xl md:text-3xl font-bold mb-3 text-foreground"
             >
               Users Trust Locksy
             </h3>
             <p
-              className="text-base md:text-lg max-w-xl mx-auto leading-relaxed"
-              style={{ color: "oklch(0.50 0 0)" }}
+              className="text-base md:text-lg max-w-xl mx-auto leading-relaxed text-muted-foreground"
             >
-              Over <strong>1,000 privacy-conscious people</strong> have chosen Locksy to protect
+              Over <strong className="text-foreground">1,000 privacy-conscious people</strong> have chosen Locksy to protect
               their tabs. Join a growing community that values real browser-level privacy.
             </p>
 
@@ -221,7 +205,7 @@ export default function MilestoneBanner() {
                   >
                     {value}
                   </span>
-                  <span className="text-[10px] sm:text-xs md:text-sm font-medium leading-tight" style={{ color: "oklch(0.55 0 0)" }}>
+                  <span className="text-[10px] sm:text-xs md:text-sm font-medium leading-tight text-muted-foreground">
                     {label}
                   </span>
                 </div>
@@ -230,7 +214,7 @@ export default function MilestoneBanner() {
 
             {/* CTA — per-browser install buttons */}
             <div className="mt-8 space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-widest text-center" style={{ color: "oklch(0.55 0 0)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-center text-muted-foreground">
                 Add to your browser — free
               </p>
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
@@ -256,7 +240,7 @@ export default function MilestoneBanner() {
         </div>
 
         {/* Bottom trust logos strip */}
-        <p className="mt-6 text-center text-xs font-medium" style={{ color: "oklch(0.60 0 0)" }}>
+        <p className="mt-6 text-center text-xs font-medium text-muted-foreground">
           Available on Chrome · Edge · Firefox · Brave · Opera · Vivaldi · Comet
         </p>
       </div>

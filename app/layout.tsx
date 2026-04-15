@@ -9,6 +9,7 @@ import {
   jsonLdHowToInstall
 } from "@/lib/metadata"
 import ChatSupport from "@/components/chat-support"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const geist = Geist({ subsets: ["latin"] })
 const geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="overflow-x-hidden">
+    <html lang="en" className="overflow-x-hidden" suppressHydrationWarning>
       <head>
         {/* RSS Feed Auto-Discovery */}
         <link
@@ -49,8 +50,15 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geist.className} overflow-x-hidden`}>
-        {children}
-        <ChatSupport />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          {children}
+          <ChatSupport />
+        </ThemeProvider>
       </body>
     </html>
   )
