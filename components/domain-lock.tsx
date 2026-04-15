@@ -36,8 +36,8 @@ export default function DomainLock() {
     <section className="py-24 md:py-32 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 dark:bg-secondary/20 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
@@ -61,14 +61,14 @@ export default function DomainLock() {
             {/* Browser-like window */}
             <div className="space-y-4">
               {/* Address bar example */}
-              <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 border-2 border-primary/30">
+              <div className="bg-muted rounded-lg p-4 border-2 border-primary/30">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
-                  <div className="flex-1 bg-white dark:bg-gray-800 rounded-md px-4 py-2 text-sm font-mono text-primary font-semibold">
+                  <div className="flex-1 bg-card rounded-md px-4 py-2 text-sm font-mono text-primary font-semibold">
                     *.google.com
                   </div>
                   <div className="text-2xl">🔒</div>
@@ -83,7 +83,7 @@ export default function DomainLock() {
                   { domain: "docs.google.com", title: "Google Docs" },
                   { domain: "calendar.google.com", title: "Calendar" },
                 ].map((tab, idx) => (
-                  <div key={idx} className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg p-4 border-2 border-green-500/50 shadow-md">
+                  <div key={idx} className="flex items-center gap-3 bg-card rounded-lg p-4 border-2 border-green-500/50 shadow-md">
                     <div className="text-2xl">🔒</div>
                     <div className="flex-1">
                       <div className="font-semibold text-foreground">{tab.title}</div>

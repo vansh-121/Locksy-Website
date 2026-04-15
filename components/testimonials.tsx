@@ -46,7 +46,7 @@ export default function Testimonials() {
   const [currentIdx, setCurrentIdx] = useState(0)
 
   return (
-    <section className="py-20 md:py-32 bg-neutral-50">
+    <section className="py-20 md:py-32 bg-muted">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         <h2 className="section-title">Trusted by Privacy-Conscious Users Worldwide</h2>
         <p className="section-subtitle">See what real users are saying about Locksy.</p>
@@ -61,10 +61,10 @@ export default function Testimonials() {
                   </span>
                 ))}
               </div>
-              <p className="text-neutral-700 mb-6 italic flex-grow">"{testimonial.quote}"</p>
-              <div className="mt-auto pt-4 border-t border-neutral-200">
+              <p className="text-muted-foreground mb-6 italic flex-grow">"{testimonial.quote}"</p>
+              <div className="mt-auto pt-4 border-t border-border">
                 <p className="font-semibold">{testimonial.author}</p>
-                <p className="text-sm text-neutral-600">{testimonial.role}</p>
+                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
               </div>
             </div>
           ))}
@@ -72,21 +72,21 @@ export default function Testimonials() {
 
         {/* Stats */}
         <div className="grid md:grid-cols-4 gap-6 mt-16 text-center">
-          <div className="p-6 bg-white rounded-lg">
+          <div className="p-6 bg-card rounded-lg border border-border/50">
             <div className="text-3xl font-bold text-primary mb-2">5.0</div>
-            <p className="text-neutral-600">Average Rating</p>
+            <p className="text-muted-foreground">Average Rating</p>
           </div>
-          <div className="p-6 bg-white rounded-lg">
+          <div className="p-6 bg-card rounded-lg border border-border/50">
             <div className="text-3xl font-bold text-primary mb-2">100%</div>
-            <p className="text-neutral-600">Privacy Score</p>
+            <p className="text-muted-foreground">Privacy Score</p>
           </div>
-          <div className="p-6 bg-white rounded-lg">
+          <div className="p-6 bg-card rounded-lg border border-border/50">
             <div className="text-3xl font-bold text-primary mb-2">0</div>
-            <p className="text-neutral-600">Data Breaches</p>
+            <p className="text-muted-foreground">Data Breaches</p>
           </div>
-          <div className="p-6 bg-white rounded-lg">
+          <div className="p-6 bg-card rounded-lg border border-border/50">
             <div className="text-3xl font-bold text-primary mb-2">∞</div>
-            <p className="text-neutral-600">Free Forever</p>
+            <p className="text-muted-foreground">Free Forever</p>
           </div>
         </div>
       </div>

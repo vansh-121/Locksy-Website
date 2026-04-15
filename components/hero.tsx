@@ -170,9 +170,9 @@ export default function Hero() {
     <section className="relative py-24 md:py-40 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-secondary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 dark:bg-secondary/20 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
@@ -200,7 +200,7 @@ export default function Hero() {
             <div className="space-y-6">
               <h1 className="text-5xl md:text-7xl font-black leading-tight text-foreground">
                 Secure Your Tabs with{" "}
-                <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
                   Military-Grade
                 </span>{" "}
                 Protection
@@ -307,7 +307,7 @@ export default function Hero() {
             </div>
 
             {/* Browser Compatibility Note */}
-            <div className="flex items-center justify-center sm:justify-start gap-2 p-3 bg-white/70 backdrop-blur-sm rounded-lg border border-primary/10 mt-1">
+            <div className="flex items-center justify-center sm:justify-start gap-2 p-3 bg-card/70 backdrop-blur-sm rounded-lg border border-primary/10 mt-1">
               <svg className="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
@@ -321,7 +321,7 @@ export default function Hero() {
           <div className="flex justify-center md:justify-end items-start relative md:-mt-80 z-10">
             <div className="relative flex items-center justify-center">
               {/* Glow effect behind logo */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-3xl opacity-30 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-3xl opacity-30 dark:opacity-50 animate-pulse" />
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
                 alt="Locksy Extension"
@@ -447,40 +447,40 @@ export default function Hero() {
 
         {/* Trust Indicators - Full Width */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 mt-10 border-t border-border/50 z-10 relative">
-          <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
+          <div className="flex items-center gap-3 p-4 bg-card/50 dark:bg-card/70 backdrop-blur-sm rounded-xl border border-primary/10 dark:border-primary/20">
             <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center text-2xl">
               ⭐
             </div>
             <div>
               <div className="font-bold text-foreground">5-Star Rating</div>
-              <div className="text-sm text-muted-foreground">User Verified</div>
+              <div className="text-sm text-muted-foreground dark:text-foreground/60">User Verified</div>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
+          <div className="flex items-center gap-3 p-4 bg-card/50 dark:bg-card/70 backdrop-blur-sm rounded-xl border border-primary/10 dark:border-primary/20">
             <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-2xl">
               🔒
             </div>
             <div>
               <div className="font-bold text-foreground">PBKDF2</div>
-              <div className="text-sm text-muted-foreground">Encrypted</div>
+              <div className="text-sm text-muted-foreground dark:text-foreground/60">Encrypted</div>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
+          <div className="flex items-center gap-3 p-4 bg-card/50 dark:bg-card/70 backdrop-blur-sm rounded-xl border border-primary/10 dark:border-primary/20">
             <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center text-2xl">
               📴
             </div>
             <div>
               <div className="font-bold text-foreground">100% Offline</div>
-              <div className="text-sm text-muted-foreground">No Tracking</div>
+              <div className="text-sm text-muted-foreground dark:text-foreground/60">No Tracking</div>
             </div>
           </div>
-          <div className="flex items-center gap-3 p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-primary/10">
+          <div className="flex items-center gap-3 p-4 bg-card/50 dark:bg-card/70 backdrop-blur-sm rounded-xl border border-primary/10 dark:border-primary/20">
             <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center text-2xl">
               ✓
             </div>
             <div>
               <div className="font-bold text-foreground">Free Forever</div>
-              <div className="text-sm text-muted-foreground">No Hidden Fees</div>
+              <div className="text-sm text-muted-foreground dark:text-foreground/60">No Hidden Fees</div>
             </div>
           </div>
         </div>

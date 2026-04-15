@@ -37,41 +37,43 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --gradient-via: oklch(0.50 0.23 282);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --background: oklch(0.12 0.02 270);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.15 0.02 270);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.15 0.02 270);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.62 0.26 264);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.65 0.24 300);
+  --secondary-foreground: oklch(0.99 0 0);
+  --muted: oklch(0.20 0.02 270);
+  --muted-foreground: oklch(0.68 0 0);
+  --accent: oklch(0.18 0.04 264);
+  --accent-foreground: oklch(0.62 0.26 264);
+  --destructive: oklch(0.65 0.25 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.24 0.03 270);
+  --input: oklch(0.20 0.03 270);
+  --ring: oklch(0.62 0.26 264);
+  --chart-1: oklch(0.62 0.26 264);
+  --chart-2: oklch(0.70 0.20 162);
+  --chart-3: oklch(0.78 0.20 70);
+  --chart-4: oklch(0.70 0.27 304);
+  --chart-5: oklch(0.70 0.25 16);
+  --sidebar: oklch(0.14 0.02 270);
+  --sidebar-foreground: oklch(0.96 0 0);
+  --sidebar-primary: oklch(0.62 0.26 264);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.20 0.03 270);
+  --sidebar-accent-foreground: oklch(0.96 0 0);
+  --sidebar-border: oklch(0.24 0.03 270);
+  --sidebar-ring: oklch(0.55 0.18 264);
+  --gradient-via: oklch(0.82 0.22 282);
 }
 
 @theme inline {
@@ -125,11 +127,19 @@
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02];
+    @apply px-4 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02];
+  }
+
+  .dark .btn-primary {
+    @apply shadow-primary/30 hover:shadow-primary/50;
   }
 
   .btn-secondary {
-    @apply px-4 py-3 sm:px-8 sm:py-4 bg-white border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+    @apply px-4 py-3 sm:px-8 sm:py-4 bg-card border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+  }
+
+  .dark .btn-secondary {
+    @apply border-primary/30 hover:shadow-primary/20;
   }
 
   /* Size variants for CTAs (optional) */
@@ -142,14 +152,48 @@
   }
 
   .feature-card {
-    @apply p-8 bg-gradient-to-br from-white to-accent/30 rounded-2xl border border-primary/10 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 hover:border-primary/20 backdrop-blur-sm;
+    @apply p-8 bg-gradient-to-br from-card to-accent/30 rounded-2xl border border-primary/10 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 hover:border-primary/20 backdrop-blur-sm;
+  }
+
+  .dark .feature-card {
+    @apply border-primary/15 hover:border-primary/40 hover:shadow-primary/20 shadow-md shadow-primary/5;
   }
 
   .section-title {
-    @apply text-4xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary bg-clip-text text-transparent;
+    @apply text-4xl md:text-6xl font-bold text-center mb-6 bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, var(--primary), var(--gradient-via), var(--secondary));
   }
 
   .section-subtitle {
     @apply text-xl text-muted-foreground text-center mb-16 max-w-3xl mx-auto leading-relaxed;
   }
+}
+
+/* ── Dark mode glow enhancements ───────────────────────────────── */
+.dark .btn-primary {
+  text-shadow: 0 0 20px rgba(255 255 255 / 0.15);
+}
+
+/* Cards get a vibrant glow border in dark mode */
+.dark .feature-card:hover {
+  box-shadow: 0 0 40px oklch(0.62 0.26 264 / 0.18), 0 20px 40px oklch(0 0 0 / 0.3);
+}
+
+/* Neon glow on gradient text headings in dark mode */
+.dark .section-title {
+  filter: drop-shadow(0 0 24px oklch(0.62 0.26 264 / 0.45));
+}
+
+.dark h2[class*="bg-clip-text"],
+.dark h3[class*="bg-clip-text"],
+.dark span[class*="bg-clip-text"] {
+  filter: drop-shadow(0 0 20px oklch(0.62 0.26 264 / 0.35));
+}
+
+/* Smooth theme transition */
+html.transitioning,
+html.transitioning *,
+html.transitioning *::before,
+html.transitioning *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
 }

@@ -29,9 +29,9 @@ const PLATFORMS = [
     sublabel: "macOS & iOS",
     gradient: "from-neutral-400/10 to-neutral-600/10",
     border: "border-neutral-400/20",
-    iconColor: "text-neutral-600",
-    badgeBg: "bg-neutral-100",
-    badgeText: "text-neutral-700",
+    iconColor: "text-foreground/80",
+    badgeBg: "bg-muted",
+    badgeText: "text-foreground/70",
   },
   {
     icon: (
@@ -43,9 +43,9 @@ const PLATFORMS = [
     sublabel: "iPhone & iPad",
     gradient: "from-neutral-400/10 to-neutral-600/10",
     border: "border-neutral-400/20",
-    iconColor: "text-neutral-600",
-    badgeBg: "bg-neutral-100",
-    badgeText: "text-neutral-700",
+    iconColor: "text-foreground/80",
+    badgeBg: "bg-muted",
+    badgeText: "text-foreground/70",
   },
   {
     icon: (
@@ -176,9 +176,9 @@ export default function BiometricUnlock() {
     >
       {/* Animated background blobs */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/5 w-80 h-80 bg-violet-500/8 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/5 w-96 h-96 bg-indigo-500/8 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-0 right-1/3 w-64 h-64 bg-purple-500/6 rounded-full blur-3xl animate-pulse delay-500" />
+        <div className="absolute top-1/3 left-1/5 w-80 h-80 bg-violet-500/8 dark:bg-violet-500/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/5 w-96 h-96 bg-indigo-500/8 dark:bg-indigo-500/15 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-0 right-1/3 w-64 h-64 bg-purple-500/6 dark:bg-purple-500/12 rounded-full blur-3xl animate-pulse delay-500" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
@@ -189,7 +189,7 @@ export default function BiometricUnlock() {
             <span>🆕</span>
             NEW IN v2.3.0
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 dark:from-violet-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent leading-tight">
             Unlock with a Touch.<br className="hidden sm:block" /> No Password Typing.
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
@@ -218,16 +218,16 @@ export default function BiometricUnlock() {
               />
 
               {/* Card */}
-              <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl border border-white/60 shadow-2xl overflow-hidden">
+              <div className="relative bg-card/90 backdrop-blur-xl rounded-3xl border border-border shadow-2xl overflow-hidden">
 
                 {/* Browser chrome bar */}
-                <div className="flex items-center gap-2 px-4 py-3 bg-neutral-100/80 border-b border-neutral-200/60">
+                <div className="flex items-center gap-2 px-4 py-3 bg-muted/80 border-b border-border">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 rounded-full bg-red-400" />
                     <div className="w-3 h-3 rounded-full bg-yellow-400" />
                     <div className="w-3 h-3 rounded-full bg-green-400" />
                   </div>
-                  <div className="flex-1 mx-2 bg-white rounded-md px-3 py-1 text-xs text-neutral-400 border border-neutral-200 truncate">
+                  <div className="flex-1 mx-2 bg-background rounded-md px-3 py-1 text-xs text-muted-foreground border border-border truncate">
                     🔒 github.com · protected by Locksy
                   </div>
                 </div>
@@ -292,7 +292,7 @@ export default function BiometricUnlock() {
                       unlockState === "scanning" ? "opacity-100" : "opacity-0"
                     }`}
                   >
-                    <div className="w-full bg-indigo-100 rounded-full h-1.5 overflow-hidden">
+                    <div className="w-full bg-primary/10 rounded-full h-1.5 overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-100"
                         style={{ width: `${scanProgress}%` }}
@@ -314,7 +314,7 @@ export default function BiometricUnlock() {
                     aria-label="Demo biometric unlock"
                     className={`w-full py-3 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
                       unlockState === "success"
-                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                        ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
                         : "bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-wait"
                     }`}
                   >
@@ -329,8 +329,8 @@ export default function BiometricUnlock() {
 
               {/* WebAuthn badge below card */}
               <div className="mt-4 flex justify-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/80 border border-violet-200 rounded-full text-xs text-violet-700 font-medium shadow-sm backdrop-blur-sm">
-                  <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-card/80 border border-primary/20 rounded-full text-xs text-primary font-medium shadow-sm backdrop-blur-sm">
+                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                   Secured by W3C WebAuthn / FIDO2
                 </div>
               </div>
@@ -342,7 +342,7 @@ export default function BiometricUnlock() {
             {SECURITY_POINTS.map((point, i) => (
               <div
                 key={i}
-                className="flex gap-4 p-5 bg-white/70 backdrop-blur-sm rounded-2xl border border-primary/10 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
+                className="flex gap-4 p-5 bg-card/70 backdrop-blur-sm rounded-2xl border border-primary/10 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
               >
                 <div className="text-2xl flex-shrink-0 mt-0.5">{point.icon}</div>
                 <div>
@@ -384,7 +384,7 @@ export default function BiometricUnlock() {
         </div>
 
         {/* ── How it Works ─────────────────────────────────────────── */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-3xl border border-primary/10 p-8 md:p-12 shadow-sm">
+        <div className="bg-card/60 backdrop-blur-sm rounded-3xl border border-primary/10 p-8 md:p-12 shadow-sm">
           <div className="text-center mb-10">
             <h3 className="text-2xl md:text-3xl font-bold mb-3">Set It Up in 3 Steps</h3>
             <p className="text-muted-foreground text-sm sm:text-base">Enable biometric unlock in under a minute.</p>

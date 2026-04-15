@@ -147,8 +147,8 @@ export default function ProblemStatement() {
     <section className="py-24 md:py-32 bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-10 w-64 h-64 bg-destructive/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/3 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/4 left-10 w-64 h-64 bg-destructive/5 dark:bg-destructive/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/3 right-10 w-96 h-96 bg-primary/5 dark:bg-primary/12 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">

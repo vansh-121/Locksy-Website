@@ -27,16 +27,16 @@ export default function KeyboardShortcuts() {
         <section id="keyboard-shortcuts" className="py-24 md:py-32 bg-gradient-to-b from-accent via-background to-accent relative overflow-hidden">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute top-1/2 right-20 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse delay-300" />
-                <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-violet-500/20 rounded-full blur-3xl animate-pulse delay-700" />
+                <div className="absolute top-20 left-20 w-72 h-72 bg-primary/20 dark:bg-primary/30 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute top-1/2 right-20 w-96 h-96 bg-secondary/20 dark:bg-secondary/30 rounded-full blur-3xl animate-pulse delay-300" />
+                <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-violet-500/20 dark:bg-violet-500/30 rounded-full blur-3xl animate-pulse delay-700" />
             </div>
 
             <div className="relative max-w-7xl mx-auto px-4 md:px-6">
                 <div className="text-center mb-20">
                     <h2 className="text-5xl md:text-6xl font-black leading-tight text-foreground mb-6">
                         Lightning-Fast{" "}
-                        <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 dark:from-violet-400 dark:via-purple-400 dark:to-fuchsia-400 bg-clip-text text-transparent">
                             Keyboard Shortcuts
                         </span>
                     </h2>
@@ -51,7 +51,7 @@ export default function KeyboardShortcuts() {
                         {shortcuts.map((shortcut, idx) => (
                             <div
                                 key={idx}
-                                className="group relative overflow-hidden bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                                className="group relative overflow-hidden bg-card rounded-2xl shadow-lg border border-border hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                             >
                                 {/* Subtle gradient on hover */}
                                 <div className={`absolute inset-0 bg-gradient-to-br ${shortcut.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
@@ -73,11 +73,11 @@ export default function KeyboardShortcuts() {
                                     <div className="flex flex-wrap items-center justify-start gap-2 mb-6">
                                         {shortcut.keys.map((key, keyIdx) => (
                                             <span key={keyIdx} className="inline-flex items-center">
-                                                <kbd className="px-4 py-2 bg-white border-2 border-gray-200 rounded-lg shadow-sm text-base font-semibold text-gray-700 min-w-[3.5rem] text-center hover:border-gray-300 transition-all">
+                                                <kbd className="px-4 py-2 bg-card border-2 border-border rounded-lg shadow-sm text-base font-semibold text-foreground/80 min-w-[3.5rem] text-center hover:border-primary/30 transition-all">
                                                     {key}
                                                 </kbd>
                                                 {keyIdx < shortcut.keys.length - 1 && (
-                                                    <span className="mx-2 text-lg font-medium text-gray-400">+</span>
+                                                    <span className="mx-2 text-lg font-medium text-muted-foreground">+</span>
                                                 )}
                                             </span>
                                         ))}
