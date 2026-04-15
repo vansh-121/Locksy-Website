@@ -32,7 +32,7 @@ export default function Home() {
           <Header />
           <Hero />
 
-          {/* 1000+ users milestone celebration */}
+          {/* 5000+ users milestone celebration */}
           <MilestoneBanner />
 
           {/* Establish the problem first */}

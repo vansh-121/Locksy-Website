@@ -187,7 +187,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Design inspired by modern SaaS landing pages
 - Built with privacy and security as top priorities
-- Thanks to all contributors and 1000+ users
+- Thanks to all contributors and 5000+ users
 - Special thanks to the open-source community
 
 ## 📈 Stats

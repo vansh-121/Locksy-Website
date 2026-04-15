@@ -38,7 +38,7 @@ export default function MilestoneBanner() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [animating, setAnimating] = useState(false)
   const [particles] = useState(generateParticles)
-  const count = useCountUp(1000, 2200, animating)
+  const count = useCountUp(5000, 2200, animating)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -128,7 +128,7 @@ export default function MilestoneBanner() {
 
             {/* Stars row */}
             <div className="flex justify-center gap-1 mb-5">
-              {["⭐","⭐","⭐","⭐","⭐"].map((s, i) => (
+              {["⭐", "⭐", "⭐", "⭐", "⭐"].map((s, i) => (
                 <span
                   key={i}
                   className="text-lg md:text-xl"
@@ -182,14 +182,14 @@ export default function MilestoneBanner() {
             <p
               className="text-base md:text-lg max-w-xl mx-auto leading-relaxed text-muted-foreground"
             >
-              Over <strong className="text-foreground">1,000 privacy-conscious people</strong> have chosen Locksy to protect
+              Over <strong className="text-foreground">5,000+ privacy-conscious people</strong> have chosen Locksy to protect
               their tabs. Join a growing community that values real browser-level privacy.
             </p>
 
             {/* Stats row */}
             <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4 md:gap-8">
               {[
-                { value: "1000+", label: "Active Users" },
+                { value: "5000+", label: "Active Users" },
                 { value: "5★", label: "Avg. Rating" },
                 { value: "3", label: "Stores" },
               ].map(({ value, label }) => (
@@ -220,8 +220,8 @@ export default function MilestoneBanner() {
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {[
                   { name: "Chrome", icon: "/browsers/chrome.png", url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim" },
-                  { name: "Edge",   icon: "/browsers/edge.png",   url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn" },
-                  { name: "Firefox",icon: "/browsers/firefox.png",url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/" },
+                  { name: "Edge", icon: "/browsers/edge.png", url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn" },
+                  { name: "Firefox", icon: "/browsers/firefox.png", url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/" },
                 ].map((b) => (
                   <a
                     key={b.name}
