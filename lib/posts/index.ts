@@ -24,6 +24,7 @@ import post_how_browser_extensions_defend_against_brute_force_password_attacks f
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
 import post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters from './how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters'
 import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
+import post_how_remote_workers_can_protect_sensitive_browser_tabs_faq from './how-remote-workers-can-protect-sensitive-browser-tabs-faq'
 import post_how_remote_workers_can_protect_sensitive_browser_tabs from './how-remote-workers-can-protect-sensitive-browser-tabs'
 import post_how_tab_locking_prevents_vpn_bypass_attacks from './how-tab-locking-prevents-vpn-bypass-attacks'
 import post_how_to_protect_healthcare_provider_tabs_from_cybercriminals from './how-to-protect-healthcare-provider-tabs-from-cybercriminals'
@@ -68,6 +69,7 @@ export const allPosts = [
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
     post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters,
     post_how_password_based_encryption_protects_your_locked_tabs,
+    post_how_remote_workers_can_protect_sensitive_browser_tabs_faq,
     post_how_remote_workers_can_protect_sensitive_browser_tabs,
     post_how_tab_locking_prevents_vpn_bypass_attacks,
     post_how_to_protect_healthcare_provider_tabs_from_cybercriminals,
