@@ -39,6 +39,7 @@ import post_real_time_tab_anomaly_detection_the_future_of_browser_security from 
 import post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing from './remote-access-software-security-locking-sensitive-tabs-during-screen-sharing'
 import post_screen_recording_protection_hiding_tabs_from_screen_captures_common_mistakes from './screen-recording-protection-hiding-tabs-from-screen-captures-common-mistakes'
 import post_screen_recording_protection_hiding_tabs_from_screen_captures from './screen-recording-protection-hiding-tabs-from-screen-captures'
+import post_social_engineering_attacks_through_browser_tabs_how_to_defend_vs_alternatives from './social-engineering-attacks-through-browser-tabs-how-to-defend-vs-alternatives'
 import post_social_engineering_attacks_through_browser_tabs_how_to_defend from './social-engineering-attacks-through-browser-tabs-how-to-defend'
 import post_tab_overload_how_too_many_open_tabs_compromise_your_security_common_mistakes from './tab-overload-how-too-many-open-tabs-compromise-your-security-common-mistakes'
 import post_tab_overload_how_too_many_open_tabs_compromise_your_security from './tab-overload-how-too-many-open-tabs-compromise-your-security'
@@ -85,6 +86,7 @@ export const allPosts = [
     post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing,
     post_screen_recording_protection_hiding_tabs_from_screen_captures_common_mistakes,
     post_screen_recording_protection_hiding_tabs_from_screen_captures,
+    post_social_engineering_attacks_through_browser_tabs_how_to_defend_vs_alternatives,
     post_social_engineering_attacks_through_browser_tabs_how_to_defend,
     post_tab_overload_how_too_many_open_tabs_compromise_your_security_common_mistakes,
     post_tab_overload_how_too_many_open_tabs_compromise_your_security,
