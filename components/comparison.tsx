@@ -159,8 +159,11 @@ export default function Comparison() {
                   <tbody>
                     {[
                       ["Lock Individual Tabs", true, false, false],
-                      ["Domain-Wide Lock (Wildcard)", true, false, false],
+                      ["Domain Lock", true, false, false],
                       ["Keyboard Shortcuts", true, false, false],
+                      // ["Right-Click Context Menus", true, false, false],
+                      ["Stealth Mode", true, false, false],
+                      // ["Light / Dark Theme", true, false, false],
                       // ["Visual Lock Indicators", true, false, false],
                       // ["One-Click Operation", true, false, false],
                       // ["Smart Unlock Preferences", true, false, false],

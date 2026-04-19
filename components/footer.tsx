@@ -294,7 +294,7 @@ export default function Footer() {
         <div className="border-t border-neutral-800/50 pt-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
-              <p className="text-sm text-neutral-400 mb-1">© 2025 Locksy - Tab Protection Extension</p>
+              <p className="text-sm text-neutral-400 mb-1">© 2025–2026 Locksy - Tab Protection Extension</p>
               <p className="text-xs text-neutral-500">Made with ❤️ for Privacy & Security</p>
             </div>
 
