@@ -270,11 +270,11 @@ export default function WhatsNewV250() {
                     </div>
                     <div className="flex-1 mx-2 bg-background rounded-md px-3 py-1 text-xs text-muted-foreground border border-border truncate flex items-center gap-1.5">
                       <span className="transition-all duration-500">
-                        {stealthOn ? "🔒" : "🔒"}
+                        {stealthOn ? "🌐" : "🔒"}
                       </span>
                       <span className="transition-all duration-500">
                         {stealthOn
-                          ? "Locksy - Tab Locker & Password Protection"
+                          ? "github.com"
                           : "🔒 github.com · protected by Locksy"}
                       </span>
                     </div>
