@@ -8,7 +8,7 @@ const post = {
     author: 'Locksy Security Team',
     publishDate: '2026-04-20',
     lastModified: '2026-04-20',
-    readTime: '9 min read',
+    readTime: '14 min read',
     category: 'Privacy',
     tags: ['Stealth Mode', 'Privacy', 'Security', 'Browser Security', 'New Features'],
     keywords: [
@@ -26,164 +26,186 @@ const post = {
     image: 'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=1200&h=630&fit=crop&auto=format&q=80',
     imageAlt: 'Silhouette of a person in shadow representing digital invisibility',
     content: `
-## The Problem with Visible Tab Lockers
+## The Lock Screen That Betrayed Me
 
-Tab locking extensions solve a critical problem: they prevent unauthorized access to sensitive browser tabs. But most tab lockers have a subtle flaw — **they announce their own existence**.
+It was a Tuesday afternoon, the kind of unremarkable workday where you're knee-deep in quarterly reports and your brain is running on coffee fumes. I had Locksy protecting three tabs: my company's financial dashboard, an internal HR review document, and a personal medical portal I'd checked during lunch. All locked, all safe. Or so I thought.
 
-Think about it: a locked tab that displays "🔒 This Tab is Locked — Enter Password" is secure, but it's also a signal. It tells anyone who sees your screen:
+My manager walked up behind me to ask about a deadline. I turned to talk to her, and there it was — my screen, in full view, proudly displaying a large purple lock icon with the text **"This Tab is Locked — Enter Password to Unlock."** She didn't say anything about it. She didn't have to. Her eyes flickered to the screen, then back to me, and I could practically hear the unspoken question: *"What are you hiding?"*
 
-1. You're using a tab locker.
-2. You have something worth hiding behind that lock.
-3. This specific tab contains sensitive information.
+The irony was crushing. The very tool that was protecting my privacy had become a neon sign advertising the fact that I had something worth protecting. The lock screen did its job — nobody could access those tabs — but it failed at something equally important: **discretion**.
 
-For many users, this visibility is perfectly fine. But for others — people on shared computers, users in open offices, those who value operational security — the very presence of a lock screen is a privacy leak.
-
-**Locksy v2.5.0 solves this with Stealth Mode.**
+That experience is what makes Locksy v2.5.0's Stealth Mode so significant. It's not just another feature checkbox. It's a fundamental rethinking of what "protection" means when the act of protecting itself becomes a vulnerability.
 
 ---
 
-### What Stealth Mode Does
+## The Paradox of Visible Security
 
-When you activate Stealth Mode, Locksy makes itself **completely invisible**. Here's exactly what changes:
+Here's a thought experiment that crystallizes the problem. Imagine you have two houses on the same street. House A has a standard door with a deadbolt — nothing unusual. House B has the same deadbolt, but also a massive steel vault door, security cameras on every corner, motion-sensor floodlights, and a sign that reads "ARMED SECURITY SYSTEM ACTIVE."
 
-#### 1. Lock Screen Disguised as a Connection Error
+Which house is more secure? Arguably, House B. But which house is more likely to attract attention from someone wondering what's inside? Also House B. The visible security measures create what criminologists call "target hardening with signaling" — you've made it harder to break in, but you've also advertised that there's something valuable behind those walls.
 
-Instead of showing the normal Locksy lock screen with a password prompt, locked tabs display a pixel-perfect replica of Chrome's "This site can't be reached" error page:
+The same principle applies to tab lockers. A locked tab that screams "I'M LOCKED WITH LOCKSY" is secure, but it communicates three pieces of information to anyone who glances at your screen:
 
-\`\`\`
-This site can't be reached
-The connection was refused.
+1. You're using a security extension.
+2. You consider the content behind that lock sensitive enough to protect.
+3. If they're technically minded, they now know the exact tool they'd need to research if they wanted to find vulnerabilities.
 
-Try:
-• Checking the connection
-• Checking the proxy and the firewall
-• Running Windows Network Diagnostics
+For casual users — people who lock a banking tab at home — this visibility is perfectly acceptable. But for professionals dealing with sensitive data, people in shared environments, and anyone who values **operational security**, visible protection is a contradiction.
 
-ERR_CONNECTION_REFUSED
-\`\`\`
-
-To a casual observer — or even a tech-savvy coworker — this looks like a genuine browser error. There's no indication that Locksy is running, that the tab is locked, or that any content is being protected.
-
-#### 2. Badge Counter Disappears
-
-Normally, Locksy shows a small red badge on its toolbar icon indicating how many tabs are locked (e.g., "3"). In Stealth Mode, this badge **vanishes completely**. The extension icon looks identical to an inactive, unused extension.
-
-#### 3. Notifications Silenced
-
-Locksy typically sends brief browser notifications when tabs are locked or unlocked. In Stealth Mode, **all notifications are muted**. No popups, no toasts, no sound — nothing that could draw attention.
-
-#### 4. Preference Persists Across Sessions
-
-Your stealth setting is saved to local storage. Close the browser, reboot your computer, update Locksy — stealth mode stays active until you explicitly turn it off.
+![A dark workspace with a laptop screen glowing softly](https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=450&fit=crop&auto=format&q=80)
 
 ---
 
-### How to Activate Stealth Mode
+## What Stealth Mode Actually Does
 
-You have three options — use whichever fits your workflow:
+Stealth Mode isn't a single toggle that changes one thing. It's a coordinated transformation of every visible surface Locksy touches. When you flip it on, four things happen simultaneously — and together, they make Locksy genuinely undetectable.
 
-| Method | How |
-|--------|-----|
-| **Popup toggle** | Open the Locksy popup → Click the stealth toggle in the header |
-| **Keyboard shortcut** | Press **Alt+Shift+7** |
-| **Context menu** | Right-click any page → Locksy → Toggle Stealth Mode |
+### The Lock Screen Becomes a Connection Error
 
-All three methods produce the same result. The state change is instant — no page reload required.
+This is the centerpiece. Instead of Locksy's branded lock screen with the password prompt, locked tabs display a pixel-perfect replica of Chrome's "This site can't be reached" error page. The error code reads \`ERR_CONNECTION_REFUSED\`. The styling, typography, spacing, and even the suggested troubleshooting steps match what Chrome actually displays when a site is genuinely unreachable.
 
----
+To a casual observer, a tech-savvy coworker, or even your IT department glancing at your screen during a walkby — this looks like a website that's temporarily down. It's the kind of page everyone has seen hundreds of times. Nobody gives it a second thought. Nobody asks questions. Nobody wonders what you're hiding, because there's nothing to suggest anything is hidden at all.
 
-### How to Unlock Tabs in Stealth Mode
+The psychological brilliance here is that the fake error page doesn't just hide Locksy — it provides a **plausible alternative explanation**. The viewer's brain doesn't register "something is being concealed"; it registers "that website is broken." The mental model is completely different.
 
-Even though the lock screen is disguised, your tabs are still fully accessible to you. Two unlock methods work in Stealth Mode:
+### The Badge Counter Vanishes
 
-1. **Alt+U** — The universal Locksy unlock shortcut. Press it on any locked tab to reveal the password prompt.
-2. **Triple-click** — Click three times rapidly on the fake error page. This reveals the hidden Locksy password prompt.
+Normally, Locksy displays a small red badge on its toolbar icon showing how many tabs are currently locked — "3", "7", whatever the count is. It's a helpful at-a-glance indicator. But it's also a dead giveaway. Anyone who knows what browser extension icons look like can immediately identify that you're running a tab locker with active locks.
 
-Both methods are invisible to anyone who doesn't know they exist. The fake error page gives no hints about these actions.
+In Stealth Mode, this badge disappears entirely. The Locksy icon looks identical to any other inactive, unused extension sitting in your toolbar. There's no count, no indicator, no visual difference between Locksy and a forgotten extension you installed three years ago and never bothered to remove.
 
----
+### Notifications Go Silent
 
-### Real-World Scenarios
+Locksy normally sends brief browser notifications when tabs are locked or unlocked — "Tab locked: github.com", "3 tabs protected", that sort of thing. These are useful feedback mechanisms. They're also potential exposure vectors. A notification popup appearing in the corner of your screen during a presentation, a screen share, or even just while a colleague is leaning over your desk can reveal that you're actively using a tab locker.
 
-#### Shared Family Computer
+In Stealth Mode, every notification is suppressed. No popups, no toasts, no sounds. Locksy operates in complete silence. You can still see status information by opening the popup manually, but nothing is ever pushed to your attention — or anyone else's — without your explicit action.
 
-You share a desktop with family members. Your banking tabs, email, and personal documents are locked with Locksy. Without stealth mode, anyone who sits down at the computer would see "This Tab is Locked" and immediately know:
-- You're using a security extension.
-- That specific tab has something private.
+### Your Preference Persists Forever
 
-With stealth mode, they see a connection error — the kind of page everyone has seen a thousand times. They'll likely just close the tab or assume the website is temporarily down.
+This might sound like a small implementation detail, but it matters enormously for real-world usability. Your stealth preference is saved to local storage and survives browser restarts, system reboots, and even Locksy updates. You set it once, and it stays active until you explicitly turn it off.
 
-#### Open Office / Coworking Space
-
-You're at a hot desk in a coworking space. You step away to refill your coffee. A colleague glances at your screen:
-- **Without stealth:** "Oh, what are you hiding behind that lock?"
-- **With stealth:** "Looks like their internet is acting up."
-
-The psychological difference is enormous. Stealth mode removes the social signal entirely.
-
-#### Screen Sharing and Presentations
-
-You're sharing your screen on Zoom, Google Meet, or Teams. You forgot to close a locked personal tab before the call. Without stealth mode, your colleagues see a Locksy lock screen — awkward at best, suspicious at worst.
-
-With stealth mode, that tab just looks like a broken website. Nobody gives it a second thought.
-
-#### Screen Recording and Tutorials
-
-Content creators who record browser-based tutorials or walkthroughs can use stealth mode to ensure that any accidentally visible locked tabs don't reveal that they're running a tab locker. The recording shows nothing unusual.
+This is crucial because the worst thing a stealth feature can do is silently disable itself. Imagine thinking you're in stealth mode, walking away from your laptop, and returning to find that a browser update reset the setting and your locked tabs are now displaying branded Locksy lock screens. That's not just inconvenient — it's a trust violation. Locksy's persistence guarantee means you can **set it and genuinely forget it**.
 
 ---
 
-### Security in Stealth Mode
+## Three Ways to Activate Stealth
 
-A common concern: *does stealth mode reduce security?*
+You have three paths to toggle Stealth Mode, and all three produce identical results:
 
-**No.** Stealth mode is purely a visual change. Under the hood:
-- Tabs are still encrypted with PBKDF2 (600k iterations).
-- Rate limiting and brute-force protection are still active.
-- All 8+ security layers remain in place.
-- Domain locks continue to auto-protect new tabs.
+| Method | How to Use | Best For |
+|--------|-----------|----------|
+| **Popup toggle** | Open the Locksy popup → Click the stealth icon in the header | Visual confirmation, first-time setup |
+| **Keyboard shortcut** | Press **Alt+Shift+7** | Speed, discretion, power users |
+| **Context menu** | Right-click any page → Locksy → Toggle Stealth Mode | Mouse-centric workflows, quick toggling |
 
-The only difference is what the lock screen *looks like*. The protection is identical.
+The state change is instant. No page reload, no browser restart, no waiting. The moment you toggle, every locked tab's appearance updates simultaneously. If you're in the middle of a screen share and realize you forgot to enable stealth, you can press Alt+Shift+7 and every locked tab transforms into a connection error page in real time. Your audience sees a brief page transition — nothing suspicious, nothing that demands explanation.
 
 ---
 
-### Stealth Mode vs. Incognito Mode
+## Unlocking Tabs When You're Invisible
 
-People sometimes confuse stealth mode with incognito/private browsing. They're completely different:
+A concern people raise immediately: "If the lock screen looks like an error page, how do I unlock my tabs?"
+
+Two methods work in Stealth Mode, both deliberately obscure:
+
+**Alt+U** — Locksy's universal unlock shortcut. Press it on any locked tab (stealth or not), and the password prompt appears. This is the recommended method for keyboard-oriented users.
+
+**Triple-click** — Click three times rapidly on the fake error page. This reveals the hidden Locksy password prompt. The triple-click gesture was chosen because it's distinctive enough to be intentional (you won't trigger it by accident) but common enough that it doesn't require memorizing an exotic key combination.
+
+Both methods are invisible to anyone who doesn't know they exist. The fake error page provides zero hints about either action. There's no "click here to unlock" text, no subtle Locksy branding, no hidden cursor changes. It's a dead-end error page to everyone except you.
+
+![A person typing on a laptop in low light](https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=450&fit=crop&auto=format&q=80)
+
+---
+
+## Real Scenarios Where Stealth Mode Changes Everything
+
+### The Shared Family Desktop
+
+You share a computer with your family. Your banking tabs, medical records, and personal emails are locked with Locksy. Without stealth, every family member who sits down at the computer sees "This Tab is Locked" and immediately understands two things: you're using a security tool, and you're actively locking specific content from them. Even if they respect your privacy, the visual signal creates an awkward dynamic. It invites curiosity. It says, "There's something here I don't want you to see."
+
+With Stealth Mode, they see connection errors — the digital equivalent of a broken website. The most likely response is closing the tab or assuming the site is temporarily down. There's no awkward conversation, no raised eyebrows, no unspoken tension. Your privacy is maintained without anyone even realizing it was ever at risk.
+
+### The Open Office Walk-By
+
+You're at your desk in an open-plan office. You step away to refill your coffee. A colleague passes by, glances at your screen:
+
+- **Without stealth:** *"Oh, you're using a tab locker? What's behind that lock?"* Even if they don't ask out loud, the thought lands. And in office environments where perception matters, being seen as someone who "locks their screen with extra tools" can create unintended impressions.
+- **With stealth:** *"Looks like that website is down. Sucks."* They keep walking. Nothing to see, nothing to wonder about, nothing to mention in passing to another colleague.
+
+### The Screen Share You Forgot to Prepare For
+
+You're sharing your screen on a Zoom call. You planned to share a single application window, but someone asks you to show them something in your browser, and now you're sharing the full browser window. Three tabs away from your current view, a locked personal tab is sitting there. Without stealth, your colleagues see the Locksy lock screen — a moment that ranges from mildly embarrassing to genuinely problematic depending on your workplace culture.
+
+With stealth, that tab shows a connection error. If anyone notices it at all, they assume the site you were trying to visit is temporarily unreachable. You can acknowledge it with a casual "yeah, that site's been acting up" and move on. Crisis averted.
+
+### The Content Creator Recording
+
+You're recording a browser-based tutorial, a coding walkthrough, or a product demo. You have locked personal tabs open because you didn't want to close them and lose your sessions. Without stealth, your recording includes Locksy lock screens — identifiable branding that viewers can look up, research, and potentially use to piece together information about your browsing habits or security practices.
+
+With stealth, the recording shows nothing unusual. Connection errors are so mundane that no viewer will pause, rewind, or investigate. Your professional content stays clean.
+
+---
+
+## Stealth Mode vs. Incognito Mode
+
+People frequently confuse stealth mode with incognito/private browsing, but they solve completely different problems:
 
 | Feature | Incognito Mode | Locksy Stealth Mode |
-|---------|---------------|-------------------|
+|---------|---------------|---------------------|
 | Hides browsing history | ✅ After closing | ❌ Not its purpose |
-| Prevents tab access | ❌ | ✅ Password-protected |
-| Hides extension presence | ❌ | ✅ |
-| Disguises locked content | ❌ | ✅ |
+| Prevents tab access | ❌ Anyone can view | ✅ Password-protected |
+| Hides extension presence | ❌ | ✅ Badge + notifications hidden |
+| Disguises locked content | ❌ | ✅ Fake error page |
 | Works on specific tabs | ❌ Whole window | ✅ Per-tab control |
-| Data encrypted at rest | ❌ | ✅ PBKDF2 |
+| Data encrypted at rest | ❌ | ✅ PBKDF2, 600k iterations |
+| Persists across sessions | ❌ Gone on close | ✅ Remembered forever |
 
-Incognito mode prevents *history recording*. Stealth mode prevents *visual detection of locked tabs*. They solve completely different problems and can be used together.
-
----
-
-### Tips for Maximum Stealth
-
-1. **Lock your extension list.** If someone opens \`chrome://extensions\`, they can still see Locksy installed. Consider pinning only essential extensions and keeping Locksy unpinned — the icon will be in the overflow menu, making it less visible.
-2. **Use keyboard shortcuts exclusively.** Avoid clicking the Locksy icon in front of others. Alt+Shift+9 to lock, Alt+U to unlock, Alt+Shift+7 to toggle stealth — all from the keyboard.
-3. **Combine with domain lock.** Set up domain rules for your most sensitive sites (banking, email, health portals). New tabs matching those domains will auto-lock in stealth mode without any action from you.
-4. **Enable stealth before screen sharing.** Make it a habit to press Alt+Shift+7 before starting any screen share or recording.
+Here's the simplest way to think about it: **Incognito mode prevents history recording. Stealth mode prevents visual detection of locked tabs.** They solve completely different problems, and they can — and arguably should — be used together for maximum privacy.
 
 ---
 
-### Getting Started
+## Does Stealth Mode Reduce Security?
 
-Stealth Mode is available in Locksy v2.5.0 and later. Install or update Locksy:
+This is the most common concern, and the answer is an unequivocal **no**.
+
+Stealth Mode is purely a visual transformation. It changes what the lock screen *looks like*, not how the lock *works*. Under the hood, every security layer remains fully active:
+
+- Tabs are still encrypted with **PBKDF2 (600,000 iterations)**, meeting OWASP 2023 guidelines.
+- **Rate limiting** and **brute-force protection** are still enforced — failed password attempts trigger exponential cooldowns.
+- **Domain locks** continue to auto-protect new tabs matching your rules.
+- The **zero-knowledge architecture** is unchanged — your password never leaves your device.
+- All **8+ security layers** described in Locksy's security documentation remain in place.
+
+The fake error page is rendered *on top of* the same encrypted lock mechanism. If someone somehow bypasses the visual disguise (which requires knowing exactly how Locksy works), they still face the same password wall they would without stealth. It's an additional layer, not a replacement.
+
+---
+
+## Tips for Maximum Stealth
+
+If you're adopting stealth mode as part of a serious operational security practice, here are four habits that will maximize its effectiveness:
+
+1. **Unpin Locksy from your toolbar.** In Chrome, click the puzzle piece icon in the toolbar and unpin Locksy. It moves to the extension overflow menu, making it invisible to casual observers. You can still access it via the overflow menu or keyboard shortcuts.
+
+2. **Use keyboard shortcuts exclusively.** Avoid clicking the Locksy icon in front of others. **Alt+Shift+9** to lock, **Alt+U** to unlock, **Alt+Shift+7** to toggle stealth — all from the keyboard, all invisible to anyone watching your screen from a distance.
+
+3. **Combine with domain lock rules.** Set up auto-lock rules for your most sensitive domains — banking, email, HR portals, medical sites. New tabs matching those domains will lock automatically in stealth mode, without any visible action from you. The tab loads, immediately becomes a connection error, and nobody is the wiser.
+
+4. **Enable stealth before every screen share.** Make it a pre-meeting ritual: before you click "Share Screen" on Zoom, Teams, or Meet, press **Alt+Shift+7**. It takes less than a second and guarantees that if any locked tab accidentally becomes visible, it looks like a broken website, not a secured vault.
+
+---
+
+## Getting Started
+
+Stealth Mode is available in **Locksy v2.5.0** and later. Install or update Locksy on your browser:
 
 - [Chrome Web Store](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
 - [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/locksy/)
 - [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn)
 
-Once installed, right-click any page → Locksy → Toggle Stealth Mode. That's it.
+Once installed, right-click any page → Locksy → Toggle Stealth Mode. Or press Alt+Shift+7. That's it.
 
-Your tabs are locked. Your locker is invisible. No one knows. 🕵️
+Your tabs are locked. Your locker is invisible. The only person who knows is you. 🕵️
 
 ---
 _Learn more about Locksy's full feature set at [locksy.dev](https://www.locksy.dev)._

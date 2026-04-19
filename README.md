@@ -4,31 +4,40 @@
 [![Microsoft Edge Add-ons](https://img.shields.io/badge/Edge%20Add--ons-Available-0078D4?logo=microsoft-edge&logoColor=white)](https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn)
 [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Available-FF7139?logo=firefox&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/locksy/)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://locksy.vercel.app)
-[![Version](https://img.shields.io/badge/version-2.2.0-blue)](https://github.com/vansh-121/Locksy)
+[![Version](https://img.shields.io/badge/version-2.5.0-blue)](https://github.com/vansh-121/Locksy)
 
-Official landing page for **Locksy** - A powerful browser extension that provides military-grade tab protection with PBKDF2 encryption (600,000 iterations, OWASP 2023 compliant). Now with Auto-Lock Timer and Scheduled Locking for automatic security.
+Official landing page for **Locksy** — A powerful browser extension that provides military-grade tab protection with PBKDF2 encryption (600,000 iterations, OWASP 2023 compliant). Now featuring Right-Click Context Menus, Stealth Mode, and a persistent Light/Dark Theme Toggle.
 
-## 🔒 Security Features (v2.2.0)
+## 🚀 What's New in v2.5.0
 
-- 🛡️ **PBKDF2 with 600k Iterations** - Ultimate Key Derivation Function (KDF) Encryption
-- ⚡ **120 Years Crack Resistance** - Military-grade password protection
-- 🚫 **Rate Limiting & Brute-Force Protection** - Advanced timing attack prevention
-- 🔐 **Zero Data Collection** - Everything stored locally on your device
-- 📴 **100% Offline** - No external servers or data transmission
-- 🔓 **No Backdoors** - Only you can unlock your tabs
+- 🖱️ **Right-Click Context Menus** — Lock tabs, domains, or all tabs from the right-click menu on any page, link, image, or selected text
+- 🕵️ **Stealth Mode** — Make Locksy completely undetectable: badge counter vanishes, notifications go silent, lock screen disguised as a "This site can't be reached" error
+- 🎨 **Light / Dark Theme Toggle** — Persistent two-state theme switcher built into the popup header, syncs across all Locksy pages instantly
+
+## 🔒 Security Features
+
+- 🛡️ **PBKDF2 with 600k Iterations** — Ultimate Key Derivation Function (KDF) Encryption
+- ⚡ **120 Years Crack Resistance** — Military-grade password protection
+- 🚫 **Rate Limiting & Brute-Force Protection** — Advanced timing attack prevention
+- 🔐 **Zero Data Collection** — Everything stored locally on your device
+- 📴 **100% Offline** — No external servers or data transmission
+- 🔓 **No Backdoors** — Only you can unlock your tabs
 
 ## 🌟 Key Features
 
-- ⏱️ **Auto-Lock Timer** - Automatic protection after inactivity (1-480 min)
-- 📅 **Scheduled Locking** - Time-based security with day-of-week selection
-- ⌨️ **Keyboard Shortcuts** - Lock tabs instantly with Alt+Shift+9
-- 🌐 **Domain Lock** - Lock entire domains with wildcard patterns
-- 🎨 **Visual Lock Indicators** - Red lock icon on tab favicons
-- 🥷 **Incognito Mode Support** - Full privacy mode compatibility
-- 🔄 **Smart Unlock Preferences** - Remembers unlock preferences per domain
-- 🪶 **Ultra Lightweight** - Zero performance impact on your browser
-- 🎨 **Modern UI** - Beautiful gradient interface with smooth animations
-- 🚫 **No Account Required** - Install and start protecting in 30 seconds
+- 🖱️ **Right-Click Context Menus** — Lock tabs, domains, or all tabs from the context menu
+- 🕵️ **Stealth Mode** — Complete invisibility with fake error page disguise
+- 🎨 **Theme Toggle** — Persistent light/dark mode across all extension pages
+- ⏱️ **Auto-Lock Timer** — Automatic protection after inactivity (1–480 min)
+- 📅 **Scheduled Locking** — Time-based security with day-of-week selection
+- ⌨️ **Keyboard Shortcuts** — Lock tabs instantly with Alt+Shift+9
+- 🌐 **Domain Lock** — Lock entire domains with wildcard patterns
+- 🎨 **Visual Lock Indicators** — Red lock icon on tab favicons
+- 🥷 **Incognito Mode Support** — Full privacy mode compatibility
+- 🔄 **Smart Unlock Preferences** — Remembers unlock preferences per domain
+- 🪶 **Ultra Lightweight** — Zero performance impact on your browser
+- 🎨 **Modern UI** — Beautiful gradient interface with smooth animations
+- 🚫 **No Account Required** — Install and start protecting in 30 seconds
 
 ## 🛠️ Tech Stack
 
@@ -44,61 +53,96 @@ Official landing page for **Locksy** - A powerful browser extension that provide
 
 ## 🌐 Website Sections
 
-- **Hero** - Eye-catching introduction with download buttons for all major browsers
-- **Domain Lock** - Highlight persistent domain-level protection
-- **Problem Statement** - Explains why tab security matters
-- **Features** - 12+ feature cards showcasing capabilities
-- **Keyboard Shortcuts** - Interactive shortcuts demonstration
-- **How It Works** - 3-step installation guide
-- **Security** - Privacy guarantees and security features
-- **Comparison** - Compare with browser's native features
-- **Testimonials** - User reviews and feedback
-- **FAQ** - Common questions answered
-- **CTA** - Call-to-action for installation
+- **Hero** — Eye-catching introduction with download buttons for all major browsers
+- **What's New v2.5.0** — Interactive demos for Context Menus, Stealth Mode & Theme Toggle
+- **Domain Lock** — Highlight persistent domain-level protection
+- **Problem Statement** — Explains why tab security matters with trust indicators
+- **Features** — 12+ feature cards showcasing capabilities
+- **Biometric Unlock** — Upcoming WebAuthn/FIDO2 biometric authentication showcase
+- **Automation Features** — Auto-Lock Timer & Scheduled Locking demos
+- **Keyboard Shortcuts** — Interactive shortcuts demonstration
+- **How It Works** — 3-step installation guide
+- **Security** — Privacy guarantees and security features
+- **Comparison** — Compare with browser's native features
+- **Milestone Banner** — User count & achievement milestones
+- **Testimonials** — User reviews and feedback
+- **FAQ** — Common questions answered
+- **CTA** — Call-to-action for installation
+- **Blog** — 50+ SEO-optimized articles on browser security, tab protection, and privacy
 
 ## 🎨 Design Features
 
-- ⚡ **Modern Gradient Design** - Beautiful purple-to-pink gradients
-- 📱 **Fully Responsive** - Mobile-first design approach
-- 🎨 **Interactive Elements** - Hover effects, animations, and transitions
-- 🎥 **Video Demo** - Embedded YouTube tutorial with custom controls
-- 🏆 **Product Hunt Badge** - Featured product integration
-- 🌟 **Trust Indicators** - Rating, encryption, offline, and free badges
+- ⚡ **Modern Gradient Design** — Beautiful violet-to-indigo gradients
+- 🌙 **Dark Mode** — Vibrant, high-contrast dark theme with neon glow effects
+- 📱 **Fully Responsive** — Mobile-first design approach
+- 🎨 **Interactive Elements** — Hover effects, micro-animations, and transitions
+- 🎥 **Video Demo** — Embedded YouTube tutorial with custom controls
+- 🏆 **Product Hunt Badge** — Featured product integration
+- 🌟 **Trust Indicators** — Rating, encryption, offline, and free badges
 
 ## 📄 Project Structure
 
 ```
 locksy-website/
 ├── app/
-│   ├── globals.css          # Global styles & Tailwind config
-│   ├── layout.tsx           # Root layout with metadata
-│   ├── page.tsx             # Home page
-│   ├── privacy-policy/      # Privacy policy page
-│   └── uninstall/           # Uninstall feedback page
+│   ├── globals.css              # Global styles & Tailwind config
+│   ├── layout.tsx               # Root layout with metadata
+│   ├── loading.tsx              # Page loading skeleton
+│   ├── page.tsx                 # Home page
+│   ├── sitemap.ts               # Dynamic sitemap generation
+│   ├── blog/                    # Blog listing & individual post pages
+│   │   ├── page.tsx
+│   │   ├── blog-client.tsx
+│   │   └── [slug]/              # Dynamic blog post routes
+│   ├── contact/                 # Contact page
+│   ├── feed.xml/                # RSS feed
+│   ├── newsletter/              # Newsletter subscription
+│   ├── privacy-policy/          # Privacy policy page
+│   ├── uninstall/               # Uninstall feedback page
+│   ├── verify/                  # Verification page
+│   ├── verify-badge/            # Badge verification
+│   └── api/                     # API routes
 ├── components/
-│   ├── header.tsx           # Navigation header
-│   ├── hero.tsx             # Hero section with video
-│   ├── domain-lock.tsx      # Domain lock feature showcase
-│   ├── features.tsx         # 12+ feature cards
-│   ├── keyboard-shortcuts.tsx # Keyboard shortcuts section
-│   ├── problem-statement.tsx
-│   ├── how-it-works.tsx     # Installation guide
-│   ├── security.tsx         # Privacy & security guarantees
-│   ├── comparison.tsx       # Feature comparison
-│   ├── testimonials.tsx     # User reviews
-│   ├── faq.tsx              # Frequently asked questions
-│   ├── cta-section.tsx      # Call-to-action
-│   ├── footer.tsx           # Footer with links
-│   ├── product-hunt-badge.tsx
-│   └── ui/                  # Reusable UI components (40+ components)
+│   ├── header.tsx               # Navigation header
+│   ├── hero.tsx                 # Hero section with video
+│   ├── whats-new-v250.tsx       # v2.5.0 features: Context Menus, Stealth & Theme demos
+│   ├── domain-lock.tsx          # Domain lock feature showcase
+│   ├── problem-statement.tsx    # Why tab security matters
+│   ├── features.tsx             # 12+ feature cards
+│   ├── biometric-unlock.tsx     # Biometric authentication showcase
+│   ├── automation-features.tsx  # Auto-Lock Timer & Scheduled Locking
+│   ├── keyboard-shortcuts.tsx   # Keyboard shortcuts section
+│   ├── how-it-works.tsx         # Installation guide
+│   ├── security.tsx             # Privacy & security guarantees
+│   ├── comparison.tsx           # Feature comparison
+│   ├── milestone-banner.tsx     # User milestones & achievements
+│   ├── testimonials.tsx         # User reviews
+│   ├── faq.tsx                  # Frequently asked questions
+│   ├── cta-section.tsx          # Call-to-action
+│   ├── support-chat-cta.tsx     # Support chat prompt
+│   ├── footer.tsx               # Footer with links
+│   ├── theme-toggle.tsx         # Site-wide light/dark theme toggle
+│   ├── theme-provider.tsx       # Theme context provider
+│   ├── page-loader.tsx          # Page transition loader
+│   ├── product-hunt-badge.tsx   # Product Hunt badge
+│   └── ui/                      # Reusable UI components (shadcn/ui)
 ├── lib/
-│   ├── utils.ts             # Utility functions
-│   ├── faq-data.ts          # FAQ content
-│   └── metadata.ts          # SEO metadata
+│   ├── utils.ts                 # Utility functions
+│   ├── faq-data.ts              # FAQ content
+│   ├── metadata.ts              # SEO metadata
+│   ├── blog-data.ts             # Blog index & metadata
+│   └── posts/                   # 50+ blog post content files
+│       ├── index.ts
+│       └── *.ts                 # Individual post articles
+├── hooks/                       # Custom React hooks
+├── styles/
+│   └── globals.css              # Additional global styles
 ├── public/
 │   ├── robots.txt
-│   ├── sitemap.xml
-│   └── browsers/            # Browser icons
+│   ├── site.webmanifest
+│   ├── favicon.svg
+│   └── browsers/                # Browser icons
+├── scripts/                     # Build & utility scripts
 └── package.json
 ```
 
@@ -122,12 +166,17 @@ locksy-website/
    pnpm install
    ```
 
-3. **Run development server**
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+
+4. **Run development server**
    ```bash
    pnpm dev
    ```
 
-4. **Open in browser**
+5. **Open in browser**
    ```
    http://localhost:3000
    ```
@@ -141,10 +190,10 @@ pnpm start
 
 ## 📦 Available Scripts
 
-- `pnpm dev` - Start development server
-- `pnpm build` - Build for production
-- `pnpm start` - Start production server
-- `pnpm lint` - Run ESLint
+- `pnpm dev` — Start development server
+- `pnpm build` — Build for production
+- `pnpm start` — Start production server
+- `pnpm lint` — Run ESLint
 
 ## 🔗 Links
 
@@ -193,10 +242,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📈 Stats
 
 - ⭐ 5-star rating on browser stores
+- 👥 5,000+ active users
 - 🌍 Available on Chrome, Edge, Firefox, Opera, Brave, Vivaldi
-- 📦 Version 2.0.0 - Major Security Overhaul
+- 📦 Version 2.5.0 — Context Menus, Stealth Mode & Theme Toggle
 - 🔒 OWASP 2023 compliant encryption
 - 💯 100% privacy-focused (no data collection)
+- 📝 50+ SEO blog articles on browser security
 
 ---
 

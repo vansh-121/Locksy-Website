@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen } from 'lucide-react'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { useEffect, useState } from 'react'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
@@ -164,6 +165,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 to-secondary/5 blur-2xl opacity-0 group-hover:opacity-50 transition-opacity rounded-3xl" />
                         <div className="relative bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-6 md:p-10 lg:p-12 shadow-lg">
                             <ReactMarkdown
+                                remarkPlugins={[remarkGfm]}
                                 components={{
                                     h1: ({ children }) => (
                                         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl mt-10 mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
