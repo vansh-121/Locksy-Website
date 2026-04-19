@@ -43,6 +43,24 @@ export default function Features() {
       gradient: "from-violet-500 to-indigo-500",
     },
     {
+      icon: "🖱️",
+      title: "Right-Click Context Menus (v2.5.0)",
+      desc: "Lock tabs instantly from the right-click menu — no popup needed. Lock this tab, lock a domain, lock all tabs, or toggle stealth. Works on pages, links, images, and selected text.",
+      gradient: "from-indigo-500 to-violet-500",
+    },
+    {
+      icon: "🕵️",
+      title: "Stealth Mode (v2.5.0)",
+      desc: "Make Locksy completely invisible. Badge counter vanishes, notifications go silent, and locked tabs show a fake \"connection refused\" error page. Toggle via popup, Alt+Shift+7, or right-click.",
+      gradient: "from-purple-500 to-violet-500",
+    },
+    {
+      icon: "🎨",
+      title: "Light / Dark Theme (v2.5.0)",
+      desc: "Persistent theme switcher built into the popup header. Choose light or dark mode — syncs instantly across all Locksy pages without reload. Works on the lock screen too.",
+      gradient: "from-cyan-500 to-violet-500",
+    },
+    {
       icon: "🔒",
       title: "PBKDF2 Key Derivation",
       desc: "600k iterations with SHA-256 - OWASP 2023 compliant. Military-grade password hashing with 120 years crack resistance.",

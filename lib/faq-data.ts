@@ -91,4 +91,16 @@ export const faqData: FAQItem[] = [
     question: "How do I customize keyboard shortcuts?",
     answer: "Go to your browser's extension settings (chrome://extensions/shortcuts or about:addons in Firefox), find Locksy, and customize the shortcuts to your preference.",
   },
+  {
+    question: "What is Stealth Mode?",
+    answer: "Stealth Mode makes Locksy completely invisible. The badge counter on the extension icon disappears, all browser notifications are silenced, and locked tabs are disguised as a \"This site can't be reached\" error page — no one will know you're using Locksy. Toggle it from the popup, the right-click menu, or with Alt+Shift+7. Your preference is saved and survives browser restarts.",
+  },
+  {
+    question: "How do right-click context menus work?",
+    answer: "Right-click on any page, link, image, or selected text and you'll see a Locksy sub-menu with quick actions: Lock this tab, Lock this domain, Lock all tabs, and Toggle Stealth Mode. It's the fastest way to use Locksy without opening the popup.",
+  },
+  {
+    question: "Can I switch between light and dark themes?",
+    answer: "Yes! Locksy v2.5.0 includes a persistent theme toggle in the popup header. Choose between Light ☀️ and Dark 🌙 modes — your preference syncs instantly across all Locksy pages (including the lock screen) without a page reload and is remembered across sessions.",
+  },
 ]
