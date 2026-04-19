@@ -8,7 +8,7 @@ const PLATFORMS = [
   {
     icon: (
       <svg viewBox="0 0 24 24" className="w-7 h-7" fill="currentColor">
-        <path d="M3 12C3 7.03 7.03 3 12 3s9 4.03 9 9-4.03 9-9 9-9-4.03-9-9zm9-7C8.13 5 5 8.13 5 12s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 2c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5z"/>
+        <path d="M3 12C3 7.03 7.03 3 12 3s9 4.03 9 9-4.03 9-9 9-9-4.03-9-9zm9-7C8.13 5 5 8.13 5 12s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 2c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5z" />
       </svg>
     ),
     label: "Windows Hello",
@@ -22,7 +22,7 @@ const PLATFORMS = [
   {
     icon: (
       <svg viewBox="0 0 24 24" className="w-7 h-7" fill="currentColor">
-        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.44c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.39-1.32 2.76-2.53 3.95zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.44c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.39-1.32 2.76-2.53 3.95zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
       </svg>
     ),
     label: "Touch ID",
@@ -36,7 +36,7 @@ const PLATFORMS = [
   {
     icon: (
       <svg viewBox="0 0 24 24" className="w-7 h-7" fill="currentColor">
-        <path d="M9 3C6.25 3 4 5.25 4 8s2.25 5 5 5 5-2.25 5-5-2.25-5-5-5zm0 2c1.65 0 3 1.35 3 3S10.65 11 9 11 6 9.65 6 8s1.35-3 3-3zm0 10c-3.87 0-7 1.57-7 3.5V20h14v-1.5C16 14.57 12.87 13 9 13zm6.54.35C16.7 14.23 18 15.36 18 16.5V20h2v-3.5c0-1.58-2.25-2.9-4.46-3.15zM15 3.12A5 5 0 0 1 15 13a5 5 0 0 0 0-9.88z"/>
+        <path d="M9 3C6.25 3 4 5.25 4 8s2.25 5 5 5 5-2.25 5-5-2.25-5-5-5zm0 2c1.65 0 3 1.35 3 3S10.65 11 9 11 6 9.65 6 8s1.35-3 3-3zm0 10c-3.87 0-7 1.57-7 3.5V20h14v-1.5C16 14.57 12.87 13 9 13zm6.54.35C16.7 14.23 18 15.36 18 16.5V20h2v-3.5c0-1.58-2.25-2.9-4.46-3.15zM15 3.12A5 5 0 0 1 15 13a5 5 0 0 0 0-9.88z" />
       </svg>
     ),
     label: "Face ID",
@@ -50,7 +50,7 @@ const PLATFORMS = [
   {
     icon: (
       <svg viewBox="0 0 24 24" className="w-7 h-7" fill="currentColor">
-        <path d="M6 2a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H6zm6 18a1.5 1.5 0 0 1 0-3 1.5 1.5 0 0 1 0 3zM7 7.5A4.5 4.5 0 0 1 11.5 3v1A3.5 3.5 0 0 0 8 7.5H7zM11.5 5V3A4.5 4.5 0 0 1 16 7.5h-1A3.5 3.5 0 0 0 11.5 5z"/>
+        <path d="M6 2a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H6zm6 18a1.5 1.5 0 0 1 0-3 1.5 1.5 0 0 1 0 3zM7 7.5A4.5 4.5 0 0 1 11.5 3v1A3.5 3.5 0 0 0 8 7.5H7zM11.5 5V3A4.5 4.5 0 0 1 16 7.5h-1A3.5 3.5 0 0 0 11.5 5z" />
       </svg>
     ),
     label: "Android Biometrics",
@@ -64,7 +64,7 @@ const PLATFORMS = [
   {
     icon: (
       <svg viewBox="0 0 24 24" className="w-7 h-7" fill="currentColor">
-        <path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.68-.2-.13-.24-.04-.55.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67-.09.18-.26.28-.44.28zM3.5 9.72a.499.499 0 0 1-.373-.836C5.272 6.53 8.542 5 12.014 5c3.472 0 6.741 1.53 8.887 3.884a.5.5 0 1 1-.747.666C18.163 7.387 15.203 6 12.014 6 8.824 6 5.864 7.387 3.87 9.55a.497.497 0 0 1-.37.17zm3.93 3.81a.5.5 0 0 1-.31-.88A8.01 8.01 0 0 1 12 11a8 8 0 0 1 4.873 1.66.5.5 0 0 1-.619.789A7.012 7.012 0 0 0 12 12a7.01 7.01 0 0 0-4.255 1.451.5.5 0 0 1-.315.089zM12 17c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm0-4c-.83 0-1.5.67-1.5 1.5S11.17 16 12 16s1.5-.67 1.5-1.5S12.83 13 12 13z"/>
+        <path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.68-.2-.13-.24-.04-.55.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67-.09.18-.26.28-.44.28zM3.5 9.72a.499.499 0 0 1-.373-.836C5.272 6.53 8.542 5 12.014 5c3.472 0 6.741 1.53 8.887 3.884a.5.5 0 1 1-.747.666C18.163 7.387 15.203 6 12.014 6 8.824 6 5.864 7.387 3.87 9.55a.497.497 0 0 1-.37.17zm3.93 3.81a.5.5 0 0 1-.31-.88A8.01 8.01 0 0 1 12 11a8 8 0 0 1 4.873 1.66.5.5 0 0 1-.619.789A7.012 7.012 0 0 0 12 12a7.01 7.01 0 0 0-4.255 1.451.5.5 0 0 1-.315.089zM12 17c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm0-4c-.83 0-1.5.67-1.5 1.5S11.17 16 12 16s1.5-.67 1.5-1.5S12.83 13 12 13z" />
       </svg>
     ),
     label: "USB Security Keys",
@@ -186,8 +186,8 @@ export default function BiometricUnlock() {
         {/* ── Section Header ───────────────────────────────────────── */}
         <div className="text-center mb-14 md:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full text-xs sm:text-sm font-bold mb-6 shadow-lg">
-            <span>🆕</span>
-            NEW IN v2.3.0
+            <span>🫆</span>
+            Biometric Unlock
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 dark:from-violet-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent leading-tight">
             Unlock with a Touch.<br className="hidden sm:block" /> No Password Typing.
@@ -208,13 +208,12 @@ export default function BiometricUnlock() {
 
               {/* Glow ring behind card */}
               <div
-                className={`absolute inset-0 rounded-3xl blur-2xl transition-all duration-700 ${
-                  unlockState === "success"
-                    ? "bg-gradient-to-br from-emerald-400/30 to-teal-400/30 scale-105"
-                    : unlockState === "scanning"
+                className={`absolute inset-0 rounded-3xl blur-2xl transition-all duration-700 ${unlockState === "success"
+                  ? "bg-gradient-to-br from-emerald-400/30 to-teal-400/30 scale-105"
+                  : unlockState === "scanning"
                     ? "bg-gradient-to-br from-indigo-400/25 to-violet-400/25 scale-102"
                     : "bg-gradient-to-br from-violet-400/15 to-indigo-400/15"
-                }`}
+                  }`}
               />
 
               {/* Card */}
@@ -250,13 +249,12 @@ export default function BiometricUnlock() {
 
                     {/* Main icon circle */}
                     <div
-                      className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl transition-all duration-500 shadow-lg ${
-                        unlockState === "success"
-                          ? "bg-gradient-to-br from-emerald-400 to-teal-500 scale-110"
-                          : unlockState === "scanning"
+                      className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl transition-all duration-500 shadow-lg ${unlockState === "success"
+                        ? "bg-gradient-to-br from-emerald-400 to-teal-500 scale-110"
+                        : unlockState === "scanning"
                           ? "bg-gradient-to-br from-indigo-500 to-violet-600 scale-105"
                           : "bg-gradient-to-br from-violet-500 to-indigo-600"
-                      }`}
+                        }`}
                     >
                       {unlockState === "success" ? "✓" : "👆"}
                     </div>
@@ -265,13 +263,12 @@ export default function BiometricUnlock() {
                   {/* Status text */}
                   <div className="text-center space-y-1">
                     <p
-                      className={`font-bold text-lg transition-colors duration-300 ${
-                        unlockState === "success"
-                          ? "text-emerald-600"
-                          : unlockState === "scanning"
+                      className={`font-bold text-lg transition-colors duration-300 ${unlockState === "success"
+                        ? "text-emerald-600"
+                        : unlockState === "scanning"
                           ? "text-indigo-600"
                           : "text-foreground"
-                      }`}
+                        }`}
                     >
                       {unlockState === "idle" && "Tab Locked"}
                       {unlockState === "locked" && "Touch to Unlock"}
@@ -288,9 +285,8 @@ export default function BiometricUnlock() {
 
                   {/* Progress bar (visible when scanning) */}
                   <div
-                    className={`w-full transition-opacity duration-300 ${
-                      unlockState === "scanning" ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`w-full transition-opacity duration-300 ${unlockState === "scanning" ? "opacity-100" : "opacity-0"
+                      }`}
                   >
                     <div className="w-full bg-primary/10 rounded-full h-1.5 overflow-hidden">
                       <div
@@ -312,11 +308,10 @@ export default function BiometricUnlock() {
                     onClick={handleManualTrigger}
                     disabled={unlockState === "scanning"}
                     aria-label="Demo biometric unlock"
-                    className={`w-full py-3 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                      unlockState === "success"
-                        ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
-                        : "bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-wait"
-                    }`}
+                    className={`w-full py-3 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${unlockState === "success"
+                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                      : "bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-wait"
+                      }`}
                   >
                     {unlockState === "success" ? "✓ Unlocked" : "👆 Try Biometric Demo"}
                   </button>
@@ -407,26 +402,6 @@ export default function BiometricUnlock() {
                 <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
               </div>
             ))}
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary btn-lg inline-flex items-center justify-center gap-2"
-            >
-              <img src="/browsers/chrome.png" alt="Chrome" className="w-5 h-5 flex-shrink-0" />
-              Get Locksy v2.3.0
-            </a>
-            <a
-              href="https://github.com/vansh-121/Locksy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary btn-lg inline-flex items-center justify-center gap-2"
-            >
-              View Source on GitHub
-            </a>
           </div>
         </div>
 

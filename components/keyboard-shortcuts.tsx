@@ -21,6 +21,13 @@ export default function KeyboardShortcuts() {
             icon: "⚡",
             gradient: "from-orange-500 via-red-500 to-pink-500",
         },
+        {
+            keys: ["Alt", "Shift", "7"],
+            action: "Toggle Stealth Mode",
+            description: "Instantly hide all Locksy indicators — badge, notifications, and lock screen disguised",
+            icon: "🕵️",
+            gradient: "from-purple-500 via-violet-500 to-indigo-500",
+        },
     ]
 
     return (
@@ -47,7 +54,7 @@ export default function KeyboardShortcuts() {
 
                 {/* Shortcuts - Bento Box Style */}
                 <div className="max-w-6xl mx-auto mb-20">
-                    <div className="grid md:grid-cols-3 gap-6">
+                    <div className="grid md:grid-cols-2 gap-6">
                         {shortcuts.map((shortcut, idx) => (
                             <div
                                 key={idx}

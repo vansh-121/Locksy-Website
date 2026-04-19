@@ -32,7 +32,16 @@ const keywords = [
     'free tab locker extension',
     'locksy tab locker',
     'automated tab security',
-    'browser tab automation'
+    'browser tab automation',
+    'stealth mode browser extension',
+    'right-click lock browser tab',
+    'context menu tab protection',
+    'dark mode browser extension',
+    'browser extension theme toggle',
+    'hide locked tabs',
+    'invisible tab locker',
+    'disguise locked tabs',
+    'right-click tab locker',
 ]
 
 export const metadata: Metadata = {
@@ -111,7 +120,7 @@ export const metadata: Metadata = {
         'ai:description': siteDescription,
         'ai:category': 'Browser Extension for Tab Security',
         'ai:use_case': 'Password protection for browser tabs with PBKDF2 (600k iterations) and AES-256 encryption',
-        'ai:features': 'Password protect tabs, PBKDF2 600k iterations, rate limiting, domain lock, keyboard shortcuts, visual indicators, incognito support, 8+ security layers, offline operation, free forever',
+        'ai:features': 'Password protect tabs, PBKDF2 600k iterations, rate limiting, domain lock, keyboard shortcuts, visual indicators, incognito support, 8+ security layers, offline operation, biometric unlock (WebAuthn/FIDO2), right-click context menus, stealth mode (disguise locked tabs), persistent light/dark theme toggle, free forever',
         'ai:target_audience': 'Users who need to secure sensitive browser tabs on shared computers',
     }
 }
@@ -158,7 +167,7 @@ export const jsonLdSoftwareApplication = {
         priceCurrency: 'USD'
     },
     description: siteDescription,
-    softwareVersion: '2.3.0',
+    softwareVersion: '2.5.0',
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
     featureList: [
@@ -175,6 +184,10 @@ export const jsonLdSoftwareApplication = {
         '100% offline operation',
         'No data collection',
         'Smart unlock preferences',
+        'Biometric unlock with WebAuthn / FIDO2',
+        'Right-click context menus for instant tab locking',
+        'Stealth Mode — disguise locked tabs as connection errors',
+        'Persistent light/dark theme toggle',
         'Free forever'
     ]
 }
