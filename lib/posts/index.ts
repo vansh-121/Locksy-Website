@@ -51,6 +51,9 @@ import post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_
 import post_why_incognito_mode_is_not_enough_for_browser_privacy from './why-incognito-mode-is-not-enough-for-browser-privacy'
 import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs from './why-smart-people-use-domain-rules-instead-of-manually-locking-tabs'
 import post_why_your_browser_history_is_worth_more_than_you_think from './why-your-browser-history-is-worth-more-than-you-think'
+import post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle from './whats-new-in-locksy-v250-context-menus-stealth-mode-theme-toggle'
+import post_how_to_lock_browser_tabs_with_right_click_context_menus from './how-to-lock-browser-tabs-with-right-click-context-menus'
+import post_stealth_mode_how_to_make_your_tab_locker_completely_invisible from './stealth-mode-how-to-make-your-tab-locker-completely-invisible'
 
 export const allPosts = [
     ...legacyPosts,
@@ -99,4 +102,8 @@ export const allPosts = [
     post_why_incognito_mode_is_not_enough_for_browser_privacy,
     post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs,
     post_why_your_browser_history_is_worth_more_than_you_think,
+    post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle,
+    post_how_to_lock_browser_tabs_with_right_click_context_menus,
+    post_stealth_mode_how_to_make_your_tab_locker_completely_invisible,
 ]
+

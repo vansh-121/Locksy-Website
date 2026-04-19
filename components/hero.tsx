@@ -180,13 +180,13 @@ export default function Hero() {
           {/* Left: Content */}
           <div className="space-y-10 z-10">
             {/* Badges */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
               <a
-                href="#biometric-unlock"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                href="#whats-new-v250"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
-                <span>👆</span>
-                NEW: Biometric Unlock
+                <span>🚀</span>
+                WHAT'S NEW IN v2.5.0
               </a>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
@@ -206,7 +206,7 @@ export default function Hero() {
                 Protection
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Password-protect any browser tab or lock entire domains with persistent protection. Now with Auto-Lock Timer and Scheduled Locking for ultimate privacy on autopilot.
+                Password-protect any browser tab or lock entire domains with persistent protection. Now with right-click context menus, stealth mode, and a light/dark theme toggle.
               </p>
             </div>
 

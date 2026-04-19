@@ -3,6 +3,7 @@ import Hero from "@/components/hero"
 import AutomationFeatures from "@/components/automation-features"
 import DomainLock from "@/components/domain-lock"
 import BiometricUnlock from "@/components/biometric-unlock"
+import WhatsNewV250 from "@/components/whats-new-v250"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
 import KeyboardShortcuts from "@/components/keyboard-shortcuts"
@@ -44,8 +45,13 @@ export default function Home() {
           {/* NEW v2.3.0 — Biometric Unlock */}
           <BiometricUnlock />
 
+
+
           {/* Showcase NEW v2.2.0 automation features prominently */}
           <AutomationFeatures />
+
+          {/* NEW v2.5.0 — Context Menus, Stealth Mode, Theme Toggle */}
+          <WhatsNewV250 />
 
           {/* Another major feature - Domain Lock */}
           <div id="domain-lock">
