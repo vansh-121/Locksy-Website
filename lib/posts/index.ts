@@ -17,6 +17,7 @@ import post_cryptocurrency_wallet_tab_security_protecting_your_digital_assets fr
 import post_dark_mode_security_why_your_eyes_and_your_privacy_benefit from './dark-mode-security-why-your-eyes-and-your-privacy-benefit'
 import post_essential_browser_security_checklist_for_small_businesses from './essential-browser-security-checklist-for-small-businesses'
 import post_firefox_vs_chrome_vs_edge_which_browser_is_most_secure_in_2026 from './firefox-vs-chrome-vs-edge-which-browser-is-most-secure-in-2026'
+import post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know_real_world_cases from './gdpr-compliance-and-browser-tab-data-what-you-need-to-know-real-world-cases'
 import post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know from './gdpr-compliance-and-browser-tab-data-what-you-need-to-know'
 import post_how_ai_powered_browser_security_is_changing_tab_protection from './how-ai-powered-browser-security-is-changing-tab-protection'
 import post_how_browser_extensions_defend_against_brute_force_password_attacks_beginners_guide from './how-browser-extensions-defend-against-brute-force-password-attacks-beginners-guide'
@@ -28,6 +29,7 @@ import post_how_password_based_encryption_protects_your_locked_tabs from './how-
 import post_how_remote_workers_can_protect_sensitive_browser_tabs_faq from './how-remote-workers-can-protect-sensitive-browser-tabs-faq'
 import post_how_remote_workers_can_protect_sensitive_browser_tabs from './how-remote-workers-can-protect-sensitive-browser-tabs'
 import post_how_tab_locking_prevents_vpn_bypass_attacks from './how-tab-locking-prevents-vpn-bypass-attacks'
+import post_how_to_lock_browser_tabs_with_right_click_context_menus from './how-to-lock-browser-tabs-with-right-click-context-menus'
 import post_how_to_protect_healthcare_provider_tabs_from_cybercriminals from './how-to-protect-healthcare-provider-tabs-from-cybercriminals'
 import post_how_to_protect_your_browser_on_public_wifi_networks from './how-to-protect-your-browser-on-public-wifi-networks'
 import post_how_to_set_up_auto_lock_for_banking_and_financial_tabs from './how-to-set-up-auto-lock-for-banking-and-financial-tabs'
@@ -42,18 +44,17 @@ import post_screen_recording_protection_hiding_tabs_from_screen_captures_common_
 import post_screen_recording_protection_hiding_tabs_from_screen_captures from './screen-recording-protection-hiding-tabs-from-screen-captures'
 import post_social_engineering_attacks_through_browser_tabs_how_to_defend_vs_alternatives from './social-engineering-attacks-through-browser-tabs-how-to-defend-vs-alternatives'
 import post_social_engineering_attacks_through_browser_tabs_how_to_defend from './social-engineering-attacks-through-browser-tabs-how-to-defend'
+import post_stealth_mode_how_to_make_your_tab_locker_completely_invisible from './stealth-mode-how-to-make-your-tab-locker-completely-invisible'
 import post_tab_overload_how_too_many_open_tabs_compromise_your_security_common_mistakes from './tab-overload-how-too-many-open-tabs-compromise-your-security-common-mistakes'
 import post_tab_overload_how_too_many_open_tabs_compromise_your_security from './tab-overload-how-too-many-open-tabs-compromise-your-security'
 import post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits from './the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits'
 import post_the_future_of_browser_security_predictions_for_2027 from './the-future-of-browser-security-predictions-for-2027'
 import post_understanding_zero_knowledge_architecture_in_browser_extensions from './understanding-zero-knowledge-architecture-in-browser-extensions'
+import post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle from './whats-new-in-locksy-v250-context-menus-stealth-mode-theme-toggle'
 import post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it from './why-an-idle-browser-is-a-security-risk-and-how-auto-lock-timers-fix-it'
 import post_why_incognito_mode_is_not_enough_for_browser_privacy from './why-incognito-mode-is-not-enough-for-browser-privacy'
 import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs from './why-smart-people-use-domain-rules-instead-of-manually-locking-tabs'
 import post_why_your_browser_history_is_worth_more_than_you_think from './why-your-browser-history-is-worth-more-than-you-think'
-import post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle from './whats-new-in-locksy-v250-context-menus-stealth-mode-theme-toggle'
-import post_how_to_lock_browser_tabs_with_right_click_context_menus from './how-to-lock-browser-tabs-with-right-click-context-menus'
-import post_stealth_mode_how_to_make_your_tab_locker_completely_invisible from './stealth-mode-how-to-make-your-tab-locker-completely-invisible'
 
 export const allPosts = [
     ...legacyPosts,
@@ -68,6 +69,7 @@ export const allPosts = [
     post_dark_mode_security_why_your_eyes_and_your_privacy_benefit,
     post_essential_browser_security_checklist_for_small_businesses,
     post_firefox_vs_chrome_vs_edge_which_browser_is_most_secure_in_2026,
+    post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know_real_world_cases,
     post_gdpr_compliance_and_browser_tab_data_what_you_need_to_know,
     post_how_ai_powered_browser_security_is_changing_tab_protection,
     post_how_browser_extensions_defend_against_brute_force_password_attacks_beginners_guide,
@@ -79,6 +81,7 @@ export const allPosts = [
     post_how_remote_workers_can_protect_sensitive_browser_tabs_faq,
     post_how_remote_workers_can_protect_sensitive_browser_tabs,
     post_how_tab_locking_prevents_vpn_bypass_attacks,
+    post_how_to_lock_browser_tabs_with_right_click_context_menus,
     post_how_to_protect_healthcare_provider_tabs_from_cybercriminals,
     post_how_to_protect_your_browser_on_public_wifi_networks,
     post_how_to_set_up_auto_lock_for_banking_and_financial_tabs,
@@ -93,17 +96,15 @@ export const allPosts = [
     post_screen_recording_protection_hiding_tabs_from_screen_captures,
     post_social_engineering_attacks_through_browser_tabs_how_to_defend_vs_alternatives,
     post_social_engineering_attacks_through_browser_tabs_how_to_defend,
+    post_stealth_mode_how_to_make_your_tab_locker_completely_invisible,
     post_tab_overload_how_too_many_open_tabs_compromise_your_security_common_mistakes,
     post_tab_overload_how_too_many_open_tabs_compromise_your_security,
     post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits,
     post_the_future_of_browser_security_predictions_for_2027,
     post_understanding_zero_knowledge_architecture_in_browser_extensions,
+    post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle,
     post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it,
     post_why_incognito_mode_is_not_enough_for_browser_privacy,
     post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs,
     post_why_your_browser_history_is_worth_more_than_you_think,
-    post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle,
-    post_how_to_lock_browser_tabs_with_right_click_context_menus,
-    post_stealth_mode_how_to_make_your_tab_locker_completely_invisible,
 ]
-
