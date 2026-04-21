@@ -50,6 +50,7 @@ import post_tab_overload_how_too_many_open_tabs_compromise_your_security from '.
 import post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits from './the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits'
 import post_the_future_of_browser_security_predictions_for_2027 from './the-future-of-browser-security-predictions-for-2027'
 import post_understanding_zero_knowledge_architecture_in_browser_extensions from './understanding-zero-knowledge-architecture-in-browser-extensions'
+import post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_how_to_guide from './what-happens-when-someone-accesses-your-unlocked-browser-tabs-how-to-guide'
 import post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle from './whats-new-in-locksy-v250-context-menus-stealth-mode-theme-toggle'
 import post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it from './why-an-idle-browser-is-a-security-risk-and-how-auto-lock-timers-fix-it'
 import post_why_incognito_mode_is_not_enough_for_browser_privacy from './why-incognito-mode-is-not-enough-for-browser-privacy'
@@ -102,6 +103,7 @@ export const allPosts = [
     post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits,
     post_the_future_of_browser_security_predictions_for_2027,
     post_understanding_zero_knowledge_architecture_in_browser_extensions,
+    post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_how_to_guide,
     post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle,
     post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it,
     post_why_incognito_mode_is_not_enough_for_browser_privacy,
