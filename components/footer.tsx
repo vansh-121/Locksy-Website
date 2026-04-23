@@ -98,7 +98,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#features" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <a href="/#features" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Features
                 </a>
@@ -114,7 +114,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="#faq" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <a href="/#faq" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   FAQ
                 </a>

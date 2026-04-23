@@ -48,6 +48,3 @@ Allow: /
 
 User-agent: YouBot
 Allow: /
-
-# Crawl delay (optional, reduces server load)
-Crawl-delay: 1
