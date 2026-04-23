@@ -60,23 +60,9 @@ export async function POST(request: Request) {
         }
     }
 
-    // 2. Ping Google's sitemap endpoint
-    try {
-        const googlePing = await fetch(
-            `https://www.google.com/ping?sitemap=${encodeURIComponent(SITEMAP_URL)}`
-        )
-        results.push({
-            step: 'Google Sitemap Ping',
-            status: googlePing.ok ? 'ok' : 'failed',
-            detail: `HTTP ${googlePing.status}`,
-        })
-    } catch (error) {
-        results.push({
-            step: 'Google Sitemap Ping',
-            status: 'error',
-            detail: String(error),
-        })
-    }
+    // Note: Google deprecated their sitemap ping endpoint in early 2024 (it now returns 404),
+    // so we rely on Google reading our robots.txt and sitemap.xml normally,
+    // or through Google Search Console submissions.
 
     // 3. Ping PubSubHubbub for RSS readers
     try {
