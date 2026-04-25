@@ -53,6 +53,7 @@ import post_the_future_of_browser_security_predictions_for_2027_beginners_guide 
 import post_the_future_of_browser_security_predictions_for_2027 from './the-future-of-browser-security-predictions-for-2027'
 import post_the_psychology_of_digital_privacy_why_people_ignore_tab_security_top_benefits from './the-psychology-of-digital-privacy-why-people-ignore-tab-security-top-benefits'
 import post_understanding_zero_knowledge_architecture_in_browser_extensions from './understanding-zero-knowledge-architecture-in-browser-extensions'
+import post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_common_mistakes from './what-happens-when-someone-accesses-your-unlocked-browser-tabs-common-mistakes'
 import post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_how_to_guide from './what-happens-when-someone-accesses-your-unlocked-browser-tabs-how-to-guide'
 import post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle from './whats-new-in-locksy-v250-context-menus-stealth-mode-theme-toggle'
 import post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it from './why-an-idle-browser-is-a-security-risk-and-how-auto-lock-timers-fix-it'
@@ -109,6 +110,7 @@ export const allPosts = [
     post_the_future_of_browser_security_predictions_for_2027,
     post_the_psychology_of_digital_privacy_why_people_ignore_tab_security_top_benefits,
     post_understanding_zero_knowledge_architecture_in_browser_extensions,
+    post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_common_mistakes,
     post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_how_to_guide,
     post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle,
     post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it,
