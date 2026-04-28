@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { blogPosts, getBlogPost, getRelatedPosts } from '@/lib/blog-data'
+import { blogPosts, getBlogPost, getRelatedPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
 import { BlogPostClient } from './blog-post-client'
 
 export async function generateStaticParams() {
@@ -8,38 +8,6 @@ export async function generateStaticParams() {
         slug: post.slug,
     }))
 }
-
-// Duplicate/variant blog posts that should be noindexed to avoid
-// Google's "thin content" / "low value content" penalty.
-// These are near-duplicates of other posts with minor variations.
-const NOINDEX_SLUGS = new Set([
-    // Variant duplicates — each has a "main" version plus extras
-    'essential-browser-security-checklist-for-small-businesses-common-mistakes',
-    'how-browser-extensions-defend-against-brute-force-password-attacks-beginners-guide',
-    'how-browser-extensions-defend-against-brute-force-password-attacks-real-world-cases',
-    'how-ai-powered-browser-security-is-changing-tab-protection-intermediate-tips',
-    'how-remote-workers-can-protect-sensitive-browser-tabs-faq',
-    'gdpr-compliance-and-browser-tab-data-what-you-need-to-know-real-world-cases',
-    'screen-recording-protection-hiding-tabs-from-screen-captures-common-mistakes',
-    'social-engineering-attacks-through-browser-tabs-how-to-defend-vs-alternatives',
-    'how-webauthn-and-fido2-biometrics-are-changing-browser-security-common-mistakes',
-    'what-happens-when-someone-accesses-your-unlocked-browser-tabs-common-mistakes',
-    'what-happens-when-someone-accesses-your-unlocked-browser-tabs-how-to-guide',
-    'tab-overload-how-too-many-open-tabs-compromise-your-security-common-mistakes',
-    'the-future-of-browser-security-predictions-for-2027-beginners-guide',
-    'why-smart-people-use-domain-rules-instead-of-manually-locking-tabs-beginners-guide',
-    'remote-access-software-security-locking-sensitive-tabs-during-screen-sharing-beginners-guide',
-    'the-psychology-of-digital-privacy-why-people-ignore-tab-security-top-benefits',
-
-    // Ultra-thin/stub posts — too short for AdSense quality standards
-    'why-your-open-browser-tabs-are-a-security-risk-in-2026',         // 113 words (stub)
-    'how-to-create-an-unbreakable-master-password-for-tab-security',  // 305 words (stub)
-
-    // Short legacy posts — below modern content depth threshold
-    'keyboard-shortcuts-for-tab-security',                            // 1,005 words
-    'how-to-password-protect-browser-tabs',                           // 1,095 words
-    'protect-banking-tabs-from-prying-eyes',                          // 1,243 words
-])
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params

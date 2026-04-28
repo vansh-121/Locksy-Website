@@ -21,7 +21,7 @@ export const blogPosts: BlogPost[] = allPosts as BlogPost[]
 
 // Posts that are noindexed due to thin content or duplication.
 // These should NOT appear in listing pages, homepage, or category filters.
-const HIDDEN_SLUGS = new Set([
+export const NOINDEX_SLUGS = new Set([
     // Variant duplicates
     'essential-browser-security-checklist-for-small-businesses-common-mistakes',
     'how-browser-extensions-defend-against-brute-force-password-attacks-beginners-guide',
@@ -50,7 +50,7 @@ const HIDDEN_SLUGS = new Set([
 
 // Filtered posts — used for blog listing, homepage, categories, tags, etc.
 export const filteredBlogPosts: BlogPost[] = blogPosts.filter(
-    post => !HIDDEN_SLUGS.has(post.slug)
+    post => !NOINDEX_SLUGS.has(post.slug)
 )
 
 // Helper function to get a single blog post by slug
