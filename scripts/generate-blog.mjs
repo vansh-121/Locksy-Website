@@ -584,22 +584,31 @@ async function generateTopicsAI(count = 20) {
 
     const prompt = `You are a content strategist for "Locksy", a browser extension that password-protects and organizes browser tabs.
 
-Generate ${count} unique, actionable blog topic ideas for a technical blog about browser security, privacy, and productivity. Each topic should:
-1. Be relevant to Locksy's features: tab locking, password protection, auto-lock timers, domain-based rules, biometric unlock, etc.
-2. Encourage users to adopt Locksy by positioning it as a solution to real problems
-3. Have action-oriented, specific titles (NOT generic)
-4. Cover different angles: tutorials, comparisons, technical deep-dives, use cases, best practices
+Generate ${count} unique, actionable blog topic ideas for a technical blog about browser security, privacy, and productivity.
+
+CRITICAL — ADSENSE COMPLIANCE:
+- Each topic MUST be genuinely unique — NOT a variation/angle of another topic
+- NO "beginners guide to X", "common mistakes in X", "FAQ about X" versions of the same subject
+- Each topic should cover a DIFFERENT subject area, problem, or technology
+- Topics must have enough depth for a 2500-4000 word article with real technical substance
+- Every topic should be able to stand alone as a valuable resource
+
+Each topic should:
+1. Be relevant to browser security, privacy, tab protection, or productivity
+2. Have action-oriented, specific titles (NOT generic)
+3. Cover genuinely different angles: tutorials, comparisons, technical deep-dives, use cases, best practices
+4. NOT overlap with these existing topics: remote work security, PBKDF2 encryption, public WiFi, tab management, incognito mode, browser history, social engineering, GDPR, zero-trust, auto-lock
 
 Examples of good topics:
-- "Why Incognito Mode Won't Protect Your Banking Tabs (But Locksy Will)"
-- "How Locksy's Domain Rules Eliminate Tab Management Chaos"
-- "Biometric Unlock for Tabs: The Future of Browser Security"
-- "Why Shared Computer Users Need a Password-Protected Tab Locker"
+- "How Cross-Site Scripting (XSS) Puts Your Open Tabs at Risk"
+- "Building a Browser Security Audit Checklist for IT Teams"
+- "The Hidden Dangers of Browser Sync: When Convenience Becomes a Vulnerability"
+- "How to Secure Shared Login Sessions Without Logging Out"
 
 Return ONLY a valid JSON array (no other text) with this structure:
 [
     {
-        "title": "Specific, actionable title about Locksy feature or problem it solves",
+        "title": "Specific, actionable title about a unique security/privacy topic",
         "category": "Tutorial|Security|Technical|Productivity|Comparison|Research",
         "keywords": ["keyword1", "keyword2", "keyword3", "keyword4"],
         "tags": ["tag1", "tag2", "tag3"]
@@ -607,7 +616,7 @@ Return ONLY a valid JSON array (no other text) with this structure:
     ...
 ]
 
-Ensure titles are unique and specific. Include Locksy or its benefits naturally in titles.`
+Ensure each title covers a genuinely different subject. No two topics should be answerable with the same article.`
 
     try {
         const data = await retryWithBackoff(async () => {
@@ -655,40 +664,12 @@ Ensure titles are unique and specific. Include Locksy or its benefits naturally 
     }
 }
 
-/**
- * Generate topic variations with different angles
- * Each topic becomes 10 separate variations for different content angles
- * 
- * Angles: beginner, intermediate, advanced, mistakes, comparisons, how-to, benefits, pro-tips, use-cases, faq
- */
-function generateVariations(topic) {
-    const angles = [
-        { suffix: 'beginners-guide', label: 'Beginner\'s Guide', instruction: 'Write this as an absolute beginner\'s guide for users new to Locksy. Use simple, non-technical language and explain basics thoroughly.' },
-        { suffix: 'intermediate-tips', label: 'Intermediate Tips', instruction: 'Write this targeting users who are comfortable with Locksy. Include intermediate techniques and workflow optimizations.' },
-        { suffix: 'advanced-techniques', label: 'Advanced Techniques', instruction: 'Write this for power users seeking advanced techniques, optimizations, and deep technical understanding.' },
-        { suffix: 'common-mistakes', label: 'Common Mistakes', instruction: 'Focus on mistakes users make and pitfalls to avoid. Help readers learn from errors.' },
-        { suffix: 'vs-alternatives', label: 'Comparisons', instruction: 'Write a comparison/competitive analysis that highlights why the Locksy approach (or Locksy itself) is superior. Be objective but emphasize advantages.' },
-        { suffix: 'how-to-guide', label: 'How-To Guide', instruction: 'Write a step-by-step how-to guide with actionable instructions and clear procedures.' },
-        { suffix: 'top-benefits', label: 'Top Benefits', instruction: 'Focus on benefits, advantages, and why this topic matters. Emphasize value proposition and real-world benefits.' },
-        { suffix: 'pro-tips', label: 'Pro Tips & Tricks', instruction: 'Write insider tips, tricks, and expert-level insights. Include practical, immediately-useful advice.' },
-        { suffix: 'real-world-cases', label: 'Real-World Use Cases', instruction: 'Use concrete real-world scenarios and practical examples. Tell stories about how this applies in actual use.' },
-        { suffix: 'faq', label: 'FAQ', instruction: 'Write in a Q&A format addressing common questions, misconceptions, and frequent concerns about this topic. Use conversational tone.' }
-    ]
-
-    return angles.map(angle => ({
-        ...topic,
-        slug: `${slugify(topic.title)}-${angle.suffix}`,
-        title: `${topic.title} - ${angle.label}`,
-        angle: angle.label,
-        variationAngle: angle.suffix,
-        variationInstruction: angle.instruction,
-        // Add variation-specific keywords
-        keywords: [
-            ...topic.keywords,
-            angle.label.toLowerCase().replace(/[^\w\s]/g, '')
-        ]
-    }))
-}
+// IMPORTANT: NO MORE VARIATIONS.
+// Previously each topic spawned 10 near-duplicate "variations" (beginners-guide,
+// common-mistakes, FAQ, etc.) which Google flagged as mass-produced thin content.
+// Now each topic produces exactly ONE unique, high-quality article.
+//
+// Minimum quality gate: articles under 1800 words are rejected.
 
 async function generateBlogContent(topic) {
     const apiKey = process.env.GEMINI_API_KEY
@@ -701,10 +682,16 @@ async function generateBlogContent(topic) {
     const shuffledImages = shuffleArray([...INLINE_IMAGE_POOL])
     const selectedImages = shuffledImages.slice(0, 3)
 
-    // Build prompt with optional variation instruction
-    const variationInstruction = topic.variationInstruction ? `\nCONTENT ANGLE:\n${topic.variationInstruction}\n` : ''
-
     const prompt = `You are a seasoned tech blogger who writes for Medium, who has deep expertise in browser security, privacy, and productivity. Your readers trust you because you write with authentic personality, real opinions, and genuine experience. You absolutely NEVER sound like an AI or corporate marketing.
+
+CRITICAL — GOOGLE ADSENSE COMPLIANCE:
+This article MUST pass Google AdSense's "high value content" review. That means:
+- Every paragraph must provide GENUINE, UNIQUE value that a reader cannot easily find elsewhere
+- NO filler paragraphs, NO generic advice, NO padding. Every sentence must earn its place
+- Include SPECIFIC data, statistics, technical details, or actionable steps — not vague generalities
+- The article must stand on its own as a useful resource even without mentioning Locksy
+- Do NOT repeat the same point in different words. Say it once, say it well, move on
+- Include at least ONE original insight, framework, or recommendation that demonstrates expertise
 
 Your sole job: Write a compelling, human-sounding long-form essay about "${topic.title}"
 
@@ -776,10 +763,10 @@ ARTICLE STRUCTURE:
 - Use images at natural breaks: after a major section or between paragraphs
 - End with a genuine conclusion or insight (not a summary)
 
-TOPIC & VARIATION:
+TOPIC:
 Topic: "${topic.title}"
 Category: ${topic.category}
-Keywords to weave naturally: ${topic.keywords.join(', ')}${variationInstruction}
+Keywords to weave naturally: ${topic.keywords.join(', ')}
 
 INLINE IMAGES:
 Include these 2-3 images naturally throughout the article (at section breaks or between paragraphs). Use EXACTLY these markdown syntaxes verbatim:
@@ -952,88 +939,70 @@ ${entryLines ? entryLines + '\n' : ''}]
     writeFileSync(INDEX_PATH, indexContent, 'utf-8')
 }
 
+// Minimum word count to pass quality gate.
+// Articles below this are rejected (Google considers them thin content).
+const MIN_WORD_COUNT = 1800
+
 async function main() {
-    console.log('🚀 Locksy Auto Blog Generator (Infinite Topics Edition)')
+    console.log('🚀 Locksy Auto Blog Generator (AdSense-Safe Edition)')
     console.log('=====================================================\n')
 
     // Get existing slugs to avoid duplicates
     const existingSlugs = getExistingSlugs()
     console.log(`📝 Found ${existingSlugs.size} existing blog posts\n`)
 
-    // Generate variations for all human-curated topics (10 angles each)
-    let allVariations = []
-    
-    // First, add variations of human-curated topics
-    for (const topic of TOPIC_POOL) {
-        const variations = generateVariations(topic)
-        allVariations.push(...variations)
-    }
-    
-    console.log(`📚 Generated ${allVariations.length} topic variations from ${TOPIC_POOL.length} human topics`)
+    // Each topic in TOPIC_POOL produces ONE post (no more variations).
+    // The slug is derived directly from the title.
+    const availableTopics = TOPIC_POOL
+        .map(topic => ({ ...topic, slug: slugify(topic.title) }))
+        .filter(topic => !existingSlugs.has(topic.slug))
 
-    // Filter out variations that have already been written
-    const availableVariations = allVariations.filter(variation => 
-        !existingSlugs.has(variation.slug)
-    )
+    console.log(`📚 ${TOPIC_POOL.length} topics in pool, ${availableTopics.length} not yet written\n`)
 
-    console.log(`✨ ${availableVariations.length} variations available to write\n`)
-
-    // If running low on topics, generate new Locksy-focused topics via AI
-    let selectedVariation = null
+    let selectedTopic = null
     const lowTopicThreshold = 5
 
-    if (availableVariations.length < lowTopicThreshold) {
-        console.log(`⚠️  Low on available topics (${availableVariations.length} < ${lowTopicThreshold})`)
+    if (availableTopics.length < lowTopicThreshold) {
+        console.log(`⚠️  Low on available topics (${availableTopics.length} < ${lowTopicThreshold})`)
         console.log(`🤖 Generating new Locksy-focused topics via AI...\n`)
 
         const aiTopics = await generateTopicsAI(20)
-        
-        if (aiTopics.length > 0) {
-            // Generate variations for AI-generated topics too
-            for (const topic of aiTopics) {
-                const variations = generateVariations(topic)
-                allVariations.push(...variations)
-            }
-            
-            console.log(`✨ Generated ${aiTopics.length * 10} variations from ${aiTopics.length} AI topics\n`)
 
-            // Re-filter with expanded pool
-            const allAvailable = allVariations.filter(variation => 
-                !existingSlugs.has(variation.slug)
-            )
-            
-            console.log(`🎯 Total available variations now: ${allAvailable.length}\n`)
+        if (aiTopics.length > 0) {
+            const aiAvailable = aiTopics
+                .map(t => ({ ...t, slug: slugify(t.title) }))
+                .filter(t => !existingSlugs.has(t.slug))
+
+            console.log(`✨ ${aiAvailable.length} new unique AI topics available\n`)
+
+            const allAvailable = [...availableTopics, ...aiAvailable]
 
             if (allAvailable.length === 0) {
                 console.log('✅ All topics have been written! System is in steady state.')
                 return { success: true, message: 'All topics written' }
             }
 
-            selectedVariation = allAvailable[Math.floor(Math.random() * allAvailable.length)]
+            selectedTopic = allAvailable[Math.floor(Math.random() * allAvailable.length)]
         } else {
-            // AI generation failed, use existing available variations
-            if (availableVariations.length === 0) {
+            if (availableTopics.length === 0) {
                 console.log('✅ All topics in the pool have been written! Add more topics to TOPIC_POOL or check Gemini API.')
                 return { success: true, message: 'All topics written' }
             }
-            
-            selectedVariation = availableVariations[Math.floor(Math.random() * availableVariations.length)]
+            selectedTopic = availableTopics[Math.floor(Math.random() * availableTopics.length)]
         }
     } else {
-        // Plenty of topics available, pick one
-        selectedVariation = availableVariations[Math.floor(Math.random() * availableVariations.length)]
+        selectedTopic = availableTopics[Math.floor(Math.random() * availableTopics.length)]
     }
 
-    const slug = selectedVariation.slug
+    const slug = selectedTopic.slug
 
-    console.log(`📖 Generating: "${selectedVariation.title}"`)
-    console.log(`💡 Angle: ${selectedVariation.angle || 'Standard'}`)
-    console.log(`🏷️  Category: ${selectedVariation.category}`)
-    console.log(`🔑 Keywords: ${selectedVariation.keywords.join(', ')}\n`)
+    console.log(`📖 Generating: "${selectedTopic.title}"`)
+    console.log(`🏷️  Category: ${selectedTopic.category}`)
+    console.log(`🔑 Keywords: ${selectedTopic.keywords.join(', ')}\n`)
 
     try {
         // Generate the blog content using AI
-        const { articleBody, metaDescription, imageKeywords } = await generateBlogContent(selectedVariation)
+        const { articleBody, metaDescription, imageKeywords } = await generateBlogContent(selectedTopic)
         const wordCount = articleBody.split(/\s+/).length
         const readTime = calculateReadTime(wordCount)
         const today = getTodayDate()
@@ -1042,20 +1011,27 @@ async function main() {
         if (metaDescription) console.log(`📝 Meta description: ${metaDescription}`)
         if (imageKeywords) console.log(`🔍 Image keywords: ${imageKeywords}`)
 
+        // Quality gate: reject thin content
+        if (wordCount < MIN_WORD_COUNT) {
+            console.error(`\n❌ QUALITY GATE FAILED: Article is only ${wordCount} words (minimum: ${MIN_WORD_COUNT}).`)
+            console.error(`   This article would be flagged as thin content by AdSense. Skipping.`)
+            return { success: false, error: `Article too short: ${wordCount} words` }
+        }
+
         // Fallback description if Gemini didn't output a META_DESC line
-        const fallbackDescription = `${selectedVariation.keywords[0].charAt(0).toUpperCase() + selectedVariation.keywords[0].slice(1)}: ${selectedVariation.title.toLowerCase()}. Practical insights on ${selectedVariation.keywords.slice(1, 3).join(' and ')}.`
+        const fallbackDescription = `${selectedTopic.keywords[0].charAt(0).toUpperCase() + selectedTopic.keywords[0].slice(1)}: ${selectedTopic.title.toLowerCase()}. Practical insights on ${selectedTopic.keywords.slice(1, 3).join(' and ')}.`
 
         // Create the blog post object
         const post = {
             slug,
-            title: selectedVariation.title,
+            title: selectedTopic.title,
             description: metaDescription || fallbackDescription,
             publishDate: today,
             lastModified: today,
             readTime,
-            category: selectedVariation.category,
-            tags: selectedVariation.tags,
-            keywords: selectedVariation.keywords,
+            category: selectedTopic.category,
+            tags: selectedTopic.tags,
+            keywords: selectedTopic.keywords,
             content: articleBody
         }
 
@@ -1068,7 +1044,7 @@ async function main() {
         console.log(`📄 Slug: ${slug}`)
         console.log(`📅 Date: ${today}`)
         console.log(`🔗 URL: https://www.locksy.dev/blog/${slug}`)
-        
+
         return { success: true, message: 'Blog post generated successfully' }
     } catch (error) {
         console.error(`\n❌ Error generating blog post:`, error.message)
