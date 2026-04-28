@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { blogPosts, getBlogPost, getRelatedPosts } from '@/lib/blog-data'
+import { blogPosts, getBlogPost, getRelatedPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
 import { BlogPostClient } from './blog-post-client'
 
 export async function generateStaticParams() {
@@ -21,6 +21,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     const siteUrl = 'https://www.locksy.dev'
     const postUrl = `${siteUrl}/blog/${post.slug}`
+
+    // Noindex duplicate/variant posts to avoid thin content penalties
+    const shouldNoindex = NOINDEX_SLUGS.has(slug)
 
     return {
         title: post.title,
@@ -54,6 +57,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         },
         alternates: {
             canonical: postUrl,
+        },
+        robots: shouldNoindex ? {
+            index: false,
+            follow: true,
+        } : {
+            index: true,
+            follow: true,
         },
     }
 }

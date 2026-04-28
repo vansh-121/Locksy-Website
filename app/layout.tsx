@@ -9,6 +9,7 @@ import {
   jsonLdHowToInstall
 } from "@/lib/metadata"
 import ChatSupport from "@/components/chat-support"
+import CookieConsent from "@/components/cookie-consent"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const geist = Geist({ subsets: ["latin"] })
@@ -58,6 +59,7 @@ export default function RootLayout({
         >
           {children}
           <ChatSupport />
+          <CookieConsent />
         </ThemeProvider>
       </body>
     </html>

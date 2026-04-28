@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { generatePageMetadata } from '@/lib/metadata'
-import { blogPosts, getAllCategories, getAllTags } from '@/lib/blog-data'
+import { filteredBlogPosts, getAllCategories, getAllTags } from '@/lib/blog-data'
 import { BlogClient } from './blog-client'
 
 const siteUrl = 'https://www.locksy.dev'
@@ -13,7 +13,7 @@ export const metadata: Metadata = generatePageMetadata(
 )
 
 export default function BlogPage() {
-    const posts = blogPosts
+    const posts = filteredBlogPosts
     const categories = getAllCategories()
     const tags = getAllTags()
 

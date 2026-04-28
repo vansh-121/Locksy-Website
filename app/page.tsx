@@ -12,12 +12,14 @@ import Security from "@/components/security"
 import Comparison from "@/components/comparison"
 import Testimonials from "@/components/testimonials"
 import FAQ from "@/components/faq"
+import LatestBlogPosts from "@/components/latest-blog-posts"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
 import Footer from "@/components/footer"
 import PageLoader from "@/components/page-loader"
 import MilestoneBanner from "@/components/milestone-banner"
 import { jsonLdFAQPage } from "@/lib/metadata"
+import { filteredBlogPosts } from "@/lib/blog-data"
 
 export default function Home() {
   return (
@@ -75,6 +77,9 @@ export default function Home() {
 
           {/* Handle objections and questions */}
           <FAQ />
+
+          {/* Latest blog articles — editorial content for SEO value */}
+          <LatestBlogPosts posts={filteredBlogPosts} />
 
           {/* Support and final CTAs */}
           <SupportChatCTA />

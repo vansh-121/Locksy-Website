@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { blogPosts } from '@/lib/blog-data'
+import { blogPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const siteUrl = 'https://www.locksy.dev'
@@ -43,6 +43,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
+            url: `${siteUrl}/disclaimer`,
+            lastModified: new Date('2026-04-28'),
+            changeFrequency: 'yearly',
+            priority: 0.6,
+        },
+        {
+            url: `${siteUrl}/cookie-policy`,
+            lastModified: new Date('2026-04-28'),
+            changeFrequency: 'yearly',
+            priority: 0.6,
+        },
+        {
             url: `${siteUrl}/uninstall`,
             lastModified: new Date('2026-02-04'),
             changeFrequency: 'monthly',
@@ -56,13 +68,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ]
 
-    // Blog post pages
-    const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-        url: `${siteUrl}/blog/${post.slug}`,
-        lastModified: new Date(post.lastModified),
-        changeFrequency: 'weekly' as const,
-        priority: 0.8,
-    }))
+    // Blog post pages — exclude noindexed duplicates
+    const blogPages: MetadataRoute.Sitemap = blogPosts
+        .filter((post) => !NOINDEX_SLUGS.has(post.slug))
+        .map((post) => ({
+            url: `${siteUrl}/blog/${post.slug}`,
+            lastModified: new Date(post.lastModified),
+            changeFrequency: 'weekly' as const,
+            priority: 0.8,
+        }))
 
     return [...staticPages, ...blogPages]
 }

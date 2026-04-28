@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         creator: '@locksy',
     },
     robots: {
-        index: true,
+        index: false,
         follow: true,
     },
 }
