@@ -41,6 +41,7 @@ import post_how_zero_trust_security_applies_to_your_browser_tabs from './how-zer
 import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
 import post_protecting_your_tabs_from_man_in_the_middle_attacks_on_open_networks from './protecting-your-tabs-from-man-in-the-middle-attacks-on-open-networks'
 import post_real_time_tab_anomaly_detection_the_future_of_browser_security from './real-time-tab-anomaly-detection-the-future-of-browser-security'
+import post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing_beginners_guide from './remote-access-software-security-locking-sensitive-tabs-during-screen-sharing-beginners-guide'
 import post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing from './remote-access-software-security-locking-sensitive-tabs-during-screen-sharing'
 import post_screen_recording_protection_hiding_tabs_from_screen_captures_common_mistakes from './screen-recording-protection-hiding-tabs-from-screen-captures-common-mistakes'
 import post_screen_recording_protection_hiding_tabs_from_screen_captures from './screen-recording-protection-hiding-tabs-from-screen-captures'
@@ -100,6 +101,7 @@ export const allPosts = [
     post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
     post_protecting_your_tabs_from_man_in_the_middle_attacks_on_open_networks,
     post_real_time_tab_anomaly_detection_the_future_of_browser_security,
+    post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing_beginners_guide,
     post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing,
     post_screen_recording_protection_hiding_tabs_from_screen_captures_common_mistakes,
     post_screen_recording_protection_hiding_tabs_from_screen_captures,
