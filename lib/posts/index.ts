@@ -59,6 +59,7 @@ import post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_common
 import post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_how_to_guide from './what-happens-when-someone-accesses-your-unlocked-browser-tabs-how-to-guide'
 import post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle from './whats-new-in-locksy-v250-context-menus-stealth-mode-theme-toggle'
 import post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it from './why-an-idle-browser-is-a-security-risk-and-how-auto-lock-timers-fix-it'
+import post_why_browser_context_isolation_wont_protect_you_without_tab_locking from './why-browser-context-isolation-wont-protect-you-without-tab-locking'
 import post_why_incognito_mode_is_not_enough_for_browser_privacy from './why-incognito-mode-is-not-enough-for-browser-privacy'
 import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs_beginners_guide from './why-smart-people-use-domain-rules-instead-of-manually-locking-tabs-beginners-guide'
 import post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs from './why-smart-people-use-domain-rules-instead-of-manually-locking-tabs'
@@ -119,6 +120,7 @@ export const allPosts = [
     post_what_happens_when_someone_accesses_your_unlocked_browser_tabs_how_to_guide,
     post_whats_new_in_locksy_v250_context_menus_stealth_mode_theme_toggle,
     post_why_an_idle_browser_is_a_security_risk_and_how_auto_lock_timers_fix_it,
+    post_why_browser_context_isolation_wont_protect_you_without_tab_locking,
     post_why_incognito_mode_is_not_enough_for_browser_privacy,
     post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs_beginners_guide,
     post_why_smart_people_use_domain_rules_instead_of_manually_locking_tabs,
