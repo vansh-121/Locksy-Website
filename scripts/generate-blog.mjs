@@ -518,26 +518,63 @@ const TOPIC_POOL = [
 // Each entry includes `tags` so the keyword-based fallback can score relevance
 // when the Unsplash API is not available.
 const COVER_IMAGE_POOL = [
-    { url: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Developer coding on a laptop with security focus', tags: ['developer', 'coding', 'laptop', 'programming', 'security'] },
-    { url: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Cybersecurity concept with digital shield and lock', tags: ['cybersecurity', 'shield', 'digital', 'protection', 'network'] },
-    { url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Green encrypted data streaming on a monitor', tags: ['encryption', 'data', 'matrix', 'streams', 'hacker', 'code'] },
-    { url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Monitor displaying code in a development environment', tags: ['monitor', 'code', 'development', 'programming', 'screen'] },
-    { url: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Secure online payment with laptop and credit card', tags: ['payment', 'finance', 'banking', 'credit-card', 'ecommerce'] },
-    { url: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Backlit mechanical keyboard close-up', tags: ['keyboard', 'shortcuts', 'typing', 'hardware', 'hotkeys'] },
-    { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Modern open office with shared workstations', tags: ['office', 'workspace', 'team', 'shared', 'business', 'enterprise'] },
-    { url: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Padlock on a laptop keyboard symbolizing security', tags: ['padlock', 'lock', 'password', 'laptop', 'physical-security'] },
-    { url: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Digital shield icon on a technology background', tags: ['shield', 'digital', 'protection', 'security', 'icon', 'firewall'] },
-    { url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Team collaborating on laptops in a tech workspace', tags: ['team', 'collaboration', 'enterprise', 'remote', 'colleagues'] },
-    { url: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Code editor window on a developer screen', tags: ['code', 'editor', 'developer', 'terminal', 'ide'] },
-    { url: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Abstract blue technology light background', tags: ['abstract', 'technology', 'future', 'ai', 'innovation', 'trends'] },
-    { url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Person working at a bright and tidy home office', tags: ['home-office', 'remote-work', 'work-from-home', 'productivity', 'privacy'] },
-    { url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Data analytics dashboard on a screen', tags: ['analytics', 'dashboard', 'data', 'metrics', 'visualization', 'browser'] },
-    { url: 'https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Fingerprint scan biometric authentication', tags: ['fingerprint', 'biometrics', 'authentication', 'webauthn', 'fido2', 'identity'] },
-    { url: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Coffee shop with laptop on public WiFi', tags: ['public-wifi', 'coffee-shop', 'cafe', 'laptop', 'travel', 'vpn'] },
+    // ── General security / coding ─────────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Developer coding on a laptop with security focus', tags: ['developer', 'coding', 'laptop', 'programming', 'security', 'api', 'devtools'] },
+    { url: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Cybersecurity concept with digital shield and lock', tags: ['cybersecurity', 'shield', 'digital', 'protection', 'network', 'firewall', 'defense'] },
+    { url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Green encrypted data streaming on a monitor', tags: ['encryption', 'data', 'matrix', 'streams', 'hacker', 'code', 'tls', 'https'] },
+    { url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Monitor displaying code in a development environment', tags: ['monitor', 'code', 'development', 'programming', 'screen', 'ide', 'cors', 'websocket'] },
+    { url: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Secure online payment with laptop and credit card', tags: ['payment', 'finance', 'banking', 'credit-card', 'ecommerce', 'transactions', 'financial'] },
+    { url: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Backlit mechanical keyboard close-up', tags: ['keyboard', 'shortcuts', 'typing', 'hardware', 'hotkeys', 'input'] },
+    { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Modern open office with shared workstations', tags: ['office', 'workspace', 'team', 'shared', 'business', 'enterprise', 'shoulder-surfing'] },
+    { url: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Padlock on a laptop keyboard symbolizing security', tags: ['padlock', 'lock', 'password', 'laptop', 'physical-security', 'lock-screen'] },
+    { url: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Digital shield icon on a technology background', tags: ['shield', 'digital', 'protection', 'security', 'icon', 'firewall', 'csp', 'sandbox'] },
+    { url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Team collaborating on laptops in a tech workspace', tags: ['team', 'collaboration', 'enterprise', 'remote', 'colleagues', 'multi-account'] },
+    { url: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Code editor window on a developer screen', tags: ['code', 'editor', 'developer', 'terminal', 'ide', 'devtools', 'api-keys', 'localstorage'] },
+    { url: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Abstract blue technology light background', tags: ['abstract', 'technology', 'future', 'ai', 'innovation', 'trends', 'telemetry', 'anomaly'] },
+    { url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Person working at a bright and tidy home office', tags: ['home-office', 'remote-work', 'work-from-home', 'productivity', 'privacy', 'screen-sharing'] },
+    { url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Data analytics dashboard on a screen', tags: ['analytics', 'dashboard', 'data', 'metrics', 'visualization', 'browser', 'cache'] },
+    { url: 'https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Fingerprint scan biometric authentication', tags: ['fingerprint', 'biometrics', 'authentication', 'webauthn', 'fido2', 'identity', 'passkey'] },
+    { url: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Coffee shop with laptop on public WiFi', tags: ['public-wifi', 'coffee-shop', 'cafe', 'laptop', 'travel', 'vpn', 'open-network', 'mitm'] },
     { url: 'https://images.unsplash.com/photo-1484981184820-2e84ea0af397?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Student studying with a laptop at a university library', tags: ['student', 'school', 'library', 'education', 'shared-computer'] },
-    { url: 'https://images.unsplash.com/photo-1559526324-593bc073d938?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Online banking on a smartphone with credit card', tags: ['banking', 'finance', 'mobile', 'credit-card', 'payment', 'transactions'] },
+    { url: 'https://images.unsplash.com/photo-1559526324-593bc073d938?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Online banking on a smartphone with credit card', tags: ['banking', 'finance', 'mobile', 'credit-card', 'payment', 'transactions', 'crypto', 'accountant'] },
     { url: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Parent showing a child something on a laptop at home', tags: ['family', 'parental-controls', 'kids', 'children', 'home', 'parenting'] },
-    { url: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Password manager app on a smartphone', tags: ['password', 'password-manager', 'authentication', 'credentials', 'login'] },
+    { url: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Password manager app on a smartphone', tags: ['password', 'password-manager', 'authentication', 'credentials', 'login', 'autofill', 'saved-password'] },
+    // ── Network / server / infrastructure ────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Colorful network cables plugged into a server', tags: ['network', 'server', 'cables', 'infrastructure', 'websocket', 'webrtc', 'cors', 'network-security'] },
+    { url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Rows of servers in a data center', tags: ['server', 'data-center', 'infrastructure', 'cloud', 'service-worker', 'supply-chain', 'telemetry'] },
+    { url: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Close-up of fiber optic cables lit up in blue', tags: ['fiber-optic', 'network', 'data-transfer', 'internet', 'connection', 'encryption', 'tls'] },
+    { url: 'https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Abstract digital network nodes and connections', tags: ['network-nodes', 'abstract', 'connections', 'digital', 'ip-leak', 'webrtc', 'zero-trust'] },
+    // ── Phishing / social engineering / attacks ───────────────────────────
+    { url: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Hooded figure at a computer representing a hacker', tags: ['hacker', 'phishing', 'social-engineering', 'attack', 'tabnabbing', 'session-hijacking', 'threat'] },
+    { url: 'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Binary code and warning icons on a dark screen', tags: ['warning', 'attack', 'exploit', 'binary', 'threat', 'csrf', 'xss', 'injection', 'brute-force'] },
+    { url: 'https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Red alert warning on a laptop screen', tags: ['alert', 'warning', 'danger', 'malware', 'exploit', 'phishing', 'tabnabbing', 'supply-chain'] },
+    // ── Cookies / sessions / browser storage ─────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Person looking at a browser on a laptop', tags: ['browser', 'browsing', 'cookies', 'session', 'tabs', 'fingerprinting', 'autofill', 'clipboard'] },
+    { url: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Hands on a laptop with a website open in a browser', tags: ['browser', 'website', 'tab', 'session', 'localstorage', 'cookies', 'csrf', 'samesite'] },
+    { url: 'https://images.unsplash.com/photo-1624996379697-f01d168b1a52?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Modern server rack with glowing LED lights', tags: ['server', 'cloud', 'storage', 'cache', 'browser-storage', 'service-worker', 'pwa'] },
+    // ── Legal / professional services ─────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Gavel and scales of justice on a wooden desk', tags: ['legal', 'law', 'gavel', 'justice', 'compliance', 'gdpr', 'hipaa', 'lawyer', 'attorney'] },
+    { url: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Person signing documents at a professional desk', tags: ['documents', 'signing', 'professional', 'legal', 'compliance', 'accountant', 'cpa', 'finance'] },
+    // ── Journalism / research ─────────────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Journalist writing notes next to a laptop in a newsroom', tags: ['journalist', 'writing', 'research', 'newsroom', 'privacy', 'source-protection', 'investigation'] },
+    { url: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Open notebook with handwritten notes beside a laptop', tags: ['notes', 'research', 'writing', 'journalist', 'documentation', 'privacy', 'audit'] },
+    // ── Video calls / screen sharing ──────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Person on a video call showing their laptop screen', tags: ['video-call', 'screen-sharing', 'zoom', 'meeting', 'remote', 'webrtc', 'online-meeting'] },
+    { url: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Laptop screen showing a group video conference', tags: ['video-conference', 'screen-share', 'team-call', 'remote-meeting', 'collaboration', 'privacy'] },
+    // ── Multi-monitor / desk setups ───────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Developer at a multi-monitor desk setup', tags: ['multi-monitor', 'desk-setup', 'developer', 'screens', 'shoulder-surfing', 'workspace', 'browser-profiles'] },
+    // ── Mobile / smartphone ───────────────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Hand holding a smartphone with app icons visible', tags: ['smartphone', 'mobile', 'app', 'browser', 'tab-sync', 'cross-device', 'passkey'] },
+    // ── Privacy / eye / surveillance ──────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1494178270175-e96de2971df9?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Close-up of a human eye representing surveillance and privacy', tags: ['eye', 'surveillance', 'privacy', 'tracking', 'fingerprinting', 'telemetry', 'monitoring'] },
+    { url: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Silhouette of a person behind frosted glass symbolizing anonymity', tags: ['anonymity', 'privacy', 'incognito', 'shadow', 'identity', 'fingerprinting', 'vpn'] },
+    // ── Cryptocurrency / blockchain ───────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Gold Bitcoin coins on a laptop keyboard', tags: ['bitcoin', 'cryptocurrency', 'blockchain', 'crypto', 'wallet', 'digital-assets', 'defi'] },
+    // ── Healthcare ────────────────────────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Doctor reviewing patient data on a tablet in a hospital', tags: ['healthcare', 'hospital', 'medical', 'hipaa', 'doctor', 'patient-data', 'compliance'] },
+    // ── Abstract lock / key imagery ───────────────────────────────────────
+    { url: 'https://images.unsplash.com/photo-1609763418275-e0ff6edba5af?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Close-up of a gold key in a lock on a wooden door', tags: ['key', 'lock', 'access', 'protection', 'credentials', 'master-password', 'physical-security'] },
+    { url: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1200&h=630&fit=crop&auto=format&q=80', alt: 'Combination lock close-up with blurred background', tags: ['combination-lock', 'security', 'access-control', 'password', 'brute-force', 'protection'] },
 ]
 
 // Pool of inline images for article content
@@ -572,30 +609,42 @@ function getExistingSlugs() {
     return slugs
 }
 
-function getRecentlyUsedImages(limit = 5) {
-    // Collect image URLs from all post files (in directory listing order).
-    // The last `limit` entries across all files are treated as "recently used"
-    // to avoid repeating the same cover image on consecutive posts.
+/**
+ * Returns a Set of every cover image URL already used across all existing posts.
+ * Prevents any image from being reused until the entire pool is exhausted.
+ */
+function getUsedImages() {
     const files = getPostFiles()
-    const allImages = []
+    const used = new Set()
     for (const file of files) {
         const content = readFileSync(file, 'utf-8')
         for (const m of content.matchAll(/image:\s*['"]([^'"]+)['"]/g)) {
-            allImages.push(m[1])
+            used.add(m[1])
         }
     }
-    // The last `limit` images across all files are considered "recent"
-    return new Set(allImages.slice(-limit))
+    return used
 }
 
 /**
- * Score a pool image by how many of its tags appear in the AI-provided keyword string.
- * Higher = more relevant.
+ * Score a pool image against a combined string of the article title + keywords.
+ * Uses word-token matching so "session hijacking" matches the tag "session-hijacking".
+ * Higher score = more relevant.
  */
 function scoreImageByKeywords(img, keywordString) {
     if (!keywordString || !img.tags) return 0
-    const lower = keywordString.toLowerCase()
-    return img.tags.reduce((score, tag) => score + (lower.includes(tag.toLowerCase()) ? 1 : 0), 0)
+    // Normalise: lower-case, replace hyphens/underscores/commas with spaces
+    const normalize = s => s.toLowerCase().replace(/[-_,]/g, ' ')
+    const tokens = normalize(keywordString).split(/\s+/).filter(t => t.length > 2)
+    const tagNorm = img.tags.map(normalize)
+    let score = 0
+    for (const token of tokens) {
+        for (const tag of tagNorm) {
+            // Full word match gets 2 pts; substring match gets 1 pt
+            if (tag === token) { score += 2; break }
+            if (tag.includes(token) || token.includes(tag)) { score += 1; break }
+        }
+    }
+    return score
 }
 
 /**
@@ -608,7 +657,7 @@ function scoreImageByKeywords(img, keywordString) {
  * In both cases recently-used images are avoided.
  */
 async function getContentRelatedCoverImage(imageKeywords) {
-    const recentlyUsed = getRecentlyUsedImages(5)
+    const usedImages = getUsedImages()
     const unsplashKey = process.env.UNSPLASH_ACCESS_KEY
 
     // ── Tier 1: Unsplash API ────────────────────────────────────────────────
@@ -622,12 +671,13 @@ async function getContentRelatedCoverImage(imageKeywords) {
             if (res.ok) {
                 const photo = await res.json()
                 const url = `${photo.urls.raw}&w=1200&h=630&fit=crop&auto=format&q=80`
-                // Unsplash attribution: log photographer info
-                const photographer = photo.user?.name || 'Unknown'
-                console.log(`📸 Unsplash image by ${photographer} (${photo.id}): ${imageKeywords}`)
-                return {
-                    url,
-                    alt: photo.alt_description || photo.description || imageKeywords
+                // Skip if already used in another post
+                if (usedImages.has(url)) {
+                    console.warn('⚠️  Unsplash returned an already-used image — falling back to local pool')
+                } else {
+                    const photographer = photo.user?.name || 'Unknown'
+                    console.log(`📸 Unsplash image by ${photographer} (${photo.id}): ${imageKeywords}`)
+                    return { url, alt: photo.alt_description || photo.description || imageKeywords }
                 }
             } else {
                 console.warn(`⚠️  Unsplash API returned ${res.status} — falling back to local pool`)
@@ -638,26 +688,32 @@ async function getContentRelatedCoverImage(imageKeywords) {
     }
 
     // ── Tier 2: Keyword-scored local pool ───────────────────────────────────
-    const availableImages = COVER_IMAGE_POOL.filter(img => !recentlyUsed.has(img.url))
+    // Prefer images not yet used by any existing post; fall back to full pool
+    // only when every image in the pool has already been used.
+    const availableImages = COVER_IMAGE_POOL.filter(img => !usedImages.has(img.url))
     const pool = availableImages.length > 0 ? availableImages : COVER_IMAGE_POOL
+    if (availableImages.length === 0) {
+        console.warn('⚠️  All cover images used — cycling pool from the beginning')
+    }
 
     if (imageKeywords) {
-        // Sort by relevance score, then pick randomly among top scorers (score > 0)
+        // Sort by relevance score descending; pick randomly among the top tier
         const scored = pool
             .map(img => ({ img, score: scoreImageByKeywords(img, imageKeywords) }))
             .sort((a, b) => b.score - a.score)
 
         const topScore = scored[0].score
-        const topImages = topScore > 0
-            ? scored.filter(s => s.score === topScore).map(s => s.img)
-            : pool // no keyword match — just use the whole pool
+        // Use the top-scoring images; if nothing matched (score 0), use the full pool
+        const candidates = topScore > 0
+            ? scored.filter(s => s.score >= topScore - 1).map(s => s.img)
+            : pool
 
-        const chosen = topImages[Math.floor(Math.random() * topImages.length)]
-        console.log(`🖼️  Pool image selected by keyword match (score ${topScore}): ${chosen.alt}`)
+        const chosen = candidates[Math.floor(Math.random() * candidates.length)]
+        console.log(`🖼️  Pool image selected (score ${topScore}): ${chosen.alt}`)
         return chosen
     }
 
-    // Final fallback: fully random from non-recently-used pool
+    // Final fallback: fully random from unused pool
     return pool[Math.floor(Math.random() * pool.length)]
 }
 function shuffleArray(arr) {
