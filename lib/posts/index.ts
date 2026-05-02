@@ -40,6 +40,7 @@ import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security_comm
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
 import post_how_zero_trust_security_applies_to_your_browser_tabs from './how-zero-trust-security-applies-to-your-browser-tabs'
 import post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy from './incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy'
+import post_mastering_referrer_policy_a_technical_guide_to_controlling_information_leaks_from_your_browser from './mastering-referrer-policy-a-technical-guide-to-controlling-information-leaks-from-your-browser'
 import post_protecting_your_tabs_from_man_in_the_middle_attacks_on_open_networks from './protecting-your-tabs-from-man-in-the-middle-attacks-on-open-networks'
 import post_real_time_tab_anomaly_detection_the_future_of_browser_security from './real-time-tab-anomaly-detection-the-future-of-browser-security'
 import post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing_beginners_guide from './remote-access-software-security-locking-sensitive-tabs-during-screen-sharing-beginners-guide'
@@ -102,6 +103,7 @@ export const allPosts = [
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
     post_how_zero_trust_security_applies_to_your_browser_tabs,
     post_incognito_mode_wont_save_you_the_case_for_real_tab_level_privacy,
+    post_mastering_referrer_policy_a_technical_guide_to_controlling_information_leaks_from_your_browser,
     post_protecting_your_tabs_from_man_in_the_middle_attacks_on_open_networks,
     post_real_time_tab_anomaly_detection_the_future_of_browser_security,
     post_remote_access_software_security_locking_sensitive_tabs_during_screen_sharing_beginners_guide,

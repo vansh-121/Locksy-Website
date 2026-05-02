@@ -497,36 +497,120 @@ function slugify(title) {
 }
 
 /**
- * Attempt to repair common JSON formatting issues from Gemini responses
- * Fixes: unescaped quotes, missing commas, trailing commas, etc.
+ * Walk through a JSON string character-by-character and escape any double-quote
+ * characters that appear inside string values but are NOT already escaped.
+ *
+ * Heuristic: a '"' inside a string ends the string only if the next non-whitespace
+ * character is one of ',' '}' ']' or ':' (JSON structural chars).
+ * Any other following character means the '"' is embedded text — escape it.
+ */
+function fixUnescapedQuotes(str) {
+    let result = ''
+    let inString = false
+    let i = 0
+    while (i < str.length) {
+        const char = str[i]
+        if (!inString) {
+            if (char === '"') inString = true
+            result += char
+            i++
+        } else {
+            if (char === '\\') {
+                // Already-escaped sequence — copy both chars verbatim
+                result += char
+                i++
+                if (i < str.length) { result += str[i]; i++ }
+            } else if (char === '"') {
+                // Peek at the next non-whitespace character
+                let j = i + 1
+                while (j < str.length && /[\t \r\n]/.test(str[j])) j++
+                const next = j < str.length ? str[j] : ''
+                if (next === ',' || next === '}' || next === ']' || next === ':' || next === '') {
+                    // Structural — this quote ends the string
+                    inString = false
+                    result += char
+                } else {
+                    // Embedded unescaped quote — escape it
+                    result += '\\"'
+                }
+                i++
+            } else if (char === '\n' || char === '\r') {
+                // Literal newlines are invalid inside JSON strings
+                result += '\\n'
+                i++
+            } else {
+                result += char
+                i++
+            }
+        }
+    }
+    return result
+}
+
+/**
+ * Attempt to repair common JSON formatting issues from Gemini responses.
  */
 function repairJSON(jsonStr) {
     let repaired = jsonStr
-    
-    // Fix: Replace smart quotes with regular quotes
+
+    // Fix: Strip markdown code fences Gemini sometimes wraps output in
+    repaired = repaired.replace(/^```(?:json)?\s*/m, '').replace(/\s*```\s*$/m, '')
+
+    // Fix: Replace smart / curly quotes with straight ASCII quotes
     repaired = repaired
-        .replace(/[\u201C\u201D]/g, '"') // Curly double quotes
-        .replace(/[\u2018\u2019]/g, "'") // Curly single quotes
-    
-    // Fix: Escape any unescaped quotes within string values (but be careful not to double-escape)
-    // This is a simple regex that looks for quotes that aren't already escaped
-    repaired = repaired.replace(/"([^"]*)":/g, (match, key) => {
-        // Key should already have quotes, just check value part
-        const value = match.substring(0, match.length - 2) // Remove :"
-        if (!value.includes('\\')) {
-            return match // Already properly escaped
-        }
-        return match // Keep as-is
-    })
-    
+        .replace(/[\u201C\u201D]/g, '"')
+        .replace(/[\u2018\u2019]/g, "'")
+
     // Fix: Remove trailing commas before ] or }
-    repaired = repaired
-        .replace(/,(\s*[}\]])/g, '$1')
-    
-    // Fix: Ensure strings are properly quoted (looking for unquoted values)
-    // This is tricky, so we'll be conservative
-    
+    repaired = repaired.replace(/,(\s*[}\]])/g, '$1')
+
+    // Fix: Remove stray control characters (keep tab/newline — handled by fixUnescapedQuotes)
+    repaired = repaired.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f]/g, '')
+
+    // Fix: Escape unescaped double-quotes inside string values via state machine
+    repaired = fixUnescapedQuotes(repaired)
+
     return repaired
+}
+
+/**
+ * Multi-stage JSON parsing with truncation recovery.
+ * Tries progressively more aggressive repairs before giving up.
+ */
+function parseTopicsJSON(jsonStr) {
+    // Stage 1: raw parse (ideal case — no repairs needed)
+    try { return JSON.parse(jsonStr) } catch (_) {}
+
+    // Stage 2: apply full repairs
+    const repaired = repairJSON(jsonStr)
+    try { return JSON.parse(repaired) } catch (_) {}
+
+    // Stage 3: try to close a truncated array (Gemini hit token limit mid-output)
+    const truncationSuffixes = [']}', '"}]}', '"]}', ']']
+    for (const suffix of truncationSuffixes) {
+        try { return JSON.parse(repairJSON(jsonStr + suffix)) } catch (_) {}
+    }
+
+    // Stage 4: extract any individually well-formed objects via balanced-brace scan
+    const recovered = []
+    let depth = 0, start = -1
+    for (let i = 0; i < jsonStr.length; i++) {
+        const c = jsonStr[i]
+        if (c === '{') { if (depth === 0) start = i; depth++ }
+        else if (c === '}') {
+            depth--
+            if (depth === 0 && start !== -1) {
+                try {
+                    const obj = JSON.parse(repairJSON(jsonStr.slice(start, i + 1)))
+                    if (obj && obj.title) recovered.push(obj)
+                } catch (_) {}
+                start = -1
+            }
+        }
+    }
+    if (recovered.length > 0) return recovered
+
+    return null
 }
 
 function getTodayDate() {
@@ -673,7 +757,7 @@ Now generate ${count} unique blog topics in valid JSON format only:`
                     ],
                     generationConfig: {
                         temperature: 0.7, // Lower temp for more consistent JSON
-                        maxOutputTokens: 4096
+                        maxOutputTokens: 8192
                     }
                 })
             }, 60000)
@@ -695,34 +779,25 @@ Now generate ${count} unique blog topics in valid JSON format only:`
             return []
         }
 
-        try {
-            // Attempt to repair common JSON issues before parsing
-            const repairedJson = repairJSON(jsonMatch[0])
-            const topics = JSON.parse(repairedJson)
-            
-            // Validate topics array
-            if (!Array.isArray(topics)) {
-                console.warn('⚠️  Gemini returned non-array JSON — skipping AI topic generation')
-                return []
-            }
-            
-            // Validate each topic has required fields
-            const validTopics = topics.filter(t => {
-                const hasRequired = t.title && t.category && Array.isArray(t.keywords) && Array.isArray(t.tags)
-                if (!hasRequired) {
-                    console.warn(`⚠️  Skipping topic with missing required fields: ${t.title || 'untitled'}`)
-                }
-                return hasRequired
-            })
-            
-            console.log(`🤖 Generated ${validTopics.length} new AI topics (${topics.length - validTopics.length} rejected as invalid)`)
-            return validTopics
-        } catch (jsonError) {
-            console.warn(`⚠️  JSON parsing failed at position ${jsonError.message.match(/position (\d+)/)?.[1] || 'unknown'}`)
-            console.warn(`⚠️  Response preview: ${jsonMatch[0].substring(0, 200)}...`)
-            console.warn(`⚠️  This usually happens when Gemini returns unescaped quotes or special characters`)
+        const topics = parseTopicsJSON(jsonMatch[0])
+
+        if (!topics || !Array.isArray(topics)) {
+            console.warn('⚠️  Could not recover valid JSON from Gemini topic response — skipping AI topic generation')
+            console.warn(`⚠️  Response preview: ${jsonMatch[0].substring(0, 300)}...`)
             return []
         }
+
+        // Validate each topic has required fields
+        const validTopics = topics.filter(t => {
+            const hasRequired = t.title && t.category && Array.isArray(t.keywords) && Array.isArray(t.tags)
+            if (!hasRequired) {
+                console.warn(`⚠️  Skipping topic with missing required fields: ${t.title || 'untitled'}`)
+            }
+            return hasRequired
+        })
+
+        console.log(`🤖 Generated ${validTopics.length} new AI topics (${topics.length - validTopics.length} rejected as invalid)`)
+        return validTopics
     } catch (error) {
         console.warn(`⚠️  AI topic generation failed: ${error.message} — skipping`)
         return []
