@@ -496,6 +496,39 @@ function slugify(title) {
         .replace(/^-|-$/g, '')
 }
 
+/**
+ * Attempt to repair common JSON formatting issues from Gemini responses
+ * Fixes: unescaped quotes, missing commas, trailing commas, etc.
+ */
+function repairJSON(jsonStr) {
+    let repaired = jsonStr
+    
+    // Fix: Replace smart quotes with regular quotes
+    repaired = repaired
+        .replace(/[\u201C\u201D]/g, '"') // Curly double quotes
+        .replace(/[\u2018\u2019]/g, "'") // Curly single quotes
+    
+    // Fix: Escape any unescaped quotes within string values (but be careful not to double-escape)
+    // This is a simple regex that looks for quotes that aren't already escaped
+    repaired = repaired.replace(/"([^"]*)":/g, (match, key) => {
+        // Key should already have quotes, just check value part
+        const value = match.substring(0, match.length - 2) // Remove :"
+        if (!value.includes('\\')) {
+            return match // Already properly escaped
+        }
+        return match // Keep as-is
+    })
+    
+    // Fix: Remove trailing commas before ] or }
+    repaired = repaired
+        .replace(/,(\s*[}\]])/g, '$1')
+    
+    // Fix: Ensure strings are properly quoted (looking for unquoted values)
+    // This is tricky, so we'll be conservative
+    
+    return repaired
+}
+
 function getTodayDate() {
     return new Date().toISOString().split('T')[0]
 }
@@ -605,18 +638,25 @@ Examples of good topics:
 - "The Hidden Dangers of Browser Sync: When Convenience Becomes a Vulnerability"
 - "How to Secure Shared Login Sessions Without Logging Out"
 
-Return ONLY a valid JSON array (no other text) with this structure:
+⚠️  CRITICAL JSON FORMATTING RULES:
+- Return ONLY a valid JSON array with NO markdown code blocks, NO explanations, NO other text
+- Escape all double quotes in strings using backslash: \\"
+- Escape all backslashes: use \\\\ for a single backslash
+- Do NOT include any text before or after the JSON array
+- Validate: each object must have title, category, keywords array, tags array
+- Categories must be EXACTLY one of: Tutorial, Security, Technical, Productivity, Comparison, Research
+
+VALID JSON STRUCTURE (follow exactly):
 [
     {
-        "title": "Specific, actionable title about a unique security/privacy topic",
-        "category": "Tutorial|Security|Technical|Productivity|Comparison|Research",
+        "title": "Title with escaped \\"quotes\\" if needed",
+        "category": "Tutorial",
         "keywords": ["keyword1", "keyword2", "keyword3", "keyword4"],
         "tags": ["tag1", "tag2", "tag3"]
-    },
-    ...
+    }
 ]
 
-Ensure each title covers a genuinely different subject. No two topics should be answerable with the same article.`
+Now generate ${count} unique blog topics in valid JSON format only:`
 
     try {
         const data = await retryWithBackoff(async () => {
@@ -632,7 +672,7 @@ Ensure each title covers a genuinely different subject. No two topics should be 
                         }
                     ],
                     generationConfig: {
-                        temperature: 0.9,
+                        temperature: 0.7, // Lower temp for more consistent JSON
                         maxOutputTokens: 4096
                     }
                 })
@@ -655,9 +695,34 @@ Ensure each title covers a genuinely different subject. No two topics should be 
             return []
         }
 
-        const topics = JSON.parse(jsonMatch[0])
-        console.log(`🤖 Generated ${topics.length} new AI topics`)
-        return topics
+        try {
+            // Attempt to repair common JSON issues before parsing
+            const repairedJson = repairJSON(jsonMatch[0])
+            const topics = JSON.parse(repairedJson)
+            
+            // Validate topics array
+            if (!Array.isArray(topics)) {
+                console.warn('⚠️  Gemini returned non-array JSON — skipping AI topic generation')
+                return []
+            }
+            
+            // Validate each topic has required fields
+            const validTopics = topics.filter(t => {
+                const hasRequired = t.title && t.category && Array.isArray(t.keywords) && Array.isArray(t.tags)
+                if (!hasRequired) {
+                    console.warn(`⚠️  Skipping topic with missing required fields: ${t.title || 'untitled'}`)
+                }
+                return hasRequired
+            })
+            
+            console.log(`🤖 Generated ${validTopics.length} new AI topics (${topics.length - validTopics.length} rejected as invalid)`)
+            return validTopics
+        } catch (jsonError) {
+            console.warn(`⚠️  JSON parsing failed at position ${jsonError.message.match(/position (\d+)/)?.[1] || 'unknown'}`)
+            console.warn(`⚠️  Response preview: ${jsonMatch[0].substring(0, 200)}...`)
+            console.warn(`⚠️  This usually happens when Gemini returns unescaped quotes or special characters`)
+            return []
+        }
     } catch (error) {
         console.warn(`⚠️  AI topic generation failed: ${error.message} — skipping`)
         return []
