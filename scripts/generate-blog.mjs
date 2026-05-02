@@ -331,6 +331,187 @@ const TOPIC_POOL = [
         keywords: ["man in the middle attack", "mitm browser protect", "packet sniffing defense", "open network security"],
         tags: ["Network Security", "MITM", "Open WiFi"]
     },
+    // ── NEW TOPICS — Batch 2 (May 2026) ────────────────────────────────────
+    {
+        title: "Session Hijacking Explained: How Attackers Steal Your Open Tab Sessions",
+        category: "Security",
+        keywords: ["session hijacking browser", "cookie theft attack", "stolen session token", "browser session security"],
+        tags: ["Session Hijacking", "Cookies", "Attack Vectors"]
+    },
+    {
+        title: "Tabnabbing Attacks: How Inactive Browser Tabs Get Hijacked",
+        category: "Security",
+        keywords: ["tabnabbing attack", "tab hijacking browser", "inactive tab exploit", "phishing via tab switch"],
+        tags: ["Tabnabbing", "Phishing", "Attack Vectors"]
+    },
+    {
+        title: "Browser Fingerprinting: What Sites Know About You Without Cookies",
+        category: "Research",
+        keywords: ["browser fingerprinting", "canvas fingerprint tracking", "fingerprint privacy", "anti-fingerprinting browser"],
+        tags: ["Fingerprinting", "Privacy", "Tracking"]
+    },
+    {
+        title: "How Saved Passwords in Your Browser Can Be Compromised",
+        category: "Security",
+        keywords: ["browser saved passwords risk", "browser password manager danger", "steal browser passwords", "password storage security"],
+        tags: ["Passwords", "Browser Storage", "Security Risks"]
+    },
+    {
+        title: "The Hidden Dangers of Browser Autofill and Saved Form Data",
+        category: "Security",
+        keywords: ["browser autofill security risk", "saved form data attack", "autofill password leak", "disable autofill security"],
+        tags: ["Autofill", "Form Data", "Privacy"]
+    },
+    {
+        title: "Content Security Policy (CSP) Demystified: How It Protects Your Browser",
+        category: "Technical",
+        keywords: ["content security policy explained", "csp browser protection", "xss prevention csp", "web security headers"],
+        tags: ["CSP", "Security Headers", "XSS Prevention"]
+    },
+    {
+        title: "How Cross-Site Request Forgery (CSRF) Attacks Target Your Active Sessions",
+        category: "Technical",
+        keywords: ["csrf attack browser", "cross site request forgery", "csrf token protection", "active session exploit"],
+        tags: ["CSRF", "Session Security", "Technical"]
+    },
+    {
+        title: "localStorage vs sessionStorage: Security Risks Developers Often Miss",
+        category: "Technical",
+        keywords: ["localstorage security risk", "sessionstorage vulnerability", "browser storage attack", "web storage security"],
+        tags: ["localStorage", "Web Storage", "Developer Security"]
+    },
+    {
+        title: "WebRTC IP Leak: How Video Calls Expose Your Real IP Address Through the Browser",
+        category: "Security",
+        keywords: ["webrtc ip leak", "vpn webrtc bypass", "real ip exposure browser", "webrtc privacy fix"],
+        tags: ["WebRTC", "IP Leak", "Privacy"]
+    },
+    {
+        title: "How Clipboard Access in Browsers Puts Your Copied Data at Risk",
+        category: "Security",
+        keywords: ["clipboard access browser", "website read clipboard", "clipboard security risk", "protect clipboard data"],
+        tags: ["Clipboard", "Privacy", "Browser APIs"]
+    },
+    {
+        title: "Browser Extension Supply Chain Attacks: The Threat You Haven't Prepared For",
+        category: "Security",
+        keywords: ["extension supply chain attack", "browser extension compromise", "malicious extension update", "extension security audit"],
+        tags: ["Supply Chain", "Extensions", "Security"]
+    },
+    {
+        title: "How to Audit Your Installed Browser Extensions for Security Risks",
+        category: "Tutorial",
+        keywords: ["audit browser extensions", "extension security check", "remove dangerous extensions", "extension permissions review"],
+        tags: ["Security Audit", "Extensions", "Tutorial"]
+    },
+    {
+        title: "Browser Profiles: The Underused Feature That Separates Work From Personal Browsing",
+        category: "Productivity",
+        keywords: ["browser profiles security", "separate work personal browser", "chrome profile security", "multi-profile browser"],
+        tags: ["Browser Profiles", "Productivity", "Separation"]
+    },
+    {
+        title: "Multi-Account Security in the Browser: Keeping Work and Personal Sessions Isolated",
+        category: "Tutorial",
+        keywords: ["multi account browser security", "separate sessions browser", "account isolation browser", "work personal browser isolation"],
+        tags: ["Multi-Account", "Session Isolation", "Privacy"]
+    },
+    {
+        title: "How Browser Tab Sync Across Devices Creates New Attack Surfaces",
+        category: "Security",
+        keywords: ["browser tab sync security", "cloud sync browser risk", "synced tabs privacy", "cross-device browser attack"],
+        tags: ["Tab Sync", "Cloud Security", "Cross-Device"]
+    },
+    {
+        title: "Service Workers and Browser Security: What Every User Should Know",
+        category: "Technical",
+        keywords: ["service worker security", "browser service worker risk", "pwa security", "background browser script"],
+        tags: ["Service Workers", "PWA", "Security"]
+    },
+    {
+        title: "How HTTPS Actually Works (And Where It Still Leaves You Exposed)",
+        category: "Technical",
+        keywords: ["how https works", "tls encryption browser", "https limitations", "certificate pinning browser"],
+        tags: ["HTTPS", "TLS", "Encryption", "Technical"]
+    },
+    {
+        title: "Shoulder Surfing in the Digital Age: Protecting Your Tabs on Multi-Monitor Setups",
+        category: "Security",
+        keywords: ["shoulder surfing digital", "multi monitor tab privacy", "screen visibility security", "desk setup privacy"],
+        tags: ["Shoulder Surfing", "Physical Security", "Privacy"]
+    },
+    {
+        title: "How Lawyers and Law Firms Should Secure Client Data in the Browser",
+        category: "Tutorial",
+        keywords: ["law firm browser security", "legal data browser protection", "attorney client privilege browser", "legal professional privacy"],
+        tags: ["Legal", "Professional", "Data Protection"]
+    },
+    {
+        title: "Protecting Sensitive Financial Data in the Browser for Accountants and CPAs",
+        category: "Tutorial",
+        keywords: ["accountant browser security", "financial data browser protection", "cpa client data security", "tax data browser privacy"],
+        tags: ["Finance", "Accounting", "Professional Security"]
+    },
+    {
+        title: "How Journalists Protect Sources Using Browser Security Techniques",
+        category: "Research",
+        keywords: ["journalist browser security", "protect sources online", "investigative reporter privacy", "whistleblower browser safety"],
+        tags: ["Journalism", "Source Protection", "Privacy"]
+    },
+    {
+        title: "Protecting Developer Intellectual Property: Securing Code Tabs and API Keys in the Browser",
+        category: "Tutorial",
+        keywords: ["developer tab security", "protect api keys browser", "code security browser", "developer privacy tools"],
+        tags: ["Developers", "API Keys", "Intellectual Property"]
+    },
+    {
+        title: "Browser Telemetry: What Your Browser Secretly Reports Back to Its Maker",
+        category: "Research",
+        keywords: ["browser telemetry data", "chrome firefox telemetry", "browser privacy reporting", "disable browser telemetry"],
+        tags: ["Telemetry", "Privacy", "Data Collection"]
+    },
+    {
+        title: "The Anatomy of a Phishing Page: How Attackers Clone Legitimate Sites in Your Browser",
+        category: "Security",
+        keywords: ["phishing page anatomy", "fake website browser", "url spoofing detection", "identify phishing site"],
+        tags: ["Phishing", "Detection", "Attack Anatomy"]
+    },
+    {
+        title: "WebSocket Security: How Real-Time Browser Connections Can Be Exploited",
+        category: "Technical",
+        keywords: ["websocket security", "real-time browser attack", "websocket hijacking", "secure websocket connection"],
+        tags: ["WebSocket", "Real-Time", "Security"]
+    },
+    {
+        title: "Browser Sandbox Escapes: What They Are and Why You Should Care",
+        category: "Research",
+        keywords: ["browser sandbox escape", "sandbox bypass vulnerability", "browser exploit sandbox", "chromium sandbox security"],
+        tags: ["Sandbox", "Browser Exploits", "Advanced Security"]
+    },
+    {
+        title: "Why Cross-Origin Resource Sharing (CORS) Misconfigurations Are a Browser Security Nightmare",
+        category: "Technical",
+        keywords: ["cors misconfiguration security", "cross origin browser attack", "cors vulnerability", "fix cors security"],
+        tags: ["CORS", "Web Security", "Technical"]
+    },
+    {
+        title: "How to Use Browser Developer Tools to Audit Your Own Security",
+        category: "Tutorial",
+        keywords: ["browser devtools security audit", "devtools privacy check", "network tab security devtools", "inspect element security"],
+        tags: ["Developer Tools", "Security Audit", "Tutorial"]
+    },
+    {
+        title: "HttpOnly and SameSite Cookies Explained: Why These Flags Protect Your Sessions",
+        category: "Technical",
+        keywords: ["httponly cookie security", "samesite cookie flag", "secure cookie attributes", "session cookie protection"],
+        tags: ["Cookies", "Session Security", "Technical"]
+    },
+    {
+        title: "Protecting Sensitive Browser Tabs During Video Calls and Online Meetings",
+        category: "Tutorial",
+        keywords: ["screen share tab protection", "hide tabs video call", "zoom meeting browser privacy", "secure tab sharing online"],
+        tags: ["Video Calls", "Screen Sharing", "Privacy"]
+    },
 ]
 
 // Pool of high-quality Unsplash images for blog cover photos.
