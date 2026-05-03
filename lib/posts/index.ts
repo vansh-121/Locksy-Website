@@ -27,6 +27,7 @@ import post_how_browser_extensions_defend_against_brute_force_password_attacks_b
 import post_how_browser_extensions_defend_against_brute_force_password_attacks_real_world_cases from './how-browser-extensions-defend-against-brute-force-password-attacks-real-world-cases'
 import post_how_browser_extensions_defend_against_brute_force_password_attacks from './how-browser-extensions-defend-against-brute-force-password-attacks'
 import post_how_browser_tab_sync_across_devices_creates_new_attack_surfaces from './how-browser-tab-sync-across-devices-creates-new-attack-surfaces'
+import post_how_lawyers_and_law_firms_should_secure_client_data_in_the_browser from './how-lawyers-and-law-firms-should-secure-client-data-in-the-browser'
 import post_how_parents_can_lock_sensitive_tabs_on_family_computers from './how-parents-can-lock-sensitive-tabs-on-family-computers'
 import post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters from './how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters'
 import post_how_password_based_encryption_protects_your_locked_tabs from './how-password-based-encryption-protects-your-locked-tabs'
@@ -91,6 +92,7 @@ export const allPosts = [
     post_how_browser_extensions_defend_against_brute_force_password_attacks_real_world_cases,
     post_how_browser_extensions_defend_against_brute_force_password_attacks,
     post_how_browser_tab_sync_across_devices_creates_new_attack_surfaces,
+    post_how_lawyers_and_law_firms_should_secure_client_data_in_the_browser,
     post_how_parents_can_lock_sensitive_tabs_on_family_computers,
     post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters,
     post_how_password_based_encryption_protects_your_locked_tabs,
