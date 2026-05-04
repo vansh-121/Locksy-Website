@@ -1,4 +1,4 @@
-import { blogPosts } from '@/lib/blog-data'
+import { filteredBlogPosts } from '@/lib/blog-data'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -8,7 +8,7 @@ const SITE_TITLE = 'Locksy Blog'
 const SITE_DESCRIPTION = 'Security tips, browser tricks, and password management guides from the Locksy team.'
 
 export async function GET() {
-    const sortedPosts = [...blogPosts].sort(
+    const sortedPosts = [...filteredBlogPosts].sort(
         (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
     )
 
