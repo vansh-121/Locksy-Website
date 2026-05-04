@@ -6,7 +6,7 @@ const post = {
     slug: 'firefox-vs-chrome-vs-edge-which-browser-is-most-secure-in-2026',
     title: 'Firefox vs Chrome vs Edge: Which Browser is Most Secure in 2026?',
     description: 'Which browser truly wins the security battle in 2026? We dive deep into Firefox vs Chrome vs Edge, dissecting their tech and giving you an honest take.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-09',
     lastModified: '2026-03-09',
     readTime: '17 min read',

@@ -6,7 +6,7 @@ const post = {
     slug: '10-browser-security-extensions-everyone-should-install',
     title: '10 Browser Security Extensions Everyone Should Install',
     description: 'Think your browser\'s safe? Think again. I dive deep into the essential browser security extensions everyone needs in 2026 to protect their privacy, data, and ',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-17',
     lastModified: '2026-03-17',
     readTime: '15 min read',

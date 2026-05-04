@@ -6,7 +6,7 @@ const post = {
     slug: 'screen-recording-protection-hiding-tabs-from-screen-captures',
     title: 'Screen Recording Protection: Hiding Tabs From Screen Captures',
     description: 'Ever worried about sensitive info flashing across a screen capture? Learn how to get screen recording protection and hide tabs from recording with smart brows',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-28',
     lastModified: '2026-03-28',
     readTime: '14 min read',

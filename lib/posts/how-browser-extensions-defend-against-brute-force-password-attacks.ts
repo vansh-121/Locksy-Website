@@ -6,7 +6,7 @@ const post = {
     slug: 'how-browser-extensions-defend-against-brute-force-password-attacks',
     title: 'How Browser Extensions Defend Against Brute-Force Password Attacks',
     description: 'Think brute-force attacks only target servers? Think again. Discover how browser extensions like Locksy add crucial client-side brute force protection to your',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-08',
     lastModified: '2026-03-08',
     readTime: '12 min read',

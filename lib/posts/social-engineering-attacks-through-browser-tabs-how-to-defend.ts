@@ -6,7 +6,7 @@ const post = {
     slug: 'social-engineering-attacks-through-browser-tabs-how-to-defend',
     title: 'Social Engineering Attacks Through Browser Tabs: How to Defend',
     description: 'Ever left your browser open only to find your digital life exposed? Learn how social engineering browser attacks exploit tabs, and prevent browser takeover wi',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-07',
     lastModified: '2026-04-07',
     readTime: '13 min read',

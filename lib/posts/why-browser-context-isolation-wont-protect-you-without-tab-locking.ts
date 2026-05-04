@@ -6,7 +6,7 @@ const post = {
     slug: 'why-browser-context-isolation-wont-protect-you-without-tab-locking',
     title: 'Why Browser Context Isolation Won\'t Protect You (Without Tab Locking)',
     description: 'Browser context isolation is a security marvel. But as an expert, I\'ve seen it fail. Why technical safeguards won\'t protect you from yourself, and how tab loc',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-29',
     lastModified: '2026-04-29',
     readTime: '15 min read',

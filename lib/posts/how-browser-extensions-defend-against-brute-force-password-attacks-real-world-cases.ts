@@ -6,7 +6,7 @@ const post = {
     slug: 'how-browser-extensions-defend-against-brute-force-password-attacks-real-world-cases',
     title: 'How Browser Extensions Defend Against Brute-Force Password Attacks - Real-World Use Cases',
     description: 'Tired of server-side rate limits and weak password defenses? Discover how browser extensions offer real-time, client-side brute-force protection you can trust',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-14',
     lastModified: '2026-04-14',
     readTime: '17 min read',

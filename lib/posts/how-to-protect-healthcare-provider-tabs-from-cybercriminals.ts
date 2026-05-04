@@ -6,7 +6,7 @@ const post = {
     slug: 'how-to-protect-healthcare-provider-tabs-from-cybercriminals',
     title: 'How to Protect Healthcare Provider Tabs From Cybercriminals',
     description: 'Cybercriminals crave medical data. Learn critical strategies for healthcare tab security, how to protect medical data, and why HIPAA browser security starts w',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-21',
     lastModified: '2026-03-21',
     readTime: '16 min read',

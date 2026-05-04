@@ -6,7 +6,7 @@ const post = {
     slug: 'essential-browser-security-checklist-for-small-businesses',
     title: 'Essential Browser Security Checklist for Small Businesses',
     description: 'Small business browser security isn\'t optional. Learn how to craft a robust business browser checklist, secure your team\'s browsing, and protect sensitive dat',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-03',
     lastModified: '2026-03-03',
     readTime: '17 min read',

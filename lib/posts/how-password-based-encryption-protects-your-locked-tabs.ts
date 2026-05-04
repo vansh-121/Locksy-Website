@@ -6,7 +6,7 @@ const post = {
     slug: 'how-password-based-encryption-protects-your-locked-tabs',
     title: 'How Password-Based Encryption Protects Your Locked Tabs',
     description: 'Ever wonder how to truly secure your sensitive browser tabs? Dive deep into password-based encryption and understand how it keeps your private data locked dow',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-02-25',
     lastModified: '2026-02-25',
     readTime: '11 min read',

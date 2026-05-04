@@ -6,7 +6,7 @@ const post = {
     slug: 'browser-security-mistakes-that-put-your-data-at-risk',
     title: 'Browser Security Mistakes That Put Your Data at Risk',
     description: 'Are your browser habits leaving your data exposed? Discover the common browser security mistakes you\'re making and how to avoid costly errors that put your pr',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-04',
     lastModified: '2026-03-04',
     readTime: '14 min read',

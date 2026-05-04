@@ -6,7 +6,7 @@ const post = {
     slug: 'mastering-referrer-policy-a-technical-guide-to-controlling-information-leaks-from-your-browser',
     title: 'Mastering Referrer Policy: A Technical Guide to Controlling Information Leaks from Your Browser',
     description: 'Stop leaking sensitive URLs. Master Referrer Policy to control what your browser shares. A deep dive into privacy, security, and real-world implementation.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-05-02',
     lastModified: '2026-05-02',
     readTime: '18 min read',

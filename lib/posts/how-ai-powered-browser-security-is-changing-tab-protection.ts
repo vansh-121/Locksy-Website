@@ -6,7 +6,7 @@ const post = {
     slug: 'how-ai-powered-browser-security-is-changing-tab-protection',
     title: 'How AI-Powered Browser Security Is Changing Tab Protection',
     description: 'AI browser security is here. Learn how machine learning tab protection fights intelligent threats, keeps your digital life private, and why smart defense matt',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-22',
     lastModified: '2026-03-22',
     readTime: '13 min read',

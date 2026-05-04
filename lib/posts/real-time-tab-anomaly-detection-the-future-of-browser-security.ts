@@ -6,7 +6,7 @@ const post = {
     slug: 'real-time-tab-anomaly-detection-the-future-of-browser-security',
     title: 'Real-Time Tab Anomaly Detection: The Future of Browser Security',
     description: 'Ever wondered if your browser could tell when something\'s *off*? Dive into real-time tab anomaly detection, AI-powered security, and the future of your digita',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-01',
     lastModified: '2026-04-01',
     readTime: '12 min read',

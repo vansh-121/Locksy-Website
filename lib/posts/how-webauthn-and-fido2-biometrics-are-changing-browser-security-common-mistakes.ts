@@ -6,7 +6,7 @@ const post = {
     slug: 'how-webauthn-and-fido2-biometrics-are-changing-browser-security-common-mistakes',
     title: 'How WebAuthn and FIDO2 Biometrics Are Changing Browser Security - Common Mistakes',
     description: 'Tired of security headaches? WebAuthn & FIDO2 biometrics are revolutionizing browser security, but most people are making these common mistakes.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-12',
     lastModified: '2026-04-12',
     readTime: '13 min read',

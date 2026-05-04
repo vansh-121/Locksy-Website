@@ -6,7 +6,7 @@ const post = {
     slug: 'why-your-browser-history-is-worth-more-than-you-think',
     title: 'Why Your Browser History Is Worth More Than You Think',
     description: 'Your browser history is a digital diary. Discover the hidden security risks and privacy threats lurking in your past clicks, and learn why protecting it is mo',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-27',
     lastModified: '2026-03-27',
     readTime: '9 min read',

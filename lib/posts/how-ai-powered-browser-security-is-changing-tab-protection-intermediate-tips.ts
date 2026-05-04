@@ -6,7 +6,7 @@ const post = {
     slug: 'how-ai-powered-browser-security-is-changing-tab-protection-intermediate-tips',
     title: 'How AI-Powered Browser Security Is Changing Tab Protection - Intermediate Tips',
     description: 'Tired of browser tab chaos and sneaky threats? Learn how AI-powered security is fundamentally changing tab protection with these intermediate tips.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-24',
     lastModified: '2026-04-24',
     readTime: '12 min read',

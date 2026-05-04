@@ -5,7 +5,7 @@ const post = {
     slug: 'whats-new-in-locksy-v250-context-menus-stealth-mode-theme-toggle',
     title: "What's New in Locksy v2.5.0: Context Menus, Stealth Mode & Theme Toggle",
     description: 'Locksy v2.5.0 is here with three headline features: right-click context menus for instant tab locking, a stealth mode that disguises locked tabs as connection errors, and a persistent light/dark theme toggle.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-20',
     lastModified: '2026-04-20',
     readTime: '13 min read',

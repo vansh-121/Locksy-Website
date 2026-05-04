@@ -6,7 +6,7 @@ const post = {
     slug: 'how-webauthn-and-fido2-biometrics-are-changing-browser-security',
     title: 'How WebAuthn and FIDO2 Biometrics Are Changing Browser Security',
     description: 'Tired of passwords? Discover how WebAuthn, FIDO2, and biometric browser security are finally ditching login woes. See how extensions like Locksy offer fingerp',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-02-26',
     lastModified: '2026-02-26',
     readTime: '14 min read',

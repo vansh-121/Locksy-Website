@@ -6,7 +6,7 @@ const post = {
     slug: 'browser-sandbox-escapes-what-they-are-and-why-you-should-care',
     title: 'Browser Sandbox Escapes: What They Are and Why You Should Care',
     description: 'Browser sandbox escapes aren\'t just for Hollywood. I\'ll break down what they are, why your "safe" browser isn\'t always safe, and what you *really* need to do.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-05-04',
     lastModified: '2026-05-04',
     readTime: '13 min read',

@@ -6,7 +6,7 @@ const post = {
     slug: 'the-future-of-browser-security-predictions-for-2027-beginners-guide',
     title: 'The Future of Browser Security: Predictions for 2027 - Beginner\'s Guide',
     description: 'The future of browser security in 2027? It’s not just tech, it’s a mindset shift. I\'m breaking down what\'s coming, why it matters, and how you can get ready.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-22',
     lastModified: '2026-04-22',
     readTime: '16 min read',

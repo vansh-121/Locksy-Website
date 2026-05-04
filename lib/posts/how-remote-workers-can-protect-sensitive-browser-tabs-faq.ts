@@ -6,7 +6,7 @@ const post = {
     slug: 'how-remote-workers-can-protect-sensitive-browser-tabs-faq',
     title: 'How Remote Workers Can Protect Sensitive Browser Tabs - FAQ',
     description: 'Remote worker? Stop accidentally flashing sensitive client data during screen shares. Here\'s how to truly protect your browser tabs, from someone who’s been t',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-16',
     lastModified: '2026-04-16',
     readTime: '19 min read',

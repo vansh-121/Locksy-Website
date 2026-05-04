@@ -1246,7 +1246,7 @@ const post = {
     slug: '${escSQ(post.slug)}',
     title: '${escSQ(post.title)}',
     description: '${escSQ(post.description)}',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '${post.publishDate}',
     lastModified: '${post.lastModified}',
     readTime: '${post.readTime}',

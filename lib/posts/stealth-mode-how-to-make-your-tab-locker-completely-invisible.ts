@@ -5,7 +5,7 @@ const post = {
     slug: 'stealth-mode-how-to-make-your-tab-locker-completely-invisible',
     title: 'Stealth Mode: How to Make Your Tab Locker Completely Invisible',
     description: 'Discover how Locksy\'s Stealth Mode disguises locked tabs as connection errors, hides the badge counter, and silences notifications — making your tab locker completely invisible.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-20',
     lastModified: '2026-04-20',
     readTime: '14 min read',

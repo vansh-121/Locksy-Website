@@ -6,7 +6,7 @@ const post = {
     slug: 'how-parents-can-lock-sensitive-tabs-on-family-computers',
     title: 'How Parents Can Lock Sensitive Tabs on Family Computers',
     description: 'Keep your family computer secure and your sensitive tabs private. Learn how parental browser control with Locksy offers peace of mind for child safe browsing.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-02-27',
     lastModified: '2026-02-27',
     readTime: '12 min read',

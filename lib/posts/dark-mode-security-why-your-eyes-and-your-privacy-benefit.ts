@@ -6,7 +6,7 @@ const post = {
     slug: 'dark-mode-security-why-your-eyes-and-your-privacy-benefit',
     title: 'Dark Mode Security: Why Your Eyes And Your Privacy Benefit',
     description: 'Tired eyes and exposed data? Discover how **dark mode browser security** isn\'t just about comfort, but a crucial step for your digital privacy and focus.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-04',
     lastModified: '2026-04-04',
     readTime: '12 min read',

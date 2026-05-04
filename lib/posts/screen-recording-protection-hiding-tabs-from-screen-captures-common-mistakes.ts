@@ -6,7 +6,7 @@ const post = {
     slug: 'screen-recording-protection-hiding-tabs-from-screen-captures-common-mistakes',
     title: 'Screen Recording Protection: Hiding Tabs From Screen Captures - Common Mistakes',
     description: 'Think you\'re safe from screen captures? I\'ve seen countless screw-ups trying to hide sensitive tabs. Let\'s fix your screen recording protection mistakes.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-17',
     lastModified: '2026-04-17',
     readTime: '20 min read',

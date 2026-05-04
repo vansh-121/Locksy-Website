@@ -6,7 +6,7 @@ const post = {
     slug: 'essential-browser-security-checklist-for-small-businesses-common-mistakes',
     title: 'Essential Browser Security Checklist for Small Businesses - Common Mistakes',
     description: 'Small business browser security is a minefield. I\'m cutting through the noise to expose common mistakes and offer hard-won advice. Stop making these errors.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-27',
     lastModified: '2026-04-27',
     readTime: '19 min read',

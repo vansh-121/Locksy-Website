@@ -6,7 +6,7 @@ const post = {
     slug: 'the-psychology-of-digital-privacy-why-people-ignore-tab-security-top-benefits',
     title: 'The Psychology of Digital Privacy: Why People Ignore Tab Security - Top Benefits',
     description: 'Ever wonder why we ignore browser tab security, despite the risks? It\'s human psychology. I\'m breaking down the hidden privacy costs & game-changing benefits.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-23',
     lastModified: '2026-04-23',
     readTime: '13 min read',

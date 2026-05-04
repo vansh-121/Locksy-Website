@@ -6,7 +6,7 @@ const post = {
     slug: 'the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits',
     title: 'The Case for One-Click Security: Why Friction Is the Enemy of Good Habits',
     description: 'Tired of security friction? Discover why one-click browser security is essential for digital privacy and how smart UX design makes frictionless tab protection',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-14',
     lastModified: '2026-03-14',
     readTime: '12 min read',

@@ -6,7 +6,7 @@ const post = {
     slug: 'social-engineering-attacks-through-browser-tabs-how-to-defend-vs-alternatives',
     title: 'Social Engineering Attacks Through Browser Tabs: How to Defend - Comparisons',
     description: 'Tired of falling for sneaky browser tab tricks? I\'m breaking down how social engineering attacks exploit your tabs and comparing real defenses.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-18',
     lastModified: '2026-04-18',
     readTime: '15 min read',

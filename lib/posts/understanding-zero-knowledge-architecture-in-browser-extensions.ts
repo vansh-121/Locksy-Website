@@ -6,7 +6,7 @@ const post = {
     slug: 'understanding-zero-knowledge-architecture-in-browser-extensions',
     title: 'Understanding Zero-Knowledge Architecture in Browser Extensions',
     description: 'Ever wondered how a zero-knowledge browser extension protects your privacy without ever knowing your secrets? Unpack the magic of zero knowledge encryption.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-12',
     lastModified: '2026-03-12',
     readTime: '12 min read',

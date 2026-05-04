@@ -6,7 +6,7 @@ const post = {
     slug: 'how-to-set-up-auto-lock-for-banking-and-financial-tabs',
     title: 'How to Set Up Auto-Lock for Banking and Financial Tabs',
     description: 'Protect your online banking like a pro. Learn why auto-locking banking tabs is crucial for financial security and how to set it up effortlessly. Don\'t risk yo',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-01',
     lastModified: '2026-03-01',
     readTime: '14 min read',

@@ -5,7 +5,7 @@ import type { BlogPost } from '@/lib/blog-data'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen } from 'lucide-react'
+import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen, User } from 'lucide-react'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -101,6 +101,10 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                 <Clock className="h-4 w-4" />
                                 {post.readTime}
                             </span>
+                            <Link href="/about" className="flex items-center gap-1 hover:text-primary transition-colors">
+                                <User className="h-4 w-4" />
+                                By {post.author}
+                            </Link>
                         </div>
 
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
@@ -308,31 +312,45 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                     </div>
                 </article>
 
-                {/* Author & Updated Info */}
+                {/* Author Bio Card — E-E-A-T signal for AdSense & Google */}
                 <div className="max-w-4xl mx-auto mt-10">
-                    <div className="bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
-                                <BookOpen className="h-5 w-5 text-white" />
+                    <div className="bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-6 md:p-8">
+                        <div className="flex flex-col sm:flex-row gap-5">
+                            {/* Avatar */}
+                            <div className="flex-shrink-0">
+                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+                                    <span className="text-white font-bold text-xl">VS</span>
+                                </div>
                             </div>
-                            <div>
-                                <p className="font-semibold text-foreground">{post.author}</p>
-                                <p className="text-sm text-muted-foreground">
-                                    Updated {new Date(post.lastModified.replace(/-/g, '/')).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'long',
-                                        day: 'numeric'
-                                    })}
+                            {/* Bio */}
+                            <div className="flex-1 min-w-0">
+                                <div className="flex flex-wrap items-center gap-2 mb-1">
+                                    <Link href="/about" className="font-bold text-lg text-foreground hover:text-primary transition-colors">
+                                        {post.author}
+                                    </Link>
+                                    <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium">Author</span>
+                                </div>
+                                <p className="text-sm font-medium text-muted-foreground mb-2">Developer &amp; Founder of Locksy</p>
+                                <p className="text-sm text-foreground/80 leading-relaxed">
+                                    Vansh is the developer and founder of Locksy — a privacy-first browser tab security extension trusted by 5,000+ users across Chrome, Edge, Firefox, and Brave. He writes about browser security, privacy, and developer tools.
                                 </p>
+                                <div className="flex flex-wrap gap-3 mt-4">
+                                    <Link href="/about" className="text-xs text-primary hover:underline font-medium">About Locksy</Link>
+                                    <a href="https://github.com/vansh-121" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-medium">GitHub</a>
+                                    <span className="text-xs text-muted-foreground">
+                                        Last updated {new Date(post.lastModified.replace(/-/g, '/')).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex gap-2">
-                            <Button variant="outline" size="sm" onClick={shareToTwitter} className="gap-2">
-                                <Twitter className="h-4 w-4" /> Share
-                            </Button>
-                            <Button variant="outline" size="sm" onClick={copyLink} className="gap-2">
-                                <Share2 className="h-4 w-4" /> Copy Link
-                            </Button>
+                            {/* Share buttons */}
+                            <div className="flex sm:flex-col gap-2 flex-shrink-0">
+                                <Button variant="outline" size="sm" onClick={shareToTwitter} className="gap-2">
+                                    <Twitter className="h-4 w-4" /> <span className="hidden sm:inline">Share</span>
+                                </Button>
+                                <Button variant="outline" size="sm" onClick={copyLink} className="gap-2">
+                                    <Share2 className="h-4 w-4" /> <span className="hidden sm:inline">Copy</span>
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </div>

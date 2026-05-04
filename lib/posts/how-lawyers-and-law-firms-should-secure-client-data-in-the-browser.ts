@@ -6,7 +6,7 @@ const post = {
     slug: 'how-lawyers-and-law-firms-should-secure-client-data-in-the-browser',
     title: 'How Lawyers and Law Firms Should Secure Client Data in the Browser',
     description: 'Lawyers, listen up: your browser is a data security time bomb. I\'m breaking down how to genuinely secure client data in the browser, from isolation to smart e',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-05-03',
     lastModified: '2026-05-03',
     readTime: '12 min read',

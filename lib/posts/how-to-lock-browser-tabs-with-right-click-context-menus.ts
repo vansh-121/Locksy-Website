@@ -5,7 +5,7 @@ const post = {
     slug: 'how-to-lock-browser-tabs-with-right-click-context-menus',
     title: 'How to Lock Browser Tabs with Right-Click Context Menus',
     description: 'Learn how to password-protect any browser tab using right-click context menus in Locksy v2.5.0. Step-by-step guide for Chrome, Firefox, Edge, and more.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-20',
     lastModified: '2026-04-20',
     readTime: '12 min read',

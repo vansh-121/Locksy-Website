@@ -6,7 +6,7 @@ const post = {
     slug: 'how-zero-trust-security-applies-to-your-browser-tabs',
     title: 'How Zero-Trust Security Applies to Your Browser Tabs',
     description: 'Our browsers are built on trust, but is that a mistake? Explore how zero-trust security can revolutionize your browser tabs, urging you to verify every tab fo',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-26',
     lastModified: '2026-03-26',
     readTime: '12 min read',

@@ -6,7 +6,7 @@ const post = {
     slug: 'how-browser-tab-sync-across-devices-creates-new-attack-surfaces',
     title: 'How Browser Tab Sync Across Devices Creates New Attack Surfaces',
     description: 'Browser tab sync is a convenience trap. I\'m digging into how cross-device tab synchronization opens alarming new attack surfaces you probably haven\'t consider',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-05-02',
     lastModified: '2026-05-02',
     readTime: '15 min read',

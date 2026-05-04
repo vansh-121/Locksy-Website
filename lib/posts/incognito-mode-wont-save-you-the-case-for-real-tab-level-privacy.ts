@@ -6,7 +6,7 @@ const post = {
     slug: 'incognito-mode-wont-save-you-the-case-for-real-tab-level-privacy',
     title: 'Incognito Mode Won\'t Save You: The Case for Real Tab-Level Privacy',
     description: 'Incognito Mode is a digital myth. Learn why it won\'t keep your tabs private & discover real solutions for incognito tab protection beyond basic browser privac',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-02-24',
     lastModified: '2026-02-24',
     readTime: '12 min read',

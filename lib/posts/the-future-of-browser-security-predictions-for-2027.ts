@@ -6,7 +6,7 @@ const post = {
     slug: 'the-future-of-browser-security-predictions-for-2027',
     title: 'The Future of Browser Security: Predictions for 2027',
     description: 'Where\'s browser security headed by 2027? I\'m predicting AI, passwordless tech, and hyper-personalized privacy. Explore the future of web security and browser ',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-02',
     lastModified: '2026-03-02',
     readTime: '12 min read',

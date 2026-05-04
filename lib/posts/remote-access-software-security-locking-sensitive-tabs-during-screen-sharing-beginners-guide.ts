@@ -6,7 +6,7 @@ const post = {
     slug: 'remote-access-software-security-locking-sensitive-tabs-during-screen-sharing-beginners-guide',
     title: 'Remote Access Software Security: Locking Sensitive Tabs During Screen Sharing - Beginner\'s Guide',
     description: 'Screen sharing got you sweating? Learn how to lock sensitive browser tabs during remote access calls. A real-world guide from a tech expert.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-28',
     lastModified: '2026-04-28',
     readTime: '20 min read',

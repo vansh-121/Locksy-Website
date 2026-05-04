@@ -6,7 +6,7 @@ const post = {
     slug: 'cryptocurrency-wallet-tab-security-protecting-your-digital-assets',
     title: 'Cryptocurrency Wallet Tab Security: Protecting Your Digital Assets',
     description: 'Don\'t leave your digital fortune exposed! Learn critical strategies to protect your crypto wallet tabs from snoops & hackers, including a smart browser extens',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-30',
     lastModified: '2026-03-30',
     readTime: '14 min read',

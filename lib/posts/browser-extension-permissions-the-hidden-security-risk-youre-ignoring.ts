@@ -6,7 +6,7 @@ const post = {
     slug: 'browser-extension-permissions-the-hidden-security-risk-youre-ignoring',
     title: 'Browser Extension Permissions: The Hidden Security Risk You\'re Ignoring',
     description: 'Your browser extensions are silent data siphons. I\'ll expose the hidden security risks in their permissions and show you how to take back control.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-30',
     lastModified: '2026-04-30',
     readTime: '16 min read',

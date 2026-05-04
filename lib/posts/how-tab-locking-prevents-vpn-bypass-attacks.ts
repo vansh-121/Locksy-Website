@@ -6,7 +6,7 @@ const post = {
     slug: 'how-tab-locking-prevents-vpn-bypass-attacks',
     title: 'How Tab Locking Prevents VPN Bypass Attacks',
     description: 'Don\'t let your VPN fool you. Learn how subtle bypass attacks can expose your data and how a simple tab lock can provide critical vpn security tab lock for tru',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-24',
     lastModified: '2026-03-24',
     readTime: '11 min read',

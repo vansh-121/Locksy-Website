@@ -6,7 +6,7 @@ const post = {
     slug: 'gdpr-compliance-and-browser-tab-data-what-you-need-to-know',
     title: 'GDPR Compliance and Browser Tab Data: What You Need to Know',
     description: 'Your browser tabs are a goldmine of personal data. Learn how GDPR rules apply to that data and why securing your browser is crucial for compliance.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-29',
     lastModified: '2026-03-29',
     readTime: '10 min read',

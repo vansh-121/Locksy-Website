@@ -6,7 +6,7 @@ const post = {
     slug: 'gdpr-compliance-and-browser-tab-data-what-you-need-to-know-real-world-cases',
     title: 'GDPR Compliance and Browser Tab Data: What You Need to Know - Real-World Use Cases',
     description: 'Think your browser tabs are harmless? Think again. I\'m breaking down how GDPR hits browser data, with real-world headaches, mistakes, and smart fixes.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-20',
     lastModified: '2026-04-20',
     readTime: '16 min read',

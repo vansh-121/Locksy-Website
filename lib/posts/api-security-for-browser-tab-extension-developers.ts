@@ -6,7 +6,7 @@ const post = {
     slug: 'api-security-for-browser-tab-extension-developers',
     title: 'API Security for Browser Tab Extension Developers',
     description: 'Unlock robust browser extension API security. Learn critical strategies to prevent vulnerabilities, protect user data, and build secure Chrome extensions from',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-25',
     lastModified: '2026-03-25',
     readTime: '14 min read',

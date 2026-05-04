@@ -6,7 +6,7 @@ const post = {
     slug: 'browser-tab-management-security-best-practices-for-teams',
     title: 'Browser Tab Management: Security Best Practices for Teams',
     description: 'Open tabs are digital landmines. Discover how smart tab management fortifies team browser security, protecting sensitive data and enforcing corporate policy e',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-06',
     lastModified: '2026-03-06',
     readTime: '13 min read',

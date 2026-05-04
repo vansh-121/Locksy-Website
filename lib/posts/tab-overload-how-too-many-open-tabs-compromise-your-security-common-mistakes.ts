@@ -6,7 +6,7 @@ const post = {
     slug: 'tab-overload-how-too-many-open-tabs-compromise-your-security-common-mistakes',
     title: 'Tab Overload: How Too Many Open Tabs Compromise Your Security - Common Mistakes',
     description: 'Too many open tabs aren\'t just slowing you down – they\'re a massive security risk. Learn the common mistakes we all make and how to fix your tab overload.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-11',
     lastModified: '2026-04-11',
     readTime: '16 min read',

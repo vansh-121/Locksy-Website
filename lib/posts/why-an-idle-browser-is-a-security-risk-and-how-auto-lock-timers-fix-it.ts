@@ -6,7 +6,7 @@ const post = {
     slug: 'why-an-idle-browser-is-a-security-risk-and-how-auto-lock-timers-fix-it',
     title: 'Why an Idle Browser Is a Security Risk (And How Auto-Lock Timers Fix It)',
     description: 'Don\'t let an idle browser be an open door to your digital life. Discover why a browser auto lock timer is essential for idle session security and how to fix i',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-16',
     lastModified: '2026-03-16',
     readTime: '16 min read',

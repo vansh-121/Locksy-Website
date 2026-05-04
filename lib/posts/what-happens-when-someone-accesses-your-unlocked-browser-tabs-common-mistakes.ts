@@ -6,7 +6,7 @@ const post = {
     slug: 'what-happens-when-someone-accesses-your-unlocked-browser-tabs-common-mistakes',
     title: 'What Happens When Someone Accesses Your Unlocked Browser Tabs - Common Mistakes',
     description: 'Ever leave your browser open, thinking "I\'ll be right back"? Here\'s the uncomfortable truth about unlocked browser risk, common mistakes, and how fast your di',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-25',
     lastModified: '2026-04-25',
     readTime: '14 min read',

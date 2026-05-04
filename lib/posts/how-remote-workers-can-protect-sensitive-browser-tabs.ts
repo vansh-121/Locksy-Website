@@ -6,7 +6,7 @@ const post = {
     slug: 'how-remote-workers-can-protect-sensitive-browser-tabs',
     title: 'How Remote Workers Can Protect Sensitive Browser Tabs',
     description: 'Remote work security is tricky. Ever worried about sensitive browser tabs? Learn how to protect your digital workspace from prying eyes and accidental leaks.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-02-28',
     lastModified: '2026-02-28',
     readTime: '13 min read',

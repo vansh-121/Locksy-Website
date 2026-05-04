@@ -6,7 +6,7 @@ const post = {
     slug: 'how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters',
     title: 'How Passkeys Are Replacing Passwords (And Why Tab Protection Still Matters)',
     description: 'Passkeys are finally here, revolutionizing online security. But do they make you truly safe? Discover why even with passkeys, browser tab protection still mat',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-06',
     lastModified: '2026-04-06',
     readTime: '13 min read',

@@ -6,7 +6,7 @@ const post = {
     slug: 'browser-cache-poisoning-why-tab-isolation-matters',
     title: 'Browser Cache Poisoning: Why Tab Isolation Matters',
     description: 'Don\'t let your browser\'s cache betray you. Discover browser cache poisoning, why it\'s a stealthy threat, and how isolated tab cache strategies can protect you',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-23',
     lastModified: '2026-03-23',
     readTime: '14 min read',

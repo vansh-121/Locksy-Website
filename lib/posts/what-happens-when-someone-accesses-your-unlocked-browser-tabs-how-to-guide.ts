@@ -6,7 +6,7 @@ const post = {
     slug: 'what-happens-when-someone-accesses-your-unlocked-browser-tabs-how-to-guide',
     title: 'What Happens When Someone Accesses Your Unlocked Browser Tabs - How-To Guide',
     description: 'Unlocked browser tabs are a digital open house for anyone. I\'ll walk you through the real risks and the actionable steps I personally use to lock things down.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-21',
     lastModified: '2026-04-21',
     readTime: '16 min read',

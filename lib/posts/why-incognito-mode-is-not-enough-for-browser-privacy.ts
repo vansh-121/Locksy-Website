@@ -6,7 +6,7 @@ const post = {
     slug: 'why-incognito-mode-is-not-enough-for-browser-privacy',
     title: 'Why Incognito Mode Is Not Enough for Browser Privacy',
     description: 'Incognito mode is a privacy myth. Discover why it\'s not secure, its key limitations, and what truly protects your browser activity from prying eyes, not just ',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-11',
     lastModified: '2026-03-11',
     readTime: '11 min read',

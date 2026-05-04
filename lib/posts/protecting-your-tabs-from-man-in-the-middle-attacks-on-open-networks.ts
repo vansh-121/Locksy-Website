@@ -6,7 +6,7 @@ const post = {
     slug: 'protecting-your-tabs-from-man-in-the-middle-attacks-on-open-networks',
     title: 'Protecting Your Tabs From Man-in-the-Middle Attacks on Open Networks',
     description: 'Public Wi-Fi feels convenient until a man-in-the-middle attack sniffs your data. Learn how to protect your browser tabs and secure your digital life on open n',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-04-03',
     lastModified: '2026-04-03',
     readTime: '12 min read',

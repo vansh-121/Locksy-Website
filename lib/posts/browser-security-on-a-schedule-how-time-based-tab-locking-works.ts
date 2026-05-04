@@ -6,7 +6,7 @@ const post = {
     slug: 'browser-security-on-a-schedule-how-time-based-tab-locking-works',
     title: 'Browser Security on a Schedule: How Time-Based Tab Locking Works',
     description: 'Ever left sensitive tabs open? Discover how scheduled browser lock features provide crucial time-based tab security, creating an automatic lock schedule brows',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-07',
     lastModified: '2026-03-07',
     readTime: '14 min read',

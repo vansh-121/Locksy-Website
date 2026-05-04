@@ -6,7 +6,7 @@ const post = {
     slug: 'comparing-tab-lockers-locksy-vs-other-browser-extension-solutions',
     title: 'Comparing Tab Lockers: Locksy vs Other Browser Extension Solutions',
     description: 'Ever worried about prying eyes on your open tabs? We dive deep into tab locker extensions, comparing solutions to find the best browser tab protection tools l',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-13',
     lastModified: '2026-03-13',
     readTime: '14 min read',

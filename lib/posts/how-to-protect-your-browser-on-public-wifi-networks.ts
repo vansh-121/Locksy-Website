@@ -6,7 +6,7 @@ const post = {
     slug: 'how-to-protect-your-browser-on-public-wifi-networks',
     title: 'How to Protect Your Browser on Public WiFi Networks',
     description: 'Don\'t get hacked on public WiFi. Learn essential browser security tips, understand the hidden dangers of open networks, and protect your digital privacy.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-10',
     lastModified: '2026-03-10',
     readTime: '13 min read',

@@ -6,7 +6,7 @@ const post = {
     slug: 'why-smart-people-use-domain-rules-instead-of-manually-locking-tabs',
     title: 'Why Smart People Use Domain Rules Instead of Manually Locking Tabs',
     description: 'Frustrated with manually locking tabs? Discover why smart people use domain rules for automatic browser security and effortlessly protect sensitive sites.',
-    author: 'Locksy Security Team',
+    author: 'Vansh Sethi',
     publishDate: '2026-03-05',
     lastModified: '2026-03-05',
     readTime: '12 min read',
