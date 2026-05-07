@@ -56,6 +56,7 @@ import post_social_engineering_attacks_through_browser_tabs_how_to_defend from '
 import post_stealth_mode_how_to_make_your_tab_locker_completely_invisible from './stealth-mode-how-to-make-your-tab-locker-completely-invisible'
 import post_tab_overload_how_too_many_open_tabs_compromise_your_security_common_mistakes from './tab-overload-how-too-many-open-tabs-compromise-your-security-common-mistakes'
 import post_tab_overload_how_too_many_open_tabs_compromise_your_security from './tab-overload-how-too-many-open-tabs-compromise-your-security'
+import post_the_anatomy_of_a_phishing_page_how_attackers_clone_legitimate_sites_in_your_browser from './the-anatomy-of-a-phishing-page-how-attackers-clone-legitimate-sites-in-your-browser'
 import post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits from './the-case-for-one-click-security-why-friction-is-the-enemy-of-good-habits'
 import post_the_future_of_browser_security_predictions_for_2027_beginners_guide from './the-future-of-browser-security-predictions-for-2027-beginners-guide'
 import post_the_future_of_browser_security_predictions_for_2027 from './the-future-of-browser-security-predictions-for-2027'
@@ -124,6 +125,7 @@ export const allPosts = [
     post_stealth_mode_how_to_make_your_tab_locker_completely_invisible,
     post_tab_overload_how_too_many_open_tabs_compromise_your_security_common_mistakes,
     post_tab_overload_how_too_many_open_tabs_compromise_your_security,
+    post_the_anatomy_of_a_phishing_page_how_attackers_clone_legitimate_sites_in_your_browser,
     post_the_case_for_one_click_security_why_friction_is_the_enemy_of_good_habits,
     post_the_future_of_browser_security_predictions_for_2027_beginners_guide,
     post_the_future_of_browser_security_predictions_for_2027,
