@@ -102,7 +102,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.git-check.outputs.changes == 'true'
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --allow-scripts
 
       - name: Verify build
         if: steps.git-check.outputs.changes == 'true'
