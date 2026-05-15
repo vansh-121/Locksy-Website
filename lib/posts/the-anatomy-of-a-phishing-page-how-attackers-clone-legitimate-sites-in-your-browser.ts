@@ -3,19 +3,19 @@
 // DO NOT EDIT MANUALLY — regenerate via the blog generator script.
 
 const post = {
-    slug: 'the-anatomy-of-a-phishing-page-how-attackers-clone-legitimate-sites-in-your-browser',
-    title: 'The Anatomy of a Phishing Page: How Attackers Clone Legitimate Sites in Your Browser',
-    description: 'Ever wondered how phishing sites fool you? I\'m dissecting the anatomy of a fake page, from URL tricks to reverse proxies, revealing how attackers clone legiti',
-    author: 'Vansh Sethi',
-    publishDate: '2026-05-07',
-    lastModified: '2026-05-07',
-    readTime: '14 min read',
-    category: 'Security',
-    tags: ['Phishing', 'Detection', 'Attack Anatomy'],
-    keywords: ['phishing page anatomy', 'fake website browser', 'url spoofing detection', 'identify phishing site'],
-    image: 'https://images.unsplash.com/photo-1591522810783-a870802cbafe?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzgxMzI2ODF8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
-    imageAlt: 'black flat screen computer monitor',
-    content: `
+ slug: 'the-anatomy-of-a-phishing-page-how-attackers-clone-legitimate-sites-in-your-browser',
+ title: 'The Anatomy of a Phishing Page: How Attackers Clone Legitimate Sites in Your Browser',
+ description: 'Ever wondered how phishing sites fool you? I\'m dissecting the anatomy of a fake page, from URL tricks to reverse proxies, revealing how attackers clone legiti',
+ author: 'Vansh Sethi',
+ publishDate: '2026-05-07',
+ lastModified: '2026-05-07',
+ readTime: '14 min read',
+ category: 'Security',
+ tags: ['Phishing', 'Detection', 'Attack Anatomy'],
+ keywords: ['phishing page anatomy', 'fake website browser', 'url spoofing detection', 'identify phishing site'],
+ image: 'https://images.unsplash.com/photo-1591522810783-a870802cbafe?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzgxMzI2ODF8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
+ imageAlt: 'black flat screen computer monitor',
+ content: `
 ## That Time My Friend Almost Lost It All to a Pixel-Perfect Imposter
 
 You know that gut-punch feeling when you realize you've been had? The cold dread creeping up your spine, the frantic double-checking of URLs, the sudden suspicion of every pixel on your screen? I get it. I’ve felt it myself, and more often than I’d like to admit, I’ve had to walk friends through the aftermath of it. Last month, a friend — sharp as a tack, works in tech, mind you — nearly fell for a PayPal phishing scam that was so meticulously crafted, it frankly pissed me off. He got an email about an "unusual activity" on his account, clicked the link, and landed on what appeared to be the *exact* PayPal login page. Every logo, every font, even the little legal disclaimers at the bottom were there. He typed his username, his password... then, something snagged. A tiny, almost imperceptible delay, followed by a redirect to the *real* PayPal site, where he was asked to log in again. He didn't, thankfully, but the experience left him shaken. What stopped him was less about technical savvy and more about a flicker of intuition. That's the terrifying reality of modern phishing: it's not about crude typos anymore; it's about crafting an illusion so convincing, your brain registers it as gospel. It preys on our trust in visual cues, our cognitive shortcuts, and frankly, the inherent vulnerabilities in how browsers present information to us.
@@ -34,13 +34,13 @@ Today, the game is far more advanced. We're talking about sophisticated phishing
 
 Let's dissect the URL bar, our supposed first line of defense. The problem isn't just that it's easy to create similar-looking domains; it's that browsers often don't provide enough context or protection.
 
-1.  **Homoglyph Attacks:** This is a classic, but still effective. Imagine \`apple.com\` versus \`аррlе.com\`. Look closely. The second one uses Cyrillic characters that look identical to Latin ones. To a human eye, they're indistinguishable. Your browser *might* display them differently if it's savvy enough (e.g., showing the punycode \`xn--80ahqj0b.com\`), but many don't by default, or the user doesn't know what punycode means. It's a game of visual deception, where the attacker leverages the vast Unicode character set against our perception.
+1. **Homoglyph Attacks:** This is a classic, but still effective. Imagine \`apple.com\` versus \`аррlе.com\`. Look closely. The second one uses Cyrillic characters that look identical to Latin ones. To a human eye, they're indistinguishable. Your browser *might* display them differently if it's savvy enough (e.g., showing the punycode \`xn--80ahqj0b.com\`), but many don't by default, or the user doesn't know what punycode means. It's a game of visual deception, where the attacker leverages the vast Unicode character set against our perception.
 
-2.  **Subdomain Shenanigans:** Attackers often register domains like \`paypal-security.com\` and then create a subdomain that *looks* legitimate: \`login.paypal.com.paypal-security.com\`. Your eye scans quickly, sees \`paypal.com\` near the beginning, and moves on. The crucial part, the *root domain*, \`paypal-security.com\`, is often overlooked, especially on mobile browsers or when the URL is truncated. It’s the digital equivalent of a magician’s misdirection. They want you to focus on the familiar part, ignoring the critical details.
+2. **Subdomain Shenanigans:** Attackers often register domains like \`paypal-security.com\` and then create a subdomain that *looks* legitimate: \`login.paypal.com.paypal-security.com\`. Your eye scans quickly, sees \`paypal.com\` near the beginning, and moves on. The crucial part, the *root domain*, \`paypal-security.com\`, is often overlooked, especially on mobile browsers or when the URL is truncated. It’s the digital equivalent of a magician’s misdirection. They want you to focus on the familiar part, ignoring the critical details.
 
-3.  **Long and Winding Roads:** Similar to subdomains, attackers can craft incredibly long URLs with multiple subdomains and paths, pushing the actual root domain far to the right, off the visible portion of the URL bar. \`https://secure.login.paypal.com.verify.session.update.some-random-site.xyz/auth/login?id=12345&redirect=true\`. See it? That \`some-random-site.xyz\` is the actual attacker's domain, but it's obscured by the sheer length and deceptive use of subdomains. Mobile browsers are particularly susceptible here, often truncating URLs to fit the smaller screen.
+3. **Long and Winding Roads:** Similar to subdomains, attackers can craft incredibly long URLs with multiple subdomains and paths, pushing the actual root domain far to the right, off the visible portion of the URL bar. \`https://secure.login.paypal.com.verify.session.update.some-random-site.xyz/auth/login?id=12345&redirect=true\`. See it? That \`some-random-site.xyz\` is the actual attacker's domain, but it's obscured by the sheer length and deceptive use of subdomains. Mobile browsers are particularly susceptible here, often truncating URLs to fit the smaller screen.
 
-4.  **Open Redirects:** Sometimes, a legitimate site might have an open redirect vulnerability. An attacker can craft a URL using the *real* domain, like \`https://www.legitsite.com/redirect?url=https://phishingsite.com\`. You click, see \`legitsite.com\` in the URL, feel safe, and then are instantly redirected to the phishing page. It's a quick flash, barely noticeable, but enough to bypass initial scrutiny. This leverages a flaw in the legitimate site to gain initial trust.
+4. **Open Redirects:** Sometimes, a legitimate site might have an open redirect vulnerability. An attacker can craft a URL using the *real* domain, like \`https://www.legitsite.com/redirect?url=https://phishingsite.com\`. You click, see \`legitsite.com\` in the URL, feel safe, and then are instantly redirected to the phishing page. It's a quick flash, barely noticeable, but enough to bypass initial scrutiny. This leverages a flaw in the legitimate site to gain initial trust.
 
 The browser's address bar, in its current form, places an immense burden on the user to be a cybersecurity expert, constantly scrutinizing every character. And honestly? That's an unreasonable expectation for anyone, let alone the general public. We need tools that don't just *show* us the URL, but *interpret* it for us in an unforgeable way.
 
@@ -48,13 +48,13 @@ The browser's address bar, in its current form, places an immense burden on the 
 
 Beyond the URL, the phishing page itself is a masterpiece of mimicry. Attackers don't just copy the text; they clone the entire visual and interactive experience.
 
-*   **HTML & CSS Replication:** Modern cloning tools scrape the entire HTML and CSS of a target page. They meticulously reproduce layouts, color schemes, fonts, and even responsive design elements. If the real site has a fancy animation on a button, the fake site will try to replicate it. They'll even embed SVG logos and favicons to ensure every visual detail matches. The goal is complete perceptual congruence. Your brain sees the familiar UI, the "muscle memory" of interacting with that site kicks in, and your guard drops. They know you're not going to "view source" to check for inconsistencies – who does that for every login?
+* **HTML & CSS Replication:** Modern cloning tools scrape the entire HTML and CSS of a target page. They meticulously reproduce layouts, color schemes, fonts, and even responsive design elements. If the real site has a fancy animation on a button, the fake site will try to replicate it. They'll even embed SVG logos and favicons to ensure every visual detail matches. The goal is complete perceptual congruence. Your brain sees the familiar UI, the "muscle memory" of interacting with that site kicks in, and your guard drops. They know you're not going to "view source" to check for inconsistencies – who does that for every login?
 
-*   **JavaScript Injection and Manipulation:** This is where things get truly insidious.
-    *   **Keyloggers:** Simple scripts can capture every keystroke you make on the page before the data is submitted, giving attackers your username and password even if the form submission itself fails or goes to the wrong place.
-    *   **Form Action Modification:** The most common trick. The attacker modifies the \`action\` attribute of the login form to point to *their* server, where your credentials are harvested. After capturing, they often redirect you to the *real* site's login page, making you think you simply made a typo or had a session timeout. This "pass-through" attack is brilliant in its simplicity and effectiveness. You input your details, they get them, and then you're shunted off to the real site, none the wiser.
-    *   **Disabling Developer Tools:** Some phishing pages try to disable right-click or block developer tools (\`F12\`). While easily bypassed by anyone with a modicum of technical skill, it's a psychological deterrent, preying on less tech-savvy users who might otherwise try to inspect the page. It's a subtle signal that says, "Nothing to see here, move along."
-    *   **Fake Error Messages:** After you submit your details, the page might display a fake error message ("Incorrect password, please try again") while simultaneously sending your *correct* credentials to the attacker. This buys them time and gives them a second chance if you mistype the first time, all while reinforcing the illusion of a legitimate interaction.
+* **JavaScript Injection and Manipulation:** This is where things get truly insidious.
+ * **Keyloggers:** Simple scripts can capture every keystroke you make on the page before the data is submitted, giving attackers your username and password even if the form submission itself fails or goes to the wrong place.
+ * **Form Action Modification:** The most common trick. The attacker modifies the \`action\` attribute of the login form to point to *their* server, where your credentials are harvested. After capturing, they often redirect you to the *real* site's login page, making you think you simply made a typo or had a session timeout. This "pass-through" attack is brilliant in its simplicity and effectiveness. You input your details, they get them, and then you're shunted off to the real site, none the wiser.
+ * **Disabling Developer Tools:** Some phishing pages try to disable right-click or block developer tools (\`F12\`). While easily bypassed by anyone with a modicum of technical skill, it's a psychological deterrent, preying on less tech-savvy users who might otherwise try to inspect the page. It's a subtle signal that says, "Nothing to see here, move along."
+ * **Fake Error Messages:** After you submit your details, the page might display a fake error message ("Incorrect password, please try again") while simultaneously sending your *correct* credentials to the attacker. This buys them time and gives them a second chance if you mistype the first time, all while reinforcing the illusion of a legitimate interaction.
 
 This level of detail means that visual inspection alone is insufficient. We need an "authenticity layer" that can verify the origin and integrity of the *content* we're interacting with, not just the secure connection to it.
 
@@ -65,8 +65,8 @@ This level of detail means that visual inspection alone is insufficient. We need
 Remember when we were all taught to "look for the green padlock"? That little icon signifying a secure HTTPS connection? Well, that advice, while technically correct for ensuring your data is encrypted *in transit*, has become a major source of false confidence. Here's why:
 
 A valid SSL/TLS certificate (the technology behind HTTPS) *only* confirms two things:
-1.  The connection between your browser and the server is encrypted.
-2.  The server you're talking to is indeed the one that owns the certificate.
+1. The connection between your browser and the server is encrypted.
+2. The server you're talking to is indeed the one that owns the certificate.
 
 It *does not* verify that the server you're talking to is legitimate, trustworthy, or belongs to the company you think it does. Attackers can (and do, often for free via services like Let's Encrypt) obtain valid SSL certificates for their phishing domains. So, you'll land on \`login.paypal.com.phishingsite.xyz\`, see the padlock, see HTTPS, and think you're safe. You're not. You're just securely encrypting your credentials to the phisher's server.
 
@@ -76,10 +76,10 @@ The widespread availability of free SSL certificates, while fantastic for broade
 
 No matter how technically sophisticated a phishing page is, it almost always needs a human push to get you there. This is where social engineering comes in, and it's the glue that holds the whole attack together.
 
-*   **Urgency and Fear:** "Your account has been compromised!", "Immediate action required!", "Your payment is overdue!" These messages trigger an emotional response, overriding rational thought. We're conditioned to react quickly to threats.
-*   **Curiosity and Greed:** "You've won a prize!", "Check out this photo of you!", "Here's your tax refund." These appeal to our desires and curiosity, lowering our guard.
-*   **Impersonation:** The email, SMS, or chat message will often spoof a legitimate sender – your bank, a government agency, a shipping company, even a colleague or boss. The more personalized (spear phishing), the higher the success rate. They might reference specific recent events, purchases, or even internal company jargon.
-*   **The "Why" Factor:** Attackers tailor their lures. If it's a corporate target, they might use a fake HR document or a password reset link for an internal system. If it's a consumer, it's often banking, e-commerce, or social media. They understand the context of your digital life and exploit it.
+* **Urgency and Fear:** "Your account has been compromised!", "Immediate action required!", "Your payment is overdue!" These messages trigger an emotional response, overriding rational thought. We're conditioned to react quickly to threats.
+* **Curiosity and Greed:** "You've won a prize!", "Check out this photo of you!", "Here's your tax refund." These appeal to our desires and curiosity, lowering our guard.
+* **Impersonation:** The email, SMS, or chat message will often spoof a legitimate sender – your bank, a government agency, a shipping company, even a colleague or boss. The more personalized (spear phishing), the higher the success rate. They might reference specific recent events, purchases, or even internal company jargon.
+* **The "Why" Factor:** Attackers tailor their lures. If it's a corporate target, they might use a fake HR document or a password reset link for an internal system. If it's a consumer, it's often banking, e-commerce, or social media. They understand the context of your digital life and exploit it.
 
 The email or message is the match that lights the fuse, leading you directly to that perfectly crafted, deceptive page. You can have the most secure browser in the world, but if your human judgment is compromised by a clever social engineering tactic, you're still vulnerable. This isn't just about technical defenses; it's about building a robust mental model for online interaction.
 
@@ -93,9 +93,9 @@ What if your browser didn't just show you a URL, but gave you an *unforgeable*, 
 
 ![Team working on laptops in a modern office](https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=450&fit=crop&auto=format&q=80)
 
-For instance, I've been experimenting with tools that aim to create an explicit "authenticity layer" right within the browser, beyond the basic padlock. This is precisely why I use Locksy. It’s not just another browser extension; it's designed to provide that crucial, unphishable signal about the true origin of a page. Instead of just showing you the URL, Locksy gives you a clear, undeniable visual confirmation that the page you're looking at genuinely belongs to the entity it claims to be. It's a layer of trust that lives outside the renderable HTML/CSS, making it incredibly difficult for attackers to spoof. Think of it as a digital watermark that browsers, by themselves, simply can't offer. It helps close that "Authenticity Gap" by giving you a direct, verifiable signal that bypasses the visual deception of a cloned page.
+For instance, I've been experimenting with tools that aim to create an explicit "authenticity layer" right within the browser, beyond the basic padlock. This is precisely why I use Locksy. It’s not just another browser extension; it's designed to provide that crucial, unphishable signal about the true origin of a page. Instead of just showing you the URL, a tab-locking extension gives you a clear, undeniable visual confirmation that the page you're looking at genuinely belongs to the entity it claims to be. It's a layer of trust that lives outside the renderable HTML/CSS, making it incredibly difficult for attackers to spoof. Think of it as a digital watermark that browsers, by themselves, simply can't offer. It helps close that "Authenticity Gap" by giving you a direct, verifiable signal that bypasses the visual deception of a cloned page.
 
-Beyond specific tools, we need to embrace more robust authentication methods. FIDO2/WebAuthn hardware tokens (like YubiKeys) are a game-changer because they cryptographically prove your identity to the *correct domain*, making reverse proxy phishing much harder. Even if an attacker gets your username and password, they can't complete the FIDO2 challenge without the physical key interacting with the legitimate site. It’s not a silver bullet, but it raises the bar significantly.
+Beyond specific tools, we need to embrace more robust authentication methods. FIDO2/WebAuthn hardware tokens (like YubiKeys) are a significant improvement because they cryptographically prove your identity to the *correct domain*, making reverse proxy phishing much harder. Even if an attacker gets your username and password, they can't complete the FIDO2 challenge without the physical key interacting with the legitimate site. It’s not a complete solution, but it raises the bar significantly.
 
 ## The Path Forward: Educated Skepticism and a New Authenticity Layer
 

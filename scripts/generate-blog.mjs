@@ -1046,7 +1046,113 @@ Now generate ${count} unique blog topics in valid JSON format only:`
 // common-mistakes, FAQ, etc.) which Google flagged as mass-produced thin content.
 // Now each topic produces exactly ONE unique, high-quality article.
 //
-// Minimum quality gate: articles under 1800 words are rejected.
+// Quality gates (AdSense compliance):
+//   - Minimum 1800 words, maximum 5000 words
+//   - Locksy mentioned at most 1 time
+//   - No AI filler phrases detected
+//   - No false claims about Locksy's capabilities
+
+// ── AI filler patterns that trigger AdSense "low value" flags ──────────────
+const AI_FILLER_PATTERNS = [
+    /in today'?s digital (landscape|world|age|era)/i,
+    /it'?s important to note that/i,
+    /this article will (explore|discuss|cover|examine)/i,
+    /let'?s dive (in|into)/i,
+    /let'?s take a (look|closer look)/i,
+    /embracing \w+/i,
+    /leveraging \w+/i,
+    /harnessing \w+/i,
+    /it goes without saying/i,
+    /at the end of the day/i,
+    /in conclusion,/i,
+    /to summarize,/i,
+    /the bottom line is/i,
+    /without further ado/i,
+    /buckle up/i,
+    /game.?changer/i,
+    /no.?brainer/i,
+    /silver bullet/i,
+    /paradigm shift/i,
+    /navigate the complex/i,
+    /ever.?evolving/i,
+    /a world where/i,
+    /in an era of/i,
+]
+
+// Locksy claims that are FALSE and must never appear
+const FALSE_LOCKSY_CLAIMS = [
+    /locksy.*container/i,       // Locksy doesn't do containers
+    /locksy.*sandbox/i,         // Locksy doesn't sandbox anything
+    /locksy.*vpn/i,             // Locksy is not a VPN
+    /locksy.*encrypt.*traffic/i,// Locksy doesn't encrypt network traffic
+    /locksy.*firewall/i,        // Locksy is not a firewall
+    /locksy.*malware/i,         // Locksy doesn't detect malware
+    /locksy.*antivirus/i,       // Locksy is not antivirus
+    /locksy.*isolat/i,          // Locksy doesn't isolate processes
+]
+
+/**
+ * Post-generation quality audit.
+ * Returns { pass: boolean, issues: string[] }
+ */
+function auditContentQuality(articleBody, wordCount) {
+    const issues = []
+
+    // 1. Word count bounds
+    if (wordCount < 1800) {
+        issues.push(`Too short: ${wordCount} words (minimum 1800)`)
+    }
+    if (wordCount > 5000) {
+        issues.push(`Too long: ${wordCount} words (maximum 5000) — likely padded with filler`)
+    }
+
+    // 2. Locksy mention count — max 1
+    const locksyMentions = (articleBody.match(/\blocksy\b/gi) || []).length
+    if (locksyMentions > 1) {
+        issues.push(`Locksy mentioned ${locksyMentions} times (maximum 1) — too promotional`)
+    }
+
+    // 3. AI filler phrases
+    const foundFillers = []
+    for (const pattern of AI_FILLER_PATTERNS) {
+        if (pattern.test(articleBody)) {
+            const match = articleBody.match(pattern)
+            foundFillers.push(match[0])
+        }
+    }
+    if (foundFillers.length > 0) {
+        issues.push(`AI filler phrases detected: ${foundFillers.map(f => `"${f}"`).join(', ')}`)
+    }
+
+    // 4. False Locksy claims
+    const falseClaims = []
+    for (const pattern of FALSE_LOCKSY_CLAIMS) {
+        if (pattern.test(articleBody)) {
+            const match = articleBody.match(pattern)
+            falseClaims.push(match[0])
+        }
+    }
+    if (falseClaims.length > 0) {
+        issues.push(`FALSE claims about Locksy: ${falseClaims.map(f => `"${f}"`).join(', ')}`)
+    }
+
+    // 5. Heading structure — must have at least 4 ## headings for depth
+    const headingCount = (articleBody.match(/^##\s/gm) || []).length
+    if (headingCount < 4) {
+        issues.push(`Only ${headingCount} sections (need at least 4 for depth)`)
+    }
+
+    // 6. Excessive exclamation marks — AI loves them
+    const exclamationCount = (articleBody.match(/!/g) || []).length
+    if (exclamationCount > 8) {
+        issues.push(`${exclamationCount} exclamation marks (max 8) — reads as overly enthusiastic AI`)
+    }
+
+    return {
+        pass: issues.length === 0,
+        issues
+    }
+}
 
 async function generateBlogContent(topic) {
     const apiKey = process.env.GEMINI_API_KEY
@@ -1059,107 +1165,73 @@ async function generateBlogContent(topic) {
     const shuffledImages = shuffleArray([...INLINE_IMAGE_POOL])
     const selectedImages = shuffledImages.slice(0, 3)
 
-    const prompt = `You are a seasoned tech blogger who writes for Medium, who has deep expertise in browser security, privacy, and productivity. Your readers trust you because you write with authentic personality, real opinions, and genuine experience. You absolutely NEVER sound like an AI or corporate marketing.
+    const prompt = `You are a senior security engineer who writes technical articles for Smashing Magazine and CSS-Tricks. You have 10+ years of hands-on experience with browser internals, web security, and extension development. You write to educate developers and power users — not to market products.
 
-CRITICAL — GOOGLE ADSENSE COMPLIANCE:
-This article MUST pass Google AdSense's "high value content" review. That means:
-- Every paragraph must provide GENUINE, UNIQUE value that a reader cannot easily find elsewhere
-- NO filler paragraphs, NO generic advice, NO padding. Every sentence must earn its place
-- Include SPECIFIC data, statistics, technical details, or actionable steps — not vague generalities
-- The article must stand on its own as a useful resource even without mentioning Locksy
-- Do NOT repeat the same point in different words. Say it once, say it well, move on
-- Include at least ONE original insight, framework, or recommendation that demonstrates expertise
+ABSOLUTE RULES — VIOLATING ANY OF THESE WILL CAUSE THE ARTICLE TO BE REJECTED:
 
-Your sole job: Write a compelling, human-sounding long-form essay about "${topic.title}"
+1. ORIGINAL VALUE: Every section must contain at least one of:
+   - A specific code snippet, config example, or terminal command readers can use
+   - A concrete data point, benchmark, or statistic with a source
+   - A step-by-step procedure with exact settings/values
+   - An original analysis, comparison table, or decision framework
+   If a section is just "general advice" with no specifics, it FAILS.
 
-AUTHENTICITY & VOICE — THIS IS THE MOST CRITICAL PART:
-Your writing should feel like a trusted friend sharing hard-won knowledge over coffee. People should forget they're reading content generated by AI. You have a distinct personality:
-- Share genuine frustrations with existing solutions
-- Use vivid, specific examples and anecdotes (not generic scenarios)
-- Write with strong, unapologetic opinions. Don't hedge. Say what works and what doesn't.
-- Show your reasoning. Explain WHY you believe something, not just WHAT you believe
-- Use conversational language: contractions (don't, won't, it's), casual phrases, natural speech patterns
-- React authentically to ideas. Use phrases like "Here's the thing...", "I've learned...", "The reality is..."
-- Include personal anecdotes or specific real-world examples you've encountered
-- Challenge assumptions. Question conventional wisdom. Don't accept things at face value
-- Be willing to admit limitations or nuance. Real experts know that not everything is black-and-white
+2. LOCKSY MENTIONS: You may mention Locksy AT MOST ONCE in the entire article, and ONLY if it's genuinely relevant to the topic. If the topic isn't directly about tab locking, DO NOT mention Locksy at all. When you do mention it, use a single brief sentence like: "Tools like Locksy handle this by..." — never a paragraph. Locksy is a browser extension that password-locks individual tabs using PBKDF2 encryption. It does NOT: sandbox browsers, encrypt network traffic, detect malware, act as a VPN, or isolate processes. Do not claim it does anything beyond tab-level password protection.
 
-STRUCTURE & STORYTELLING:
-- HOOK: Start with a specific story, scenario, or observation that makes readers think "Yes! This is what I've been experiencing!"
-  Examples: "I discovered this the hard way when..." or "Last week, a friend asked me..." or "Here's what nobody talks about..."
-- FLOW: Use natural transitions that feel like thinking out loud, not templated articles
-  Avoid: "In this article, we'll explore..." Instead: "Here's what I've learned..." or "So let me break this down..."
-- DEPTH: Go deeper than surface-level. Show nuance, complexity, trade-offs
-- REAL EXAMPLES: Use specific, concrete examples. Name actual tools, scenarios, mistakes you've seen
-- CONCLUSION: End with something memorable or actionable — a genuine insight or recommendation
+3. ZERO AI FILLER: The following phrases are BANNED. Using any of them will cause the article to be rejected:
+   - "In today's digital landscape/world/age"
+   - "It's important to note"
+   - "Let's dive in/into"
+   - "This article will explore/discuss/cover"
+   - "Game-changer" / "No-brainer" / "Silver bullet"
+   - "Embracing/Leveraging/Harnessing"
+   - "In conclusion" / "To summarize"
+   - "The bottom line is"
+   - "Without further ado" / "Buckle up"
+   - "Navigate the complex" / "Ever-evolving"
+   - Any sentence starting with "It goes without saying"
 
-AI DETECTION RED FLAGS TO ABSOLUTELY AVOID:
-❌ "In today's digital landscape / world / age..."
-❌ "It's important to note that..."
-❌ "To summarize / In conclusion / Finally..."
-❌ "This article will explore / discuss / cover..."
-❌ "Let's dive into..." or "Let's take a look at..."
-❌ "Embracing X" or "Leveraging Y" or "Harnessing Z"
-❌ "It goes without saying..." or "At the end of the day..."
-❌ "Furthermore / Moreover / Additionally" (use "Also" or rewrite naturally)
-❌ Lists with semicolons: "First; second; third" — write in prose instead
-❌ Exactly three numbered points (classic AI pattern — vary your structure)
-❌ Generic motivational phrases like "The key is..." or "The bottom line is..."
-❌ Perfect bullet points with perfect grammar and symmetry
-❌ Bland transitions between paragraphs
+4. TECHNICAL DEPTH: Write for an audience that already knows the basics. Don't explain what a browser is, what HTTPS is, or what a password manager does. Jump straight into the nuanced, expert-level content. Include:
+   - Specific CVE numbers, RFC references, or specification citations when relevant
+   - Actual browser API names (chrome.tabs, navigator.credentials, document.referrerPolicy)
+   - Real tools by name with version numbers where applicable
+   - Config file snippets, HTTP header examples, or JavaScript code blocks
+   - Performance numbers, timing data, or comparison benchmarks
 
-PERSONALITY REQUIREMENTS:
-- Use varied sentence length: Mix short. Punchy. Sentences. With longer, flowing ones that take their time.
-- Use parenthetical asides naturally (like this) — it's how humans think and talk
-- Use contractions constantly: don't, won't, can't, it's, that's, you're
-- Use first-person extensively: "I've found...", "I realized...", "What I've learned..."
-- Use second-person to engage: "You probably already know...", "Here's where things get interesting for you..."
-- Show emotion: frustration, excitement, skepticism. Real humans have feelings about ideas.
-- Use humor, sarcasm, or wit naturally (not forced). If a joke lands, great. If not, skip it.
-- Vary your tone. Be serious when discussing security risks, lighter when talking about workflows
+5. NO REPETITION: Never restate the same point in different words. State it once clearly and move on. Each paragraph must introduce NEW information.
 
-CONTENT DEPTH & SPECIFICITY:
-- Reference specific tools, technologies, or techniques by name
-- Use concrete numbers, percentages, timeframes when relevant
-- Explain the 'why' behind recommendations, not just the 'what'
-- Acknowledge counterarguments or different perspectives
-- Share lessons learned from real experience
-- Show your expertise through specific technical knowledge, not just cheerleading
-
-BRAND VOICE (Locksy):
-- Mention Locksy naturally and sparingly (2-3 times max) as a real example you use, not as product placement
-- If Locksy solves the problem you're discussing, mention it like "I use Locksy for this because..."
-- Never pitch. Never sell. Just mention it as one tool in a broader conversation
-- For feature-focused topics, lead with the underlying problem/technology, mention Locksy as an example of how it's implemented well
+VOICE & STYLE:
+- Write like you're explaining something to a smart colleague, not lecturing a student
+- Use contractions naturally (don't, won't, it's, that's)
+- Use first-person sparingly — only for genuine experience-based insights
+- Be direct and opinionated. "X is better than Y because..." not "X and Y both have merits"
+- Include concrete "gotchas" or surprising findings that demonstrate real expertise
+- Vary paragraph length: some short (2-3 sentences), some longer (5-7 sentences)
+- Use code blocks (\`\`\`) for any technical examples
 
 ARTICLE STRUCTURE:
-- 2500-4000 words of genuine insight, not filler
-- Start with a hook/story (not a definition)
-- Use ## for descriptive section headings (e.g., "The browser tab chaos I see every day" NOT "Overview")
-- Write substantial paragraphs (150-300 words each)
-- Use images at natural breaks: after a major section or between paragraphs
-- End with a genuine conclusion or insight (not a summary)
+- 1800-3500 words of substantive technical content
+- Start with a concrete problem or surprising fact (NOT a personal anecdote story)
+- 5-8 sections with descriptive ## headings
+- Include at least 2 code/config/command examples in fenced code blocks
+- Include at least 1 comparison table or decision matrix using markdown tables
+- End with specific, actionable takeaways (NOT motivational statements)
 
 TOPIC:
-Topic: "${topic.title}"
+Title: "${topic.title}"
 Category: ${topic.category}
-Keywords to weave naturally: ${topic.keywords.join(', ')}
+Target keywords: ${topic.keywords.join(', ')}
 
 INLINE IMAGES:
-Include these 2-3 images naturally throughout the article (at section breaks or between paragraphs). Use EXACTLY these markdown syntaxes verbatim:
+Place these images at natural section breaks. Use EXACTLY this markdown:
 
 ${selectedImages.join('\n')}
 
-Make sure they fit the flow and add visual breathing room to the text.
-
-OUTPUT FORMAT — FOLLOW EXACTLY:
-First, output these two lines (no quotes, no extra text on each line):
-META_DESC: {a compelling 140-155 character meta description that reads like something a human expert would write, includes primary keyword, and makes readers want to click}
-IMAGE_KEYWORDS: {3-5 specific visual search terms that capture this article's essence — e.g. "frustrated developer staring at laptop screen" or "hands typing keyboard late night"}
-
-Then output a blank line, then the article body starting with the first ## heading.
-
-Do NOT include an H1 — the article title is handled separately.`
+OUTPUT FORMAT:
+Line 1: META_DESC: {140-155 char description with primary keyword, written as a factual statement}
+Line 2: IMAGE_KEYWORDS: {3-5 visual search terms}
+Line 3: (blank)
+Line 4+: Article body starting with first ## heading. No H1.`
 
     const data = await retryWithBackoff(async () => {
         const response = await fetchWithTimeout(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
@@ -1174,7 +1246,7 @@ Do NOT include an H1 — the article title is handled separately.`
                     }
                 ],
                 generationConfig: {
-                    temperature: 0.85,
+                    temperature: 0.7, // Lower temp = more consistent, factual output
                     maxOutputTokens: 8192
                 }
             })
@@ -1388,12 +1460,17 @@ async function main() {
         if (metaDescription) console.log(`📝 Meta description: ${metaDescription}`)
         if (imageKeywords) console.log(`🔍 Image keywords: ${imageKeywords}`)
 
-        // Quality gate: reject thin content
-        if (wordCount < MIN_WORD_COUNT) {
-            console.error(`\n❌ QUALITY GATE FAILED: Article is only ${wordCount} words (minimum: ${MIN_WORD_COUNT}).`)
-            console.error(`   This article would be flagged as thin content by AdSense. Skipping.`)
-            return { success: false, error: `Article too short: ${wordCount} words` }
+        // ── Comprehensive quality audit ────────────────────────────────
+        const audit = auditContentQuality(articleBody, wordCount)
+        if (!audit.pass) {
+            console.error(`\n❌ QUALITY AUDIT FAILED:`)
+            for (const issue of audit.issues) {
+                console.error(`   • ${issue}`)
+            }
+            console.error(`\n   This article would be flagged by AdSense. Skipping.`)
+            return { success: false, error: `Quality audit failed: ${audit.issues.join('; ')}` }
         }
+        console.log(`✅ Quality audit passed (${wordCount} words, all checks green)`)
 
         // Fallback description if Gemini didn't output a META_DESC line
         const fallbackDescription = `${selectedTopic.keywords[0].charAt(0).toUpperCase() + selectedTopic.keywords[0].slice(1)}: ${selectedTopic.title.toLowerCase()}. Practical insights on ${selectedTopic.keywords.slice(1, 3).join(' and ')}.`

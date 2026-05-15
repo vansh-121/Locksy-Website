@@ -3,19 +3,19 @@
 // DO NOT EDIT MANUALLY — regenerate via the blog generator script.
 
 const post = {
-    slug: '10-browser-security-extensions-everyone-should-install',
-    title: '10 Browser Security Extensions Everyone Should Install',
-    description: 'Think your browser\'s safe? Think again. I dive deep into the essential browser security extensions everyone needs in 2026 to protect their privacy, data, and ',
-    author: 'Vansh Sethi',
-    publishDate: '2026-03-17',
-    lastModified: '2026-03-17',
-    readTime: '15 min read',
-    category: 'Comparison',
-    tags: ['Extensions', 'Browser Security', 'Comparison'],
-    keywords: ['browser security extensions', 'best browser extensions 2026', 'privacy extensions', 'security add-ons'],
-    image: 'https://images.unsplash.com/photo-1669023414162-8b0573b9c6b2?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzM3Mzc4OTV8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
-    imageAlt: 'a computer with a keyboard and mouse',
-    content: `
+ slug: '10-browser-security-extensions-everyone-should-install',
+ title: '10 Browser Security Extensions Everyone Should Install',
+ description: 'Think your browser\'s safe? Think again. I dive deep into the essential browser security extensions everyone needs in 2026 to protect their privacy, data, and ',
+ author: 'Vansh Sethi',
+ publishDate: '2026-03-17',
+ lastModified: '2026-03-17',
+ readTime: '15 min read',
+ category: 'Comparison',
+ tags: ['Extensions', 'Browser Security', 'Comparison'],
+ keywords: ['browser security extensions', 'best browser extensions 2026', 'privacy extensions', 'security add-ons'],
+ image: 'https://images.unsplash.com/photo-1669023414162-8b0573b9c6b2?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzM3Mzc4OTV8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
+ imageAlt: 'a computer with a keyboard and mouse',
+ content: `
 ## That Time I Almost Shared My Financials with a Stranger
 
 Let me set the scene. It was a Tuesday. I was working from a bustling coffee shop, the kind with exposed brick and too-loud indie music. Deep into a research rabbit hole, I had about forty tabs open – some work, some personal, a few highly sensitive, like my online banking portal (yeah, I know, I know, but I was just checking something quickly, okay?). Nature called, as it often does. I grabbed my phone, left my open laptop on the table, and dashed off.
@@ -88,9 +88,9 @@ And speaking of isolation and keeping things separate...
 
 Remember my coffee shop mishap? That moment of sheer panic when a stranger was looking at my exposed financial data? That's precisely the kind of scenario that triggered my search for a solution to **password-protect specific browser tabs**. Because let's face it, locking your entire computer when you step away isn't always practical for a two-minute break, especially if you're collaborating or have others using your machine. And sometimes, you just want to secure *one* sensitive tab without closing it and losing your progress.
 
-This is where an extension like **Locksy** shines, and it’s a tool I genuinely recommend and use. Locksy allows you to instantly password-protect any active tab or group of tabs. So, if I step away from my laptop, even for a moment, I can click a button, and my banking tab, my medical portal, or any other sensitive tab is instantly obscured behind a password prompt. Anyone trying to peek will just see a locked screen.
+This is where an extension like **a tab-locking extension** shines, and it’s a tool I genuinely recommend and use. a tab-locking extension allows you to instantly password-protect any active tab or group of tabs. So, if I step away from my laptop, even for a moment, I can click a button, and my banking tab, my medical portal, or any other sensitive tab is instantly obscured behind a password prompt. Anyone trying to peek will just see a locked screen.
 
-It’s an elegantly simple solution to a very common and critical problem. It gives you that immediate, on-the-fly security for sensitive information without disrupting your entire workflow. You can set it to auto-lock after a certain idle time, or even lock specific domains automatically. It's not about stopping a sophisticated hacker; it's about stopping casual snooping, protecting your data from curious eyes, or even just keeping your kids from accidentally messing with your work. For anyone who works in public, shares their computer, or just wants that extra layer of immediate privacy, Locksy is an absolute no-brainer. It gives you peace of mind that your open tabs remain *yours*.
+It’s an elegantly simple solution to a very common and critical problem. It gives you that immediate, on-the-fly security for sensitive information without disrupting your entire workflow. You can set it to auto-lock after a certain idle time, or even lock specific domains automatically. It's not about stopping a sophisticated hacker; it's about stopping casual snooping, protecting your data from curious eyes, or even just keeping your kids from accidentally messing with your work. For anyone who works in public, shares their computer, or just wants that extra layer of immediate privacy, a tab-locking extension is an absolute straightforward choice. It gives you peace of mind that your open tabs remain *yours*.
 
 ### The Janitor: Cookie Managers and Site Data Control
 
@@ -114,12 +114,12 @@ This isn't necessarily malicious; many legitimate extensions *need* these permis
 
 So, how do you mitigate this risk?
 
-1.  **Be Selective**: Only install extensions you genuinely need. Each one is another potential point of failure.
-2.  **Scrutinize Permissions**: When you install an extension, *read* the requested permissions. Does a "to-do list" extension really need to "read and change all your data on all websites"? Probably not. If it feels excessive, look for an alternative.
-3.  **Check Reviews and Reputation**: Look at the number of users, the average rating, and read recent reviews. Is the developer responsive? Are there any red flags?
-4.  **Open Source is Gold**: Whenever possible, prioritize open-source extensions. Their code can be audited by anyone, making it much harder to hide malicious intent. Bitwarden, uBlock Origin, and HTTPS Everywhere are great examples.
-5.  **Stay Updated**: Ensure your extensions (and browser) are always up-to-date. Developers often release updates to patch security vulnerabilities.
-6.  **Periodic Review**: Every few months, go through your installed extensions. Do you still use them? Are they still maintained? If not, uninstall them. Decluttering your browser isn't just good for performance; it's good for security.
+1. **Be Selective**: Only install extensions you genuinely need. Each one is another potential point of failure.
+2. **Scrutinize Permissions**: When you install an extension, *read* the requested permissions. Does a "to-do list" extension really need to "read and change all your data on all websites"? Probably not. If it feels excessive, look for an alternative.
+3. **Check Reviews and Reputation**: Look at the number of users, the average rating, and read recent reviews. Is the developer responsive? Are there any red flags?
+4. **Open Source is Gold**: Whenever possible, prioritize open-source extensions. Their code can be audited by anyone, making it much harder to hide malicious intent. Bitwarden, uBlock Origin, and HTTPS Everywhere are great examples.
+5. **Stay Updated**: Ensure your extensions (and browser) are always up-to-date. Developers often release updates to patch security vulnerabilities.
+6. **Periodic Review**: Every few months, go through your installed extensions. Do you still use them? Are they still maintained? If not, uninstall them. Decluttering your browser isn't just good for performance; it's good for security.
 
 I always preach a "less is more" approach here. Don't just install every shiny new **browser security extension** that pops up. Be deliberate. Be discerning.
 
@@ -127,13 +127,13 @@ I always preach a "less is more" approach here. Don't just install every shiny n
 
 If you're wondering what my *actual* browser setup looks like after years of obsessive tweaking, here's a peek at some of my essential **best browser extensions 2026** picks:
 
-*   **uBlock Origin**: Absolutely foundational for content blocking and general sanity.
-*   **Bitwarden**: My digital vault for all passwords. Cannot live without it.
-*   **HTTPS Everywhere**: Simple, effective, critical encryption enforcement.
-*   **ClearURLs**: Keeps my URLs clean and reduces tracking.
-*   **Locksy**: For those moments I need to secure sensitive tabs instantly, whether I'm stepping away or just want to keep certain windows private from others sharing my screen. It’s an easy, elegant solution.
-*   **Cookie AutoDelete**: Automated cookie cleanup. Essential for maintaining privacy.
-*   **Decentraleyes**: Protects against tracking via commonly used content delivery networks (CDNs). A bit more advanced, but excellent.
+* **uBlock Origin**: Absolutely foundational for content blocking and general sanity.
+* **Bitwarden**: My digital vault for all passwords. Cannot live without it.
+* **HTTPS Everywhere**: Simple, effective, critical encryption enforcement.
+* **ClearURLs**: Keeps my URLs clean and reduces tracking.
+* **a tab-locking extension**: For those moments I need to secure sensitive tabs instantly, whether I'm stepping away or just want to keep certain windows private from others sharing my screen. It’s an easy, elegant solution.
+* **Cookie AutoDelete**: Automated cookie cleanup. Essential for maintaining privacy.
+* **Decentraleyes**: Protects against tracking via commonly used content delivery networks (CDNs). A bit more advanced, but excellent.
 
 This isn't a definitive list for everyone, but it reflects a balance of strong security, robust privacy, and reasonable performance. Each one solves a distinct problem, and together, they form a formidable defense against the myriad threats lurking online.
 
