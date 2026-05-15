@@ -328,7 +328,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                     <Link href="/about" className="font-bold text-lg text-foreground hover:text-primary transition-colors">
                                         {post.author}
                                     </Link>
-                                    <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium">Author</span>
+                                    <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-foreground border-0 font-medium">Author</span>
                                 </div>
                                 <p className="text-sm font-medium text-muted-foreground mb-2">Developer &amp; Founder of Locksy</p>
                                 <p className="text-sm text-foreground/80 leading-relaxed">
@@ -377,7 +377,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                             <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent" />
                                         </div>
                                         <CardHeader>
-                                            <Badge variant="secondary" className="w-fit mb-2 bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 text-primary">
+                                            <Badge variant="secondary" className="w-fit mb-2 bg-muted/80 hover:bg-muted text-foreground border-0 transition-colors">
                                                 {relatedPost.category}
                                             </Badge>
                                             <CardTitle className="line-clamp-2 text-lg">

@@ -3,19 +3,19 @@
 // DO NOT EDIT MANUALLY — regenerate via the blog generator script.
 
 const post = {
-    slug: 'how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters',
-    title: 'How Passkeys Are Replacing Passwords (And Why Tab Protection Still Matters)',
-    description: 'Passkeys are finally here, revolutionizing online security. But do they make you truly safe? Discover why even with passkeys, browser tab protection still mat',
-    author: 'Vansh Sethi',
-    publishDate: '2026-04-06',
-    lastModified: '2026-04-06',
-    readTime: '13 min read',
-    category: 'Research',
-    tags: ['Passkeys', 'Authentication', 'Future'],
-    keywords: ['passkeys vs passwords', 'webauthn adoption', 'passwordless authentication', 'passkey security'],
-    image: 'https://images.unsplash.com/photo-1624916145576-5b5772d9bccb?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzU0NjY4MDN8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
-    imageAlt: 'black and silver laptop computer on black table',
-    content: `
+ slug: 'how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters',
+ title: 'How Passkeys Are Replacing Passwords (And Why Tab Protection Still Matters)',
+ description: 'Passkeys are finally here, revolutionizing online security. But do they make you truly safe? Discover why even with passkeys, browser tab protection still mat',
+ author: 'Vansh Sethi',
+ publishDate: '2026-04-06',
+ lastModified: '2026-04-06',
+ readTime: '13 min read',
+ category: 'Research',
+ tags: ['Passkeys', 'Authentication', 'Future'],
+ keywords: ['passkeys vs passwords', 'webauthn adoption', 'passwordless authentication', 'passkey security'],
+ image: 'https://images.unsplash.com/photo-1624916145576-5b5772d9bccb?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzU0NjY4MDN8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
+ imageAlt: 'black and silver laptop computer on black table',
+ content: `
 ## The Ghost in the Machine, or, "Did I Leave the Digital Door Open?"
 
 Picture this: you're at your favorite coffee shop, deep in a research rabbit hole or managing your crypto portfolio. You need to grab another oat milk latte, so you step away from your laptop for a minute. Just a minute, right? Or maybe you're at home, working from the kitchen table, and your toddler, in a moment of pure curiosity, decides to "help" by mashing the keyboard. Or perhaps your partner, needing to quickly check something, just clicks over to your open browser window.
@@ -29,22 +29,22 @@ But then, a new sheriff rolled into town: **passkeys**. And suddenly, it feels l
 Let's be brutally honest: passwords suck. There, I said it. From the moment we were first told to pick something "memorable but not obvious," we were set up for failure. We tried to follow the rules: "at least 12 characters, a mix of upper and lower case, numbers, and symbols." The result? A proliferation of \`P@ssw0rd123!\` variants or, worse, reusing the same complex string across dozens of sites because, well, who can remember them all?
 
 The problem isn't just our fallible human memory. It's the inherent insecurity of the system itself. When you use a password, you're essentially sending a secret over the internet to a server. That server stores *some* representation of your password (hopefully a hashed one, but even then, breaches happen). This means:
-1.  **Phishing is rampant:** A convincing fake login page can trick you into handing over your secret.
-2.  **Server breaches are devastating:** If the company's database gets hacked, your password (or its hash) is exposed. And if you reused that password, suddenly dozens of your accounts are vulnerable.
-3.  **It's a shared secret:** Both you and the server know "something." That "something" is the weakest link.
+1. **Phishing is rampant:** A convincing fake login page can trick you into handing over your secret.
+2. **Server breaches are devastating:** If the company's database gets hacked, your password (or its hash) is exposed. And if you reused that password, suddenly dozens of your accounts are vulnerable.
+3. **It's a shared secret:** Both you and the server know "something." That "something" is the weakest link.
 
 For years, two-factor authentication (2FA) has been our band-aid solution, adding a second layer like a code from your phone. And yes, it's significantly better than just a password. But it's still an *added step*, and it still relies on that primary, vulnerable password. I've spent countless hours explaining to friends and family why 2FA is critical, only to see their eyes glaze over at the perceived inconvenience. We needed something fundamentally different, something that cut the Gordian knot of passwords entirely.
 
 ## Enter Passkeys: A Breath of Fresh, Secure Air
 
-This is where **passkeys** ride in, like a hero in a Western, ready to clean up the town. When I first started hearing about FIDO (Fast Identity Online) and **WebAuthn adoption**, I was cautiously optimistic. Another "solution," I thought. But the more I dug in, the more excited I became. This isn't just another flavor of 2FA; it's a paradigm shift, a genuine move towards **passwordless authentication**.
+This is where **passkeys** ride in, like a hero in a Western, ready to clean up the town. When I first started hearing about FIDO (Fast Identity Online) and **WebAuthn adoption**, I was cautiously optimistic. Another "solution," I thought. But the more I dug in, the more excited I became. This isn't just another flavor of 2FA; it's a , a genuine move towards **passwordless authentication**.
 
 So, what *are* passkeys? In simple terms, they're cryptographic credentials that live on your device (your phone, laptop, tablet) and are used to sign into websites and apps. Instead of a secret you type, it’s a pair of keys: a public key that the website knows, and a private key that *only your device knows*. When you want to log in, your device uses its private key to cryptographically "sign" a challenge from the website. The website then verifies this signature with your public key. If it matches, you're in.
 
 Crucially, **your private key never leaves your device**. It's often protected by your biometric data (fingerprint, face scan) or a device PIN. This means:
-*   **They are phishing-resistant:** You can't accidentally give away your private key to a fake website because the authentication process is tied to the actual website's domain. Your device simply won't sign a challenge for \`evil-site.com\` if you're trying to log into \`yourbank.com\`.
-*   **They are device-bound (mostly):** While they can sync securely between your devices (e.g., via iCloud Keychain, Google Password Manager), they are fundamentally tied to a secure element on your hardware, making them incredibly difficult to steal en masse.
-*   **They are easy to use:** Think about logging into your phone with your face. That's essentially the experience. No typing, no remembering, just a glance or a touch.
+* **They are phishing-resistant:** You can't accidentally give away your private key to a fake website because the authentication process is tied to the actual website's domain. Your device simply won't sign a challenge for \`evil-site.com\` if you're trying to log into \`yourbank.com\`.
+* **They are device-bound (mostly):** While they can sync securely between your devices (e.g., via iCloud Keychain, Google Password Manager), they are fundamentally tied to a secure element on your hardware, making them incredibly difficult to steal en masse.
+* **They are easy to use:** Think about logging into your phone with your face. That's essentially the experience. No typing, no remembering, just a glance or a touch.
 
 ![Data analytics dashboard on a screen](https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop&auto=format&q=80)
 
@@ -55,8 +55,8 @@ I've been using passkeys wherever I can, and frankly, it feels like magic. Loggi
 Let's lay it out directly: the comparison between **passkeys vs. passwords** isn't even a fair fight. Passkeys win, hands down, in almost every single category that matters for security and usability.
 
 Think of it like this:
-*   **Passwords:** Are like a shared secret code written on a piece of paper that you both remember. If someone steals the paper, or tricks you into telling them the code, they're in.
-*   **Passkeys:** Are like a unique, secure digital key that *only* works with a specific lock, and you need your biometric data to even *touch* the key. You never give the key to anyone; you just show the lock a proof that you have the key.
+* **Passwords:** Are like a shared secret code written on a piece of paper that you both remember. If someone steals the paper, or tricks you into telling them the code, they're in.
+* **Passkeys:** Are like a unique, secure digital key that *only* works with a specific lock, and you need your biometric data to even *touch* the key. You never give the key to anyone; you just show the lock a proof that you have the key.
 
 This fundamental difference is what makes **passwordless authentication** such a leap forward. The attack surface for phishing is drastically reduced, and even if a company's server is breached, there's no password (or hash of one) for attackers to steal. They'd just find a public key, which is useless without your corresponding private key locked away on your device.
 
@@ -75,10 +75,10 @@ But what if you leave all your valuables — your wallet, your diary, your perso
 This, my friends, is the critical blind spot that passkeys, for all their brilliance, don't address. Passkeys are about *authentication* — proving who you are at the point of entry. They are not about *session security* or *data privacy* once you're already logged in and actively browsing.
 
 Consider these scenarios, which I guarantee you've either experienced or worried about:
-*   **The Shared Computer:** You use a family computer or a public library machine. You log into your email, your banking, your social media using a passkey. Fantastic! But then you step away. Anyone walking up to that computer can now freely browse your active sessions. They don't need to log in; you already did.
-*   **The Curious Gaze:** You're working on your laptop in a café, and you minimize your sensitive tabs when you notice someone peeking over your shoulder. But what if you forget, or you're just too engrossed? Your open financial statements, your sensitive work documents, your private conversations – all potentially exposed.
-*   **The "Oops" Moment:** You're showing a friend something on your laptop, and you accidentally click on a browser tab that reveals something deeply personal or confidential. Embarrassing at best, damaging at worst.
-*   **Work-from-Home Woes:** Kids, partners, roommates – they mean well, but an unattended laptop with sensitive client data, internal documents, or personal health information can easily be stumbled upon.
+* **The Shared Computer:** You use a family computer or a public library machine. You log into your email, your banking, your social media using a passkey. Fantastic! But then you step away. Anyone walking up to that computer can now freely browse your active sessions. They don't need to log in; you already did.
+* **The Curious Gaze:** You're working on your laptop in a café, and you minimize your sensitive tabs when you notice someone peeking over your shoulder. But what if you forget, or you're just too engrossed? Your open financial statements, your sensitive work documents, your private conversations – all potentially exposed.
+* **The "Oops" Moment:** You're showing a friend something on your laptop, and you accidentally click on a browser tab that reveals something deeply personal or confidential. Embarrassing at best, damaging at worst.
+* **Work-from-Home Woes:** Kids, partners, roommates – they mean well, but an unattended laptop with sensitive client data, internal documents, or personal health information can easily be stumbled upon.
 
 Passkeys solved the "how do I get in securely?" problem. But they left wide open the "how do I keep my *active sessions* secure once I'm in?" problem. And that's a massive difference. You could have the most secure login in the world, but if your browser tabs are left exposed, all that login security is moot.
 
@@ -86,19 +86,19 @@ Passkeys solved the "how do I get in securely?" problem. But they left wide open
 
 ## Why Tab Protection Still Matters: Securing the Digital Room
 
-This is precisely why I've found tools like Locksy to be absolutely indispensable in my daily digital life, even as I embrace passkeys with open arms. Locksy doesn't replace passkeys; it complements them, adding a crucial layer of security that passkeys simply aren't designed to provide.
+This is precisely why I've found tools like Locksy to be absolutely indispensable in my daily digital life, even as I embrace passkeys with open arms. a tab-locking extension doesn't replace passkeys; it complements them, adding a crucial layer of security that passkeys simply aren't designed to provide.
 
-Think back to our house analogy: Passkeys are the unbreachable front door. Locksy is like having individual locks on the doors to your study, your bedroom, and your safe, *even after you've entered the main house*. It's about protecting the specific rooms where your most sensitive information resides, even when the main entrance is open.
+Think back to our house analogy: Passkeys are the unbreachable front door. a tab-locking extension is like having individual locks on the doors to your study, your bedroom, and your safe, *even after you've entered the main house*. It's about protecting the specific rooms where your most sensitive information resides, even when the main entrance is open.
 
-What Locksy does, brilliantly and simply, is allow you to **password-protect individual browser tabs or windows**. This isn't about logging into a website; it's about securing access to a browser tab *that is already logged in*.
+What a tab-locking extension does, brilliantly and simply, is allow you to **password-protect individual browser tabs or windows**. This isn't about logging into a website; it's about securing access to a browser tab *that is already logged in*.
 
 Here's why this matters profoundly in the era of passkeys:
-*   **Protection of Active Sessions:** You're logged into your bank, your health portal, your work VPN, or your private messaging app. You step away, or someone else uses your computer. Locksy ensures that to view *that specific tab*, an additional password (or biometric authentication, if your device supports it) is required. This means your active, logged-in session remains private.
-*   **Granular Control:** Not every tab needs this level of protection. You might be fine with your news feed being open. But your crypto exchange? Your medical records? Locksy lets you specify exactly which tabs or domains need an extra layer of defense. This is about taking control of your **digital privacy** at a micro-level.
-*   **Peace of Mind in Shared Environments:** Whether it's a bustling office, a public library, or a busy household, the ability to instantly lock down sensitive tabs with a quick keyboard shortcut or automatic timer is invaluable. No more frantic closing of windows or logging out of everything just to grab a coffee.
-*   **Preventing Accidental Exposure:** That moment when you're demonstrating something to a colleague and accidentally flash your personal finances? With Locksy, those tabs are blurred or locked until you specifically authenticate them. It's a simple, elegant solution to a common privacy headache.
+* **Protection of Active Sessions:** You're logged into your bank, your health portal, your work VPN, or your private messaging app. You step away, or someone else uses your computer. a tab-locking extension ensures that to view *that specific tab*, an additional password (or biometric authentication, if your device supports it) is required. This means your active, logged-in session remains private.
+* **Granular Control:** Not every tab needs this level of protection. You might be fine with your news feed being open. But your crypto exchange? Your medical records? a tab-locking extension lets you specify exactly which tabs or domains need an extra layer of defense. This is about taking control of your **digital privacy** at a micro-level.
+* **Peace of Mind in Shared Environments:** Whether it's a bustling office, a public library, or a busy household, the ability to instantly lock down sensitive tabs with a quick keyboard shortcut or automatic timer is invaluable. No more frantic closing of windows or logging out of everything just to grab a coffee.
+* **Preventing Accidental Exposure:** That moment when you're demonstrating something to a colleague and accidentally flash your personal finances? With a tab-locking extension, those tabs are blurred or locked until you specifically authenticate them. It's a simple, elegant solution to a common privacy headache.
 
-I often use Locksy when I'm deep in research for an article, with dozens of tabs open, some containing sensitive personal notes or information that I wouldn't want visible if someone unexpectedly looked over my shoulder. With a quick command, I can lock down those specific tabs, keeping them accessible only to me, without having to close them or log out of the services. It's a small, seamless action that provides a massive boost in security and **digital privacy**.
+I often use a tab-locking extension when I'm deep in research for an article, with dozens of tabs open, some containing sensitive personal notes or information that I wouldn't want visible if someone unexpectedly looked over my shoulder. With a quick command, I can lock down those specific tabs, keeping them accessible only to me, without having to close them or log out of the services. It's a small, seamless action that provides a massive boost in security and **digital privacy**.
 
 ## Building a Layered Defense: Passkeys + Tab Protection
 
@@ -106,24 +106,24 @@ The key takeaway here is that security is never a single solution; it's a **laye
 
 But our digital lives extend far beyond the login screen. We spend hours, days, weeks logged into services, with sensitive information active in our browser tabs. Ignoring this "in-session" vulnerability is like fortifying your castle gates with titanium and lasers, only to leave the royal treasury wide open once an authorized person steps inside.
 
-Integrating a tool like Locksy into your security strategy isn't about doubting passkeys; it's about understanding the scope of what each tool is designed to do. Passkeys secure the *entrance*. Tab protection secures the *contents within*. Together, they create a much more comprehensive and formidable shield around your **digital privacy**.
+Integrating a tool like a tab-locking extension into your security strategy isn't about doubting passkeys; it's about understanding the scope of what each tool is designed to do. Passkeys secure the *entrance*. Tab protection secures the *contents within*. Together, they create a much more comprehensive and formidable shield around your **digital privacy**.
 
-I honestly believe that as passkeys become the norm, the conversation will shift. We'll stop worrying so much about *how* we log in, and start focusing more on *what happens after we're in*. This shift will make solutions like Locksy even more critical.
+I honestly believe that as passkeys become the norm, the conversation will shift. We'll stop worrying so much about *how* we log in, and start focusing more on *what happens after we're in*. This shift will make solutions like a tab-locking extension even more critical.
 
 ![Abstract technology with blue light](https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&h=450&fit=crop&auto=format&q=80)
 
 ## The Road Ahead: Smarter Security, Smarter Habits
 
-The future of online security, powered by passkeys, looks incredibly bright. The days of struggling with complex strings of characters are, thankfully, numbered. We're moving towards a world where logging in is instantaneous, secure, and far less prone to the human errors and systemic vulnerabilities that have plagued us for decades.
+The future of online security, powered by passkeys, looks incredibly bright. The days of struggling with complex strings of characters are, thankfully, numbered. We're moving towards logging in is instantaneous, secure, and far less prone to the human errors and systemic vulnerabilities that have plagued us for decades.
 
-But this progress doesn't mean we can drop our guard. It means we need to evolve our understanding of security, to recognize that different threats require different defenses. While passkeys protect our identity at the gate, tools like Locksy protect our active digital workspace, our open thoughts, and our sensitive data from prying eyes or accidental exposure.
+But this progress doesn't mean we can drop our guard. It means we need to evolve our understanding of security, to recognize that different threats require different defenses. While passkeys protect our identity at the gate, tools like a tab-locking extension protect our active digital workspace, our open thoughts, and our sensitive data from prying eyes or accidental exposure.
 
 It's about cultivating smarter digital habits, adopting powerful new technologies like passkeys, and augmenting them with intelligent, practical solutions for real-world scenarios. We're building a new kind of digital fortress, and every layer counts.
 
 So, go embrace passkeys. They truly are fantastic. But don't forget to lock the doors inside the castle, too.
 
 ---
-*Ready to add another layer of privacy to your browsing? Explore Locksy.*
+*Ready to add another layer of privacy to your browsing? Explore a tab-locking extension.*
 `
 }
 

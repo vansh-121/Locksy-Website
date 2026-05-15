@@ -3,19 +3,19 @@
 // DO NOT EDIT MANUALLY — regenerate via the blog generator script.
 
 const post = {
-    slug: 'webrtc-ip-leak-how-video-calls-expose-your-real-ip-address-through-the-browser',
-    title: 'WebRTC IP Leak: How Video Calls Expose Your Real IP Address Through the Browser',
-    description: 'Your VPN *might* not be protecting your privacy during video calls. Discover how WebRTC leaks your real IP address and my battle-tested strategies for a genui',
-    author: 'Vansh Sethi',
-    publishDate: '2026-05-06',
-    lastModified: '2026-05-06',
-    readTime: '16 min read',
-    category: 'Security',
-    tags: ['WebRTC', 'IP Leak', 'Privacy'],
-    keywords: ['webrtc ip leak', 'vpn webrtc bypass', 'real ip exposure browser', 'webrtc privacy fix'],
-    image: 'https://images.unsplash.com/photo-1708447134618-bfb5d207ed95?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzgwNDYxMTF8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
-    imageAlt: 'a laptop computer sitting on top of a desk',
-    content: `
+ slug: 'webrtc-ip-leak-how-video-calls-expose-your-real-ip-address-through-the-browser',
+ title: 'WebRTC IP Leak: How Video Calls Expose Your Real IP Address Through the Browser',
+ description: 'Your VPN *might* not be protecting your privacy during video calls. Discover how WebRTC leaks your real IP address and my battle-tested strategies for a genui',
+ author: 'Vansh Sethi',
+ publishDate: '2026-05-06',
+ lastModified: '2026-05-06',
+ readTime: '16 min read',
+ category: 'Security',
+ tags: ['WebRTC', 'IP Leak', 'Privacy'],
+ keywords: ['webrtc ip leak', 'vpn webrtc bypass', 'real ip exposure browser', 'webrtc privacy fix'],
+ image: 'https://images.unsplash.com/photo-1708447134618-bfb5d207ed95?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzgwNDYxMTF8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
+ imageAlt: 'a laptop computer sitting on top of a desk',
+ content: `
 ## The Moment of Truth: When My "Secure" VPN Failed Me
 
 I remember it like yesterday. I was on a client call, something sensitive, so naturally, my VPN was active, glowing green in the system tray. I felt that familiar, comforting hum of digital anonymity. After the call, just out of curiosity (and a healthy dose of paranoia that comes with years in this game), I decided to run a quick WebRTC leak test. You know, just to confirm everything was buttoned up. I navigated to \`ipleak.net\`, squinted at the results, and felt a cold wave of dread wash over me. There, staring back at me, under the "WebRTC Local IP Address" section, was my *real*, actual internal IP address. Not the VPN's IP. Not a masked one. My physical network interface, sitting right there, exposed to anyone who cared to look.
@@ -34,9 +34,9 @@ The problem, as I discovered that day, isn't WebRTC's existence. It's *how* it's
 
 So, you're wondering, how does this actually expose my real IP? When two browsers try to establish a WebRTC connection, they exchange "ICE candidates." These candidates are essentially a list of potential network paths and addresses through which they could communicate. This list includes:
 
-1.  **Host Candidates:** These are your local, private IP addresses (like \`192.168.1.x\` or \`10.0.0.x\`) that your device uses on your local network. WebRTC wants to know these in case you're on the same local network as the other party.
-2.  **Server Reflexive Candidates:** These are your public IP addresses, discovered by querying a STUN server. This is the crucial one for the "real IP exposure" scenario. If your browser sends a STUN request from your physical interface *before* or *outside* your VPN tunnel, that STUN server will return your true public IP, which then gets included in the ICE candidates.
-3.  **Relayed Candidates:** If direct connections fail, WebRTC falls back to using a TURN (Traversal Using Relays around NAT) server, which acts as a relay for all traffic. This is a last resort and generally doesn't expose your direct IP, but it's part of the same persistence mechanism.
+1. **Host Candidates:** These are your local, private IP addresses (like \`192.168.1.x\` or \`10.0.0.x\`) that your device uses on your local network. WebRTC wants to know these in case you're on the same local network as the other party.
+2. **Server Reflexive Candidates:** These are your public IP addresses, discovered by querying a STUN server. This is the crucial one for the "real IP exposure" scenario. If your browser sends a STUN request from your physical interface *before* or *outside* your VPN tunnel, that STUN server will return your true public IP, which then gets included in the ICE candidates.
+3. **Relayed Candidates:** If direct connections fail, WebRTC falls back to using a TURN (Traversal Using Relays around NAT) server, which acts as a relay for all traffic. This is a last resort and generally doesn't expose your direct IP, but it's part of the same persistence mechanism.
 
 The problem arises because browsers, by default, will typically include *all* these candidates in the Session Description Protocol (SDP) offer that gets exchanged between peers. This means that the website hosting the video call (or any malicious script on that site) can parse the SDP and see your real public IP address, even if you're using a VPN. It's not necessarily the *other person* on the call who sees it directly, but the server infrastructure *facilitating* the call, or any script running on the page. And if a single script can see it, it can log it, share it, or use it to link your VPN-masked identity to your actual geographical location. This isn't theoretical; this is a widely documented privacy leak, and it's particularly nasty because it circumvents the primary defense mechanism most people rely on for online privacy: their VPN. It's like having a bulletproof vest that's missing a crucial plate right over your heart.
 
@@ -70,33 +70,33 @@ After years of trial and error, countless tests, and a fair bit of frustration, 
 
 This is where you make fundamental changes to how your browser handles WebRTC. It's the most impactful, but also requires the most understanding of trade-offs.
 
-*   **Firefox is Your Friend (Mostly):** If you're serious about WebRTC privacy, Firefox generally offers more granular control.
-    *   Type \`about:config\` in your address bar and confirm you know what you're doing.
-    *   Search for \`media.peerconnection.enabled\`. Setting this to \`false\` will disable WebRTC entirely. This is the nuclear option. It means no browser-based video calls, period. For extreme privacy, this is the way, but it's a huge hit to functionality.
-    *   A more nuanced approach: Set \`media.peerconnection.ice.no_host_reflect\` to \`true\`. This tells WebRTC not to reveal your local (private) IP addresses to STUN servers. While it doesn't prevent all leaks, it significantly reduces the information available.
-    *   Also consider \`network.websocket.enabled\` (if you want to disable WebSockets, though this has broader implications beyond WebRTC).
-*   **Chrome/Chromium (The Reluctant Ally):** Chrome has historically been less privacy-friendly in this regard, offering fewer direct kill switches.
-    *   Type \`chrome://flags\` in your address bar.
-    *   Search for "WebRTC IP handling policy." You'll see options like "Default public & private IP addresses" (the default, least private), "Default public IP addresses," "Disable non-proxied UDP," and "Block non-proxied UDP."
-    *   Setting it to "Block non-proxied UDP" is the strongest option here. It tries to force WebRTC traffic through a proxy (like your VPN), preventing direct UDP connections from revealing your host IP. However, this isn't foolproof, and many WebRTC applications will simply fail to connect if they can't establish a direct UDP peer-to-peer connection. It's a trade-off between privacy and functionality.
-    *   Also look for flags related to \`mDNS\` (multicast DNS), which can also reveal local network information. Disabling it (\`WebRTC mDNS hostname anonymization\`) can help, but again, might affect local network discovery features.
-    *   The reality for Chrome users is that truly hardening WebRTC without breaking *something* is a constant headache. This is where a smart tool becomes indispensable.
+* **Firefox is Your Friend (Mostly):** If you're serious about WebRTC privacy, Firefox generally offers more granular control.
+ * Type \`about:config\` in your address bar and confirm you know what you're doing.
+ * Search for \`media.peerconnection.enabled\`. Setting this to \`false\` will disable WebRTC entirely. This is the nuclear option. It means no browser-based video calls, period. For extreme privacy, this is the way, but it's a huge hit to functionality.
+ * A more nuanced approach: Set \`media.peerconnection.ice.no_host_reflect\` to \`true\`. This tells WebRTC not to reveal your local (private) IP addresses to STUN servers. While it doesn't prevent all leaks, it significantly reduces the information available.
+ * Also consider \`network.websocket.enabled\` (if you want to disable WebSockets, though this has broader implications beyond WebRTC).
+* **Chrome/Chromium (The Reluctant Ally):** Chrome has historically been less privacy-friendly in this regard, offering fewer direct kill switches.
+ * Type \`chrome://flags\` in your address bar.
+ * Search for "WebRTC IP handling policy." You'll see options like "Default public & private IP addresses" (the default, least private), "Default public IP addresses," "Disable non-proxied UDP," and "Block non-proxied UDP."
+ * Setting it to "Block non-proxied UDP" is the strongest option here. It tries to force WebRTC traffic through a proxy (like your VPN), preventing direct UDP connections from revealing your host IP. However, this isn't foolproof, and many WebRTC applications will simply fail to connect if they can't establish a direct UDP peer-to-peer connection. It's a trade-off between privacy and functionality.
+ * Also look for flags related to \`mDNS\` (multicast DNS), which can also reveal local network information. Disabling it (\`WebRTC mDNS hostname anonymization\`) can help, but again, might affect local network discovery features.
+ * The reality for Chrome users is that truly hardening WebRTC without breaking *something* is a constant headache. This is where a smart tool becomes indispensable.
 
 ### Pillar 2: Intelligent Network Management (The Shield)
 
 This pillar focuses on ensuring your VPN or network setup is actually doing its job.
 
-*   **Choose Your VPN Wisely:** Don't just pick one that *claims* WebRTC leak protection. Test it rigorously. Use sites like \`ipleak.net\` or \`browserleaks.com/webrtc\` *after* connecting your VPN and *before* making any sensitive calls. If you see your local IP, your VPN isn't doing enough. Look for VPNs that specifically implement aggressive WebRTC leak prevention at the client level, often by completely disabling certain network interfaces or outbound UDP connections for WebRTC when the VPN is active.
-*   **Firewall Rules (Advanced Users Only):** For the truly paranoid, you can configure your operating system's firewall (like \`ufw\` on Linux, Windows Firewall, or Little Snitch on macOS) to block outbound UDP traffic on specific ports commonly used by STUN/TURN servers (e.g., UDP port 3478, and sometimes 19302-19309). This is a heavy-handed approach and will almost certainly break most WebRTC applications, but it's effective at preventing the leak at the network level. This isn't for the faint of heart, or for anyone who needs video calls for work.
+* **Choose Your VPN Wisely:** Don't just pick one that *claims* WebRTC leak protection. Test it rigorously. Use sites like \`ipleak.net\` or \`browserleaks.com/webrtc\` *after* connecting your VPN and *before* making any sensitive calls. If you see your local IP, your VPN isn't doing enough. Look for VPNs that specifically implement aggressive WebRTC leak prevention at the client level, often by completely disabling certain network interfaces or outbound UDP connections for WebRTC when the VPN is active.
+* **Firewall Rules (Advanced Users Only):** For the truly paranoid, you can configure your operating system's firewall (like \`ufw\` on Linux, Windows Firewall, or Little Snitch on macOS) to block outbound UDP traffic on specific ports commonly used by STUN/TURN servers (e.g., UDP port 3478, and sometimes 19302-19309). This is a heavy-handed approach and will almost certainly break most WebRTC applications, but it's effective at preventing the leak at the network level. This isn't for the faint of heart, or for anyone who needs video calls for work.
 
 ### Pillar 3: Contextual Awareness & Specialized Tools (The Safeguard)
 
-This is about smart habits and leveraging tools that simplify the complex.
+This is about smart habits and that simplify the complex.
 
-*   **Dedicated Browser Profiles:** For sensitive work or communications, use a separate browser profile (or even a different browser entirely) that you've specifically hardened for privacy. This allows you to keep your main browser functional for everyday tasks while having a secure sandbox for critical activities.
-*   **Reputable Browser Extensions (with caution):** If you absolutely must use an extension, choose one from a known, transparent developer with a strong track record. Read reviews, check its permissions, and understand its mechanism. Even then, treat it as a temporary measure and verify its effectiveness regularly. I generally avoid these for core security features because they add another layer of trust (and potential failure) to your stack.
-*   **Automated Browser Configuration (e.g., Locksy):** This is where a tool like Locksy shines. Instead of manually digging through \`about:config\` or \`chrome://flags\` after every browser update, or hoping a flaky extension works, Locksy provides a centralized, persistent way to manage these settings across different browser profiles. For instance, I use Locksy to create a "Privacy Hardened" profile where WebRTC is tightly controlled (or even fully disabled), and I can toggle into it instantly when I need to make a sensitive call. It takes the guesswork and the manual grunt work out of maintaining these complex configurations, giving me peace of mind that my browser's WebRTC behavior is predictable and secure, without breaking *all* my workflows. It's about bringing power-user controls to a more manageable interface, so you're not constantly fighting your browser's defaults.
-*   **Always Verify:** This is non-negotiable. Before any sensitive WebRTC interaction, open \`ipleak.net\` or \`browserleaks.com/webrtc\` in a new tab. Check for your real IP. If it's there, your defenses are down. Adapt and re-test. This continuous verification loop is your ultimate safeguard.
+* **Dedicated Browser Profiles:** For sensitive work or communications, use a separate browser profile (or even a different browser entirely) that you've specifically hardened for privacy. This allows you to keep your main browser functional for everyday tasks while having a secure sandbox for critical activities.
+* **Reputable Browser Extensions (with caution):** If you absolutely must use an extension, choose one from a known, transparent developer with a strong track record. Read reviews, check its permissions, and understand its mechanism. Even then, treat it as a temporary measure and verify its effectiveness regularly. I generally avoid these for core security features because they add another layer of trust (and potential failure) to your stack.
+* **Automated Browser Configuration (e.g., a tab-locking extension):** This is where a tool like a tab-locking extension shines. Instead of manually digging through \`about:config\` or \`chrome://flags\` after every browser update, or hoping a flaky extension works, a tab-locking extension provides a centralized, persistent way to manage these settings across different browser profiles. For instance, I use a tab-locking extension to create a "Privacy Hardened" profile where WebRTC is tightly controlled (or even fully disabled), and I can toggle into it instantly when I need to make a sensitive call. It takes the guesswork and the manual grunt work out of maintaining these complex configurations, giving me peace of mind that my browser's WebRTC behavior is predictable and secure, without breaking *all* my workflows. It's about bringing power-user controls to a more manageable interface, so you're not constantly fighting your browser's defaults.
+* **Always Verify:** This is non-negotiable. Before any sensitive WebRTC interaction, open \`ipleak.net\` or \`browserleaks.com/webrtc\` in a new tab. Check for your real IP. If it's there, your defenses are down. Adapt and re-test. This continuous verification loop is your ultimate safeguard.
 
 ![Smartphone and laptop on a desk](https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=800&h=450&fit=crop&auto=format&q=80)
 
@@ -106,7 +106,7 @@ WebRTC is a double-edged sword. It has transformed the web, making real-time com
 
 The lesson I've learned, time and time again, is that true digital privacy isn't a set-it-and-forget-it affair. It requires vigilance, understanding, and a willingness to adapt. You can't just install a VPN and assume you're bulletproof. You have to understand the nuances of how your browser interacts with the network, how different protocols behave, and where the potential weak points are. It's an ongoing, active defense.
 
-The myth of passive privacy – the idea that some magic tool will protect you without any effort on your part – is a dangerous one. It leads to complacency and, eventually, exposure. My experience with the WebRTC IP leak was a stark reminder that we, as users, must take ownership of our digital footprint. We have to be the ones asking the hard questions, digging into the settings, and testing our defenses. Tools exist to help, like a good VPN that truly blocks WebRTC leaks, or a browser management system like Locksy that puts powerful controls at your fingertips without the constant manual hassle. But ultimately, the responsibility rests with you to understand the threats and implement the solutions. Don't let your browser's convenience betray your privacy. Be proactive, be informed, and always, always verify. Your digital anonymity depends on it.
+The myth of passive privacy – the idea that some magic tool will protect you without any effort on your part – is a dangerous one. It leads to complacency and, eventually, exposure. My experience with the WebRTC IP leak was a stark reminder that we, as users, must take ownership of our digital footprint. We have to be the ones asking the hard questions, digging into the settings, and testing our defenses. Tools exist to help, like a good VPN that truly blocks WebRTC leaks, or a browser management system like a tab-locking extension that puts powerful controls at your fingertips without the constant manual hassle. But ultimately, the responsibility rests with you to understand the threats and implement the solutions. Don't let your browser's convenience betray your privacy. Be proactive, be informed, and always, always verify. Your digital anonymity depends on it.
 `
 }
 

@@ -2,10 +2,10 @@ name: Auto Generate Blog Post - Retry
 
 on:
   schedule:
-    # Retry 1: Run at 4:30 AM UTC = 10:00 AM India Time (2 hours after primary)
-    - cron: '30 4 * * *'
-    # Retry 2: Run at 6:00 AM UTC = 11:30 AM India Time (3 hours after primary)
-    - cron: '0 6 * * *'
+    # Retry 1: Wednesdays at 4:30 AM UTC = 10:00 AM IST (2 hours after primary)
+    - cron: '30 4 * * 3'
+    # Retry 2: Wednesdays at 6:00 AM UTC = 11:30 AM IST (3 hours after primary)
+    - cron: '0 6 * * 3'
   workflow_dispatch: # Allow manual retry trigger
 
 permissions:
@@ -114,7 +114,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add lib/posts/
-          git commit -m "blog: auto-generated daily blog post - retry $(date +%Y-%m-%d\ %H:%M\ UTC)"
+          git commit -m "blog: weekly blog post - retry $(date +%Y-%m-%d\ %H:%M\ UTC)"
           git push
 
       - name: ✅ Retry successful
