@@ -78,8 +78,6 @@ I've tested this myself. I've had a locked tab open, then used various screen re
 
 ## Real-World Scenarios: Where Screen Recording Protection Shines
 
-Let's dive into some practical scenarios where a tab-locking extension's ability to **hide tabs from recording** becomes incredibly valuable.
-
 ### Scenario 1: The Accidental Screen Share Fiasco
 
 This is the classic. You're on a video call, sharing your "Desktop 1" to demo a new feature. In your haste, you forget that little tab with your personal budget spreadsheet or your private direct messages with a colleague is open. You briefly switch to it, or it pops up in the background. If you're lucky, you catch it. If not, it's recorded for all eternity in the meeting archive.

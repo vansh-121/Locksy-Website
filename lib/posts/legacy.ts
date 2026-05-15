@@ -5,8 +5,8 @@
 // New posts are generated as individual files by scripts/generate-blog.mjs
 
 const legacyPosts = [
-    {
-        slug: 'how-to-password-protect-browser-tabs',
+ {
+ slug: 'how-to-password-protect-browser-tabs',
  title: 'How to Password Protect Browser Tabs in 2026 (Chrome, Edge, Firefox)',
  description: 'A practical, no-nonsense guide to locking your browser tabs with a password — because closing the laptop lid is not a security strategy.',
  author: 'Vansh Sethi',
@@ -115,8 +115,8 @@ The setup takes 90 seconds. The keyboard shortcut takes less than one second. An
 *Questions about tab security? [Drop us a message](/contact) — we actually respond.*
 `
  },
-    {
-        slug: 'browser-tab-security-best-practices',
+ {
+ slug: 'browser-tab-security-best-practices',
  title: '15 Browser Tab Security Best Practices Every User Should Know',
  description: 'Practical, no-BS security habits for your browser tabs — from encryption basics to the mistakes almost everyone makes.',
  author: 'Vansh Sethi',
@@ -259,8 +259,8 @@ That's 15 minutes of work for a dramatically better security posture.
 *Building better habits starts with the right tools. [Try a tab-locking extension](/) — it's free, open-source, and respects your privacy.*
 `
  },
-    {
-        slug: 'what-is-pbkdf2-encryption-explained',
+ {
+ slug: 'what-is-pbkdf2-encryption-explained',
  title: 'What is PBKDF2 Encryption? A Plain-English Guide',
  description: 'PBKDF2 explained without the jargon. What it does, why it matters for your passwords, and how it stops hackers — even if you have zero technical background.',
  author: 'Vansh Sethi',
@@ -383,8 +383,8 @@ PBKDF2 takes a fundamentally simple idea — hash the password many, many times 
 *a tab-locking extension uses PBKDF2 with 600,000+ iterations, open-source code, and zero server communication. [See for yourself on GitHub](https://github.com/nicoryne/a tab-locking extension).*
 `
  },
-    {
-        slug: 'chrome-vs-firefox-vs-edge-tab-security',
+ {
+ slug: 'chrome-vs-firefox-vs-edge-tab-security',
  title: 'Chrome vs Firefox vs Edge: Which Browser Actually Protects Your Tabs?',
  description: 'An honest comparison of Chrome, Firefox, and Edge tab security features — what each browser gets right, what they get wrong, and what none of them do.',
  author: 'Vansh Sethi',
@@ -503,8 +503,8 @@ That entire setup takes about 10 minutes and gets you to a security posture that
 *No matter which browser you use, a tab-locking extension adds the tab protection layer that none of them include. [Install it free](/) — works on Chrome, Firefox, Edge, and Brave.*
 `
  },
-    {
-        slug: 'protect-banking-tabs-from-prying-eyes',
+ {
+ slug: 'protect-banking-tabs-from-prying-eyes',
  title: 'How to Protect Your Banking Tabs from Prying Eyes',
  description: 'Your bank account is open in a tab right now, isn\'t it? Here\'s how to make sure nobody else can see it — even if they\'re sitting right next to you.',
  author: 'Vansh Sethi',
@@ -634,8 +634,8 @@ Your bank invests millions in protecting the login gate. a tab-locking extension
 *Your finances deserve better than an open tab. [Get a tab-locking extension](/) — free, open-source, and it never sees your data.*
 `
  },
-    {
-        slug: 'keyboard-shortcuts-for-tab-security',
+ {
+ slug: 'keyboard-shortcuts-for-tab-security',
  title: 'Keyboard Shortcuts for Tab Security: The 2-Second Privacy Move',
  description: 'The fastest way to protect your browser tabs is a keyboard shortcut. Here\'s how to set it up and make it second nature.',
  author: 'Vansh Sethi',
@@ -747,8 +747,8 @@ Every security tool faces this tension between thoroughness and usability. The l
 *Speed matters when privacy is on the line. [Install a tab-locking extension](/) and start building the reflex.*
 `
  },
-    {
-        slug: 'shared-computer-security-ultimate-guide',
+ {
+ slug: 'shared-computer-security-ultimate-guide',
  title: 'Shared Computer Security: The Ultimate Guide for 2026',
  description: 'Whether it\'s a family PC, a library terminal, or a hot-desking office — here\'s how to keep your stuff private on a computer that isn\'t entirely yours.',
  author: 'Vansh Sethi',
@@ -928,8 +928,8 @@ Set up a browser profile with a tab-locking extension on it. Lock your screen wh
 *Shared computer? Private tabs. [Install a tab-locking extension](/) — your tabs, your rules.*
 `
  },
-    {
-        slug: 'complete-guide-to-pbkdf2-vs-bcrypt-vs-argon2-for-password-hashing',
+ {
+ slug: 'complete-guide-to-pbkdf2-vs-bcrypt-vs-argon2-for-password-hashing',
  title: 'Complete Guide to PBKDF2 vs bcrypt vs Argon2 for Password Hashing',
  description: 'Complete Guide to PBKDF2 vs bcrypt vs Argon2 for Password Hashing. Learn about PBKDF2 vs bcrypt and password hashing comparison with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -1075,7 +1075,7 @@ This is the key metric for modern password hashing.
 
 * **PBKDF2:** If you're maintaining a very old system and an upgrade is simply not feasible right now, ensure your iteration count is astronomically high. But honestly? If you're building new, or have the resources to upgrade, *don't* start with PBKDF2. It’s like buying a flip phone in 2024. It works, but why would you?
 * **bcrypt:** This is your solid, reliable choice if Argon2 isn't an option for some reason (e.g., legacy system constraints, specific compliance requirements for an older standard). It's a significant upgrade over PBKDF2 and still offers excellent protection for most applications. If I couldn't use Argon2, bcrypt would be my next immediate pick.
-* **Argon2id:** This is the best choice, full stop, for any new application or system. It provides the strongest protection against modern attacks, particularly those leveraging GPUs and ASICs. Tune its parameters (memory, time, parallelism) based on your system's resources and the desired security level. Future-proof your passwords.
+* **Argon2id:** This is the best choice, full stop, for any new application or system. It provides the strongest protection against modern attacks, particularly those and ASICs. Tune its parameters (memory, time, parallelism) based on your system's resources and the desired security level. Future-proof your passwords.
 
 ### Why This Matters to You: The User's Perspective
 
@@ -1109,7 +1109,7 @@ For developers and anyone building systems that handle passwords:
 
 ### The Ultimate Guardian
 
-In a world where data breaches are practically an inevitability, the strength of the password hashing algorithm used by the services you trust isn't just a technical detail. It's a fundamental pillar of your digital security. It's the ultimate guardian of your secrets, quietly doing its job long after your actual password has left your keyboard.
+In data breaches are practically an inevitability, the strength of the password hashing algorithm used by the services you trust isn't just a technical detail. It's a fundamental pillar of your digital security. It's the ultimate guardian of your secrets, quietly doing its job long after your actual password has left your keyboard.
 
 So, the next time you create an account, remember that your "secure" password is only as strong as the hashing algorithm protecting its hashed form. Demand the best. Demand Argon2.
 
@@ -1118,8 +1118,8 @@ So, the next time you create an account, remember that your "secure" password is
 `
  }
 ,
-    {
-        slug: 'how-students-can-protect-their-browser-tabs-on-shared-school-computers',
+ {
+ slug: 'how-students-can-protect-their-browser-tabs-on-shared-school-computers',
  title: 'How Students Can Protect Their Browser Tabs on Shared School Computers',
  description: 'How Students Can Protect Their Browser Tabs on Shared School Computers. Learn about student browser security and shared computer protection with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -1276,8 +1276,8 @@ Ultimately, becoming adept at \`shared computer protection\` and \`student brows
 `
  }
 ,
-    {
-        slug: 'why-your-open-browser-tabs-are-a-security-risk-in-2026',
+ {
+ slug: 'why-your-open-browser-tabs-are-a-security-risk-in-2026',
  title: 'Why Your Open Browser Tabs Are a Security Risk in 2026',
  description: 'Why Your Open Browser Tabs Are a Security Risk in 2026. Learn about browser tab security risk and open tabs vulnerability with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -1404,7 +1404,7 @@ Let's be clear: our current habits around browser security are, for many of us, 
 * **The Log Out Lottery:** How many services do you truly log out of when you're done? Most people close the tab, trusting the session will eventually expire. That's a gamble, and the house (the internet) almost always wins. Session expiration times vary wildly, from minutes to weeks.
 * **The Tab Hoarder's Dilemma:** We all do it. We accumulate tabs like digital dust bunnies, convinced we'll "get back to them." Each additional open tab is another open door, another point of potential compromise, another piece of your digital self left exposed.
 
-So, what's the solution? A paradigm shift in how we think about browser security, moving from reactive fixes to proactive protection.
+So, what's the solution? A in how we think about browser security, moving from reactive fixes to proactive protection.
 
 ### Beyond the Lock Screen: A New Layer of Defense
 
@@ -1444,8 +1444,8 @@ It's not about paranoia; it's about preparedness. It's about taking proactive st
 `
  }
 ,
-    {
-        slug: 'top-5-keyboard-shortcuts-for-better-browser-security',
+ {
+ slug: 'top-5-keyboard-shortcuts-for-better-browser-security',
  title: 'Top 5 Keyboard Shortcuts for Better Browser Security',
  description: 'Top 5 Keyboard Shortcuts for Better Browser Security. Learn about browser keyboard shortcuts security and quick lock shortcuts with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -1473,8 +1473,6 @@ We tap away, click, scroll, and often, we do it with a casualness that borders o
 I'm talking about **keyboard shortcuts**. Not just for productivity, mind you – though they're brilliant for that too – but as essential tools in your browser security arsenal. They are your quick lock shortcuts, your security hotkeys, your silent, swift escape routes. They transform you from a fumbling digital bystander into a nimble privacy ninja.
 
 Forget the notion that shortcuts are just for power users or coders. These aren't arcane spells; they're direct lines of communication with your computer, bypassing the visual clutter and the glacial pace of the mouse. When seconds count, when privacy is on the line, these browser keyboard shortcuts security moves are your best friends. And trust me, once you integrate them, you'll wonder how you ever survived without them.
-
-Let's dive into five of my absolute must-have keyboard shortcuts that will make your browser a more secure, and frankly, more pleasant place to be.
 
 ## The Instant Disappearing Act: Closing Tabs and Windows
 
@@ -1534,7 +1532,7 @@ But sometimes, minimizing isn't enough. Maybe you need to quickly switch to a di
 
 These shortcuts bring up a quick switcher that lets you cycle through all your open applications. You hold down Alt/Cmd, tap Tab to cycle, and release when you're on the desired application. It's incredibly efficient. If you have your email client or a bland text editor open, you can instantly switch to it, making it look like you were just working on something innocuous.
 
-This isn't just about hiding; it's about **context switching** quickly. In a world where we multitask constantly, the ability to rapidly shift focus away from sensitive data is a critical security skill. It prevents "shoulder surfing" – where someone inadvertently (or intentionally) peeks at your screen. It maintains your digital decorum. And it does it with a speed and fluidity that mousing simply cannot match. Make these a reflex. Your privacy will thank you.
+This isn't just about hiding; it's about **context switching** quickly. In we multitask constantly, the ability to rapidly shift focus away from sensitive data is a critical security skill. It prevents "shoulder surfing" – where someone inadvertently (or intentionally) peeks at your screen. It maintains your digital decorum. And it does it with a speed and fluidity that mousing simply cannot match. Make these a reflex. Your privacy will thank you.
 
 ## The Digital Eraser: Clearing Browsing Data
 
@@ -1602,8 +1600,8 @@ And trust me, that feeling of empowerment, that knowledge that you can instantly
 `
  }
 ,
-    {
-        slug: 'how-locksy-uses-client-side-encryption-to-keep-your-tabs-private',
+ {
+ slug: 'how-locksy-uses-client-side-encryption-to-keep-your-tabs-private',
  title: 'How Locksy Uses Client-Side Encryption to Keep Your Tabs Private',
  description: 'How Locksy Uses Client-Side Encryption to Keep Your Tabs Private. Learn about client side encryption browser and locksy encryption method with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -1622,7 +1620,7 @@ We've all been there, right? You're working on something sensitive – maybe a g
 
 It’s not always about hiding state secrets, is it? Sometimes, it’s just about **personal space**. About maintaining the integrity of your digital workspace, even when the physical one is shared. Your browser tabs are like the scattered notes on your desk, or the books open to specific pages – they represent your current train of thought, your ongoing research, your private interests. To have them exposed feels… intrusive. Like someone reading over your shoulder, but worse, because it’s *your entire digital context* they could be peeking into.
 
-I’ve had this exact scenario play out more times than I care to admit. Once, I was researching a very specific medical condition for a friend (with their permission, of course, but still sensitive information), and my partner walked into the room just as I stepped away. Nothing untoward happened, but the sheer *panic* of wondering if they’d inadvertently glance at the topic sent a jolt through me. It made me realize: in a world where our browsers are often the single most important application we use, connecting us to everything from banking to intimate conversations, we lack a fundamental layer of privacy *within* that application. We lock our phones, we password-protect our laptops, but our active browser session? Often, it’s an open book.
+I’ve had this exact scenario play out more times than I care to admit. Once, I was researching a very specific medical condition for a friend (with their permission, of course, but still sensitive information), and my partner walked into the room just as I stepped away. Nothing untoward happened, but the sheer *panic* of wondering if they’d inadvertently glance at the topic sent a jolt through me. It made me realize: in our browsers are often the single most important application we use, connecting us to everything from banking to intimate conversations, we lack a fundamental layer of privacy *within* that application. We lock our phones, we password-protect our laptops, but our active browser session? Often, it’s an open book.
 
 ## The Illusion of Browser Privacy: Why Incognito Isn't Enough
 
@@ -1671,7 +1669,7 @@ The crucial part here is that the password you enter is *never* stored. It's use
 
 You might be thinking, "Can't I just close the tab, or hide the window?" Sure, you can. But that’s a reactive measure. It disrupts your workflow. You lose your place. You have to remember where you were, what you were doing. And what if you *can't* close it? What if you're in the middle of a complex form, or deeply engrossed in research spread across multiple tabs?
 
-a tab-locking extension isn't about hiding; it's about **securing your active workspace**. It's about maintaining continuity while adding a critical layer of protection. Imagine you're writing a highly sensitive email. You don't want to close the email client just because someone walked into the room. You want to lock it, step away, and then unlock it to pick up exactly where you left off. That's the paradigm shift here.
+a tab-locking extension isn't about hiding; it's about **securing your active workspace**. It's about maintaining continuity while adding a critical layer of protection. Imagine you're writing a highly sensitive email. You don't want to close the email client just because someone walked into the room. You want to lock it, step away, and then unlock it to pick up exactly where you left off. That's the here.
 
 Furthermore, this approach offers genuine peace of mind in scenarios that are surprisingly common:
 
@@ -1708,7 +1706,7 @@ It's particularly useful when I'm working from a coffee shop. I'm paranoid about
 
 And it’s incredibly fast. The encryption/decryption process happens almost instantaneously, which is critical for an extension that aims to enhance, not hinder, your browsing experience. This seamless integration is what makes a tool like a tab-locking extension truly valuable – it solves a real problem without creating friction.
 
-It’s about control. It’s about setting boundaries. In a world where our digital lives are increasingly intertwined with our physical ones, having the power to say, "This part of my digital space is private, and only I hold the key," isn't just a luxury; it's a necessity.
+It’s about control. It’s about setting boundaries. In our digital lives are increasingly intertwined with our physical ones, having the power to say, "This part of my digital space is private, and only I hold the key," isn't just a luxury; it's a necessity.
 
 We live in an age where our browsers are our primary interface to the world, and yet, they often lack granular control over privacy on a local, immediate level. a tab-locking extension fills that gap with a robust, transparent, and user-friendly approach to **private tab encryption**. It gives you the power to truly own your digital space, even when the world around you is looking over your shoulder.
 
@@ -1719,8 +1717,8 @@ It's an empowering feeling, knowing that your sensitive tabs aren't just hidden,
 `
  }
 ,
-    {
-        slug: 'how-to-lock-specific-tabs-in-chrome-without-extensions',
+ {
+ slug: 'how-to-lock-specific-tabs-in-chrome-without-extensions',
  title: 'How to Lock Specific Tabs in Chrome Without Extensions',
  description: 'How to Lock Specific Tabs in Chrome Without Extensions. Learn about lock chrome tabs and chrome tab security with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -1849,8 +1847,8 @@ Don't settle for the frantic scramble. Take charge of your **chrome tab security
 `
  }
 ,
-    {
-        slug: 'the-psychology-of-digital-privacy-why-people-ignore-tab-security',
+ {
+ slug: 'the-psychology-of-digital-privacy-why-people-ignore-tab-security',
  title: 'The Psychology of Digital Privacy: Why People Ignore Tab Security',
  description: 'The Psychology of Digital Privacy: Why People Ignore Tab Security. Learn about digital privacy psychology and security awareness with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -1957,8 +1955,8 @@ Don’t let the "just a minute" lie trick you into exposing your digital self. T
 `
  }
 ,
-    {
-        slug: 'what-happens-when-someone-accesses-your-unlocked-browser-tabs',
+ {
+ slug: 'what-happens-when-someone-accesses-your-unlocked-browser-tabs',
  title: 'What Happens When Someone Accesses Your Unlocked Browser Tabs',
  description: 'What Happens When Someone Accesses Your Unlocked Browser Tabs. Learn about unlocked browser risk and browser tab theft with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -1997,7 +1995,7 @@ If you have your personal or work email open in a tab, consider it game over. Em
 
 * **Initiate Password Resets:** They can go to virtually any online service you use – banking, social media, shopping, cloud storage – click "Forgot Password," and receive the reset link directly to your open email tab. Within minutes, they could lock you out of dozens of accounts, change your passwords, and seize control.
 * **Access Confidential Information:** Your email contains medical reports, legal documents, financial statements, private conversations, travel plans, and sensitive work communications. All of it becomes instantly accessible.
-* **Impersonate You:** They can send emails from your account to friends, family, or colleagues, requesting money, spreading misinformation, or executing phishing attacks against people you know, leveraging your established trust. Imagine an email to your company's finance department, from *your* email, asking to change direct deposit information. That's not just a breach; it's a potential financial catastrophe.
+* **Impersonate You:** They can send emails from your account to friends, family, or colleagues, requesting money, spreading misinformation, or executing phishing attacks against people you know, established trust. Imagine an email to your company's finance department, from *your* email, asking to change direct deposit information. That's not just a breach; it's a potential financial catastrophe.
 
 ### Financial Freefall: Banking, Shopping, and Investments
 
@@ -2099,8 +2097,8 @@ _Protect your digital workspace. Learn more about a tab-locking extension at \`g
 `
  }
 ,
-    {
-        slug: 'browser-tab-security-for-content-creators-and-streamers',
+ {
+ slug: 'browser-tab-security-for-content-creators-and-streamers',
  title: 'Browser Tab Security for Content Creators and Streamers',
  description: 'Browser Tab Security for Content Creators and Streamers. Learn about streamer browser security and content creator privacy with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -2117,7 +2115,7 @@ _Protect your digital workspace. Learn more about a tab-locking extension at \`g
 
 Let’s be honest. We’ve all been there, haven't we? You're deep in the zone, maybe editing a client video, researching a new script, or just chilling in a "just chatting" stream, and suddenly... *it* happens. A quick Alt+Tab to switch screens, a moment of distraction, or perhaps a rogue pop-up, and there it is: your personal email, a confidential client brief, or, heaven forbid, your banking app, flashing across your screen for all the world to see. If you’re a content creator or streamer, that “all the world” often means hundreds, thousands, or even millions of viewers. And trust me, the internet never forgets.
 
-I’ve seen it happen to friends. One minute they’re showing off their amazing new game, the next their Discord DMs are live for everyone to screenshot. Or the time a popular tech reviewer accidentally flashed a spreadsheet with their personal income during a "What's on my desktop?" segment. The panic, the scramble to close tabs, the apologies – it’s a nightmare scenario that can erode trust, compromise privacy, and frankly, just be downright embarrassing. This isn't just about a minor slip-up; it's about the erosion of your digital boundaries in a world where your screen is literally your livelihood.
+I’ve seen it happen to friends. One minute they’re showing off their amazing new game, the next their Discord DMs are live for everyone to screenshot. Or the time a popular tech reviewer accidentally flashed a spreadsheet with their personal income during a "What's on my desktop?" segment. The panic, the scramble to close tabs, the apologies – it’s a nightmare scenario that can erode trust, compromise privacy, and frankly, just be downright embarrassing. This isn't just about a minor slip-up; it's about the erosion of your digital boundaries in your screen is literally your livelihood.
 
 For us, the digital natives, the creators, the folks who spend half their lives tethered to a browser, our tabs are more than just web pages. They're our workspace, our research library, our social hub, our personal diary, and sometimes, our financial ledger. They hold the keys to upcoming projects, client communications, personal appointments, and the random internet rabbit holes we dive into when no one's watching. So, why do we treat them with such casual disregard when it comes to security? We lock our phones, encrypt our hard drives, and use VPNs, but the very windows into our digital souls – our browser tabs – often remain wide open, vulnerable to prying eyes, accidental reveals, or even malicious snoops.
 
@@ -2192,8 +2190,8 @@ Take control of your digital boundaries. Learn more about a tab-locking extensio
 `
  }
 ,
-    {
-        slug: 'digital-minimalism-using-tab-security-to-reduce-browser-clutter',
+ {
+ slug: 'digital-minimalism-using-tab-security-to-reduce-browser-clutter',
  title: 'Digital Minimalism: Using Tab Security to Reduce Browser Clutter',
  description: 'Digital Minimalism: Using Tab Security to Reduce Browser Clutter. Learn about digital minimalism tabs and reduce browser clutter with practical tips and expert advice.',
  author: 'Vansh Sethi',
@@ -2313,8 +2311,8 @@ You'll be surprised at the mental clarity that comes with a less cluttered brows
 `
  }
 ,
-    {
-        slug: 'how-to-create-an-unbreakable-master-password-for-tab-security',
+ {
+ slug: 'how-to-create-an-unbreakable-master-password-for-tab-security',
  title: 'How to Create an Unbreakable Master Password for Tab Security',
  description: 'How to Create an Unbreakable Master Password for Tab Security. Learn about create strong master password and unbreakable password tips with practical tips and expert advice.',
  author: 'Vansh Sethi',

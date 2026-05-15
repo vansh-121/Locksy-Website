@@ -91,7 +91,7 @@ This pillar focuses on ensuring your VPN or network setup is actually doing its 
 
 ### Pillar 3: Contextual Awareness & Specialized Tools (The Safeguard)
 
-This is about smart habits and leveraging tools that simplify the complex.
+This is about smart habits and that simplify the complex.
 
 * **Dedicated Browser Profiles:** For sensitive work or communications, use a separate browser profile (or even a different browser entirely) that you've specifically hardened for privacy. This allows you to keep your main browser functional for everyday tasks while having a secure sandbox for critical activities.
 * **Reputable Browser Extensions (with caution):** If you absolutely must use an extension, choose one from a known, transparent developer with a strong track record. Read reviews, check its permissions, and understand its mechanism. Even then, treat it as a temporary measure and verify its effectiveness regularly. I generally avoid these for core security features because they add another layer of trust (and potential failure) to your stack.

@@ -37,7 +37,7 @@ For years, two-factor authentication (2FA) has been our band-aid solution, addin
 
 ## Enter Passkeys: A Breath of Fresh, Secure Air
 
-This is where **passkeys** ride in, like a hero in a Western, ready to clean up the town. When I first started hearing about FIDO (Fast Identity Online) and **WebAuthn adoption**, I was cautiously optimistic. Another "solution," I thought. But the more I dug in, the more excited I became. This isn't just another flavor of 2FA; it's a paradigm shift, a genuine move towards **passwordless authentication**.
+This is where **passkeys** ride in, like a hero in a Western, ready to clean up the town. When I first started hearing about FIDO (Fast Identity Online) and **WebAuthn adoption**, I was cautiously optimistic. Another "solution," I thought. But the more I dug in, the more excited I became. This isn't just another flavor of 2FA; it's a , a genuine move towards **passwordless authentication**.
 
 So, what *are* passkeys? In simple terms, they're cryptographic credentials that live on your device (your phone, laptop, tablet) and are used to sign into websites and apps. Instead of a secret you type, it’s a pair of keys: a public key that the website knows, and a private key that *only your device knows*. When you want to log in, your device uses its private key to cryptographically "sign" a challenge from the website. The website then verifies this signature with your public key. If it matches, you're in.
 
@@ -114,7 +114,7 @@ I honestly believe that as passkeys become the norm, the conversation will shift
 
 ## The Road Ahead: Smarter Security, Smarter Habits
 
-The future of online security, powered by passkeys, looks incredibly bright. The days of struggling with complex strings of characters are, thankfully, numbered. We're moving towards a world where logging in is instantaneous, secure, and far less prone to the human errors and systemic vulnerabilities that have plagued us for decades.
+The future of online security, powered by passkeys, looks incredibly bright. The days of struggling with complex strings of characters are, thankfully, numbered. We're moving towards logging in is instantaneous, secure, and far less prone to the human errors and systemic vulnerabilities that have plagued us for decades.
 
 But this progress doesn't mean we can drop our guard. It means we need to evolve our understanding of security, to recognize that different threats require different defenses. While passkeys protect our identity at the gate, tools like a tab-locking extension protect our active digital workspace, our open thoughts, and our sensitive data from prying eyes or accidental exposure.
 
