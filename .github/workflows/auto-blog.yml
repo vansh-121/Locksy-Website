@@ -2,8 +2,9 @@ name: Auto Generate Blog Post
 
 on:
   schedule:
-    # Run daily at 2:30 AM UTC = 8:00 AM India Time (IST)
-    - cron: '30 2 * * *'
+    # Run weekly on Wednesdays at 2:30 AM UTC = 8:00 AM India Time (IST)
+    # Changed from daily to weekly to avoid mass-production patterns (AdSense compliance)
+    - cron: '30 2 * * 3'
   workflow_dispatch: # Allow manual triggering
 
 permissions:
@@ -56,5 +57,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add lib/posts/
-          git commit -m "blog: auto-generated daily blog post $(date +%Y-%m-%d)"
+          git commit -m "blog: weekly blog post $(date +%Y-%m-%d)"
           git push
