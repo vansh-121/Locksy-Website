@@ -104,7 +104,7 @@ This is perhaps the most fundamental rule in **secure extension development**: g
 * **Optional Permissions:** For features that aren't critical to the core functionality, consider using optional permissions. This allows users to opt-in to more powerful features, increasing transparency and trust. For example, if your extension offers an advanced feature to interact with a specific external service, you could request the permission for that service's domain only when the user enables that feature, rather than upfront.
 * **Host Permissions:** Be extremely conservative with host permissions. \`*://*/*\` is the nuclear option and should be avoided unless absolutely, unequivocally necessary. Each additional host permission is another surface for potential exploitation.
 
-An extension like a tab-locking extension, which needs to password-protect tabs, requires access to tab information. It *must* have certain permissions to identify and interact with tabs. But it certainly doesn't need permissions to read arbitrary files from your hard drive or access every URL you've ever visited. The developer's job is to ruthlessly prune permissions down to the bare minimum required for the core value proposition.
+An extension like Locksy, which needs to password-protect tabs, requires access to tab information. It *must* have certain permissions to identify and interact with tabs. But it certainly doesn't need permissions to read arbitrary files from your hard drive or access every URL you've ever visited. The developer's job is to ruthlessly prune permissions down to the bare minimum required for the core value proposition.
 
 ## Content Security Policy (CSP): Your Digital Bouncer
 

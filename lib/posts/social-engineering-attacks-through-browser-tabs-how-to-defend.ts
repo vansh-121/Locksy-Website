@@ -58,24 +58,24 @@ The truth is, our browsers are the frontline of our digital lives, and every ope
 
 So, what do we do about this? We can't realistically close every tab every time we step away. That's simply not how we work. And constantly logging in and out of every service is a productivity killer. We need a solution that acknowledges human behavior while bolstering our security.
 
-This is exactly why I’ve become a fan of tools like **a tab-locking extension**. It’s a browser extension that tackles this very problem head-on by allowing you to password-protect your browser tabs.
+This is exactly why I’ve become a fan of tools like **Locksy**. It’s a browser extension that tackles this very problem head-on by allowing you to password-protect your browser tabs.
 
-Think of a tab-locking extension as a digital bouncer for your sensitive tabs. You can set it up to automatically lock specific tabs after a period of inactivity, or you can manually lock individual tabs that contain sensitive information. Want to keep your online banking tab secure? Lock it. Your work's internal wiki? Lock it. Your highly embarrassing fan fiction draft? Lock it, for goodness sake!
+Think of Locksy as a digital bouncer for your sensitive tabs. You can set it up to automatically lock specific tabs after a period of inactivity, or you can manually lock individual tabs that contain sensitive information. Want to keep your online banking tab secure? Lock it. Your work's internal wiki? Lock it. Your highly embarrassing fan fiction draft? Lock it, for goodness sake!
 
-Here's why a tab-locking extension is a significant improvement for \`defend social engineering\`:
+Here's why Locksy is a significant improvement for \`defend social engineering\`:
 
 * **Prevents Opportunistic Peeking:** Someone glances at your screen and sees a locked tab instead of your sensitive data. They can't just click and browse. They need a password. This immediately deters casual snooping.
-* **Mitigates Phishing Tab Attacks:** If someone tries to redirect your banking tab to a fake login page, a tab-locking extension can be configured to lock it immediately, or require a password to even *access* the tab. Even if they somehow manage to change the URL, the lock acts as a crucial barrier. When you return, instead of seeing a familiar (but fake) login page, you see a lock screen. This forces you to pause, enter a password, and more importantly, *re-authenticate* your presence, making you less likely to fall for the visual deception. You're consciously unlocking, not mindlessly resuming.
-* **Secures Your Sessions When You Step Away:** This is the big one. Whether you're at home, at a coffee shop, or in a shared office, a tab-locking extension adds a critical layer of protection. You can set rules: "Lock my banking tab after 30 seconds of inactivity," or "Always require a password to open anything on \`myworkdomain.com\`." This means even if you forget to lock your screen, your most vulnerable digital assets remain protected. It's a fantastic \`prevent browser takeover\` mechanism against those quick-hit, low-effort attacks.
+* **Mitigates Phishing Tab Attacks:** If someone tries to redirect your banking tab to a fake login page, Locksy can be configured to lock it immediately, or require a password to even *access* the tab. Even if they somehow manage to change the URL, the lock acts as a crucial barrier. When you return, instead of seeing a familiar (but fake) login page, you see a lock screen. This forces you to pause, enter a password, and more importantly, *re-authenticate* your presence, making you less likely to fall for the visual deception. You're consciously unlocking, not mindlessly resuming.
+* **Secures Your Sessions When You Step Away:** This is the big one. Whether you're at home, at a coffee shop, or in a shared office, Locksy adds a critical layer of protection. You can set rules: "Lock my banking tab after 30 seconds of inactivity," or "Always require a password to open anything on \`myworkdomain.com\`." This means even if you forget to lock your screen, your most vulnerable digital assets remain protected. It's a fantastic \`prevent browser takeover\` mechanism against those quick-hit, low-effort attacks.
 * **Granular Control:** You decide which tabs are sensitive enough for a lock, and under what conditions. This isn't an all-or-nothing solution, which is crucial for usability. You can tailor it to your workflow.
 
-I've personally configured a tab-locking extension to auto-lock my financial sites and my main work project management tool after a minute of inactivity. It's been a lifesaver. No more frantic dashing back to the computer because I suddenly remembered my bank statement was open. It gives me peace of mind, knowing that even if I'm distracted for a moment, my sensitive information isn't just sitting there, waiting to be exploited.
+I've personally configured Locksy to auto-lock my financial sites and my main work project management tool after a minute of inactivity. It's been a lifesaver. No more frantic dashing back to the computer because I suddenly remembered my bank statement was open. It gives me peace of mind, knowing that even if I'm distracted for a moment, my sensitive information isn't just sitting there, waiting to be exploited.
 
 ![Digital shield protecting data](https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=450&fit=crop&auto=format&q=80)
 
 ### Beyond the Lock: A Holistic Approach to Browser Security
 
-While a tool like a tab-locking extension is incredibly powerful for specific types of \`social engineering browser\` attacks, it's just one part of a robust security posture. Think of it as adding a deadbolt to a specific, vulnerable door. You still need to secure the whole house.
+While a tool like Locksy is incredibly powerful for specific types of \`social engineering browser\` attacks, it's just one part of a robust security posture. Think of it as adding a deadbolt to a specific, vulnerable door. You still need to secure the whole house.
 
 Here are some other critical practices to **defend social engineering** and prevent \`browser takeover\`:
 
@@ -122,7 +122,7 @@ Extensions can be fantastic, but they can also be a significant security risk.
 
 In our increasingly interconnected lives, our browsers are the primary interface for almost everything we do online. They hold the keys to our financial lives, our social circles, our work, and our personal data. To neglect their security, especially the simple, everyday vulnerabilities like unattended open tabs, is to leave a gaping hole in your digital perimeter.
 
-We often focus on the grand, dramatic cyberattacks, but the reality is that many compromises start with something mundane: an open tab, a moment of distraction, or an opportunistic glance. Tools like a tab-locking extension are excellent because they address this human element directly, providing a practical, unobtrusive way to \`defend social engineering\` and add a crucial layer of protection where we need it most.
+We often focus on the grand, dramatic cyberattacks, but the reality is that many compromises start with something mundane: an open tab, a moment of distraction, or an opportunistic glance. Tools like Locksy are excellent because they address this human element directly, providing a practical, unobtrusive way to \`defend social engineering\` and add a crucial layer of protection where we need it most.
 
 Don't let your browser tabs be the unlocked back door to your digital life. Be proactive, be vigilant, and secure those tabs. Your peace of mind (and your bank account) will thank you.
 

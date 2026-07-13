@@ -22,14 +22,7 @@ export const blogPosts: BlogPost[] = allPosts as BlogPost[]
 // Posts that are noindexed due to thin or shorter content.
 // These still render if visited (they exist in legacy.ts) but should NOT
 // appear in listing pages, homepage, category filters, or the sitemap.
-export const NOINDEX_SLUGS = new Set([
-    // Shorter legacy posts — still accessible but hidden from listings
-    'keyboard-shortcuts-for-tab-security',
-    'how-to-password-protect-browser-tabs',
-    'protect-banking-tabs-from-prying-eyes',
-    'why-your-open-browser-tabs-are-a-security-risk-in-2026',
-    'how-to-create-an-unbreakable-master-password-for-tab-security',
-])
+export const NOINDEX_SLUGS = new Set<string>([])
 
 // Filtered posts — used for blog listing, homepage, categories, tags, etc.
 export const filteredBlogPosts: BlogPost[] = blogPosts.filter(
