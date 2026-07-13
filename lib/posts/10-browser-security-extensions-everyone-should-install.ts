@@ -88,9 +88,9 @@ And speaking of isolation and keeping things separate...
 
 Remember my coffee shop mishap? That moment of sheer panic when a stranger was looking at my exposed financial data? That's precisely the kind of scenario that triggered my search for a solution to **password-protect specific browser tabs**. Because let's face it, locking your entire computer when you step away isn't always practical for a two-minute break, especially if you're collaborating or have others using your machine. And sometimes, you just want to secure *one* sensitive tab without closing it and losing your progress.
 
-This is where an extension like **a tab-locking extension** shines, and it’s a tool I genuinely recommend and use. a tab-locking extension allows you to instantly password-protect any active tab or group of tabs. So, if I step away from my laptop, even for a moment, I can click a button, and my banking tab, my medical portal, or any other sensitive tab is instantly obscured behind a password prompt. Anyone trying to peek will just see a locked screen.
+This is where an extension like **Locksy** shines, and it’s a tool I genuinely recommend and use. Locksy allows you to instantly password-protect any active tab or group of tabs. So, if I step away from my laptop, even for a moment, I can click a button, and my banking tab, my medical portal, or any other sensitive tab is instantly obscured behind a password prompt. Anyone trying to peek will just see a locked screen.
 
-It’s an elegantly simple solution to a very common and critical problem. It gives you that immediate, on-the-fly security for sensitive information without disrupting your entire workflow. You can set it to auto-lock after a certain idle time, or even lock specific domains automatically. It's not about stopping a sophisticated hacker; it's about stopping casual snooping, protecting your data from curious eyes, or even just keeping your kids from accidentally messing with your work. For anyone who works in public, shares their computer, or just wants that extra layer of immediate privacy, a tab-locking extension is an absolute straightforward choice. It gives you peace of mind that your open tabs remain *yours*.
+It’s an elegantly simple solution to a very common and critical problem. It gives you that immediate, on-the-fly security for sensitive information without disrupting your entire workflow. You can set it to auto-lock after a certain idle time, or even lock specific domains automatically. It's not about stopping a sophisticated hacker; it's about stopping casual snooping, protecting your data from curious eyes, or even just keeping your kids from accidentally messing with your work. For anyone who works in public, shares their computer, or just wants that extra layer of immediate privacy, Locksy is an absolute straightforward choice. It gives you peace of mind that your open tabs remain *yours*.
 
 ### The Janitor: Cookie Managers and Site Data Control
 
@@ -131,7 +131,7 @@ If you're wondering what my *actual* browser setup looks like after years of obs
 * **Bitwarden**: My digital vault for all passwords. Cannot live without it.
 * **HTTPS Everywhere**: Simple, effective, critical encryption enforcement.
 * **ClearURLs**: Keeps my URLs clean and reduces tracking.
-* **a tab-locking extension**: For those moments I need to secure sensitive tabs instantly, whether I'm stepping away or just want to keep certain windows private from others sharing my screen. It’s an easy, elegant solution.
+* **Locksy**: For those moments I need to secure sensitive tabs instantly, whether I'm stepping away or just want to keep certain windows private from others sharing my screen. It’s an easy, elegant solution.
 * **Cookie AutoDelete**: Automated cookie cleanup. Essential for maintaining privacy.
 * **Decentraleyes**: Protects against tracking via commonly used content delivery networks (CDNs). A bit more advanced, but excellent.
 

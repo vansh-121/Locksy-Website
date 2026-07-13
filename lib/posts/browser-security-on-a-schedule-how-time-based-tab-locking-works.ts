@@ -48,7 +48,7 @@ When you install an extension like Locksy, which is designed for this purpose, i
 
 If the extension observes no activity for a pre-defined duration – say, 30 seconds, 1 minute, 5 minutes, or whatever you configure – then the timer reaches its limit. At this point, the extension springs into action. It doesn't just close your tabs (that would be annoying and disruptive); it *locks* them. What does "locking" mean in this context? It means obscuring the content of the tab with a password prompt. The tab is still open, the session is still active, but to view its contents, you (or anyone else) would need to enter the correct password.
 
-This intelligent locking mechanism is crucial. It means you don't lose your place, you don't lose unsaved work, and you don't have to re-authenticate with every website. You simply enter your a tab-locking extension password, and everything reappears exactly as you left it. It's a seamless re-entry into your workflow, secured by a quick password verification.
+This intelligent locking mechanism is crucial. It means you don't lose your place, you don't lose unsaved work, and you don't have to re-authenticate with every website. You simply enter your Locksy password, and everything reappears exactly as you left it. It's a seamless re-entry into your workflow, secured by a quick password verification.
 
 The real power here lies in the customization. You're not stuck with a one-size-fits-all approach. A good extension lets you set different schedules for different scenarios. For example:
 * **Short idle timeout for sensitive tabs:** Maybe your banking tab locks after 30 seconds of inactivity, while your news feed tab stays open for 5 minutes.
@@ -63,7 +63,7 @@ Let's be brutally honest for a moment: we are often our own weakest link in the 
 
 Think about the mental load involved in constantly remembering to secure your digital environment. Every time you stand up from your desk, even for a moment, you have a split-second decision to make: "Do I lock it?" "Is it worth the hassle for just a minute?" "No one's around, right?" These micro-decisions add up, creating a constant, low-level hum of anxiety.
 
-An \`automatic lock schedule browser\` like a tab-locking extension completely eliminates this mental overhead. It's a set-it-and-forget-it solution that covers your blind spots. Here are just a few scenarios where this kind of automation is an absolute significant improvement:
+An \`automatic lock schedule browser\` like Locksy completely eliminates this mental overhead. It's a set-it-and-forget-it solution that covers your blind spots. Here are just a few scenarios where this kind of automation is an absolute significant improvement:
 
 * **The Shared Family Computer:** You've got your bank statements open, your kids want to play a game. You step away to get them a snack. Without a time-based lock, your sensitive data is just sitting there, potentially exposed to curious young eyes or even accidental clicks. With it, the moment you're idle, boom, locked.
 * **The Busy Office Environment:** You're in an open-plan office. A colleague taps you on the shoulder for a quick question. You turn your head, engage in conversation. Your screen, displaying confidential client data, is wide open. An automated lock mitigates this risk entirely.
@@ -75,23 +75,23 @@ This isn't just about preventing grand acts of espionage; it's about minimizing 
 
 ![Close-up of hands typing on a keyboard](https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=450&fit=crop&auto=format&q=80)
 
-## Crafting Your Digital Perimeter: Practical a tab-locking extension Settings and Strategies
+## Crafting Your Digital Perimeter: Practical Locksy Settings and Strategies
 
-Implementing \`time-based tab security\` effectively requires a bit of thought about your own habits and risk profile. It's not just about turning it on; it's about tailoring it to *your* life. This is where an extension like a tab-locking extension truly shines, offering granular control that makes it a practical tool rather than an annoying hindrance.
+Implementing \`time-based tab security\` effectively requires a bit of thought about your own habits and risk profile. It's not just about turning it on; it's about tailoring it to *your* life. This is where an extension like Locksy truly shines, offering granular control that makes it a practical tool rather than an annoying hindrance.
 
 First, consider your environment. Are you primarily working from a secure home office, or do you frequently find yourself in public spaces?
 * **High-Risk Environments (public, shared):** If you're often in a coffee shop or a co-working space, I'd strongly recommend a very aggressive idle timeout. Think 30 seconds to 1 minute. Yes, it might mean re-entering your password a bit more often, but the trade-off for security in these environments is absolutely worth it. You're essentially telling your browser, "Assume the worst, always."
 * **Medium-Risk Environments (shared home computer, office):** Here, a 2-5 minute idle timeout might be more appropriate. It's enough time to grab a drink, have a quick chat, or respond to a message without constantly being prompted, but it still provides a solid layer of protection against casual snooping.
 * **Low-Risk Environments (dedicated home office, no one else around):** Even here, I'd argue for *some* level of automation. Maybe a 10-15 minute timeout, or a specific \`browser security schedule\` that locks everything when you typically finish work for the day. This protects against the "oops, I forgot to shut down" scenario or if you step away for an extended period.
 
-Next, think about specific tabs or domains. Do you have certain websites that are inherently more sensitive than others? Many advanced locking extensions, including a tab-locking extension, allow you to create rules based on specific URLs or domains. For example:
+Next, think about specific tabs or domains. Do you have certain websites that are inherently more sensitive than others? Many advanced locking extensions, including Locksy, allow you to create rules based on specific URLs or domains. For example:
 * Always lock tabs with \`*.bankofamerica.com\` or \`*.paypal.com\` after 30 seconds, regardless of global settings.
 * Never lock tabs for \`*.netflix.com\` (because who cares if someone sees what you're binging?).
 * Lock all tabs that aren't on a predefined "safe list" after a certain duration.
 
 This level of customization is what transforms a simple auto-lock feature into a sophisticated security tool. It allows you to strike that crucial balance between robust security and uninterrupted workflow. The goal isn't to make your digital life harder; it's to make it safer and less stressful. When the automation is intelligent enough, it fades into the background, working silently to protect you without you even having to think about it.
 
-Remember, the password you use for a tab-locking extension should be strong and unique. This is the master key to your browser's current state, so treat it with the same respect you'd give your main system password. And don't forget the obvious: if you're stepping away for an extended period, or leaving your computer entirely, a full system lock (\`Win + L\` on Windows, \`Ctrl + Cmd + Q\` on Mac) is still the gold standard. Time-based tab locking is a fantastic layer of defense, but it complements, rather than replaces, other fundamental security practices.
+Remember, the password you use for Locksy should be strong and unique. This is the master key to your browser's current state, so treat it with the same respect you'd give your main system password. And don't forget the obvious: if you're stepping away for an extended period, or leaving your computer entirely, a full system lock (\`Win + L\` on Windows, \`Ctrl + Cmd + Q\` on Mac) is still the gold standard. Time-based tab locking is a fantastic layer of defense, but it complements, rather than replaces, other fundamental security practices.
 
 ## Beyond the Timer: A Holistic View of Browser Security
 
@@ -107,7 +107,7 @@ Finally, think about your network. Are you connecting to public Wi-Fi networks w
 
 ![A padlock resting on a laptop keyboard](https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=450&fit=crop&auto=format&q=80)
 
-An \`automatic lock schedule browser\` like a tab-locking extension doesn't solve all these problems, nor is it meant to. What it *does* do, exceptionally well, is fill a critical gap: the human element of forgetfulness and distraction. It provides an ever-vigilant guardian for your open browser tabs, ensuring that even when you step away for a moment, your digital world remains private and secure. It's a testament to how intelligent automation can significantly reduce our daily security burden and enhance our peace of mind.
+An \`automatic lock schedule browser\` like Locksy doesn't solve all these problems, nor is it meant to. What it *does* do, exceptionally well, is fill a critical gap: the human element of forgetfulness and distraction. It provides an ever-vigilant guardian for your open browser tabs, ensuring that even when you step away for a moment, your digital world remains private and secure. It's a testament to how intelligent automation can significantly reduce our daily security burden and enhance our peace of mind.
 
 ## The Peace of Mind Protocol
 

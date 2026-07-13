@@ -61,7 +61,7 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
                         Browser Security Blog
                     </div>
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                        Security Insights
+                        Locksy Security Insights
                     </h1>
                     <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
                         Expert guides, tutorials, and best practices for securing your browser tabs and protecting your online privacy

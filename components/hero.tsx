@@ -199,11 +199,10 @@ export default function Hero() {
 
             <div className="space-y-6">
               <h1 className="text-5xl md:text-7xl font-black leading-tight text-foreground">
-                Secure Your Tabs with{" "}
                 <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
-                  Military-Grade
+                  Locksy
                 </span>{" "}
-                Protection
+                — Secure Your Tabs with Military-Grade Protection
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                 Password-protect any browser tab or lock entire domains with persistent protection. Now with right-click context menus, stealth mode, and a light/dark theme toggle.
