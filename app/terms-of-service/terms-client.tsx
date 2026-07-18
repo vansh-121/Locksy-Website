@@ -19,7 +19,7 @@ export default function TermsOfServiceClient() {
             badge: "Description",
             title: "Description of Service",
             content: [
-                "Locksy is a free, open-source browser extension that provides password-based tab protection for all major browsers, including Chrome, Edge, Firefox, Brave, Opera, and Vivaldi.",
+                "Locksy is a browser extension that provides password-based tab protection for all major browsers, including Chrome, Edge, Firefox, Brave, Opera, and Vivaldi. It is available in a Free Core version with an optional lifetime Pro upgrade.",
                 "The Extension allows users to lock browser tabs with a master password, set auto-lock timers, schedule locking periods, lock entire domains, use biometric authentication (via WebAuthn/FIDO2), right-click context menus for quick locking, stealth mode to disguise locked tabs, and toggle between light and dark themes.",
                 "All data processing occurs entirely on the user's device. No personal data, passwords, or browsing activity is transmitted to any external server."
             ]
@@ -37,18 +37,17 @@ export default function TermsOfServiceClient() {
             badge: "License",
             title: "License & Usage Rights",
             content: [
-                "Locksy is distributed under the MIT License. You are permitted to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the MIT License conditions.",
-                "You are granted a non-exclusive, worldwide, royalty-free license to use the Extension for any lawful purpose.",
-                "You MAY NOT: use the Extension for any illegal activity, attempt to reverse-engineer security features to bypass protections for malicious purposes, redistribute the Extension under a different name without proper attribution, or misrepresent the origin of the software."
+                "Locksy is proprietary software. You are granted a non-exclusive, personal, non-transferable, revocable license to use the Extension for your personal, non-commercial security purposes subject to these Terms.",
+                "You MAY NOT: lease, rent, redistribute, sell, or modify the Extension; attempt to reverse-engineer, decompile, or bypass the extension's security features; or misrepresent the origin of the software."
             ]
         },
         {
             icon: Code2,
-            badge: "Open Source",
-            title: "Open Source & Contributions",
+            badge: "Auditing",
+            title: "Security & Auditing",
             content: [
-                "Locksy's source code is publicly available on GitHub (github.com/vansh-121/Locksy). Community contributions are welcome and subject to the project's contribution guidelines.",
-                "By submitting contributions (pull requests, issues, or suggestions), you agree that your contributions will be licensed under the same MIT License as the project."
+                "While the extension's source code is proprietary, Locksy is built with strict privacy constraints. No personal data, passwords, or browsing activity is ever transmitted to any external server.",
+                "Users can verify that no network requests are initiated by the extension by auditing network activity logs locally using their browser's built-in developer tools."
             ]
         },
         {
@@ -100,7 +99,7 @@ export default function TermsOfServiceClient() {
                 </header>
 
                 {/* Hero */}
-                <section className="relative py-20 md:py-32 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
+                <section className="relative pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
                     <div className="absolute inset-0 overflow-hidden">
                         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
                         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
@@ -134,11 +133,11 @@ export default function TermsOfServiceClient() {
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-4">
                                         {[
-                                            "100% free, forever — no hidden fees",
-                                            "Open source under MIT License",
-                                            "Your data stays on your device",
+                                            "Free Core version with optional lifetime Pro Upgrade",
+                                            "No monthly recurring fees or subscriptions",
+                                            "Your data stays 100% on your device",
                                             "No account needed to use Locksy",
-                                            "You can modify & redistribute",
+                                            "100% offline encryption and locking",
                                         ].map((item, idx) => (
                                             <div key={idx} className="flex items-center gap-3 bg-white/80 dark:bg-card/80 backdrop-blur-sm rounded-xl p-4">
                                                 <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0" />
@@ -348,7 +347,7 @@ export default function TermsOfServiceClient() {
                             </div>
                         </div>
                         <div className="mt-8 text-center text-sm text-muted-foreground">
-                            <p>© 2025–2026 Locksy. Open source and privacy-focused.</p>
+                            <p>© 2025–2026 Locksy. Privacy-focused tab protection.</p>
                         </div>
                     </div>
                 </footer>

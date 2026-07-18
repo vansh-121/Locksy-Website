@@ -3,7 +3,7 @@ import Hero from "@/components/hero"
 import AutomationFeatures from "@/components/automation-features"
 import DomainLock from "@/components/domain-lock"
 import BiometricUnlock from "@/components/biometric-unlock"
-import WhatsNewV250 from "@/components/whats-new-v250"
+import WhatsNewV300 from "@/components/whats-new-v300"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
 import KeyboardShortcuts from "@/components/keyboard-shortcuts"
@@ -15,6 +15,7 @@ import FAQ from "@/components/faq"
 import LatestBlogPosts from "@/components/latest-blog-posts"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
+import Pricing from "@/components/pricing"
 import Footer from "@/components/footer"
 import PageLoader from "@/components/page-loader"
 import MilestoneBanner from "@/components/milestone-banner"
@@ -38,6 +39,9 @@ export default function Home() {
           {/* 5000+ users milestone celebration */}
           <MilestoneBanner />
 
+          {/* Pricing cards & plans */}
+          <Pricing />
+
           {/* Establish the problem first */}
           <ProblemStatement />
 
@@ -52,8 +56,8 @@ export default function Home() {
           {/* Showcase NEW v2.2.0 automation features prominently */}
           <AutomationFeatures />
 
-          {/* NEW v2.5.0 — Context Menus, Stealth Mode, Theme Toggle */}
-          <WhatsNewV250 />
+          {/* NEW v3.0.0 — Redesigned UI Shell, Reports, Startup Lock & Webcam snaps */}
+          <WhatsNewV300 />
 
           {/* Another major feature - Domain Lock */}
           <div id="domain-lock">

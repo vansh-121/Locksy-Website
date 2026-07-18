@@ -436,7 +436,7 @@ export default function UninstallClient() {
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-lg mb-2">Privacy concerns?</h3>
                                                 <p className="text-sm text-muted-foreground leading-relaxed">
-                                                    Everything stays on your device. We never collect, transmit, or store your data. Open-source and transparent. Check our{" "}
+                                                    Everything stays on your device. We never collect, transmit, or store your data. Secure and transparent. Check our{" "}
                                                     <Link href="/privacy-policy" className="text-primary hover:underline font-semibold">
                                                         privacy policy
                                                     </Link>.

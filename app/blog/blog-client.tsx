@@ -279,11 +279,6 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
                                         Install Locksy Free
                                     </Button>
                                 </Link>
-                                <Link href="/newsletter">
-                                    <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                                        Subscribe to Newsletter
-                                    </Button>
-                                </Link>
                             </CardContent>
                         </Card>
                     </div>

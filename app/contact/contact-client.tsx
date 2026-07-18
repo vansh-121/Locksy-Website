@@ -221,8 +221,8 @@ Timestamp: ${new Date().toISOString()}
                                 <a
                                     key={action.title}
                                     href={action.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    target={action.href.startsWith("http") || action.href.startsWith("mailto") ? "_blank" : undefined}
+                                    rel={action.href.startsWith("http") || action.href.startsWith("mailto") ? "noopener noreferrer" : undefined}
                                     className="group"
                                 >
                                     <Card className="border-2 border-border hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-card/50 backdrop-blur-sm h-full">
@@ -241,7 +241,7 @@ Timestamp: ${new Date().toISOString()}
                 </div>
 
                 {/* Contact Form */}
-                <div className="max-w-3xl mx-auto">
+                <div id="contact-form" className="max-w-3xl mx-auto scroll-mt-24">
                     <div className="text-center space-y-4 mb-8">
                         <h2 className="text-3xl md:text-4xl font-bold">Send a Message</h2>
                         <p className="text-muted-foreground">

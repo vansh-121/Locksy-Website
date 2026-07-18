@@ -6,13 +6,14 @@
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://locksy.vercel.app)
 [![Version](https://img.shields.io/badge/version-2.5.0-blue)](https://github.com/vansh-121/Locksy)
 
-Official landing page for **Locksy** — A powerful browser extension that provides military-grade tab protection with PBKDF2 encryption (600,000 iterations, OWASP 2023 compliant). Now featuring Right-Click Context Menus, Stealth Mode, and a persistent Light/Dark Theme Toggle.
+Official landing page for **Locksy** — A powerful browser extension that provides military-grade tab protection with PBKDF2 encryption (600,000 iterations, OWASP 2023 compliant). Now featuring a Sleek UI Redesign, Weekly Privacy Reports, Startup Session Lock, and Webcam Intruder Detection.
 
-## 🚀 What's New in v2.5.0
+## 🚀 What's New in v3.0.0
 
-- 🖱️ **Right-Click Context Menus** — Lock tabs, domains, or all tabs from the right-click menu on any page, link, image, or selected text
-- 🕵️ **Stealth Mode** — Make Locksy completely undetectable: badge counter vanishes, notifications go silent, lock screen disguised as a "This site can't be reached" error
-- 🎨 **Light / Dark Theme Toggle** — Persistent two-state theme switcher built into the popup header, syncs across all Locksy pages instantly
+- 🎨 **Sleek Tabbed App Shell** — Fluid glassmorphism dashboard in your browser
+- 📊 **Weekly Privacy Reports** — Track security score, blocked snoopers & locks history
+- 🚀 **Startup Session Lock** — Lock restored tabs instantly on browser launch
+- 📸 **Webcam Intruder Detection** — Capture local-only webcam photos on failed unlock attempts
 
 ## 🔒 Security Features
 
@@ -54,7 +55,7 @@ Official landing page for **Locksy** — A powerful browser extension that provi
 ## 🌐 Website Sections
 
 - **Hero** — Eye-catching introduction with download buttons for all major browsers
-- **What's New v2.5.0** — Interactive demos for Context Menus, Stealth Mode & Theme Toggle
+- **What's New v3.0.0** — Interactive demos for UI Redesign, Privacy Reports, Startup Lock & Intruder Detection
 - **Domain Lock** — Highlight persistent domain-level protection
 - **Problem Statement** — Explains why tab security matters with trust indicators
 - **Features** — 12+ feature cards showcasing capabilities
@@ -96,7 +97,6 @@ locksy-website/
 │   │   └── [slug]/              # Dynamic blog post routes
 │   ├── contact/                 # Contact page
 │   ├── feed.xml/                # RSS feed
-│   ├── newsletter/              # Newsletter subscription
 │   ├── privacy-policy/          # Privacy policy page
 │   ├── uninstall/               # Uninstall feedback page
 │   ├── verify/                  # Verification page
@@ -230,7 +230,7 @@ For security vulnerabilities, please report privately via GitHub Security Adviso
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under a proprietary license - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -244,7 +244,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - ⭐ 5-star rating on browser stores
 - 👥 5,000+ active users
 - 🌍 Available on Chrome, Edge, Firefox, Opera, Brave, Vivaldi
-- 📦 Version 2.5.0 — Context Menus, Stealth Mode & Theme Toggle
+- 📦 Version 3.0.0 — Privacy Reports, Startup Lock & Intruder Detection
 - 🔒 OWASP 2023 compliant encryption
 - 💯 100% privacy-focused (no data collection)
 - 📝 50+ SEO blog articles on browser security

@@ -167,7 +167,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative py-24 md:py-40 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
+    <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl animate-pulse" />
@@ -176,17 +176,17 @@ export default function Hero() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Left: Content */}
           <div className="space-y-10 z-10">
             {/* Badges */}
             <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
               <a
-                href="#whats-new-v250"
+                href="#whats-new-v300"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 <span>🚀</span>
-                WHAT'S NEW IN v2.5.0
+                WHAT'S NEW IN v3.0.0
               </a>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
@@ -205,7 +205,7 @@ export default function Hero() {
                 — Secure Your Tabs with Military-Grade Protection
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Password-protect any browser tab or lock entire domains with persistent protection. Now with right-click context menus, stealth mode, and a light/dark theme toggle.
+                Password-protect any browser tab or lock entire domains with persistent protection. Now featuring Weekly Privacy Reports, Startup Session Guarding, and automated Webcam Intruder Alerts.
               </p>
             </div>
 
@@ -317,7 +317,7 @@ export default function Hero() {
           </div>
 
           {/* Right: Logo/Image */}
-          <div className="flex justify-center md:justify-end items-start relative md:-mt-80 z-10">
+          <div className="flex justify-center md:justify-end items-start relative z-10 md:mt-12">
             <div className="relative flex items-center justify-center">
               {/* Glow effect behind logo */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-3xl opacity-30 dark:opacity-50 animate-pulse" />

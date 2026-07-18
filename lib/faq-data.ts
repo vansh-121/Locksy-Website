@@ -20,8 +20,8 @@ export const faqData: FAQItem[] = [
     answer: "Domain Lock lets you lock all tabs matching a domain pattern (like *.google.com or github.com). New tabs matching locked domains are automatically protected, and locks persist across browser restarts. You can manage unlock preferences for each domain.",
   },
   {
-    question: "Is Locksy really free?",
-    answer: "Yes, 100% free with no hidden fees, premium tiers, or subscriptions. It will always be free.",
+    question: "Is Locksy free to use?",
+    answer: "Yes! Locksy is free for core tab-locking, biometrics, right-click context menu locks, and local webcam captures. If you need advanced automation and controls like unlimited domain locking, startup session lock, stealth mode, custom timers, or weekly privacy reports, you can upgrade to Locksy Pro for a one-time lifetime purchase (no monthly subscriptions).",
   },
   {
     question: "Do I need to create an account?",
@@ -85,7 +85,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Is Locksy open source?",
-    answer: "Yes! Locksy is completely open source. You can inspect the code, contribute, or verify the security yourself on GitHub. Transparency is core to our privacy-first approach.",
+    answer: "No. Locksy is a proprietary browser extension. However, it operates with absolute privacy: 100% of the encryption, password verification, and logs run locally on your device. We have zero server communication and zero data collection, meaning your private data never leaves your computer.",
   },
   {
     question: "How do I customize keyboard shortcuts?",
@@ -102,5 +102,25 @@ export const faqData: FAQItem[] = [
   {
     question: "Can I switch between light and dark themes?",
     answer: "Yes! Locksy v2.5.0 includes a persistent theme toggle in the popup header. Choose between Light ☀️ and Dark 🌙 modes — your preference syncs instantly across all Locksy pages (including the lock screen) without a page reload and is remembered across sessions.",
+  },
+  {
+    question: "What are Custom Lock Screen Messages?",
+    answer: "Custom Lock Screen Messages (available in Locksy Pro) allow you to display personal notes, reminders, or warning messages directly on the lock screen overlay. This is ideal for leaving notes for co-workers, setting custom security warnings, or specifying instructions for shared device users.",
+  },
+  {
+    question: "How does Webcam Intruder Capture work?",
+    answer: "Locksy automatically logs and captures local-only webcam snapshots of anyone attempting to access your protected tabs after three failed password entry attempts. These snapshots are saved 100% locally in your browser sandbox and can be viewed or deleted securely from your Intruder Log viewer.",
+  },
+  {
+    question: "What is 1-Click Unlock All?",
+    answer: "With 1-Click Unlock All, you can unlock all currently locked tabs simultaneously by entering your master password just once. Instead of entering your password on every tab, this feature saves you time when resuming your work session.",
+  },
+  {
+    question: "What is Startup Session Lock?",
+    answer: "Startup Session Lock instantly locks all tabs from your previous browsing session as soon as you launch your browser. It includes a 15-second catch-up window to guard against delayed tab loading, ensuring snoopers cannot see your restored tabs during startup.",
+  },
+  {
+    question: "What are Weekly Privacy Reports?",
+    answer: "Weekly Privacy Reports are generated completely offline and stored locally. They provide a detailed dashboard showing your lock/unlock history, failed snooper attempts, and calculates a personalized Security Health Score to help you keep track of your browser's security status.",
   },
 ]
