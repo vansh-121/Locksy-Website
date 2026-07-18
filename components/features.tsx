@@ -61,6 +61,24 @@ export default function Features() {
       gradient: "from-cyan-500 to-violet-500",
     },
     {
+      icon: "📸",
+      title: "Webcam Intruder Capture (v2.6.0)",
+      desc: "Silently captures a local-only webcam snapshot of snoopers trying to guess your password. Dedicated log page lets you review attempt histories and delete photos safely.",
+      gradient: "from-rose-500 to-red-500",
+    },
+    {
+      icon: "🚀",
+      title: "Startup Session Lock (v2.7.0)",
+      desc: "Automatically lock all active session tabs instantly on browser launch. Smart 15-second catch-up window locks delayed session restorations.",
+      gradient: "from-amber-500 to-yellow-500",
+    },
+    {
+      icon: "📊",
+      title: "Weekly Privacy Reports (v3.0.0)",
+      desc: "Local metrics dashboard tracking locks history, failed snooper attempts, and active security scores. 100% private and generated completely offline.",
+      gradient: "from-violet-600 to-indigo-600",
+    },
+    {
       icon: "🔒",
       title: "PBKDF2 Key Derivation",
       desc: "600k iterations with SHA-256 - OWASP 2023 compliant. Military-grade password hashing with 120 years crack resistance.",

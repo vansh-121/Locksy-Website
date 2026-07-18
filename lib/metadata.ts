@@ -167,7 +167,7 @@ export const jsonLdSoftwareApplication = {
         priceCurrency: 'USD'
     },
     description: siteDescription,
-    softwareVersion: '2.5.0',
+    softwareVersion: '3.0.0',
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
     featureList: [
@@ -188,7 +188,11 @@ export const jsonLdSoftwareApplication = {
         'Right-click context menus for instant tab locking',
         'Stealth Mode — disguise locked tabs as connection errors',
         'Persistent light/dark theme toggle',
-        'Free forever'
+        'Startup Lock — automatically lock restored tabs on launch',
+        'Weekly Privacy Reports with Security Health Score dashboard',
+        'Custom lock screen warning messages',
+        'Real-time intruder alerts',
+        'Free core with Pro upgrade option'
     ]
 }
 

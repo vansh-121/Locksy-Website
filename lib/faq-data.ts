@@ -20,8 +20,8 @@ export const faqData: FAQItem[] = [
     answer: "Domain Lock lets you lock all tabs matching a domain pattern (like *.google.com or github.com). New tabs matching locked domains are automatically protected, and locks persist across browser restarts. You can manage unlock preferences for each domain.",
   },
   {
-    question: "Is Locksy really free?",
-    answer: "Yes, 100% free with no hidden fees, premium tiers, or subscriptions. It will always be free.",
+    question: "Is Locksy free to use?",
+    answer: "Yes! Locksy is free for core tab-locking, biometrics, right-click context menu locks, and local webcam captures. If you need advanced automation and controls like unlimited domain locking, startup session lock, stealth mode, custom timers, or weekly privacy reports, you can upgrade to Locksy Pro for a one-time lifetime purchase (no monthly subscriptions).",
   },
   {
     question: "Do I need to create an account?",
@@ -85,7 +85,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Is Locksy open source?",
-    answer: "Yes! Locksy is completely open source. You can inspect the code, contribute, or verify the security yourself on GitHub. Transparency is core to our privacy-first approach.",
+    answer: "Yes! Locksy's core security mechanisms (password hashing, biometric WebAuthn verification, right-click locking, local webcam capture) are 100% open source. You can audit all extension files directly on your local device. Premium convenience features like Reports and Startup Lock are proprietary and part of our Pro version.",
   },
   {
     question: "How do I customize keyboard shortcuts?",

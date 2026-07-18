@@ -159,12 +159,6 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/newsletter" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Newsletter
-                </a>
-              </li>
-              <li>
                 <a href="/blog" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Blog
@@ -256,12 +250,6 @@ export default function Footer() {
                 >
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Sponsor Project ♥
-                </a>
-              </li>
-              <li>
-                <a href="/newsletter" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Newsletter Updates
                 </a>
               </li>
             </ul>

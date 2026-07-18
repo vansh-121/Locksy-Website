@@ -182,11 +182,11 @@ export default function Hero() {
             {/* Badges */}
             <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
               <a
-                href="#whats-new-v250"
+                href="#whats-new-v300"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 <span>🚀</span>
-                WHAT'S NEW IN v2.5.0
+                WHAT'S NEW IN v3.0.0
               </a>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
@@ -205,7 +205,7 @@ export default function Hero() {
                 — Secure Your Tabs with Military-Grade Protection
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Password-protect any browser tab or lock entire domains with persistent protection. Now with right-click context menus, stealth mode, and a light/dark theme toggle.
+                Password-protect any browser tab or lock entire domains with persistent protection. Now featuring Weekly Privacy Reports, Startup Session Guarding, and automated Webcam Intruder Alerts.
               </p>
             </div>
 
