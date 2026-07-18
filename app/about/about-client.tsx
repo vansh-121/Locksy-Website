@@ -26,14 +26,14 @@ const VALUES = [
     },
     {
         icon: Code2,
-        title: "Open Source",
-        desc: "Full transparency. The entire codebase is public on GitHub so anyone can audit, verify, and contribute.",
+        title: "100% Local",
+        desc: "Complete privacy. All encryption keys, databases, and logs stay strictly inside your browser sandbox.",
         color: "from-purple-500 to-indigo-500",
     },
     {
         icon: Heart,
-        title: "Free Forever",
-        desc: "No premium tiers, no subscriptions, no ads in the extension. Locksy is and always will be completely free.",
+        title: "Free Core Tier",
+        desc: "Start for free without ads. Enjoy basic tab protection, and optionally upgrade to Pro for advanced features.",
         color: "from-rose-500 to-pink-500",
     },
     {
@@ -78,8 +78,8 @@ export default function AboutClient() {
                                     </span>
                                 </h1>
                                 <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                                    A free, open-source browser extension built to give you complete control over your tab privacy.
-                                    No compromises, no tracking, no cost.
+                                    A powerful browser extension built to give you complete control over your tab privacy.
+                                    No compromises, no tracking, and 100% offline.
                                 </p>
                             </div>
                         </div>

@@ -416,7 +416,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                             <CardHeader className="text-center pt-10">
                                 <CardTitle className="text-3xl font-bold">Ready to Secure Your Browser Tabs?</CardTitle>
                                 <CardDescription className="text-base max-w-xl mx-auto">
-                                    Get started with Locksy today — free, open-source, and trusted by thousands
+                                    Get started with Locksy today — free core version, trusted by thousands
                                 </CardDescription>
                             </CardHeader>
                             <CardContent className="flex flex-col sm:flex-row justify-center gap-4 pb-10 px-8">

@@ -85,7 +85,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Is Locksy open source?",
-    answer: "Yes! Locksy's core security mechanisms (password hashing, biometric WebAuthn verification, right-click locking, local webcam capture) are 100% open source. You can audit all extension files directly on your local device. Premium convenience features like Reports and Startup Lock are proprietary and part of our Pro version.",
+    answer: "No. Locksy is a proprietary browser extension. However, it operates with absolute privacy: 100% of the encryption, password verification, and logs run locally on your device. We have zero server communication and zero data collection, meaning your private data never leaves your computer.",
   },
   {
     question: "How do I customize keyboard shortcuts?",

@@ -79,6 +79,24 @@ export default function Features() {
       gradient: "from-violet-600 to-indigo-600",
     },
     {
+      icon: "💬",
+      title: "Custom Lock Screen Messages (v2.6.0)",
+      desc: "Display personalized notes, reminders, or warning messages directly on the lock screen overlay to deter snoopers.",
+      gradient: "from-teal-500 to-emerald-500",
+    },
+    {
+      icon: "🔓",
+      title: "1-Click Unlock All (v2.7.0)",
+      desc: "Unlock all currently protected tabs simultaneously by entering your master password once. Perfect for quick workflow resumption.",
+      gradient: "from-amber-500 to-orange-500",
+    },
+    {
+      icon: "🚨",
+      title: "Real-Time Intruder Alerts",
+      desc: "Get instant browser notifications and visual warnings on the lock screen when someone attempts to access protected tabs.",
+      gradient: "from-rose-500 to-red-500",
+    },
+    {
       icon: "🔒",
       title: "PBKDF2 Key Derivation",
       desc: "600k iterations with SHA-256 - OWASP 2023 compliant. Military-grade password hashing with 120 years crack resistance.",

@@ -44,9 +44,9 @@ const COOKIE_TYPES = [
         name: "Advertising Cookies",
         required: false,
         color: "from-rose-500 to-pink-500",
-        description: "We may display non-intrusive advertisements through the Google AdSense network to support the ongoing development and maintenance of Locksy as a free, open-source project. These advertising cookies are managed by Google and are used to show you relevant ads based on your browsing interests. You can opt out of personalized advertising at any time.",
+        description: "We may display non-intrusive advertisements through the Google AdSense network to support the ongoing development and maintenance of Locksy. These advertising cookies are managed by Google and are used to show you relevant ads based on your browsing interests. You can opt out of personalized advertising at any time.",
         examples: [
-            { name: "Google AdSense", purpose: "Display relevant advertisements to support the free project", duration: "Varies", provider: "Google" },
+            { name: "Google AdSense", purpose: "Display relevant advertisements to support the project", duration: "Varies", provider: "Google" },
         ]
     }
 ]

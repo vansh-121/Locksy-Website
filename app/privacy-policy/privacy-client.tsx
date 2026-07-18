@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Shield, Lock, CheckCircle, XCircle, Github, ArrowLeft, Database, Eye, AlertTriangle, FileText, Globe, Trash2 } from "lucide-react"
+import { Shield, Lock, CheckCircle, XCircle, ArrowLeft, Database, Eye, AlertTriangle, FileText, Globe, Trash2 } from "lucide-react"
 
 interface PrivacyPolicyClientProps {
     lastUpdated: string
@@ -72,7 +72,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                         "PBKDF2 with 600k iterations",
                                         "Zero tracking or analytics",
                                         "No third-party services",
-                                        "Open source & verifiable"
+                                        "Local & Verifiable Security"
                                     ].map((item, idx) => (
                                         <div key={idx} className="flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-xl p-4">
                                             <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
@@ -464,26 +464,23 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                         </div>
                     </div>
 
-                    {/* Open Source */}
-                    <div className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border-2 border-purple-500/20 rounded-3xl p-10 md:p-12">
+                    {/* Local Verification */}
+                    <div className="bg-gradient-to-br from-violet-500/10 to-blue-500/10 border-2 border-violet-500/20 rounded-3xl p-10 md:p-12">
                         <div className="flex flex-col md:flex-row items-center gap-8">
-                            <Github className="h-24 w-24 text-foreground flex-shrink-0" />
+                            <Shield className="h-24 w-24 text-foreground flex-shrink-0" />
                             <div className="flex-1 text-center md:text-left">
                                 <h2 className="text-3xl md:text-4xl font-black mb-4">
-                                    Open Source & Verifiable
+                                    Local & Verifiable Security
                                 </h2>
                                 <p className="text-lg text-muted-foreground mb-6">
-                                    Don't take our word for it. Review our source code, audit our security, and verify every claim we make.
+                                    Don't take our word for it. Review network request logs in your browser's developer console to verify that zero external communication is initiated by the extension.
                                 </p>
-                                <a
-                                    href="https://github.com/vansh-121/Locksy"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <Link
+                                    href="/contact"
                                     className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all hover:scale-105 font-bold text-lg"
                                 >
-                                    <Github className="h-6 w-6" />
-                                    View Source Code
-                                </a>
+                                    Contact Support
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -576,19 +573,13 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                             <Link href="/" className="hover:text-primary transition-colors">
                                 Home
                             </Link>
-                            <a
-                                href="https://github.com/vansh-121/Locksy"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-primary transition-colors flex items-center gap-2"
-                            >
-                                <Github className="h-4 w-4" />
-                                GitHub
-                            </a>
+                            <Link href="/contact" className="hover:text-primary transition-colors">
+                                Contact
+                            </Link>
                         </div>
                     </div>
                     <div className="mt-8 text-center text-sm text-muted-foreground">
-                        <p>© 2025 Locksy. Open source and privacy-focused.</p>
+                        <p>© 2026 Locksy. Privacy-focused tab protection.</p>
                     </div>
                 </div>
             </footer>

@@ -2,8 +2,7 @@ export default function Security() {
   const guarantees = [
     { icon: "✓", title: "No Account Required", desc: "Start using Locksy immediately without sign-up" },
     { icon: "✓", title: "Zero Data Collection", desc: "We never see, store, or transmit your browsing data" },
-    // { icon: "✓", title: "Local Storage Only", desc: "Everything stays on your device, under your control" },
-    { icon: "✓", title: "Open Source Code", desc: "Inspect the code yourself on GitHub" },
+    { icon: "✓", title: "Local Processing", desc: "All encryption and logic run entirely within your local browser sandbox" },
     { icon: "✓", title: "PBKDF2 with 600k Iterations", desc: "120 years crack resistance with timing attack protection" },
     { icon: "✓", title: "Rate Limiting & Brute-Force Protection", desc: "Advanced protection against automated cracking attempts" },
     { icon: "✓", title: "No Admin Backdoors", desc: "Only you can unlock your tabs" },
@@ -35,14 +34,6 @@ export default function Security() {
 
         <div className="text-center">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://github.com/vansh-121/Locksy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary inline-block"
-            >
-              View Full Source Code
-            </a>
             <a
               href="/privacy-policy"
               className="btn-secondary inline-block"

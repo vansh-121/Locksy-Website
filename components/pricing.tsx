@@ -50,7 +50,7 @@ export default function Pricing() {
             <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">Protection</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Start with our powerful open-source core for free, or unlock the ultimate privacy suite with a one-time lifetime license.
+            Start with our powerful core features for free, or unlock the ultimate privacy suite with a one-time lifetime license.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function Pricing() {
             <div>
               <div className="flex items-center justify-between mb-8">
                 <span className="text-xl font-black text-foreground tracking-tight">Free Core</span>
-                <span className="text-xs px-3 py-1.5 bg-muted text-muted-foreground rounded-full font-bold uppercase tracking-wider">Open Source</span>
+                <span className="text-xs px-3 py-1.5 bg-muted text-muted-foreground rounded-full font-bold uppercase tracking-wider">Free Tier</span>
               </div>
               <div className="mb-8">
                 <div className="flex items-baseline gap-2">
