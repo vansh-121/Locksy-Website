@@ -4,6 +4,7 @@ import AutomationFeatures from "@/components/automation-features"
 import DomainLock from "@/components/domain-lock"
 import BiometricUnlock from "@/components/biometric-unlock"
 import WhatsNewV300 from "@/components/whats-new-v300"
+import WhatsNewV250 from "@/components/whats-new-v250"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
 import KeyboardShortcuts from "@/components/keyboard-shortcuts"
@@ -58,6 +59,9 @@ export default function Home() {
 
           {/* NEW v3.0.0 — Redesigned UI Shell, Reports, Startup Lock & Webcam snaps */}
           <WhatsNewV300 />
+
+          {/* NEW v2.5.0 — Stealth Mode & Context Menus */}
+          <WhatsNewV250 />
 
           {/* Another major feature - Domain Lock */}
           <div id="domain-lock">
