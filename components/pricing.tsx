@@ -121,7 +121,7 @@ export default function Pricing() {
               </div>
               <div className="mb-8">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl md:text-7xl font-black text-foreground tracking-tighter">$4.99</span>
+                  <span className="text-5xl md:text-7xl font-black text-foreground tracking-tighter">$2.99</span>
                 </div>
                 <p className="text-violet-600 dark:text-violet-400 mt-2 font-bold">One-time payment. Yours forever.</p>
               </div>
