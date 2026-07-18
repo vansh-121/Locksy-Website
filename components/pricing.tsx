@@ -24,7 +24,10 @@ export default function Pricing() {
     { title: "Max 5 Biometric prompts", desc: "Up to 5 fingerprint or face unlocks per day", icon: <Fingerprint className="w-4 h-4" /> },
     { title: "Max 3 Webcam captures", desc: "Store up to 3 local snooper snapshots", icon: <Camera className="w-4 h-4" /> },
     { title: "Preset Timers Only", desc: "Choose from 5, 15, 30, or 60 minute presets", icon: <Clock className="w-4 h-4" /> },
-    { title: "No Stealth or Reports", desc: "No connection-error disguise or weekly reports dashboard", icon: <EyeOff className="w-4 h-4" /> },
+    { title: "Default Hotkey locking", desc: "Alt+Shift+9 shortcut to lock active tab instantly", icon: <Key className="w-4 h-4" /> },
+    { title: "Incognito Window Support", desc: "Full protection in private browsing mode", icon: <EyeOff className="w-4 h-4" /> },
+    { title: "Offline Local Processing", desc: "Encryption keys never leave your machine", icon: <ShieldCheck className="w-4 h-4" /> },
+    { title: "No Custom Messages/Reports", desc: "Upgrade to Pro for custom messages & reports", icon: <ShieldAlert className="w-4 h-4" /> },
   ]
 
   return (
@@ -89,14 +92,14 @@ export default function Pricing() {
             </div>
 
             <div className="mt-10">
-              <a
-                href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-4 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center block transition-all duration-300 transform active:scale-[0.98]"
+              <button
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("open-install-dropdown"));
+                }}
+                className="w-full py-4 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center block transition-all duration-300 transform active:scale-[0.98] cursor-pointer"
               >
                 Download Free Version
-              </a>
+              </button>
             </div>
           </div>
 
@@ -129,7 +132,7 @@ export default function Pricing() {
               <ul className="space-y-5">
                 {proFeatures.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-4">
-                    <div className="mt-0.5 p-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-violet-500 group-hover:to-fuchsia-500 group-hover:text-white transition-all duration-300 shadow-sm shadow-violet-500/10">
+                    <div className="mt-0.5 p-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-violet-500 group-hover:to-fuchsia-500 group-hover:text-white dark:group-hover:text-white transition-all duration-300 shadow-sm shadow-violet-500/10">
                       {item.icon}
                     </div>
                     <div>
@@ -143,7 +146,7 @@ export default function Pricing() {
 
             <div className="mt-10 space-y-4 relative z-10">
               <a
-                href="https://polar.sh/checkout/polar_c_ZdeCgbSo8tHsDZdh1AuiZ7jsmDI1CltQcE3PC1KOXG7"
+                href="https://polar.sh/checkout/polar_c_OTox50GTbSmPF7u4gj2uChIxZwJ1CvvJkzyW40ECxM7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative w-full py-4 bg-foreground text-background font-black rounded-2xl text-center block overflow-hidden transform transition-all duration-300 active:scale-[0.98] group/btn hover:shadow-xl hover:shadow-violet-500/20"

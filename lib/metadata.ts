@@ -192,6 +192,7 @@ export const jsonLdSoftwareApplication = {
         'Weekly Privacy Reports with Security Health Score dashboard',
         'Custom lock screen warning messages',
         'Real-time intruder alerts',
+        '1-Click Unlock All Tabs simultaneously',
         'Free core with Pro upgrade option'
     ]
 }

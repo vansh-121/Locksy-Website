@@ -39,6 +39,9 @@ export default function Home() {
           {/* 5000+ users milestone celebration */}
           <MilestoneBanner />
 
+          {/* Pricing cards & plans */}
+          <Pricing />
+
           {/* Establish the problem first */}
           <ProblemStatement />
 
@@ -75,9 +78,6 @@ export default function Home() {
 
           {/* Social proof */}
           <Testimonials />
-
-          {/* Pricing cards & plans */}
-          <Pricing />
 
           {/* Handle objections and questions */}
           <FAQ />

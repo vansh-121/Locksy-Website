@@ -61,6 +61,15 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleOpenDropdown = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      setShowDownloadDropdown(true)
+    }
+    window.addEventListener("open-install-dropdown", handleOpenDropdown)
+    return () => window.removeEventListener("open-install-dropdown", handleOpenDropdown)
+  }, [])
+
   // Click outside handler for dropdown
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

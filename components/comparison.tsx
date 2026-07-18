@@ -159,22 +159,14 @@ export default function Comparison() {
                   <tbody>
                     {[
                       ["Lock Individual Tabs", true, false, false],
-                      ["Domain Lock", true, false, false],
-                      ["Keyboard Shortcuts", true, false, false],
-                      // ["Right-Click Context Menus", true, false, false],
-                      ["Stealth Mode", true, false, false],
-                      // ["Light / Dark Theme", true, false, false],
-                      // ["Visual Lock Indicators", true, false, false],
-                      // ["One-Click Operation", true, false, false],
-                      // ["Smart Unlock Preferences", true, false, false],
-                      ["PBKDF2 Encryption", true, false, false],
-                      ["Brute-Force Protection", true, false, false],
-                      ["8+ Security Layers", true, false, false],
-                      ["No Account Required", true, true, false],
-                      ["100% Offline", true, true, false],
-                      ["Incognito Support", true, true, false],
-                      // ["Ultra Lightweight", true, false, false],
-                      ["Free Forever", true, true, false],
+                      ["Domain Auto-Locks", true, false, false],
+                      ["Startup Session Lock", true, false, false],
+                      ["Stealth Mode Disguise", true, false, false],
+                      ["Webcam Intruder Capture", true, false, false],
+                      ["Custom Lock Screen Messages", true, false, false],
+                      ["Weekly Privacy Reports", true, false, false],
+                      ["Biometric Unlock (WebAuthn)", true, false, false],
+                      ["PBKDF2 Hashing (600k iterations)", true, false, false],
                     ].map((row, idx) => (
                       <tr key={idx} className="border-b border-border/50 hover:bg-accent/30 transition-colors">
                         <td className="py-4 px-4 md:px-6 font-medium">{row[0]}</td>

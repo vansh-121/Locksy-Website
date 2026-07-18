@@ -103,4 +103,24 @@ export const faqData: FAQItem[] = [
     question: "Can I switch between light and dark themes?",
     answer: "Yes! Locksy v2.5.0 includes a persistent theme toggle in the popup header. Choose between Light ☀️ and Dark 🌙 modes — your preference syncs instantly across all Locksy pages (including the lock screen) without a page reload and is remembered across sessions.",
   },
+  {
+    question: "What are Custom Lock Screen Messages?",
+    answer: "Custom Lock Screen Messages (available in Locksy Pro) allow you to display personal notes, reminders, or warning messages directly on the lock screen overlay. This is ideal for leaving notes for co-workers, setting custom security warnings, or specifying instructions for shared device users.",
+  },
+  {
+    question: "How does Webcam Intruder Capture work?",
+    answer: "Locksy automatically logs and captures local-only webcam snapshots of anyone attempting to access your protected tabs after three failed password entry attempts. These snapshots are saved 100% locally in your browser sandbox and can be viewed or deleted securely from your Intruder Log viewer.",
+  },
+  {
+    question: "What is 1-Click Unlock All?",
+    answer: "With 1-Click Unlock All, you can unlock all currently locked tabs simultaneously by entering your master password just once. Instead of entering your password on every tab, this feature saves you time when resuming your work session.",
+  },
+  {
+    question: "What is Startup Session Lock?",
+    answer: "Startup Session Lock instantly locks all tabs from your previous browsing session as soon as you launch your browser. It includes a 15-second catch-up window to guard against delayed tab loading, ensuring snoopers cannot see your restored tabs during startup.",
+  },
+  {
+    question: "What are Weekly Privacy Reports?",
+    answer: "Weekly Privacy Reports are generated completely offline and stored locally. They provide a detailed dashboard showing your lock/unlock history, failed snooper attempts, and calculates a personalized Security Health Score to help you keep track of your browser's security status.",
+  },
 ]
