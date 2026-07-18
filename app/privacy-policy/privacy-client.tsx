@@ -11,7 +11,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
     return (
         <>
             <div className="min-h-screen">
-            <header className="sticky top-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5">
+            <header className="sticky top-0 z-50 transition-all duration-300 bg-white/80 dark:bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5">
                 <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
                     <Link href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
                         <div className="relative">
@@ -74,7 +74,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                         "No third-party services",
                                         "Local & Verifiable Security"
                                     ].map((item, idx) => (
-                                        <div key={idx} className="flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-xl p-4">
+                                        <div key={idx} className="flex items-center gap-3 bg-white/80 dark:bg-card/80 backdrop-blur-sm rounded-xl p-4">
                                             <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
                                             <span className="font-semibold text-sm">{item}</span>
                                         </div>
