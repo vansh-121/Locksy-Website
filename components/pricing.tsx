@@ -72,7 +72,7 @@ export default function Pricing() {
                 </div>
                 <p className="text-muted-foreground mt-2 font-medium">Free forever, no credit card required.</p>
               </div>
-              
+
               <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-8" />
 
               {/* Checklist */}
@@ -105,7 +105,7 @@ export default function Pricing() {
 
           {/* PRO PLAN */}
           <div className="group relative flex flex-col justify-between bg-card/60 backdrop-blur-2xl rounded-[2.5rem] border border-violet-500/30 p-8 md:p-10 shadow-[0_0_40px_rgba(139,92,246,0.1)] hover:shadow-[0_0_60px_rgba(139,92,246,0.2)] transition-all duration-500 transform lg:scale-105 hover:-translate-y-2 z-10 overflow-hidden">
-            
+
             {/* Animated Glow Effect */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-fuchsia-500/5 to-cyan-500/5 pointer-events-none" />
@@ -146,7 +146,7 @@ export default function Pricing() {
 
             <div className="mt-10 space-y-4 relative z-10">
               <a
-                href="https://polar.sh/checkout/polar_c_OTox50GTbSmPF7u4gj2uChIxZwJ1CvvJkzyW40ECxM7"
+                href="https://buy.polar.sh/polar_cl_h8dabKldTUY7gf2g9MfFicCSIn0Ghc34SadGc3xl1cI"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative w-full py-4 bg-foreground text-background font-black rounded-2xl text-center block overflow-hidden transform transition-all duration-300 active:scale-[0.98] group/btn hover:shadow-xl hover:shadow-violet-500/20"
