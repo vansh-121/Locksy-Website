@@ -167,7 +167,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative py-24 md:py-40 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
+    <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl animate-pulse" />
@@ -176,7 +176,7 @@ export default function Hero() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Left: Content */}
           <div className="space-y-10 z-10">
             {/* Badges */}
@@ -317,7 +317,7 @@ export default function Hero() {
           </div>
 
           {/* Right: Logo/Image */}
-          <div className="flex justify-center md:justify-end items-start relative md:-mt-80 z-10">
+          <div className="flex justify-center md:justify-end items-start relative z-10 md:mt-12">
             <div className="relative flex items-center justify-center">
               {/* Glow effect behind logo */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-3xl opacity-30 dark:opacity-50 animate-pulse" />
