@@ -24,10 +24,10 @@ export const blogPosts: BlogPost[] = allPosts as BlogPost[]
 // appear in listing pages, homepage, category filters, or the sitemap.
 export const NOINDEX_SLUGS = new Set<string>([])
 
-// Filtered posts — used for blog listing, homepage, categories, tags, etc.
-export const filteredBlogPosts: BlogPost[] = blogPosts.filter(
-    post => !NOINDEX_SLUGS.has(post.slug)
-)
+// Filtered posts — sorted by publishDate descending (latest first)
+export const filteredBlogPosts: BlogPost[] = blogPosts
+    .filter(post => !NOINDEX_SLUGS.has(post.slug))
+    .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
 
 // Helper function to get a single blog post by slug
 export function getBlogPost(slug: string): BlogPost | undefined {

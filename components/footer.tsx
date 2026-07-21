@@ -103,9 +103,21 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
+                <a href="/tools" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Free Security Tools
+                </a>
+              </li>
+              <li>
                 <a href="/security" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Security
+                </a>
+              </li>
+              <li>
+                <a href="/contact" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Contact Us
                 </a>
               </li>
               <li>

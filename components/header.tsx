@@ -138,17 +138,17 @@ export default function Header() {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
+            href="/tools"
+            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
+          >
+            Tools
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
+          </a>
+          <a
             href="/blog"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
             Blog
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a
-            href="/contact"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            Contact
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           {/* <a
@@ -239,8 +239,15 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile: Theme Toggle + Menu Toggle */}
+        {/* Mobile: Theme Toggle + Get Pro + Menu Toggle */}
         <div className="lg:hidden flex items-center gap-2">
+          <a
+            href="/#pricing"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
+          >
+            <span>💎</span>
+            <span>Get Pro</span>
+          </a>
           <ThemeToggle />
           <button
             className="p-2 rounded-lg hover:bg-accent transition-colors flex-shrink-0"
@@ -261,7 +268,7 @@ export default function Header() {
           <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-xl lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
             <div className="flex flex-col p-6">
               {/* Navigation Section */}
-              <div className="space-y-1 mb-4">
+              <div className="space-y-1 mb-2">
                 <a
                   href="/#features"
                   className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
@@ -291,6 +298,13 @@ export default function Header() {
                   FAQ
                 </a>
                 <a
+                  href="/tools"
+                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Tools
+                </a>
+                <a
                   href="/blog"
                   className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
                   onClick={() => setIsMenuOpen(false)}
@@ -307,10 +321,17 @@ export default function Header() {
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-border/50 my-4" />
+              <div className="h-px bg-border/50 my-2" />
 
               {/* CTA Section */}
-              <div className="space-y-3 mb-4">
+              <div className="space-y-2.5 mb-2">
+                <a
+                  href="/#pricing"
+                  className="flex items-center justify-center gap-2 p-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg transition-all"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span>💎</span> Get Pro
+                </a>
                 <a
                   href="https://github.com/sponsors/vansh-121"
                   target="_blank"
