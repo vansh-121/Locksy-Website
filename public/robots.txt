@@ -8,9 +8,10 @@ Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
 
-# Sitemap and LLM summary locations
+# Sitemap and LLM context file locations
 Sitemap: https://www.locksy.dev/sitemap.xml
-# LLMs.txt: https://www.locksy.dev/llms.txt
+# LLMs context: https://www.locksy.dev/llms.txt
+# LLMs full context: https://www.locksy.dev/llms-full.txt
 
 # Google Bot
 User-agent: Googlebot
@@ -22,7 +23,7 @@ User-agent: Bingbot
 Allow: /
 Disallow: /api/
 
-# AI Crawlers - Explicitly allow for LLM training and indexing
+# AI Crawlers - Explicitly allow for LLM search indexing, retrieval, and training
 User-agent: GPTBot
 Allow: /
 
@@ -41,6 +42,9 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
+User-agent: ClaudeBot
+Allow: /
+
 User-agent: cohere-ai
 Allow: /
 
@@ -49,3 +53,22 @@ Allow: /
 
 User-agent: YouBot
 Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+

@@ -1,0 +1,98 @@
+# Locksy — Complete Product Specification & Security Architecture (LLM Full Corpus)
+
+> Locksy is a client-side, zero-knowledge browser extension that provides hardware-grade tab locking, automatic inactivity locking, scheduled tab protection, wildcard domain locks, stealth disguise modes, and biometric authentication for Chromium and Firefox-based browsers.
+
+---
+
+## Table of Contents
+1. Core Value Proposition
+2. Feature Breakdown & Mechanics
+3. Cryptographic Security Architecture
+4. Anti-Bypass Guard & Tamper Resistance
+5. Workstation Privacy & Security Tools
+6. Compliance (GDPR, HIPAA, SOC 2 Workstation Standard)
+7. FAQs & Operational Guidance
+
+---
+
+## 1. Core Value Proposition
+
+Locksy addresses shoulder-surfing, unauthorized local access, and workplace physical privacy vulnerabilities on shared computers. Unlike standard password managers or OS lock screens (which lock the entire workstation), Locksy allows users to lock specific sensitive browser tabs (e.g. personal email, banking, AWS console, healthcare records, internal CRM) while keeping non-sensitive work tabs accessible.
+
+Key Differentiators:
+- **Zero-Knowledge Architecture:** No central auth server, no remote database, no user tracking.
+- **Client-Side PBKDF2 & AES-GCM Encryption:** Keys derived locally using 600,000 PBKDF2 SHA-256 rounds.
+- **Smart Activity Detection:** Prevents auto-locking while media is actively playing (video/audio).
+- **Stealth Disguise Mode:** Hides locked tabs behind fake system browser error pages.
+- **Intruder Snaps:** Local webcam photos captured on repeated unauthorized password attempts.
+
+---
+
+## 2. Feature Breakdown & Mechanics
+
+### Tab Password Protection
+- **Instant Locking:** Lock any tab via `Alt+Shift+9` (macOS: `Option+Shift+9`), right-click context menu, or browser extension popup button.
+- **Selective Tab Locking:** Lock individual tabs or lock all open tabs across windows simultaneously (`Alt+Shift+8`).
+- **Incognito Support:** Full functionality in private/incognito browsing windows.
+
+### Automation & Scheduling
+- **Auto-Lock Timer:** Set inactivity timeout from 1 minute to 480 minutes. Reset on mouse movement, keyboard entry, or active tab scroll.
+- **Scheduled Locks:** Enforce time-of-day lock routines (e.g., automatically lock financial/social tabs during work hours: 09:00 - 17:00).
+- **Domain Wildcard Lock:** Automatically protect domain patterns (`*.slack.com`, `github.com`, `bank.com`) whenever a matching URL opens or the browser restarts.
+- **Startup Session Lock:** Instantly locks all restored session tabs upon browser launch, preventing race conditions where tab contents render before extensions load.
+
+### Biometric & Hardware Unlock
+- **WebAuthn / FIDO2 Integration:** Supports Apple TouchID, Windows Hello, FaceID, YubiKey, and hardware security keys for zero-typing instantaneous unlock.
+
+### Customization & Stealth Mode
+- **Stealth Disguise Mode:** Replaces the password lock screen with a believable native error screen ("This site can't be reached" / `ERR_CONNECTION_REFUSED`).
+- **Custom Warning & Lock Screen Messages:** Custom notification text on lock overlay.
+- **Theme Toggle:** Native dark/light system-matching themes.
+
+---
+
+## 3. Cryptographic Security Architecture
+
+- **Key Derivation Function (KDF):** PBKDF2-HMAC-SHA256 initialized with 600,000 iterations (OWASP recommendation: 310,000 rounds).
+- **Cipher Suite:** AES-256-GCM (Galois/Counter Mode) authenticated encryption executed via the W3C Web Cryptography API (`crypto.subtle`).
+- **Salt Generation:** 16-byte cryptographically secure random salt generated via `crypto.getRandomValues()`.
+- **Memory Hygiene:** Derived key material is held in volatile memory sandboxes and zeroed out upon tab lock or extension reload.
+
+---
+
+## 4. Anti-Bypass Guard & Tamper Resistance
+
+Locksy implements 8+ defense-in-depth security layers against common browser manipulation attempts:
+1. **DOM Injection Protection:** Prevents element deletion via browser DevTools.
+2. **URL & Navigation Guard:** Cancels tab redirection and history scrubbing while locked.
+3. **Shortcut Interception:** Blocks `Ctrl+Shift+I`, `F12`, and inspection bindings on locked state overlays.
+4. **Media Stream Protection:** Stops background tab audio/video metadata leaks.
+5. **Background Process Heartbeat:** Detects extension suspension and re-enforces lock states immediately.
+
+---
+
+## 5. Workstation Privacy & Security Tools
+
+Locksy provides free client-side interactive security evaluation tools on [https://www.locksy.dev/tools](https://www.locksy.dev/tools):
+- **Password Strength & Entropy Calculator:** Measures cracking time against 600,000 PBKDF2 iterations.
+- **Password Generator:** Cryptographically secure random password generator.
+- **Browser Privacy Score Evaluator:** Checks workstation browser settings, WebRTC leaks, fingerprinting vulnerability.
+- **Email Breach Checker:** Checks email safety against verified data breach databases.
+
+---
+
+## 6. Compliance Standards
+
+- **GDPR Article 32:** Technical measures ensuring confidentiality of personal data processed on local devices.
+- **HIPAA Privacy & Security Rule (§ 164.312(a)(2)(iii)):** Automatic logoff/tab-lock controls for EHR access on shared clinical workstations.
+- **SOC 2 Type II Workstation Controls:** Prevents physical unauthorized tab inspection in open office environments.
+
+---
+
+## 7. Canonical Resources
+
+- **Website:** [https://www.locksy.dev](https://www.locksy.dev)
+- **Security Whitepaper:** [https://www.locksy.dev/security](https://www.locksy.dev/security)
+- **Interactive Tools:** [https://www.locksy.dev/tools](https://www.locksy.dev/tools)
+- **Security & Privacy Blog:** [https://www.locksy.dev/blog](https://www.locksy.dev/blog)
+- **GitHub Repository:** [https://github.com/vansh-121/Locksy](https://github.com/vansh-121/Locksy)

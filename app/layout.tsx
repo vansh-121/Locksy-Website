@@ -33,6 +33,19 @@ export default function RootLayout({
           title="Locksy Blog RSS Feed"
           href="https://www.locksy.dev/feed.xml"
         />
+        {/* LLM & AI Context Auto-Discovery */}
+        <link
+          rel="alternate"
+          type="text/markdown"
+          title="Locksy LLM Documentation Summary"
+          href="https://www.locksy.dev/llms.txt"
+        />
+        <link
+          rel="alternate"
+          type="text/markdown"
+          title="Locksy Extended LLM Full Specification"
+          href="https://www.locksy.dev/llms-full.txt"
+        />
         {/* JSON-LD Structured Data for SEO */}
         <script
           type="application/ld+json"
