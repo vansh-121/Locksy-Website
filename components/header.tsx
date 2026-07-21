@@ -138,6 +138,13 @@ export default function Header() {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
+            href="/tools"
+            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
+          >
+            Free Tools
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
+          </a>
+          <a
             href="/blog"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
@@ -289,6 +296,13 @@ export default function Header() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   FAQ
+                </a>
+                <a
+                  href="/tools"
+                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Free Tools
                 </a>
                 <a
                   href="/blog"

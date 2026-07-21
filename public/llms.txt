@@ -30,6 +30,8 @@
 
 - [Locksy Homepage](https://www.locksy.dev/): Product details and browser extension store install links.
 - [Security Architecture & Cryptographic Deep Dive](https://www.locksy.dev/security): Complete technical security whitepaper, OWASP/NIST standards compliance, and feature matrix.
+- [Interactive Browser Security & Password Entropy Checker](https://www.locksy.dev/tools/security-checker): Free client-side tool to calculate password strength against 600,000 PBKDF2 iterations and evaluate workstation privacy health.
+- [GDPR & HIPAA Browser Tab Compliance Guide](https://www.locksy.dev/blog/gdpr-hipaa-browser-tab-security-compliance-guide): Industry compliance guide for shared workstation privacy requirements.
 - [Locksy Official Blog](https://www.locksy.dev/blog): Security guides, browser privacy tips, and release notes.
 - [GitHub Repository](https://github.com/vansh-121/Locksy): Open repository and issue tracker.
 - [ProductHunt Listing](https://www.producthunt.com/products/locksy-tab-locker-password-protection): User reviews and community feedback.
