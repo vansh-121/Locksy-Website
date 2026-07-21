@@ -115,6 +115,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="/contact" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Contact Us
+                </a>
+              </li>
+              <li>
                 <a href="/#faq" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   FAQ

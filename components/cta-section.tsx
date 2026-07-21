@@ -50,14 +50,13 @@ export default function CTASection() {
             </svg>
             Watch Demo
           </a> */}
-          <a
-            href="https://github.com/vansh-121/Locksy"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/contact"
             className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
           >
-            View on GitHub
-          </a>
+            Contact Support
+          </Link>
+
           <a
             href="https://github.com/sponsors/vansh-121"
             target="_blank"
@@ -77,6 +76,12 @@ export default function CTASection() {
           >
             Report Issue
           </a> */}
+          {/* <Link
+            href="/contact"
+            className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
+          >
+            Contact Support
+          </Link> */}
           <Link
             href="/privacy-policy"
             className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
