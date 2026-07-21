@@ -259,17 +259,17 @@ export default function SecurityPage() {
               <p className="text-muted-foreground text-sm">Empirical risk data and cryptographic benchmarks.</p>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
               {statisticalFacts.map((item, i) => (
-                <div key={i} className="p-6 rounded-2xl bg-card/80 backdrop-blur-lg border border-border/60 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 shadow-lg text-center flex flex-col justify-between group">
+                <div key={i} className="p-4 sm:p-6 rounded-2xl bg-card/80 backdrop-blur-lg border border-border/60 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 shadow-lg text-center flex flex-col justify-between group overflow-hidden">
                   <div>
-                    <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">{item.icon}</div>
-                    <div className="text-3xl lg:text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1">
+                    <div className="text-2xl sm:text-3xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform">{item.icon}</div>
+                    <div className="text-xl sm:text-3xl lg:text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 tracking-tight">
                       {item.stat}
                     </div>
-                    <div className="text-xs font-bold text-foreground mb-2 uppercase tracking-wider">{item.label}</div>
+                    <div className="text-[10px] sm:text-xs font-bold text-foreground mb-2 uppercase tracking-wider">{item.label}</div>
                   </div>
-                  <div className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/40">
+                  <div className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/40">
                     {item.desc}
                   </div>
                 </div>

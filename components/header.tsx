@@ -274,7 +274,7 @@ export default function Header() {
                   className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Security Deep Dive
+                  Security
                 </a>
                 <a
                   href="/#pricing"
