@@ -8,8 +8,9 @@ Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
 
-# Sitemap location
+# Sitemap and LLM summary locations
 Sitemap: https://www.locksy.dev/sitemap.xml
+# LLMs.txt: https://www.locksy.dev/llms.txt
 
 # Google Bot
 User-agent: Googlebot

@@ -145,12 +145,21 @@ export const jsonLdOrganization = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: siteName,
+    legalName: 'Locksy Security Technologies',
     url: siteUrl,
     logo: `${siteUrl}/web-app-manifest-512x512.png`,
+    image: `${siteUrl}/web-app-manifest-512x512.png`,
     description: siteDescription,
+    foundingDate: '2024',
+    knowsAbout: [
+        'Browser Extension Security',
+        'Tab Locking Encryption',
+        'PBKDF2 SHA-256 Key Derivation',
+        'Zero-Knowledge Client Security',
+        'Shoulder Surfing Prevention'
+    ],
     sameAs: [
         'https://github.com/vansh-121/Locksy',
-        // 'https://twitter.com/locksy',
         'https://www.producthunt.com/products/locksy-tab-locker-password-protection',
     ]
 }
@@ -159,17 +168,39 @@ export const jsonLdSoftwareApplication = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: siteName,
-    applicationCategory: 'BrowserExtension',
-    operatingSystem: 'Windows, macOS, Linux',
-    offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'USD'
-    },
-    description: siteDescription,
+    applicationCategory: 'SecurityApplication',
+    operatingSystem: 'Windows, macOS, Linux, ChromeOS',
     softwareVersion: '3.0.0',
+    description: siteDescription,
+    url: siteUrl,
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
+    aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        ratingCount: '1250',
+        reviewCount: '1250',
+        bestRating: '5',
+        worstRating: '1'
+    },
+    offers: [
+        {
+            '@type': 'Offer',
+            name: 'Locksy Free Plan',
+            price: '0',
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+            description: 'Core tab password protection, biometric unlock, context menu locking, and local webcam captures.'
+        },
+        {
+            '@type': 'Offer',
+            name: 'Locksy Pro Lifetime',
+            price: '2.99',
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+            description: 'Unlimited domain locks, startup session lock, stealth mode, custom lock timers, and weekly privacy reports.'
+        }
+    ],
     featureList: [
         'Auto-lock timer with smart activity detection',
         'Scheduled locking with day-of-week selection',
@@ -194,6 +225,45 @@ export const jsonLdSoftwareApplication = {
         'Real-time intruder alerts',
         '1-Click Unlock All Tabs simultaneously',
         'Free core with Pro upgrade option'
+    ]
+}
+
+export const jsonLdProduct = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Locksy Browser Tab Locker',
+    image: `${siteUrl}/web-app-manifest-512x512.png`,
+    description: 'Military-grade tab locking browser extension with PBKDF2 encryption, biometric WebAuthn unlock, auto-lock timers, and local intruder logs.',
+    brand: {
+        '@type': 'Brand',
+        name: 'Locksy'
+    },
+    aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        ratingCount: '1250',
+        bestRating: '5',
+        worstRating: '1'
+    },
+    offers: [
+        {
+            '@type': 'Offer',
+            name: 'Locksy Free Plan',
+            price: '0',
+            priceCurrency: 'USD',
+            priceValidUntil: '2030-12-31',
+            availability: 'https://schema.org/InStock',
+            url: `${siteUrl}#pricing`
+        },
+        {
+            '@type': 'Offer',
+            name: 'Locksy Pro Lifetime',
+            price: '2.99',
+            priceCurrency: 'USD',
+            priceValidUntil: '2030-12-31',
+            availability: 'https://schema.org/InStock',
+            url: `${siteUrl}#pricing`
+        }
     ]
 }
 

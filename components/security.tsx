@@ -35,6 +35,12 @@ export default function Security() {
         <div className="text-center">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
+              href="/security"
+              className="btn-primary inline-block"
+            >
+              🛡️ Read Security Deep Dive
+            </a>
+            <a
               href="/privacy-policy"
               className="btn-secondary inline-block"
             >

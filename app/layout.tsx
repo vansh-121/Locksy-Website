@@ -6,6 +6,7 @@ import {
   jsonLdWebsite,
   jsonLdOrganization,
   jsonLdSoftwareApplication,
+  jsonLdProduct,
   jsonLdHowToInstall
 } from "@/lib/metadata"
 import ChatSupport from "@/components/chat-support"
@@ -44,6 +45,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSoftwareApplication) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProduct) }}
         />
         <script
           type="application/ld+json"

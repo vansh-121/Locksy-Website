@@ -32,12 +32,12 @@ export const faqData: FAQItem[] = [
     answer: "For security reasons, passwords cannot be recovered. You'll need to reset your password, which will unlock all currently locked tabs.",
   },
   {
-    question: "Does it work in incognito mode?",
+    question: "Does Locksy work in Incognito mode?",
     answer: 'Yes! Just enable "Allow in Incognito" in your browser\'s extension settings. Your master password works in both normal and incognito windows.',
   },
   {
-    question: "Is my password safe?",
-    answer: "Absolutely. We use PBKDF2 with 600,000 iterations (military-grade) and never store your actual password - only an encrypted hash. 120 years crack resistance with timing attack protection.",
+    question: "Is Locksy safe and secure?",
+    answer: "Absolutely. Locksy is 100% safe and operates with a zero-knowledge architecture. We use PBKDF2 with 600,000 iterations (military-grade key derivation) and AES-256-GCM encryption. We never store or transmit your password or browsing data—everything stays 100% offline within your local browser sandbox.",
   },
   {
     question: "Can someone bypass the lock?",
