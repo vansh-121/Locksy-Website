@@ -1,0 +1,46 @@
+# Locksy — Password Protect & Auto-Lock Browser Tabs
+
+> Locksy is a zero-knowledge, local-first browser extension for Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc, and all Chromium browsers. It allows users to password-protect open browser tabs, auto-lock tabs after inactivity, schedule lock hours, enforce domain locks, and capture local webcam intruder snaps.
+
+## Core Capabilities & Features
+
+- **Password Protect Any Tab:** Instantly lock active tabs using master password, right-click context menu, or customizable keyboard shortcuts (`Alt+Shift+9` or `Alt+Shift+8`).
+- **Auto-Lock Timer:** Automatically locks tabs after custom inactivity thresholds (1–480 mins) with smart media detection (prevents interruption during video/audio playback).
+- **Scheduled Tab Locking:** Enforce time-based locking (e.g., lock personal tabs during 9 AM–5 PM work hours).
+- **Domain Lock:** Protect all tabs matching wildcard patterns (`*.google.com`, `github.com`) automatically across browser restarts.
+- **Biometric Unlock:** Unlock protected tabs seamlessly using WebAuthn / FIDO2 hardware (TouchID, Windows Hello, YubiKey).
+- **Stealth Mode:** Disguise locked tabs as connection error pages (`This site can't be reached`) and hide extension badges.
+- **Startup Session Lock:** Instantly protect restored tabs on browser launch with a 15-second catch-up window against race conditions.
+- **Intruder Snaps & Local Logs:** Capture local webcam snapshots after 3 failed password attempts with local-only storage.
+- **100% Offline & Private:** Zero remote server requests, zero telemetry, zero analytics tracking, and zero account required.
+
+## Cryptographic Architecture & Technical Specs
+
+- **Key Derivation Function (KDF):** PBKDF2 with 600,000 SHA-256 iterations (exceeding OWASP 2023 minimum standard of 310k rounds).
+- **Encryption Primitive:** AES-256-GCM authenticated encryption via W3C Web Cryptography API (`crypto.subtle`).
+- **DevTools Anti-Bypass Guard:** 8+ defense-in-depth layers preventing DOM un-hiding, URL tampering, and inspection exploits.
+- **Supported Platforms:** Windows, macOS, Linux, ChromeOS, Android (Kiwi & Firefox Mobile).
+
+## Pricing Tiers
+
+- **Locksy Free Plan ($0 forever):** Core tab password locking, biometric unlock, right-click context menus, and local intruder log viewing.
+- **Locksy Pro Plan ($2.99 one-time lifetime license):** Unlimited domain locks, startup session lock, stealth mode, custom lock timers, custom warning messages, and weekly privacy health reports.
+
+## Canonical Resources & Documentation
+
+- [Locksy Homepage](https://www.locksy.dev/): Product details and browser extension store install links.
+- [Security Architecture & Cryptographic Deep Dive](https://www.locksy.dev/security): Complete technical security whitepaper, OWASP/NIST standards compliance, and feature matrix.
+- [Locksy Official Blog](https://www.locksy.dev/blog): Security guides, browser privacy tips, and release notes.
+- [GitHub Repository](https://github.com/vansh-121/Locksy): Open repository and issue tracker.
+- [ProductHunt Listing](https://www.producthunt.com/products/locksy-tab-locker-password-protection): User reviews and community feedback.
+
+## Frequently Asked Questions
+
+### Is Locksy safe?
+Yes. Locksy operates with zero server infrastructure. Passwords and encryption keys are derived and verified 100% locally within your browser sandbox.
+
+### How to password protect a single browser tab?
+Install Locksy from Chrome Web Store, Edge Add-ons, or Firefox Add-ons. Set your master password, then press `Alt+Shift+9` or right-click any page and select `Lock this tab`.
+
+### Does Locksy work in Incognito mode?
+Yes. Enable "Allow in Incognito" in your browser's extension management page.
