@@ -20,6 +20,7 @@ import Pricing from "@/components/pricing"
 import Footer from "@/components/footer"
 import PageLoader from "@/components/page-loader"
 import MilestoneBanner from "@/components/milestone-banner"
+import ToolsShowcase from "@/components/tools-showcase"
 import { jsonLdFAQPage } from "@/lib/metadata"
 import { filteredBlogPosts } from "@/lib/blog-data"
 
@@ -85,6 +86,9 @@ export default function Home() {
 
           {/* Handle objections and questions */}
           <FAQ />
+
+          {/* Free Security Tools Showcase */}
+          <ToolsShowcase />
 
           {/* Latest blog articles — editorial content for SEO value */}
           <LatestBlogPosts posts={filteredBlogPosts} />
