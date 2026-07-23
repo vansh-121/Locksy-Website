@@ -189,16 +189,88 @@ export const jsonLdSoftwareApplication = {
             name: 'Locksy Free Plan',
             price: '0',
             priceCurrency: 'USD',
+            validFrom: '2024-01-01',
+            priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
-            description: 'Core tab password protection, biometric unlock, context menu locking, and local webcam captures.'
+            url: `${siteUrl}#pricing`,
+            description: 'Core tab password protection, biometric unlock, context menu locking, and local webcam captures.',
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: '0',
+                    currency: 'USD',
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'US',
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 0,
+                        unitCode: 'DAY',
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 0,
+                        unitCode: 'DAY',
+                    },
+                },
+            },
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'US',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+                merchantReturnDays: 0,
+            },
         },
         {
             '@type': 'Offer',
             name: 'Locksy Pro Lifetime',
             price: '2.99',
             priceCurrency: 'USD',
+            validFrom: '2024-01-01',
+            priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
-            description: 'Unlimited domain locks, startup session lock, stealth mode, custom lock timers, and weekly privacy reports.'
+            url: `${siteUrl}#pricing`,
+            description: 'Unlimited domain locks, startup session lock, stealth mode, custom lock timers, and weekly privacy reports.',
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: '0',
+                    currency: 'USD',
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'US',
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 0,
+                        unitCode: 'DAY',
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 0,
+                        unitCode: 'DAY',
+                    },
+                },
+            },
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'US',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+                merchantReturnDays: 0,
+            },
         }
     ],
     featureList: [
@@ -251,18 +323,86 @@ export const jsonLdProduct = {
             name: 'Locksy Free Plan',
             price: '0',
             priceCurrency: 'USD',
+            validFrom: '2024-01-01',
             priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
-            url: `${siteUrl}#pricing`
+            url: `${siteUrl}#pricing`,
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: '0',
+                    currency: 'USD',
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'US',
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 0,
+                        unitCode: 'DAY',
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 0,
+                        unitCode: 'DAY',
+                    },
+                },
+            },
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'US',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+                merchantReturnDays: 0,
+            },
         },
         {
             '@type': 'Offer',
             name: 'Locksy Pro Lifetime',
             price: '2.99',
             priceCurrency: 'USD',
+            validFrom: '2024-01-01',
             priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
-            url: `${siteUrl}#pricing`
+            url: `${siteUrl}#pricing`,
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: '0',
+                    currency: 'USD',
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'US',
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 0,
+                        unitCode: 'DAY',
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 0,
+                        unitCode: 'DAY',
+                    },
+                },
+            },
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'US',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+                merchantReturnDays: 0,
+            },
         }
     ]
 }
