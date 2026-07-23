@@ -23,6 +23,16 @@ User-agent: Bingbot
 Allow: /
 Disallow: /api/
 
+# DuckDuckGo Bot
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+
+# Brave Search Bot
+User-agent: Bravebot
+Allow: /
+Disallow: /api/
+
 # AI Crawlers - Explicitly allow for LLM search indexing, retrieval, and training
 User-agent: GPTBot
 Allow: /
