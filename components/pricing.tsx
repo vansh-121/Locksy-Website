@@ -7,6 +7,7 @@ export default function Pricing() {
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
 
   const proFeatures = [
+    { title: "Privacy Blur Manager UI", desc: "Custom blur levels (Light to Solid), site categories & whitelists", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Unlimited Domain Auto-Locks", desc: "Lock any number of websites & subdomains", icon: <Globe className="w-4 h-4" /> },
     { title: "Unlimited Biometric Unlocks", desc: "Windows Hello, Touch ID, or Face ID access", icon: <Fingerprint className="w-4 h-4" /> },
     { title: "Startup Session Lock", desc: "Instantly lock all session-restored tabs on launch", icon: <Zap className="w-4 h-4" /> },
@@ -19,6 +20,7 @@ export default function Pricing() {
   ]
 
   const freeLimits = [
+    { title: "Privacy Blur Shield (Basic)", desc: "Auto-mask passwords/cards & window focus loss blur", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Basic Password Locking", desc: "Standard master password overlay protection", icon: <Shield className="w-4 h-4" /> },
     { title: "Max 3 Domain Locks", desc: "Limit of 3 auto-locked websites", icon: <Globe className="w-4 h-4" /> },
     { title: "Max 5 Biometric prompts", desc: "Up to 5 fingerprint or face unlocks per day", icon: <Fingerprint className="w-4 h-4" /> },
@@ -27,7 +29,6 @@ export default function Pricing() {
     { title: "Default Hotkey locking", desc: "Alt+Shift+9 shortcut to lock active tab instantly", icon: <Key className="w-4 h-4" /> },
     { title: "Incognito Window Support", desc: "Full protection in private browsing mode", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Offline Local Processing", desc: "Encryption keys never leave your machine", icon: <ShieldCheck className="w-4 h-4" /> },
-    { title: "No Custom Messages/Reports", desc: "Upgrade to Pro for custom messages & reports", icon: <ShieldAlert className="w-4 h-4" /> },
   ]
 
   return (
