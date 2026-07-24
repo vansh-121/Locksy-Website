@@ -1,6 +1,12 @@
 export default function Features() {
   const features = [
     {
+      icon: "🛡️",
+      title: "Privacy Blur Shield",
+      desc: "Automatically masks passwords, credit cards, emails, and OTPs on web pages, plus instantly blurs the page overlay when switching windows or leaving your computer.",
+      gradient: "from-indigo-500 to-purple-500",
+    },
+    {
       icon: "⏱️",
       title: "Auto-Lock Timer",
       desc: "Automatic protection after inactivity. Set your timeout duration (1-480 min) and let Locksy lock your tabs automatically when you step away. Smart activity detection won't interrupt video playback.",
@@ -38,55 +44,55 @@ export default function Features() {
     },
     {
       icon: "👆",
-      title: "Biometric Unlock (v2.3.0)",
+      title: "Biometric Unlock",
       desc: "Unlock protected tabs with Touch ID, Windows Hello, Face ID, or Android biometrics. WebAuthn / FIDO2 — no biometric data ever leaves your device.",
       gradient: "from-violet-500 to-indigo-500",
     },
     {
       icon: "🖱️",
-      title: "Right-Click Context Menus (v2.5.0)",
+      title: "Right-Click Context Menus",
       desc: "Lock tabs instantly from the right-click menu — no popup needed. Lock this tab, lock a domain, lock all tabs, or toggle stealth. Works on pages, links, images, and selected text.",
       gradient: "from-indigo-500 to-violet-500",
     },
     {
       icon: "🕵️",
-      title: "Stealth Mode (v2.5.0)",
+      title: "Stealth Mode",
       desc: "Make Locksy completely invisible. Badge counter vanishes, notifications go silent, and locked tabs show a fake \"connection refused\" error page. Toggle via popup, Alt+Shift+7, or right-click.",
       gradient: "from-purple-500 to-violet-500",
     },
     {
       icon: "🎨",
-      title: "Light / Dark Theme (v2.5.0)",
+      title: "Light / Dark Theme",
       desc: "Persistent theme switcher built into the popup header. Choose light or dark mode — syncs instantly across all Locksy pages without reload. Works on the lock screen too.",
       gradient: "from-cyan-500 to-violet-500",
     },
     {
       icon: "📸",
-      title: "Webcam Intruder Capture (v2.6.0)",
+      title: "Webcam Intruder Capture",
       desc: "Silently captures a local-only webcam snapshot of snoopers trying to guess your password. Dedicated log page lets you review attempt histories and delete photos safely.",
       gradient: "from-rose-500 to-red-500",
     },
     {
       icon: "🚀",
-      title: "Startup Session Lock (v2.7.0)",
+      title: "Startup Session Lock",
       desc: "Automatically lock all active session tabs instantly on browser launch. Smart 15-second catch-up window locks delayed session restorations.",
       gradient: "from-amber-500 to-yellow-500",
     },
     {
       icon: "📊",
-      title: "Weekly Privacy Reports (v3.0.0)",
+      title: "Weekly Privacy Reports",
       desc: "Local metrics dashboard tracking locks history, failed snooper attempts, and active security scores. 100% private and generated completely offline.",
       gradient: "from-violet-600 to-indigo-600",
     },
     {
       icon: "💬",
-      title: "Custom Lock Screen Messages (v2.6.0)",
+      title: "Custom Lock Screen Messages",
       desc: "Display personalized notes, reminders, or warning messages directly on the lock screen overlay to deter snoopers.",
       gradient: "from-teal-500 to-emerald-500",
     },
     {
       icon: "🔓",
-      title: "1-Click Unlock All (v2.7.0)",
+      title: "1-Click Unlock All",
       desc: "Unlock all currently protected tabs simultaneously by entering your master password once. Perfect for quick workflow resumption.",
       gradient: "from-amber-500 to-orange-500",
     },

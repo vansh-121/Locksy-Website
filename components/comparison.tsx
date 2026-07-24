@@ -158,6 +158,7 @@ export default function Comparison() {
                   </thead>
                   <tbody>
                     {[
+                      ["Privacy Blur Shield (Auto-Mask & Focus Blur)", true, false, false],
                       ["Lock Individual Tabs", true, false, false],
                       ["Domain Auto-Locks", true, false, false],
                       ["Startup Session Lock", true, false, false],
