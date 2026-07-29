@@ -44,6 +44,10 @@ export const faqData: FAQItem[] = [
     answer: "No. Locksy has 8+ security layers that prevent all known bypass methods, including DevTools inspection and DOM tampering.",
   },
   {
+    question: "Do locked tabs still work after I restart my browser?",
+    answer: "Yes. Tabs that your browser restores stay locked, and your password or biometric unlock takes you straight back to the original page. Each lock carries its own permanent identifier that is independent of the tab numbers your browser reassigns on restart, so a restored lock screen always knows which page belongs to it. If you are on version 3.1.0 or earlier and see an \"unable to unlock\" error on a restored tab, update to 3.1.1 or later.",
+  },
+  {
     question: "How do wildcard domain patterns work?",
     answer: "Use *.example.com to lock all subdomains of example.com (like mail.example.com, docs.example.com). Or use just example.com to lock only that specific domain. Wildcard patterns give you flexible, powerful protection.",
   },

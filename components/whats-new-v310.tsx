@@ -16,7 +16,7 @@ interface FeatureItem {
 const V310_FEATURES: FeatureItem[] = [
   {
     id: "privacy-blur",
-    badge: "v3.1.0 New Feature",
+    badge: "v3.1.1 New Feature",
     title: "Privacy Blur Shield",
     tagline: "Dynamic page masking & automatic focus-loss blur",
     description: "Keep confidential data hidden from shoulder-surfers. Privacy Blur Shield automatically detects and blurs sensitive text (passwords, credit cards, OTPs, emails, phone numbers) on web pages, plus instantly blurs the active page when you switch windows or step away.",
@@ -30,7 +30,7 @@ const V310_FEATURES: FeatureItem[] = [
   },
   {
     id: "blur-manager",
-    badge: "v3.1.0 Pro Exclusive",
+    badge: "v3.1.1 Pro Exclusive",
     title: "Privacy Blur Manager",
     tagline: "Custom blur rules, site categories & whitelists",
     description: "Take total control of page privacy. Choose your preferred blur intensity (Light, Medium, High, Solid), toggle specific targets, auto-blur entire site categories (Banking, Webmail, Password Managers), or whitelist trusted domains.",
@@ -59,7 +59,7 @@ export default function WhatsNewV310() {
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 text-sm font-semibold mb-4 shadow-sm">
             <Sparkles className="w-4 h-4 text-indigo-500" />
-            <span>NEW IN VERSION 3.1.0</span>
+            <span>NEW IN VERSION 3.1.1</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-foreground">
@@ -77,11 +77,10 @@ export default function WhatsNewV310() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2.5 px-5 py-3 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-200 border cursor-pointer ${
-                activeTab === tab.id
-                  ? "bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-500/25 scale-[1.02]"
-                  : "bg-card/80 text-muted-foreground border-border/60 hover:border-indigo-500/40 hover:text-foreground hover:bg-card"
-              }`}
+              className={`flex items-center gap-2.5 px-5 py-3 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-200 border cursor-pointer ${activeTab === tab.id
+                ? "bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-500/25 scale-[1.02]"
+                : "bg-card/80 text-muted-foreground border-border/60 hover:border-indigo-500/40 hover:text-foreground hover:bg-card"
+                }`}
             >
               {tab.icon}
               <span>{tab.title}</span>
@@ -92,7 +91,7 @@ export default function WhatsNewV310() {
         {/* Dynamic Display Card */}
         <div className="bg-card/90 dark:bg-slate-900/90 border border-border/80 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl transition-all">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
+
             {/* Left Column: Descriptions */}
             <div className="lg:col-span-6 space-y-6">
               <span className="inline-block px-3.5 py-1 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider border border-indigo-500/30">
@@ -128,7 +127,7 @@ export default function WhatsNewV310() {
             {/* Right Column: Live Mock UI Preview */}
             <div className="lg:col-span-6">
               <div className="bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-inner">
-                
+
                 {/* Mock Privacy Blur View */}
                 {activeTab === "privacy-blur" && (
                   <div className="space-y-4">

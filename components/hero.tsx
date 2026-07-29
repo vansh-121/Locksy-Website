@@ -186,7 +186,7 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 <span>🚀</span>
-                WHAT'S NEW IN v3.1.0
+                WHAT'S NEW IN v3.1.1
               </a>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">

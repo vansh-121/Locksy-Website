@@ -145,8 +145,8 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                 },
                                 {
                                     icon: "📑",
-                                    title: "Locked Tab IDs",
-                                    desc: "Temporary list of which tabs are locked. Automatically cleared when tabs close.",
+                                    title: "Locked Tab Records",
+                                    desc: "Which tabs are locked, plus the address of each locked page so you can be taken back to it after unlocking. Stored on your device only, deleted the moment a tab is unlocked or closed, and kept across a browser restart so restored tabs stay unlockable.",
                                     gradient: "from-green-500 to-emerald-500"
                                 },
                                 {
@@ -182,7 +182,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                             <div className="grid md:grid-cols-3 gap-4">
                                 {[
                                     "Browsing history",
-                                    "Website URLs",
+                                    "Website URLs (beyond tabs you lock)",
                                     "Personal information",
                                     "Payment data",
                                     "Cookies",
