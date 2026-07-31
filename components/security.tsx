@@ -2,7 +2,7 @@ export default function Security() {
   const guarantees = [
     { icon: "✓", title: "No Account Required", desc: "Start using Locksy immediately without sign-up" },
     { icon: "✓", title: "Zero Data Collection", desc: "We never see, store, or transmit your browsing data" },
-    { icon: "✓", title: "Local Processing", desc: "All encryption and logic run entirely within your local browser sandbox" },
+    { icon: "✓", title: "Local Processing", desc: "All password hashing and lock logic run entirely within your local browser sandbox" },
     { icon: "✓", title: "PBKDF2 with 600k Iterations", desc: "120 years crack resistance with timing attack protection" },
     { icon: "✓", title: "Rate Limiting & Brute-Force Protection", desc: "Advanced protection against automated cracking attempts" },
     { icon: "✓", title: "No Admin Backdoors", desc: "Only you can unlock your tabs" },

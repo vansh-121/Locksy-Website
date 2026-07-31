@@ -16,7 +16,7 @@ interface FeatureItem {
 const V310_FEATURES: FeatureItem[] = [
   {
     id: "privacy-blur",
-    badge: "v3.1.1 New Feature",
+    badge: "v3.1.0 New Feature",
     title: "Privacy Blur Shield",
     tagline: "Dynamic page masking & automatic focus-loss blur",
     description: "Keep confidential data hidden from shoulder-surfers. Privacy Blur Shield automatically detects and blurs sensitive text (passwords, credit cards, OTPs, emails, phone numbers) on web pages, plus instantly blurs the active page when you switch windows or step away.",
@@ -30,7 +30,7 @@ const V310_FEATURES: FeatureItem[] = [
   },
   {
     id: "blur-manager",
-    badge: "v3.1.1 Pro Exclusive",
+    badge: "v3.1.0 Pro Exclusive",
     title: "Privacy Blur Manager",
     tagline: "Custom blur rules, site categories & whitelists",
     description: "Take total control of page privacy. Choose your preferred blur intensity (Light, Medium, High, Solid), toggle specific targets, auto-blur entire site categories (Banking, Webmail, Password Managers), or whitelist trusted domains.",
@@ -59,7 +59,7 @@ export default function WhatsNewV310() {
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 text-sm font-semibold mb-4 shadow-sm">
             <Sparkles className="w-4 h-4 text-indigo-500" />
-            <span>NEW IN VERSION 3.1.1</span>
+            <span>NEW IN VERSION 3.1.0</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-foreground">

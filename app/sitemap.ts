@@ -62,7 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${siteUrl}/privacy-policy`,
-            lastModified: new Date('2026-02-04'),
+            lastModified: new Date('2026-07-31'),
             changeFrequency: 'monthly',
             priority: 0.7,
         },

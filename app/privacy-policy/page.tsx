@@ -6,8 +6,8 @@ import path from "path"
 
 export const metadata: Metadata = {
     title: 'Privacy Policy - Your Data is 100% Private | Locksy',
-    description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. All passwords are encrypted locally with AES-256. 100% offline, completely private browser tab security.',
-    keywords: 'locksy privacy policy, browser extension privacy, zero data collection, offline encryption, AES-256 encryption, privacy-first, no tracking',
+    description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. Your master password is never stored — only a PBKDF2-derived hash. 100% offline, completely private browser tab security.',
+    keywords: 'locksy privacy policy, browser extension privacy, zero data collection, offline password hashing, PBKDF2 password hashing, privacy-first, no tracking',
     alternates: {
         canonical: 'https://www.locksy.dev/privacy-policy',
     },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: 'https://www.locksy.dev/privacy-policy',
         siteName: 'Locksy',
         title: 'Privacy Policy - Your Data is 100% Private | Locksy',
-        description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. All passwords are encrypted locally with AES-256.',
+        description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. Your master password is never stored — only a PBKDF2-derived hash.',
         images: [
             {
                 url: 'https://www.locksy.dev/web-app-manifest-512x512.png',
@@ -49,14 +49,14 @@ export default function PrivacyPolicyPage() {
     // Get the last modified date of this file
     const filePath = path.join(process.cwd(), 'app', 'privacy-policy', 'privacy-client.tsx')
     let lastUpdated = 'January 24, 2026'
-    
+
     try {
         const stats = fs.statSync(filePath)
         const date = new Date(stats.mtime)
-        lastUpdated = date.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+        lastUpdated = date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         })
     } catch (error) {
         console.error('Error reading file stats:', error)

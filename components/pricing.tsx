@@ -13,20 +13,20 @@ export default function Pricing() {
     { title: "Startup Session Lock", desc: "Instantly lock all session-restored tabs on launch", icon: <Zap className="w-4 h-4" /> },
     { title: "Stealth Mode disguise", desc: "Disguise locked tabs as fake browser error pages", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Weekly Privacy Reports", desc: "Personalized offline dashboard & security score", icon: <LayoutDashboard className="w-4 h-4" /> },
-    { title: "Custom Lock Screen Messages", desc: "Display personal notes or warnings on lock overlays", icon: <ShieldAlert className="w-4 h-4" /> },
-    { title: "Webcam Intruder captures", desc: "Log up to 50 local snapshots of failed access attempts", icon: <Camera className="w-4 h-4" /> },
+    { title: "Custom Lock Screen Messages", desc: "Display personal notes or warnings on the lock screen", icon: <ShieldAlert className="w-4 h-4" /> },
+    { title: "Webcam Intruder captures", desc: "Unlimited local snapshots of failed access attempts", icon: <Camera className="w-4 h-4" /> },
     { title: "1-Click Unlock All Tabs", desc: "Unlock all protected tabs simultaneously", icon: <Key className="w-4 h-4" /> },
     { title: "Custom Auto-Lock Timers", desc: "Configure custom duration settings up to 8 hours", icon: <Clock className="w-4 h-4" /> },
   ]
 
   const freeLimits = [
     { title: "Privacy Blur Shield (Basic)", desc: "Auto-mask passwords/cards & window focus loss blur", icon: <EyeOff className="w-4 h-4" /> },
-    { title: "Basic Password Locking", desc: "Standard master password overlay protection", icon: <Shield className="w-4 h-4" /> },
+    { title: "Basic Password Locking", desc: "Standard master password tab protection", icon: <Shield className="w-4 h-4" /> },
     { title: "Max 3 Domain Locks", desc: "Limit of 3 auto-locked websites", icon: <Globe className="w-4 h-4" /> },
     { title: "Max 5 Biometric prompts", desc: "Up to 5 fingerprint or face unlocks per day", icon: <Fingerprint className="w-4 h-4" /> },
     { title: "Max 3 Webcam captures", desc: "Store up to 3 local snooper snapshots", icon: <Camera className="w-4 h-4" /> },
     { title: "Preset Timers Only", desc: "Choose from 5, 15, 30, or 60 minute presets", icon: <Clock className="w-4 h-4" /> },
-    { title: "Default Hotkey locking", desc: "Alt+Shift+9 shortcut to lock active tab instantly", icon: <Key className="w-4 h-4" /> },
+    { title: "Default Hotkey locking", desc: "Alt+Shift+9 to lock the active tab; 3 total uses of Lock All", icon: <Key className="w-4 h-4" /> },
     { title: "Incognito Window Support", desc: "Full protection in private browsing mode", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Offline Local Processing", desc: "Encryption keys never leave your machine", icon: <ShieldCheck className="w-4 h-4" /> },
   ]

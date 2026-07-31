@@ -170,7 +170,7 @@ export const jsonLdSoftwareApplication = {
     name: siteName,
     applicationCategory: 'SecurityApplication',
     operatingSystem: 'Windows, macOS, Linux, ChromeOS',
-    softwareVersion: '3.1.1',
+    softwareVersion: '3.2.0',
     description: siteDescription,
     url: siteUrl,
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
@@ -193,7 +193,7 @@ export const jsonLdSoftwareApplication = {
             priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
             url: `${siteUrl}#pricing`,
-            description: 'Core tab password protection, biometric unlock, context menu locking, and local webcam captures.',
+            description: 'Core tab password protection, biometric unlock, context menu locking, and local webcam captures. Free tier includes 3 domain locks, 3 intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs.',
             shippingDetails: {
                 '@type': 'OfferShippingDetails',
                 shippingRate: {

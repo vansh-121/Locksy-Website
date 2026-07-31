@@ -8,12 +8,12 @@ import Link from 'next/link'
 
 export const metadata: Metadata = generatePageMetadata(
   "Locksy Security Architecture & Cryptographic Deep Dive",
-  "Explore Locksy's local-first security architecture: PBKDF2 encryption with 600,000 iterations, AES-256-GCM, zero server communication, WebAuthn biometric unlock, and defense-in-depth isolation.",
+  "Explore Locksy's local-first security architecture: PBKDF2 password hashing with 600,000 iterations, constant-time verification, zero server communication, WebAuthn biometric unlock, and defense-in-depth isolation.",
   "/security",
   [
     "locksy security architecture",
     "PBKDF2 600000 iterations",
-    "AES 256 tab encryption",
+    "PBKDF2 tab password hashing",
     "local-first browser security",
     "shoulder surfing prevention stats",
     "zero knowledge tab locker"
@@ -30,7 +30,7 @@ export default function SecurityPage() {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
     headline: "Locksy Security Architecture & Cryptographic Deep Dive",
-    description: "Detailed technical evaluation of Locksy's client-side PBKDF2 600,000-iteration key derivation, AES-256-GCM authenticated encryption, and local-only sandbox security model.",
+    description: "Detailed technical evaluation of Locksy's client-side PBKDF2 600,000-iteration key derivation, constant-time password verification, and local-only sandbox security model.",
     author: {
       '@type': 'Organization',
       name: 'Locksy Security Team'
@@ -72,14 +72,14 @@ export default function SecurityPage() {
     },
     {
       feature: "Tab Isolation Architecture",
-      locksy: "DOM Removal + Content Script Guard",
+      locksy: "Full-tab navigation to extension page",
       pwdManager: "Form Autofill Injection Only",
       nativeLock: "No Per-Tab Granularity",
       basicOverlay: "CSS display:none (Bypassable)"
     },
     {
       feature: "DevTools Bypass Protection",
-      locksy: "8+ Anti-Tampering Security Layers",
+      locksy: "No overlay to remove (real navigation)",
       pwdManager: "N/A (Does not lock tabs)",
       nativeLock: "N/A",
       basicOverlay: "Fails DevTools DOM edit"
@@ -153,7 +153,7 @@ export default function SecurityPage() {
         </div>
 
         <div className="relative max-w-6xl mx-auto px-4 md:px-6">
-          
+
           {/* Hero Section */}
           <div className="text-center max-w-4xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/10 via-purple-500/10 to-secondary/10 border border-primary/20 text-primary text-sm font-semibold mb-6 shadow-sm">
@@ -163,13 +163,13 @@ export default function SecurityPage() {
               </span>
               Verified Zero-Knowledge Security Model
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6 leading-tight">
               Locksy Security Architecture & <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">Cryptographic Deep Dive</span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Discover how Locksy safeguards your private browser tabs using client-side <strong>PBKDF2 600,000-iteration encryption</strong>, AES-256-GCM, and zero network data exposure.
+              Discover how Locksy safeguards your private browser tabs using client-side <strong>PBKDF2 600,000-iteration key derivation</strong>, constant-time password verification, and zero network data exposure.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
@@ -360,8 +360,8 @@ export default function SecurityPage() {
                     <span className="font-bold text-primary">600,000 Rounds</span>
                   </div>
                   <div className="p-3 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-muted-foreground block mb-1">Encryption Mode</span>
-                    <span className="font-bold text-foreground">AES-256-GCM (96-bit IV)</span>
+                    <span className="text-muted-foreground block mb-1">Verification</span>
+                    <span className="font-bold text-foreground">Constant-Time Compare</span>
                   </div>
                   <div className="p-3 rounded-xl bg-muted/30 border border-border/40">
                     <span className="text-muted-foreground block mb-1">Execution Sandbox</span>
@@ -388,29 +388,29 @@ export default function SecurityPage() {
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40">
                     <span className="text-emerald-500 text-lg font-bold">✓</span>
                     <div>
-                      <strong className="text-foreground block mb-1">DOM Sanitization & Scrubbing</strong>
-                      <span className="text-muted-foreground text-xs">Underlying HTML content is scrubbed and replaced with a sandboxed lock interface.</span>
+                      <strong className="text-foreground block mb-1">Full-Tab Navigation Isolation</strong>
+                      <span className="text-muted-foreground text-xs">The protected page is not hidden behind an overlay — the tab is navigated to an internal extension page, so the original document is no longer loaded at all.</span>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40">
                     <span className="text-emerald-500 text-lg font-bold">✓</span>
                     <div>
-                      <strong className="text-foreground block mb-1">Anti-DevTools Guarding</strong>
-                      <span className="text-muted-foreground text-xs">Inspection events and DOM mutations trigger active state verification to block tampering.</span>
+                      <strong className="text-foreground block mb-1">Navigation Re-Enforcement</strong>
+                      <span className="text-muted-foreground text-xs">Any attempt to navigate a locked tab back to its page is intercepted by the background service and returned to the lock screen.</span>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40">
                     <span className="text-emerald-500 text-lg font-bold">✓</span>
                     <div>
-                      <strong className="text-foreground block mb-1">URL & Title Obfuscation</strong>
-                      <span className="text-muted-foreground text-xs">Original URL metadata is held in encrypted local memory, hiding full addresses from shoulder surfers.</span>
+                      <strong className="text-foreground block mb-1">Address Concealment</strong>
+                      <span className="text-muted-foreground text-xs">The original address is held in local extension storage and never rendered on the lock screen, so it stays hidden from anyone looking at the tab.</span>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40">
                     <span className="text-emerald-500 text-lg font-bold">✓</span>
                     <div>
-                      <strong className="text-foreground block mb-1">Startup Session Lock</strong>
-                      <span className="text-muted-foreground text-xs">Intercepts restored tabs on browser launch with a 15-second catch-up window against startup race conditions.</span>
+                      <strong className="text-foreground block mb-1">Startup Session Lock (Pro)</strong>
+                      <span className="text-muted-foreground text-xs">Locks tabs restored by the browser at launch, with a 30-second catch-up window so tabs that finish loading late are still caught.</span>
                     </div>
                   </div>
                 </div>
