@@ -21,7 +21,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Is Locksy free to use?",
-    answer: "Yes! Locksy is free for core tab-locking, biometrics, right-click context menu locks, and local webcam captures. If you need advanced automation and controls like unlimited domain locking, startup session lock, stealth mode, custom timers, or weekly privacy reports, you can upgrade to Locksy Pro for a one-time lifetime purchase (no monthly subscriptions).",
+    answer: "Yes! Locksy is free for core tab-locking, biometrics, right-click context menu locks, and local webcam captures. Free includes up to 3 domain locks, 3 stored intruder photos, 5 biometric unlocks per day, and 3 total uses of \"Lock All Tabs\". If you need advanced automation and controls like unlimited domain locking, startup session lock, stealth mode, custom timers, or weekly privacy reports, you can upgrade to Locksy Pro for a one-time lifetime purchase (no monthly subscriptions).",
   },
   {
     question: "Do I need to create an account?",
@@ -37,11 +37,11 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Is Locksy safe and secure?",
-    answer: "Absolutely. Locksy is 100% safe and operates with a zero-knowledge architecture. We use PBKDF2 with 600,000 iterations (military-grade key derivation) and AES-256-GCM encryption. We never store or transmit your password or browsing data—everything stays 100% offline within your local browser sandbox.",
+    answer: "Absolutely. Locksy is 100% safe and operates with a zero-knowledge architecture. We derive your master password with PBKDF2 at 600,000 iterations and compare it in constant time, so the password itself is never stored. We never store or transmit your password or browsing data—everything stays 100% offline within your local browser sandbox.",
   },
   {
     question: "Can someone bypass the lock?",
-    answer: "No. Locksy has 8+ security layers that prevent all known bypass methods, including DevTools inspection and DOM tampering.",
+    answer: "Locksy doesn't hide your page behind an overlay — it navigates the tab away to its own lock page, so there is no hidden element for someone to delete with DevTools. Any attempt to navigate back is intercepted and re-locked, and unlock requests are verified against the browser's own report of which tab sent them. Do note that anyone who can reach your browser profile on disk or install extensions is operating below the level any extension can defend against — Locksy protects an unattended session, not a compromised machine.",
   },
   {
     question: "Do locked tabs still work after I restart my browser?",
@@ -61,7 +61,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Can I lock multiple tabs at once?",
-    answer: "Yes! Use Alt+Shift+8 to lock all open tabs at once, or use Domain Lock to automatically protect all tabs matching a specific domain pattern.",
+    answer: "Yes! Use Alt+Shift+8 to lock all open tabs at once, or use Domain Lock to automatically protect all tabs matching a specific domain pattern. On the free plan this shortcut can be used 3 times in total; Pro removes the limit.",
   },
   {
     question: "Can Auto-Lock and Scheduled Locking work together?",
@@ -113,7 +113,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "How does Webcam Intruder Capture work?",
-    answer: "Locksy automatically logs and captures local-only webcam snapshots of anyone attempting to access your protected tabs after three failed password entry attempts. These snapshots are saved 100% locally in your browser sandbox and can be viewed or deleted securely from your Intruder Log viewer.",
+    answer: "Locksy automatically logs and captures local-only webcam snapshots of anyone attempting to access your protected tabs after three failed password entry attempts. These snapshots are saved 100% locally in your browser sandbox and can be viewed or deleted securely from your Intruder Log viewer. The free plan stores up to 3 snapshots; Pro is unlimited.",
   },
   {
     question: "What is 1-Click Unlock All?",
@@ -121,7 +121,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "What is Startup Session Lock?",
-    answer: "Startup Session Lock instantly locks all tabs from your previous browsing session as soon as you launch your browser. It includes a 15-second catch-up window to guard against delayed tab loading, ensuring snoopers cannot see your restored tabs during startup.",
+    answer: "Startup Session Lock instantly locks all tabs from your previous browsing session as soon as you launch your browser. Available on Locksy Pro. It includes a 30-second catch-up window so tabs that finish restoring late are still locked.",
   },
   {
     question: "What are Weekly Privacy Reports?",

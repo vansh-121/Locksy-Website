@@ -55,7 +55,7 @@ On shared home or office computers, family members or co-workers opening the bro
 
 **Locksy** fills the gap post-authentication:
 
-1. **PBKDF2 SHA-256 (600,000 Iterations):** Locksy encrypts the tab state and scrubs DOM contents using 600k rounds of key derivation natively via the Web Cryptography API.
+1. **PBKDF2 SHA-256 (600,000 Iterations):** Locksy derives your master password using 600k rounds of key derivation natively via the Web Cryptography API, and navigates locked tabs away to an internal extension page.
 2. **Auto-Lock Timers with Smart Media Detection:** Automatically locks open tabs after inactivity without interrupting active video playback.
 3. **Biometric Unlock (WebAuthn / FIDO2):** Seamlessly unlock protected tabs with Touch ID, Windows Hello, or hardware security keys.
 

@@ -21,7 +21,7 @@ export default function Features() {
     {
       icon: "⌨️",
       title: "Keyboard Shortcuts",
-      desc: "Lock tabs instantly with Alt+Shift+9, open manager with Alt+Shift+0, or lock all tabs with Alt+Shift+8. Fully customizable shortcuts.",
+      desc: "Lock tabs instantly with Alt+Shift+9, open manager with Alt+Shift+0, or lock all tabs with Alt+Shift+8 (3 free uses, unlimited on Pro). Fully customizable shortcuts.",
       gradient: "from-violet-500 to-purple-500",
     },
     // {
@@ -75,7 +75,7 @@ export default function Features() {
     {
       icon: "🚀",
       title: "Startup Session Lock",
-      desc: "Automatically lock all active session tabs instantly on browser launch. Smart 15-second catch-up window locks delayed session restorations.",
+      desc: "Automatically lock session tabs on browser launch. A 30-second catch-up window catches tabs that restore late. Requires Locksy Pro.",
       gradient: "from-amber-500 to-yellow-500",
     },
     {
@@ -87,7 +87,7 @@ export default function Features() {
     {
       icon: "💬",
       title: "Custom Lock Screen Messages",
-      desc: "Display personalized notes, reminders, or warning messages directly on the lock screen overlay to deter snoopers.",
+      desc: "Display personalized notes, reminders, or warning messages directly on the lock screen to deter snoopers.",
       gradient: "from-teal-500 to-emerald-500",
     },
     {

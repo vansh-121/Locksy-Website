@@ -17,7 +17,7 @@ export default function KeyboardShortcuts() {
         {
             keys: ["Alt", "Shift", "8"],
             action: "Lock All Tabs",
-            description: "Lock all compatible tabs in the current window at once",
+            description: "Lock all compatible tabs in the current window at once (3 free uses, unlimited on Pro)",
             icon: "⚡",
             gradient: "from-orange-500 via-red-500 to-pink-500",
         },
