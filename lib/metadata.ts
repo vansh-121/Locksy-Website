@@ -161,6 +161,9 @@ export const jsonLdOrganization = {
     sameAs: [
         'https://github.com/vansh-121/Locksy',
         'https://www.producthunt.com/products/locksy-tab-locker-password-protection',
+        'https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim',
+        'https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn',
+        'https://addons.mozilla.org/en-US/firefox/addon/locksy/',
     ]
 }
 
@@ -175,11 +178,13 @@ export const jsonLdSoftwareApplication = {
     url: siteUrl,
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
+    // Verified Chrome Web Store, Edge Add-ons & Firefox Add-ons rating aggregation
+    // Calculation: (4.3 * 22 + 4.5 * 4 + 5.0 * 2) / 28 = 122.6 / 28 = 4.38 -> 4.4
     aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        ratingCount: '1250',
-        reviewCount: '1250',
+        ratingValue: '4.4',
+        ratingCount: '28',
+        reviewCount: '28',
         bestRating: '5',
         worstRating: '1'
     },
@@ -312,8 +317,9 @@ export const jsonLdProduct = {
     },
     aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        ratingCount: '1250',
+        ratingValue: '4.4',
+        ratingCount: '28',
+        reviewCount: '28',
         bestRating: '5',
         worstRating: '1'
     },
@@ -370,6 +376,7 @@ export const jsonLdProduct = {
             priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
             url: `${siteUrl}#pricing`,
+            description: 'Unlimited domain locks, startup session lock, stealth mode, custom lock timers, weekly privacy reports & more.',
             shippingDetails: {
                 '@type': 'OfferShippingDetails',
                 shippingRate: {
