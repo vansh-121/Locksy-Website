@@ -16,6 +16,8 @@ export default function Pricing() {
     { title: "Custom Lock Screen Messages", desc: "Display personal notes or warnings on the lock screen", icon: <ShieldAlert className="w-4 h-4" /> },
     { title: "Webcam Intruder captures", desc: "Unlimited local snapshots of failed access attempts", icon: <Camera className="w-4 h-4" /> },
     { title: "1-Click Unlock All Tabs", desc: "Unlock all protected tabs simultaneously", icon: <Key className="w-4 h-4" /> },
+    { title: "Smart Sessions & Re-Auth Timing", desc: "Custom re-auth window (1–60 min, Strict) with sensitive action prompts", icon: <Clock className="w-4 h-4" /> },
+    { title: "Master Recovery Key Backup", desc: "Generate 16-char emergency recovery key for offline password reset", icon: <Key className="w-4 h-4" /> },
     { title: "Custom Auto-Lock Timers", desc: "Configure custom duration settings up to 8 hours", icon: <Clock className="w-4 h-4" /> },
   ]
 
@@ -25,10 +27,13 @@ export default function Pricing() {
     { title: "Max 3 Domain Locks", desc: "Limit of 3 auto-locked websites", icon: <Globe className="w-4 h-4" /> },
     { title: "Max 5 Biometric prompts", desc: "Up to 5 fingerprint or face unlocks per day", icon: <Fingerprint className="w-4 h-4" /> },
     { title: "Max 3 Webcam captures", desc: "Store up to 3 local snooper snapshots", icon: <Camera className="w-4 h-4" /> },
-    { title: "Preset Timers Only", desc: "Choose from 5, 15, 30, or 60 minute presets", icon: <Clock className="w-4 h-4" /> },
+    { title: "10-Min Session Re-Auth Window", desc: "Default 10-minute session duration before re-authentication", icon: <Clock className="w-4 h-4" /> },
     { title: "Default Hotkey locking", desc: "Alt+Shift+9 to lock the active tab; 3 total uses of Lock All", icon: <Key className="w-4 h-4" /> },
+    { title: "Master Recovery Key Setup", desc: "Generate & export 16-char emergency recovery key", icon: <Key className="w-4 h-4" /> },
+    { title: "Quick-Unlock Panel", desc: "View & unlock active protected tabs from popup", icon: <CheckCircle2 className="w-4 h-4" /> },
     { title: "Incognito Window Support", desc: "Full protection in private browsing mode", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Offline Local Processing", desc: "Encryption keys never leave your machine", icon: <ShieldCheck className="w-4 h-4" /> },
+    { title: "Zero Data Telemetry", desc: "100% private client-side processing, no tracking", icon: <Shield className="w-4 h-4" /> },
   ]
 
   return (
@@ -92,7 +97,7 @@ export default function Pricing() {
               </ul>
             </div>
 
-            <div className="mt-10">
+            <div className="mt-10 space-y-4">
               <button
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent("open-install-dropdown"));
@@ -101,6 +106,10 @@ export default function Pricing() {
               >
                 Download Free Version
               </button>
+              <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
+                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                100% Free Forever • No Account Required
+              </div>
             </div>
           </div>
 

@@ -3,6 +3,7 @@ import Hero from "@/components/hero"
 import AutomationFeatures from "@/components/automation-features"
 import DomainLock from "@/components/domain-lock"
 import BiometricUnlock from "@/components/biometric-unlock"
+import WhatsNewV330 from "@/components/whats-new-v330"
 import WhatsNewV310 from "@/components/whats-new-v310"
 import WhatsNewV300 from "@/components/whats-new-v300"
 import WhatsNewV250 from "@/components/whats-new-v250"
@@ -58,6 +59,9 @@ export default function Home() {
 
           {/* Showcase NEW v2.2.0 automation features prominently */}
           <AutomationFeatures />
+
+          {/* NEW v3.3.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
+          <WhatsNewV330 />
 
           {/* NEW v3.1.0 — Privacy Blur Shield, Manager UI & License Recovery */}
           <WhatsNewV310 />
