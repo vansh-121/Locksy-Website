@@ -306,189 +306,68 @@ export default function BrowserPrivacyScoreClient() {
 
           </div>
 
-          {/* ── What each check does ──────────────────────────────────── */}
+          {/* ── Key Privacy Factors ──────────────────────────────────── */}
           <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">What each check actually measures</h2>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Key Privacy Checks Explained</h2>
 
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              This is a live diagnostic, not a quiz — every result above comes from calling a real browser API on
-              your machine when the page loaded. Here is precisely what each one asks, and what a failing result
-              means in practice.
+              This audit reviews essential browser configurations that impact your daily online privacy.
             </p>
 
             <div className="space-y-4">
               <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">WebRTC IP candidate leak</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3">
-                  The scan opens an <code className="text-primary">RTCPeerConnection</code> against Google&apos;s
-                  public STUN server (<code className="text-primary">stun.l.google.com:19302</code>), creates a
-                  throwaway data channel, and reads the ICE candidates the browser offers up. Each
-                  candidate string can contain an IP address — and historically that included your real address even
-                  when you were behind a VPN, because WebRTC negotiates peer-to-peer paths outside the proxy tunnel.
-                </p>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">WebRTC IP Exposure</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  A <strong className="text-foreground">Secure</strong> result means no usable address was surfaced
-                  within the scan window. A <strong className="text-foreground">Leaking</strong> result shows the
-                  address a video-call site could read without asking permission. This is the single most consequential
-                  check here, which is why it carries the largest score weight — a VPN that leaks your IP through
-                  WebRTC is providing far less protection than you think it is.
+                  Checks whether real-time communication protocols expose your public IP address. A secure result means your network identity is shielded from unauthorized discovery.
                 </p>
               </div>
 
               <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Global Privacy Control and Do Not Track</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Global Privacy Control (GPC)</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Reads <code className="text-primary">navigator.globalPrivacyControl</code> and{' '}
-                  <code className="text-primary">navigator.doNotTrack</code>. GPC is the meaningful one: unlike the
-                  largely ignored DNT header, it carries legal weight under several privacy regimes, and companies
-                  covered by them are required to treat it as a valid opt-out request. Enabling it costs nothing and
-                  is a genuine legal signal rather than a polite suggestion. Most browsers expose it as a
-                  &ldquo;Send a Do Not Track / opt-out request&rdquo; toggle in privacy settings.
+                  Verifies whether your browser transmits an official opt-out signal telling websites not to sell or share your personal browsing data.
                 </p>
               </div>
 
               <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Ad and tracking script blocking</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Tracker & Ad Blocking</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Issues a <code className="text-primary">HEAD</code> request for a well-known ad-network script and
-                  watches whether it fails. If the request is blocked, something in your stack — an extension, a
-                  filtering DNS resolver, your browser&apos;s built-in shields — is intercepting tracker traffic.
-                  Content blockers cut off a large share of third-party tracking at the network layer, which is a
-                  more reliable defence than any per-site preference.
+                  Detects whether known advertising and cross-site tracking scripts are blocked before they can monitor your web activity.
                 </p>
               </div>
 
               <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Hardware fingerprint entropy</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3">
-                  Collects screen geometry, device pixel ratio, colour depth and reported CPU core count — four
-                  attributes any page can read silently, with no permission prompt and no cookie involved. Taken
-                  individually they are unremarkable. Combined, they narrow you down sharply, and adding the usual
-                  extras (fonts, timezone, GPU renderer string, audio stack) is often enough to single out one
-                  browser among millions.
-                </p>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Browser Fingerprinting Exposure</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  This item is deliberately reported as a warning rather than pass or fail, because there is no
-                  configuration that makes it pass. Fingerprinting is the tracking technique that survives clearing
-                  your cookies, using private browsing, and switching to a VPN. Only browsers that actively
-                  randomise or standardise these values push back on it.
+                  Evaluates how unique your hardware, screen, and browser attributes appear to third-party tracking scripts across the web.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* ── Score model + honest limits ───────────────────────────── */}
+          {/* ── Tips to Improve Privacy ───────────────────────────────────── */}
           <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">How the score is weighted — and where it falls short</h2>
-
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              The number is a weighted tally, not a scientific measurement. Every browser starts at a baseline of
-              40, and each protection adds points: no WebRTC leak is worth 20, an active GPC signal 15, a detected
-              content blocker 15, and a restricted referrer 10. We would rather show you the formula than present a
-              figure you have to take on faith.
-            </p>
-
-            <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">The referrer check reflects this visit only</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  It inspects <code className="text-primary">document.referrer</code> for the page load that just
-                  happened. Arriving here from a search engine produces a different result than typing the URL
-                  directly, so treat it as a single data point rather than a verdict on your browser&apos;s referrer
-                  policy in general.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Blocker detection can misfire in both directions</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  A corporate firewall or a flaky connection can make the probe fail even with no blocker installed,
-                  and a blocker configured to return an empty response rather than reject the request can slip past
-                  it. The check tells you whether that one request succeeded — nothing more.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">A clean scan is not the same as being private</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  These four checks cover network-level exposure. They say nothing about what you are logged into,
-                  which extensions can read the pages you visit, or how much your browser profile is syncing to the
-                  cloud. A perfect 100 here is compatible with being thoroughly tracked by services you signed into
-                  voluntarily.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">What leaves your browser — and what doesn&apos;t</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3">
-                  No result — including any IP address the WebRTC probe surfaces — is sent to us, stored, or logged.
-                  Every value stays in the page, and reloading discards all of it and returns to the start button. We
-                  have no backend here
-                  to send it to.
-                </p>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  The scan itself does make <strong className="text-foreground">two outbound requests</strong>, both to
-                  Google, and you should know about both. The ad-script probe issues a{" "}
-                  <code className="text-primary">HEAD</code> request to{" "}
-                  <code className="text-primary">pagead2.googlesyndication.com</code>. And the WebRTC check contacts
-                  Google&apos;s public STUN server at{" "}
-                  <code className="text-primary">stun.l.google.com:19302</code> — which, by design, means that server
-                  observes your public IP address. That is not incidental; it is how STUN works, and it is how the
-                  test learns what a video-call site could see. Any browser-based WebRTC leak test has to disclose
-                  your address to some STUN server in order to tell you your address is exposed. That is why the scan
-                  does not start by itself: nothing is contacted until you press the button, so if the trade is not
-                  acceptable to you, simply don&apos;t press it — checking your browser&apos;s WebRTC settings
-                  directly is the leak-free alternative.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* ── Improving the score ───────────────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Improving your result</h2>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">How to Improve Your Browser Privacy</h2>
 
             <div className="space-y-3">
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Close the WebRTC leak first</h3>
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Enable Global Privacy Control</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  It carries the heaviest weight for good reason. Firefox exposes{' '}
-                  <code className="text-primary">media.peerconnection.ice.default_address_only</code> in{' '}
-                  <code className="text-primary">about:config</code>; Chromium-based browsers need an extension that
-                  restricts ICE candidate policy. Do not simply disable WebRTC outright unless you never use browser
-                  video calls, as it will break them. Our{' '}
-                  <Link href="/blog/webrtc-ip-leak-how-video-calls-expose-your-real-ip-address-through-the-browser" className="text-primary hover:underline font-semibold">deep
-                  dive on WebRTC IP leaks</Link> walks through the mechanism properly.
+                  Turn on &ldquo;Do Not Track&rdquo; or &ldquo;Global Privacy Control&rdquo; in your browser settings to automatically request privacy on supported websites.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Turn on GPC — it takes one click</h3>
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Use a Trusted Content Blocker</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Look for the &ldquo;Send a Do Not Track request&rdquo; or opt-out toggle in your browser&apos;s
-                  privacy settings. It has no downside and, unlike DNT alone, carries actual legal force with
-                  companies subject to modern privacy law.
+                  Install a reputable open-source ad and tracker blocker to stop invasive scripts from loading across web pages.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Install a content blocker, then audit your extensions</h3>
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Review Browser Permissions</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  A reputable blocker removes a large fraction of third-party tracking. Then look critically at
-                  everything else you have installed — an extension with permission to read every page you visit has
-                  deeper access than any tracker it might be blocking. We covered how to evaluate that in{' '}
-                  <Link href="/blog/browser-extension-permissions-the-hidden-security-risk-youre-ignoring" className="text-primary hover:underline font-semibold">the
-                  hidden risk of extension permissions</Link>.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Accept that fingerprinting needs a different answer</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  You cannot configure your way out of having a screen resolution. Browsers that fight
-                  fingerprinting do it by lying — reporting standardised values so that everyone looks alike.
-                  Resisting it properly means using one of those, and accepting the occasional layout quirk that
-                  comes with it.
+                  Regularly audit installed browser extensions and site permissions (location, camera, microphone) to reduce unnecessary data access.
                 </p>
               </div>
             </div>
@@ -496,57 +375,27 @@ export default function BrowserPrivacyScoreClient() {
 
           {/* ── FAQ ───────────────────────────────────────────────────── */}
           <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently asked questions</h2>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently Asked Questions</h2>
 
             <div className="space-y-3">
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Does this scan send my IP address anywhere?</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Does this scan save or transmit my IP address?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Not to us. Any address the WebRTC probe surfaces is displayed on your screen and held in page
-                  memory until you navigate away — there is no endpoint here that receives scan results. But it is
-                  not sent nowhere: the WebRTC test contacts Google&apos;s public STUN server, and that server
-                  necessarily observes your public IP, because observing and reporting it back is precisely how STUN
-                  works. Every browser-based WebRTC leak test has this property. It is also why the scan waits for
-                  you to press the button rather than running the moment the page opens.
+                  No. Scan results are calculated live inside your browser session and are never saved, recorded, or logged on our servers.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">I use a VPN but my real IP still shows. Why?</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Does private browsing mode protect against all tracking?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  That is the classic WebRTC leak, and it is exactly what this check exists to catch. WebRTC
-                  gathers candidate network paths at the operating-system level to enable direct peer-to-peer
-                  connections, which can sidestep the VPN tunnel entirely. Your traffic is still routed through the
-                  VPN; your address is simply being advertised alongside it.
+                  Private browsing prevents cookies and browsing history from saving locally on your device, but websites can still see your IP address and connection details.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Why is my score capped even in private browsing mode?</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">How does tab locking help my privacy?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Private windows discard cookies and history when closed. They do not change your screen
-                  resolution, your CPU core count, or how WebRTC negotiates connections — so the fingerprint and
-                  leak checks return the same results. Private browsing hides your activity from other people using
-                  your computer, not from the sites you visit.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Should blocked cookies count in my favour?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Blocking cookies wholesale breaks most logins, so it is not advice we would give. The distinction
-                  worth caring about is first-party versus third-party: your bank setting a session cookie is
-                  necessary, an ad network setting one across two hundred sites is not. Modern browsers let you
-                  block the second without breaking the first.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">What does this have to do with locking tabs?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Everything above is about remote observers — networks, trackers, sites. There is a second threat
-                  model this scan cannot see: the person who sits down at your desk while a dozen authenticated
-                  sessions are open on screen. No privacy setting addresses that, which is the gap Locksy fills.
+                  Browser privacy tools protect you from remote online trackers, while Locksy protects your active logged-in sessions from anyone nearby who has access to your physical computer.
                 </p>
               </div>
             </div>
@@ -554,16 +403,16 @@ export default function BrowserPrivacyScoreClient() {
 
           {/* CTA */}
           <div className="p-8 rounded-3xl bg-gradient-to-r from-violet-500/10 via-purple-500/10 to-primary/10 border border-violet-500/20 text-center">
-            <h3 className="text-xl font-bold mb-2">Eliminate Open Tab Exposure Risks with Locksy</h3>
+            <h3 className="text-xl font-bold mb-2">Protect Open Tabs with Locksy</h3>
             <p className="text-xs text-muted-foreground mb-6 max-w-lg mx-auto">
-              Locksy encrypts active open tabs using client-side PBKDF2 (600,000 iterations), WebAuthn biometrics, and stealth mode.
+              Locksy locks and encrypts your active browser tabs with master password protection and biometric unlock.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/#download" className="btn-primary text-xs py-3 px-6">
                 Install Locksy Free
               </Link>
               <Link href="/security" className="btn-secondary text-xs py-3 px-6">
-                Read Security Whitepaper
+                Read Security Overview
               </Link>
             </div>
           </div>

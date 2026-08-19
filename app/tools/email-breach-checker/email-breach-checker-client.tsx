@@ -155,154 +155,60 @@ export default function EmailBreachCheckerClient() {
             )}
           </div>
 
-          {/* ── How the lookup works ──────────────────────────────────── */}
+          {/* ── Understanding Breaches ─────────────────────────────────── */}
           <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">What happens when you press check</h2>
-
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
-              Your browser sends the address you typed straight to the{' '}
-              <a href="https://xposedornot.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">XposedOrNot</a>{' '}
-              public breach API and renders whatever comes back. There is no server of ours in the middle: the
-              request goes from your machine to theirs, the response is displayed, and nothing is written to a
-              database, a log file or your browser&apos;s local storage. Reload the page and it is gone.
-            </p>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Understanding Data Breaches</h2>
 
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              We would rather be precise than reassuring, so here is the part most breach checkers gloss over:
-              this lookup transmits your <strong className="text-foreground">complete email address</strong> to a
-              third-party service. Some breach APIs use a k-anonymity scheme, where your browser hashes the input
-              and sends only the first few characters of the hash, so the service can return a bucket of candidate
-              matches without ever learning what you searched for. This endpoint does not work that way. If sending
-              your address to an external service is unacceptable in your threat model, do not use this tool — and
-              be sceptical of any breach checker that does not tell you which of the two designs it uses.
+              Data breaches occur when third-party services suffer unauthorized security intrusions resulting in public leaks of user account information.
             </p>
 
-            <div className="grid sm:grid-cols-3 gap-4">
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <div className="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">Step one</div>
-                <h3 className="font-bold text-foreground mb-1.5 text-sm">Normalise</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  The address is trimmed and lower-cased in the page, then URL-encoded. Anything without an{' '}
-                  <code className="text-primary">@</code> is rejected before any request is made.
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">What Gets Exposed?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Breaches typically contain account identifiers such as email addresses, usernames, and associated password hashes from the compromised service.
                 </p>
               </div>
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <div className="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">Step two</div>
-                <h3 className="font-bold text-foreground mb-1.5 text-sm">Query</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  A single read-only request goes to the breach index, which holds records from publicly disclosed
-                  credential dumps. No account, no API key, no rate-limit cookie.
-                </p>
-              </div>
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <div className="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">Step three</div>
-                <h3 className="font-bold text-foreground mb-1.5 text-sm">Render</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Matching incident names are listed as-is. The list is the names of the breached services — never
-                  the leaked passwords themselves, which the index does not return.
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">The Danger of Reused Passwords</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Attackers use automated credential-stuffing bots to try leaked email and password combinations across hundreds of unrelated platforms.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* ── Reading the result ────────────────────────────────────── */}
+          {/* ── Recommended Next Steps ──────────────────────────────────────── */}
           <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">How to read your result</h2>
-
-            <div className="space-y-4">
-              <div className="p-5 sm:p-6 rounded-2xl bg-red-500/5 border border-red-500/20">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Found in one or more breaches</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3">
-                  This does not mean you were careless. It means a company you handed an address to was breached,
-                  and their user table ended up in public circulation. The named incidents are the ones already
-                  disclosed and indexed — a floor, not a total.
-                </p>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  What actually matters is <em>what else</em> was in that record. If the password you used there is
-                  a password you also used anywhere else, that combination is now sitting in credential-stuffing
-                  lists, being tried automatically against every major login page. Change those first, starting with
-                  your email account — whoever controls your inbox can reset almost everything else.
-                </p>
-              </div>
-
-              <div className="p-5 sm:p-6 rounded-2xl bg-emerald-500/5 border border-emerald-500/20">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">No breaches found</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Encouraging, but weaker evidence than it looks. A clean result means this address does not appear
-                  in the dumps this index has processed. Breaches routinely go undetected for months or years before
-                  disclosure, plenty are never disclosed at all, and stolen data is often traded privately long
-                  before it reaches a public corpus. Read it as &ldquo;nothing known yet,&rdquo; not
-                  &ldquo;never exposed.&rdquo;
-                </p>
-              </div>
-
-              <div className="p-5 sm:p-6 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">One caveat about failures</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  If the request itself fails — the API is down, or your network blocks it — this tool currently
-                  shows the same clean result as a genuine miss. So if you get a clean result and you had reason to
-                  expect otherwise, try again later rather than treating it as confirmation.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* ── What to do next ──────────────────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">What to actually do about it</h2>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Recommended Next Steps</h2>
 
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              In priority order, because the usual advice — &ldquo;change your passwords&rdquo; — is both too vague
-              and too much work to act on all at once.
+              If your email has appeared in a breach, follow these essential remediation steps:
             </p>
 
             <div className="space-y-3">
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">1. Secure the email account itself</h3>
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">1. Secure Your Primary Email Account</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Your inbox is the master key to every account that offers a password reset. Give it a unique
-                  password and the strongest second factor it supports, before touching anything else.
+                  Your email inbox controls password resets for all other online services. Ensure it has a strong, unique password and two-factor authentication enabled.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">2. Kill every instance of the reused password</h3>
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">2. Replace Reused Passwords</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Credential stuffing works precisely because one leaked pair unlocks a dozen unrelated services.
-                  If you can recall reusing a password anywhere, that is where the real exposure is — not the site
-                  that got breached. Our{' '}
-                  <Link href="/tools/password-generator" className="text-primary hover:underline font-semibold">password generator</Link>{' '}
-                  produces a fresh high-entropy replacement locally, and the{' '}
-                  <Link href="/tools/password-strength-checker" className="text-primary hover:underline font-semibold">strength checker</Link>{' '}
-                  shows how long each one would survive a brute-force attempt.
+                  Update your passwords across all accounts where you may have reused credentials. Use our{' '}
+                  <Link href="/tools/password-generator" className="text-primary hover:underline font-semibold">Password Generator</Link>{' '}
+                  to create unique replacements.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">3. Add a second factor where it counts</h3>
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">3. Enable Two-Factor Authentication (2FA)</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Email, banking, cloud storage, password manager, domain registrar. A leaked password stops being
-                  sufficient the moment a second factor is required — prefer an authenticator app or a hardware key
-                  over SMS, which is vulnerable to number porting.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">4. Expect the phishing to get better</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Leaked records often carry names, phone numbers and purchase history alongside the address. That
-                  detail is what turns generic spam into a convincing message that cites a real order you actually
-                  placed. Treat unexpected mail referencing genuine specifics with more suspicion, not less.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">5. Remember what a password never protected</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Every fix above defends the login. None of it helps once you are already logged in and walk away
-                  from an unlocked machine — your inbox, your admin panels and your dashboards are sitting there in
-                  open tabs, past every authentication step you just hardened. That is a different threat model, and
-                  the one Locksy exists for.
+                  Add an authenticator app (such as Google Authenticator or Aegis) or hardware security key to protect your critical accounts even if a password leaks.
                 </p>
               </div>
             </div>
@@ -310,52 +216,27 @@ export default function EmailBreachCheckerClient() {
 
           {/* ── FAQ ───────────────────────────────────────────────────── */}
           <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently asked questions</h2>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently Asked Questions</h2>
 
             <div className="space-y-3">
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Do you store the address I search for?</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Do you store the email address I search for?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  We do not — there is no backend here to store it in, and nothing is written to local storage.
-                  The address is, however, sent to the third-party breach API described above, which is what makes
-                  the lookup possible at all.
+                  No. We do not store, track, or record any email addresses searched on this tool.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
                 <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Will this show me the leaked password?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  No, and you should distrust any free tool that offers to. The index returns the names of the
-                  breached services only. A site willing to hand you plaintext credentials for an arbitrary address
-                  is telling you something about its own ethics.
+                  No. This tool only lists the names of services associated with known data incidents, never plain text passwords.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">A breach is listed from years ago. Do I still need to act?</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">A breach is listed from several years ago. Do I still need to act?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  If the password from that era is genuinely dead everywhere, no. Old dumps stay in circulation
-                  indefinitely and get re-tried whenever a new stuffing campaign spins up, so the only thing that
-                  makes an old breach harmless is that the credentials no longer work anywhere.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Should I check my other addresses too?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Yes — results are per-address, and an old account you have not touched in a decade is often the
-                  one holding a password you reused back when you reused passwords. Work-issued addresses are worth
-                  checking as well, though your IT team may already monitor them centrally.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Does using aliases or a catch-all domain help?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  It helps a great deal. A distinct address per service means a breach exposes one alias rather than
-                  the identifier that ties all your accounts together, and it tells you exactly which company leaked
-                  your data. It does not protect the password, so treat it as compartmentalisation rather than a
-                  substitute for unique credentials.
+                  If you have already changed the password for that service and never reused that password on other accounts, no further action is needed.
                 </p>
               </div>
             </div>
@@ -363,9 +244,9 @@ export default function EmailBreachCheckerClient() {
 
           {/* CTA */}
           <div className="p-8 rounded-3xl bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-red-500/10 border border-amber-500/20 text-center">
-            <h3 className="text-xl font-bold mb-2">Protect Your Logged-In Browser Sessions with Locksy</h3>
+            <h3 className="text-xl font-bold mb-2">Protect Open Tabs from Local Exposure with Locksy</h3>
             <p className="text-xs text-muted-foreground mb-6 max-w-lg mx-auto">
-              Locksy prevents unauthorized physical workstation access to active open tabs with PBKDF2 (600,000 iterations) and biometric unlock.
+              Locksy prevents unauthorized access to active open browser tabs with password encryption and biometric unlock.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/#download" className="btn-primary text-xs py-3 px-6">

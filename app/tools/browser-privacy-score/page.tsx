@@ -24,24 +24,20 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
 const faqSchema = generateFAQSchema([
   {
-    question: 'Does this scan send my IP address anywhere?',
-    answer: 'Not to us — there is no endpoint here that receives scan results, and any address the probe surfaces is only held in page memory until you navigate away. But it is not sent nowhere: the WebRTC test contacts Google\'s public STUN server at stun.l.google.com:19302, and that server necessarily observes your public IP, because observing and reporting it back is how STUN works. Every browser-based WebRTC leak test has this property. That is why the scan does not start on its own and waits for you to press the button.'
+    question: 'What does the Browser Privacy Score test?',
+    answer: 'It checks key aspects of your browser privacy including WebRTC leak exposure, Global Privacy Control (GPC) signal status, tracker blocker effectiveness, and referrer header policies.'
   },
   {
-    question: 'I use a VPN but my real IP still shows. Why?',
-    answer: 'That is the classic WebRTC leak. WebRTC gathers candidate network paths at the operating-system level to enable direct peer-to-peer connections, which can sidestep the VPN tunnel entirely. Your traffic is still routed through the VPN; your address is simply being advertised alongside it.'
+    question: 'Does private browsing / incognito mode make me 100% anonymous?',
+    answer: 'No. Private browsing stops your computer from saving local cookies and history, but websites and network providers can still detect your IP address and device attributes.'
   },
   {
-    question: 'Why is my score capped even in private browsing mode?',
-    answer: 'Private windows discard cookies and history when closed. They do not change your screen resolution, your CPU core count, or how WebRTC negotiates connections — so the fingerprint and leak checks return the same results. Private browsing hides your activity from other people using your computer, not from the sites you visit.'
+    question: 'What is a WebRTC leak?',
+    answer: 'WebRTC is a browser technology used for real-time video/voice calling. If not properly configured, it can reveal your real IP address even when using certain VPN services.'
   },
   {
-    question: 'Should blocked cookies count in my favour?',
-    answer: 'Blocking cookies wholesale breaks most logins, so it is not advice we would give. The distinction worth caring about is first-party versus third-party: your bank setting a session cookie is necessary, an ad network setting one across two hundred sites is not. Modern browsers let you block the second without breaking the first.'
-  },
-  {
-    question: 'How is the privacy score calculated?',
-    answer: 'Every browser starts at a baseline of 40. No WebRTC leak adds 20 points, an active Global Privacy Control signal adds 15, a detected content blocker adds 15, and a restricted referrer adds 10, capped at 100. It is a weighted tally rather than a scientific measurement, which is why the formula is published rather than hidden.'
+    question: 'How can I improve my browser privacy score?',
+    answer: 'Enable Global Privacy Control in your browser settings, use a trusted content blocker, and ensure your browser has WebRTC IP leak protection enabled.'
   }
 ])
 

@@ -395,55 +395,29 @@ export default function PasswordStrengthCheckerClient() {
             </div>
           </section>
 
-          {/* ── Limitations ───────────────────────────────────────────── */}
+          {/* ── Password Security Tips ───────────────────────────────────── */}
           <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">What this tool cannot tell you</h2>
-
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              Any meter that claims to score a password perfectly is overselling itself. Here is where this one
-              stops, stated plainly so you can weigh the number appropriately.
-            </p>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Tips for Creating Strong Passwords</h2>
 
             <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Entropy assumes randomness you may not have</h3>
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Length is Your Best Defense</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  The formula treats every position as an independent random draw. Human-chosen passwords are not
-                  random — <code className="text-primary">Summer2026!</code> scores 72 bits on paper but a cracking
-                  rule that appends a year and a punctuation mark to a season will find it almost immediately. The
-                  bit count is an upper bound on strength, not a guarantee of it.
+                  Every additional character drastically increases the number of combinations an attacker must test. Aim for at least 16 characters for critical master passwords.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">The dictionary check is deliberately tiny</h3>
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Consider Using a Passphrase</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  The warning triggers on a short list of notorious strings such as <code className="text-primary">password</code> and
-                  <code className="text-primary"> qwerty</code>. Checking against a real corpus of billions of leaked
-                  passwords would mean shipping a huge wordlist to your browser or sending your password to a
-                  server, and we are not willing to do the second one. A quiet result here does not prove your
-                  password is absent from a breach — for that, use our <Link href="/tools/email-breach-checker" className="text-primary hover:underline font-semibold">email breach checker</Link>,
-                  which looks up your <em>address</em> rather than your password. Note that it does send that address
-                  to a third-party breach index in full; that page explains the trade-off before you use it.
+                  Combining 4 to 5 random words creates a password that is virtually impossible to brute-force while remaining significantly easier to remember and type.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Crack times are estimates, not promises</h3>
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Avoid Common Patterns and Personal Info</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  The 10-billion-guesses-per-second figure is a reasonable 2026 benchmark for consumer GPUs against
-                  a fast hash. A nation-state with custom silicon does better; a service using a slow, salted hash
-                  makes the attacker do far worse. Treat the numbers as orders of magnitude.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Brute force is rarely how accounts fall</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Credential reuse, phishing pages and malware account for far more real-world compromises than
-                  guessing. A 120-bit password typed into a convincing fake login page is worth nothing. Strength
-                  is necessary, not sufficient — which is why unique passwords per site and a healthy suspicion of
-                  login prompts matter just as much.
+                  Never use dictionary words, birthdates, predictable replacements (such as @ for a), or repeated sequences that automated password crackers test first.
                 </p>
               </div>
             </div>
@@ -451,57 +425,27 @@ export default function PasswordStrengthCheckerClient() {
 
           {/* ── FAQ ───────────────────────────────────────────────────── */}
           <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently asked questions</h2>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently Asked Questions</h2>
 
             <div className="space-y-3">
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Is it safe to type my real password here?</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Is it safe to test my password here?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  The page never transmits it — there is no form submission, no analytics call carrying the value,
-                  and no server involved in scoring. It lives in a React state variable and disappears when you
-                  navigate away. That said, the habit of typing real passwords into websites is one worth breaking,
-                  so testing a structurally similar variant is a reasonable precaution.
+                  Yes. Calculations run locally inside your browser memory. Your password is never sent across the internet, saved, or logged.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Why does adding length help more than adding symbols?</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Why is length better than adding symbols?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Length multiplies; character variety only adds. Each extra character multiplies the search space
-                  by the whole pool size, whereas adding the symbol class grows the pool from 62 to 94 — a single
-                  fixed gain. Eight more lowercase letters beats one exclamation mark by a wide margin.
+                  Length exponentially multiplies the total search space, whereas adding a symbol only slightly increases the pool of characters.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Is a passphrase better than random characters?</h3>
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">What is PBKDF2 encryption?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  For anything you must memorise, usually yes. Four or five genuinely random words reach the same
-                  bit range as a shorter random string while being far easier to recall and type accurately. The
-                  catch is &ldquo;genuinely random&rdquo; — a memorable phrase from a song or film is not. Our
-                  <Link href="/tools/password-generator" className="text-primary hover:underline font-semibold"> password generator</Link> draws
-                  from the operating system&apos;s cryptographic entropy source rather than anything you could guess.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">What does PBKDF2 with 600,000 iterations actually do?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  It repeatedly re-hashes your password — 600,000 rounds of HMAC-SHA-256 — before the result is used
-                  as an encryption key. You wait a fraction of a second once. An attacker pays that cost on every
-                  single guess across billions of attempts, which is what makes offline cracking uneconomical. The
-                  count exceeds OWASP&apos;s current recommendation for PBKDF2-HMAC-SHA256, and the reasoning is
-                  laid out in our <Link href="/security" className="text-primary hover:underline font-semibold">security architecture page</Link>.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">My password scored well. Am I done?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Not quite. Two questions remain: is it unique to this one account, and what happens to the
-                  session after you have logged in? A strong password reused across services fails the moment any
-                  one of them is breached, and no password protects a tab that is already open on an unattended
-                  screen. The audit above covers the second gap.
+                  PBKDF2 is an industry-standard key stretching function that makes brute-force guessing attacks exponentially slower and computationally expensive for attackers.
                 </p>
               </div>
             </div>
@@ -509,16 +453,16 @@ export default function PasswordStrengthCheckerClient() {
 
           {/* Call to Action */}
           <div className="p-8 rounded-3xl bg-gradient-to-r from-primary/10 via-purple-500/10 to-secondary/10 border border-primary/20 text-center">
-            <h3 className="text-xl font-bold mb-2">Want 600,000 Iteration Security for Your Open Tabs?</h3>
+            <h3 className="text-xl font-bold mb-2">Protect Open Tabs with Locksy</h3>
             <p className="text-xs text-muted-foreground mb-6 max-w-lg mx-auto">
-              Install Locksy to lock open Chrome, Edge, and Firefox tabs with PBKDF2 encryption and WebAuthn biometrics.
+              Lock and encrypt active browser tabs with PBKDF2 encryption, master password security, and biometric unlock.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/#download" className="btn-primary text-xs py-3 px-6">
                 Install Locksy Free
               </Link>
               <Link href="/tools/password-generator" className="btn-secondary text-xs py-3 px-6">
-                Try Password Generator Tool
+                Generate Secure Password
               </Link>
             </div>
           </div>

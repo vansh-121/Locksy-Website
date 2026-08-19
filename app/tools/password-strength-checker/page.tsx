@@ -24,24 +24,20 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 
 const faqSchema = generateFAQSchema([
   {
-    question: 'Is it safe to type my real password here?',
-    answer: 'The page never transmits it — there is no form submission, no analytics call carrying the value, and no server involved in scoring. It lives in a React state variable and disappears when you navigate away. That said, the habit of typing real passwords into websites is one worth breaking, so testing a structurally similar variant is a reasonable precaution.'
+    question: 'Is my password safe to test here?',
+    answer: 'Yes. Calculations are performed locally inside your browser memory. We never store, log, or send your passwords across the internet.'
   },
   {
-    question: 'Why does adding length help more than adding symbols?',
-    answer: 'Length multiplies; character variety only adds. Each extra character multiplies the search space by the whole pool size, whereas adding the symbol class grows the pool from 62 to 94 — a single fixed gain. Eight more lowercase letters beats one exclamation mark by a wide margin.'
+    question: 'Why does password length matter more than complex symbols?',
+    answer: 'Every additional character exponentially multiplies the possible combinations, creating a much stronger defense against automated brute-force attempts than simply adding a symbol.'
   },
   {
-    question: 'Is a passphrase better than random characters?',
-    answer: 'For anything you must memorise, usually yes. Four or five genuinely random words reach the same bit range as a shorter random string while being far easier to recall and type accurately. The catch is that the words must be genuinely random — a memorable phrase from a song or film is not.'
+    question: 'What is the difference between a password and a passphrase?',
+    answer: 'A passphrase uses multiple random words (e.g. "correct-horse-battery-staple") which provides high entropy while remaining much easier for humans to remember and type accurately.'
   },
   {
-    question: 'What does PBKDF2 with 600,000 iterations actually do?',
-    answer: 'It repeatedly re-hashes your password — 600,000 rounds of HMAC-SHA-256 — before the result is used as an encryption key. You wait a fraction of a second once. An attacker pays that cost on every single guess across billions of attempts, which is what makes offline cracking uneconomical.'
-  },
-  {
-    question: 'My password scored well. Am I done?',
-    answer: 'Not quite. Two questions remain: is it unique to this one account, and what happens to the session after you have logged in? A strong password reused across services fails the moment any one of them is breached, and no password protects a tab that is already open on an unattended screen.'
+    question: 'What is PBKDF2 key stretching?',
+    answer: 'PBKDF2 is a cryptographic key-derivation function that performs hundreds of thousands of hashing rounds, dramatically slowing down brute-force attacks.'
   }
 ])
 
