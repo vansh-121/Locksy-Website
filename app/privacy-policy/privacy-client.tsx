@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Footer from "@/components/footer"
 import { Shield, Lock, CheckCircle, XCircle, ArrowLeft, Database, Eye, AlertTriangle, FileText, Globe, Trash2 } from "lucide-react"
 
 interface PrivacyPolicyClientProps {
@@ -674,36 +675,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                     </div>
                 </section>
 
-                {/* Footer */}
-                <footer className="relative bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 text-neutral-300 py-12">
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-                    <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div className="flex items-center gap-3">
-                                <img
-                                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
-                                    alt="Locksy"
-                                    className="h-10 w-auto"
-                                />
-                                <span className="font-black text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                    Locksy
-                                </span>
-                                <span className="text-muted-foreground">• Privacy-First Security</span>
-                            </div>
-                            <div className="flex items-center gap-6">
-                                <Link href="/" className="hover:text-primary transition-colors">
-                                    Home
-                                </Link>
-                                <Link href="/contact" className="hover:text-primary transition-colors">
-                                    Contact
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="mt-8 text-center text-sm text-muted-foreground">
-                            <p>© 2026 Locksy. Privacy-focused tab protection.</p>
-                        </div>
-                    </div>
-                </footer>
+                <Footer />
             </div>
         </>
     )

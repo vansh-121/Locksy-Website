@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Footer from "@/components/footer"
 import { Shield, FileText, Scale, AlertTriangle, CheckCircle, ArrowLeft, Users, Globe, Code2, Heart } from "lucide-react"
 
 export default function TermsOfServiceClient() {
@@ -313,44 +314,7 @@ export default function TermsOfServiceClient() {
                     </div>
                 </section>
 
-                {/* Footer */}
-                <footer className="relative bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 text-neutral-300 py-12">
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-                    <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div className="flex items-center gap-3">
-                                <img
-                                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
-                                    alt="Locksy"
-                                    className="h-10 w-auto"
-                                />
-                                <span className="font-black text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                    Locksy
-                                </span>
-                                <span className="text-muted-foreground">• Fair & Transparent</span>
-                            </div>
-                            <div className="flex items-center gap-6">
-                                <Link href="/" className="hover:text-primary transition-colors">
-                                    Home
-                                </Link>
-                                <Link href="/privacy-policy" className="hover:text-primary transition-colors">
-                                    Privacy Policy
-                                </Link>
-                                <a
-                                    href="https://github.com/vansh-121/Locksy"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hover:text-primary transition-colors"
-                                >
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-                        <div className="mt-8 text-center text-sm text-muted-foreground">
-                            <p>© 2025–2026 Locksy. Privacy-focused tab protection.</p>
-                        </div>
-                    </div>
-                </footer>
+                <Footer />
             </div>
         </>
     )

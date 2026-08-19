@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Shield, Lock, Zap, Heart, ArrowRight, CheckCircle2, Download, Star, Frown } from "lucide-react"
 import Link from "next/link"
 import Header from "@/components/header"
+import Footer from "@/components/footer"
 
 const PRIMARY_BROWSERS = [
     {
@@ -137,77 +138,6 @@ export default function UninstallClient() {
                     </div>
                 </div>
 
-                {/* Finishing the removal */}
-                <div className="max-w-4xl mx-auto mb-12">
-                    <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
-                        <CardContent className="pt-8 pb-8 space-y-5">
-                            <h2 className="text-2xl md:text-3xl font-bold">Finishing the removal properly</h2>
-
-                            <p className="text-muted-foreground leading-relaxed">
-                                Removing the extension stops it running, but it does not always clear what it wrote to
-                                your browser&apos;s local storage. If you want Locksy gone completely, there are two
-                                loose ends worth tidying — and one thing to do <em>before</em> you remove it from any
-                                other browser.
-                            </p>
-
-                            <div className="p-5 rounded-xl bg-amber-500/10 border border-amber-500/30">
-                                <h3 className="font-bold mb-2">Unlock your tabs first</h3>
-                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                    A locked tab is rendered by the extension. Uninstall while tabs are still locked and
-                                    the lock screen simply disappears along with everything else — the pages themselves
-                                    are untouched and no browsing data is lost, but you may find tabs left on a blank or
-                                    stale view that need reloading. Unlocking everything from the popup before you remove
-                                    it avoids that entirely.
-                                </p>
-                            </div>
-
-                            <div className="grid md:grid-cols-2 gap-5">
-                                <div className="p-5 rounded-xl bg-background/50 border border-border">
-                                    <h3 className="font-bold mb-2">Chrome, Edge, Brave, Opera and Vivaldi</h3>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
-                                        Right-click the Locksy icon in the toolbar and choose to remove it, or open your
-                                        browser&apos;s extensions page and remove it there. To clear what it stored,
-                                        remove the extension first, then clear site data for the extension&apos;s origin
-                                        from your browser&apos;s privacy settings. Chromium browsers generally discard an
-                                        extension&apos;s local storage when it is uninstalled, so this is belt-and-braces
-                                        rather than strictly necessary.
-                                    </p>
-                                </div>
-
-                                <div className="p-5 rounded-xl bg-background/50 border border-border">
-                                    <h3 className="font-bold mb-2">Firefox</h3>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
-                                        Open the add-ons manager, find Locksy under Extensions, and remove it from the
-                                        overflow menu. Firefox will ask whether to report why you removed it — that
-                                        prompt is Mozilla&apos;s, not ours, and the feedback form on this page is
-                                        separate. Extension storage is removed with the add-on.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <p className="text-muted-foreground leading-relaxed">
-                                Then check your other browsers. Because nothing syncs between installations, removing
-                                Locksy from Chrome has no effect on the copy in Firefox — each profile is independent,
-                                including its master password and its saved rules. If you set it up on more than one
-                                browser or more than one machine, each needs removing separately.
-                            </p>
-
-                            <p className="text-muted-foreground leading-relaxed">
-                                There is nothing to request from us afterwards. No account was created, no password or
-                                browsing data ever reached a server, and there is no profile of yours for us to delete —
-                                so uninstalling is genuinely the end of it. The{' '}
-                                <Link href="/privacy-policy" className="text-primary hover:underline font-semibold">
-                                    privacy policy
-                                </Link>{' '}
-                                sets out what was and was not stored, and the{' '}
-                                <Link href="/security" className="text-primary hover:underline font-semibold">
-                                    security architecture page
-                                </Link>{' '}
-                                explains why the design leaves us nothing to hand back.
-                            </p>
-                        </CardContent>
-                    </Card>
-                </div>
 
                 {/* Support Section - After Uninstalling */}
                 <div className="max-w-4xl mx-auto mb-12">
@@ -654,35 +584,7 @@ export default function UninstallClient() {
                 </div>
             </main>
 
-            {/* Footer */}
-            <footer className="relative border-t py-12 mt-16 bg-background/50 backdrop-blur-sm">
-                <div className="container text-center space-y-6">
-                    <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                        <span>Made with</span>
-                        <Heart className="h-4 w-4 text-red-500 animate-pulse" />
-                        <span>by the Locksy team</span>
-                    </div>
-                    <div className="flex flex-wrap justify-center gap-6 text-sm">
-                        <Link href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors font-medium">
-                            Privacy Policy
-                        </Link>
-                        <Link href="/" className="text-muted-foreground hover:text-primary transition-colors font-medium">
-                            Home
-                        </Link>
-                        <a
-                            href="https://github.com/vansh-121/locksy"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-muted-foreground hover:text-primary transition-colors font-medium"
-                        >
-                            GitHub
-                        </a>
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                        © {new Date().getFullYear()} Locksy. Protecting your privacy, one tab at a time.
-                    </p>
-                </div>
-            </footer>
+            <Footer />
         </div>
         </>
     )
