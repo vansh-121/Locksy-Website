@@ -275,8 +275,9 @@ export default function BrowserPrivacyScoreClient() {
               <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
                 <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">WebRTC IP candidate leak</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3">
-                  The scan opens an <code className="text-primary">RTCPeerConnection</code> against a public STUN
-                  server, creates a throwaway data channel, and reads the ICE candidates the browser offers up. Each
+                  The scan opens an <code className="text-primary">RTCPeerConnection</code> against Google&apos;s
+                  public STUN server (<code className="text-primary">stun.l.google.com:19302</code>), creates a
+                  throwaway data channel, and reads the ICE candidates the browser offers up. Each
                   candidate string can contain an IP address — and historically that included your real address even
                   when you were behind a VPN, because WebRTC negotiates peer-to-peer paths outside the proxy tunnel.
                 </p>
@@ -373,11 +374,24 @@ export default function BrowserPrivacyScoreClient() {
               </div>
 
               <div className="p-5 rounded-2xl bg-muted/20 border border-border/40">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Nothing is recorded</h3>
+                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">What leaves your browser — and what doesn&apos;t</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3">
+                  No result — including any IP address the WebRTC probe surfaces — is sent to us, stored, or logged.
+                  Every value stays in the page, and reloading starts the scan from scratch. We have no backend here
+                  to send it to.
+                </p>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Every value stays in the page. No result — including any IP address the WebRTC probe surfaces — is
-                  sent to us, stored, or logged. Reload and the scan starts from scratch. The one outbound request is
-                  the ad-script probe described above, and it is discarded immediately.
+                  The scan itself does make <strong className="text-foreground">two outbound requests</strong>, both to
+                  Google, and you should know about both. The ad-script probe issues a{" "}
+                  <code className="text-primary">HEAD</code> request to{" "}
+                  <code className="text-primary">pagead2.googlesyndication.com</code>. And the WebRTC check contacts
+                  Google&apos;s public STUN server at{" "}
+                  <code className="text-primary">stun.l.google.com:19302</code> — which, by design, means that server
+                  observes your public IP address. That is not incidental; it is how STUN works, and it is how the
+                  test learns what a video-call site could see. Any browser-based WebRTC leak test has to disclose
+                  your address to some STUN server in order to tell you your address is exposed. If that trade is not
+                  acceptable to you, don&apos;t run the scan — checking your browser&apos;s WebRTC settings directly
+                  is the leak-free alternative.
                 </p>
               </div>
             </div>

@@ -41,7 +41,7 @@ export default function ToolsHubPage() {
     },
     {
       question: 'Which of these tools send data off my machine?',
-      answer: 'The password strength checker and generator make no network requests at all. The privacy score makes one probe for a known ad script to infer whether a content blocker is active. The email breach checker does send the address you type to a third-party public breach index, because that lookup cannot be performed locally.'
+      answer: 'The password strength checker and generator make no network requests at all. The privacy score makes two, both to Google: a probe for a known ad script to infer whether a content blocker is active, and a STUN request that the WebRTC leak test needs in order to work — that STUN server necessarily sees your public IP, which is the whole mechanism the test relies on. The email breach checker does send the address you type to a third-party public breach index, because that lookup cannot be performed locally.'
     },
     {
       question: 'Where did the Locksy security checker tool go?',
@@ -257,9 +257,11 @@ export default function ToolsHubPage() {
               <strong className="text-foreground">no network requests at all</strong>. Every value stays in page
               memory and disappears on reload. You can confirm this yourself in about fifteen seconds: open your
               browser&apos;s developer tools, switch to the network panel, and interact with either tool. You should
-              see nothing appear. The privacy score makes exactly one outbound request — a probe for a known ad
-              script, used to infer whether a content blocker is intercepting tracker traffic — and the result is
-              read and discarded.
+              see nothing appear. The privacy score is different: it makes two outbound requests, both to Google. One
+              probes for a known ad script to infer whether a content blocker is intercepting tracker traffic. The
+              other is a STUN request that the WebRTC leak test cannot function without — and that STUN server sees
+              your public IP address by design, because observing and reporting it back is exactly what STUN does.
+              Neither result is stored or sent to us, but both requests are real and that page explains them in full.
             </p>
 
             <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/20">

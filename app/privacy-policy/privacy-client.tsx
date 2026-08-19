@@ -463,7 +463,12 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                             <Link href="/tools/email-breach-checker" className="text-primary hover:underline font-semibold">breach checker</Link>{' '}
                                             is the exception: it sends the address you enter to a third-party public breach
                                             index, because that lookup cannot be performed locally. That page states as
-                                            much before you use it.
+                                            much before you use it. The{' '}
+                                            <Link href="/tools/browser-privacy-score" className="text-primary hover:underline font-semibold">browser privacy score</Link>{' '}
+                                            makes two requests to Google while it runs — an ad-script probe used to detect
+                                            content blockers, and a STUN request the WebRTC leak test requires, which by
+                                            design lets that STUN server observe your public IP. Neither result is sent to
+                                            us or retained, and that page explains both in detail.
                                         </p>
                                     </div>
                                 </div>

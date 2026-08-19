@@ -423,7 +423,8 @@ export default function PasswordStrengthCheckerClient() {
                   passwords would mean shipping a huge wordlist to your browser or sending your password to a
                   server, and we are not willing to do the second one. A quiet result here does not prove your
                   password is absent from a breach — for that, use our <Link href="/tools/email-breach-checker" className="text-primary hover:underline font-semibold">email breach checker</Link>,
-                  which uses k-anonymity so your address never leaves in full.
+                  which looks up your <em>address</em> rather than your password. Note that it does send that address
+                  to a third-party breach index in full; that page explains the trade-off before you use it.
                 </p>
               </div>
 
