@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Shield, FileText, Scale, AlertTriangle, CheckCircle, ArrowLeft, Users, Globe, Code2, Heart } from "lucide-react"
 
@@ -74,33 +75,9 @@ export default function TermsOfServiceClient() {
 
     return (
         <>
-            <div className="min-h-screen">
-                {/* Header */}
-                <header className="sticky top-0 z-50 transition-all duration-300 bg-white/80 dark:bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5">
-                    <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
-                        <Link href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
-                                <img
-                                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
-                                    alt="Locksy"
-                                    className="relative h-10 md:h-12 w-auto"
-                                />
-                            </div>
-                            <span className="hidden sm:block font-black text-xl md:text-2xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                Locksy
-                            </span>
-                        </Link>
-                        <Link href="/" className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                            <ArrowLeft className="h-4 w-4" />
-                            <span className="hidden sm:inline">Back to Home</span>
-                            <span className="sm:hidden">Back</span>
-                        </Link>
-                    </div>
-                </header>
-
-                {/* Hero */}
-                <section className="relative pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
+            <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
+                <Header />
+                <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
                         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
                         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
