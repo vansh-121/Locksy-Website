@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import SupportChatCTA from "@/components/support-chat-cta"
@@ -9,7 +9,12 @@ import Link from 'next/link'
 import { Shield, Sparkles, CheckCircle2, AlertTriangle, XCircle, RefreshCw } from 'lucide-react'
 
 export default function BrowserPrivacyScoreClient() {
-  const [scanning, setScanning] = useState(true)
+  // The scan is NOT started on mount. Two of the six checks make outbound requests to
+  // Google, and the STUN one necessarily exposes the visitor's public IP to that server.
+  // Firing that on page load would leak before anyone could read the disclosure and opt
+  // out, so the scan waits for an explicit click.
+  const [hasRun, setHasRun] = useState(false)
+  const [scanning, setScanning] = useState(false)
   const [results, setResults] = useState<{
     webrtc: { status: string; safe: boolean; desc: string }
     referrer: { status: string; safe: boolean; desc: string }
@@ -29,6 +34,7 @@ export default function BrowserPrivacyScoreClient() {
   })
 
   const runAudit = async () => {
+    setHasRun(true)
     setScanning(true)
 
     // 1. Real WebRTC IP Leak Detection
@@ -140,10 +146,6 @@ export default function BrowserPrivacyScoreClient() {
     setScanning(false)
   }
 
-  useEffect(() => {
-    runAudit()
-  }, [])
-
   return (
     <>
       <Header />
@@ -173,7 +175,50 @@ export default function BrowserPrivacyScoreClient() {
           {/* Main Score Card */}
           <div className="p-5 sm:p-8 rounded-3xl bg-card/80 backdrop-blur-xl border border-border/60 shadow-2xl mb-12 text-center relative overflow-hidden">
             
-            {scanning ? (
+            {!hasRun ? (
+              <div className="py-6 sm:py-8 text-left max-w-2xl mx-auto">
+                <div className="text-center mb-6">
+                  <div className="inline-block p-5 rounded-full bg-primary/10 border-2 border-primary/30 mb-4">
+                    <Shield className="w-10 h-10 text-primary" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Before you start: what this scan sends</h2>
+                </div>
+
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4">
+                  Four of the six checks read values your browser already exposes to every page — privacy
+                  signal, cookie setting, referrer, and device fingerprint attributes. Those touch the network
+                  not at all.
+                </p>
+
+                <div className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 mb-5">
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    The other two make <strong className="text-foreground">outbound requests to Google</strong>:
+                    a <code className="text-primary">HEAD</code> probe to{" "}
+                    <code className="text-primary">pagead2.googlesyndication.com</code> to detect a content
+                    blocker, and a STUN request to{" "}
+                    <code className="text-primary">stun.l.google.com:19302</code> for the WebRTC leak test —{" "}
+                    <strong className="text-foreground">which lets that server observe your public IP address</strong>.
+                    That is unavoidable: a browser-based WebRTC test has to expose your address to a STUN server
+                    in order to report whether it is exposed. Nothing is sent to us or stored anywhere.
+                  </p>
+                </div>
+
+                <div className="text-center">
+                  <button
+                    onClick={runAudit}
+                    className="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer text-sm"
+                  >
+                    <Shield className="w-4 h-4" /> I understand — run the scan
+                  </button>
+                  <p className="text-[11px] text-muted-foreground mt-3">
+                    Prefer not to? Nothing has run yet, and closing this page sends nothing. You can inspect your
+                    WebRTC settings directly in your browser instead — the{" "}
+                    <span className="text-foreground font-semibold">Improving your result</span> section below
+                    explains how.
+                  </p>
+                </div>
+              </div>
+            ) : scanning ? (
               <div className="py-12">
                 <RefreshCw className="w-12 h-12 text-primary animate-spin mx-auto mb-4" />
                 <h2 className="text-xl font-bold text-foreground mb-1">Inspecting Live Browser Hardware APIs...</h2>
@@ -377,7 +422,8 @@ export default function BrowserPrivacyScoreClient() {
                 <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">What leaves your browser — and what doesn&apos;t</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3">
                   No result — including any IP address the WebRTC probe surfaces — is sent to us, stored, or logged.
-                  Every value stays in the page, and reloading starts the scan from scratch. We have no backend here
+                  Every value stays in the page, and reloading discards all of it and returns to the start button. We
+                  have no backend here
                   to send it to.
                 </p>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
@@ -389,9 +435,10 @@ export default function BrowserPrivacyScoreClient() {
                   <code className="text-primary">stun.l.google.com:19302</code> — which, by design, means that server
                   observes your public IP address. That is not incidental; it is how STUN works, and it is how the
                   test learns what a video-call site could see. Any browser-based WebRTC leak test has to disclose
-                  your address to some STUN server in order to tell you your address is exposed. If that trade is not
-                  acceptable to you, don&apos;t run the scan — checking your browser&apos;s WebRTC settings directly
-                  is the leak-free alternative.
+                  your address to some STUN server in order to tell you your address is exposed. That is why the scan
+                  does not start by itself: nothing is contacted until you press the button, so if the trade is not
+                  acceptable to you, simply don&apos;t press it — checking your browser&apos;s WebRTC settings
+                  directly is the leak-free alternative.
                 </p>
               </div>
             </div>
@@ -455,9 +502,12 @@ export default function BrowserPrivacyScoreClient() {
               <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
                 <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Does this scan send my IP address anywhere?</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  No. Any address the WebRTC probe surfaces is displayed on your screen and held in page memory
-                  until you navigate away. It is never transmitted to us — there is no endpoint here that receives
-                  scan results.
+                  Not to us. Any address the WebRTC probe surfaces is displayed on your screen and held in page
+                  memory until you navigate away — there is no endpoint here that receives scan results. But it is
+                  not sent nowhere: the WebRTC test contacts Google&apos;s public STUN server, and that server
+                  necessarily observes your public IP, because observing and reporting it back is precisely how STUN
+                  works. Every browser-based WebRTC leak test has this property. It is also why the scan waits for
+                  you to press the button rather than running the moment the page opens.
                 </p>
               </div>
 

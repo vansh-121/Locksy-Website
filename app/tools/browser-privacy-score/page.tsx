@@ -25,7 +25,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 const faqSchema = generateFAQSchema([
   {
     question: 'Does this scan send my IP address anywhere?',
-    answer: 'No. Any address the WebRTC probe surfaces is displayed on your screen and held in page memory until you navigate away. It is never transmitted to us — there is no endpoint here that receives scan results.'
+    answer: 'Not to us — there is no endpoint here that receives scan results, and any address the probe surfaces is only held in page memory until you navigate away. But it is not sent nowhere: the WebRTC test contacts Google\'s public STUN server at stun.l.google.com:19302, and that server necessarily observes your public IP, because observing and reporting it back is how STUN works. Every browser-based WebRTC leak test has this property. That is why the scan does not start on its own and waits for you to press the button.'
   },
   {
     question: 'I use a VPN but my real IP still shows. Why?',
