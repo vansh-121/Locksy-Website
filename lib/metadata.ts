@@ -173,7 +173,7 @@ export const jsonLdSoftwareApplication = {
     name: siteName,
     applicationCategory: 'SecurityApplication',
     operatingSystem: 'Windows, macOS, Linux, ChromeOS',
-    softwareVersion: '3.2.1',
+    softwareVersion: '3.3.0',
     description: siteDescription,
     url: siteUrl,
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
@@ -491,6 +491,24 @@ export const generateBreadcrumbSchema = (items: { name: string; url: string }[])
             position: index + 1,
             name: item.name,
             item: `${siteUrl}${item.url}`
+        }))
+    }
+}
+
+// Generate a page-scoped FAQPage schema. The site-wide FAQ uses `jsonLdFAQPage`
+// (built from lib/faq-data.ts); this helper lets individual pages — e.g. the free
+// tools under /tools — publish their own question set.
+export const generateFAQSchema = (items: { question: string; answer: string }[]) => {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: items.map(item => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer
+            }
         }))
     }
 }

@@ -240,6 +240,84 @@ Timestamp: ${new Date().toISOString()}
                     </div>
                 </div>
 
+                {/* Self-service triage */}
+                <div className="max-w-3xl mx-auto mb-16">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Try this first — it is probably faster</h2>
+                    <p className="text-muted-foreground leading-relaxed mb-8">
+                        Locksy is maintained by one developer, so a reply takes a day or two. These five questions
+                        account for most of the mail that arrives, and every one of them has an answer you can act on
+                        right now.
+                    </p>
+
+                    <div className="space-y-4">
+                        <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
+                            <CardContent className="pt-6 pb-6">
+                                <h3 className="font-bold text-lg mb-2">I forgot my master password</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                    We cannot reset it. That is not a policy we can make an exception to — your password
+                                    is never transmitted or stored, only a PBKDF2 verifier held locally, so there is no
+                                    copy anywhere for us to recover. If you exported a Master Recovery Key (the
+                                    16-character code introduced in v3.3), use <em>Forgot Password?</em> in the extension
+                                    popup. If you did not, the only route is clearing the extension&apos;s stored data
+                                    and setting it up again, which unlocks your tabs but discards your saved rules.
+                                </p>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
+                            <CardContent className="pt-6 pb-6">
+                                <h3 className="font-bold text-lg mb-2">Biometric unlock is not being offered</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                    Biometric unlock runs on WebAuthn, so it needs a platform authenticator your
+                                    operating system already recognises — Windows Hello, Touch ID, or an equivalent
+                                    enrolled on the device. If the fingerprint or face option is missing, the usual
+                                    cause is that the OS-level authenticator is not enrolled yet, or the browser build
+                                    does not expose it. Set it up in your system settings first, then reopen the
+                                    extension.
+                                </p>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
+                            <CardContent className="pt-6 pb-6">
+                                <h3 className="font-bold text-lg mb-2">A tab did not lock, or unlocked on its own</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                    Check two things before reporting it. First, whether the page is one browsers forbid
+                                    extensions from touching at all — internal settings pages, the extension gallery,
+                                    and similar privileged URLs are off limits by design, not by bug. Second, whether a
+                                    session timeout is doing what you configured: Smart Sessions intentionally keeps an
+                                    unlock valid for a bounded window, and Strict Mode (0 minutes) expires it
+                                    immediately instead.
+                                </p>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
+                            <CardContent className="pt-6 pb-6">
+                                <h3 className="font-bold text-lg mb-2">My settings did not follow me to another computer</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                    Expected. Nothing syncs, because syncing would require a server holding your
+                                    configuration. Each browser profile keeps its own independent setup — a deliberate
+                                    trade-off, described in more detail on the{' '}
+                                    <Link href="/about" className="text-primary hover:underline font-semibold">about page</Link>.
+                                </p>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
+                            <CardContent className="pt-6 pb-6">
+                                <h3 className="font-bold text-lg mb-2">I want to remove Locksy and everything it stored</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                    The{' '}
+                                    <Link href="/uninstall" className="text-primary hover:underline font-semibold">uninstall page</Link>{' '}
+                                    walks through it per browser, including how to clear the local data rather than just
+                                    removing the extension. Unlock any locked tabs first — it saves you a step.
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+
                 {/* Contact Form */}
                 <div id="contact-form" className="max-w-3xl mx-auto scroll-mt-24">
                     <div className="text-center space-y-4 mb-8">
@@ -375,6 +453,80 @@ Timestamp: ${new Date().toISOString()}
                             </Card>
                         </div>
                     )}
+                </div>
+
+                {/* How to write a useful report */}
+                <div className="max-w-3xl mx-auto mt-16 space-y-6">
+                    <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
+                        <CardContent className="pt-8 pb-8 space-y-4">
+                            <h2 className="text-2xl md:text-3xl font-bold">Writing a bug report that gets fixed</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                Most reports stall on the same thing: the behaviour cannot be reproduced from the
+                                description. Four details usually close that gap — your browser and version, the Locksy
+                                version, the exact sequence of clicks that triggers it, and what you expected instead of
+                                what happened. If a page is involved, saying which one matters more than it sounds,
+                                since site-specific behaviour is a common cause.
+                            </p>
+                            <p className="text-muted-foreground leading-relaxed">
+                                If you are comfortable doing it, the extension&apos;s console output is the single most
+                                useful attachment. Open your browser&apos;s extension management page, inspect the Locksy
+                                service worker, reproduce the problem, and copy whatever appears in the console. That
+                                often turns a week of back-and-forth into a same-day fix. Reproducible bugs are best
+                                filed on{' '}
+                                <a
+                                    href="https://github.com/vansh-121/Locksy/issues"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-primary hover:underline font-semibold"
+                                >
+                                    GitHub Issues
+                                </a>{' '}
+                                rather than email, so other users hitting the same thing can find the thread.
+                            </p>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
+                        <CardContent className="pt-8 pb-8 space-y-4">
+                            <h2 className="text-2xl md:text-3xl font-bold">What happens to what you send</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                The form above is handled by Web3Forms, a third-party form relay, which forwards your
+                                name, address and message to the developer&apos;s inbox. We mention it because a site
+                                that talks about privacy should not be vague about its own contact form. If you would
+                                rather not involve a relay at all, email directly — the address is at the top of this
+                                page — or open a public GitHub issue.
+                            </p>
+                            <p className="text-muted-foreground leading-relaxed">
+                                One request regardless of which route you pick: <strong className="text-foreground">never
+                                include your master password, your recovery key, or a screenshot showing either.</strong>{' '}
+                                There is no support scenario that requires them, and nobody legitimate will ever ask.
+                                A message that contains one is a message you cannot un-send.
+                            </p>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="border-2 border-border bg-card/50 backdrop-blur-sm">
+                        <CardContent className="pt-8 pb-8 space-y-4">
+                            <h2 className="text-2xl md:text-3xl font-bold">Response times and scope</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                Expect a reply within 24 to 48 hours on weekdays, occasionally longer around a release.
+                                Support questions, bug reports, feature requests, billing problems with a Pro
+                                subscription, press enquiries and partnership proposals all land in the same inbox and
+                                get read. Feature requests genuinely do shape the roadmap — auto-lock timers and stealth
+                                mode both started as user mail.
+                            </p>
+                            <p className="text-muted-foreground leading-relaxed">
+                                If you have found a security vulnerability, please report it privately by email rather
+                                than filing a public issue, and give us a reasonable window to ship a fix before
+                                disclosing it. Include enough detail to reproduce. Coordinated reports are always
+                                credited unless you would prefer otherwise, and the{' '}
+                                <Link href="/security" className="text-primary hover:underline font-semibold">
+                                    security architecture page
+                                </Link>{' '}
+                                documents the design you would be testing against.
+                            </p>
+                        </CardContent>
+                    </Card>
                 </div>
 
                 {/* Additional Info */}

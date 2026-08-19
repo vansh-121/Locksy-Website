@@ -32,8 +32,12 @@ export const metadata: Metadata = {
         images: ['https://www.locksy.dev/web-app-manifest-512x512.png'],
         creator: '@locksy',
     },
+    // This page is listed in app/sitemap.ts, so it must not be noindexed — a
+    // sitemap entry marked noindex is reported as an error in Search Console.
+    // It now carries a full per-browser removal guide, which is genuine search
+    // intent ("how to uninstall Locksy"), so indexing is the right resolution.
     robots: {
-        index: false,
+        index: true,
         follow: true,
     },
 }

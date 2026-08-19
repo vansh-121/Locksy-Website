@@ -15,6 +15,9 @@ const MILESTONES = [
     { year: "Jan 2026", title: "v2.3 — Biometrics", desc: "WebAuthn/FIDO2 biometric unlock for fingerprint & face ID." },
     { year: "Feb 2026", title: "1,000 Users ⭐", desc: "Community milestone: 1,000 active users across all browsers." },
     { year: "Apr 2026", title: "v2.5 — Stealth Mode", desc: "Context menus, stealth mode, and persistent theme toggle." },
+    { year: "May 2026", title: "v3.0 — Intruder Detection", desc: "Weekly privacy reports, startup session lock, and local-only webcam capture on failed unlocks." },
+    { year: "Jun 2026", title: "v3.1 — Privacy Blur Shield", desc: "Automatic focus-loss blur, password and card field masking, and per-site blur rules." },
+    { year: "Aug 2026", title: "v3.3 — Recovery & Sessions", desc: "Master Recovery Key for offline account reset, plus bounded sessions with re-auth on sensitive actions." },
 ]
 
 const VALUES = [
@@ -44,14 +47,18 @@ const VALUES = [
     },
 ]
 
-const STATS = [
+// The guide count is passed in from the server page rather than hardcoded, so it can't
+// drift out of date — an inflated article count is trivially falsifiable.
+const buildStats = (guideCount: number) => [
     { number: "5,000+", label: "Active Users" },
-    { number: "48+", label: "Blog Articles" },
+    { number: `${guideCount}`, label: "In-Depth Guides" },
     { number: "8+", label: "Security Layers" },
     { number: "7+", label: "Browsers Supported" },
 ]
 
-export default function AboutClient() {
+export default function AboutClient({ guideCount }: { guideCount: number }) {
+    const STATS = buildStats(guideCount)
+
     return (
         <>
             <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
@@ -132,6 +139,42 @@ export default function AboutClient() {
                                         all while keeping your data entirely on your device.
                                     </p>
                                 </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Threat model */}
+                    <section className="pb-20 md:pb-28">
+                        <div className="max-w-4xl mx-auto px-4 md:px-6">
+                            <h2 className="text-3xl md:text-4xl font-black mb-6">
+                                The specific problem we set out to solve
+                            </h2>
+                            <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
+                                <p>
+                                    Browser security is overwhelmingly designed around remote attackers — phishing pages,
+                                    malicious scripts, network eavesdroppers. Enormous engineering effort goes into
+                                    stopping someone on the other side of the world from reading your session. Almost
+                                    none goes into the far more mundane scenario that actually happens: you are already
+                                    logged in, your screen is unlocked, and someone else is standing in front of it.
+                                </p>
+                                <p>
+                                    That is the gap Locksy fills, and it is worth being precise about it. Once you have
+                                    authenticated, your bank dashboard, your work email, your medical portal and your
+                                    private messages are all sitting in tabs that require no further proof of identity.
+                                    Every protection you configured has already been satisfied. A colleague borrowing
+                                    your laptop for &ldquo;one quick thing,&rdquo; a family member on the shared desktop,
+                                    a classmate on the next library machine — none of them need to defeat any encryption
+                                    to read everything on your screen. They just need to switch tabs.
+                                </p>
+                                <p>
+                                    The operating system&apos;s screen lock is the usual answer, and it is a good one when
+                                    you remember to use it. But it is all-or-nothing and it is disruptive: locking your
+                                    whole machine to hide one tab means abandoning everything else you were doing.
+                                    In practice people simply do not do it for a two-minute absence, which is exactly
+                                    the window in which this kind of exposure occurs. Locksy makes the protection
+                                    granular enough that using it is not a decision you have to weigh each time — one
+                                    tab, one domain, or every tab at once, locked in a keystroke and restored the same way.
+                                </p>
                             </div>
                         </div>
                     </section>
@@ -286,6 +329,129 @@ export default function AboutClient() {
                                         </div>
                                     ))}
                                 </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* How it's built */}
+                    <section className="py-20 md:py-28">
+                        <div className="max-w-4xl mx-auto px-4 md:px-6">
+                            <h2 className="text-3xl md:text-4xl font-black mb-6">
+                                How it is built, and what &ldquo;offline&rdquo; actually means
+                            </h2>
+                            <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
+                                <p>
+                                    &ldquo;Privacy-first&rdquo; is a claim every extension makes, so here is the
+                                    architecture rather than the adjective. Your master password is never stored. It is
+                                    stretched with PBKDF2-HMAC-SHA256 at 600,000 iterations, and only the derived
+                                    verifier is kept — inside your browser&apos;s own storage, on your own device. There
+                                    is no account to create, no server to sign in to, and no endpoint that receives your
+                                    password, because no such endpoint exists.
+                                </p>
+                                <p>
+                                    The iteration count is the part worth understanding. Each attempt at guessing your
+                                    password costs an attacker 600,000 hash operations rather than one, which is what
+                                    turns a feasible offline attack into an infeasible one. It is also why unlocking
+                                    takes a perceptible fraction of a second — that delay is the protection working, not
+                                    a performance defect. Biometric unlock goes through WebAuthn, so a fingerprint or
+                                    face scan is verified by your operating system&apos;s secure hardware and never
+                                    travels through the extension at all.
+                                </p>
+                                <p>
+                                    Because everything is local, there are consequences we would rather state up front
+                                    than have you discover later. Nothing syncs between devices; each browser you
+                                    install Locksy in keeps its own independent configuration. And since we hold no copy
+                                    of your credentials, we cannot reset your password for you — which is precisely why
+                                    version 3.3 introduced the Master Recovery Key, a 16-character code you export once
+                                    and store somewhere safe. It is the only recovery path, and that is a deliberate
+                                    trade: an account-recovery service would require us to hold something we have
+                                    chosen not to hold.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Funding + limits */}
+                    <section className="pb-20 md:pb-28">
+                        <div className="max-w-4xl mx-auto px-4 md:px-6">
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="bg-card rounded-3xl p-8 shadow-lg border border-border">
+                                    <h2 className="text-2xl font-black mb-4">How the project pays for itself</h2>
+                                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                                        <p>
+                                            A free security extension raises a fair question: what is the business model,
+                                            and does it involve you? The answer is a Pro tier. Core tab locking, auto-lock
+                                            timers, biometric unlock and stealth mode are free and stay free. Optional
+                                            paid features — weekly privacy reports, intruder capture, custom blur rules,
+                                            startup session lock — fund the work.
+                                        </p>
+                                        <p>
+                                            What we do not do: sell data, embed third-party trackers in the extension, or
+                                            show ads inside it. There is no analytics pipeline collecting your browsing
+                                            history, for the straightforward reason that the extension has nowhere to send
+                                            it. Sponsorship through GitHub covers part of the cost too, and it is
+                                            genuinely optional.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-card rounded-3xl p-8 shadow-lg border border-border">
+                                    <h2 className="text-2xl font-black mb-4">What Locksy deliberately does not do</h2>
+                                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                                        <p>
+                                            It is not a password manager, and it is not trying to become one. It does not
+                                            store or fill your credentials — use a dedicated manager for that. It is not
+                                            a VPN, an antivirus, or a tracker blocker, and it will not defend against
+                                            malware that has already compromised your operating system.
+                                        </p>
+                                        <p>
+                                            It defends one thing well: an authenticated browser session against someone
+                                            with physical access to an unlocked machine. Security tools that claim to
+                                            solve everything usually solve nothing thoroughly, so we would rather name
+                                            the boundary than blur it. Our{' '}
+                                            <Link href="/security" className="text-primary hover:underline font-semibold">
+                                                security architecture page
+                                            </Link>{' '}
+                                            documents the cryptography in more detail, including the parts we consider
+                                            open trade-offs.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Editorial */}
+                    <section className="pb-20 md:pb-28">
+                        <div className="max-w-4xl mx-auto px-4 md:px-6">
+                            <h2 className="text-3xl md:text-4xl font-black mb-6">About the guides on this site</h2>
+                            <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
+                                <p>
+                                    Alongside the extension we publish {guideCount} long-form guides on browser
+                                    security — key derivation and password hashing, WebRTC address leaks, referrer
+                                    policy, extension permission models, passkeys, and the practical side of securing a
+                                    shared machine. They are written and reviewed by the same person who writes the
+                                    extension, which means the technical claims come from working on the problem rather
+                                    than summarising other articles about it.
+                                </p>
+                                <p>
+                                    Where a guide touches on something Locksy sells, we say so in the guide. Where a
+                                    conclusion argues against using Locksy — and there are cases, like a threat model
+                                    that calls for full-disk encryption instead — we say that too. Corrections are welcome
+                                    and get made: if something on this site is wrong, please{' '}
+                                    <Link href="/contact" className="text-primary hover:underline font-semibold">
+                                        tell us
+                                    </Link>{' '}
+                                    and we will fix it. You can browse the full archive on the{' '}
+                                    <Link href="/blog" className="text-primary hover:underline font-semibold">
+                                        blog
+                                    </Link>{' '}
+                                    or try the{' '}
+                                    <Link href="/tools" className="text-primary hover:underline font-semibold">
+                                        free security tools
+                                    </Link>{' '}
+                                    that accompany them.
+                                </p>
                             </div>
                         </div>
                     </section>

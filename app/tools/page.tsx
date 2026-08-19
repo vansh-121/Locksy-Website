@@ -3,7 +3,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
-import { generatePageMetadata, generateBreadcrumbSchema } from "@/lib/metadata"
+import { generatePageMetadata, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/metadata"
 import Link from 'next/link'
 import { Shield, Key, Eye, Lock, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react'
 
@@ -24,6 +24,29 @@ export default function ToolsHubPage() {
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Free Security Tools', url: '/tools' }
+  ])
+
+  const faqSchema = generateFAQSchema([
+    {
+      question: 'Are the Locksy security tools really free?',
+      answer: 'Free with no account, no usage limit and no paywall. The honest answer about motive: we build a browser extension, and people who care enough to audit their own passwords are the people most likely to find it useful. Nothing here is time-limited or degraded to push you toward a purchase.'
+    },
+    {
+      question: 'Do I need to install the extension to use them?',
+      answer: 'No. They are ordinary web pages and work in any modern browser with nothing installed. The extension solves a different problem — locking already-authenticated tabs against someone with physical access to your machine — and these tools do not depend on it.'
+    },
+    {
+      question: 'Is it safe to type a real password into a website?',
+      answer: 'As a general habit, no, and we would rather you kept the instinct. Verify the claim instead of trusting it: open your browser\'s network panel and watch for requests while you type. If you would prefer not to, test a password with the same length and character classes rather than the real one — the entropy calculation depends only on those, so the result is identical.'
+    },
+    {
+      question: 'Which of these tools send data off my machine?',
+      answer: 'The password strength checker and generator make no network requests at all. The privacy score makes one probe for a known ad script to infer whether a content blocker is active. The email breach checker does send the address you type to a third-party public breach index, because that lookup cannot be performed locally.'
+    },
+    {
+      question: 'Where did the Locksy security checker tool go?',
+      answer: 'It duplicated the entropy calculation already in the strength checker, so the two were merged rather than maintained as near-identical pages. Its workstation exposure audit now lives on the password strength checker page, and the old address redirects there.'
+    }
   ])
 
   const tools = [
@@ -56,10 +79,10 @@ export default function ToolsHubPage() {
     },
     {
       title: "Email Breach Checker",
-      description: "Check if your email or username has been compromised in known security data breaches using 100% k-Anonymity privacy model.",
+      description: "Look up whether your email address appears in publicly disclosed credential dumps, and see plainly what the result does and does not prove.",
       icon: "⚠️",
       url: "/tools/email-breach-checker",
-      badge: "k-Anonymized",
+      badge: "Public Breach Index",
       gradient: "from-amber-500/10 via-orange-500/10 to-red-500/10",
       border: "border-amber-500/30"
     }
@@ -70,6 +93,10 @@ export default function ToolsHubPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <Header />
@@ -93,7 +120,8 @@ export default function ToolsHubPage() {
               Free Online <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">Security & Privacy Tools</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Empower your digital security with free client-side utilities. All calculations run strictly in your browser memory—zero data collection or server storage.
+              Four free utilities for auditing your own security, each one documenting how it reaches its answer and
+              where that answer stops being reliable. No account, no usage limits, and nothing stored.
             </p>
           </div>
 
@@ -139,8 +167,8 @@ export default function ToolsHubPage() {
             <div className="grid sm:grid-cols-3 gap-6 text-center">
               <div className="p-4">
                 <div className="text-3xl mb-2">🔒</div>
-                <h3 className="font-bold text-foreground mb-1">100% Client-Side Execution</h3>
-                <p className="text-xs text-muted-foreground">Calculations occur inside your browser via WebCrypto API. Zero data leaves your computer.</p>
+                <h3 className="font-bold text-foreground mb-1">Runs In Your Browser</h3>
+                <p className="text-xs text-muted-foreground">Three of the four tools do all their work in page memory. Nothing you type is transmitted or stored.</p>
               </div>
               <div className="p-4">
                 <div className="text-3xl mb-2">🚀</div>
@@ -149,8 +177,156 @@ export default function ToolsHubPage() {
               </div>
               <div className="p-4">
                 <div className="text-3xl mb-2">🛡️</div>
-                <h3 className="font-bold text-foreground mb-1">Backed by Locksy Architecture</h3>
-                <p className="text-xs text-muted-foreground">Built on the same zero-knowledge encryption principles powering the Locksy Tab Locker extension.</p>
+                <h3 className="font-bold text-foreground mb-1">Methodology Published</h3>
+                <p className="text-xs text-muted-foreground">Every tool documents its own formula and its own limits, so you can judge whether the number deserves your trust.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Which tool to reach for ─────────────────────────────────── */}
+          <section className="mb-16">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Which one should you use first?</h2>
+
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+              The four tools answer four different questions, and they are most useful in a particular order.
+              Working through them takes about ten minutes and gives you a reasonably complete picture of where
+              your day-to-day browsing is actually exposed.
+            </p>
+
+            <div className="space-y-4">
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
+                  Start with <Link href="/tools/email-breach-checker" className="text-primary hover:underline">the breach checker</Link> — it tells you whether damage has already happened
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Everything else on this page is preventative. This one is diagnostic: it looks for your address in
+                  credential dumps that are already circulating. If it comes back with hits, that is your most urgent
+                  work, because leaked pairs get replayed automatically against unrelated login pages.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
+                  Then measure what you already use with <Link href="/tools/password-strength-checker" className="text-primary hover:underline">the strength checker</Link>
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  It converts a password into bits of entropy and then into an estimated brute-force time, and shows
+                  how dramatically that estimate shifts once a service applies key stretching. Most people are
+                  surprised in both directions — their &ldquo;clever&rdquo; substitutions are worth less than they
+                  assumed, and length is worth far more.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
+                  Replace the weak ones with <Link href="/tools/password-generator" className="text-primary hover:underline">the generator</Link>
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Human-chosen passwords cluster around predictable patterns, which is exactly what cracking
+                  wordlists exploit. The generator draws from the operating system&apos;s cryptographic entropy pool
+                  instead, so there is no pattern to learn. Store the output in a password manager rather than trying
+                  to remember it.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
+                  Finish with <Link href="/tools/browser-privacy-score" className="text-primary hover:underline">the privacy score</Link> — passwords are only half the story
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Perfect credentials do not stop a site from reading your real IP address through a WebRTC leak, or
+                  from identifying your browser by its hardware characteristics without ever setting a cookie. This
+                  scan runs those checks live against your current browser and shows you what it found.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── What client-side means here ─────────────────────────────── */}
+          <section className="mb-16">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">What &ldquo;client-side&rdquo; means here, precisely</h2>
+
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
+              Plenty of sites describe themselves as client-side while quietly posting your input to an analytics
+              endpoint. The claim is only worth anything if it is specific and checkable, so here is ours, tool by
+              tool.
+            </p>
+
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+              The password strength checker and the password generator make{' '}
+              <strong className="text-foreground">no network requests at all</strong>. Every value stays in page
+              memory and disappears on reload. You can confirm this yourself in about fifteen seconds: open your
+              browser&apos;s developer tools, switch to the network panel, and interact with either tool. You should
+              see nothing appear. The privacy score makes exactly one outbound request — a probe for a known ad
+              script, used to infer whether a content blocker is intercepting tracker traffic — and the result is
+              read and discarded.
+            </p>
+
+            <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/20">
+              <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">The one genuine exception</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                The breach checker cannot work locally, because the answer lives in a breach index nobody can ship
+                to a browser. It sends the address you type to a third-party public breach API. We do not store it,
+                log it, or see it — but it does leave your machine, and that page says so plainly rather than hiding
+                behind a general privacy badge. Some breach services offer a k-anonymity design, where only a short
+                hash prefix is sent; the endpoint behind this tool does not, and pretending otherwise would be worse
+                than the limitation itself.
+              </p>
+            </div>
+          </section>
+
+          {/* ── FAQ ────────────────────────────────────────────────────── */}
+          <section className="mb-16">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Common questions about these tools</h2>
+
+            <div className="space-y-3">
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Are they really free, and what is the catch?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Free with no account, no usage limit and no paywall. The honest answer about motive: we build a
+                  browser extension, and people who care enough to audit their own passwords are the people most
+                  likely to find it useful. That is the entire funnel. Nothing here is time-limited or degraded to
+                  push you toward a purchase.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Do I need to install the extension to use them?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  No. They are ordinary web pages and work in any modern browser with nothing installed. The
+                  extension solves a different problem — locking already-authenticated tabs against someone with
+                  physical access to your machine — and these tools do not depend on it.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Is it safe to type a real password into a website?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  As a general habit, no — and we would rather you kept the instinct. Verify our claim instead of
+                  trusting it: open the network panel and watch for requests while you type. If you would prefer not
+                  to, test a password with the same structure and length rather than the real one; the entropy
+                  calculation depends only on length and which character classes appear, so the result will be
+                  identical.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Can I use these at work or in training material?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Yes. IT teams and educators are welcome to link to them in onboarding docs and security awareness
+                  sessions — the published methodology on each page is there so you can check the numbers before
+                  putting them in front of colleagues or students.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Where did the security checker tool go?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  It duplicated the entropy calculation already in the strength checker, so we merged the two rather
+                  than maintain near-identical pages. Its workstation exposure audit now lives on the{' '}
+                  <Link href="/tools/password-strength-checker" className="text-primary hover:underline font-semibold">password
+                  strength checker</Link>, and the old address redirects there.
+                </p>
               </div>
             </div>
           </section>

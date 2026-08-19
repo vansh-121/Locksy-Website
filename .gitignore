@@ -32,3 +32,6 @@ next-env.d.ts
 # temp files
 .tmp*
 
+
+# Claude Code local config
+.claude/
