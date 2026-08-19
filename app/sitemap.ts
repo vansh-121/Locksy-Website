@@ -31,12 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
-            url: `${siteUrl}/tools/security-checker`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
-        {
             url: `${siteUrl}/tools/password-strength-checker`,
             lastModified: new Date(),
             changeFrequency: 'weekly',

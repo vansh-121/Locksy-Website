@@ -20,7 +20,6 @@ import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
 import Pricing from "@/components/pricing"
 import Footer from "@/components/footer"
-import PageLoader from "@/components/page-loader"
 import MilestoneBanner from "@/components/milestone-banner"
 import ToolsShowcase from "@/components/tools-showcase"
 import { jsonLdFAQPage } from "@/lib/metadata"
@@ -35,78 +34,74 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQPage) }}
       />
 
-      <PageLoader>
-        <main className="w-full" itemScope itemType="https://schema.org/WebPage">
-          <Header />
-          <Hero />
+      <main className="w-full" itemScope itemType="https://schema.org/WebPage">
+        <Header />
+        <Hero />
 
-          {/* 5000+ users milestone celebration */}
-          <MilestoneBanner />
+        {/* 5000+ users milestone celebration */}
+        <MilestoneBanner />
 
-          {/* Pricing cards & plans */}
-          <Pricing />
+        {/* Pricing cards & plans */}
+        <Pricing />
 
-          {/* Establish the problem first */}
-          <ProblemStatement />
+        {/* Establish the problem first */}
+        <ProblemStatement />
 
-          {/* Show why Locksy is better than alternatives */}
-          <Comparison />
+        {/* Show why Locksy is better than alternatives */}
+        <Comparison />
 
-          {/* NEW v2.3.0 — Biometric Unlock */}
-          <BiometricUnlock />
+        {/* NEW v2.3.0 — Biometric Unlock */}
+        <BiometricUnlock />
 
+        {/* Showcase NEW v2.2.0 automation features prominently */}
+        <AutomationFeatures />
 
+        {/* NEW v3.3.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
+        <WhatsNewV330 />
 
-          {/* Showcase NEW v2.2.0 automation features prominently */}
-          <AutomationFeatures />
+        {/* NEW v3.1.0 — Privacy Blur Shield, Manager UI & License Recovery */}
+        <WhatsNewV310 />
 
-          {/* NEW v3.3.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
-          <WhatsNewV330 />
+        {/* NEW v3.0.0 — Redesigned UI Shell, Reports, Startup Lock & Webcam snaps */}
+        <WhatsNewV300 />
 
-          {/* NEW v3.1.0 — Privacy Blur Shield, Manager UI & License Recovery */}
-          <WhatsNewV310 />
+        {/* NEW v2.5.0 — Stealth Mode & Context Menus */}
+        <WhatsNewV250 />
 
-          {/* NEW v3.0.0 — Redesigned UI Shell, Reports, Startup Lock & Webcam snaps */}
-          <WhatsNewV300 />
+        {/* Another major feature - Domain Lock */}
+        <div id="domain-lock">
+          <DomainLock />
+        </div>
 
-          {/* NEW v2.5.0 — Stealth Mode & Context Menus */}
-          <WhatsNewV250 />
+        {/* Comprehensive features overview */}
+        <Features />
 
-          {/* Another major feature - Domain Lock */}
-          <div id="domain-lock">
-            <DomainLock />
-          </div>
+        {/* How easy it is to use */}
+        <HowItWorks />
 
-          {/* Comprehensive features overview */}
-          <Features />
+        {/* Power user feature */}
+        <KeyboardShortcuts />
 
-          {/* How easy it is to use */}
-          <HowItWorks />
+        {/* Technical credibility and trust */}
+        <Security />
 
-          {/* Power user feature */}
-          <KeyboardShortcuts />
+        {/* Social proof */}
+        <Testimonials />
 
-          {/* Technical credibility and trust */}
-          <Security />
+        {/* Handle objections and questions */}
+        <FAQ />
 
-          {/* Social proof */}
-          <Testimonials />
+        {/* Free Security Tools Showcase */}
+        <ToolsShowcase />
 
-          {/* Handle objections and questions */}
-          <FAQ />
+        {/* Latest blog articles — editorial content for SEO value */}
+        <LatestBlogPosts posts={filteredBlogPosts} />
 
-          {/* Free Security Tools Showcase */}
-          <ToolsShowcase />
-
-          {/* Latest blog articles — editorial content for SEO value */}
-          <LatestBlogPosts posts={filteredBlogPosts} />
-
-          {/* Support and final CTAs */}
-          <SupportChatCTA />
-          <CTASection />
-          <Footer />
-        </main>
-      </PageLoader>
+        {/* Support and final CTAs */}
+        <SupportChatCTA />
+        <CTASection />
+        <Footer />
+      </main>
     </>
   )
 }

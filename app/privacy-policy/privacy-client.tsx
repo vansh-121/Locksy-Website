@@ -1,6 +1,8 @@
 "use client"
 
 import Link from "next/link"
+import Header from "@/components/header"
+import Footer from "@/components/footer"
 import { Shield, Lock, CheckCircle, XCircle, ArrowLeft, Database, Eye, AlertTriangle, FileText, Globe, Trash2 } from "lucide-react"
 
 interface PrivacyPolicyClientProps {
@@ -10,30 +12,9 @@ interface PrivacyPolicyClientProps {
 export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClientProps) {
     return (
         <>
-            <div className="min-h-screen">
-                <header className="sticky top-0 z-50 transition-all duration-300 bg-white/80 dark:bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5">
-                    <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
-                        <Link href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
-                                <img
-                                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
-                                    alt="Locksy"
-                                    className="relative h-10 md:h-12 w-auto"
-                                />
-                            </div>
-                            <span className="hidden sm:block font-black text-xl md:text-2xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                Locksy
-                            </span>
-                        </Link>
-                        <Link href="/" className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                            <ArrowLeft className="h-4 w-4" />
-                            <span className="hidden sm:inline">Back to Home</span>
-                            <span className="sm:hidden">Back</span>
-                        </Link>
-                    </div>
-                </header>
-                <section className="relative pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
+            <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
+                <Header />
+                <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
                         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
                         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
@@ -68,10 +49,10 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-4">
                                         {[
-                                            "All data stays on YOUR device only",
+                                            "All extension data stays on YOUR device only",
                                             "PBKDF2 with 600k iterations",
-                                            "Zero tracking or analytics",
-                                            "No third-party services",
+                                            "No tracking or analytics in the extension",
+                                            "The extension talks to no servers of ours",
                                             "Local & Verifiable Security"
                                         ].map((item, idx) => (
                                             <div key={idx} className="flex items-center gap-3 bg-white/80 dark:bg-card/80 backdrop-blur-sm rounded-xl p-4">
@@ -104,9 +85,18 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                     </span>
                                 </h2>
                             </div>
-                            <div className="bg-card rounded-3xl p-8 md:p-10 shadow-xl border border-border">
+                            <div className="bg-card rounded-3xl p-8 md:p-10 shadow-xl border border-border space-y-5">
                                 <p className="text-lg text-muted-foreground leading-relaxed">
                                     Locksy (&quot;the Extension&quot;) is built with privacy at its core. This policy explains exactly what data we collect (spoiler: almost nothing), where it&apos;s stored (on your device only), and how you maintain complete control. We believe in radical transparency and your right to privacy.
+                                </p>
+                                <p className="text-lg text-muted-foreground leading-relaxed">
+                                    One distinction matters throughout, and we would rather draw it clearly than let the
+                                    strong claims below be read too broadly. <strong className="text-foreground">The
+                                    Extension</strong> is the software you install in your browser: it is local-only and
+                                    involves no servers of ours. <strong className="text-foreground">This website</strong>{' '}
+                                    is an ordinary marketing and publishing site, and like nearly every site it does use
+                                    a small number of third-party services. Every section below refers to the Extension
+                                    unless it says otherwise; the website is covered separately at the end.
                                 </p>
                             </div>
                         </div>
@@ -341,9 +331,10 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                             <div className="inline-flex p-4 bg-green-500/20 rounded-3xl mb-6">
                                 <Globe className="h-12 w-12 text-green-600" />
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-black mb-6">
+                            <h2 className="text-3xl md:text-4xl font-black mb-2">
                                 Zero Data Sharing
                             </h2>
+                            <p className="text-muted-foreground mb-6">In the Extension</p>
                             <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
                                 {[
                                     "✓ We do NOT sell your data",
@@ -355,6 +346,122 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                         <span className="font-bold text-green-700">{item}</span>
                                     </div>
                                 ))}
+                            </div>
+                        </div>
+
+                        {/* This Website */}
+                        <div className="max-w-4xl mx-auto">
+                            <div className="text-center mb-10">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-6">
+                                    <Globe className="h-4 w-4" />
+                                    This Website
+                                </div>
+                                <h2 className="text-4xl md:text-5xl font-black mb-4">
+                                    What{" "}
+                                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                                        locksy.dev
+                                    </span>{" "}
+                                    Does
+                                </h2>
+                                <p className="text-xl text-muted-foreground">
+                                    Separate from the Extension — and not local-only
+                                </p>
+                            </div>
+
+                            <div className="bg-card rounded-3xl p-8 md:p-10 shadow-xl border border-border space-y-5">
+                                <p className="text-muted-foreground leading-relaxed">
+                                    It would be easy to let the claims above blur into an implication that this website
+                                    is equally hermetic. It is not, and saying so plainly is more useful than a badge.
+                                    Here is every third party involved in serving this site, and what each one receives.
+                                </p>
+
+                                <div className="space-y-4">
+                                    <div className="p-5 rounded-xl bg-muted/40 border border-border">
+                                        <h3 className="font-bold mb-1.5">Hosting and delivery</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                            The site is served from a commercial hosting platform, which keeps standard
+                                            server logs — IP address, user agent, requested path, timestamp — for
+                                            operational and abuse-prevention purposes. This is unavoidable for any hosted
+                                            website; we do not build profiles from it or feed it into any analytics
+                                            product.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 rounded-xl bg-muted/40 border border-border">
+                                        <h3 className="font-bold mb-1.5">Advertising</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                            We may display advertising through the Google AdSense network to fund the
+                                            project. Google and its partners set cookies and may use them to serve ads
+                                            based on your prior visits to this and other sites. You can opt out of
+                                            personalised advertising at{' '}
+                                            <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Google Ad Settings</a>,{' '}
+                                            <a href="https://optout.networkadvertising.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">the Network Advertising Initiative</a>, or{' '}
+                                            <a href="https://optout.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">the Digital Advertising Alliance</a>.
+                                            Full detail, including cookie names and durations, is in our{' '}
+                                            <Link href="/cookie-policy" className="text-primary hover:underline font-semibold">cookie policy</Link>.
+                                            None of this touches the Extension, which contains no ad code whatsoever.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 rounded-xl bg-muted/40 border border-border">
+                                        <h3 className="font-bold mb-1.5">Contact and feedback forms</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                            The forms on our{' '}
+                                            <Link href="/contact" className="text-primary hover:underline font-semibold">contact</Link>{' '}
+                                            and{' '}
+                                            <Link href="/uninstall" className="text-primary hover:underline font-semibold">uninstall</Link>{' '}
+                                            pages are handled by Web3Forms, a third-party relay that forwards whatever
+                                            you submit — name, email address, message — to the developer&apos;s inbox.
+                                            If you would rather not involve a relay, email us directly instead.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 rounded-xl bg-muted/40 border border-border">
+                                        <h3 className="font-bold mb-1.5">Live chat</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                            Support chat is provided by Crisp. Opening it loads their widget and creates a
+                                            conversation record on their infrastructure containing what you type. It is
+                                            optional — nothing is sent unless you start a chat.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 rounded-xl bg-muted/40 border border-border">
+                                        <h3 className="font-bold mb-1.5">Embedded video</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                            The product demo is a YouTube embed. Playing it lets Google set cookies and
+                                            register a view, on Google&apos;s terms rather than ours.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 rounded-xl bg-muted/40 border border-border">
+                                        <h3 className="font-bold mb-1.5">The free security tools</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                            The{' '}
+                                            <Link href="/tools/password-strength-checker" className="text-primary hover:underline font-semibold">strength checker</Link>{' '}
+                                            and{' '}
+                                            <Link href="/tools/password-generator" className="text-primary hover:underline font-semibold">generator</Link>{' '}
+                                            make no network requests at all — nothing you type leaves the page. The{' '}
+                                            <Link href="/tools/email-breach-checker" className="text-primary hover:underline font-semibold">breach checker</Link>{' '}
+                                            is the exception: it sends the address you enter to a third-party public breach
+                                            index, because that lookup cannot be performed locally. That page states as
+                                            much before you use it. The{' '}
+                                            <Link href="/tools/browser-privacy-score" className="text-primary hover:underline font-semibold">browser privacy score</Link>{' '}
+                                            makes two requests to Google while it runs — an ad-script probe used to detect
+                                            content blockers, and a STUN request the WebRTC leak test requires, which by
+                                            design lets that STUN server observe your public IP. Neither result is sent to
+                                            us or retained, and that page explains both in detail.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <p className="text-muted-foreground leading-relaxed">
+                                    What we do not do on the website either: sell your data, run behavioural analytics of
+                                    our own, or require an account to read anything here. If your browser sends a Global
+                                    Privacy Control signal, ad networks subject to applicable privacy law are required to
+                                    honour it as an opt-out request — our{' '}
+                                    <Link href="/tools/browser-privacy-score" className="text-primary hover:underline font-semibold">browser
+                                    privacy score</Link> will tell you whether yours is sending one.
+                                </p>
                             </div>
                         </div>
 
@@ -548,36 +655,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                     </div>
                 </section>
 
-                {/* Footer */}
-                <footer className="relative bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 text-neutral-300 py-12">
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-                    <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div className="flex items-center gap-3">
-                                <img
-                                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
-                                    alt="Locksy"
-                                    className="h-10 w-auto"
-                                />
-                                <span className="font-black text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                    Locksy
-                                </span>
-                                <span className="text-muted-foreground">• Privacy-First Security</span>
-                            </div>
-                            <div className="flex items-center gap-6">
-                                <Link href="/" className="hover:text-primary transition-colors">
-                                    Home
-                                </Link>
-                                <Link href="/contact" className="hover:text-primary transition-colors">
-                                    Contact
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="mt-8 text-center text-sm text-muted-foreground">
-                            <p>© 2026 Locksy. Privacy-focused tab protection.</p>
-                        </div>
-                    </div>
-                </footer>
+                <Footer />
             </div>
         </>
     )

@@ -3,13 +3,13 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
-import { generatePageMetadata, generateBreadcrumbSchema } from "@/lib/metadata"
+import { generatePageMetadata, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/metadata"
 import Link from 'next/link'
 import { Shield, Key, Eye, Lock, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = generatePageMetadata(
   "Free Browser Security & Privacy Tools Hub – Locksy",
-  "Free, client-side browser security tools: Password Strength Checker, Cryptographic Password Generator, Browser Privacy Score Inspector, and Email Breach Checker.",
+  "Free browser security tools: Password Strength Checker, Password Generator, Browser Privacy Score Inspector, and Email Breach Checker.",
   "/tools",
   [
     "free browser security tools",
@@ -26,10 +26,29 @@ export default function ToolsHubPage() {
     { name: 'Free Security Tools', url: '/tools' }
   ])
 
+  const faqSchema = generateFAQSchema([
+    {
+      question: 'Are the Locksy security tools completely free to use?',
+      answer: 'Yes. All tools are 100% free with no account creation, no usage limits, and no subscription required.'
+    },
+    {
+      question: 'Do I need to install the Locksy extension to use these tools?',
+      answer: 'No. These web tools work directly in any modern browser without requiring any software installation.'
+    },
+    {
+      question: 'Are my passwords or inputs stored on your servers?',
+      answer: 'No. The password strength checker and generator process your inputs directly on your device inside your browser memory.'
+    },
+    {
+      question: 'Which browsers are supported?',
+      answer: 'All modern desktop and mobile browsers are supported, including Chrome, Firefox, Safari, Edge, Brave, and Opera.'
+    }
+  ])
+
   const tools = [
     {
       title: "Password Strength Checker",
-      description: "Calculate password entropy and test resistance against 600,000 PBKDF2 iterations with GPU brute-force time estimates.",
+      description: "Test your password strength, entropy rating, and estimated brute-force resistance in real time.",
       icon: "🔑",
       url: "/tools/password-strength-checker",
       badge: "Popular Tool",
@@ -37,8 +56,8 @@ export default function ToolsHubPage() {
       border: "border-blue-500/30"
     },
     {
-      title: "Cryptographic Password Generator",
-      description: "Generate high-entropy, cryptographically secure random passwords or passphrases with custom length and character sets.",
+      title: "Password Generator",
+      description: "Instantly create strong, random, and secure passwords with customizable length and character sets.",
       icon: "🎲",
       url: "/tools/password-generator",
       badge: "100% Client-Side",
@@ -47,7 +66,7 @@ export default function ToolsHubPage() {
     },
     {
       title: "Browser Privacy Score Inspector",
-      description: "Run an instant audit on your browser's fingerprinting risk, WebRTC leaks, DNT status, and active privacy protections.",
+      description: "Scan your browser setup for tracker protection, WebRTC privacy, and active privacy headers.",
       icon: "🛡️",
       url: "/tools/browser-privacy-score",
       badge: "Instant Audit",
@@ -56,10 +75,10 @@ export default function ToolsHubPage() {
     },
     {
       title: "Email Breach Checker",
-      description: "Check if your email or username has been compromised in known security data breaches using 100% k-Anonymity privacy model.",
+      description: "Check if your email address has appeared in known public data breaches and security incidents.",
       icon: "⚠️",
       url: "/tools/email-breach-checker",
-      badge: "k-Anonymized",
+      badge: "Security Check",
       gradient: "from-amber-500/10 via-orange-500/10 to-red-500/10",
       border: "border-amber-500/30"
     }
@@ -70,6 +89,10 @@ export default function ToolsHubPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <Header />
@@ -93,7 +116,7 @@ export default function ToolsHubPage() {
               Free Online <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">Security & Privacy Tools</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Empower your digital security with free client-side utilities. All calculations run strictly in your browser memory—zero data collection or server storage.
+              Explore our collection of free tools designed to help you secure your online presence, generate strong credentials, and protect your digital privacy.
             </p>
           </div>
 
@@ -139,18 +162,100 @@ export default function ToolsHubPage() {
             <div className="grid sm:grid-cols-3 gap-6 text-center">
               <div className="p-4">
                 <div className="text-3xl mb-2">🔒</div>
-                <h3 className="font-bold text-foreground mb-1">100% Client-Side Execution</h3>
-                <p className="text-xs text-muted-foreground">Calculations occur inside your browser via WebCrypto API. Zero data leaves your computer.</p>
+                <h3 className="font-bold text-foreground mb-1">Privacy First</h3>
+                <p className="text-xs text-muted-foreground">Tools operate safely inside your browser session without storing or logging your personal data.</p>
               </div>
               <div className="p-4">
                 <div className="text-3xl mb-2">🚀</div>
-                <h3 className="font-bold text-foreground mb-1">Zero Registration</h3>
-                <p className="text-xs text-muted-foreground">No email required, no subscriptions, and no paywalls. Free for personal and commercial use.</p>
+                <h3 className="font-bold text-foreground mb-1">Instant & Free</h3>
+                <p className="text-xs text-muted-foreground">No registration, credit cards, or signups required. Instant access whenever you need it.</p>
               </div>
               <div className="p-4">
                 <div className="text-3xl mb-2">🛡️</div>
-                <h3 className="font-bold text-foreground mb-1">Backed by Locksy Architecture</h3>
-                <p className="text-xs text-muted-foreground">Built on the same zero-knowledge encryption principles powering the Locksy Tab Locker extension.</p>
+                <h3 className="font-bold text-foreground mb-1">Actionable Protection</h3>
+                <p className="text-xs text-muted-foreground">Get clear recommendations to immediately strengthen your online security and browser defenses.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Security Best Practices Guide ─────────────────────────────────── */}
+          <section className="mb-16">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Recommended Security Routine</h2>
+
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+              Maintaining strong online security is simple when you follow a few essential habits:
+            </p>
+
+            <div className="space-y-4">
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
+                  1. Check for Compromised Credentials with <Link href="/tools/email-breach-checker" className="text-primary hover:underline">Email Breach Checker</Link>
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Regularly verify if your email address has appeared in public security incidents so you can proactively update compromised passwords.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
+                  2. Evaluate Password Strength with <Link href="/tools/password-strength-checker" className="text-primary hover:underline">Password Strength Checker</Link>
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Ensure your master passwords and critical account credentials meet robust length and entropy standards.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
+                  3. Create Unique Passwords with <Link href="/tools/password-generator" className="text-primary hover:underline">Password Generator</Link>
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Generate unique, high-entropy passwords for every service so that a breach on one site never puts your other accounts at risk.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
+                  4. Audit Browser Privacy with <Link href="/tools/browser-privacy-score" className="text-primary hover:underline">Browser Privacy Score</Link>
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Check your browser configuration to ensure tracking prevention and privacy protections are functioning properly.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── FAQ ────────────────────────────────────────────────────── */}
+          <section className="mb-16">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently Asked Questions</h2>
+
+            <div className="space-y-3">
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Are these tools really free?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Yes, all our online security and privacy tools are completely free to use without any account creation or subscriptions.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Do I need to install the extension to use them?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  No. These tools run directly on the web and work in any standard web browser without needing any extension or download.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Are my generated passwords stored anywhere?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  No. Passwords and strength checks are processed entirely locally on your device inside your browser. We never store, transmit, or log your passwords.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
+                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Can I use these tools for team or organizational security?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Yes, individuals, developers, and organizations are welcome to use these tools for security audits and password hygiene.
+                </p>
               </div>
             </div>
           </section>
@@ -159,14 +264,14 @@ export default function ToolsHubPage() {
           <div className="p-10 rounded-3xl bg-gradient-to-r from-primary/15 via-purple-500/10 to-secondary/15 border border-primary/30 text-center">
             <h3 className="text-2xl font-bold mb-2">Protect Your Open Tabs with Locksy</h3>
             <p className="text-muted-foreground text-sm max-w-xl mx-auto mb-6">
-              Combine these free tools with automatic PBKDF2 tab encryption and WebAuthn biometric unlock.
+              Lock sensitive open tabs with password protection and biometric unlock.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/#download" className="btn-primary">
                 Install Locksy Extension Free
               </Link>
               <Link href="/security" className="btn-secondary">
-                Read Security Whitepaper
+                Read Security Overview
               </Link>
             </div>
           </div>

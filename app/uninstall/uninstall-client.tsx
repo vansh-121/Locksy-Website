@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Shield, Lock, Zap, Heart, ArrowRight, CheckCircle2, Download, Star, Frown } from "lucide-react"
 import Link from "next/link"
 import Header from "@/components/header"
+import Footer from "@/components/footer"
 
 const PRIMARY_BROWSERS = [
     {
@@ -136,6 +137,7 @@ export default function UninstallClient() {
                         </div>
                     </div>
                 </div>
+
 
                 {/* Support Section - After Uninstalling */}
                 <div className="max-w-4xl mx-auto mb-12">
@@ -408,7 +410,15 @@ export default function UninstallClient() {
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-lg mb-2">Confused about setup?</h3>
                                                 <p className="text-sm text-muted-foreground leading-relaxed">
-                                                    Watch our 2-minute video tutorial. Basics: lock tabs with Alt+Shift+9, manage domains in the popup. It's that simple!
+                                                    Watch the{" "}
+                                                    <a
+                                                        href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-primary hover:underline font-semibold"
+                                                    >
+                                                        demo video
+                                                    </a>. Basics: lock tabs with Alt+Shift+9, manage domains in the popup. It&apos;s that simple!
                                                 </p>
                                             </div>
                                         </div>
@@ -574,35 +584,7 @@ export default function UninstallClient() {
                 </div>
             </main>
 
-            {/* Footer */}
-            <footer className="relative border-t py-12 mt-16 bg-background/50 backdrop-blur-sm">
-                <div className="container text-center space-y-6">
-                    <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                        <span>Made with</span>
-                        <Heart className="h-4 w-4 text-red-500 animate-pulse" />
-                        <span>by the Locksy team</span>
-                    </div>
-                    <div className="flex flex-wrap justify-center gap-6 text-sm">
-                        <Link href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors font-medium">
-                            Privacy Policy
-                        </Link>
-                        <Link href="/" className="text-muted-foreground hover:text-primary transition-colors font-medium">
-                            Home
-                        </Link>
-                        <a
-                            href="https://github.com/vansh-121/locksy"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-muted-foreground hover:text-primary transition-colors font-medium"
-                        >
-                            GitHub
-                        </a>
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                        © {new Date().getFullYear()} Locksy. Protecting your privacy, one tab at a time.
-                    </p>
-                </div>
-            </footer>
+            <Footer />
         </div>
         </>
     )

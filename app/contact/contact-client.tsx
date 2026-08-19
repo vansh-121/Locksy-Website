@@ -18,7 +18,6 @@ import {
     User,
     MessageCircle
 } from "lucide-react"
-import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 
@@ -240,6 +239,8 @@ Timestamp: ${new Date().toISOString()}
                     </div>
                 </div>
 
+
+
                 {/* Contact Form */}
                 <div id="contact-form" className="max-w-3xl mx-auto scroll-mt-24">
                     <div className="text-center space-y-4 mb-8">
@@ -376,6 +377,8 @@ Timestamp: ${new Date().toISOString()}
                         </div>
                     )}
                 </div>
+
+
 
                 {/* Additional Info */}
                 <div className="mt-16 text-center space-y-4">

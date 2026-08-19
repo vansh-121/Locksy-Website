@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { generateBreadcrumbSchema } from "@/lib/metadata"
+import { filteredBlogPosts } from "@/lib/blog-data"
 import AboutClient from "./about-client"
 
 export const metadata: Metadata = {
@@ -51,7 +52,7 @@ export default function AboutPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
-            <AboutClient />
+            <AboutClient guideCount={filteredBlogPosts.length} />
         </>
     )
 }
