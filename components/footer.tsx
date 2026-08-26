@@ -277,9 +277,9 @@ export default function Footer() {
                 title="Listed on Sell With boost"
               >
                 <img
-                  src="https://sellwithboost.com/badge/listing.svg"
+                  src="https://sellwithboost.com/badge/listing-dark.svg"
                   alt="Listed on Sell With boost"
-                  style={{ height: '36px', width: 'auto' }}
+                  style={{ height: '40px', width: 'auto' }}
                 />
               </a>
               <a
