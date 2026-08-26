@@ -268,7 +268,20 @@ export default function Footer() {
               <p className="text-xs text-neutral-500">Made with ❤️ for Privacy & Security</p>
             </div>
 
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4">
+              <a
+                href="https://sellwithboost.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-90 inline-flex items-center"
+                title="Listed on Sell With boost"
+              >
+                <img
+                  src="https://sellwithboost.com/badge/listing.svg"
+                  alt="Listed on Sell With boost"
+                  style={{ height: '36px', width: 'auto' }}
+                />
+              </a>
               <a
                 href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
                 target="_blank"
