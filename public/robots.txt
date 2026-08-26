@@ -10,8 +10,11 @@ Disallow: /admin/
 
 # Sitemap and LLM context file locations
 Sitemap: https://www.locksy.dev/sitemap.xml
-# LLMs context: https://www.locksy.dev/llms.txt
-# LLMs full context: https://www.locksy.dev/llms-full.txt
+
+# LLMs.txt — AI/LLM context files for generative engine optimization
+# See https://llmstxt.org for the specification
+LLMs-context: https://www.locksy.dev/llms.txt
+LLMs-full-context: https://www.locksy.dev/llms-full.txt
 
 # Google Bot
 User-agent: Googlebot

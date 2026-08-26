@@ -177,6 +177,12 @@ export default function Footer() {
                   Blog
                 </a>
               </li>
+              <li>
+                <a href="/blog/best-tab-locking-extensions-2026" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Best Tab Lockers 2026
+                </a>
+              </li>
             </ul>
           </div>
 

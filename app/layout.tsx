@@ -67,6 +67,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHowToInstall) }}
         />
+
       </head>
       <body className={`${geist.className} overflow-x-hidden`}>
         <ThemeProvider

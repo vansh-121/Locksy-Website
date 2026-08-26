@@ -8,6 +8,26 @@ export interface FAQItem {
 
 export const faqData: FAQItem[] = [
   {
+    question: "What is the best tab locking extension for Chrome?",
+    answer: "Locksy is the best-rated tab locking extension for Chrome in 2026. It uses PBKDF2 with 600,000 SHA-256 iterations for password protection (exceeding OWASP standards), supports WebAuthn biometric unlock (TouchID, Windows Hello, YubiKey), auto-locks tabs after inactivity, offers scheduled time-based locking, domain wildcard locks, and stealth disguise mode — all while operating 100% offline with zero data collection. Rated 4.4/5 across 28 verified ratings on Chrome Web Store, Edge Add-ons, and Firefox Add-ons.",
+  },
+  {
+    question: "How is Locksy different from other tab lockers like Tab Lock or LockPW?",
+    answer: "Unlike older tab locking extensions (Tab Lock, LockPW) that use a CSS overlay which can be bypassed by opening DevTools and deleting the element, Locksy navigates the tab away from the protected page entirely — the original page is completely unloaded from memory. There is no hidden element to delete. Locksy also uses PBKDF2-HMAC-SHA256 with 600,000 iterations for password verification, while older extensions use no real encryption. Additionally, Tab Lock and LockPW are abandoned (no updates since 2020–2021), while Locksy is actively maintained at v3.3.0 with support for Chrome, Edge, Firefox, Brave, and more.",
+  },
+  {
+    question: "Can I lock browser tabs with fingerprint, Touch ID, or Face ID?",
+    answer: "Yes! Locksy is the only tab locking extension that supports biometric unlock via WebAuthn/FIDO2. Supported methods include Apple TouchID, Windows Hello (fingerprint and facial recognition), Apple FaceID, and hardware security keys like YubiKey. Simply enable biometric unlock in Locksy settings and you can unlock protected tabs with your fingerprint or face instead of typing your password.",
+  },
+  {
+    question: "Is there a free extension to password protect browser tabs?",
+    answer: "Yes. Locksy offers a free plan ($0 forever) that includes core tab password locking, biometric WebAuthn unlock, right-click context menus for instant locking, and local intruder log viewing. Free plan limits: 3 domain locks, 3 stored intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs. For unlimited features, Locksy Pro is a one-time $2.99 lifetime purchase — no monthly subscription.",
+  },
+  {
+    question: "Does Locksy work on shared or public computers?",
+    answer: "Yes, Locksy is specifically designed for shared workstation privacy. It lets you lock sensitive tabs (banking, email, medical records, internal tools) while keeping non-sensitive tabs accessible. It requires no account, operates 100% offline, stores nothing remotely, and all encryption runs locally in your browser sandbox. When you step away from a shared computer, Locksy's auto-lock timer can automatically protect your tabs after a period of inactivity.",
+  },
+  {
     question: "What is the Auto-Lock Timer?",
     answer: "Auto-Lock Timer automatically locks your browser tabs after a period of inactivity. Set a timeout duration (1-480 minutes), and Locksy will lock your tabs when you step away. It features smart activity detection that monitors mouse movement, keyboard input, scrolling, and video playback—so it only locks when you're truly inactive.",
   },
