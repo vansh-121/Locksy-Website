@@ -21,6 +21,7 @@ import post_the_anatomy_of_a_phishing_page_how_attackers_clone_legitimate_sites_
 import post_webrtc_ip_leak_how_video_calls_expose_your_real_ip_address_through_the_browser from './webrtc-ip-leak-how-video-calls-expose-your-real-ip-address-through-the-browser'
 import post_gdpr_hipaa_browser_tab_security_compliance_guide from './gdpr-hipaa-browser-tab-security-compliance-guide'
 import post_tab_locking_vs_password_managers_browser_security_guide from './tab-locking-vs-password-managers-browser-security-guide'
+import post_best_tab_locking_extensions_2026 from './best-tab-locking-extensions-2026'
 
 export const allPosts = [
     ...legacyPosts,
@@ -39,4 +40,5 @@ export const allPosts = [
     post_webrtc_ip_leak_how_video_calls_expose_your_real_ip_address_through_the_browser,
     post_gdpr_hipaa_browser_tab_security_compliance_guide,
     post_tab_locking_vs_password_managers_browser_security_guide,
+    post_best_tab_locking_extensions_2026,
 ]

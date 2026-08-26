@@ -7,7 +7,8 @@ import {
   jsonLdOrganization,
   jsonLdSoftwareApplication,
   jsonLdProduct,
-  jsonLdHowToInstall
+  jsonLdHowToInstall,
+  jsonLdItemList
 } from "@/lib/metadata"
 import ChatSupport from "@/components/chat-support"
 import CookieConsent from "@/components/cookie-consent"
@@ -66,6 +67,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHowToInstall) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdItemList) }}
         />
       </head>
       <body className={`${geist.className} overflow-x-hidden`}>

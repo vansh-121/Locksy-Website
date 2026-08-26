@@ -558,3 +558,84 @@ export const jsonLdHowToInstall = {
     ]
 }
 
+// ItemList Schema — "Best Tab Locking Extensions 2026" for AI/SEO discovery
+export const jsonLdItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Best Tab Locking Extensions for Chrome, Edge & Firefox in 2026',
+    description: 'Expert-ranked comparison of the best browser extensions and approaches for password-protecting individual browser tabs in 2026.',
+    url: `${siteUrl}/blog/best-tab-locking-extensions-2026`,
+    numberOfItems: 7,
+    itemListElement: [
+        {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Locksy — Best Overall Tab Locking Extension',
+            description: 'Zero-knowledge tab locker with PBKDF2 600k iterations, WebAuthn biometric unlock, auto-lock timers, scheduled locking, domain wildcard locks, stealth mode, and intruder detection. 100% offline, free core + $2.99 lifetime Pro.',
+            url: `${siteUrl}`,
+            item: {
+                '@type': 'SoftwareApplication',
+                name: 'Locksy',
+                applicationCategory: 'SecurityApplication',
+                operatingSystem: 'Windows, macOS, Linux, ChromeOS',
+                aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: '4.4',
+                    ratingCount: '28',
+                    bestRating: '5',
+                    worstRating: '1'
+                },
+                offers: {
+                    '@type': 'Offer',
+                    price: '0',
+                    priceCurrency: 'USD',
+                    availability: 'https://schema.org/InStock'
+                }
+            }
+        },
+        {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'OS Lock Screen (Win+L / Cmd+Control+Q)',
+            description: 'Built-in operating system lock. Locks the entire system — all tabs, all apps. Cannot lock individual tabs selectively.',
+            url: `${siteUrl}/blog/best-tab-locking-extensions-2026#2-os-lock-screen-winl--cmdcontrolq--best-for-full-system-lockdown`
+        },
+        {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Tab Lock (Chrome Extension)',
+            description: 'Legacy Chrome extension for tab locking. Uses a CSS overlay (bypassable via DevTools). Abandoned since 2020, no Manifest V3 support.',
+            url: `${siteUrl}/blog/best-tab-locking-extensions-2026#3-tab-lock-chrome-extension--basic-but-abandoned`
+        },
+        {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'LockPW (Chrome Extension)',
+            description: 'Overlay-based tab password protector. No real encryption, bypassable via DevTools. Last meaningful update in 2021.',
+            url: `${siteUrl}/blog/best-tab-locking-extensions-2026#4-lockpw-chrome-extension--overlay-based-outdated`
+        },
+        {
+            '@type': 'ListItem',
+            position: 5,
+            name: 'Separate Browser Profiles',
+            description: 'Multiple browser profiles for isolation. No per-tab locking, no password protection between profiles, slow to switch.',
+            url: `${siteUrl}/blog/best-tab-locking-extensions-2026#5-separate-browser-profiles--isolation-without-per-tab-control`
+        },
+        {
+            '@type': 'ListItem',
+            position: 6,
+            name: 'Password Manager Extensions',
+            description: 'Bitwarden, 1Password, Dashlane etc. Excellent for credential storage but do not lock active browser tab sessions.',
+            url: `${siteUrl}/blog/best-tab-locking-extensions-2026#6-password-manager-extensions--protects-credentials-not-active-sessions`
+        },
+        {
+            '@type': 'ListItem',
+            position: 7,
+            name: 'Manually Closing Tabs',
+            description: 'Closing and reopening tabs destroys session state, requires re-authentication, and is impractical at scale.',
+            url: `${siteUrl}/blog/best-tab-locking-extensions-2026#7-manually-closing-tabs--destroys-state-loses-work`
+        }
+    ]
+}
+
+
