@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { blogPosts, getBlogPost, getRelatedPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
+import { jsonLdItemList } from '@/lib/metadata'
 import { BlogPostClient } from './blog-post-client'
 
 export async function generateStaticParams() {
@@ -133,6 +134,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
             />
+            {slug === 'best-tab-locking-extensions-2026' && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdItemList).replace(/</g, '\\u003c') }}
+                />
+            )}
             <BlogPostClient post={post} relatedPosts={getRelatedPosts(post.slug, 3)} />
         </>
     )
