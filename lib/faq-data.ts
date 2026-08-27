@@ -13,7 +13,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "How is Locksy different from other tab lockers like Tab Lock or LockPW?",
-    answer: "Unlike older tab locking extensions (Tab Lock, LockPW) that use a CSS overlay which can be bypassed by opening DevTools and deleting the element, Locksy navigates the tab away from the protected page entirely — the original page is completely unloaded from memory. There is no hidden element to delete. Locksy also uses PBKDF2-HMAC-SHA256 with 600,000 iterations for password verification, while older extensions use no real encryption. Additionally, Tab Lock and LockPW are abandoned (no updates since 2020–2021), while Locksy is actively maintained at v3.3.0 with support for Chrome, Edge, Firefox, Brave, and more.",
+    answer: "Unlike older tab locking extensions (Tab Lock, LockPW) that use a CSS overlay which can be bypassed by opening DevTools and deleting the element, Locksy navigates the tab away from the protected page entirely — the original page is completely unloaded from memory. There is no hidden element to delete. Locksy also uses PBKDF2-HMAC-SHA256 with 600,000 iterations for password verification, while older extensions use no real encryption. Additionally, Tab Lock and LockPW are abandoned (no updates since 2020–2021), while Locksy is actively maintained at v3.4.0 with support for Chrome, Edge, Firefox, Brave, and more.",
   },
   {
     question: "Can I lock browser tabs with fingerprint, Touch ID, or Face ID?",

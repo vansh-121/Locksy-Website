@@ -16,7 +16,7 @@ interface FeatureItem {
 const V330_FEATURES: FeatureItem[] = [
   {
     id: "recovery-key",
-    badge: "v3.3.0 Major Feature",
+    badge: "v3.4.0 Major Feature",
     title: "Master Recovery Key",
     tagline: "16-character emergency account recovery & offline export",
     description: "Never worry about locked account lockout again. Locksy automatically generates a 16-character emergency recovery key (LOCKSY-XXXX-XXXX-XXXX) protected by PBKDF2-SHA256 cryptographic hashing. Easily copy it or save it as a local text file for safe offline vault backup.",
@@ -30,7 +30,7 @@ const V330_FEATURES: FeatureItem[] = [
   },
   {
     id: "smart-sessions",
-    badge: "v3.3.0 Pro Feature",
+    badge: "v3.4.0 Pro Feature",
     title: "Smart Sessions & Re-Auth",
     tagline: "Bounded session timing & sensitive action prompts",
     description: "Stay signed in between popup opens instead of retyping your master password, while critical operations (unlocking tabs, removing domain locks, toggling stealth mode) still ask for password or biometric re-authentication. Choose your preferred window from Strict to 60 minutes.",
@@ -59,7 +59,7 @@ export default function WhatsNewV330() {
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-500/10 dark:bg-violet-500/20 border border-violet-500/30 text-violet-600 dark:text-violet-400 text-sm font-semibold mb-4 shadow-sm">
             <Sparkles className="w-4 h-4 text-violet-500" />
-            <span>NEW IN VERSION 3.3.0</span>
+            <span>NEW IN VERSION 3.4.0</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-foreground">

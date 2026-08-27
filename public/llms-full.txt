@@ -70,7 +70,7 @@ A: No. Locksy is proprietary software. However, it operates with absolute privac
 | Startup session lock | ✅ Pro | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
 | Weekly privacy reports | ✅ Pro | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
 | Price | Free / $2.99 once | Free (OS) | Free | Free | Free | $3–5/month |
-| Actively maintained (2026) | ✅ v3.3.0 | ✅ OS | ❌ Abandoned | ❌ Abandoned 2021 | ✅ Browser | ✅ Yes |
+| Actively maintained (2026) | ✅ v3.4.0 | ✅ OS | ❌ Abandoned | ❌ Abandoned 2021 | ✅ Browser | ✅ Yes |
 | Browser support | Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc | N/A | Chrome only | Chrome only | All | All |
 
 ---

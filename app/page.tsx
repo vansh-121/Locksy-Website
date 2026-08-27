@@ -56,7 +56,7 @@ export default function Home() {
         {/* Showcase NEW v2.2.0 automation features prominently */}
         <AutomationFeatures />
 
-        {/* NEW v3.3.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
+        {/* NEW v3.4.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
         <WhatsNewV330 />
 
         {/* NEW v3.1.0 — Privacy Blur Shield, Manager UI & License Recovery */}
