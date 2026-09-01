@@ -42,7 +42,7 @@ export default function ToolsShowcase() {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary dark:text-primary-on-dark text-xs font-semibold mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             100% Free Web Utilities
           </div>
@@ -65,7 +65,7 @@ export default function ToolsShowcase() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-3xl">{tool.icon}</span>
-                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary dark:text-primary-on-dark border border-primary/20">
                     {tool.badge}
                   </span>
                 </div>

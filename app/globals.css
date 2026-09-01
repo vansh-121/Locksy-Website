@@ -38,6 +38,16 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --gradient-via: oklch(0.50 0.23 282);
+
+  /* Theme-INVARIANT brand blues, for text sitting on a hard-coded surface.
+     `text-primary` flips with the theme, so on a `bg-white` button or a
+     hard-coded navy panel it lands at only ~4.1-4.2:1 in one theme or the
+     other. These two are deliberately NOT redefined under `.dark`:
+       --primary-on-light  #063ad7  →  8.08:1 on #ffffff
+       --primary-on-dark   #4f8dff  →  5.38-5.80:1 on the #0a1329..#0c1a3b navies
+     Use them whenever the background does not follow the theme. */
+  --primary-on-light: oklch(0.45 0.24 264);
+  --primary-on-dark: oklch(0.68 0.22 264);
 }
 
 .dark {
@@ -86,6 +96,8 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-on-light: var(--primary-on-light);
+  --color-primary-on-dark: var(--primary-on-dark);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);

@@ -237,27 +237,27 @@ export default function Footer() {
           <h4 className="text-sm font-semibold text-neutral-400 mb-4">Compatible with All Major Browsers</h4>
           <div className="flex flex-wrap items-center justify-center gap-8">
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/chrome.png" alt="Chrome" className="w-6 h-6 opacity-70" />
+              <img src="/browsers/chrome.png" alt="Chrome" className="w-6 h-6 opacity-70 object-contain" />
               <span className="text-sm">Chrome</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/edge.png" alt="Edge" className="w-6 h-6 opacity-70" />
+              <img src="/browsers/edge.png" alt="Edge" className="w-6 h-6 opacity-70 object-contain" />
               <span className="text-sm">Edge</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/brave.png" alt="Brave" className="w-6 h-6 opacity-70" />
+              <img src="/browsers/brave.png" alt="Brave" className="w-6 h-6 opacity-70 object-contain" />
               <span className="text-sm">Brave</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/opera.png" alt="Opera" className="w-6 h-6 opacity-70" />
+              <img src="/browsers/opera.png" alt="Opera" className="w-6 h-6 opacity-70 object-contain" />
               <span className="text-sm">Opera</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/vivaldi.png" alt="Vivaldi" className="w-6 h-6 opacity-70" />
+              <img src="/browsers/vivaldi.png" alt="Vivaldi" className="w-6 h-6 opacity-70 object-contain" />
               <span className="text-sm">Vivaldi</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/arc.png" alt="Arc" className="w-6 h-6 opacity-70" />
+              <img src="/browsers/arc.png" alt="Arc" className="w-6 h-6 opacity-70 object-contain" />
               <span className="text-sm">Arc</span>
             </div>
             <div className="flex items-center gap-2 text-neutral-400">

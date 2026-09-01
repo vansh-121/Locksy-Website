@@ -367,8 +367,9 @@ export default function WhatsNewV250() {
                         <div className="px-4 py-1.5 bg-[#8ab4f8] text-[#202124] text-xs rounded font-semibold">Reload</div>
                       </div>
 
-                      {/* Hidden unlock hint */}
-                      <p className="mt-4 text-[9px] text-[#9aa0a6]/60 italic">Press Alt+U or triple-click to unlock</p>
+                      {/* Hidden unlock hint — no opacity modifier: #9aa0a6 on #202124
+                          is 6.09:1, while /60 composited to #696d72 at only 3.09:1 */}
+                      <p className="mt-4 text-[9px] text-[#9aa0a6] italic">Press Alt+U or triple-click to unlock</p>
                     </div>
                   </div>
                 </div>
