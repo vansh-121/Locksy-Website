@@ -1,6 +1,7 @@
 "use client"
 
 import ProductHuntBadge from "@/components/product-hunt-badge"
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 
 declare global {
@@ -372,9 +373,12 @@ export default function Hero() {
             <div className="relative flex items-center justify-center">
               {/* Glow effect behind logo */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-3xl opacity-30 dark:opacity-50 animate-pulse" />
-              <img
+              <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
                 alt="Locksy Extension"
+                width={384}
+                height={384}
+                priority
                 className="relative h-48 sm:h-64 md:h-80 lg:h-96 w-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
               />
             </div>

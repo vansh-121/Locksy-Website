@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 text-neutral-300 py-20 overflow-hidden">
@@ -14,9 +16,11 @@ export default function Footer() {
         {/* Logo and Description */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <img
+            <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
               alt="Locksy"
+              width={48}
+              height={48}
               className="h-12 w-auto"
             />
             <span className="font-black text-3xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">

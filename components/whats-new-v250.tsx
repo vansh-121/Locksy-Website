@@ -363,8 +363,8 @@ export default function WhatsNewV250() {
                       <p className="text-[11px] text-[#9aa0a6] font-mono mb-4">ERR_CONNECTION_REFUSED</p>
 
                       <div className="flex gap-2">
-                        <div className="px-4 py-1.5 bg-[#3c4043] text-[#e8eaed] text-xs rounded font-medium">← Back</div>
-                        <div className="px-4 py-1.5 bg-[#8ab4f8] text-[#202124] text-xs rounded font-semibold">Reload</div>
+                        <div className="px-4 py-1.5 bg-[#5f6368] text-[#ffffff] text-xs rounded font-medium">← Back</div>
+                        <div className="px-4 py-1.5 bg-[#8ab4f8] text-[#0d1117] text-xs rounded font-semibold">Reload</div>
                       </div>
 
                       {/* Hidden unlock hint — no opacity modifier: #9aa0a6 on #202124

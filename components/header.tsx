@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 const PRIMARY_BROWSERS = [
@@ -96,9 +97,12 @@ export default function Header() {
         <a href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
-            <img
+            <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
               alt="Locksy"
+              width={48}
+              height={48}
+              priority
               className="relative h-10 md:h-12 w-auto"
             />
           </div>
@@ -252,6 +256,7 @@ export default function Header() {
           <button
             className="p-2 rounded-lg hover:bg-accent transition-colors flex-shrink-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMenuOpen ? (
