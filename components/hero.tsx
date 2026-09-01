@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react"
 declare global {
   interface Window {
     YT: any
-    onYouTubeIframeAPIReady: () => void
+    onYouTubeIframeAPIReady?: () => void
   }
 }
 
@@ -72,8 +72,18 @@ export default function Hero() {
   useEffect(() => {
     if (!hasActivated) return
 
+    // If the visitor activates the video and then leaves before
+    // youtube.com/iframe_api has finished loading, YouTube still fires
+    // onYouTubeIframeAPIReady afterwards. Today `new YT.Player()` against a
+    // missing element is a silent no-op, but that is undocumented behaviour we
+    // do not control, and a future throw would land in Lighthouse's
+    // errors-in-console audit. So the late callback is cancelled explicitly.
+    let cancelled = false
+
     const createPlayer = () => {
+      if (cancelled) return
       if (!window.YT?.Player) return
+      if (!document.getElementById('youtube-player')) return
       playerRef.current = new window.YT.Player('youtube-player', {
         videoId: VIDEO_ID,
         // Serve the player itself from youtube-nocookie.com so playback does not
@@ -130,6 +140,12 @@ export default function Hero() {
     }
 
     return () => {
+      cancelled = true
+      // Drop our closure off the global so a late API load cannot revive it.
+      // Identity-checked so we never clear a newer mount's callback.
+      if (window.onYouTubeIframeAPIReady === createPlayer) {
+        window.onYouTubeIframeAPIReady = undefined
+      }
       if (typeof playerRef.current?.destroy === 'function') playerRef.current.destroy()
       playerRef.current = null
       setPlayerReady(false)
@@ -431,18 +447,7 @@ export default function Hero() {
                 className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'
                   }`}
               >
-                {/* Top Bar - Live Badge */}
-                <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between">
-                  {isPlaying && (
-                    <div className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                      </span>
-                      LIVE DEMO
-                    </div>
-                  )}
-                </div>
+
 
                 {/* Center Play/Pause Button */}
                 {!isPlaying && (
