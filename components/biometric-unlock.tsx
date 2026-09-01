@@ -303,17 +303,20 @@ export default function BiometricUnlock() {
                     <div className="flex-1 h-px bg-border" />
                   </div>
 
-                  {/* Trigger button */}
+                  {/* Trigger button — no aria-label: the visible text is already a
+                      good accessible name, and an aria-label that did not contain it
+                      tripped axe's label-content-name-mismatch. The emoji is
+                      aria-hidden so the name is exactly the words on screen. */}
                   <button
                     onClick={handleManualTrigger}
                     disabled={unlockState === "scanning"}
-                    aria-label="Demo biometric unlock"
                     className={`w-full py-3 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${unlockState === "success"
                       ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
                       : "bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-wait"
                       }`}
                   >
-                    {unlockState === "success" ? "✓ Unlocked" : "👆 Try Biometric Demo"}
+                    <span aria-hidden="true">{unlockState === "success" ? "✓" : "👆"}</span>{" "}
+                    {unlockState === "success" ? "Unlocked" : "Try Biometric Demo"}
                   </button>
 
                   <p className="text-[10px] text-muted-foreground text-center">

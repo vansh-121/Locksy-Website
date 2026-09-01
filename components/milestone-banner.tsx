@@ -3,18 +3,33 @@
 import { useEffect, useRef, useState } from "react"
 
 const PARTICLE_COUNT = 30
+const PARTICLE_COLORS = ["#a78bfa", "#818cf8", "#c084fc", "#60a5fa", "#f472b6"]
 
-function generateParticles() {
-  return Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 2,
-    delay: Math.random() * 4,
-    duration: Math.random() * 3 + 2,
-    color: ["#a78bfa", "#818cf8", "#c084fc", "#60a5fa", "#f472b6"][Math.floor(Math.random() * 5)],
-  }))
+// Deterministic pseudo-random (mulberry32-style integer hash) in [0, 1).
+// These particles are decorative, but they are part of the prerendered HTML of
+// `/`, so `Math.random()` here gave the server and the client different
+// left/top/size/colour values and React reported a hydration mismatch. Seeding
+// off the particle index keeps the scatter varied while making both renders
+// byte-identical.
+function seeded(seed: number) {
+  let t = (seed + 0x9e3779b9) | 0
+  t = Math.imul(t ^ (t >>> 15), t | 1)
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296
 }
+
+// Rounded so the inline styles stay short and free of float-formatting doubt.
+const round2 = (n: number) => Math.round(n * 100) / 100
+
+const PARTICLES = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
+  id: i,
+  x: round2(seeded(i * 6 + 1) * 100),
+  y: round2(seeded(i * 6 + 2) * 100),
+  size: round2(seeded(i * 6 + 3) * 4 + 2),
+  delay: round2(seeded(i * 6 + 4) * 4),
+  duration: round2(seeded(i * 6 + 5) * 3 + 2),
+  color: PARTICLE_COLORS[Math.floor(seeded(i * 6 + 6) * PARTICLE_COLORS.length)],
+}))
 
 function useCountUp(target: number, duration = 2000, start = false) {
   const [count, setCount] = useState(0)
@@ -37,7 +52,6 @@ function useCountUp(target: number, duration = 2000, start = false) {
 export default function MilestoneBanner() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [animating, setAnimating] = useState(false)
-  const [particles] = useState(generateParticles)
   const count = useCountUp(5000, 2200, animating)
 
   useEffect(() => {
@@ -61,7 +75,7 @@ export default function MilestoneBanner() {
     >
       {/* Animated floating particles */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        {particles.map((p) => (
+        {PARTICLES.map((p) => (
           <span
             key={p.id}
             className="absolute rounded-full opacity-0"

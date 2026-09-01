@@ -12,9 +12,13 @@ Disallow: /admin/
 Sitemap: https://www.locksy.dev/sitemap.xml
 
 # LLMs.txt — AI/LLM context files for generative engine optimization
-# See https://llmstxt.org for the specification
-LLMs-context: https://www.locksy.dev/llms.txt
-LLMs-full-context: https://www.locksy.dev/llms-full.txt
+# See https://llmstxt.org for the specification.
+# NOTE: `LLMs-context:` is not a registered robots.txt directive, so parsers
+# (including Lighthouse) report it as an error. The files are advertised the
+# standard way instead, via <link rel="alternate" type="text/markdown"> in
+# app/layout.tsx. Kept here as comments for human readers only:
+#   https://www.locksy.dev/llms.txt
+#   https://www.locksy.dev/llms-full.txt
 
 # Google Bot
 User-agent: Googlebot

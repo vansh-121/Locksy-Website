@@ -54,6 +54,8 @@ const SECONDARY_BROWSERS = [
   },
 ]
 
+const VIDEO_ID = '6uyd4sN5WiA'
+
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<any>(null)
@@ -62,19 +64,24 @@ export default function Hero() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [showControls, setShowControls] = useState(false)
   const [playerReady, setPlayerReady] = useState(false)
+  // Click-to-play facade. Nothing is requested from YouTube until the visitor
+  // actually asks for the video, so a cold page view writes zero third-party
+  // cookies and downloads none of the ~1 MB YouTube player bundle.
+  const [hasActivated, setHasActivated] = useState(false)
 
   useEffect(() => {
-    // Load YouTube IFrame API
-    const tag = document.createElement('script')
-    tag.src = 'https://www.youtube.com/iframe_api'
-    const firstScriptTag = document.getElementsByTagName('script')[0]
-    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
+    if (!hasActivated) return
 
-    // Initialize player when API is ready
-    window.onYouTubeIframeAPIReady = () => {
+    const createPlayer = () => {
+      if (!window.YT?.Player) return
       playerRef.current = new window.YT.Player('youtube-player', {
-        videoId: '6uyd4sN5WiA',
+        videoId: VIDEO_ID,
+        // Serve the player itself from youtube-nocookie.com so playback does not
+        // write advertising/tracking cookies for the visitor.
+        host: 'https://www.youtube-nocookie.com',
         playerVars: {
+          autoplay: 1,
+          mute: 1,
           controls: 0,
           modestbranding: 1,
           rel: 0,
@@ -82,11 +89,20 @@ export default function Hero() {
           iv_load_policy: 3,
           disablekb: 1,
           enablejsapi: 1,
+          playsinline: 1,
         },
         events: {
-          onReady: () => {
+          // Use event.target, not playerRef.current: onReady can fire before the
+          // `new YT.Player(...)` assignment below has completed, and event.target
+          // is the fully-initialised player either way.
+          onReady: (event: any) => {
+            playerRef.current = event.target
             setPlayerReady(true)
-            playerRef.current.mute()
+            event.target.mute()
+            // Honour the click that mounted us.
+            event.target.playVideo()
+            const frame = event.target.getIframe?.()
+            if (frame && !frame.title) frame.title = 'Locksy demo video'
           },
           onStateChange: (event: any) => {
             if (event.data === window.YT.PlayerState.PLAYING) {
@@ -99,64 +115,83 @@ export default function Hero() {
       })
     }
 
-    return () => {
-      if (playerRef.current) {
-        playerRef.current.destroy()
+    // The API may already be present (e.g. the player was destroyed and remounted).
+    if (window.YT?.Player) {
+      createPlayer()
+    } else {
+      window.onYouTubeIframeAPIReady = createPlayer
+      const API_SRC = 'https://www.youtube.com/iframe_api'
+      if (!document.querySelector(`script[src="${API_SRC}"]`)) {
+        const tag = document.createElement('script')
+        tag.src = API_SRC
+        tag.async = true
+        document.head.appendChild(tag)
       }
     }
-  }, [])
+
+    return () => {
+      if (typeof playerRef.current?.destroy === 'function') playerRef.current.destroy()
+      playerRef.current = null
+      setPlayerReady(false)
+      setIsPlaying(false)
+    }
+  }, [hasActivated])
+
+  // The object returned by `new YT.Player()` only gains its API methods once
+  // onReady has fired. Calling them before that throws
+  // ("unMute is not a function"), which would show up in Lighthouse's
+  // errors-in-console audit, so every call site goes through this.
+  const withPlayer = (method: string, fn: (p: any) => void) => {
+    const p = playerRef.current
+    if (playerReady && typeof p?.[method] === 'function') fn(p)
+  }
 
   useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVideoVisible(true)
-            if (playerReady && playerRef.current) {
-              playerRef.current.playVideo()
-            }
           } else {
-            // Pause video when scrolled out of view
-            if (playerReady && playerRef.current) {
-              playerRef.current.pauseVideo()
-            }
+            // Only ever pause here. Auto-*starting* on scroll is what pulled the
+            // YouTube player into every page view in the first place.
+            const p = playerRef.current
+            if (playerReady && typeof p?.pauseVideo === 'function') p.pauseVideo()
           }
         })
       },
       { threshold: 0.3 }
     )
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
-    }
-
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current)
-      }
-    }
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [playerReady])
 
   const toggleMute = () => {
-    if (playerRef.current) {
+    withPlayer(isMuted ? 'unMute' : 'mute', (p) => {
       if (isMuted) {
-        playerRef.current.unMute()
+        p.unMute()
         setIsMuted(false)
       } else {
-        playerRef.current.mute()
+        p.mute()
         setIsMuted(true)
       }
-    }
+    })
   }
 
   const togglePlayPause = () => {
-    if (playerRef.current) {
-      if (isPlaying) {
-        playerRef.current.pauseVideo()
-      } else {
-        playerRef.current.playVideo()
-      }
+    // First interaction mounts the player, which autoplays on ready.
+    if (!hasActivated) {
+      setHasActivated(true)
+      return
     }
+    withPlayer(isPlaying ? 'pauseVideo' : 'playVideo', (p) => {
+      if (isPlaying) p.pauseVideo()
+      else p.playVideo()
+    })
   }
 
   const openFullscreen = () => {
@@ -352,12 +387,46 @@ export default function Hero() {
               onMouseEnter={() => setShowControls(true)}
               onMouseLeave={() => setShowControls(false)}
             >
-              <div
-                id="youtube-player"
-                className="absolute inset-0 w-full h-full"
-              />
+              {hasActivated ? (
+                <div
+                  id="youtube-player"
+                  className="absolute inset-0 w-full h-full"
+                />
+              ) : (
+                /* Facade: self-hosted 1280x720 poster (exact 16:9, so it matches the
+                   aspect-video box) plus a play button. No youtube.com request at all
+                   until this is clicked. */
+                <button
+                  type="button"
+                  onClick={() => setHasActivated(true)}
+                  className="absolute inset-0 w-full h-full cursor-pointer group/facade"
+                >
+                  <img
+                    src="/video-poster.jpg"
+                    alt=""
+                    aria-hidden="true"
+                    width={1280}
+                    height={720}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <span className="w-20 h-20 rounded-full bg-gradient-to-r from-primary to-secondary text-white flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover/facade:scale-110">
+                      <svg className="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                  </span>
+                  <span className="absolute bottom-4 left-0 right-0 text-center text-sm font-semibold text-white/90">
+                    Watch the demo
+                  </span>
+                  <span className="sr-only">Play the Locksy demo video</span>
+                </button>
+              )}
 
-              {/* Custom Video Controls Overlay */}
+              {/* Custom Video Controls Overlay — only once the real player exists,
+                  otherwise its centre play button would sit on top of the facade's. */}
+              {hasActivated && (
               <div
                 className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'
                   }`}
@@ -440,6 +509,7 @@ export default function Hero() {
                   </button>
                 </div>
               </div>
+              )}
             </div>
           </div>
         </div>

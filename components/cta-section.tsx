@@ -15,7 +15,7 @@ export default function CTASection() {
             href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
+            className="w-full px-5 py-3 bg-white text-primary-on-light font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
           >
             <img src="/browsers/chrome.png" alt="Chrome" className="w-5 h-5 flex-shrink-0" />
             Get for Chrome
@@ -24,7 +24,7 @@ export default function CTASection() {
             href="https://addons.mozilla.org/en-US/firefox/addon/locksy/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
+            className="w-full px-5 py-3 bg-white text-primary-on-light font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
           >
             <img src="/browsers/firefox.png" alt="Firefox" className="w-5 h-5 flex-shrink-0" />
             Get for Firefox
@@ -33,7 +33,7 @@ export default function CTASection() {
             href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
+            className="w-full px-5 py-3 bg-white text-primary-on-light font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
           >
             <img src="/browsers/edge.png" alt="Edge" className="w-5 h-5 flex-shrink-0" />
             Get for Edge
@@ -61,7 +61,7 @@ export default function CTASection() {
             href="https://github.com/sponsors/vansh-121"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 text-center inline-flex items-center justify-center gap-2"
+            className="w-full px-5 py-3 bg-white text-primary-on-light font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 text-center inline-flex items-center justify-center gap-2"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
