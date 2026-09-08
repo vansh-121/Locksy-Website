@@ -21,7 +21,7 @@ export default function Features() {
     {
       icon: "⌨️",
       title: "Keyboard Shortcuts",
-      desc: "Lock tabs instantly with Alt+Shift+9, open manager with Alt+Shift+0, or lock all tabs with Alt+Shift+8 (3 free uses, unlimited on Pro). Fully customizable shortcuts.",
+      desc: "Lock the current tab (Alt+Shift+9), open the manager (Alt+Shift+0), lock every tab (Alt+Shift+8, 3 free uses then Pro), or hide Locksy with Stealth Mode (Alt+Shift+7). All shortcuts are customizable, and locked tabs show a lock icon plus a live badge counter.",
       gradient: "from-violet-500 to-purple-500",
     },
     // {
@@ -37,15 +37,9 @@ export default function Features() {
       gradient: "from-blue-500 to-cyan-500",
     },
     {
-      icon: "🔐",
-      title: "One-Click Locking",
-      desc: "Lock any tab instantly with a single click. No complex setup needed.",
-      gradient: "from-cyan-500 to-teal-500",
-    },
-    {
       icon: "👆",
       title: "Biometric Unlock",
-      desc: "Unlock protected tabs with Touch ID, Windows Hello, Face ID, or Android biometrics. WebAuthn / FIDO2 — no biometric data ever leaves your device.",
+      desc: "Unlock protected tabs with your fingerprint or face — Touch ID, Windows Hello, Face ID, Android biometrics, or a USB security key. Your biometric data never leaves your device.",
       gradient: "from-violet-500 to-indigo-500",
     },
     {
@@ -61,12 +55,6 @@ export default function Features() {
       gradient: "from-purple-500 to-violet-500",
     },
     {
-      icon: "🎨",
-      title: "Light / Dark Theme",
-      desc: "Persistent theme switcher built into the popup header. Choose light or dark mode — syncs instantly across all Locksy pages without reload. Works on the lock screen too.",
-      gradient: "from-cyan-500 to-violet-500",
-    },
-    {
       icon: "📸",
       title: "Webcam Intruder Capture",
       desc: "Silently captures a local-only webcam snapshot of snoopers trying to guess your password. Dedicated log page lets you review attempt histories and delete photos safely.",
@@ -75,7 +63,7 @@ export default function Features() {
     {
       icon: "🚀",
       title: "Startup Session Lock",
-      desc: "Automatically lock session tabs on browser launch. A 30-second catch-up window catches tabs that restore late. Requires Locksy Pro.",
+      desc: "Automatically locks your session tabs when the browser launches, including tabs that restore a moment later. Requires Locksy Pro.",
       gradient: "from-amber-500 to-yellow-500",
     },
     {
@@ -104,14 +92,14 @@ export default function Features() {
     },
     {
       icon: "🔒",
-      title: "PBKDF2 Key Derivation",
-      desc: "600k iterations with SHA-256 - OWASP 2023 compliant. Military-grade password hashing with 120 years crack resistance.",
+      title: "Strong Password Encryption",
+      desc: "Your master password is protected with heavy-duty hashing (PBKDF2, 600k rounds, SHA-256) — the approach security experts recommend, with an estimated 120 years to crack.",
       gradient: "from-purple-500 to-pink-500",
     },
     {
       icon: "🛡️",
-      title: "Rate Limiting & Brute-Force Protection",
-      desc: "Advanced timing attack protection with exponential backoff. Prevents automated password cracking attempts.",
+      title: "Brute-Force Protection",
+      desc: "If someone keeps guessing your password, Locksy automatically slows them down with escalating delays — blocking automated cracking tools.",
       gradient: "from-amber-500 to-orange-500",
     },
     {

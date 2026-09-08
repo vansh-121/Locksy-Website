@@ -1,163 +1,278 @@
+"use client"
+
+// Keyboard shortcuts, presented as a polished reference table.
+//
+// This is a client component so it can auto-detect macOS and show ⌥ Option
+// instead of Alt. Important: it renders the Windows/Linux key set as its
+// initial state (never null), so the full table — every shortcut, action and
+// description — is present in the server-rendered HTML. The macOS swap happens
+// after mount, and a manual toggle lets anyone see either key set regardless of
+// what they're browsing on.
+//
+// A real <table> is used on desktop for genuine row/column semantics, with
+// stacked cards on mobile where a multi-column table would be unreadable.
+
+import { useEffect, useState } from "react"
+
+type Platform = "win" | "mac"
+
+const SHORTCUTS = [
+  {
+    winKeys: ["Alt", "Shift", "9"],
+    macKeys: ["⌥ Option", "⇧ Shift", "9"],
+    action: "Lock the current tab",
+    description: "Instantly locks the tab you're looking at right now.",
+    icon: "🔒",
+    gradient: "from-blue-500 to-cyan-500",
+    tier: null,
+  },
+  {
+    winKeys: ["Alt", "Shift", "0"],
+    macKeys: ["⌥ Option", "⇧ Shift", "0"],
+    action: "Open the lock manager",
+    description: "Jump straight to the panel where you manage locked sites.",
+    icon: "🗂️",
+    gradient: "from-violet-500 to-purple-500",
+    tier: null,
+  },
+  {
+    winKeys: ["Alt", "Shift", "8"],
+    macKeys: ["⌥ Option", "⇧ Shift", "8"],
+    action: "Lock every open tab",
+    description: "Locks all compatible tabs in the window in one go.",
+    // Note: deliberately not an amber/orange gradient — the ⚡ emoji is itself
+    // yellow-orange and disappears against a warm background.
+    icon: "⚡",
+    gradient: "from-rose-500 to-red-600",
+    tier: "3 free, then Pro",
+  },
+  {
+    winKeys: ["Alt", "Shift", "7"],
+    macKeys: ["⌥ Option", "⇧ Shift", "7"],
+    action: "Toggle Stealth Mode",
+    description: "Hides Locksy completely — badge, alerts, and lock screen.",
+    icon: "🕵️",
+    gradient: "from-emerald-500 to-teal-600",
+    tier: null,
+  },
+]
+
+// Shared keycap rendering so the table and the mobile cards stay identical.
+// The heavier bottom border + inset highlight give the keys a physical feel.
+function Keys({ keys }: { keys: string[] }) {
+  return (
+    <span className="inline-flex items-center gap-2 flex-wrap">
+      {keys.map((key, i) => (
+        <span key={key} className="inline-flex items-center gap-2">
+          <kbd className="px-3 py-2 min-w-[3rem] text-center bg-gradient-to-b from-card to-muted border border-border/80 border-b-[3px] border-b-border rounded-lg text-sm font-bold text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_1px_2px_rgba(0,0,0,0.2)] whitespace-nowrap">
+            {key}
+          </kbd>
+          {i < keys.length - 1 && (
+            <span className="text-muted-foreground/60 text-xs font-bold">+</span>
+          )}
+        </span>
+      ))}
+    </span>
+  )
+}
+
+function TierBadge({ tier }: { tier: string }) {
+  return (
+    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 whitespace-nowrap">
+      {tier}
+    </span>
+  )
+}
+
 export default function KeyboardShortcuts() {
-    const shortcuts = [
-        {
-            keys: ["Alt", "Shift", "9"],
-            action: "Lock Current Tab",
-            description: "Instantly lock the tab you're currently viewing",
-            icon: "🔒",
-            gradient: "from-blue-500 via-cyan-500 to-teal-500",
-        },
-        {
-            keys: ["Alt", "Shift", "0"],
-            action: "Open Domain Lock Manager",
-            description: "Quick access to manage all your locked domains",
-            icon: "🗂️",
-            gradient: "from-purple-500 via-pink-500 to-rose-500",
-        },
-        {
-            keys: ["Alt", "Shift", "8"],
-            action: "Lock All Tabs",
-            description: "Lock all compatible tabs in the current window at once (3 free uses, unlimited on Pro)",
-            icon: "⚡",
-            gradient: "from-orange-500 via-red-500 to-pink-500",
-        },
-        {
-            keys: ["Alt", "Shift", "7"],
-            action: "Toggle Stealth Mode",
-            description: "Instantly hide all Locksy indicators — badge, notifications, and lock screen disguised",
-            icon: "🕵️",
-            gradient: "from-purple-500 via-violet-500 to-indigo-500",
-        },
-    ]
+  // Default to Windows/Linux so the server-rendered HTML has real content.
+  const [platform, setPlatform] = useState<Platform>("win")
 
-    return (
-        <section id="keyboard-shortcuts" className="py-24 md:py-32 bg-gradient-to-b from-accent via-background to-accent relative overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-20 left-20 w-72 h-72 bg-primary/20 dark:bg-primary/30 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute top-1/2 right-20 w-96 h-96 bg-secondary/20 dark:bg-secondary/30 rounded-full blur-3xl animate-pulse delay-300" />
-                <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-violet-500/20 dark:bg-violet-500/30 rounded-full blur-3xl animate-pulse delay-700" />
+  useEffect(() => {
+    const ua = navigator.userAgent
+    if (/Mac|iPhone|iPad|iPod/.test(ua)) setPlatform("mac")
+  }, [])
+
+  const keysFor = (s: (typeof SHORTCUTS)[number]) =>
+    platform === "mac" ? s.macKeys : s.winKeys
+
+  return (
+    <section
+      id="keyboard-shortcuts"
+      className="py-20 md:py-28 bg-gradient-to-b from-background via-accent/20 to-background relative overflow-hidden"
+    >
+      {/* Soft background glow, consistent with neighbouring sections */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 right-1/5 w-80 h-80 bg-primary/8 dark:bg-primary/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/5 w-72 h-72 bg-secondary/8 dark:bg-secondary/15 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-4xl mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="text-center mb-8 md:mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-6">
+            <span aria-hidden="true">⌨️</span>
+            Keyboard shortcuts
+          </div>
+          <h2 className="section-title">Lock a Tab Without Touching Your Mouse</h2>
+          <p className="section-subtitle">
+            Four shortcuts cover everything. They work the moment you install Locksy, and you can
+            change any of them in your browser's extension settings.
+          </p>
+        </div>
+
+        {/* Platform switch — auto-set from your device, changeable by hand */}
+        <div className="flex justify-center mb-8">
+          <div
+            role="group"
+            aria-label="Show shortcuts for"
+            className="inline-flex items-center p-1 rounded-xl bg-muted/70 border border-border/60 backdrop-blur-sm"
+          >
+            <button
+              type="button"
+              onClick={() => setPlatform("win")}
+              aria-pressed={platform === "win"}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                platform === "win"
+                  ? "bg-gradient-to-r from-primary to-secondary text-white shadow-md"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Windows / Linux
+            </button>
+            <button
+              type="button"
+              onClick={() => setPlatform("mac")}
+              aria-pressed={platform === "mac"}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                platform === "mac"
+                  ? "bg-gradient-to-r from-primary to-secondary text-white shadow-md"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              macOS
+            </button>
+          </div>
+        </div>
+
+        {/* ── Desktop: reference table ─────────────────────────────── */}
+        <div className="hidden md:block rounded-2xl border border-border/60 bg-card shadow-xl shadow-primary/5 overflow-hidden">
+          <table className="w-full border-collapse text-left">
+            <caption className="sr-only">
+              Locksy keyboard shortcuts, the action each one performs, and what it does
+            </caption>
+            <thead>
+              <tr className="bg-gradient-to-r from-primary/10 to-secondary/10 border-b border-border/60">
+                <th
+                  scope="col"
+                  className="px-6 py-4 text-[11px] font-bold uppercase tracking-widest text-muted-foreground w-[42%]"
+                >
+                  Press
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-4 text-[11px] font-bold uppercase tracking-widest text-muted-foreground"
+                >
+                  What happens
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {SHORTCUTS.map((s, idx) => (
+                <tr
+                  key={s.action}
+                  className={`group transition-colors hover:bg-accent/40 ${
+                    idx < SHORTCUTS.length - 1 ? "border-b border-border/40" : ""
+                  }`}
+                >
+                  <td className="px-6 py-5 align-middle">
+                    <Keys keys={keysFor(s)} />
+                  </td>
+                  <td className="px-6 py-5 align-middle">
+                    <div className="flex items-start gap-3.5">
+                      {/* Gradient icon tile — matches the Features grid treatment */}
+                      <div
+                        className={`flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${s.gradient} flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition-transform duration-300`}
+                      >
+                        <span aria-hidden="true">{s.icon}</span>
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="font-bold text-foreground">{s.action}</p>
+                          {s.tier && <TierBadge tier={s.tier} />}
+                        </div>
+                        <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                          {s.description}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* ── Mobile: stacked cards ────────────────────────────────── */}
+        <div className="md:hidden space-y-3.5">
+          {SHORTCUTS.map((s) => (
+            <div
+              key={s.action}
+              className="rounded-2xl border border-border/60 bg-card p-5 shadow-lg shadow-primary/5"
+            >
+              <div className="flex items-start gap-3.5 mb-4">
+                <div
+                  className={`flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${s.gradient} flex items-center justify-center text-xl shadow-md`}
+                >
+                  <span aria-hidden="true">{s.icon}</span>
+                </div>
+                <div className="min-w-0">
+                  <p className="font-bold text-foreground leading-snug">{s.action}</p>
+                  {s.tier && (
+                    <span className="inline-flex items-center mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25">
+                      {s.tier}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <Keys keys={keysFor(s)} />
+              <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{s.description}</p>
             </div>
+          ))}
+        </div>
 
-            <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-                <div className="text-center mb-20">
-                    <h2 className="text-5xl md:text-6xl font-black leading-tight text-foreground mb-6">
-                        Lightning-Fast{" "}
-                        <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 dark:from-violet-400 dark:via-purple-400 dark:to-fuchsia-400 bg-clip-text text-transparent">
-                            Keyboard Shortcuts
-                        </span>
-                    </h2>
-                    <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-                        Lock tabs at the speed of thought. No mouse needed.
-                    </p>
-                </div>
-
-                {/* Shortcuts - Bento Box Style */}
-                <div className="max-w-6xl mx-auto mb-20">
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {shortcuts.map((shortcut, idx) => (
-                            <div
-                                key={idx}
-                                className="group relative overflow-hidden bg-card rounded-2xl shadow-lg border border-border hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                            >
-                                {/* Subtle gradient on hover */}
-                                <div className={`absolute inset-0 bg-gradient-to-br ${shortcut.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-
-                                <div className="relative p-8">
-                                    {/* Icon - cleaner look */}
-                                    <div className="mb-6">
-                                        <div className={`inline-flex w-16 h-16 items-center justify-center text-4xl bg-gradient-to-br ${shortcut.gradient} rounded-xl shadow-md group-hover:scale-105 transition-transform duration-300`}>
-                                            {shortcut.icon}
-                                        </div>
-                                    </div>
-
-                                    {/* Action Title */}
-                                    {/* Action Title */}
-                                    <h3 className="font-bold text-xl mb-4 text-foreground">
-                                        {shortcut.action}
-                                    </h3>
-                                    {/* Keyboard Keys - Softer styling */}
-                                    <div className="flex flex-wrap items-center justify-start gap-2 mb-6">
-                                        {shortcut.keys.map((key, keyIdx) => (
-                                            <span key={keyIdx} className="inline-flex items-center">
-                                                <kbd className="px-4 py-2 bg-card border-2 border-border rounded-lg shadow-sm text-base font-semibold text-foreground/80 min-w-[3.5rem] text-center hover:border-primary/30 transition-all">
-                                                    {key}
-                                                </kbd>
-                                                {keyIdx < shortcut.keys.length - 1 && (
-                                                    <span className="mx-2 text-lg font-medium text-muted-foreground">+</span>
-                                                )}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    {/* Description */}
-                                    <p className="text-muted-foreground leading-relaxed text-base">
-                                        {shortcut.description}
-                                    </p>
-                                </div>
-
-                                {/* Subtle corner accent */}
-                                <div className={`absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br ${shortcut.gradient} rounded-full opacity-0 group-hover:opacity-10 blur-xl transition-all duration-500`} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Bottom Section - Side by Side */}
-                <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
-                    {/* Customization Info */}
-                    <div className="md:col-span-1 group relative overflow-hidden bg-gradient-to-br from-violet-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl p-6 border border-violet-500/20 hover:shadow-lg transition-all duration-300">
-                        <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl flex items-center justify-center text-2xl shadow-md flex-shrink-0">
-                                ⚙️
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-lg text-foreground mb-2">
-                                    Fully Customizable
-                                </h3>
-                                <p className="text-muted-foreground text-sm leading-relaxed">
-                                    Personalize all shortcuts in your browser's extension settings.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Visual Indicators */}
-                    <div className="md:col-span-2 grid md:grid-cols-2 gap-6">
-                        <div className="group relative overflow-hidden bg-gradient-to-br from-rose-500/10 to-pink-500/10 backdrop-blur-sm rounded-2xl p-6 border border-rose-500/20 hover:shadow-lg transition-all duration-300">
-                            <div className="flex items-start gap-4">
-                                <div className="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-500 rounded-xl flex items-center justify-center text-2xl shadow-md flex-shrink-0">
-                                    🔒
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-lg text-foreground mb-2">
-                                        Lock Icon
-                                    </h3>
-                                    <p className="text-muted-foreground text-sm leading-relaxed">
-                                        Red lock overlay on tab favicons. Spot protected tabs instantly.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="group relative overflow-hidden bg-gradient-to-br from-red-500/10 to-rose-500/10 backdrop-blur-sm rounded-2xl p-6 border border-red-500/20 hover:shadow-lg transition-all duration-300">
-                            <div className="flex items-start gap-4">
-                                <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-rose-500 rounded-xl flex items-center justify-center text-2xl shadow-md flex-shrink-0">
-                                    🔢
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-lg text-foreground mb-2">
-                                        Badge Counter
-                                    </h3>
-                                    <p className="text-muted-foreground text-sm leading-relaxed">
-                                        Real-time counter on extension icon. Never lose track of locked tabs.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        {/* Supporting details: customization + the visual cues */}
+        <div className="grid sm:grid-cols-3 gap-4 mt-6">
+          {[
+            {
+              icon: "⚙️",
+              title: "Change any of them",
+              desc: "Remap every shortcut from your browser's extension shortcut settings.",
+            },
+            {
+              icon: "🔒",
+              title: "A lock on the tab",
+              desc: "Locked tabs show a red lock over the favicon, so protected tabs stand out.",
+            },
+            {
+              icon: "🔢",
+              title: "A live counter",
+              desc: "The Locksy icon shows how many tabs are locked right now.",
+            },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="rounded-xl border border-border/50 bg-card/60 backdrop-blur-sm p-5 transition-all duration-300 hover:border-primary/30 hover:-translate-y-0.5"
+            >
+              <div className="text-2xl mb-2.5" aria-hidden="true">
+                {item.icon}
+              </div>
+              <h3 className="font-semibold text-foreground mb-1.5">{item.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
             </div>
-        </section>
-    )
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }

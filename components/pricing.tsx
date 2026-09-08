@@ -7,7 +7,7 @@ export default function Pricing() {
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
 
   const proFeatures = [
-    { title: "Privacy Blur Manager UI", desc: "Custom blur levels (Light to Solid), site categories & whitelists", icon: <EyeOff className="w-4 h-4" /> },
+    { title: "Privacy Blur Manager", desc: "Custom blur levels (Light to Solid), site categories & whitelists", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Unlimited Domain Auto-Locks", desc: "Lock any number of websites & subdomains", icon: <Globe className="w-4 h-4" /> },
     { title: "Unlimited Biometric Unlocks", desc: "Windows Hello, Touch ID, or Face ID access", icon: <Fingerprint className="w-4 h-4" /> },
     { title: "Startup Session Lock", desc: "Instantly lock all session-restored tabs on launch", icon: <Zap className="w-4 h-4" /> },
@@ -16,7 +16,7 @@ export default function Pricing() {
     { title: "Custom Lock Screen Messages", desc: "Display personal notes or warnings on the lock screen", icon: <ShieldAlert className="w-4 h-4" /> },
     { title: "Webcam Intruder captures", desc: "Unlimited local snapshots of failed access attempts", icon: <Camera className="w-4 h-4" /> },
     { title: "1-Click Unlock All Tabs", desc: "Unlock all protected tabs simultaneously", icon: <Key className="w-4 h-4" /> },
-    { title: "Smart Sessions & Re-Auth Timing", desc: "Custom re-auth window (1–60 min, Strict) with sensitive action prompts", icon: <Clock className="w-4 h-4" /> },
+    { title: "Auto Re-Lock After a Set Time", desc: "Choose how long before Locksy asks for your password again (up to 60 min), with extra checks for sensitive actions", icon: <Clock className="w-4 h-4" /> },
     { title: "Master Recovery Key Backup", desc: "Generate 16-char emergency recovery key for offline password reset", icon: <Key className="w-4 h-4" /> },
     { title: "Custom Auto-Lock Timers", desc: "Configure custom duration settings up to 8 hours", icon: <Clock className="w-4 h-4" /> },
   ]
@@ -27,13 +27,13 @@ export default function Pricing() {
     { title: "Max 3 Domain Locks", desc: "Limit of 3 auto-locked websites", icon: <Globe className="w-4 h-4" /> },
     { title: "Max 5 Biometric prompts", desc: "Up to 5 fingerprint or face unlocks per day", icon: <Fingerprint className="w-4 h-4" /> },
     { title: "Max 3 Webcam captures", desc: "Store up to 3 local snooper snapshots", icon: <Camera className="w-4 h-4" /> },
-    { title: "10-Min Session Re-Auth Window", desc: "Default 10-minute session duration before re-authentication", icon: <Clock className="w-4 h-4" /> },
+    { title: "10-Minute Auto Re-Lock", desc: "Locksy asks for your password again after 10 minutes", icon: <Clock className="w-4 h-4" /> },
     { title: "Default Hotkey locking", desc: "Alt+Shift+9 to lock the active tab; 3 total uses of Lock All", icon: <Key className="w-4 h-4" /> },
     { title: "Master Recovery Key Setup", desc: "Generate & export 16-char emergency recovery key", icon: <Key className="w-4 h-4" /> },
     { title: "Quick-Unlock Panel", desc: "View & unlock active protected tabs from popup", icon: <CheckCircle2 className="w-4 h-4" /> },
     { title: "Incognito Window Support", desc: "Full protection in private browsing mode", icon: <EyeOff className="w-4 h-4" /> },
-    { title: "Offline Local Processing", desc: "Encryption keys never leave your machine", icon: <ShieldCheck className="w-4 h-4" /> },
-    { title: "Zero Data Telemetry", desc: "100% private client-side processing, no tracking", icon: <Shield className="w-4 h-4" /> },
+    { title: "Works Fully Offline", desc: "Encryption keys never leave your device", icon: <ShieldCheck className="w-4 h-4" /> },
+    { title: "No Tracking, Ever", desc: "100% private — everything stays on your device", icon: <Shield className="w-4 h-4" /> },
   ]
 
   return (

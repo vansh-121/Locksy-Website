@@ -231,33 +231,27 @@ export default function Hero() {
         <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Left: Content */}
           <div className="space-y-10 z-10">
-            {/* Badges */}
+            {/* Badge */}
             <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
-              <a
-                href="#whats-new-v330"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 text-white rounded-full text-sm font-bold shadow-lg animate-pulse hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-              >
-                <span>🔑</span>
-                NEW IN v3.4.0
-              </a>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
-                All Major Browsers
+                Works on all major browsers
               </div>
             </div>
 
             <div className="space-y-6">
               <h1 className="text-5xl md:text-7xl font-black leading-tight text-foreground">
-                <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
-                  Locksy
-                </span>{" "}
-                — Secure Your Tabs with Military-Grade Protection
+                Password Protect &amp; Lock Your{" "}
+                <span className="block bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
+                  Browser Tabs
+                </span>
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Password-protect any browser tab or lock entire domains with persistent protection. Now featuring Privacy Blur Shield, Weekly Privacy Reports, Startup Session Guarding, and Webcam Intruder Alerts.
+                Locksy password-protects any browser tab — or a whole website — with a single click.
+                It's free, works offline, and needs no account.
               </p>
             </div>
 
@@ -288,83 +282,40 @@ export default function Hero() {
                 ))}
               </div>
 
-              {/* Other Chromium Browsers - All link to Chrome Web Store */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 w-full">
-                {SECONDARY_BROWSERS.map((browser) => (
-                  <a
-                    key={browser.name}
-                    href={browser.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group py-2 sm:py-3"
-                    title="Install from Chrome Web Store"
-                  >
-                    <span className="flex items-center gap-1.5 sm:gap-2">
-                      <img
-                        src={browser.icon}
-                        alt={browser.name}
-                        className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0"
-                      />
-                      <span className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-white transition-colors">{browser.name}</span>
-                    </span>
-                  </a>
-                ))}
-              </div>
-
-              {/* Additional Links - Watch & GitHub */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
-                <a
-                  href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary text-center group flex items-center justify-center"
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    <svg className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                    </svg>
-                    <span className="text-sm sm:text-base">Watch Tutorial</span>
-                  </span>
-                </a>
-                <a
-                  href="https://github.com/vansh-121/Locksy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary text-center group flex items-center justify-center"
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    <svg className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-sm sm:text-base">View on GitHub</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-            {/* Sponsor Button - Centered */}
-            <div className="flex justify-center mt-1">
-              <a
-                href="https://github.com/sponsors/vansh-121"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-primary/90 to-secondary/90 text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:from-primary hover:to-secondary transition-all duration-300 hover:-translate-y-0.5"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                </svg>
-                <span>Sponsor this Project</span>
-              </a>
-            </div>
-
-            {/* Browser Compatibility Note */}
-            <div className="flex items-center justify-center sm:justify-start gap-2 p-3 bg-card/70 backdrop-blur-sm rounded-lg border border-primary/10 mt-1">
-              <svg className="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-              </svg>
-              <p className="text-sm text-foreground/80 font-medium">
-                Help bring Locksy to Apple Safari — sponsor to cover the $99/year Apple fee!
-              </p>
+              {/* Other browsers, tucked away so the choice stays simple. All links
+                  remain in the page (open by default until toggled off). */}
+              <details className="group/more">
+                <summary className="list-none cursor-pointer inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                  <svg className="w-4 h-4 transition-transform group-open/more:rotate-180" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                  Using Brave, Opera, Vivaldi or another browser?
+                </summary>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 w-full mt-3">
+                  {SECONDARY_BROWSERS.map((browser) => (
+                    <a
+                      key={browser.name}
+                      href={browser.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary inline-flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] group py-2 sm:py-3"
+                      title="Install from Chrome Web Store"
+                    >
+                      <span className="flex items-center gap-1.5 sm:gap-2">
+                        <img
+                          src={browser.icon}
+                          alt={browser.name}
+                          className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0"
+                        />
+                        <span className="font-semibold text-xs sm:text-sm text-foreground group-hover:text-white transition-colors">{browser.name}</span>
+                      </span>
+                    </a>
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  These all install straight from the Chrome Web Store.
+                </p>
+              </details>
             </div>
           </div>
 
@@ -539,8 +490,8 @@ export default function Hero() {
               🔒
             </div>
             <div>
-              <div className="font-bold text-foreground">PBKDF2</div>
-              <div className="text-sm text-muted-foreground dark:text-foreground/60">Encrypted</div>
+              <div className="font-bold text-foreground">Encrypted</div>
+              <div className="text-sm text-muted-foreground dark:text-foreground/60">Password-Protected</div>
             </div>
           </div>
           <div className="flex items-center gap-3 p-4 bg-card/50 dark:bg-card/70 backdrop-blur-sm rounded-xl border border-primary/10 dark:border-primary/20">

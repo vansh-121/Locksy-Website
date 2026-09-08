@@ -5,28 +5,28 @@ export default function ToolsShowcase() {
   const tools = [
     {
       title: "Password Strength Meter",
-      description: "Test password entropy against 600,000 PBKDF2 iterations and GPU brute-force speed estimates.",
+      description: "See how strong your password really is and roughly how long it would take someone to crack it.",
       icon: "🔑",
       url: "/tools/password-strength-checker",
       badge: "Popular"
     },
     {
       title: "Password Generator",
-      description: "Generate cryptographically secure, high-entropy passwords with custom lengths and symbols.",
+      description: "Create strong, random passwords with the length and characters you choose.",
       icon: "🎲",
       url: "/tools/password-generator",
       badge: "100% Private"
     },
     {
       title: "Browser Privacy Inspector",
-      description: "Run a live audit on WebRTC IP leaks, Global Privacy Control headers, and fingerprint entropy.",
+      description: "Check your browser for common privacy leaks and see how easily you can be tracked online.",
       icon: "🛡️",
       url: "/tools/browser-privacy-score",
       badge: "Real-Time"
     },
     {
       title: "Email Breach Inspector",
-      description: "Check if your email address has appeared in public security data dumps across the web.",
+      description: "Check whether your email address has turned up in known data breaches.",
       icon: "⚠️",
       url: "/tools/email-breach-checker",
       badge: "Live API"
@@ -50,7 +50,7 @@ export default function ToolsShowcase() {
             Free Online <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">Security & Privacy Tools</span>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base">
-            No signup required. All calculations execute locally inside your browser memory with zero server telemetry.
+            No signup required. Everything runs right in your browser — nothing is uploaded, and there's no tracking.
           </p>
         </div>
 

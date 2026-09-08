@@ -68,7 +68,7 @@ const PLATFORMS = [
       </svg>
     ),
     label: "USB Security Keys",
-    sublabel: "YubiKey & FIDO2",
+    sublabel: "YubiKey & more",
     gradient: "from-amber-500/10 to-orange-500/10",
     border: "border-amber-500/20",
     iconColor: "text-amber-600",
@@ -80,30 +80,30 @@ const PLATFORMS = [
 const SECURITY_POINTS = [
   {
     icon: "🔒",
-    title: "Zero Biometric Data Stored",
-    desc: "Your fingerprint or face scan never leaves your device — not even to our servers. WebAuthn keeps everything local.",
+    title: "Your Biometrics Never Leave Your Device",
+    desc: "Your fingerprint or face scan is checked by your own device — never sent to Locksy or anyone else. We literally can't see it.",
   },
   {
     icon: "🌐",
-    title: "W3C WebAuthn / FIDO2 Standard",
-    desc: "Built on the open web standard trusted by Google, Apple, and Microsoft. No proprietary lock-in.",
+    title: "Built on Trusted Sign-In Technology",
+    desc: "Uses the same secure, passwordless sign-in that Google, Apple, and Microsoft rely on. Open standard, no proprietary lock-in.",
   },
   {
     icon: "🛡️",
-    title: "Phishing-Resistant by Design",
-    desc: "Credentials are cryptographically bound to the Locksy origin — they simply cannot be replayed on a fake site.",
+    title: "Can't Be Tricked by Fake Sites",
+    desc: "Your unlock is tied to Locksy itself, so it can never be reused or replayed on a copycat or phishing page.",
   },
   {
     icon: "🔑",
-    title: "Fallback to Master Password",
-    desc: "Biometrics are a convenience layer. Your master password is always the backup if hardware is unavailable.",
+    title: "Your Master Password Still Works",
+    desc: "Biometrics are just for convenience. Your master password is always there as a backup if your device isn't available.",
   },
 ]
 
 const STEPS = [
-  { num: 1, icon: "⚙️", title: "Enable in Settings", desc: 'Open Locksy → Settings → Security → toggle "Biometric Unlock".' },
-  { num: 2, icon: "👆", title: "Register Your Biometric", desc: "Your browser or OS prompts you once to verify with Touch ID, Windows Hello, or Face ID." },
-  { num: 3, icon: "⚡", title: "Instant Unlock", desc: "Next time a tab is locked, just use your biometric — no master password typing needed." },
+  { num: 1, icon: "⚙️", title: "Turn It On in Settings", desc: 'Open Locksy → Settings → Security → toggle "Biometric Unlock".' },
+  { num: 2, icon: "👆", title: "Register Once", desc: "Your device asks you to confirm once with Touch ID, Windows Hello, or Face ID." },
+  { num: 3, icon: "⚡", title: "Unlock Instantly", desc: "Next time a tab is locked, just use your fingerprint or face — no password typing needed." },
 ]
 
 export default function BiometricUnlock() {
@@ -193,9 +193,10 @@ export default function BiometricUnlock() {
             Unlock with a Touch.<br className="hidden sm:block" /> No Password Typing.
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Locksy now supports{" "}
-            <strong className="text-foreground">WebAuthn / FIDO2 biometric authentication</strong>
-            {" "}— use your fingerprint, face, or security key to unlock protected tabs instantly. Your biometric data never leaves your device.
+            Use your{" "}
+            <strong className="text-foreground">fingerprint, face, or a security key</strong>
+            {" "}to unlock protected tabs in an instant — no password to type. Your fingerprint and
+            face scan always stay on your own device.
           </p>
         </div>
 
@@ -277,9 +278,9 @@ export default function BiometricUnlock() {
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {unlockState === "idle" && "Use your biometric or master password"}
-                      {unlockState === "locked" && "WebAuthn prompt will appear"}
+                      {unlockState === "locked" && "Your device will ask to verify you"}
                       {unlockState === "scanning" && "Biometric check in progress"}
-                      {unlockState === "success" && "\u2714 Authenticated via Windows Hello"}
+                      {unlockState === "success" && "✔ Verified with Windows Hello"}
                     </p>
                   </div>
 
@@ -325,11 +326,11 @@ export default function BiometricUnlock() {
                 </div>
               </div>
 
-              {/* WebAuthn badge below card */}
+              {/* Reassurance badge below card */}
               <div className="mt-4 flex justify-center">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-card/80 border border-primary/20 rounded-full text-xs text-primary font-medium shadow-sm backdrop-blur-sm">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  Secured by W3C WebAuthn / FIDO2
+                  Passwordless · secured on your device
                 </div>
               </div>
             </div>
@@ -357,7 +358,7 @@ export default function BiometricUnlock() {
           <div className="text-center mb-10">
             <h3 className="text-2xl md:text-3xl font-bold mb-3">Works with Your Device's Built-In Security</h3>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm sm:text-base">
-              No external hardware required. Locksy leverages the authenticator already in your laptop, phone, or security key.
+              No special setup needed — Locksy works with the fingerprint reader, face camera, or security key you already have.
             </p>
           </div>
 
@@ -385,7 +386,7 @@ export default function BiometricUnlock() {
         <div className="bg-card/60 backdrop-blur-sm rounded-3xl border border-primary/10 p-8 md:p-12 shadow-sm">
           <div className="text-center mb-10">
             <h3 className="text-2xl md:text-3xl font-bold mb-3">Set It Up in 3 Steps</h3>
-            <p className="text-muted-foreground text-sm sm:text-base">Enable biometric unlock in under a minute.</p>
+            <p className="text-muted-foreground text-sm sm:text-base">Turn on biometric unlock in under a minute.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-10">

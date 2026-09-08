@@ -1,11 +1,11 @@
 export default function Security() {
   const guarantees = [
-    { icon: "✓", title: "No Account Required", desc: "Start using Locksy immediately without sign-up" },
-    { icon: "✓", title: "Zero Data Collection", desc: "We never see, store, or transmit your browsing data" },
-    { icon: "✓", title: "Local Processing", desc: "All password hashing and lock logic run entirely within your local browser sandbox" },
-    { icon: "✓", title: "PBKDF2 with 600k Iterations", desc: "120 years crack resistance with timing attack protection" },
-    { icon: "✓", title: "Rate Limiting & Brute-Force Protection", desc: "Advanced protection against automated cracking attempts" },
-    { icon: "✓", title: "No Admin Backdoors", desc: "Only you can unlock your tabs" },
+    { icon: "✓", title: "No Account Required", desc: "Start using Locksy right away — no sign-up, no email, no login." },
+    { icon: "✓", title: "Zero Data Collection", desc: "We never see, store, or send your browsing data anywhere." },
+    { icon: "✓", title: "Everything Stays on Your Device", desc: "All password checks and locking happen locally inside your browser — nothing is uploaded." },
+    { icon: "✓", title: "Only You Can Unlock", desc: "Your password is secured with heavy-duty hashing (PBKDF2, 600k iterations) — an estimated 120 years to crack, with timing-attack protection." },
+    { icon: "✓", title: "Stops Password Guessing", desc: "Repeated wrong guesses are slowed and blocked automatically (rate limiting & brute-force protection)." },
+    { icon: "✓", title: "No Admin Backdoors", desc: "There's no master override — only you can unlock your tabs." },
   ]
 
   return (

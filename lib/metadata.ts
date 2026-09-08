@@ -3,7 +3,7 @@ import { faqData } from './faq-data'
 
 const siteUrl = 'https://www.locksy.dev' // Update with your actual domain
 const siteName = 'Locksy'
-const siteDescription = 'Password-protect browser tabs with military-grade encryption. Auto-lock tabs after inactivity, schedule locks for specific hours. Instant locking, offline security. For Chrome, Edge, Firefox, Brave & more.'
+const siteDescription = 'Lock and password-protect any browser tab in one click. Auto-lock after inactivity, works offline, no account needed. For Chrome, Edge, Firefox & Brave.'
 const keywords = [
     'password protect tabs',
     'lock browser tabs',
@@ -69,10 +69,11 @@ export const metadata: Metadata = {
         description: siteDescription,
         images: [
             {
-                url: `${siteUrl}/web-app-manifest-512x512.png`,
-                width: 512,
-                height: 512,
-                alt: 'Locksy - Password-Protect Browser Tabs',
+                url: `${siteUrl}/og-image.jpg`,
+                width: 1200,
+                height: 630,
+                alt: 'Locksy — Password Protect & Lock Your Browser Tabs',
+                type: 'image/jpeg',
             },
         ],
     },
@@ -80,7 +81,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Password Protect & Auto-Lock Browser Tabs – Locksy Tab Locker',
         description: siteDescription,
-        images: [`${siteUrl}/web-app-manifest-512x512.png`],
+        images: [`${siteUrl}/og-image.jpg`],
         creator: '@locksy',
     },
     robots: {
@@ -315,14 +316,9 @@ export const jsonLdProduct = {
         '@type': 'Brand',
         name: 'Locksy'
     },
-    aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.4',
-        ratingCount: '28',
-        reviewCount: '28',
-        bestRating: '5',
-        worstRating: '1'
-    },
+    // Note: aggregateRating intentionally lives only on jsonLdSoftwareApplication
+    // to avoid duplicating first-party ratings across two schema entities, which
+    // Google may treat as self-serving review markup.
     offers: [
         {
             '@type': 'Offer',
@@ -453,10 +449,11 @@ export const generatePageMetadata = (
             description,
             images: [
                 {
-                    url: `${siteUrl}/web-app-manifest-512x512.png`,
-                    width: 512,
-                    height: 512,
+                    url: `${siteUrl}/og-image.jpg`,
+                    width: 1200,
+                    height: 630,
                     alt: title,
+                    type: 'image/jpeg',
                 },
             ],
         },
@@ -464,7 +461,7 @@ export const generatePageMetadata = (
             card: 'summary_large_image',
             title,
             description,
-            images: [`${siteUrl}/web-app-manifest-512x512.png`],
+            images: [`${siteUrl}/og-image.jpg`],
             creator: '@locksy',
         },
         robots: {

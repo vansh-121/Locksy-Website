@@ -174,7 +174,7 @@ export default function Header() {
             href="/#pricing"
             className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-card border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg text-sm xl:text-base cursor-pointer"
           >
-            <span>💎</span>
+            <span aria-hidden="true">💎</span>
             <span className="hidden xl:inline">Get Pro</span>
             <span className="xl:hidden">Pro</span>
           </a>
@@ -243,13 +243,13 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile: Theme Toggle + Get Pro + Menu Toggle */}
+        {/* Mobile: Get Pro + Theme Toggle + Menu Toggle */}
         <div className="lg:hidden flex items-center gap-2">
           <a
             href="/#pricing"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
           >
-            <span>💎</span>
+            <span aria-hidden="true">💎</span>
             <span>Get Pro</span>
           </a>
           <ThemeToggle />
@@ -335,7 +335,7 @@ export default function Header() {
                   className="flex items-center justify-center gap-2 p-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <span>💎</span> Get Pro
+                  <span aria-hidden="true">💎</span> Get Pro
                 </a>
                 <a
                   href="https://github.com/sponsors/vansh-121"

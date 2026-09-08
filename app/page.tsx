@@ -1,16 +1,13 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
-import AutomationFeatures from "@/components/automation-features"
 import DomainLock from "@/components/domain-lock"
 import BiometricUnlock from "@/components/biometric-unlock"
-import WhatsNewV330 from "@/components/whats-new-v330"
-import WhatsNewV310 from "@/components/whats-new-v310"
-import WhatsNewV300 from "@/components/whats-new-v300"
-import WhatsNewV250 from "@/components/whats-new-v250"
+import WhatsNew from "@/components/whats-new"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
 import KeyboardShortcuts from "@/components/keyboard-shortcuts"
 import HowItWorks from "@/components/how-it-works"
+import SeeItInAction from "@/components/see-it-in-action"
 import Security from "@/components/security"
 import Comparison from "@/components/comparison"
 import Testimonials from "@/components/testimonials"
@@ -38,55 +35,44 @@ export default function Home() {
         <Header />
         <Hero />
 
-        {/* 5000+ users milestone celebration */}
-        <MilestoneBanner />
-
-        {/* Pricing cards & plans */}
-        <Pricing />
-
-        {/* Establish the problem first */}
+        {/* Why you'd want this — the everyday problem, in plain terms */}
         <ProblemStatement />
 
-        {/* Show why Locksy is better than alternatives */}
-        <Comparison />
+        {/* How simple it is to use */}
+        <HowItWorks />
 
-        {/* NEW v2.3.0 — Biometric Unlock */}
-        <BiometricUnlock />
+        {/* See it: the same tab exposed vs. locked, side by side */}
+        <SeeItInAction />
 
-        {/* Showcase NEW v2.2.0 automation features prominently */}
-        <AutomationFeatures />
+        {/* What you get — the full feature overview */}
+        <Features />
 
-        {/* NEW v3.4.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
-        <WhatsNewV330 />
-
-        {/* NEW v3.1.0 — Privacy Blur Shield, Manager UI & License Recovery */}
-        <WhatsNewV310 />
-
-        {/* NEW v3.0.0 — Redesigned UI Shell, Reports, Startup Lock & Webcam snaps */}
-        <WhatsNewV300 />
-
-        {/* NEW v2.5.0 — Stealth Mode & Context Menus */}
-        <WhatsNewV250 />
-
-        {/* Another major feature - Domain Lock */}
+        {/* A standout feature — lock entire websites */}
         <div id="domain-lock">
           <DomainLock />
         </div>
 
-        {/* Comprehensive features overview */}
-        <Features />
+        {/* Unlock with your fingerprint or face instead of typing a password */}
+        <BiometricUnlock />
 
-        {/* How easy it is to use */}
-        <HowItWorks />
-
-        {/* Power user feature */}
+        {/* Quick reference for the four keyboard shortcuts */}
         <KeyboardShortcuts />
 
-        {/* Technical credibility and trust */}
+        {/* Why it's safe — privacy & security guarantees */}
         <Security />
 
+        {/* How it compares to the alternatives */}
+        <Comparison />
+
         {/* Social proof */}
+        <MilestoneBanner />
         <Testimonials />
+
+        {/* Pricing — after visitors know what Locksy does */}
+        <Pricing />
+
+        {/* Everything that's been added recently, in one compact place */}
+        <WhatsNew />
 
         {/* Handle objections and questions */}
         <FAQ />
