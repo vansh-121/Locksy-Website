@@ -1,27 +1,21 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
-import AutomationFeatures from "@/components/automation-features"
-import DomainLock from "@/components/domain-lock"
-import BiometricUnlock from "@/components/biometric-unlock"
-import WhatsNewV330 from "@/components/whats-new-v330"
-import WhatsNewV310 from "@/components/whats-new-v310"
-import WhatsNewV300 from "@/components/whats-new-v300"
-import WhatsNewV250 from "@/components/whats-new-v250"
 import ProblemStatement from "@/components/problem-statement"
-import Features from "@/components/features"
-import KeyboardShortcuts from "@/components/keyboard-shortcuts"
 import HowItWorks from "@/components/how-it-works"
+import Features from "@/components/features"
+import DomainLock from "@/components/domain-lock"
 import Security from "@/components/security"
 import Comparison from "@/components/comparison"
 import Testimonials from "@/components/testimonials"
+import MilestoneBanner from "@/components/milestone-banner"
+import Pricing from "@/components/pricing"
+import WhatsNew from "@/components/whats-new"
 import FAQ from "@/components/faq"
+import ToolsShowcase from "@/components/tools-showcase"
 import LatestBlogPosts from "@/components/latest-blog-posts"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
-import Pricing from "@/components/pricing"
 import Footer from "@/components/footer"
-import MilestoneBanner from "@/components/milestone-banner"
-import ToolsShowcase from "@/components/tools-showcase"
 import { jsonLdFAQPage } from "@/lib/metadata"
 import { filteredBlogPosts } from "@/lib/blog-data"
 
@@ -37,67 +31,21 @@ export default function Home() {
       <main className="w-full" itemScope itemType="https://schema.org/WebPage">
         <Header />
         <Hero />
-
-        {/* 5000+ users milestone celebration */}
-        <MilestoneBanner />
-
-        {/* Pricing cards & plans */}
-        <Pricing />
-
-        {/* Establish the problem first */}
         <ProblemStatement />
-
-        {/* Show why Locksy is better than alternatives */}
-        <Comparison />
-
-        {/* NEW v2.3.0 — Biometric Unlock */}
-        <BiometricUnlock />
-
-        {/* Showcase NEW v2.2.0 automation features prominently */}
-        <AutomationFeatures />
-
-        {/* NEW v3.4.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
-        <WhatsNewV330 />
-
-        {/* NEW v3.1.0 — Privacy Blur Shield, Manager UI & License Recovery */}
-        <WhatsNewV310 />
-
-        {/* NEW v3.0.0 — Redesigned UI Shell, Reports, Startup Lock & Webcam snaps */}
-        <WhatsNewV300 />
-
-        {/* NEW v2.5.0 — Stealth Mode & Context Menus */}
-        <WhatsNewV250 />
-
-        {/* Another major feature - Domain Lock */}
+        <HowItWorks />
+        <Features />
         <div id="domain-lock">
           <DomainLock />
         </div>
-
-        {/* Comprehensive features overview */}
-        <Features />
-
-        {/* How easy it is to use */}
-        <HowItWorks />
-
-        {/* Power user feature */}
-        <KeyboardShortcuts />
-
-        {/* Technical credibility and trust */}
         <Security />
-
-        {/* Social proof */}
+        <Comparison />
         <Testimonials />
-
-        {/* Handle objections and questions */}
+        <MilestoneBanner />
+        <Pricing />
+        <WhatsNew />
         <FAQ />
-
-        {/* Free Security Tools Showcase */}
         <ToolsShowcase />
-
-        {/* Latest blog articles — editorial content for SEO value */}
         <LatestBlogPosts posts={filteredBlogPosts} />
-
-        {/* Support and final CTAs */}
         <SupportChatCTA />
         <CTASection />
         <Footer />
