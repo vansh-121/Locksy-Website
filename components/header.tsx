@@ -54,66 +54,13 @@ export default function Header() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
-            <Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png" alt="Locksy" width={48} height={48} priority className="relative h-10 md:h-12 w-auto" />
-          </div>
+          <div className="relative"><div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-lg opacity-0 group-hover:opacity-50 transition-opacity" /><Image src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png" alt="Locksy" width={48} height={48} priority className="relative h-10 md:h-12 w-auto" /></div>
           <span className="font-black text-xl md:text-2xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Locksy</span>
         </a>
-
-        <nav className="hidden lg:flex items-center gap-8 xl:gap-12">
-          {[ ["Features", "/#features"], ["Security", "/security"], ["Pricing", "/#pricing"], ["FAQ", "/#faq"], ["Tools", "/tools"], ["Blog", "/blog"] ].map(([label, href]) => (
-            <a key={label} href={href} className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group">
-              {label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
-          <ThemeToggle />
-          <div ref={dropdownRef} className="relative inline-block">
-            <button onClick={() => setShowDownloadDropdown(!showDownloadDropdown)} className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 text-sm xl:text-base">
-              <span className="hidden xl:inline">Install Now</span>
-              <span className="xl:hidden">Install</span>
-              <svg className={`w-4 h-4 transition-transform ${showDownloadDropdown ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-            </button>
-            {showDownloadDropdown && (
-              <div className="absolute right-0 mt-2 w-64 bg-card rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">
-                {[...PRIMARY_BROWSERS, ...SECONDARY_BROWSERS].map((browser, index, all) => (
-                  <a key={browser.name} href={browser.url} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors ${index < all.length - 1 ? "border-b border-border/30" : ""}`}>
-                    <img src={browser.icon} alt={browser.name} className="w-8 h-8 object-contain" />
-                    <div className="flex-1"><div className="font-semibold text-foreground">{browser.name}</div><div className="text-xs text-muted-foreground">{'storeName' in browser ? browser.storeName : "Chrome Web Store"}</div></div>
-                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="lg:hidden flex items-center gap-2">
-          <ThemeToggle />
-          <button className="p-2 rounded-lg hover:bg-accent transition-colors flex-shrink-0" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? "Close menu" : "Open menu"}>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">{isMenuOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h-16" />}</svg>
-          </button>
-        </div>
-
-        {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-xl lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
-            <div className="flex flex-col p-6">
-              <div className="space-y-1 mb-2">
-                {[ ["Features", "/#features"], ["Security", "/security"], ["Pricing", "/#pricing"], ["FAQ", "/#faq"], ["Tools", "/tools"], ["Blog", "/blog"], ["Contact", "/contact"] ].map(([label, href]) => (
-                  <a key={label} href={href} className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block" onClick={closeMenu}>{label}</a>
-                ))}
-              </div>
-              <div className="h-px bg-border/50 my-2" />
-              <button onClick={() => { closeMenu(); window.dispatchEvent(new CustomEvent("open-install-dropdown")) }} className="flex items-center justify-center gap-2 p-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg transition-all">
-                Install Locksy
-              </button>
-            </div>
-          </div>
-        )}
+        <nav className="hidden lg:flex items-center gap-8 xl:gap-12">{[["Features", "/#features"], ["Security", "/security"], ["Pricing", "/#pricing"], ["FAQ", "/#faq"], ["Tools", "/tools"], ["Blog", "/blog"]].map(([label, href]) => <a key={label} href={href} className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group">{label}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" /></a>)}</nav>
+        <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0"><ThemeToggle /><div ref={dropdownRef} className="relative inline-block"><button onClick={() => setShowDownloadDropdown(!showDownloadDropdown)} className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 text-sm xl:text-base"><span className="hidden xl:inline">Install Now</span><span className="xl:hidden">Install</span><svg className={`w-4 h-4 transition-transform ${showDownloadDropdown ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></button>{showDownloadDropdown && <div className="absolute right-0 mt-2 w-64 bg-card rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">{[...PRIMARY_BROWSERS, ...SECONDARY_BROWSERS].map((browser, index, all) => <a key={browser.name} href={browser.url} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors ${index < all.length - 1 ? "border-b border-border/30" : ""}`}><img src={browser.icon} alt={browser.name} className="w-8 h-8 object-contain" /><div className="flex-1"><div className="font-semibold text-foreground">{browser.name}</div><div className="text-xs text-muted-foreground">{'storeName' in browser ? browser.storeName : "Chrome Web Store"}</div></div><svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7-7" /></svg></a>)}</div>}</div></div>
+        <div className="lg:hidden flex items-center gap-2"><ThemeToggle /><button className="p-2 rounded-lg hover:bg-accent transition-colors flex-shrink-0" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? "Close menu" : "Open menu"}><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">{isMenuOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}</svg></button></div>
+        {isMenuOpen && <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-xl lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]"><div className="flex flex-col p-6"><div className="space-y-1 mb-2">{[["Features", "/#features"], ["Security", "/security"], ["Pricing", "/#pricing"], ["FAQ", "/#faq"], ["Tools", "/tools"], ["Blog", "/blog"], ["Contact", "/contact"]].map(([label, href]) => <a key={label} href={href} className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block" onClick={closeMenu}>{label}</a>)}</div><div className="h-px bg-border/50 my-2" /><button onClick={() => { closeMenu(); window.dispatchEvent(new CustomEvent("open-install-dropdown")) }} className="flex items-center justify-center gap-2 p-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg transition-all">Install Locksy</button></div></div>}
       </div>
     </header>
   )
