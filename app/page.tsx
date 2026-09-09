@@ -42,30 +42,78 @@ function GuideBanner() {
 export default function Home() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQPage) }} />
+      {/* FAQ Schema for rich snippets in search results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQPage) }}
+      />
+
       <main className="w-full" itemScope itemType="https://schema.org/WebPage">
         <Header />
         <Hero />
+
+        {/* 5000+ users milestone celebration */}
         <MilestoneBanner />
+
+        {/* Pricing cards & plans */}
         <Pricing />
+
+        {/* Establish the problem first */}
         <ProblemStatement />
+
+        {/* Show why Locksy is better than alternatives */}
         <Comparison />
+
+        {/* NEW v2.3.0 — Biometric Unlock */}
         <BiometricUnlock />
+
+        {/* Showcase NEW v2.2.0 automation features prominently */}
         <AutomationFeatures />
+
+        {/* NEW v3.4.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
         <WhatsNewV330 />
+
+        {/* NEW v3.1.0 — Privacy Blur Shield, Manager UI & License Recovery */}
         <WhatsNewV310 />
+
+        {/* NEW v3.0.0 — Redesigned UI Shell, Reports, Startup Lock & Webcam snaps */}
         <WhatsNewV300 />
+
+        {/* NEW v2.5.0 — Stealth Mode & Context Menus */}
         <WhatsNewV250 />
-        <div id="domain-lock"><DomainLock /></div>
+
+        {/* Another major feature - Domain Lock */}
+        <div id="domain-lock">
+          <DomainLock />
+        </div>
+
+        {/* Comprehensive features overview */}
         <Features />
+
+        {/* How easy it is to use */}
         <HowItWorks />
+
+        {/* Power user feature */}
         <KeyboardShortcuts />
+
         <GuideBanner />
+
+        {/* Technical credibility and trust */}
         <Security />
+
+        {/* Social proof */}
         <Testimonials />
+
+        {/* Handle objections and questions */}
         <FAQ />
+
+        {/* Free Security Tools Showcase */}
         <ToolsShowcase />
+
+        {/* Latest blog articles — editorial content for SEO value */}
         <LatestBlogPosts posts={filteredBlogPosts} />
+
+        {/* Support and final CTAs */}
         <SupportChatCTA />
         <CTASection />
         <Footer />
