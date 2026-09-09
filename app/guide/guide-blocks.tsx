@@ -48,6 +48,38 @@ function Steps({ items }: { items: { title: string; body: string }[] }) {
   )
 }
 
+function Downloads({ items }: { items: { name: string; store: string; url: string; icon: string }[] }) {
+  return (
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      {items.map((item) => (
+        <a
+          key={item.name}
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md hover:shadow-primary/10"
+        >
+          <img src={item.icon} alt={item.name} className="h-10 w-10 flex-shrink-0 object-contain" />
+          <div className="min-w-0">
+            <p className="text-xs font-medium text-muted-foreground">Get it for</p>
+            <p className="font-bold text-foreground">{item.name}</p>
+            <p className="truncate text-xs text-muted-foreground">{item.store}</p>
+          </div>
+          <svg
+            aria-hidden="true"
+            className="ml-auto h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  )
+}
+
 function Table({ caption, head, rows }: { caption: string; head: string[]; rows: string[][] }) {
   return (
     <div>
@@ -126,6 +158,9 @@ export default function GuideBlocks({ blocks }: { blocks: GuideBlock[] }) {
 
           case "steps":
             return <Steps key={idx} items={block.items} />
+
+          case "downloads":
+            return <Downloads key={idx} items={block.items} />
 
           case "table":
             return <Table key={idx} caption={block.caption} head={block.head} rows={block.rows} />

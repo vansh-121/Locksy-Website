@@ -7,6 +7,7 @@ import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
 import KeyboardShortcuts from "@/components/keyboard-shortcuts"
 import GuideBanner from "@/components/guide-banner"
+import NewcomerStrip from "@/components/newcomer-strip"
 import HowItWorks from "@/components/how-it-works"
 import SeeItInAction from "@/components/see-it-in-action"
 import Security from "@/components/security"
@@ -35,6 +36,9 @@ export default function Home() {
       <main className="w-full" itemScope itemType="https://schema.org/WebPage">
         <Header />
         <Hero />
+
+        {/* Instant install links + guide pointer for first-time visitors */}
+        <NewcomerStrip />
 
         {/* Why you'd want this — the everyday problem, in plain terms */}
         <ProblemStatement />

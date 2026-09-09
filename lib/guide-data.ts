@@ -41,7 +41,13 @@ export interface QaBlock {
   items: { q: string; a: string }[]
 }
 
-export type GuideBlock = StepsBlock | TableBlock | CalloutBlock | ProseBlock | QaBlock
+/** Browser store download links, rendered as icon+label button cards on the web page. */
+export interface DownloadsBlock {
+  type: "downloads"
+  items: { name: string; store: string; url: string; icon: string }[]
+}
+
+export type GuideBlock = StepsBlock | TableBlock | CalloutBlock | ProseBlock | QaBlock | DownloadsBlock
 
 export interface GuideChapter {
   /** Used as the heading's DOM id and the table-of-contents anchor. */

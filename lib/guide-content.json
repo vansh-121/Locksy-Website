@@ -16,7 +16,7 @@
           "items": [
             {
               "title": "Add Locksy to your browser",
-              "body": "Open your browser's extension store and install Locksy. It's free, and you don't need an account. Chrome: chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim · Firefox: addons.mozilla.org/en-US/firefox/addon/locksy · Edge: microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+              "body": "It's free and you don't need an account. Pick your browser in the section below, or search for Locksy in your browser's extension store."
             },
             {
               "title": "Set your master password",
@@ -29,6 +29,29 @@
             {
               "title": "Save your Master Recovery Key",
               "body": "Locksy generates a 16-character recovery key. Write it down or save it somewhere away from your computer. It is the only way to reset your master password if you forget it, and it works entirely offline."
+            }
+          ]
+        },
+        {
+          "type": "downloads",
+          "items": [
+            {
+              "name": "Google Chrome",
+              "store": "Chrome Web Store",
+              "url": "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+              "icon": "/browsers/chrome.png"
+            },
+            {
+              "name": "Microsoft Edge",
+              "store": "Edge Add-ons",
+              "url": "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
+              "icon": "/browsers/edge.png"
+            },
+            {
+              "name": "Mozilla Firefox",
+              "store": "Firefox Add-ons",
+              "url": "https://addons.mozilla.org/en-US/firefox/addon/locksy/",
+              "icon": "/browsers/firefox.png"
             }
           ]
         },

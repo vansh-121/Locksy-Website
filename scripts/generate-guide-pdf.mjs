@@ -220,6 +220,20 @@ function renderBlock(block, key) {
                 )
             )
 
+        case 'downloads':
+            // Rendered as plain link rows in the PDF — browser icons can't be
+            // embedded without shipping binary assets into the script.
+            return h(
+                View,
+                { key, style: { marginBottom: 12 } },
+                block.items.map((item, i) =>
+                    h(View, { key: i, style: { flexDirection: 'row', marginBottom: 6 }, wrap: false }, [
+                        h(Text, { key: 'n', style: { fontFamily: 'Helvetica-Bold', color: COLOR.text, width: '30%' } }, clean(item.name)),
+                        h(Link, { key: 'u', src: item.url, style: { color: COLOR.primary, fontSize: 9.5, flexGrow: 1 } }, item.url),
+                    ])
+                )
+            )
+
         default:
             throw new Error(`Unknown block type: ${block.type}`)
     }

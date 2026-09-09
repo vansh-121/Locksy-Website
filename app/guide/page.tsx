@@ -157,7 +157,7 @@ export default function GuidePage() {
                 <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">
                   Take the guide with you as a PDF, or get in touch and we&apos;ll walk you through it.
                 </p>
-                <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
                   <a href={GUIDE_PDF_PATH} download className="btn-primary text-base">
                     Download the PDF
                   </a>
