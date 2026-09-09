@@ -1,0 +1,490 @@
+{
+  "version": "3.4.0",
+  "updated": "2026-09-09",
+  "title": "Locksy User Guide",
+  "tagline": "Everything Locksy does, in plain English — from installing it to locking your first tab to catching someone who tries to snoop.",
+  "chapters": [
+    {
+      "id": "install",
+      "num": 1,
+      "title": "Install Locksy and set it up",
+      "icon": "🚀",
+      "summary": "Add the extension, choose a master password, and save a recovery key. Takes about a minute.",
+      "blocks": [
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Add Locksy to your browser",
+              "body": "Open your browser's extension store and install Locksy. It's free, and you don't need an account. Chrome: chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim · Firefox: addons.mozilla.org/en-US/firefox/addon/locksy · Edge: microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
+            },
+            {
+              "title": "Set your master password",
+              "body": "The first time you open Locksy it asks you to create one password. This single password locks and unlocks every tab — there is nothing else to remember and nothing to sign up for."
+            },
+            {
+              "title": "Pin Locksy to your toolbar",
+              "body": "Click the puzzle-piece icon in your browser toolbar, find Locksy, and click the pin. The icon then stays visible, and it doubles as a live counter showing how many tabs are currently locked."
+            },
+            {
+              "title": "Save your Master Recovery Key",
+              "body": "Locksy generates a 16-character recovery key. Write it down or save it somewhere away from your computer. It is the only way to reset your master password if you forget it, and it works entirely offline."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "warning",
+          "title": "Your password cannot be recovered",
+          "body": "Locksy never stores your master password anywhere — not on your device, and certainly not on a server. That is what makes it safe, but it also means nobody can send it back to you. Your recovery key is the safety net. Save it now, not later."
+        },
+        {
+          "type": "table",
+          "caption": "Which browsers Locksy works on",
+          "head": ["Browser", "Supported", "Install from"],
+          "rows": [
+            ["Google Chrome", "Yes", "Chrome Web Store"],
+            ["Microsoft Edge", "Yes", "Edge Add-ons"],
+            ["Firefox", "Yes", "Firefox Add-ons"],
+            ["Brave, Opera, Vivaldi, Arc, Comet", "Yes", "Chrome Web Store"],
+            ["Safari", "Not yet", "—"]
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Want Locksy to work in private windows too? Open your browser's extension settings, find Locksy, and turn on \"Allow in Incognito\" (or \"Run in Private Windows\" on Firefox). Your master password works the same way in both."
+        }
+      ]
+    },
+    {
+      "id": "first-lock",
+      "num": 2,
+      "title": "Lock your first tab",
+      "icon": "🔒",
+      "summary": "There are three ways to lock a tab. They all do exactly the same thing — use whichever you'll remember.",
+      "blocks": [
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "From the Locksy icon",
+              "body": "Click the Locksy icon in your toolbar and press \"Lock Current Tab\". This is the easiest way when you're first getting used to it."
+            },
+            {
+              "title": "With a keyboard shortcut",
+              "body": "Press Alt+Shift+9 (on a Mac, Option+Shift+9). The tab you're looking at locks instantly, without opening anything."
+            },
+            {
+              "title": "From the right-click menu",
+              "body": "Right-click anywhere on the page — on the page itself, a link, an image, or selected text — and pick Locksy → Lock this tab."
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "The moment a tab locks, the page is taken off the screen and replaced by Locksy's lock screen. A small red padlock appears over the tab's favicon so you can see at a glance which tabs are protected, and the number on the Locksy icon goes up by one."
+        },
+        {
+          "type": "callout",
+          "tone": "tip",
+          "title": "This is not a cover over the page",
+          "body": "Older tab lockers draw a box on top of the page while the page itself is still sitting there underneath — anyone who opens developer tools can delete the box and read your content. Locksy navigates the tab away from the page entirely, so there is nothing hidden behind the lock screen to uncover."
+        },
+        {
+          "type": "prose",
+          "body": "To get back in, type your master password on the lock screen (or use your fingerprint — see chapter 6). Locksy returns you to the exact page you were on. If you have several tabs locked and want them all back at once, use 1-Click Unlock All in the popup: enter your password once and every locked tab reopens."
+        }
+      ]
+    },
+    {
+      "id": "shortcuts",
+      "num": 3,
+      "title": "Keyboard shortcuts",
+      "icon": "⌨️",
+      "summary": "Four shortcuts cover everything Locksy does day to day. All of them can be changed.",
+      "blocks": [
+        {
+          "type": "table",
+          "caption": "Locksy keyboard shortcuts on Windows, Linux and macOS",
+          "head": ["Windows / Linux", "macOS", "What it does"],
+          "rows": [
+            ["Alt + Shift + 9", "Option + Shift + 9", "Lock the tab you're looking at"],
+            ["Alt + Shift + 0", "Option + Shift + 0", "Open the lock manager"],
+            ["Alt + Shift + 8", "Option + Shift + 8", "Lock every open tab (3 free uses, then Pro)"],
+            ["Alt + Shift + 7", "Option + Shift + 7", "Turn Stealth Mode on or off"]
+          ]
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Changing a shortcut on Chrome, Edge or Brave",
+              "body": "Type chrome://extensions/shortcuts into your address bar and press Enter. Find Locksy in the list, click the pencil next to the shortcut you want to change, and press your new key combination."
+            },
+            {
+              "title": "Changing a shortcut on Firefox",
+              "body": "Type about:addons into your address bar, click the gear icon, and choose \"Manage Extension Shortcuts\". Find Locksy and set your own keys."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "tip",
+          "title": "If a shortcut does nothing",
+          "body": "Another extension or an app on your computer has probably claimed the same combination. Browsers give the shortcut to whoever asked first, so just assign Locksy a different one using the steps above."
+        }
+      ]
+    },
+    {
+      "id": "automatic",
+      "num": 4,
+      "title": "Lock tabs automatically",
+      "icon": "⏱️",
+      "summary": "Three ways Locksy can lock tabs without you doing anything: when you walk away, on a schedule, or when the browser starts.",
+      "blocks": [
+        {
+          "type": "prose",
+          "body": "Locking tabs by hand works, but the tab you forget to lock is the one that matters. These three settings cover you when you don't think of it."
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Auto-Lock Timer — lock after you stop using the computer",
+              "body": "Open Locksy's settings, turn on the Auto-Lock Timer, and choose how long to wait: anything from 1 minute to 480 minutes (8 hours). If you don't move the mouse, type, or scroll for that long, your tabs lock themselves. On the free plan the wait is fixed at 10 minutes; Pro lets you set any duration."
+            },
+            {
+              "title": "Scheduled Locking — lock during set hours",
+              "body": "Pick a start and end time in 24-hour format, tick the days of the week it should apply to, and Locksy locks your tabs during that window. Use it to keep personal tabs shut between 09:00 and 17:00, or lock everything overnight from 22:00 to 06:00. Overnight ranges that cross midnight work fine."
+            },
+            {
+              "title": "Startup Session Lock — lock tabs when the browser opens",
+              "body": "When you reopen your browser and it restores yesterday's tabs, Locksy locks them straight away. It keeps watching for 30 seconds afterwards, so tabs that are slow to come back are caught too. This one needs Locksy Pro."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "tip",
+          "title": "It won't cut off your video",
+          "body": "The Auto-Lock Timer watches for video and audio playing, not just mouse and keyboard. Sitting still through a two-hour film won't get you locked out mid-scene."
+        },
+        {
+          "type": "table",
+          "caption": "Which automatic locking option to use",
+          "head": ["If you want to…", "Use", "Plan"],
+          "rows": [
+            ["Be covered when you step away from your desk", "Auto-Lock Timer", "Free (10 min) / Pro (custom)"],
+            ["Keep tabs shut during work hours or overnight", "Scheduled Locking", "Free"],
+            ["Protect tabs your browser restores on launch", "Startup Session Lock", "Pro"],
+            ["Always protect a particular website", "Domain Lock (chapter 5)", "Free (3) / Pro (unlimited)"]
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "You can run all of these at the same time. A common setup is Scheduled Locking across working hours with the Auto-Lock Timer covering breaks, and Domain Lock permanently guarding your bank and email."
+        }
+      ]
+    },
+    {
+      "id": "domain-lock",
+      "num": 5,
+      "title": "Lock a whole website, not just one tab",
+      "icon": "🌐",
+      "summary": "Tell Locksy that a site is always private, and every tab you open on it locks itself.",
+      "blocks": [
+        {
+          "type": "prose",
+          "body": "Domain Lock is the setting most people end up relying on. Instead of remembering to lock your bank each time, you add the address once and Locksy handles every tab on that site from then on — including new tabs, and including after you restart the browser."
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Add a site",
+              "body": "Open Locksy and go to Domain Locks, or right-click on the site you want to protect and choose Locksy → Lock this domain."
+            },
+            {
+              "title": "Choose how wide the rule should be",
+              "body": "Type just the address to cover that one site, or put *. in front of it to cover every subdomain as well. The table below shows what each pattern catches."
+            },
+            {
+              "title": "Set what happens when you unlock",
+              "body": "For each site you can choose whether entering your password unlocks only the tab in front of you or every tab on that site. Locksy remembers what you picked."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "How domain patterns work",
+          "head": ["Pattern", "Locks", "Does not lock"],
+          "rows": [
+            ["example.com", "example.com only", "mail.example.com"],
+            ["*.example.com", "mail.example.com, docs.example.com, and every other subdomain", "an unrelated site"],
+            ["*.bank.com", "Every page across your bank's subdomains", "other banks"],
+            ["github.com", "github.com", "gist.github.com"]
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "pro",
+          "title": "Free plan: three sites",
+          "body": "The free plan holds up to 3 domain locks — enough for your bank, your email and one more. Locksy Pro removes the limit."
+        }
+      ]
+    },
+    {
+      "id": "biometric",
+      "num": 6,
+      "title": "Unlock with your fingerprint or face",
+      "icon": "👆",
+      "summary": "Skip typing your password. Locksy works with the fingerprint reader and face unlock your computer already has.",
+      "blocks": [
+        {
+          "type": "prose",
+          "body": "If your computer or phone can already unlock with a fingerprint or your face, Locksy can use the same thing. It works through WebAuthn, the standard browsers use for hardware sign-in, so the check happens on your device and your fingerprint never gets sent anywhere — not to Locksy, not to anyone."
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Turn it on",
+              "body": "Open Locksy's settings and switch on Biometric Unlock. Your browser will ask you to confirm once with your fingerprint, face, or security key to register it."
+            },
+            {
+              "title": "Use it",
+              "body": "Next time a lock screen appears, press the biometric button instead of typing. Your password still works as a fallback whenever you want it."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Supported unlock methods by device",
+          "head": ["Device", "What you can use"],
+          "rows": [
+            ["Mac / MacBook", "Touch ID"],
+            ["Windows PC", "Windows Hello — fingerprint or face"],
+            ["iPhone / iPad", "Face ID or Touch ID"],
+            ["Android", "Fingerprint or face unlock"],
+            ["Any computer", "A USB security key such as YubiKey, SoloKey or Titan"]
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "pro",
+          "title": "Free plan: five unlocks a day",
+          "body": "The free plan allows 5 biometric unlocks per day, then falls back to your password. Locksy Pro makes it unlimited."
+        }
+      ]
+    },
+    {
+      "id": "stealth",
+      "num": 7,
+      "title": "Hide that you're using Locksy",
+      "icon": "🕵️",
+      "summary": "Stealth Mode makes the extension invisible and disguises locked tabs as an ordinary browser error.",
+      "blocks": [
+        {
+          "type": "prose",
+          "body": "A lock screen tells anyone looking that there's something worth hiding. Stealth Mode removes that signal. With it on, the counter on the Locksy icon disappears, notifications go silent, and a locked tab shows the same plain \"This site can't be reached\" page a browser shows when a website is down. It looks like a broken connection, not a locked tab."
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Turn it on or off",
+              "body": "Use whichever you prefer: the toggle in the Locksy popup, Alt+Shift+7 (Option+Shift+7 on a Mac), or right-click → Locksy → Toggle Stealth Mode."
+            },
+            {
+              "title": "Get back into a disguised tab",
+              "body": "Your tabs are still locked, not broken. Open Locksy from the toolbar and unlock from there, or turn Stealth Mode off to bring the normal lock screen back."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "pro",
+          "title": "Stealth Mode is a Pro feature",
+          "body": "Your choice is remembered and survives restarting the browser, so you only need to set it once."
+        }
+      ]
+    },
+    {
+      "id": "intruders",
+      "num": 8,
+      "title": "Catch someone trying to get in",
+      "icon": "📸",
+      "summary": "What Locksy does when a person keeps guessing your password — and how it keeps sensitive text off your screen.",
+      "blocks": [
+        {
+          "type": "prose",
+          "body": "Guessing gets harder the more someone tries. Locksy slows each attempt down, photographs whoever is sitting there, and eventually locks them out completely. All of it happens on your machine."
+        },
+        {
+          "type": "table",
+          "caption": "What happens as failed password attempts add up",
+          "head": ["Failed attempts", "What Locksy does"],
+          "rows": [
+            ["1–2", "Waits a little longer before accepting the next try"],
+            ["3", "Quietly takes a webcam photo and saves it to your intruder log"],
+            ["4–9", "Delays get longer each time, making guessing impractical"],
+            ["10", "Locks out any further attempts for 5 minutes"]
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "The delays are counted in Locksy's background process, not in the tab, so opening a fresh tab won't reset them. Photos are stored on your own device and nowhere else. Open the intruder log from the Locksy popup to look through them or delete them."
+        },
+        {
+          "type": "prose",
+          "body": "Privacy Blur Shield handles the other half of the problem — the things visible on screen before anything is locked. It automatically blurs passwords, card numbers, email addresses and one-time codes as pages load, and blurs the entire page the moment you switch to another window. Pro adds control over how strong the blur is, per-site rules, and a list of trusted sites to leave alone."
+        },
+        {
+          "type": "callout",
+          "tone": "pro",
+          "title": "Free plan: three saved photos",
+          "body": "The free plan keeps up to 3 intruder photos before it starts replacing the oldest. Pro keeps them all, and adds Real-Time Intruder Alerts that notify you the moment someone fails a password."
+        }
+      ]
+    },
+    {
+      "id": "free-vs-pro",
+      "num": 9,
+      "title": "What's free and what's Pro",
+      "icon": "💎",
+      "summary": "Everything essential is free. Pro is a one-time $2.99 — there is no subscription.",
+      "blocks": [
+        {
+          "type": "prose",
+          "body": "You can protect your tabs properly without paying anything. The free plan includes password locking, biometric unlock, right-click menus, scheduled locking and incognito support. Pro lifts the limits and adds the automation features below. It's a single $2.99 payment, once, for good."
+        },
+        {
+          "type": "table",
+          "caption": "Free plan compared with Locksy Pro",
+          "head": ["Feature", "Free", "Pro"],
+          "rows": [
+            ["Password-lock any tab", "Yes", "Yes"],
+            ["Biometric unlock", "5 per day", "Unlimited"],
+            ["Domain locks", "3 sites", "Unlimited"],
+            ["Lock All Tabs shortcut", "3 uses total", "Unlimited"],
+            ["Auto-lock timer", "Fixed 10 minutes", "Any length, up to 8 hours"],
+            ["Scheduled locking", "Yes", "Yes"],
+            ["Webcam intruder photos", "3 stored", "Unlimited"],
+            ["Real-time intruder alerts", "—", "Yes"],
+            ["Privacy Blur Shield", "Basic auto-masking", "Custom strength, per-site rules, trusted list"],
+            ["Stealth Mode", "—", "Yes"],
+            ["Startup Session Lock", "—", "Yes"],
+            ["Weekly Privacy Reports", "—", "Yes"],
+            ["Custom lock screen messages", "—", "Yes"],
+            ["1-Click Unlock All", "—", "Yes"],
+            ["Master Recovery Key", "Yes", "Yes"],
+            ["Incognito support", "Yes", "Yes"],
+            ["Works fully offline", "Yes", "Yes"],
+            ["Price", "$0 forever", "$2.99 once"]
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Weekly Privacy Reports are worth a mention: Locksy builds a private dashboard on your device showing what you locked, how many failed attempts there were, and a simple security score. It is generated offline and never uploaded."
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "num": 10,
+      "title": "When something isn't working",
+      "icon": "🛠️",
+      "summary": "The problems people actually run into, and what to do about each one.",
+      "blocks": [
+        {
+          "type": "qa",
+          "items": [
+            {
+              "q": "I forgot my master password.",
+              "a": "Use your 16-character Master Recovery Key to reset it — that's what it's for, and it works offline. Without the key, the password cannot be recovered by anyone, including us. You can still reset Locksy from scratch, which unlocks all currently locked tabs and starts you over with a new password."
+            },
+            {
+              "q": "A shortcut doesn't do anything.",
+              "a": "Another extension or a desktop app has claimed the same key combination first. Go to chrome://extensions/shortcuts (or about:addons on Firefox) and give Locksy a different one."
+            },
+            {
+              "q": "Locksy doesn't work in incognito or private windows.",
+              "a": "Extensions are switched off in private windows by default. Open your browser's extension settings, find Locksy, and turn on \"Allow in Incognito\" or \"Run in Private Windows\"."
+            },
+            {
+              "q": "A restored tab says it can't be unlocked.",
+              "a": "That was a bug in version 3.1.0 and earlier. Update Locksy to 3.1.1 or later and restored tabs will unlock normally. Each lock now carries its own permanent identifier, independent of the tab numbers your browser reassigns when it restarts."
+            },
+            {
+              "q": "Auto-lock interrupted my video.",
+              "a": "It shouldn't — the timer watches for playing video and audio and holds off while media is running. If it happened anyway, check that the video is playing in the tab that's in front rather than in a background tab."
+            },
+            {
+              "q": "Do my tabs stay locked if I close the browser?",
+              "a": "Yes. Tabs your browser restores come back still locked, and your password or fingerprint takes you straight back to the page you were on."
+            },
+            {
+              "q": "Does Locksy slow my browser down?",
+              "a": "No. It sits idle until you lock something and uses very little memory."
+            },
+            {
+              "q": "How do I remove Locksy?",
+              "a": "Right-click the Locksy icon and choose Remove, or use your browser's extension settings. Unlock any locked tabs first so you don't lose your place. There's a per-browser walkthrough at locksy.dev/uninstall."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "privacy",
+      "num": 11,
+      "title": "How your data is handled",
+      "icon": "🛡️",
+      "summary": "Nothing leaves your computer. Here's what that means, and why the lock is hard to get around.",
+      "blocks": [
+        {
+          "type": "prose",
+          "body": "Locksy has no servers, no accounts, and no analytics. It makes zero network requests while locking and unlocking tabs. Your password, your locked-site list, your intruder photos and your reports all sit in your browser's own storage on your own machine. There is no copy anywhere else, which is also why nobody can recover your password for you."
+        },
+        {
+          "type": "prose",
+          "body": "Your master password is never saved. Locksy runs it through PBKDF2 with 600,000 rounds of SHA-256 — roughly twice what OWASP recommended in 2023 — and keeps only the result, which can't be turned back into your password. Checking a password takes the same amount of time whether it's right or wrong, so no information leaks from how long the check takes. Every install uses its own 16-byte random salt."
+        },
+        {
+          "type": "table",
+          "caption": "The layers that stop a locked tab being bypassed",
+          "head": ["Layer", "What it prevents"],
+          "rows": [
+            ["The page is unloaded, not covered", "There's no hidden element to delete with developer tools"],
+            ["Navigation guard", "Typing the old address back in re-locks the tab"],
+            ["Locks carry their own ID", "Restarting the browser can't make one lock release another"],
+            ["Sender verification", "A forged unlock request can't pretend to come from a different tab"],
+            ["Central rate limiting", "Opening new tabs doesn't reset the delay after failed attempts"],
+            ["Frame refusal", "Locksy's own pages won't load inside another page"]
+          ]
+        },
+        {
+          "type": "qa",
+          "items": [
+            {
+              "q": "Is Locksy open source?",
+              "a": "No, the extension is proprietary. Everything it does runs locally on your device with no server communication, and the GitHub repository at github.com/vansh-121/Locksy is used as the issue tracker and community hub."
+            },
+            {
+              "q": "Can anyone bypass the lock?",
+              "a": "Not through the browser. But be realistic about what any extension can do: someone who can reach your browser profile on disk, or install software on your machine, is operating below the level an extension defends. Locksy protects an unattended session on a machine you trust — it isn't a defence against a compromised computer."
+            },
+            {
+              "q": "Do I still need a password manager?",
+              "a": "Yes, they solve different problems. A password manager protects logging in. Locksy protects what's on screen after you're already logged in. Use both."
+            },
+            {
+              "q": "Can I use Locksy on a work computer?",
+              "a": "Yes, that's the main use case. Lock the sensitive tabs, leave the rest open, and nothing you do needs an account or an internet connection."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

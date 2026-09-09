@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 import { faqData } from "@/lib/faq-data"
 
@@ -102,6 +103,17 @@ export default function FAQ() {
             )}
           </div>
         )}
+
+        <p className="mt-10 text-center text-neutral-400">
+          Still stuck?{" "}
+          <Link
+            href="/guide"
+            className="font-semibold text-white underline decoration-neutral-500 underline-offset-4 transition hover:text-primary-foreground hover:decoration-primary"
+          >
+            The full user guide
+          </Link>{" "}
+          walks through every feature step by step.
+        </p>
       </div>
     </section>
   )

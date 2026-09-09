@@ -6,6 +6,7 @@ import WhatsNew from "@/components/whats-new"
 import ProblemStatement from "@/components/problem-statement"
 import Features from "@/components/features"
 import KeyboardShortcuts from "@/components/keyboard-shortcuts"
+import GuideBanner from "@/components/guide-banner"
 import HowItWorks from "@/components/how-it-works"
 import SeeItInAction from "@/components/see-it-in-action"
 import Security from "@/components/security"
@@ -57,6 +58,9 @@ export default function Home() {
 
         {/* Quick reference for the four keyboard shortcuts */}
         <KeyboardShortcuts />
+
+        {/* One compact band pointing newcomers at the full user guide */}
+        <GuideBanner />
 
         {/* Why it's safe — privacy & security guarantees */}
         <Security />

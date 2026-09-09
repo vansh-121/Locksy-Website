@@ -112,12 +112,19 @@ export default function Header() {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 xl:gap-12">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
           <a
             href="/#features"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
             Features
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
+          </a>
+          <a
+            href="/guide"
+            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
+          >
+            Guide
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
@@ -280,6 +287,13 @@ export default function Header() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Features
+                </a>
+                <a
+                  href="/guide"
+                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Guide
                 </a>
                 <a
                   href="/security"
