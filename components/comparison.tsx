@@ -158,16 +158,16 @@ export default function Comparison() {
                   </thead>
                   <tbody>
                     {[
-                      ["Privacy Blur Shield (Auto-Mask & Focus Blur)", true, false, false],
-                      ["Lock Individual Tabs", true, false, false],
-                      ["Domain Auto-Locks", true, false, false],
-                      ["Startup Session Lock", true, false, false],
-                      ["Stealth Mode Disguise", true, false, false],
-                      ["Webcam Intruder Capture", true, false, false],
-                      ["Custom Lock Screen Messages", true, false, false],
-                      ["Weekly Privacy Reports", true, false, false],
-                      ["Biometric Unlock (WebAuthn)", true, false, false],
-                      ["PBKDF2 Hashing (600k iterations)", true, false, false],
+                      ["Auto-blur sensitive info", true, false, false],
+                      ["Lock individual tabs", true, false, false],
+                      ["Auto-lock whole websites", true, false, false],
+                      ["Re-lock tabs on browser startup", true, false, false],
+                      ["Hide that tabs are locked", true, false, false],
+                      ["Webcam photo of snoopers", true, false, false],
+                      ["Custom lock screen messages", true, false, false],
+                      ["Weekly privacy reports", true, false, false],
+                      ["Fingerprint / face unlock", true, false, false],
+                      ["Strong password encryption", true, false, false],
                     ].map((row, idx) => (
                       <tr key={idx} className="border-b border-border/50 hover:bg-accent/30 transition-colors">
                         <td className="py-4 px-4 md:px-6 font-medium">{row[0]}</td>

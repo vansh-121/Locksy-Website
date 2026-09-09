@@ -20,6 +20,8 @@ import {
 } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import WhatsAppIcon from "@/components/whatsapp-icon"
+import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
 
 const SOCIAL_LINKS = [
     {
@@ -81,6 +83,13 @@ const QUICK_ACTIONS = [
         icon: Heart,
         href: "mailto:vansh.sethi98760@gmail.com",
         color: "from-green-500 to-emerald-500",
+    },
+    {
+        title: "WhatsApp Channel",
+        description: "Follow Locksy Support for updates",
+        icon: WhatsAppIcon,
+        href: WHATSAPP_CHANNEL_URL,
+        color: "from-[#25D366] to-[#128C7E]",
     },
 ]
 
@@ -213,7 +222,7 @@ Timestamp: ${new Date().toISOString()}
                 {/* Quick Actions */}
                 <div className="mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Quick Actions</h2>
-                    <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
                         {QUICK_ACTIONS.map((action) => {
                             const Icon = action.icon
                             return (

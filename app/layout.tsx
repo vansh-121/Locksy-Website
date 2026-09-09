@@ -10,6 +10,7 @@ import {
   jsonLdHowToInstall
 } from "@/lib/metadata"
 import ChatSupport from "@/components/chat-support"
+import WhatsAppFloat from "@/components/whatsapp-float"
 import CookieConsent from "@/components/cookie-consent"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -77,6 +78,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           {children}
+          <WhatsAppFloat />
           <ChatSupport />
           <CookieConsent />
         </ThemeProvider>
