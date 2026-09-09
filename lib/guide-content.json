@@ -1,0 +1,223 @@
+{
+  "version": "3.4.0",
+  "updated": "2026-09-09",
+  "chapters": [
+    {
+      "id": "install",
+      "num": 1,
+      "title": "Install and set up Locksy",
+      "icon": "🚀",
+      "intro": "Locksy protects browser tabs locally. Install it from your browser's extension store, create a master password, and keep the recovery key somewhere safe before locking anything important.",
+      "blocks": [
+        { "type": "steps", "items": [
+          { "title": "Choose your browser", "body": "Locksy is available from the Chrome Web Store, Firefox Add-ons, and Microsoft Edge Add-ons. Install from the store for your browser, then confirm the browser permission prompt." },
+          { "title": "Create your master password", "body": "Open Locksy from the browser toolbar and create your master password. Choose a strong password you can remember; Locksy does not send it to a server and cannot recover it for you later." },
+          { "title": "Pin Locksy", "body": "Pin the Locksy icon to your browser toolbar so the lock controls are always one click away. The popup is the quickest place to lock the current tab, manage protection, and change settings." },
+          { "title": "Generate your Master Recovery Key", "body": "Open the recovery-key option in Locksy settings and generate the 16-character emergency key. Store it offline in a secure place. Pro can use it for emergency password reset; losing both the password and recovery key can leave you without a recovery path." }
+        ]},
+        { "type": "table", "caption": "Install Locksy", "head": ["Browser", "Store"], "rows": [
+          ["Chrome", "Chrome Web Store"],
+          ["Firefox", "Firefox Add-ons"],
+          ["Edge", "Microsoft Edge Add-ons"]
+        ]},
+        { "type": "callout", "tone": "tip", "title": "No account is required", "body": "Locksy is designed to work without a Locksy account. Encryption, password verification, and security logs stay on your device." }
+      ]
+    },
+    {
+      "id": "first-lock",
+      "num": 2,
+      "title": "Lock your first tab",
+      "icon": "🔒",
+      "intro": "Once your master password is configured, locking a tab takes a single action. You can use the popup, keyboard, or the browser's right-click menu.",
+      "blocks": [
+        { "type": "steps", "items": [
+          { "title": "Option 1 — Popup", "body": "Open the Locksy toolbar popup and choose Lock Current Tab. The protected page is replaced by Locksy's lock screen." },
+          { "title": "Option 2 — Keyboard", "body": "Press Alt+Shift+9 on Windows/Linux, or Option+Shift+9 on macOS, to lock the current tab immediately." },
+          { "title": "Option 3 — Right-click", "body": "Right-click a page and open the Locksy menu. Choose Lock this tab. The same menu can also lock a domain, lock all tabs, or toggle Stealth Mode." },
+          { "title": "Unlock when you need the page", "body": "Enter your master password on the Locksy lock screen. If biometric unlock is configured, you can use your approved WebAuthn authenticator instead." }
+        ]},
+        { "type": "callout", "tone": "warning", "title": "What locking actually does", "body": "Locksy navigates the tab away from the protected page rather than placing a removable overlay on top of it. The original page is unloaded, so deleting a DOM element in DevTools does not reveal it." }
+      ]
+    },
+    {
+      "id": "shortcuts",
+      "num": 3,
+      "title": "Keyboard shortcuts",
+      "icon": "⌨️",
+      "intro": "Four built-in shortcuts cover the most common actions. They can be remapped in your browser's extension shortcut settings.",
+      "blocks": [
+        { "type": "table", "caption": "Locksy shortcuts", "head": ["Action", "Windows / Linux", "macOS"], "rows": [
+          ["Lock current tab", "Alt + Shift + 9", "Option + Shift + 9"],
+          ["Open Domain Lock Manager", "Alt + Shift + 0", "Option + Shift + 0"],
+          ["Lock all tabs", "Alt + Shift + 8", "Option + Shift + 8"],
+          ["Toggle Stealth Mode", "Alt + Shift + 7", "Option + Shift + 7"]
+        ]},
+        { "type": "steps", "items": [
+          { "title": "Remap a shortcut", "body": "In Chromium browsers, open chrome://extensions/shortcuts, find Locksy, and assign your preferred key combination. Firefox exposes extension shortcuts through about:addons." },
+          { "title": "Use Lock All carefully", "body": "Lock All Tabs protects all compatible tabs in the current window. The free tier allows 3 total uses; Pro removes that limit." }
+        ]}
+      ]
+    },
+    {
+      "id": "automation",
+      "num": 4,
+      "title": "Lock tabs automatically",
+      "icon": "⏱️",
+      "intro": "Automation is useful when you regularly leave a computer unattended or want sensitive tabs protected at predictable times.",
+      "blocks": [
+        { "type": "steps", "items": [
+          { "title": "Set an Auto-Lock Timer", "body": "Choose an inactivity timeout from 1 to 480 minutes. Locksy watches activity such as mouse movement, keyboard input, scrolling, and active media so normal video or audio playback is not interrupted." },
+          { "title": "Add a Scheduled Lock", "body": "Choose the days and start/end times when protection should run. Scheduled Locking supports overnight windows, such as 22:00 to 06:00, and can run alongside the Auto-Lock Timer." },
+          { "title": "Enable Startup Session Lock", "body": "Pro users can automatically lock tabs restored from the previous browser session when the browser starts. A 30-second catch-up window also catches tabs that finish restoring slightly later." }
+        ]},
+        { "type": "callout", "tone": "pro", "title": "Automation can stack", "body": "Auto-Lock and Scheduled Locking can operate together. For example, a schedule can protect work hours while the inactivity timer adds protection whenever you step away." },
+        { "type": "table", "caption": "Automation at a glance", "head": ["Feature", "Best for", "Range / behavior"], "rows": [
+          ["Auto-Lock Timer", "Unexpectedly leaving the computer", "1–480 min inactivity"],
+          ["Scheduled Locking", "Predictable hours", "Selected days and times; overnight supported"],
+          ["Startup Session Lock", "Browser restarts", "Pro; 30-second restore catch-up"]
+        ]}
+      ]
+    },
+    {
+      "id": "domain-lock",
+      "num": 5,
+      "title": "Lock a whole website",
+      "icon": "🌐",
+      "intro": "Domain Lock protects matching websites automatically, including tabs you open later and tabs restored after a browser restart.",
+      "blocks": [
+        { "type": "steps", "items": [
+          { "title": "Open the Domain Lock Manager", "body": "Use the Locksy popup or Alt+Shift+0 to open the domain manager." },
+          { "title": "Add a domain pattern", "body": "Enter the domain you want to protect and save it. New matching tabs are automatically protected." },
+          { "title": "Choose the right pattern", "body": "Use example.com to match that specific domain. Use *.example.com when you want the subdomains of example.com, such as mail.example.com or docs.example.com, protected." },
+          { "title": "Leave the rule enabled", "body": "Domain locks persist across browser restarts, so the rule keeps protecting future matching tabs until you remove or change it." }
+        ]},
+        { "type": "table", "caption": "Wildcard examples", "head": ["Pattern", "Matches"], "rows": [
+          ["example.com", "The specific example.com domain"],
+          ["*.example.com", "Subdomains such as mail.example.com and docs.example.com"],
+          ["*.slack.com", "Slack subdomains that match the wildcard"]
+        ]},
+        { "type": "callout", "tone": "warning", "title": "Free-tier limit", "body": "The Free tier supports up to 3 domain locks. Pro removes the domain-lock limit." }
+      ]
+    },
+    {
+      "id": "biometrics",
+      "num": 6,
+      "title": "Unlock with fingerprint or face",
+      "icon": "👆",
+      "intro": "Locksy can use WebAuthn/FIDO2 authenticators so you can unlock without typing your master password every time.",
+      "blocks": [
+        { "type": "steps", "items": [
+          { "title": "Open biometric settings", "body": "In Locksy settings, choose the biometric or WebAuthn setup option and follow the browser's security prompt." },
+          { "title": "Approve your authenticator", "body": "Depending on your device, the browser may ask for Touch ID, Windows Hello, Face ID, Android biometrics, or a hardware security key such as YubiKey." },
+          { "title": "Unlock with the authenticator", "body": "On a protected tab, select biometric unlock when offered and complete the operating-system or hardware-key verification." }
+        ]},
+        { "type": "callout", "tone": "tip", "title": "Biometric data stays with the authenticator", "body": "Locksy uses WebAuthn/FIDO2. The extension does not receive or upload your fingerprint or face data. The browser and operating system handle the biometric verification." },
+        { "type": "callout", "tone": "warning", "title": "Free vs Pro", "body": "The Free tier allows up to 5 biometric unlock prompts per day. Pro provides unlimited biometric unlocks." }
+      ]
+    },
+    {
+      "id": "stealth",
+      "num": 7,
+      "title": "Hide that you're using Locksy",
+      "icon": "🕵️",
+      "intro": "Stealth Mode is designed for situations where even the presence of a Locksy lock screen should not draw attention.",
+      "blocks": [
+        { "type": "steps", "items": [
+          { "title": "Turn Stealth Mode on", "body": "Toggle Stealth Mode from the Locksy popup, the right-click context menu, or Alt+Shift+7 / Option+Shift+7." },
+          { "title": "Know what changes", "body": "The Locksy badge counter disappears, browser notifications are silenced, and locked tabs display a fake browser-style connection-refused page instead of the normal Locksy lock screen." },
+          { "title": "Turn it off when needed", "body": "Use the same popup, context-menu action, or shortcut to restore the normal Locksy indicators and lock screen. The preference survives browser restarts." }
+        ]},
+        { "type": "callout", "tone": "pro", "title": "Stealth Mode is a Pro feature", "body": "Stealth Mode disguise is included with Locksy Pro. The disguised page uses an ERR_CONNECTION_REFUSED-style presentation so it looks like an ordinary failed navigation." }
+      ]
+    },
+    {
+      "id": "intruder",
+      "num": 8,
+      "title": "Catch snoopers",
+      "icon": "📸",
+      "intro": "Locksy combines password-attempt throttling, local intruder logs, optional webcam captures, and a privacy blur shield to make unattended sessions harder to inspect.",
+      "blocks": [
+        { "type": "table", "caption": "Failed-attempt protection", "head": ["Trigger", "Response"], "rows": [
+          ["3 failed attempts", "Exponential backoff begins and an intruder webcam snapshot can be captured locally"],
+          ["10 failed attempts", "A 5-minute lockout is enforced by the background service worker"],
+          ["Every attempt", "The local intruder log records the access attempt for later review"]
+        ]},
+        { "type": "steps", "items": [
+          { "title": "Review the Intruder Log", "body": "Open the intruder log to review failed access attempts and locally stored snapshots. You can delete stored photos from the log viewer." },
+          { "title": "Use Privacy Blur Shield", "body": "The blur shield can mask sensitive values such as passwords, cards, emails, and OTPs and can blur the page when you switch windows or leave the computer." },
+          { "title": "Watch for real-time alerts", "body": "When an access attempt occurs, Locksy can show browser notifications and visual warnings on the lock screen so you know a protected tab was targeted." }
+        ]},
+        { "type": "callout", "tone": "warning", "title": "Webcam captures are local", "body": "Intruder snapshots are stored locally in the browser sandbox. Free stores up to 3 snapshots; Pro is unlimited. Webcam permission is subject to your browser and operating-system controls." }
+      ]
+    },
+    {
+      "id": "free-pro",
+      "num": 9,
+      "title": "Free vs Pro",
+      "icon": "💎",
+      "intro": "Locksy's Free tier covers the core protection workflow. Pro is a one-time $2.99 lifetime purchase that removes limits and adds advanced automation and controls.",
+      "blocks": [
+        { "type": "table", "caption": "Exact plan breakdown", "head": ["Free", "Pro — $2.99 one-time"], "rows": [
+          ["Privacy Blur Shield (Basic) — auto-mask passwords/cards and blur on focus loss", "Privacy Blur Manager UI — custom blur levels, site categories and whitelists"],
+          ["Basic Password Locking — standard master-password tab protection", "Unlimited Domain Auto-Locks — any number of websites and subdomains"],
+          ["Max 3 Domain Locks", "Unlimited Biometric Unlocks — Windows Hello, Touch ID or Face ID"],
+          ["Max 5 Biometric prompts per day", "Startup Session Lock"],
+          ["Max 3 Webcam captures", "Stealth Mode disguise"],
+          ["10-Min Session Re-Auth Window", "Weekly Privacy Reports"],
+          ["Default Hotkey locking — Alt+Shift+9; 3 total Lock All uses", "Custom Lock Screen Messages"],
+          ["Master Recovery Key Setup — 16-character emergency key", "Unlimited Webcam Intruder captures"],
+          ["Quick-Unlock Panel", "1-Click Unlock All Tabs"],
+          ["Incognito Window Support", "Smart Sessions & Re-Auth Timing — 1–60 min or Strict"],
+          ["Offline Local Processing", "Master Recovery Key Backup"],
+          ["Zero Data Telemetry", "Custom Auto-Lock Timers — up to 8 hours"]
+        ]},
+        { "type": "callout", "tone": "pro", "title": "One payment, lifetime access", "body": "Locksy Pro costs $2.99 as a one-time lifetime purchase. There is no monthly subscription." }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "num": 10,
+      "title": "Troubleshooting",
+      "icon": "🛠️",
+      "intro": "Most Locksy problems are configuration or browser-state issues. Start with the matching fix below before reinstalling anything.",
+      "blocks": [
+        { "type": "qa", "items": [
+          { "q": "I forgot my password. Can it be recovered?", "a": "Your master password itself cannot be recovered. If you have configured the Master Recovery Key, use the emergency recovery flow to reset the password. Otherwise, the security model requires a password reset that unlocks currently locked tabs." },
+          { "q": "A restored tab says it cannot be unlocked.", "a": "Update to Locksy 3.1.1 or later if you are on 3.1.0 or earlier. Modern Locksy lock records use permanent identifiers independent of the browser tab IDs reassigned during session restore." },
+          { "q": "How do I use Locksy in Incognito?", "a": "Enable Allow in Incognito in your browser's extension settings. Then the master password and Locksy protection work in private windows as well." },
+          { "q": "Auto-Lock interrupted my video.", "a": "Auto-Lock includes smart media/activity detection. Check that you are on a current version and that the browser recognizes the page's media playback. The intended behavior is to avoid locking while you are actively consuming media." },
+          { "q": "Can I uninstall Locksy?", "a": "You can remove the extension from your browser's extension manager. Before uninstalling, unlock important tabs and export or safely store any recovery information you may need. Removing the extension removes Locksy's protection from the browser profile." },
+          { "q": "Can someone bypass a locked tab with DevTools?", "a": "The protected page is unloaded by navigating the tab to Locksy's lock page, so there is no hidden page element to delete. Locksy also guards navigation, uses session-independent lock records, verifies unlock senders, and rate-limits failed attempts. Like any browser extension, it cannot defend against someone who controls the browser profile or can install software at the machine level." }
+        ]},
+        { "type": "callout", "tone": "tip", "title": "Before reporting a problem", "body": "Check that Locksy is updated, confirm the extension is enabled for the current browser profile, and retry in a normal browser window. For Incognito, verify the browser's Allow in Incognito setting." }
+      ]
+    },
+    {
+      "id": "privacy",
+      "num": 11,
+      "title": "Your privacy in plain English",
+      "icon": "🛡️",
+      "intro": "Locksy is built around local processing: your password and protected browsing data are not sent to Locksy servers. The security model also uses several independent layers so one browser trick does not simply reveal a locked page.",
+      "blocks": [
+        { "type": "prose", "body": "Your master password is processed with PBKDF2-HMAC-SHA256 using 600,000 iterations and a cryptographically random 16-byte salt. Locksy verifies password-derived material locally rather than storing the password itself. This makes offline guessing substantially more expensive than a plain hash comparison." },
+        { "type": "prose", "body": "Locksy is designed for unattended browser-session privacy, not for a compromised computer. The protected page is navigated away and unloaded. Navigation guards re-lock attempts to return to the original URL, lock records use random identifiers that survive tab-ID changes after browser restart, and unlock requests are checked against the browser's report of the sending tab." },
+        { "type": "table", "caption": "The security model in one view", "head": ["Layer", "What it means"], "rows": [
+          ["PBKDF2-HMAC-SHA256", "600,000 password-derivation iterations with a 16-byte random salt"],
+          ["Local processing", "Password checks, encryption-related work, reports and intruder logs run locally"],
+          ["Full-tab navigation", "The original protected page is unloaded instead of hidden behind a DOM overlay"],
+          ["Navigation guard", "Attempts to return to a protected page are intercepted and re-locked"],
+          ["Session-independent records", "Random lock identifiers remain correct when browsers reassign tab IDs"],
+          ["Sender verification", "Unlock requests are tied to the browser-reported sending tab"],
+          ["Rate limiting", "Backoff begins after 3 failed attempts and 10 attempts trigger a 5-minute lockout"],
+          ["Frame refusal", "Locksy extension pages refuse to initialize inside a frame"]
+        ]},
+        { "type": "callout", "tone": "warning", "title": "Know the boundary", "body": "No browser extension can protect you from someone who controls the underlying browser profile, operating system, or installed software. Locksy is for protecting an unattended browser session and sensitive tabs from ordinary access attempts." },
+        { "type": "qa", "items": [
+          { "q": "Does Locksy send my password to the internet?", "a": "No. Locksy's password processing and protection logic are local to the browser. The project describes the extension as 100% offline with zero network telemetry for these operations." },
+          { "q": "Does Locksy collect my browsing history?", "a": "Locksy's security architecture is local-first and does not require a remote account or cloud sync for tab protection. Local security logs remain in the browser sandbox." },
+          { "q": "What is the simplest safe setup?", "a": "Install from the official browser store, create a strong master password, generate and securely store the Master Recovery Key, pin Locksy, then lock one non-critical tab to verify your workflow before protecting important sites." }
+        ]}
+      ]
+    }
+  ]
+}
