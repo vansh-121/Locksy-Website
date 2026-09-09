@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
-import { Shield, Lock, Zap, Heart, ArrowRight, CheckCircle2, Download, Star, Frown } from "lucide-react"
+import { Shield, Lock, Zap, Heart, ArrowRight, CheckCircle2, Download, Star, Frown, BookOpen, Lightbulb } from "lucide-react"
 import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import WhatsAppIcon from "@/components/whatsapp-icon"
+import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
 
 const PRIMARY_BROWSERS = [
     {
@@ -28,17 +30,70 @@ const PRIMARY_BROWSERS = [
     },
 ]
 
+// Each reason someone might leave, paired with the fix for it.
+//
+// The point of the pairing is retention: the single biggest reason people
+// uninstall an extension is not knowing it already does the thing they wanted.
+// When a reason is ticked, its `fix` and the exact guide chapter that covers it
+// appear inline — so the feedback form answers the complaint instead of just
+// recording it. `chapter` values are chapter ids from lib/guide-content.json.
 const REASONS = [
-    "It didn't work as expected",
-    "Too many notifications/interruptions",
-    "Didn't understand how to use it",
-    "Performance issues",
-    "Privacy concerns",
-    "Switching to another tool",
-    "No longer needed",
+    {
+        label: "It didn't work as expected",
+        fix: "Most \"it just didn't work\" reports come down to one of a handful of causes — a permission the browser never granted, or a page type no extension is allowed to touch.",
+        chapter: "troubleshooting",
+        chapterTitle: "When something isn't working",
+    },
+    {
+        label: "Too many notifications/interruptions",
+        fix: "Auto-lock is fully configurable. You can raise the idle timer, limit locking to specific sites, or switch it off entirely and lock only by hand.",
+        chapter: "automatic",
+        chapterTitle: "Lock tabs automatically",
+    },
+    {
+        label: "Didn't understand how to use it",
+        fix: "That's on us, not you. Locking your first tab takes about thirty seconds once you've seen it done — the guide shows each step with screenshots.",
+        chapter: "first-lock",
+        chapterTitle: "Lock your first tab",
+    },
+    {
+        label: "Performance issues",
+        fix: "Locksy runs entirely on your device with no cloud calls, so it should be invisible. If it wasn't, that's a bug worth reporting — and usually a fixable one.",
+        chapter: "troubleshooting",
+        chapterTitle: "When something isn't working",
+    },
+    {
+        label: "Privacy concerns",
+        fix: "Nothing you lock ever leaves your computer. There's no account, no server, and no analytics on your tabs — the guide spells out exactly what is stored and where.",
+        chapter: "privacy",
+        chapterTitle: "How your data is handled",
+    },
+    {
+        label: "Switching to another tool",
+        fix: "Worth a look before you go: domain locking, fingerprint unlock, stealth mode and intruder snapshots are all in Locksy, and most of them are free.",
+        chapter: "free-vs-pro",
+        chapterTitle: "What's free and what's Pro",
+    },
+    {
+        label: "No longer needed",
+        fix: null,
+        chapter: null,
+        chapterTitle: null,
+    },
 ]
 
-export default function UninstallClient() {
+// Reason labels contain spaces and a slash, neither of which is valid in a DOM
+// id, so the checkbox/label pairing gets a slugified one.
+const reasonId = (label: string) =>
+    `reason-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`
+
+export default function UninstallClient({
+    chapterCount,
+    guidePdfPath,
+}: {
+    chapterCount: number
+    guidePdfPath: string
+}) {
     const [selectedReasons, setSelectedReasons] = useState<string[]>([])
     const [feedback, setFeedback] = useState("")
     const [submitted, setSubmitted] = useState(false)
@@ -50,6 +105,13 @@ export default function UninstallClient() {
             prev.includes(reason) ? prev.filter((r) => r !== reason) : [...prev, reason]
         )
     }
+
+    // Fixes for whatever has been ticked so far, kept in the order the reasons
+    // are listed rather than the order they were clicked, so the panel doesn't
+    // reshuffle itself as boxes are checked.
+    const suggestedFixes = REASONS.filter(
+        (reason) => reason.fix && selectedReasons.includes(reason.label)
+    )
 
     const handleSubmit = async () => {
         setIsSubmitting(true)
@@ -138,6 +200,77 @@ export default function UninstallClient() {
                     </div>
                 </div>
 
+                {/* Two things worth trying before leaving: the written guide (for
+                    people who bounced off the setup) and the WhatsApp channel (a
+                    way to stay reachable even if they do uninstall). */}
+                <div className="max-w-4xl mx-auto mb-12">
+                    <div className="text-center mb-8">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-4">
+                            <Lightbulb className="h-4 w-4" />
+                            Two minutes before you go
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-3">Most of this is fixable</h2>
+                        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                            A lot of people uninstall Locksy without ever finding the setting that would
+                            have solved their problem. Here&apos;s the short path to it.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {/* The guide */}
+                        <div className="flex flex-col rounded-2xl border-2 border-primary/25 bg-gradient-to-br from-primary/5 to-secondary/5 p-6 md:p-7 shadow-lg transition-all hover:border-primary/40 hover:shadow-xl">
+                            <div className="inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-lg mb-5">
+                                <BookOpen className="h-7 w-7 text-white" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">Read the user guide</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                                {chapterCount} short chapters in plain English — setting up, locking your first
+                                tab, shortcuts, automatic locking, and what to do when something misbehaves.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-3 pt-5">
+                                <Link
+                                    href="/guide"
+                                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                                >
+                                    Open the guide
+                                    <ArrowRight className="h-4 w-4" />
+                                </Link>
+                                <a
+                                    href={guidePdfPath}
+                                    download
+                                    className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-border px-5 py-2.5 text-sm font-semibold transition-all duration-300 hover:border-primary/40 hover:bg-accent/50"
+                                >
+                                    <Download className="h-4 w-4" />
+                                    PDF
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* WhatsApp channel */}
+                        <div className="flex flex-col rounded-2xl border-2 border-[#25D366]/30 bg-gradient-to-br from-[#25D366]/5 to-[#128C7E]/5 p-6 md:p-7 shadow-lg transition-all hover:border-[#25D366]/50 hover:shadow-xl">
+                            <div className="inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#25D366] to-[#128C7E] shadow-lg mb-5">
+                                <WhatsAppIcon className="h-7 w-7 text-white" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">Join the WhatsApp channel</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                                Follow Locksy Support for fixes, new features and quick tips. If you left
+                                because a feature was missing, this is how you&apos;ll hear when it ships —
+                                no account or phone number shared with us.
+                            </p>
+                            <div className="pt-5">
+                                <a
+                                    href={WHATSAPP_CHANNEL_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group/wa inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-lg"
+                                >
+                                    <WhatsAppIcon className="h-4 w-4 transition-transform group-hover/wa:scale-110" />
+                                    Follow on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Support Section - After Uninstalling */}
                 <div className="max-w-4xl mx-auto mb-12">
@@ -221,21 +354,73 @@ export default function UninstallClient() {
 
                                         <div className="grid md:grid-cols-2 gap-3 pt-4">
                                             {REASONS.map((reason) => (
-                                                <div key={reason} className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:border-primary/30 hover:bg-accent/50 transition-all cursor-pointer">
+                                                <div key={reason.label} className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:border-primary/30 hover:bg-accent/50 transition-all cursor-pointer">
                                                     <Checkbox
-                                                        id={reason}
-                                                        checked={selectedReasons.includes(reason)}
-                                                        onCheckedChange={() => handleReasonToggle(reason)}
+                                                        id={reasonId(reason.label)}
+                                                        checked={selectedReasons.includes(reason.label)}
+                                                        onCheckedChange={() => handleReasonToggle(reason.label)}
                                                     />
                                                     <label
-                                                        htmlFor={reason}
+                                                        htmlFor={reasonId(reason.label)}
                                                         className="text-sm font-medium leading-relaxed cursor-pointer flex-1"
                                                     >
-                                                        {reason}
+                                                        {reason.label}
                                                     </label>
                                                 </div>
                                             ))}
                                         </div>
+
+                                        {/* Answer the complaint on the spot, before the form is even
+                                            submitted — with a link straight to the chapter that covers it. */}
+                                        {suggestedFixes.length > 0 && (
+                                            <div className="mt-6 rounded-xl border-2 border-primary/25 bg-primary/5 p-5 md:p-6 space-y-4">
+                                                <div className="flex items-center gap-2">
+                                                    <Lightbulb className="h-5 w-5 text-primary flex-shrink-0" />
+                                                    <h3 className="font-bold text-base">
+                                                        {suggestedFixes.length === 1
+                                                            ? "There's a fix for that"
+                                                            : "There are fixes for those"}
+                                                    </h3>
+                                                </div>
+
+                                                <div className="space-y-4">
+                                                    {suggestedFixes.map((reason) => (
+                                                        <div
+                                                            key={reason.label}
+                                                            className="rounded-lg border border-border bg-background/70 p-4"
+                                                        >
+                                                            <p className="text-sm font-semibold mb-1.5">{reason.label}</p>
+                                                            <p className="text-sm text-muted-foreground leading-relaxed">
+                                                                {reason.fix}
+                                                            </p>
+                                                            {reason.chapter && (
+                                                                <Link
+                                                                    href={`/guide#${reason.chapter}`}
+                                                                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                                                                >
+                                                                    <BookOpen className="h-4 w-4 flex-shrink-0" />
+                                                                    Read “{reason.chapterTitle}”
+                                                                    <ArrowRight className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                </Link>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+
+                                                <p className="text-sm text-muted-foreground">
+                                                    Still stuck?{" "}
+                                                    <a
+                                                        href={WHATSAPP_CHANNEL_URL}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="font-semibold text-[#128C7E] dark:text-[#25D366] hover:underline"
+                                                    >
+                                                        Ask on our WhatsApp channel
+                                                    </a>{" "}
+                                                    — we answer there daily. Your feedback below still helps either way.
+                                                </p>
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="space-y-3">
@@ -293,6 +478,35 @@ export default function UninstallClient() {
                                         <p className="text-lg text-muted-foreground max-w-md mx-auto">
                                             Your feedback helps us make Locksy better for everyone. We truly appreciate you taking the time.
                                         </p>
+
+                                        {/* Don't dead-end here: whoever just told us why they left is
+                                            the person most worth keeping a line open to. */}
+                                        <div className="pt-2 space-y-4">
+                                            <p className="text-base font-semibold">
+                                                Want to know when we&apos;ve fixed it?
+                                            </p>
+                                            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                                                <a
+                                                    href={WHATSAPP_CHANNEL_URL}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="group/wa w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-lg"
+                                                >
+                                                    <WhatsAppIcon className="h-4 w-4 transition-transform group-hover/wa:scale-110" />
+                                                    Follow on WhatsApp
+                                                </a>
+                                                <Link
+                                                    href="/guide"
+                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border-2 border-border bg-background/60 px-6 py-3 text-sm font-semibold transition-all duration-300 hover:border-primary/40 hover:bg-accent/50"
+                                                >
+                                                    <BookOpen className="h-4 w-4" />
+                                                    Browse the guide
+                                                </Link>
+                                            </div>
+                                            <p className="text-sm text-muted-foreground">
+                                                We post fixes and new features there first.
+                                            </p>
+                                        </div>
                                     </div>
                                 </CardContent>
                             </Card>
@@ -410,7 +624,11 @@ export default function UninstallClient() {
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-lg mb-2">Confused about setup?</h3>
                                                 <p className="text-sm text-muted-foreground leading-relaxed">
-                                                    Watch the{" "}
+                                                    Read the{" "}
+                                                    <Link href="/guide#first-lock" className="text-primary hover:underline font-semibold">
+                                                        step-by-step guide
+                                                    </Link>{" "}
+                                                    or watch the{" "}
                                                     <a
                                                         href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
                                                         target="_blank"
@@ -556,6 +774,21 @@ export default function UninstallClient() {
                                     <span>💬</span>
                                     Live Chat Support
                                 </Button>
+                                <a
+                                    href={WHATSAPP_CHANNEL_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group/wa inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#25D366] px-6 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-md"
+                                >
+                                    <WhatsAppIcon className="h-4 w-4 transition-transform group-hover/wa:scale-110" />
+                                    WhatsApp Channel
+                                </a>
+                                <Link href="/guide">
+                                    <Button variant="outline" size="lg" className="gap-2">
+                                        <BookOpen className="h-4 w-4" />
+                                        User Guide
+                                    </Button>
+                                </Link>
                                 <Link href="/#faq">
                                     <Button variant="outline" size="lg" className="gap-2">
                                         <span>📚</span>

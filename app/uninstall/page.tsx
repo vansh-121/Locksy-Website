@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { generateBreadcrumbSchema } from "@/lib/metadata"
+import { guide, GUIDE_PDF_PATH } from "@/lib/guide-data"
 import UninstallClient from "./uninstall-client"
 
 export const metadata: Metadata = {
@@ -55,7 +56,12 @@ export default function UninstallPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
-            <UninstallClient />
+            {/* Chapter count and PDF path are read here, on the server, so the
+                whole guide JSON stays out of the client bundle. */}
+            <UninstallClient
+                chapterCount={guide.chapters.length}
+                guidePdfPath={GUIDE_PDF_PATH}
+            />
         </>
     )
 }
