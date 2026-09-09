@@ -7,7 +7,7 @@ export default function NewcomerStrip() {
       className="border-b border-border/50 bg-gradient-to-r from-primary/5 via-background to-secondary/5 py-4"
     >
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 sm:flex-row md:px-6">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-center text-sm text-muted-foreground sm:text-left">
           <span className="font-semibold text-foreground">New to Locksy?</span>
           {" "}Not sure how to get started or what everything does?
         </p>
