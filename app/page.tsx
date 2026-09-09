@@ -25,6 +25,20 @@ import ToolsShowcase from "@/components/tools-showcase"
 import { jsonLdFAQPage } from "@/lib/metadata"
 import { filteredBlogPosts } from "@/lib/blog-data"
 
+function GuideBanner() {
+  return (
+    <section className="border-y border-primary/10 bg-primary/5 py-6">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center sm:flex-row sm:text-left md:px-6">
+        <div>
+          <h2 className="font-bold text-foreground">New to Locksy?</h2>
+          <p className="text-sm text-muted-foreground">Follow the complete step-by-step guide to get the most from every feature.</p>
+        </div>
+        <a href="/guide" className="btn-primary btn-sm inline-flex flex-shrink-0 items-center gap-2">📖 Read the User Guide</a>
+      </div>
+    </section>
+  )
+}
+
 export default function Home() {
   return (
     <>
@@ -81,6 +95,8 @@ export default function Home() {
 
         {/* Power user feature */}
         <KeyboardShortcuts />
+
+        <GuideBanner />
 
         {/* Technical credibility and trust */}
         <Security />
