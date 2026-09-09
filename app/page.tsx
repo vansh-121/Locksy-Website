@@ -25,79 +25,47 @@ import ToolsShowcase from "@/components/tools-showcase"
 import { jsonLdFAQPage } from "@/lib/metadata"
 import { filteredBlogPosts } from "@/lib/blog-data"
 
+function GuideBanner() {
+  return (
+    <section className="border-y border-primary/10 bg-primary/5 py-6">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center sm:flex-row sm:text-left md:px-6">
+        <div>
+          <h2 className="font-bold text-foreground">New to Locksy?</h2>
+          <p className="text-sm text-muted-foreground">Follow the complete step-by-step guide to get the most from every feature.</p>
+        </div>
+        <a href="/guide" className="btn-primary btn-sm inline-flex flex-shrink-0 items-center gap-2">📖 Read the User Guide</a>
+      </div>
+    </section>
+  )
+}
+
 export default function Home() {
   return (
     <>
-      {/* FAQ Schema for rich snippets in search results */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQPage) }}
-      />
-
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQPage) }} />
       <main className="w-full" itemScope itemType="https://schema.org/WebPage">
         <Header />
         <Hero />
-
-        {/* 5000+ users milestone celebration */}
         <MilestoneBanner />
-
-        {/* Pricing cards & plans */}
         <Pricing />
-
-        {/* Establish the problem first */}
         <ProblemStatement />
-
-        {/* Show why Locksy is better than alternatives */}
         <Comparison />
-
-        {/* NEW v2.3.0 — Biometric Unlock */}
         <BiometricUnlock />
-
-        {/* Showcase NEW v2.2.0 automation features prominently */}
         <AutomationFeatures />
-
-        {/* NEW v3.4.0 — Master Recovery Key, Emergency Account Reset & Smart Sessions */}
         <WhatsNewV330 />
-
-        {/* NEW v3.1.0 — Privacy Blur Shield, Manager UI & License Recovery */}
         <WhatsNewV310 />
-
-        {/* NEW v3.0.0 — Redesigned UI Shell, Reports, Startup Lock & Webcam snaps */}
         <WhatsNewV300 />
-
-        {/* NEW v2.5.0 — Stealth Mode & Context Menus */}
         <WhatsNewV250 />
-
-        {/* Another major feature - Domain Lock */}
-        <div id="domain-lock">
-          <DomainLock />
-        </div>
-
-        {/* Comprehensive features overview */}
+        <div id="domain-lock"><DomainLock /></div>
         <Features />
-
-        {/* How easy it is to use */}
         <HowItWorks />
-
-        {/* Power user feature */}
         <KeyboardShortcuts />
-
-        {/* Technical credibility and trust */}
+        <GuideBanner />
         <Security />
-
-        {/* Social proof */}
         <Testimonials />
-
-        {/* Handle objections and questions */}
         <FAQ />
-
-        {/* Free Security Tools Showcase */}
         <ToolsShowcase />
-
-        {/* Latest blog articles — editorial content for SEO value */}
         <LatestBlogPosts posts={filteredBlogPosts} />
-
-        {/* Support and final CTAs */}
         <SupportChatCTA />
         <CTASection />
         <Footer />
