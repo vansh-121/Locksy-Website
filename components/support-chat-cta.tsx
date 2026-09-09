@@ -2,6 +2,8 @@
 
 import { MessageCircle, Clock, Shield, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import WhatsAppIcon from "@/components/whatsapp-icon"
+import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
 
 export default function SupportChatCTA() {
   const openChat = () => {
@@ -64,16 +66,28 @@ export default function SupportChatCTA() {
 
         {/* CTA Button */}
         <div className="text-center">
-          <Button
-            onClick={openChat}
-            size="lg"
-            className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-lg px-8 py-6 group"
-          >
-            <MessageCircle className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-            Chat With Us Now
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button
+              onClick={openChat}
+              size="lg"
+              className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 px-6 group"
+            >
+              <MessageCircle className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              Chat With Us Now
+            </Button>
+
+            <a
+              href={WHATSAPP_CHANNEL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 rounded-md bg-[#25D366] px-6 h-10 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-xl"
+            >
+              <WhatsAppIcon className="h-5 w-5 transition-transform group-hover:scale-110" />
+              Follow on WhatsApp
+            </a>
+          </div>
           <p className="text-sm text-muted-foreground mt-4">
-            No account needed • Instant connection
+            No account needed • Instant connection • Updates on our WhatsApp channel
           </p>
         </div>
       </div>

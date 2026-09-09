@@ -1,4 +1,6 @@
 import Image from "next/image"
+import WhatsAppIcon from "./whatsapp-icon"
+import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
 
 export default function Footer() {
   return (
@@ -110,6 +112,17 @@ export default function Footer() {
                 <a href="/guide" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   User Guide
+                </a>
+              </li>
+              <li>
+                <a
+                  href={WHATSAPP_CHANNEL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors flex items-center gap-2 group"
+                >
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  WhatsApp Channel
                 </a>
               </li>
               <li>
@@ -297,6 +310,15 @@ export default function Footer() {
                   alt="Listed on Sell With boost"
                   style={{ height: '40px', width: 'auto' }}
                 />
+              </a>
+              <a
+                href={WHATSAPP_CHANNEL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-neutral-800/50 hover:bg-gradient-to-r hover:from-green-600 hover:to-green-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                title="Follow Locksy Support on WhatsApp"
+              >
+                <WhatsAppIcon className="w-5 h-5" />
               </a>
               <a
                 href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
