@@ -160,7 +160,7 @@ export default function GuidePage() {
           <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5 p-8 text-center">
             <h2 className="text-2xl font-black text-foreground">Still have a question?</h2>
             <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">
-              Take the guide with you as a PDF, or get in touch and we&apos;ll walk you through it.
+              Take the guide with you as a PDF, or get in touch, we&apos;ll walk you through it.
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={GUIDE_PDF_PATH} download className="btn-primary text-base">
