@@ -13,7 +13,7 @@ export default function NewcomerStrip() {
         </p>
         <Link
           href="/guide"
-          className="inline-flex flex-shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="btn-primary inline-flex flex-shrink-0 items-center gap-2 text-sm"
         >
           <span aria-hidden="true">📖</span>
           Read the User Guide
