@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck } from "lucide-react"
+import { PRO_CHECKOUT_URL } from "@/lib/pro"
 
 export default function Pricing() {
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
@@ -156,7 +157,7 @@ export default function Pricing() {
 
             <div className="mt-10 space-y-4 relative z-10">
               <a
-                href="https://buy.polar.sh/polar_cl_h8dabKldTUY7gf2g9MfFicCSIn0Ghc34SadGc3xl1cI"
+                href={PRO_CHECKOUT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative w-full py-4 bg-foreground text-background font-black rounded-2xl text-center block overflow-hidden transform transition-all duration-300 active:scale-[0.98] group/btn hover:shadow-xl hover:shadow-violet-500/20"
