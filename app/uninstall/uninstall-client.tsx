@@ -676,8 +676,11 @@ export default function UninstallClient({
                     </div>
 
                     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+                        {/* min-w is what makes the overflow-x-auto above actually
+                            engage. With `w-full` alone the table just squashes four
+                            columns into a 375px viewport instead of scrolling. */}
                         <div className="overflow-x-auto">
-                            <table className="w-full text-left text-sm">
+                            <table className="w-full min-w-[560px] text-left text-sm">
                                 <caption className="sr-only">
                                     Locksy compared with browser profiles and tab managers
                                 </caption>
