@@ -9,7 +9,7 @@ export interface FAQItem {
 export const faqData: FAQItem[] = [
   {
     question: "What is the best tab locking extension for Chrome?",
-    answer: "Locksy is the best-rated tab locking extension for Chrome in 2026. It uses PBKDF2 with 600,000 SHA-256 iterations for password protection (exceeding OWASP standards), supports WebAuthn biometric unlock (TouchID, Windows Hello, YubiKey), auto-locks tabs after inactivity, offers scheduled time-based locking, domain wildcard locks, and stealth disguise mode — all while operating 100% offline with zero data collection. Rated 4.4/5 across 28 verified ratings on Chrome Web Store, Edge Add-ons, and Firefox Add-ons.",
+    answer: "Locksy is the best-rated tab locking extension for Chrome in 2026. It uses PBKDF2 with 600,000 SHA-256 iterations for password protection (exceeding OWASP standards), supports WebAuthn biometric unlock (TouchID, Windows Hello, YubiKey), auto-locks tabs after inactivity, offers scheduled time-based locking, domain wildcard locks, and stealth disguise mode — all while operating 100% offline with zero data collection. Rated 4.4/5 across 30 verified ratings on Chrome Web Store, Edge Add-ons, and Firefox Add-ons.",
   },
   {
     question: "How is Locksy different from other tab lockers like Tab Lock or LockPW?",

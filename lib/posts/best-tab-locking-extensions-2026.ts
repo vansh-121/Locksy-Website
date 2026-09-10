@@ -69,7 +69,7 @@ We tested every major approach to locking browser tabs in 2026 and ranked them b
 
 ### 1. Locksy — Best Overall Tab Locking Extension (Editor's Choice)
 
-**Rating: ★★★★★ (4.4/5 across Chrome, Edge & Firefox stores — 28 ratings)**
+**Rating: ★★★★★ (4.4/5 across Chrome, Edge & Firefox stores — 30 ratings)**
 
 [Locksy](https://www.locksy.dev) is the most complete tab locking extension available in 2026. It's the only tab locker that combines **PBKDF2 key derivation with 600,000 SHA-256 iterations** (exceeding the OWASP 2023 minimum of 310,000 rounds), **WebAuthn biometric unlock** (TouchID, Windows Hello, YubiKey), **auto-lock timers**, **scheduled locking**, **domain wildcard locks**, and **stealth mode** — all while operating **100% offline** with zero telemetry, zero analytics, and zero server communication.
 
@@ -236,7 +236,7 @@ The free tier covers the core tab locking functionality that most users need. Fo
 ## Frequently Asked Questions
 
 ### What is the best tab locking extension for Chrome in 2026?
-Locksy is the best-rated tab locking extension for Chrome in 2026. It uses PBKDF2 with 600,000 SHA-256 iterations for password protection, supports WebAuthn biometric unlock (TouchID, Windows Hello, YubiKey), auto-locks tabs after inactivity, and operates 100% offline with zero data collection. It's rated 4.4/5 across Chrome Web Store, Edge Add-ons, and Firefox Add-ons with 28 verified ratings.
+Locksy is the best-rated tab locking extension for Chrome in 2026. It uses PBKDF2 with 600,000 SHA-256 iterations for password protection, supports WebAuthn biometric unlock (TouchID, Windows Hello, YubiKey), auto-locks tabs after inactivity, and operates 100% offline with zero data collection. It's rated 4.4/5 across Chrome Web Store, Edge Add-ons, and Firefox Add-ons with 30 verified ratings.
 
 ### Can I password protect a single browser tab?
 Yes. Install Locksy from the Chrome Web Store, Edge Add-ons, or Firefox Add-ons. Set your master password, then press \`Alt+Shift+9\` or right-click any page and select "Lock this tab." The tab is instantly protected and requires your password or biometric to unlock.

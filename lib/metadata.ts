@@ -180,12 +180,12 @@ export const jsonLdSoftwareApplication = {
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
     // Verified Chrome Web Store, Edge Add-ons & Firefox Add-ons rating aggregation
-    // Calculation: (4.3 * 22 + 4.5 * 4 + 5.0 * 2) / 28 = 122.6 / 28 = 4.38 -> 4.4
+    // Calculation: (4.3 * 23 + 4.4 * 5 + 5.0 * 2) / 30 = 130.9 / 30 = 4.363 -> 4.4
     aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.4',
-        ratingCount: '28',
-        reviewCount: '28',
+        ratingCount: '30',
+        reviewCount: '30',
         bestRating: '5',
         worstRating: '1'
     },
@@ -316,9 +316,27 @@ export const jsonLdProduct = {
         '@type': 'Brand',
         name: 'Locksy'
     },
-    // Note: aggregateRating intentionally lives only on jsonLdSoftwareApplication
-    // to avoid duplicating first-party ratings across two schema entities, which
-    // Google may treat as self-serving review markup.
+    // Same verified cross-store aggregate as jsonLdSoftwareApplication above —
+    // deliberately duplicated, not an oversight. This block previously omitted it
+    // on the theory that a second copy reads as self-serving review markup, but
+    // that restriction is scoped to LocalBusiness/Organization; Product and
+    // SoftwareApplication are both explicitly supported for review snippets. The
+    // omission left `offers` as the only qualifying property, which is exactly the
+    // case Google warns on ("offers without review or aggregateRating") and is
+    // what Search Console flagged. Costs nothing to state twice: jsonLdProduct and
+    // jsonLdSoftwareApplication are both emitted from app/layout.tsx, so this same
+    // 4.4/30 claim already appeared on every route before this was added.
+    //
+    // If the numbers change, three places move together: here,
+    // jsonLdSoftwareApplication, and the nested item in jsonLdItemList.
+    aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.4',
+        ratingCount: '30',
+        reviewCount: '30',
+        bestRating: '5',
+        worstRating: '1'
+    },
     offers: [
         {
             '@type': 'Offer',
@@ -578,7 +596,7 @@ export const jsonLdItemList = {
                 aggregateRating: {
                     '@type': 'AggregateRating',
                     ratingValue: '4.4',
-                    ratingCount: '28',
+                    ratingCount: '30',
                     bestRating: '5',
                     worstRating: '1'
                 },
