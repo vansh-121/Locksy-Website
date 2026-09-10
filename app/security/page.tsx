@@ -7,7 +7,9 @@ import { generatePageMetadata, generateBreadcrumbSchema } from "@/lib/metadata"
 import Link from 'next/link'
 
 export const metadata: Metadata = generatePageMetadata(
-  "Locksy Security Architecture & Cryptographic Deep Dive",
+  // "Locksy" dropped from the front — the layout's title template re-adds it,
+  // which pushed this to 67 chars.
+  "Security Architecture & Cryptographic Deep Dive",
   "Explore Locksy's local-first security architecture: PBKDF2 password hashing with 600,000 iterations, constant-time verification, zero server communication, WebAuthn biometric unlock, and defense-in-depth isolation.",
   "/security",
   [

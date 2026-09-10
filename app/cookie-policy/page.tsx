@@ -3,7 +3,8 @@ import { generateBreadcrumbSchema } from "@/lib/metadata"
 import CookiePolicyClient from "./cookie-policy-client"
 
 export const metadata: Metadata = {
-    title: 'Cookie Policy - How We Use Cookies | Locksy',
+    // See app/privacy-policy/page.tsx — layout's title template appends the brand.
+    title: 'Cookie Policy - How We Use Cookies',
     description: 'Read Locksy\'s cookie policy. Understand what cookies and similar technologies our website uses, why we use them, and how you can control them.',
     keywords: 'locksy cookie policy, cookies, website cookies, tracking technologies, cookie consent, privacy',
     alternates: {

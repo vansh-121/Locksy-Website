@@ -9,7 +9,9 @@ import Link from 'next/link'
 import { Shield, Key, Eye, Lock, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = generatePageMetadata(
-  "Free Browser Security & Privacy Tools Hub – Locksy",
+  // Brand omitted — generatePageMetadata feeds this into `title`, which the root
+  // layout templates to "%s | Locksy". Was "... Hub – Locksy | Locksy".
+  "Free Browser Security & Privacy Tools",
   "Free browser security tools: Password Strength Checker, Password Generator, Browser Privacy Score Inspector, and Email Breach Checker.",
   "/tools",
   [

@@ -3,7 +3,8 @@ import { generateBreadcrumbSchema } from "@/lib/metadata"
 import TermsOfServiceClient from "./terms-client"
 
 export const metadata: Metadata = {
-    title: 'Terms of Service - Usage Guidelines | Locksy',
+    // See app/privacy-policy/page.tsx — layout's title template appends the brand.
+    title: 'Terms of Service - Usage Guidelines',
     description: 'Read the Terms of Service for the Locksy browser extension and website. Understand your rights, responsibilities, and our commitment to a fair, free, and transparent service.',
     keywords: 'locksy terms of service, browser extension terms, locksy terms and conditions, usage policy, free extension terms, locksy EULA',
     alternates: {

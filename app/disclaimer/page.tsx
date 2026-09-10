@@ -3,7 +3,8 @@ import { generateBreadcrumbSchema } from "@/lib/metadata"
 import DisclaimerClient from "./disclaimer-client"
 
 export const metadata: Metadata = {
-    title: 'Disclaimer - Important Legal Information | Locksy',
+    // See app/privacy-policy/page.tsx — layout's title template appends the brand.
+    title: 'Disclaimer - Important Legal Information',
     description: 'Read the disclaimer for the Locksy browser extension and website. Understand the limitations of liability, accuracy of information, and third-party links policy.',
     keywords: 'locksy disclaimer, legal disclaimer, browser extension disclaimer, liability limitations, third-party links',
     alternates: {

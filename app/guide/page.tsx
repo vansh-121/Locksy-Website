@@ -16,7 +16,10 @@ import GuideToc from "./guide-toc"
 import GuideBlocks from "./guide-blocks"
 
 export const metadata: Metadata = generatePageMetadata(
-  "Locksy User Guide — How to Lock, Auto-Lock & Unlock Browser Tabs",
+  // 77 chars with the layout's " | Locksy" template — the longest on the site
+  // and well past Google's truncation point. "Locksy" dropped from the front
+  // since the template re-adds it; "Unlock" dropped as redundant with "Lock".
+  "User Guide — How to Lock & Auto-Lock Browser Tabs",
   "Step-by-step guide to every Locksy feature: locking tabs, keyboard shortcuts, auto-lock timers, domain locks, biometric unlock, stealth mode and troubleshooting. Free PDF download.",
   "/guide",
   [

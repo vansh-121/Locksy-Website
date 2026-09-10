@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { generatePageMetadata } from '@/lib/metadata'
+import { generatePageMetadata, generateBreadcrumbSchema } from '@/lib/metadata'
 import { filteredBlogPosts, getAllCategories, getAllTags } from '@/lib/blog-data'
 import { BlogClient } from './blog-client'
 
@@ -68,8 +68,22 @@ export default function BlogPage() {
         })),
     }
 
+    // /blog was one of only five built pages with no BreadcrumbList (the other
+    // four are the homepage, which doesn't need one, 404/500, and the noindexed
+    // /verify-badge). Every individual post already emits one; the listing page
+    // they all sit under did not, which left a hole in the hierarchy Google
+    // reads when picking sitelink candidates.
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'Blog', url: '/blog' },
+    ])
+
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd).replace(/</g, '\\u003c') }}

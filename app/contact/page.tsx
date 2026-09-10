@@ -3,7 +3,9 @@ import { generateBreadcrumbSchema } from "@/lib/metadata"
 import ContactClient from "./contact-client"
 
 export const metadata: Metadata = {
-    title: 'Contact Us - Get Support for Locksy | Browser Tab Security',
+    // Trailing "| Browser Tab Security" dropped — 67 chars with the layout's
+    // " | Locksy" template, past where Google truncates.
+    title: 'Contact Us - Get Support for Locksy',
     description: 'Contact the Locksy team for support, report bugs, request features, or ask questions about our browser tab security extension. We\'re here to help!',
     keywords: 'contact locksy, locksy support, browser extension help, report bug, feature request, customer support',
     alternates: {

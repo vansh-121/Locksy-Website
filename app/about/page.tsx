@@ -4,7 +4,10 @@ import { filteredBlogPosts } from "@/lib/blog-data"
 import AboutClient from "./about-client"
 
 export const metadata: Metadata = {
-    title: 'About Locksy - Our Mission & Story | Browser Tab Security',
+    // Trailing "| Browser Tab Security" dropped: with the layout's " | Locksy"
+    // template this ran to 70 chars and Google truncated it. Matches the
+    // openGraph title below, which was already the shorter form.
+    title: 'About Locksy - Our Mission & Story',
     description: 'Learn about Locksy, the browser extension that protects your tabs with military-grade encryption. Discover our mission, values, and the developer behind the project.',
     keywords: 'about locksy, locksy story, browser extension developer, locksy mission, tab locker creator, vansh sethi, tab security, locksy team',
     alternates: {

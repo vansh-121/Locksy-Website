@@ -4,7 +4,9 @@ import type { Metadata } from 'next'
 // the Locksy listing. It carries no editorial content, so it is explicitly kept out
 // of search indexes — otherwise it reads as a thin, outbound-link-only page.
 export const metadata: Metadata = {
-  title: 'Listing Verification – Locksy',
+  // Layout's title template appends " | Locksy"; the brand is omitted here so it
+  // is not stated twice. (Cosmetic on this route — it is noindexed below.)
+  title: 'Listing Verification',
   description: 'Third-party listing verification badge for Locksy.',
   robots: {
     index: false,

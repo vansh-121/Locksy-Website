@@ -5,7 +5,10 @@ import fs from "fs"
 import path from "path"
 
 export const metadata: Metadata = {
-    title: 'Privacy Policy - Your Data is 100% Private | Locksy',
+    // No "| Locksy" suffix here — app/layout.tsx applies `template: '%s | Locksy'`
+    // to this field, so writing the brand in produces "... | Locksy | Locksy".
+    // openGraph/twitter titles below are NOT templated, so they keep the brand.
+    title: 'Privacy Policy - Your Data is 100% Private',
     description: 'Read Locksy\'s privacy policy. We collect ZERO personal data. Your master password is never stored — only a PBKDF2-derived hash. 100% offline, completely private browser tab security.',
     keywords: 'locksy privacy policy, browser extension privacy, zero data collection, offline password hashing, PBKDF2 password hashing, privacy-first, no tracking',
     alternates: {

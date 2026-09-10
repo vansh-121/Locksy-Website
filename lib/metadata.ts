@@ -126,20 +126,23 @@ export const metadata: Metadata = {
     }
 }
 
+// Feeds the site name shown in search results. Keep this — Google's own note
+// when retiring the sitelinks search box was that site names rely on a variation
+// of WebSite structured data that "continues to be supported".
+//
+// The SearchAction/potentialAction that used to sit here was removed: it targeted
+// `/?s={search_term_string}`, a URL this site never handled (blog search is
+// client-side state in app/blog/blog-client.tsx and reads no query param), and the
+// feature it fed — the sitelinks search box — was switched off by Google on
+// 2024-11-21. Leaving it would have been harmless per Google, but it was an
+// unverifiable claim about a feature that doesn't exist, and those are exactly what
+// the AdSense review flagged last time.
 export const jsonLdWebsite = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: siteName,
     url: siteUrl,
-    description: siteDescription,
-    potentialAction: {
-        '@type': 'SearchAction',
-        target: {
-            '@type': 'EntryPoint',
-            urlTemplate: `${siteUrl}/?s={search_term_string}`
-        },
-        'query-input': 'required name=search_term_string'
-    }
+    description: siteDescription
 }
 
 export const jsonLdOrganization = {

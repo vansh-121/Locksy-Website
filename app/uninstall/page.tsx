@@ -4,7 +4,10 @@ import { guide, GUIDE_PDF_PATH } from "@/lib/guide-data"
 import UninstallClient from "./uninstall-client"
 
 export const metadata: Metadata = {
-    title: 'Locksy Removed — Your Tabs Are Unprotected | Reinstall Locksy',
+    // 70 chars with the layout's " | Locksy" template, and "Locksy" appeared
+    // three times over. Shortened, but the reinstall CTA is deliberately kept —
+    // this page's job is winning the user back, not just describing itself.
+    title: 'Locksy Removed — Reinstall to Protect Your Tabs',
     description: 'Locksy has been removed from your browser and your tabs are no longer protected. Tell us what went wrong, or put the locks back in thirty seconds.',
     keywords: 'uninstall locksy, remove locksy extension, reinstall locksy, locksy feedback, browser extension uninstall',
     alternates: {
