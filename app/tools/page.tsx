@@ -3,6 +3,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
+import ProUpgradeCard from "@/components/pro-upgrade-card"
 import { generatePageMetadata, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/metadata"
 import Link from 'next/link'
 import { Shield, Key, Eye, Lock, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react'
@@ -278,6 +279,13 @@ export default function ToolsHubPage() {
 
         </div>
       </main>
+
+      {/* Free tool -> paid extension. Same card as /uninstall and /guide, with an
+          eyebrow that bridges from "these pages were free" to the price. */}
+      <ProUpgradeCard
+        eyebrow="These tools are free. So is most of Locksy."
+        className="relative overflow-hidden border-t border-border/60 py-16 md:py-20"
+      />
 
       <SupportChatCTA />
       <CTASection />

@@ -4,6 +4,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
+import ProUpgradeCard from "@/components/pro-upgrade-card"
 import {
   generatePageMetadata,
   generateBreadcrumbSchema,
@@ -154,6 +155,13 @@ export default function GuidePage() {
             </div>
           </div>
         </div>
+
+        {/* Straight after the last chapter — including "What's free and what's
+            Pro", so the reader has just been told exactly what the limits are. */}
+        <ProUpgradeCard
+          eyebrow="You've just read what Pro unlocks"
+          className="relative overflow-hidden pt-16 md:pt-20"
+        />
 
         {/* Closing CTA — full width, outside the two-column grid */}
         <div className="mx-auto max-w-2xl px-4 pt-16 md:px-6">

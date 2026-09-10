@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import ProUpgradeCard from "@/components/pro-upgrade-card"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
 import Link from 'next/link'
@@ -337,6 +338,13 @@ export default function PasswordGeneratorClient() {
 
         </div>
       </main>
+
+      {/* Free tool -> paid extension. Same card as /uninstall and /guide, with an
+          eyebrow that bridges from "this page was free" to the price. */}
+      <ProUpgradeCard
+        eyebrow="This tool is free. So is most of Locksy."
+        className="relative overflow-hidden border-t border-border/60 py-16 md:py-20"
+      />
 
       <SupportChatCTA />
       <CTASection />
