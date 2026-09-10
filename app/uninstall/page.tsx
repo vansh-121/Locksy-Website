@@ -4,7 +4,7 @@ import { guide, GUIDE_PDF_PATH } from "@/lib/guide-data"
 import UninstallClient from "./uninstall-client"
 
 export const metadata: Metadata = {
-    title: 'Locksy Removed — Your Tabs Are Unlocked | Reinstall Locksy',
+    title: 'Locksy Removed — Your Tabs Are Unprotected | Reinstall Locksy',
     description: 'Locksy has been removed from your browser and your tabs are no longer protected. Tell us what went wrong, or put the locks back in thirty seconds.',
     keywords: 'uninstall locksy, remove locksy extension, reinstall locksy, locksy feedback, browser extension uninstall',
     alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: 'https://www.locksy.dev/uninstall',
         siteName: 'Locksy',
-        title: 'Locksy Removed — Your Tabs Are Unlocked',
+        title: 'Locksy Removed — Your Tabs Are Unprotected',
         description: 'Locksy has been removed from your browser. Tell us what went wrong, or put the locks back in thirty seconds.',
         images: [
             {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Locksy Removed — Your Tabs Are Unlocked',
+        title: 'Locksy Removed — Your Tabs Are Unprotected',
         description: 'Tell us what went wrong, or put the locks back in thirty seconds.',
         images: ['https://www.locksy.dev/web-app-manifest-512x512.png'],
         creator: '@locksy',

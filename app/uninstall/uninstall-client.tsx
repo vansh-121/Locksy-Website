@@ -289,7 +289,7 @@ export default function UninstallClient({
 
     const openChat = () => {
         if (typeof window !== "undefined" && (window as any).$crisp) {
-            ;(window as any).$crisp.push(["do", "chat:open"])
+            ; (window as any).$crisp.push(["do", "chat:open"])
         }
     }
 
@@ -331,9 +331,9 @@ export default function UninstallClient({
                             <h1 className="text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
                                 Your tabs are{" "}
                                 <span className="bg-gradient-to-r from-rose-500 to-red-600 bg-clip-text text-transparent">
-                                    unlocked
+                                    unprotected
                                 </span>{" "}
-                                right now.
+                                now.
                             </h1>
                             <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
                                 Every tab you were protecting — banking, email, work — is open to
@@ -462,18 +462,16 @@ export default function UninstallClient({
                                             type="button"
                                             onClick={() => toggle(reason.id)}
                                             aria-pressed={on}
-                                            className={`group flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all duration-300 ${
-                                                on
+                                            className={`group flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all duration-300 ${on
                                                     ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
                                                     : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-                                            }`}
+                                                }`}
                                         >
                                             <span
-                                                className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-colors ${
-                                                    on
+                                                className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-colors ${on
                                                         ? "bg-gradient-to-br from-primary to-secondary text-white"
                                                         : "bg-muted text-muted-foreground group-hover:text-primary"
-                                                }`}
+                                                    }`}
                                             >
                                                 <Icon className="h-5 w-5" />
                                             </span>
@@ -481,9 +479,8 @@ export default function UninstallClient({
                                                 {reason.label}
                                             </span>
                                             <span
-                                                className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all ${
-                                                    on ? "border-primary bg-primary" : "border-border"
-                                                }`}
+                                                className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all ${on ? "border-primary bg-primary" : "border-border"
+                                                    }`}
                                             >
                                                 {on && <CheckCircle2 className="h-4 w-4 text-white" />}
                                             </span>
@@ -900,9 +897,8 @@ export default function UninstallClient({
                                     href={b.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`group/btn flex items-center justify-center gap-3 rounded-2xl bg-white px-5 py-4 font-bold text-primary-on-light shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-                                        browser?.key === b.key ? "ring-4 ring-white/60" : ""
-                                    }`}
+                                    className={`group/btn flex items-center justify-center gap-3 rounded-2xl bg-white px-5 py-4 font-bold text-primary-on-light shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${browser?.key === b.key ? "ring-4 ring-white/60" : ""
+                                        }`}
                                 >
                                     <img src={b.icon} alt="" aria-hidden="true" className="h-6 w-6" />
                                     <span>{b.name}</span>
