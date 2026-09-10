@@ -1,10 +1,14 @@
 import Link from "next/link"
 import {
+    Blend,
     Camera,
     Clock,
     EyeOff,
     Fingerprint,
     Globe,
+    KeyRound,
+    LayoutDashboard,
+    ShieldAlert,
     ShieldCheck,
     Sparkles,
     Zap,
@@ -13,17 +17,26 @@ import {
 import { PRO_CHECKOUT_URL, PRO_PRICE } from "@/lib/pro"
 
 /**
- * The six Pro unlocks that map onto a free-tier limit someone can actually
- * feel. The `was` line is the limit they hit — struck through, because that's
- * the thing the upgrade removes. Full feature list lives in components/pricing.tsx.
+ * Every Pro unlock that maps onto a free-tier limit someone can actually feel,
+ * ordered so the `was` column tells its own story: the caps that disappear
+ * first, then the caps that get raised, then what free never had at all.
+ *
+ * Both label and `was` trace to the two lists in components/pricing.tsx — if a
+ * free limit changes there, it has to change here. The only Pro entry
+ * deliberately left out is Master Recovery Key Backup, because the free tier
+ * gets a recovery key too and it isn't an honest differentiator.
  */
 const PRO_UNLOCKS = [
     { icon: Globe, label: "Unlimited domain locks", was: "3 on free" },
     { icon: Fingerprint, label: "Unlimited biometric unlocks", was: "5 a day on free" },
     { icon: Camera, label: "Unlimited intruder snapshots", was: "3 on free" },
+    { icon: KeyRound, label: "1-click lock & unlock all", was: "3 total uses on free" },
     { icon: Clock, label: "Custom auto-lock timers", was: "10 minutes on free" },
+    { icon: Blend, label: "Full privacy blur manager", was: "Basic blur on free" },
     { icon: EyeOff, label: "Stealth-mode disguise", was: "Not on free" },
     { icon: Zap, label: "Startup session lock", was: "Not on free" },
+    { icon: ShieldAlert, label: "Custom lock-screen messages", was: "Not on free" },
+    { icon: LayoutDashboard, label: "Weekly privacy reports", was: "Not on free" },
 ]
 
 interface ProUpgradeCardProps {
