@@ -452,7 +452,7 @@
             },
             {
               "q": "How do I remove Locksy?",
-              "a": "Right-click the Locksy icon and choose Remove, or use your browser's extension settings. Unlock any locked tabs first so you don't lose your place. There's a per-browser walkthrough at locksy.dev/uninstall."
+              "a": "Right-click the Locksy icon and choose Remove, or use your browser's extension settings. Unlock any locked tabs first so you don't lose your place — locked tabs can't be reopened once the extension is gone. If something is wrong rather than unwanted, the fixes above are usually quicker than removing and reinstalling."
             }
           ]
         }

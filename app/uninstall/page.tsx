@@ -4,9 +4,9 @@ import { guide, GUIDE_PDF_PATH } from "@/lib/guide-data"
 import UninstallClient from "./uninstall-client"
 
 export const metadata: Metadata = {
-    title: 'Uninstall Locksy - We\'re Sorry to See You Go | Browser Tab Security',
-    description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve. Learn how to uninstall the extension and explore alternatives if needed.',
-    keywords: 'uninstall locksy, remove locksy extension, locksy feedback, browser extension uninstall',
+    title: 'Locksy Removed — Your Tabs Are Unlocked | Reinstall Locksy',
+    description: 'Locksy has been removed from your browser and your tabs are no longer protected. Tell us what went wrong, or put the locks back in thirty seconds.',
+    keywords: 'uninstall locksy, remove locksy extension, reinstall locksy, locksy feedback, browser extension uninstall',
     alternates: {
         canonical: 'https://www.locksy.dev/uninstall',
     },
@@ -15,28 +15,29 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: 'https://www.locksy.dev/uninstall',
         siteName: 'Locksy',
-        title: 'Uninstall Locksy - We\'re Sorry to See You Go',
-        description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve our browser tab security extension.',
+        title: 'Locksy Removed — Your Tabs Are Unlocked',
+        description: 'Locksy has been removed from your browser. Tell us what went wrong, or put the locks back in thirty seconds.',
         images: [
             {
                 url: 'https://www.locksy.dev/web-app-manifest-512x512.png',
                 width: 512,
                 height: 512,
-                alt: 'Uninstall Locksy',
+                alt: 'Reinstall Locksy',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Uninstall Locksy - We\'re Sorry to See You Go',
-        description: 'Uninstalling Locksy? We\'d love to hear your feedback to help us improve.',
+        title: 'Locksy Removed — Your Tabs Are Unlocked',
+        description: 'Tell us what went wrong, or put the locks back in thirty seconds.',
         images: ['https://www.locksy.dev/web-app-manifest-512x512.png'],
         creator: '@locksy',
     },
     // This page is listed in app/sitemap.ts, so it must not be noindexed — a
     // sitemap entry marked noindex is reported as an error in Search Console.
-    // It now carries a full per-browser removal guide, which is genuine search
-    // intent ("how to uninstall Locksy"), so indexing is the right resolution.
+    // The extension redirects here after removal, so most traffic arrives
+    // directly rather than from search; indexing simply keeps the sitemap and
+    // the robots directives consistent.
     robots: {
         index: true,
         follow: true,

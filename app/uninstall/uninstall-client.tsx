@@ -1,91 +1,204 @@
 "use client"
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Textarea } from "@/components/ui/textarea"
-import { Shield, Lock, Zap, Heart, ArrowRight, CheckCircle2, Download, Star, Frown, BookOpen, Lightbulb } from "lucide-react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
+import {
+    AlertTriangle,
+    ArrowLeftRight,
+    ArrowRight,
+    BellOff,
+    BookOpen,
+    Camera,
+    CheckCircle2,
+    Clock,
+    Download,
+    EyeOff,
+    Fingerprint,
+    Gauge,
+    Github,
+    Globe,
+    HelpCircle,
+    Lock,
+    LockOpen,
+    Mail,
+    MessageCircle,
+    RotateCcw,
+    ShieldCheck,
+    ShieldOff,
+    Sparkles,
+    Star,
+    Zap,
+} from "lucide-react"
+import { Textarea } from "@/components/ui/textarea"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import WhatsAppIcon from "@/components/whatsapp-icon"
 import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
 
-const PRIMARY_BROWSERS = [
+const PRO_CHECKOUT_URL =
+    "https://buy.polar.sh/polar_cl_h8dabKldTUY7gf2g9MfFicCSIn0Ghc34SadGc3xl1cI"
+
+const BROWSERS = [
     {
+        key: "chrome",
         name: "Chrome",
         icon: "/browsers/chrome.png",
         url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
     },
     {
+        key: "edge",
         name: "Edge",
         icon: "/browsers/edge.png",
         url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
     },
     {
+        key: "firefox",
         name: "Firefox",
         icon: "/browsers/firefox.png",
         url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/",
     },
-]
+] as const
 
-// Each reason someone might leave, paired with the fix for it.
+type Browser = (typeof BROWSERS)[number]
+
+// Which store to send this visitor to, so the hero can offer one button instead
+// of three. Chromium forks (Brave, Opera, Vivaldi) all install from the Chrome
+// Web Store, so falling through to "chrome" still sends them to the right place.
+// Anything unrecognised returns null and the hero degrades to the browser picker
+// further down the page — which is also what a visitor without JS gets.
+function detectBrowser(): Browser | null {
+    if (typeof navigator === "undefined") return null
+    const ua = navigator.userAgent
+    const key = /Edg\//.test(ua)
+        ? "edge"
+        : /Firefox\//.test(ua)
+            ? "firefox"
+            : /Chrome\//.test(ua)
+                ? "chrome"
+                : null
+    return BROWSERS.find((b) => b.key === key) ?? null
+}
+
+// Every reason someone leaves, paired with the argument against it.
 //
-// The point of the pairing is retention: the single biggest reason people
-// uninstall an extension is not knowing it already does the thing they wanted.
-// When a reason is ticked, its `fix` and the exact guide chapter that covers it
-// appear inline — so the feedback form answers the complaint instead of just
-// recording it. `chapter` values are chapter ids from lib/guide-content.json.
+// This is the retention engine of the page. The visitor has *already*
+// uninstalled by the time this loads, so an answer can't be an instruction —
+// it has to be a rebuttal specific enough to be surprising. Vague reassurance
+// ("we take privacy seriously") changes nobody's mind; naming the exact limit,
+// the exact shortcut or the exact chapter does.
+//
+// `chapter` values are chapter ids from lib/guide-content.json.
 const REASONS = [
     {
-        label: "It didn't work as expected",
-        fix: "Most \"it just didn't work\" reports come down to one of a handful of causes — a permission the browser never granted, or a page type no extension is allowed to touch.",
+        id: "broken",
+        icon: AlertTriangle,
+        label: "It didn't work properly",
+        headline: "Nine times out of ten, it's one permission.",
+        body: "Locksy can't touch a tab the browser never granted it access to — and every browser silently withholds that on its own internal pages, its extension store, and built-in PDF viewers. Everywhere else it's a single toggle in your extension settings.",
         chapter: "troubleshooting",
         chapterTitle: "When something isn't working",
     },
     {
-        label: "Too many notifications/interruptions",
-        fix: "Auto-lock is fully configurable. You can raise the idle timer, limit locking to specific sites, or switch it off entirely and lock only by hand.",
+        id: "noisy",
+        icon: BellOff,
+        label: "Too many interruptions",
+        headline: "Auto-lock has a dial. Yours was turned up.",
+        body: "You can stretch the idle timer, limit locking to just the sites that actually matter, or switch auto-lock off completely and lock by hand with Alt+Shift+9. Most people who found it noisy never opened that panel.",
         chapter: "automatic",
         chapterTitle: "Lock tabs automatically",
     },
     {
-        label: "Didn't understand how to use it",
-        fix: "That's on us, not you. Locking your first tab takes about thirty seconds once you've seen it done — the guide shows each step with screenshots.",
+        id: "confusing",
+        icon: HelpCircle,
+        label: "I couldn't figure it out",
+        headline: "That's our fault, not yours.",
+        body: "Locking a tab takes about thirty seconds once you've seen it done once. We wrote a full illustrated guide precisely because too many people hit this exact wall — chapter 2 is the only one you need.",
         chapter: "first-lock",
         chapterTitle: "Lock your first tab",
     },
     {
-        label: "Performance issues",
-        fix: "Locksy runs entirely on your device with no cloud calls, so it should be invisible. If it wasn't, that's a bug worth reporting — and usually a fixable one.",
+        id: "slow",
+        icon: Gauge,
+        label: "It slowed my browser down",
+        headline: "Locksy makes zero network calls. Ever.",
+        body: "Everything runs locally on your device, so there is nothing for it to wait on. If your browser genuinely felt heavier, that's a real bug and worth naming the sites — those get fixed fast.",
         chapter: "troubleshooting",
         chapterTitle: "When something isn't working",
     },
     {
-        label: "Privacy concerns",
-        fix: "Nothing you lock ever leaves your computer. There's no account, no server, and no analytics on your tabs — the guide spells out exactly what is stored and where.",
+        id: "privacy",
+        icon: EyeOff,
+        label: "I didn't trust it with my data",
+        headline: "We never had your data to begin with.",
+        body: "No account, no server, no analytics on your tabs. Your master password and encryption keys never leave your device — the guide's final chapter lists exactly what is stored and where, in plain English.",
         chapter: "privacy",
         chapterTitle: "How your data is handled",
     },
     {
-        label: "Switching to another tool",
-        fix: "Worth a look before you go: domain locking, fingerprint unlock, stealth mode and intruder snapshots are all in Locksy, and most of them are free.",
+        id: "limits",
+        icon: Lock,
+        label: "I hit the free limits",
+        headline: "Pro lifts every one of them. $2.99, once.",
+        body: "Three domain locks becomes unlimited. Five biometric unlocks a day becomes unlimited. Three intruder snapshots becomes unlimited. Plus stealth mode, custom timers and 1-click unlock all. One payment, no subscription, yours forever.",
+        chapter: "free-vs-pro",
+        chapterTitle: "What's free and what's Pro",
+        pro: true,
+    },
+    {
+        id: "switching",
+        icon: ArrowLeftRight,
+        label: "I found something better",
+        headline: "Check the new one does all four of these.",
+        body: "Whole-domain locking, fingerprint or face unlock, stealth-mode disguise, and a webcam snapshot of whoever tried to get in. Most tab lockers manage the first. Locksy does all four, and the majority of them free.",
         chapter: "free-vs-pro",
         chapterTitle: "What's free and what's Pro",
     },
     {
-        label: "No longer needed",
-        fix: null,
+        id: "done",
+        icon: CheckCircle2,
+        label: "I just don't need it anymore",
+        headline: "Fair enough — thanks for giving it a run.",
+        body: "If you ever share a laptop, hand your screen to someone, or work somewhere public again, you know where to find us. No hard feelings either way.",
         chapter: null,
         chapterTitle: null,
     },
+] as const
+
+// The three tabs in the hero mockup — the everyday ones people actually lock.
+const EXPOSED_TABS = [
+    { label: "Online Banking", host: "your-bank.com" },
+    { label: "Inbox — Personal", host: "mail.google.com" },
+    { label: "Work Dashboard", host: "app.yourcompany.com" },
 ]
 
-// Reason labels contain spaces and a slash, neither of which is valid in a DOM
-// id, so the checkbox/label pairing gets a slugified one.
-const reasonId = (label: string) =>
-    `reason-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`
+const PROOF = [
+    {
+        quote: "So now I do not have to worry about handing over my laptop :)",
+        author: "Devansh Varshney",
+        source: "Chrome Web Store",
+    },
+    {
+        quote:
+            "Usually the extension lets you right in on other tab lockers, but this one always asks for your pin, making it my favorite one.",
+        author: "Anthony Moeller",
+        source: "Chrome Web Store",
+    },
+    {
+        quote:
+            "Domain lock feature is really helpful for shared computers. Peace of mind knowing my personal tabs stay private.",
+        author: "Avneet Singh",
+        source: "Chrome Web Store",
+    },
+]
+
+const PRO_UNLOCKS = [
+    { icon: Globe, label: "Unlimited domain locks", was: "3 on free" },
+    { icon: Fingerprint, label: "Unlimited biometric unlocks", was: "5 a day on free" },
+    { icon: Camera, label: "Unlimited intruder snapshots", was: "3 on free" },
+    { icon: Clock, label: "Custom auto-lock timers", was: "10 minutes on free" },
+    { icon: EyeOff, label: "Stealth-mode disguise", was: "Not on free" },
+    { icon: Zap, label: "Startup session lock", was: "Not on free" },
+]
 
 export default function UninstallClient({
     chapterCount,
@@ -94,54 +207,51 @@ export default function UninstallClient({
     chapterCount: number
     guidePdfPath: string
 }) {
-    const [selectedReasons, setSelectedReasons] = useState<string[]>([])
+    const [browser, setBrowser] = useState<Browser | null>(null)
+    const [selected, setSelected] = useState<string[]>([])
     const [feedback, setFeedback] = useState("")
     const [submitted, setSubmitted] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState("")
 
-    const handleReasonToggle = (reason: string) => {
-        setSelectedReasons((prev) =>
-            prev.includes(reason) ? prev.filter((r) => r !== reason) : [...prev, reason]
-        )
-    }
+    // Detection has to happen after mount: reading navigator during render would
+    // make the server and client markup disagree.
+    useEffect(() => {
+        setBrowser(detectBrowser())
+    }, [])
 
-    // Fixes for whatever has been ticked so far, kept in the order the reasons
-    // are listed rather than the order they were clicked, so the panel doesn't
-    // reshuffle itself as boxes are checked.
-    const suggestedFixes = REASONS.filter(
-        (reason) => reason.fix && selectedReasons.includes(reason.label)
-    )
+    const toggle = (id: string) =>
+        setSelected((prev) => (prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]))
+
+    // Rebuttals for whatever is ticked, in the order the reasons are listed
+    // rather than the order they were clicked, so the panel doesn't reshuffle
+    // itself as more boxes go on.
+    const answers = REASONS.filter((r) => selected.includes(r.id))
+    const showsPro = answers.some((r) => "pro" in r && r.pro)
 
     const handleSubmit = async () => {
         setIsSubmitting(true)
         setError("")
 
         try {
-            // Call Web3Forms directly (they're designed for client-side use)
+            // Web3Forms is designed for client-side use, so this posts directly.
             const response = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
                 body: JSON.stringify({
                     access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
                     subject: "Locksy Extension Uninstall Feedback",
                     from_name: "Locksy Uninstall Page",
-                    reasons: selectedReasons.join(", "),
+                    reasons: answers.map((r) => r.label).join(", ") || "None selected",
+                    browser: browser?.name ?? "Unknown",
                     feedback: feedback || "No additional feedback provided",
                     timestamp: new Date().toISOString(),
                 }),
             })
 
             const data = await response.json()
-
-            if (data.success) {
-                setSubmitted(true)
-            } else {
-                setError("Failed to submit feedback. Please try again.")
-            }
+            if (data.success) setSubmitted(true)
+            else setError("Failed to submit feedback. Please try again.")
         } catch (err) {
             setError("Network error. Please check your connection and try again.")
             console.error("Submission error:", err)
@@ -150,675 +260,670 @@ export default function UninstallClient({
         }
     }
 
-    return (
-        <>
-            <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
+    const openChat = () => {
+        if (typeof window !== "undefined" && (window as any).$crisp) {
+            ;(window as any).$crisp.push(["do", "chat:open"])
+        }
+    }
 
-            {/* Header */}
+    // Reused by the hero, the rebuttal panel and the thank-you state.
+    const restoreHref = browser ? browser.url : "#restore"
+    const restoreProps = browser
+        ? ({ target: "_blank", rel: "noopener noreferrer" } as const)
+        : ({} as const)
+
+    return (
+        <div className="min-h-screen bg-background">
             <Header />
 
-            <main className="relative max-w-6xl mx-auto px-4 md:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
-                {/* Hero Section */}
-                <div className="text-center space-y-6 mb-16">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg mb-4">
-                        <Frown className="h-10 w-10 text-white" />
-                    </div>
-                    <h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                        We're Sorry to See You Go
-                    </h1>
-                    <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-                        Your feedback helps us build a better Locksy for everyone
-                    </p>
-
-                    {/* Quick Reinstall Option */}
-                    <div className="flex flex-col items-center gap-4 pt-6">
-                        <p className="text-base text-muted-foreground">
-                            Uninstalled by mistake? Changed your mind? No worries!
-                        </p>
-                        <div className="flex flex-wrap justify-center gap-3">
-                            {PRIMARY_BROWSERS.map((browser) => (
-                                <a
-                                    key={browser.name}
-                                    href={browser.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-                                >
-                                    <img
-                                        src={browser.icon}
-                                        alt={browser.name}
-                                        className="h-5 w-5"
-                                    />
-                                    <span>Reinstall for {browser.name}</span>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
+            {/* ══ 1. HERO — the loss, stated as a present-tense fact ═════════ */}
+            <section className="relative overflow-hidden border-b border-border/60 pt-28 pb-16 md:pt-36 md:pb-24">
+                {/* A warm/alarm wash rather than the usual brand violet: this is the
+                    one moment on the site that should feel like something is off. */}
+                <div className="pointer-events-none absolute inset-0">
+                    <div className="absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-orange-500/15 blur-3xl dark:bg-orange-500/20" />
+                    <div className="absolute -bottom-32 right-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl dark:bg-red-500/15" />
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
                 </div>
 
-                {/* Two things worth trying before leaving: the written guide (for
-                    people who bounced off the setup) and the WhatsApp channel (a
-                    way to stay reachable even if they do uninstall). */}
-                <div className="max-w-4xl mx-auto mb-12">
-                    <div className="text-center mb-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-4">
-                            <Lightbulb className="h-4 w-4" />
-                            Two minutes before you go
+                <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+                    {/* Left: the pitch */}
+                    <div className="space-y-8">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-700 backdrop-blur-sm dark:text-orange-300">
+                            <span className="relative flex h-2 w-2">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-75" />
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-500" />
+                            </span>
+                            Locksy has been removed
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold mb-3">Most of this is fixable</h2>
-                        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                            A lot of people uninstall Locksy without ever finding the setting that would
-                            have solved their problem. Here&apos;s the short path to it.
-                        </p>
+
+                        <div className="space-y-5">
+                            <h1 className="text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+                                Your tabs are{" "}
+                                <span className="bg-gradient-to-r from-orange-500 via-red-500 to-rose-500 bg-clip-text text-transparent">
+                                    unlocked
+                                </span>{" "}
+                                right now.
+                            </h1>
+                            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+                                Every tab you were protecting — banking, email, work — is open to
+                                anyone who picks up your device. Putting that back takes about thirty
+                                seconds.
+                            </p>
+                        </div>
+
+                        {/* Primary CTA. Until detection resolves it points at the browser
+                            picker, so it still works with JS disabled. */}
+                        <div className="space-y-4">
+                            <a
+                                href={restoreHref}
+                                {...restoreProps}
+                                className="group inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary px-8 py-5 text-base font-black text-white shadow-xl shadow-primary/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 sm:w-auto sm:text-lg"
+                            >
+                                {browser ? (
+                                    <img src={browser.icon} alt="" aria-hidden="true" className="h-6 w-6" />
+                                ) : (
+                                    <RotateCcw className="h-5 w-5" />
+                                )}
+                                {browser ? `Restore Locksy to ${browser.name}` : "Restore Locksy"}
+                                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                            </a>
+
+                            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+                                <span className="flex items-center gap-1.5">
+                                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-500" />
+                                    Free forever
+                                </span>
+                                <span className="flex items-center gap-1.5">
+                                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-500" />
+                                    No account
+                                </span>
+                                <span className="flex items-center gap-1.5">
+                                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-500" />
+                                    Nothing leaves your device
+                                </span>
+                            </div>
+
+                            <p className="text-sm text-muted-foreground">
+                                {browser ? "Different browser? " : "Chrome, Edge or Firefox — "}
+                                <a href="#restore" className="font-semibold text-primary hover:underline">
+                                    pick yours here
+                                </a>
+                                . Or{" "}
+                                <a href="#why" className="font-semibold text-primary hover:underline">
+                                    tell us what went wrong
+                                </a>{" "}
+                                first.
+                            </p>
+                        </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {/* The guide */}
-                        <div className="flex flex-col rounded-2xl border-2 border-primary/25 bg-gradient-to-br from-primary/5 to-secondary/5 p-6 md:p-7 shadow-lg transition-all hover:border-primary/40 hover:shadow-xl">
-                            <div className="inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-lg mb-5">
-                                <BookOpen className="h-7 w-7 text-white" />
+                    {/* Right: a browser mockup with the locks now open. The abstract
+                        point ("you are less protected") lands harder as a picture of
+                        three familiar tabs sitting wide open. */}
+                    <div className="relative" aria-hidden="true">
+                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/20 to-red-500/20 blur-2xl" />
+                        <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
+                            <div className="flex items-center gap-2 border-b border-border bg-muted/60 px-4 py-3">
+                                <span className="h-3 w-3 rounded-full bg-red-400" />
+                                <span className="h-3 w-3 rounded-full bg-yellow-400" />
+                                <span className="h-3 w-3 rounded-full bg-green-400" />
+                                <span className="ml-3 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                                    <ShieldOff className="h-3.5 w-3.5 text-red-500" />
+                                    Unprotected
+                                </span>
                             </div>
-                            <h3 className="text-xl font-bold mb-2">Read the user guide</h3>
-                            <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                                {chapterCount} short chapters in plain English — setting up, locking your first
-                                tab, shortcuts, automatic locking, and what to do when something misbehaves.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-3 pt-5">
-                                <Link
-                                    href="/guide"
-                                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary to-secondary px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-                                >
-                                    Open the guide
-                                    <ArrowRight className="h-4 w-4" />
-                                </Link>
-                                <a
-                                    href={guidePdfPath}
-                                    download
-                                    className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-border px-5 py-2.5 text-sm font-semibold transition-all duration-300 hover:border-primary/40 hover:bg-accent/50"
-                                >
-                                    <Download className="h-4 w-4" />
-                                    PDF
-                                </a>
-                            </div>
-                        </div>
 
-                        {/* WhatsApp channel */}
-                        <div className="flex flex-col rounded-2xl border-2 border-[#25D366]/30 bg-gradient-to-br from-[#25D366]/5 to-[#128C7E]/5 p-6 md:p-7 shadow-lg transition-all hover:border-[#25D366]/50 hover:shadow-xl">
-                            <div className="inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#25D366] to-[#128C7E] shadow-lg mb-5">
-                                <WhatsAppIcon className="h-7 w-7 text-white" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-2">Join the WhatsApp channel</h3>
-                            <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                                Follow Locksy Support for fixes, new features and quick tips. If you left
-                                because a feature was missing, this is how you&apos;ll hear when it ships —
-                                no account or phone number shared with us.
-                            </p>
-                            <div className="pt-5">
-                                <a
-                                    href={WHATSAPP_CHANNEL_URL}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group/wa inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-lg"
-                                >
-                                    <WhatsAppIcon className="h-4 w-4 transition-transform group-hover/wa:scale-110" />
-                                    Follow on WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Support Section - After Uninstalling */}
-                <div className="max-w-4xl mx-auto mb-12">
-                    <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-60 group-hover:opacity-80 transition-opacity" />
-                        <Card className="relative border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-secondary/5 backdrop-blur-sm shadow-xl">
-                            <CardContent className="pt-8 pb-8">
-                                <div className="text-center space-y-6">
-                                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-secondary shadow-lg mb-4">
-                                        <span className="text-4xl">💬</span>
-                                    </div>
-                                    <h2 className="text-3xl md:text-4xl font-bold">
-                                        Had Issues or Questions?
-                                    </h2>
-                                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                                        We'd love to help! If you uninstalled because of a problem or confusion, <strong className="text-foreground">our support team can assist you.</strong> Many issues have simple solutions, and we're here to make things right.
-                                    </p>
-                                    <div className="bg-background/60 border border-primary/30 rounded-xl p-6 max-w-2xl mx-auto">
-                                        <p className="text-base text-muted-foreground mb-4">
-                                            Reach out for help with:
-                                        </p>
-                                        <div className="grid md:grid-cols-2 gap-3 text-left text-sm">
-                                            <div className="flex items-start gap-2">
-                                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                                                <span>Setup & configuration help</span>
-                                            </div>
-                                            <div className="flex items-start gap-2">
-                                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                                                <span>Troubleshooting issues</span>
-                                            </div>
-                                            <div className="flex items-start gap-2">
-                                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                                                <span>Feature explanations</span>
-                                            </div>
-                                            <div className="flex items-start gap-2">
-                                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                                                <span>Reinstallation guidance</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <Button
-                                        onClick={() => {
-                                            // Trigger chat support
-                                            if (typeof window !== 'undefined' && (window as any).$crisp) {
-                                                (window as any).$crisp.push(['do', 'chat:open']);
-                                            }
-                                        }}
-                                        size="lg"
-                                        className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-base md:text-lg px-6 py-4 md:px-8 md:py-6"
+                            <div className="space-y-3 p-4 sm:p-5">
+                                {EXPOSED_TABS.map((tab) => (
+                                    <div
+                                        key={tab.host}
+                                        className="flex items-center gap-3 rounded-xl border border-red-500/25 bg-red-500/5 px-4 py-3.5"
                                     >
-                                        <span className="mr-2">💬</span>
-                                        <span className="hidden sm:inline">Chat With Support Now</span>
-                                        <span className="sm:hidden">Chat With Support</span>
-                                        <ArrowRight className="ml-2 h-5 w-5" />
-                                    </Button>
-                                    <p className="text-sm text-muted-foreground">
-                                        Usually responds within a few hours • Available 24/7
-                                    </p>
+                                        <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-red-500/15">
+                                            <LockOpen className="h-4 w-4 text-red-500" />
+                                        </div>
+                                        <div className="min-w-0 flex-1">
+                                            <p className="truncate text-sm font-semibold">{tab.label}</p>
+                                            <p className="truncate text-xs text-muted-foreground">{tab.host}</p>
+                                        </div>
+                                        <span className="flex-shrink-0 rounded-full bg-red-500/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
+                                            Open
+                                        </span>
+                                    </div>
+                                ))}
+
+                                <div className="flex items-center gap-2 rounded-xl border border-dashed border-border px-4 py-3 text-xs text-muted-foreground">
+                                    <ShieldOff className="h-4 w-4 flex-shrink-0" />
+                                    No tab protection active on this browser
                                 </div>
-                            </CardContent>
-                        </Card>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                {/* Feedback Section */}
-                <div className="max-w-4xl mx-auto mb-20">
+            {/* ══ 2. WHY — the reason picker that answers back ══════════════ */}
+            <section id="why" className="relative scroll-mt-24 py-20 md:py-28">
+                <div className="mx-auto max-w-5xl px-4 md:px-6">
+                    <div className="mb-12 text-center">
+                        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur-sm">
+                            <MessageCircle className="h-4 w-4" />
+                            One question
+                        </div>
+                        <h2 className="mb-4 text-3xl font-black tracking-tight md:text-5xl">
+                            What made you remove it?
+                        </h2>
+                        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+                            Pick whatever applies. We&apos;ll tell you straight away whether it was
+                            something you could have fixed — and we read every one of these.
+                        </p>
+                    </div>
+
                     {!submitted ? (
-                        <div className="relative group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-                            <Card className="relative border-2 border-primary/20 bg-card/50 backdrop-blur-sm shadow-xl">
-                                <CardContent className="pt-8 pb-8 space-y-8">
-                                    <div className="space-y-4">
-                                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
-                                            <span>💭</span>
-                                            Help Us Improve
-                                        </div>
-                                        <h2 className="text-3xl font-bold">What made you uninstall?</h2>
-                                        <p className="text-lg text-muted-foreground">
-                                            Select all that apply — your feedback is invaluable to us
-                                        </p>
+                        <>
+                            <div className="grid gap-3 sm:grid-cols-2">
+                                {REASONS.map((reason) => {
+                                    const Icon = reason.icon
+                                    const on = selected.includes(reason.id)
+                                    return (
+                                        <button
+                                            key={reason.id}
+                                            type="button"
+                                            onClick={() => toggle(reason.id)}
+                                            aria-pressed={on}
+                                            className={`group flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all duration-300 ${
+                                                on
+                                                    ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
+                                                    : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                                            }`}
+                                        >
+                                            <span
+                                                className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-colors ${
+                                                    on
+                                                        ? "bg-gradient-to-br from-primary to-secondary text-white"
+                                                        : "bg-muted text-muted-foreground group-hover:text-primary"
+                                                }`}
+                                            >
+                                                <Icon className="h-5 w-5" />
+                                            </span>
+                                            <span className="flex-1 text-sm font-semibold leading-snug sm:text-base">
+                                                {reason.label}
+                                            </span>
+                                            <span
+                                                className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all ${
+                                                    on ? "border-primary bg-primary" : "border-border"
+                                                }`}
+                                            >
+                                                {on && <CheckCircle2 className="h-4 w-4 text-white" />}
+                                            </span>
+                                        </button>
+                                    )
+                                })}
+                            </div>
 
-                                        <div className="grid md:grid-cols-2 gap-3 pt-4">
-                                            {REASONS.map((reason) => (
-                                                <div key={reason.label} className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:border-primary/30 hover:bg-accent/50 transition-all cursor-pointer">
-                                                    <Checkbox
-                                                        id={reasonId(reason.label)}
-                                                        checked={selectedReasons.includes(reason.label)}
-                                                        onCheckedChange={() => handleReasonToggle(reason.label)}
-                                                    />
-                                                    <label
-                                                        htmlFor={reasonId(reason.label)}
-                                                        className="text-sm font-medium leading-relaxed cursor-pointer flex-1"
-                                                    >
-                                                        {reason.label}
-                                                    </label>
-                                                </div>
-                                            ))}
-                                        </div>
+                            {/* The rebuttals — the part that actually has to change a mind,
+                                so each one leads with a claim rather than an apology. */}
+                            {answers.length > 0 && (
+                                <div className="mt-10 space-y-4">
+                                    <div className="flex items-center gap-3">
+                                        <div className="h-px flex-1 bg-border" />
+                                        <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                                            {answers.length === 1 ? "Our answer" : "Our answers"}
+                                        </span>
+                                        <div className="h-px flex-1 bg-border" />
+                                    </div>
 
-                                        {/* Answer the complaint on the spot, before the form is even
-                                            submitted — with a link straight to the chapter that covers it. */}
-                                        {suggestedFixes.length > 0 && (
-                                            <div className="mt-6 rounded-xl border-2 border-primary/25 bg-primary/5 p-5 md:p-6 space-y-4">
-                                                <div className="flex items-center gap-2">
-                                                    <Lightbulb className="h-5 w-5 text-primary flex-shrink-0" />
-                                                    <h3 className="font-bold text-base">
-                                                        {suggestedFixes.length === 1
-                                                            ? "There's a fix for that"
-                                                            : "There are fixes for those"}
-                                                    </h3>
-                                                </div>
+                                    {answers.map((reason) => {
+                                        const Icon = reason.icon
+                                        return (
+                                            <div
+                                                key={reason.id}
+                                                className="overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-card to-accent/40 shadow-sm"
+                                            >
+                                                <div className="flex flex-col gap-4 p-5 sm:flex-row sm:p-6">
+                                                    <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary shadow-md">
+                                                        <Icon className="h-5 w-5 text-white" />
+                                                    </div>
+                                                    <div className="min-w-0 flex-1 space-y-2">
+                                                        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                                            {reason.label}
+                                                        </p>
+                                                        <h3 className="text-lg font-bold leading-snug md:text-xl">
+                                                            {reason.headline}
+                                                        </h3>
+                                                        <p className="text-sm leading-relaxed text-muted-foreground">
+                                                            {reason.body}
+                                                        </p>
 
-                                                <div className="space-y-4">
-                                                    {suggestedFixes.map((reason) => (
-                                                        <div
-                                                            key={reason.label}
-                                                            className="rounded-lg border border-border bg-background/70 p-4"
-                                                        >
-                                                            <p className="text-sm font-semibold mb-1.5">{reason.label}</p>
-                                                            <p className="text-sm text-muted-foreground leading-relaxed">
-                                                                {reason.fix}
-                                                            </p>
+                                                        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2">
                                                             {reason.chapter && (
                                                                 <Link
                                                                     href={`/guide#${reason.chapter}`}
-                                                                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                                                                    className="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:underline"
                                                                 >
                                                                     <BookOpen className="h-4 w-4 flex-shrink-0" />
-                                                                    Read “{reason.chapterTitle}”
+                                                                    {reason.chapterTitle}
                                                                     <ArrowRight className="h-3.5 w-3.5 flex-shrink-0" />
                                                                 </Link>
                                                             )}
+                                                            {"pro" in reason && reason.pro && (
+                                                                <a
+                                                                    href={PRO_CHECKOUT_URL}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="inline-flex items-center gap-1.5 text-sm font-bold text-violet-600 hover:underline dark:text-violet-400"
+                                                                >
+                                                                    <Sparkles className="h-4 w-4 flex-shrink-0" />
+                                                                    Get Pro — $2.99 once
+                                                                    <ArrowRight className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                </a>
+                                                            )}
                                                         </div>
-                                                    ))}
+                                                    </div>
                                                 </div>
-
-                                                <p className="text-sm text-muted-foreground">
-                                                    Still stuck?{" "}
-                                                    <a
-                                                        href={WHATSAPP_CHANNEL_URL}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="font-semibold text-[#128C7E] dark:text-[#25D366] hover:underline"
-                                                    >
-                                                        Ask on our WhatsApp channel
-                                                    </a>{" "}
-                                                    — we answer there daily. Your feedback below still helps either way.
-                                                </p>
                                             </div>
-                                        )}
-                                    </div>
+                                        )
+                                    })}
 
-                                    <div className="space-y-3">
-                                        <label htmlFor="feedback" className="text-sm font-semibold flex items-center gap-2">
-                                            <span>📝</span>
-                                            Additional Feedback (Optional)
-                                        </label>
-                                        <Textarea
-                                            id="feedback"
-                                            placeholder="Tell us what we could do better, or what feature you were missing..."
-                                            value={feedback}
-                                            onChange={(e) => setFeedback(e.target.value)}
-                                            rows={5}
-                                            className="resize-none border-2 focus:border-primary"
-                                        />
-                                    </div>
-
-                                    {error && (
-                                        <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
-                                            {error}
-                                        </div>
-                                    )}
-
-                                    <Button
-                                        onClick={handleSubmit}
-                                        className="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
-                                        size="lg"
-                                        disabled={isSubmitting || (selectedReasons.length === 0 && !feedback.trim())}
-                                    >
-                                        {isSubmitting ? (
-                                            <>
-                                                <span className="animate-spin mr-2">⏳</span>
-                                                Submitting...
-                                            </>
-                                        ) : (
-                                            <>
-                                                Submit Feedback
-                                                <ArrowRight className="ml-2 h-4 w-4" />
-                                            </>
-                                        )}
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    ) : (
-                        <div className="relative group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 blur-xl opacity-50" />
-                            <Card className="relative border-2 border-green-500/30 bg-green-500/5 backdrop-blur-sm shadow-xl">
-                                <CardContent className="pt-8 pb-8">
-                                    <div className="text-center space-y-6">
-                                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 shadow-lg">
-                                            <CheckCircle2 className="h-8 w-8 text-white" />
-                                        </div>
-                                        <h3 className="text-3xl font-bold">Thank You! 🙏</h3>
-                                        <p className="text-lg text-muted-foreground max-w-md mx-auto">
-                                            Your feedback helps us make Locksy better for everyone. We truly appreciate you taking the time.
+                                    <div className="rounded-2xl border border-border bg-muted/40 p-5 text-center">
+                                        <p className="text-sm text-muted-foreground">
+                                            Changed your mind?{" "}
+                                            <a
+                                                href={restoreHref}
+                                                {...restoreProps}
+                                                className="font-bold text-primary hover:underline"
+                                            >
+                                                {browser
+                                                    ? `Put Locksy back on ${browser.name}`
+                                                    : "Put Locksy back"}
+                                            </a>{" "}
+                                            — or finish telling us below, it genuinely helps.
                                         </p>
-
-                                        {/* Don't dead-end here: whoever just told us why they left is
-                                            the person most worth keeping a line open to. */}
-                                        <div className="pt-2 space-y-4">
-                                            <p className="text-base font-semibold">
-                                                Want to know when we&apos;ve fixed it?
-                                            </p>
-                                            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                                                <a
-                                                    href={WHATSAPP_CHANNEL_URL}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="group/wa w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-lg"
-                                                >
-                                                    <WhatsAppIcon className="h-4 w-4 transition-transform group-hover/wa:scale-110" />
-                                                    Follow on WhatsApp
-                                                </a>
-                                                <Link
-                                                    href="/guide"
-                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border-2 border-border bg-background/60 px-6 py-3 text-sm font-semibold transition-all duration-300 hover:border-primary/40 hover:bg-accent/50"
-                                                >
-                                                    <BookOpen className="h-4 w-4" />
-                                                    Browse the guide
-                                                </Link>
-                                            </div>
-                                            <p className="text-sm text-muted-foreground">
-                                                We post fixes and new features there first.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    )}
-                </div>
-
-                {/* What You'll Miss */}
-                <div className="space-y-12 mb-20">
-                    <div className="text-center space-y-4">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-destructive/10 border border-destructive/20 rounded-full text-sm font-medium text-destructive backdrop-blur-sm">
-                            <span>😢</span>
-                            You'll Be Missing Out
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold">What You're Leaving Behind</h2>
-                        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                            Locksy provides security features you won't find in standard browsers
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-6">
-                        <div className="group feature-card relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="relative z-10">
-                                <div className="inline-flex w-16 h-16 items-center justify-center mb-6 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-500">
-                                    <Shield className="h-8 w-8 text-white" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-3">Military-Grade Protection</h3>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    PBKDF2 with 600k iterations with 8+ security layers protecting your sensitive banking, email, and work tabs. 120 years crack resistance.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="group feature-card relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="relative z-10">
-                                <div className="inline-flex w-16 h-16 items-center justify-center mb-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-500">
-                                    <Lock className="h-8 w-8 text-white" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-3">Smart Domain Locking</h3>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    Automatically lock entire domains with wildcard patterns. One-time setup protects all current and future tabs from that domain.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="group feature-card relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="relative z-10">
-                                <div className="inline-flex w-16 h-16 items-center justify-center mb-6 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-500">
-                                    <Zap className="h-8 w-8 text-white" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-3">Lightning Fast Access</h3>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    Lock/unlock with Alt+Shift+9 keyboard shortcut. Ultra-lightweight with zero performance impact on your browser.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="text-center pt-4">
-                        <div className="inline-flex items-center gap-6 flex-wrap justify-center text-sm text-muted-foreground">
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 className="h-4 w-4 text-green-500" />
-                                <span>100% Offline Privacy</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 className="h-4 w-4 text-green-500" />
-                                <span>Works Incognito</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 className="h-4 w-4 text-green-500" />
-                                <span>No Account Needed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Common Issues Resolution */}
-                <div className="mb-20">
-                    <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 blur-2xl opacity-50" />
-                        <Card className="relative border-2 border-primary/20 bg-muted/50 backdrop-blur-sm shadow-lg">
-                            <CardContent className="pt-8 pb-8 space-y-6">
-                                <div className="text-center mb-8">
-                                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-4">
-                                        <span>💡</span>
-                                        Quick Solutions
-                                    </div>
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-2">Common Issues? We've Got Fixes</h2>
-                                    <p className="text-muted-foreground">Most problems have simple solutions</p>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="space-y-3 p-6 rounded-xl bg-background/50 border border-border hover:border-primary/30 transition-all">
-                                        <div className="flex items-start gap-3">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-sm">
-                                                1
-                                            </div>
-                                            <div className="flex-1">
-                                                <h3 className="font-bold text-lg mb-2">Too many interruptions?</h3>
-                                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                                    Customize which domains trigger locks. Whitelist trusted sites or disable auto-lock in settings. You have full control.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-3 p-6 rounded-xl bg-background/50 border border-border hover:border-primary/30 transition-all">
-                                        <div className="flex items-start gap-3">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">
-                                                2
-                                            </div>
-                                            <div className="flex-1">
-                                                <h3 className="font-bold text-lg mb-2">Confused about setup?</h3>
-                                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                                    Read the{" "}
-                                                    <Link href="/guide#first-lock" className="text-primary hover:underline font-semibold">
-                                                        step-by-step guide
-                                                    </Link>{" "}
-                                                    or watch the{" "}
-                                                    <a
-                                                        href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-primary hover:underline font-semibold"
-                                                    >
-                                                        demo video
-                                                    </a>. Basics: lock tabs with Alt+Shift+9, manage domains in the popup. It&apos;s that simple!
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-3 p-6 rounded-xl bg-background/50 border border-border hover:border-primary/30 transition-all">
-                                        <div className="flex items-start gap-3">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-sm">
-                                                3
-                                            </div>
-                                            <div className="flex-1">
-                                                <h3 className="font-bold text-lg mb-2">Performance worries?</h3>
-                                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                                    Locksy uses minimal resources (&lt;1MB RAM) and works entirely locally. No cloud processing means zero lag.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-3 p-6 rounded-xl bg-background/50 border border-border hover:border-primary/30 transition-all">
-                                        <div className="flex items-start gap-3">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">
-                                                4
-                                            </div>
-                                            <div className="flex-1">
-                                                <h3 className="font-bold text-lg mb-2">Privacy concerns?</h3>
-                                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                                    Everything stays on your device. We never collect, transmit, or store your data. Secure and transparent. Check our{" "}
-                                                    <Link href="/privacy-policy" className="text-primary hover:underline font-semibold">
-                                                        privacy policy
-                                                    </Link>.
-                                                </p>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </div>
+                            )}
 
-                {/* Reinstall CTA - Big Hero Section */}
-                <div className="relative group mb-20">
-                    {/* Glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary blur-2xl opacity-20 group-hover:opacity-30 transition-opacity" />
+                            {/* Free text + submit */}
+                            <div className="mt-10 space-y-4 rounded-2xl border border-border bg-card p-5 sm:p-6">
+                                <label htmlFor="feedback" className="block text-sm font-bold">
+                                    Anything else?{" "}
+                                    <span className="font-normal text-muted-foreground">(optional)</span>
+                                </label>
+                                <Textarea
+                                    id="feedback"
+                                    placeholder="The thing that annoyed you, the feature that was missing, the bug that made you give up…"
+                                    value={feedback}
+                                    onChange={(e) => setFeedback(e.target.value)}
+                                    rows={4}
+                                    className="resize-none border-2 focus:border-primary"
+                                />
 
-                    <div className="relative bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary rounded-3xl p-12 md:p-16 text-white text-center shadow-2xl shadow-primary/20">
-                        <div className="flex items-center justify-center gap-3 mb-6">
-                            <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-4xl animate-bounce">
-                                🚀
-                            </div>
-                        </div>
-                        <h2 className="text-4xl md:text-6xl font-black mb-6">Ready to Come Back?</h2>
-                        <p className="text-xl md:text-2xl opacity-95 mb-10 max-w-3xl mx-auto">
-                            We're constantly improving based on feedback like yours. Give Locksy another chance — we'd love to earn your trust back.
-                        </p>
+                                {error && (
+                                    <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-4 text-sm text-destructive">
+                                        {error}
+                                    </div>
+                                )}
 
-                        <div className="space-y-6">
-                            <p className="text-lg font-semibold opacity-90">
-                                Reinstall for your browser:
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap">
-                                {PRIMARY_BROWSERS.map((browser) => (
-                                    <a
-                                        key={browser.name}
-                                        href={browser.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group/btn inline-flex items-center gap-3 px-8 py-4 bg-white text-primary font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:scale-105"
-                                    >
-                                        <img
-                                            src={browser.icon}
-                                            alt={browser.name}
-                                            className="h-6 w-6"
-                                        />
-                                        <span>Get for {browser.name}</span>
-                                        <Download className="h-5 w-5 group-hover/btn:animate-bounce" />
-                                    </a>
-                                ))}
-                            </div>
-
-                            <div className="pt-6">
-                                <Link href="/">
-                                    <button className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300">
-                                        Learn More About Locksy
-                                        <ArrowRight className="h-5 w-5" />
-                                    </button>
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div className="grid md:grid-cols-4 gap-4 text-sm mt-12 pt-8 border-t border-white/20">
-                            <div className="flex items-center justify-center gap-2">
-                                <CheckCircle2 className="h-4 w-4" />
-                                <span>30-Second Install</span>
-                            </div>
-                            <div className="flex items-center justify-center gap-2">
-                                <CheckCircle2 className="h-4 w-4" />
-                                <span>No Credit Card</span>
-                            </div>
-                            <div className="flex items-center justify-center gap-2">
-                                <CheckCircle2 className="h-4 w-4" />
-                                <span>No Account Required</span>
-                            </div>
-                            <div className="flex items-center justify-center gap-2">
-                                <CheckCircle2 className="h-4 w-4" />
-                                <span>100% Private</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Support Section */}
-                <div className="max-w-4xl mx-auto">
-                    <Card className="border-2 border-primary/20 bg-gradient-to-br from-accent to-background shadow-lg">
-                        <CardContent className="pt-8 pb-8 text-center space-y-6">
-                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-lg mb-2">
-                                <Heart className="h-8 w-8 text-white" />
-                            </div>
-                            <h3 className="text-3xl font-bold">Still Need Help?</h3>
-                            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                                We're committed to your success. Reach out through any channel that works best for you.
-                            </p>
-                            <div className="flex flex-wrap justify-center gap-4 pt-4">
-                                <Button
-                                    onClick={() => {
-                                        // Trigger Crisp chat
-                                        if (typeof window !== 'undefined' && (window as any).$crisp) {
-                                            (window as any).$crisp.push(['do', 'chat:open']);
-                                        }
-                                    }}
-                                    size="lg"
-                                    className="gap-2 bg-gradient-to-r from-primary to-secondary text-white font-semibold"
+                                <button
+                                    type="button"
+                                    onClick={handleSubmit}
+                                    disabled={isSubmitting || (selected.length === 0 && !feedback.trim())}
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-6 py-4 font-bold text-background transition-all duration-300 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
                                 >
-                                    <span>💬</span>
-                                    Live Chat Support
-                                </Button>
+                                    {isSubmitting ? "Sending…" : "Send feedback"}
+                                    {!isSubmitting && <ArrowRight className="h-4 w-4" />}
+                                </button>
+                                <p className="text-center text-xs text-muted-foreground">
+                                    Goes straight to the developer. No mailing list, no follow-up spam.
+                                </p>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="rounded-3xl border-2 border-green-500/30 bg-green-500/5 p-8 text-center md:p-12">
+                            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 shadow-lg">
+                                <CheckCircle2 className="h-8 w-8 text-white" />
+                            </div>
+                            <h2 className="mb-3 text-3xl font-black">Got it — thank you.</h2>
+                            <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">
+                                That goes straight to the developer, and it genuinely shapes what gets
+                                built next. The door stays open.
+                            </p>
+
+                            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                                <a
+                                    href={restoreHref}
+                                    {...restoreProps}
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-secondary px-6 py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl sm:w-auto"
+                                >
+                                    <RotateCcw className="h-4 w-4" />
+                                    {browser ? `Reinstall on ${browser.name}` : "Reinstall Locksy"}
+                                </a>
                                 <a
                                     href={WHATSAPP_CHANNEL_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group/wa inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#25D366] px-6 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-md"
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-xl sm:w-auto"
                                 >
-                                    <WhatsAppIcon className="h-4 w-4 transition-transform group-hover/wa:scale-110" />
-                                    WhatsApp Channel
-                                </a>
-                                <Link href="/guide">
-                                    <Button variant="outline" size="lg" className="gap-2">
-                                        <BookOpen className="h-4 w-4" />
-                                        User Guide
-                                    </Button>
-                                </Link>
-                                <Link href="/#faq">
-                                    <Button variant="outline" size="lg" className="gap-2">
-                                        <span>📚</span>
-                                        View FAQ
-                                    </Button>
-                                </Link>
-                                <a
-                                    href="https://github.com/vansh-121/locksy"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <Button variant="outline" size="lg" className="gap-2">
-                                        <span>🐞</span>
-                                        GitHub Support
-                                    </Button>
-                                </a>
-                                <a href="mailto:vansh.sethi98760@gmail.com">
-                                    <Button variant="outline" size="lg" className="gap-2">
-                                        <span>✉️</span>
-                                        Email Support
-                                    </Button>
+                                    <WhatsAppIcon className="h-4 w-4" />
+                                    Get notified when it&apos;s fixed
                                 </a>
                             </div>
-                        </CardContent>
-                    </Card>
+                        </div>
+                    )}
                 </div>
-            </main>
+            </section>
+
+            {/* ══ 3. PROOF — what you're walking away from ═════════════════ */}
+            <section className="border-y border-border/60 bg-muted/40 py-20 md:py-28">
+                <div className="mx-auto max-w-6xl px-4 md:px-6">
+                    <div className="mb-12 text-center">
+                        <div className="mb-5 inline-flex items-center gap-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-2">
+                            {[...Array(5)].map((_, i) => (
+                                <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                            ))}
+                            <span className="ml-2 text-sm font-bold text-yellow-700 dark:text-yellow-300">
+                                5.0 average
+                            </span>
+                        </div>
+                        <h2 className="text-3xl font-black tracking-tight md:text-5xl">
+                            The people who stayed
+                        </h2>
+                    </div>
+
+                    <div className="grid gap-6 md:grid-cols-3">
+                        {PROOF.map((t) => (
+                            <figure
+                                key={t.author}
+                                className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
+                            >
+                                <div className="mb-4 flex gap-0.5">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                                    ))}
+                                </div>
+                                <blockquote className="flex-1 text-sm leading-relaxed text-muted-foreground">
+                                    &ldquo;{t.quote}&rdquo;
+                                </blockquote>
+                                <figcaption className="mt-5 border-t border-border pt-4">
+                                    <p className="text-sm font-bold">{t.author}</p>
+                                    <p className="text-xs text-muted-foreground">{t.source}</p>
+                                </figcaption>
+                            </figure>
+                        ))}
+                    </div>
+
+                    <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
+                        {[
+                            { value: "5.0", label: "Average rating" },
+                            { value: "0", label: "Data breaches" },
+                            { value: "100%", label: "Runs offline" },
+                            { value: "$0", label: "Core features, forever" },
+                        ].map((s) => (
+                            <div
+                                key={s.label}
+                                className="rounded-2xl border border-border bg-card p-6 text-center"
+                            >
+                                <div className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-3xl font-black text-transparent md:text-4xl">
+                                    {s.value}
+                                </div>
+                                <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ══ 4. PRO — the offer, for anyone who left over the limits ══ */}
+            <section className="relative overflow-hidden py-20 md:py-28">
+                <div className="pointer-events-none absolute inset-0">
+                    <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-violet-500/10 via-fuchsia-500/10 to-cyan-500/10 blur-3xl" />
+                </div>
+
+                <div className="relative mx-auto max-w-5xl px-4 md:px-6">
+                    {/* Lights up when "I hit the free limits" is one of the ticked
+                        reasons — the offer is answering that person specifically. */}
+                    <div
+                        className={`overflow-hidden rounded-[2rem] border bg-card/60 shadow-2xl backdrop-blur-xl transition-all duration-500 ${
+                            showsPro
+                                ? "border-violet-500/50 shadow-[0_0_60px_rgba(139,92,246,0.2)]"
+                                : "border-violet-500/25"
+                        }`}
+                    >
+                        <div className="h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500" />
+
+                        <div className="grid gap-10 p-8 md:p-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
+                            <div className="space-y-6">
+                                <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-gradient-to-r from-violet-600/10 to-fuchsia-600/10 px-4 py-2 text-sm font-bold text-violet-600 backdrop-blur-md dark:text-violet-400">
+                                    <Sparkles className="h-4 w-4" />
+                                    If the free limits were the problem
+                                </div>
+
+                                <h2 className="max-w-md text-3xl font-black tracking-tight md:text-4xl">
+                                    Everything unlimited, for{" "}
+                                    <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
+                                        $2.99 once
+                                    </span>
+                                </h2>
+                                <p className="max-w-xl text-muted-foreground">
+                                    Not a subscription. Not a trial. One payment, every limit gone, yours
+                                    for good.
+                                </p>
+
+                                <div className="grid gap-3 sm:grid-cols-2">
+                                    {PRO_UNLOCKS.map(({ icon: Icon, label, was }) => (
+                                        <div key={label} className="flex items-start gap-3">
+                                            <span className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-violet-500/20 bg-violet-500/10 text-violet-600 dark:text-violet-400">
+                                                <Icon className="h-3.5 w-3.5" />
+                                            </span>
+                                            <div className="min-w-0">
+                                                <p className="text-sm font-bold leading-snug">{label}</p>
+                                                <p className="text-xs text-muted-foreground line-through">{was}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col items-center gap-4 lg:min-w-[240px]">
+                                <div className="text-center">
+                                    <div className="text-6xl font-black tracking-tighter">$2.99</div>
+                                    <p className="mt-1 text-sm font-bold text-violet-600 dark:text-violet-400">
+                                        One-time · Lifetime
+                                    </p>
+                                </div>
+                                <a
+                                    href={PRO_CHECKOUT_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group/btn relative block w-full overflow-hidden rounded-2xl bg-foreground py-4 text-center font-black text-background transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20 active:scale-[0.98]"
+                                >
+                                    <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100" />
+                                    <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover/btn:text-white">
+                                        Get Pro
+                                        <Zap className="h-5 w-5 animate-pulse" />
+                                    </span>
+                                </a>
+                                <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                                    <ShieldCheck className="h-4 w-4 flex-shrink-0 text-green-500" />
+                                    Secure payment via Polar.sh
+                                </p>
+                                <Link
+                                    href="/#pricing"
+                                    className="text-xs font-semibold text-muted-foreground hover:text-primary hover:underline"
+                                >
+                                    Compare free vs Pro
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ══ 5. RESTORE — the closing ask ════════════════════════════ */}
+            <section id="restore" className="scroll-mt-24 px-4 pb-20 md:px-6 md:pb-28">
+                <div className="relative mx-auto max-w-6xl">
+                    <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-primary via-secondary to-primary opacity-20 blur-2xl" />
+
+                    <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary via-[oklch(0.50_0.23_282)] to-secondary p-8 text-center text-white shadow-2xl shadow-primary/20 md:p-16">
+                        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
+                            <ShieldCheck className="h-8 w-8" />
+                        </div>
+
+                        <h2 className="mb-5 text-3xl font-black tracking-tight md:text-5xl">
+                            Put the locks back on
+                        </h2>
+                        <p className="mx-auto mb-10 max-w-2xl text-lg opacity-95 md:text-xl">
+                            Thirty seconds, no account, no card. Pick your browser and your tabs are
+                            protected again.
+                        </p>
+
+                        <div className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-3">
+                            {BROWSERS.map((b) => (
+                                <a
+                                    key={b.key}
+                                    href={b.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`group/btn flex items-center justify-center gap-3 rounded-2xl bg-white px-5 py-4 font-bold text-primary-on-light shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+                                        browser?.key === b.key ? "ring-4 ring-white/60" : ""
+                                    }`}
+                                >
+                                    <img src={b.icon} alt="" aria-hidden="true" className="h-6 w-6" />
+                                    <span>{b.name}</span>
+                                    <Download className="h-4 w-4 opacity-60 group-hover/btn:animate-bounce" />
+                                </a>
+                            ))}
+                        </div>
+
+                        <p className="mt-5 text-sm opacity-80">
+                            Brave, Opera and Vivaldi install from the Chrome Web Store.
+                        </p>
+
+                        <div className="mt-12 grid grid-cols-2 gap-4 border-t border-white/20 pt-8 text-sm md:grid-cols-4">
+                            {["30-second install", "No credit card", "No account required", "100% offline"].map(
+                                (b) => (
+                                    <div key={b} className="flex items-center justify-center gap-2">
+                                        <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
+                                        <span>{b}</span>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ══ 6. HELP — every way to reach a human ════════════════════ */}
+            <section className="border-t border-border/60 bg-muted/40 py-16 md:py-20">
+                <div className="mx-auto max-w-5xl px-4 md:px-6">
+                    <div className="mb-10 text-center">
+                        <h2 className="mb-3 text-2xl font-black tracking-tight md:text-3xl">
+                            Still stuck on something?
+                        </h2>
+                        <p className="text-muted-foreground">
+                            If you left because of a problem, we&apos;d still like to fix it — whether
+                            you come back or not.
+                        </p>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        <button
+                            type="button"
+                            onClick={openChat}
+                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                        >
+                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-white">
+                                <MessageCircle className="h-5 w-5" />
+                            </span>
+                            <span className="min-w-0">
+                                <span className="block text-sm font-bold">Live chat</span>
+                                <span className="block text-xs text-muted-foreground">
+                                    Usually a few hours
+                                </span>
+                            </span>
+                        </button>
+
+                        <a
+                            href={WHATSAPP_CHANNEL_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#25D366]/50 hover:shadow-md"
+                        >
+                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white">
+                                <WhatsAppIcon className="h-5 w-5" />
+                            </span>
+                            <span className="min-w-0">
+                                <span className="block text-sm font-bold">WhatsApp channel</span>
+                                <span className="block text-xs text-muted-foreground">
+                                    Fixes &amp; updates first
+                                </span>
+                            </span>
+                        </a>
+
+                        <Link
+                            href="/guide"
+                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                        >
+                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
+                                <BookOpen className="h-5 w-5" />
+                            </span>
+                            <span className="min-w-0">
+                                <span className="block text-sm font-bold">User guide</span>
+                                <span className="block text-xs text-muted-foreground">
+                                    {chapterCount} chapters, plain English
+                                </span>
+                            </span>
+                        </Link>
+
+                        <a
+                            href={guidePdfPath}
+                            download
+                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                        >
+                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-slate-600 to-slate-800 text-white">
+                                <Download className="h-5 w-5" />
+                            </span>
+                            <span className="min-w-0">
+                                <span className="block text-sm font-bold">Guide as PDF</span>
+                                <span className="block text-xs text-muted-foreground">Read it offline</span>
+                            </span>
+                        </a>
+
+                        <a
+                            href="https://github.com/vansh-121/locksy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                        >
+                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 text-white">
+                                <Github className="h-5 w-5" />
+                            </span>
+                            <span className="min-w-0">
+                                <span className="block text-sm font-bold">Report a bug</span>
+                                <span className="block text-xs text-muted-foreground">GitHub issues</span>
+                            </span>
+                        </a>
+
+                        <a
+                            href="mailto:vansh.sethi98760@gmail.com"
+                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                        >
+                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white">
+                                <Mail className="h-5 w-5" />
+                            </span>
+                            <span className="min-w-0">
+                                <span className="block text-sm font-bold">Email the developer</span>
+                                <span className="block text-xs text-muted-foreground">
+                                    Straight to the inbox
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </section>
 
             <Footer />
         </div>
-        </>
     )
 }
