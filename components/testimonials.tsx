@@ -80,7 +80,7 @@ export default function Testimonials() {
         {/* Stats */}
         <div className="grid md:grid-cols-4 gap-6 mt-16 text-center">
           <div className="p-6 bg-card rounded-lg border border-border/50">
-            <div className="text-3xl font-bold text-primary mb-2">5.0</div>
+            <div className="text-3xl font-bold text-primary mb-2">4.4</div>
             <p className="text-muted-foreground">Average Rating</p>
           </div>
           <div className="p-6 bg-card rounded-lg border border-border/50">

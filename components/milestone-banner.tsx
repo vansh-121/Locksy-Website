@@ -204,7 +204,7 @@ export default function MilestoneBanner() {
             <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4 md:gap-8">
               {[
                 { value: "5000+", label: "Active Users" },
-                { value: "5★", label: "Avg. Rating" },
+                { value: "4.4★", label: "Avg. Rating" },
                 { value: "3", label: "Stores" },
               ].map(({ value, label }) => (
                 <div key={label} className="flex flex-col items-center gap-1">

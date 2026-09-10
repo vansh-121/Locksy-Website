@@ -749,7 +749,7 @@ export default function UninstallClient({
                                 <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                             ))}
                             <span className="ml-2 text-sm font-bold text-yellow-700 dark:text-yellow-300">
-                                5.0 average
+                                4.4 average (30 reviews)
                             </span>
                         </div>
                         <h2 className="text-3xl font-black tracking-tight md:text-5xl">
@@ -781,7 +781,7 @@ export default function UninstallClient({
 
                     <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
                         {[
-                            { value: "5.0", label: "Average rating" },
+                            { value: "4.4", label: "Average rating" },
                             { value: "0", label: "Data breaches" },
                             { value: "100%", label: "Runs offline" },
                             { value: "$0", label: "Core features, forever" },
