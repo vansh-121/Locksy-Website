@@ -277,22 +277,25 @@ export default function UninstallClient({
             <Header />
 
             {/* ══ 1. HERO — the loss, stated as a present-tense fact ═════════ */}
-            <section className="relative overflow-hidden border-b border-border/60 pt-28 pb-16 md:pt-36 md:pb-24">
-                {/* A warm/alarm wash rather than the usual brand violet: this is the
-                    one moment on the site that should feel like something is off. */}
+            <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent via-background to-accent pt-28 pb-16 md:pt-36 md:pb-24">
+                {/* Same wash as the marketing hero (components/hero.tsx) so the page
+                    still reads as Locksy. The alarm is carried in red by the badge,
+                    the headline and the unlocked-tabs mockup — the colour this site
+                    already uses for "unprotected" in comparison.tsx and
+                    see-it-in-action.tsx. */}
                 <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-orange-500/15 blur-3xl dark:bg-orange-500/20" />
-                    <div className="absolute -bottom-32 right-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl dark:bg-red-500/15" />
+                    <div className="absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-primary/10 blur-3xl dark:bg-primary/20" />
+                    <div className="absolute -bottom-32 right-1/4 h-96 w-96 rounded-full bg-secondary/10 blur-3xl dark:bg-secondary/20" />
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
                 </div>
 
                 <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
                     {/* Left: the pitch */}
                     <div className="space-y-8">
-                        <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-700 backdrop-blur-sm dark:text-orange-300">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-600 backdrop-blur-sm dark:text-red-400">
                             <span className="relative flex h-2 w-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-75" />
-                                <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-500" />
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
                             </span>
                             Locksy has been removed
                         </div>
@@ -300,7 +303,7 @@ export default function UninstallClient({
                         <div className="space-y-5">
                             <h1 className="text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
                                 Your tabs are{" "}
-                                <span className="bg-gradient-to-r from-orange-500 via-red-500 to-rose-500 bg-clip-text text-transparent">
+                                <span className="bg-gradient-to-r from-rose-500 to-red-600 bg-clip-text text-transparent">
                                     unlocked
                                 </span>{" "}
                                 right now.
@@ -362,7 +365,7 @@ export default function UninstallClient({
                         point ("you are less protected") lands harder as a picture of
                         three familiar tabs sitting wide open. */}
                     <div className="relative" aria-hidden="true">
-                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/20 to-red-500/20 blur-2xl" />
+                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-rose-500/20 to-red-500/20 blur-2xl" />
                         <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
                             <div className="flex items-center gap-2 border-b border-border bg-muted/60 px-4 py-3">
                                 <span className="h-3 w-3 rounded-full bg-red-400" />
