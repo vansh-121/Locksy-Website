@@ -348,7 +348,7 @@ export default function UninstallClient({
                             <a
                                 href={restoreHref}
                                 {...restoreProps}
-                                className="group inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary px-8 py-5 text-base font-black text-white shadow-xl shadow-primary/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 sm:w-auto sm:text-lg"
+                                className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary px-5 py-4 text-base font-black text-white shadow-xl shadow-primary/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 sm:w-auto sm:gap-3 sm:px-8 sm:py-5 sm:text-lg"
                             >
                                 {browser ? (
                                     <img src={browser.icon} alt="" aria-hidden="true" className="h-6 w-6" />
