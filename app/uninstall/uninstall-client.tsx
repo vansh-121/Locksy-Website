@@ -200,6 +200,46 @@ const PRO_UNLOCKS = [
     { icon: Zap, label: "Startup session lock", was: "Not on free" },
 ]
 
+// Rows and columns lifted from components/comparison.tsx, trimmed to the six
+// that matter most to someone who left for an alternative.
+//
+// The columns are deliberately the two *categories* people actually switch to,
+// not "other tab lockers" — we can verify what a browser profile and a tab
+// manager do; we can't verify a claim about every competing extension.
+const COMPARE_COLUMNS = ["Locksy", "Browser profiles", "Tab managers"] as const
+const COMPARE_ROWS: Array<[string, boolean, boolean, boolean]> = [
+    ["Lock one tab, keep the rest usable", true, false, false],
+    ["Auto-lock a whole website", true, false, false],
+    ["Fingerprint / face unlock", true, false, false],
+    ["Hide that a tab is locked at all", true, false, false],
+    ["Webcam photo of whoever tried", true, false, false],
+    ["Re-lock everything on browser startup", true, false, false],
+]
+
+// The question every departing user has and no page on the site answers.
+// Every claim here traces to the "How your data is handled" chapter in
+// lib/guide-content.json — no servers, no accounts, local-only storage.
+const AFTERMATH = [
+    {
+        icon: Globe,
+        tone: "ok" as const,
+        title: "There is nothing of yours to delete",
+        body: "Locksy has no servers, no accounts and no analytics. It made zero network requests while it was installed, so nothing about your tabs ever left the machine you're reading this on.",
+    },
+    {
+        icon: Lock,
+        tone: "ok" as const,
+        title: "Your master password was never stored",
+        body: "Only a PBKDF2-SHA256 hash at 600,000 rounds — roughly twice the 2023 OWASP recommendation — with a random salt unique to your install. It can't be turned back into your password by us or anyone else.",
+    },
+    {
+        icon: AlertTriangle,
+        tone: "warn" as const,
+        title: "Tabs that were locked when you removed it stay closed",
+        body: "A lock unloads the page rather than covering it, and the extension is what reopens it. Reinstalling protects you from here on, but it can't bring back a session that was locked at the moment you uninstalled.",
+    },
+]
+
 export default function UninstallClient({
     chapterCount,
     guidePdfPath,
@@ -617,7 +657,103 @@ export default function UninstallClient({
                 </div>
             </section>
 
-            {/* ══ 3. PROOF — what you're walking away from ═════════════════ */}
+            {/* ══ 3. COMPARE — for anyone who left for an alternative ══════ */}
+            <section className="px-4 py-16 md:px-6 md:py-20">
+                <div className="mx-auto max-w-4xl">
+                    <div className="mb-8 text-center">
+                        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary dark:text-primary-on-dark">
+                            <ArrowLeftRight className="h-4 w-4" />
+                            Switching to something else?
+                        </div>
+                        <h2 className="mb-3 text-2xl font-black tracking-tight md:text-3xl">
+                            Check the replacement does these six
+                        </h2>
+                        <p className="mx-auto max-w-xl text-muted-foreground">
+                            The two things people usually move to instead are a separate browser
+                            profile or a tab manager. Neither is built to keep one tab shut while
+                            you keep working in the others.
+                        </p>
+                    </div>
+
+                    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left text-sm">
+                                <caption className="sr-only">
+                                    Locksy compared with browser profiles and tab managers
+                                </caption>
+                                <thead>
+                                    <tr className="border-b border-border bg-muted/50">
+                                        <th scope="col" className="px-5 py-4 font-bold">
+                                            Feature
+                                        </th>
+                                        {COMPARE_COLUMNS.map((col, i) => (
+                                            <th
+                                                key={col}
+                                                scope="col"
+                                                className={`px-4 py-4 text-center font-bold ${i === 0
+                                                    ? "text-primary dark:text-primary-on-dark"
+                                                    : "font-semibold text-muted-foreground"
+                                                    }`}
+                                            >
+                                                {col}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {COMPARE_ROWS.map(([feature, ...cells]) => (
+                                        <tr
+                                            key={feature}
+                                            className="border-b border-border/60 last:border-0 hover:bg-muted/30"
+                                        >
+                                            <th
+                                                scope="row"
+                                                className="px-5 py-4 text-left font-medium"
+                                            >
+                                                {feature}
+                                            </th>
+                                            {cells.map((has, i) => (
+                                                <td key={i} className="px-4 py-4 text-center">
+                                                    {has ? (
+                                                        <span
+                                                            role="img"
+                                                            aria-label="Yes"
+                                                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-500/15 font-bold text-green-600 dark:text-green-400"
+                                                        >
+                                                            ✓
+                                                        </span>
+                                                    ) : (
+                                                        <span
+                                                            role="img"
+                                                            aria-label="No"
+                                                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-red-500/15 font-bold text-red-600 dark:text-red-400"
+                                                        >
+                                                            ×
+                                                        </span>
+                                                    )}
+                                                </td>
+                                            ))}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p className="mt-4 text-center text-sm text-muted-foreground">
+                        Most of these are free.{" "}
+                        <Link
+                            href="/#comparison"
+                            className="font-semibold text-primary hover:underline"
+                        >
+                            See the full comparison
+                        </Link>
+                        .
+                    </p>
+                </div>
+            </section>
+
+            {/* ══ 4. PROOF — what you're walking away from ═════════════════ */}
             <section className="border-y border-border/60 bg-muted/40 py-20 md:py-28">
                 <div className="mx-auto max-w-6xl px-4 md:px-6">
                     <div className="mb-12 text-center">
@@ -677,7 +813,7 @@ export default function UninstallClient({
                 </div>
             </section>
 
-            {/* ══ 4. PRO — the offer, for anyone who left over the limits ══ */}
+            {/* ══ 5. PRO — the offer, for anyone who left over the limits ══ */}
             <section className="relative overflow-hidden py-20 md:py-28">
                 <div className="pointer-events-none absolute inset-0">
                     <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-violet-500/10 via-fuchsia-500/10 to-cyan-500/10 blur-3xl" />
@@ -763,20 +899,83 @@ export default function UninstallClient({
                 </div>
             </section>
 
-            {/* ══ 5. RESTORE — the closing ask ════════════════════════════ */}
-            <section id="restore" className="scroll-mt-24 px-4 pb-20 md:px-6 md:pb-28">
-                <div className="relative mx-auto max-w-6xl">
-                    <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-primary via-secondary to-primary opacity-20 blur-2xl" />
+            {/* ══ 6. AFTERMATH — the question nobody answers for them ═════ */}
+            <section className="border-y border-border/60 bg-muted/40 px-4 py-16 md:px-6 md:py-20">
+                <div className="mx-auto max-w-5xl">
+                    <div className="mb-10 text-center">
+                        <h2 className="mb-3 text-2xl font-black tracking-tight md:text-3xl">
+                            Now that it&apos;s gone, where is your data?
+                        </h2>
+                        <p className="mx-auto max-w-xl text-muted-foreground">
+                            Worth knowing whether or not you come back.
+                        </p>
+                    </div>
 
-                    <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary via-[oklch(0.50_0.23_282)] to-secondary p-8 text-center text-white shadow-2xl shadow-primary/20 md:p-16">
-                        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
-                            <ShieldCheck className="h-8 w-8" />
+                    <div className="grid gap-4 md:grid-cols-3">
+                        {AFTERMATH.map((item) => {
+                            const Icon = item.icon
+                            const warn = item.tone === "warn"
+                            return (
+                                <div
+                                    key={item.title}
+                                    className={`rounded-2xl border p-6 ${warn
+                                        ? "border-red-500/25 bg-red-500/5"
+                                        : "border-border bg-card"
+                                        }`}
+                                >
+                                    <span
+                                        className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl ${warn
+                                            ? "bg-red-500/15 text-red-600 dark:text-red-400"
+                                            : "bg-green-500/15 text-green-600 dark:text-green-400"
+                                            }`}
+                                    >
+                                        <Icon className="h-5 w-5" />
+                                    </span>
+                                    <h3 className="mb-2 text-base font-bold leading-snug">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-sm leading-relaxed text-muted-foreground">
+                                        {item.body}
+                                    </p>
+                                </div>
+                            )
+                        })}
+                    </div>
+
+                    <p className="mt-6 text-center text-sm text-muted-foreground">
+                        The full detail is in{" "}
+                        <Link
+                            href="/guide#privacy"
+                            className="font-semibold text-primary hover:underline"
+                        >
+                            How your data is handled
+                        </Link>{" "}
+                        — or read our{" "}
+                        <Link
+                            href="/privacy-policy"
+                            className="font-semibold text-primary hover:underline"
+                        >
+                            privacy policy
+                        </Link>
+                        .
+                    </p>
+                </div>
+            </section>
+
+            {/* ══ 7. RESTORE — the closing ask ════════════════════════════ */}
+            <section id="restore" className="scroll-mt-24 px-4 pb-16 md:px-6 md:pb-20">
+                <div className="relative mx-auto max-w-5xl">
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-secondary to-primary opacity-20 blur-2xl" />
+
+                    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-[oklch(0.50_0.23_282)] to-secondary p-8 text-center text-white shadow-2xl shadow-primary/20 md:p-10">
+                        <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
+                            <ShieldCheck className="h-6 w-6" />
                         </div>
 
-                        <h2 className="mb-5 text-3xl font-black tracking-tight md:text-5xl">
+                        <h2 className="mb-4 text-2xl font-black tracking-tight md:text-3xl">
                             Put the locks back on
                         </h2>
-                        <p className="mx-auto mb-10 max-w-2xl text-lg opacity-95 md:text-xl">
+                        <p className="mx-auto mb-8 max-w-xl opacity-95">
                             Thirty seconds, no account, no card. Pick your browser and your tabs are
                             protected again.
                         </p>
@@ -803,7 +1002,7 @@ export default function UninstallClient({
                             Brave, Opera and Vivaldi install from the Chrome Web Store.
                         </p>
 
-                        <div className="mt-12 grid grid-cols-2 gap-4 border-t border-white/20 pt-8 text-sm md:grid-cols-4">
+                        <div className="mt-8 grid grid-cols-2 gap-4 border-t border-white/20 pt-6 text-sm md:grid-cols-4">
                             {["30-second install", "No credit card", "No account required", "100% offline"].map(
                                 (b) => (
                                     <div key={b} className="flex items-center justify-center gap-2">
@@ -817,7 +1016,7 @@ export default function UninstallClient({
                 </div>
             </section>
 
-            {/* ══ 6. HELP — every way to reach a human ════════════════════ */}
+            {/* ══ 8. HELP — every way to reach a human ════════════════════ */}
             <section className="border-t border-border/60 bg-muted/40 py-16 md:py-20">
                 <div className="mx-auto max-w-5xl px-4 md:px-6">
                     <div className="mb-10 text-center">
