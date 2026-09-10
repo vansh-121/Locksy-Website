@@ -317,7 +317,7 @@ export default function UninstallClient({
             <Header />
 
             {/* ══ 1. HERO — the loss, stated as a present-tense fact ═════════ */}
-            <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent via-background to-accent pt-28 pb-16 md:pt-36 md:pb-24">
+            <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent via-background to-accent pt-28 pb-16 md:pt-36 md:pb-20">
                 {/* Same wash as the marketing hero (components/hero.tsx) so the page
                     still reads as Locksy. The alarm is carried in red by the badge,
                     the headline and the unlocked-tabs mockup — the colour this site
@@ -447,7 +447,7 @@ export default function UninstallClient({
             </section>
 
             {/* ══ 2. WHY — the reason picker that answers back ══════════════ */}
-            <section id="why" className="relative scroll-mt-24 py-20 md:py-28">
+            <section id="why" className="relative scroll-mt-24 py-16 md:py-20">
                 <div className="mx-auto max-w-5xl px-4 md:px-6">
                     <div className="mb-12 text-center">
                         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur-sm">
@@ -754,7 +754,7 @@ export default function UninstallClient({
             </section>
 
             {/* ══ 4. PROOF — what you're walking away from ═════════════════ */}
-            <section className="border-y border-border/60 bg-muted/40 py-20 md:py-28">
+            <section className="border-y border-border/60 bg-muted/40 py-16 md:py-20">
                 <div className="mx-auto max-w-6xl px-4 md:px-6">
                     <div className="mb-12 text-center">
                         <div className="mb-5 inline-flex items-center gap-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-2">
@@ -814,7 +814,7 @@ export default function UninstallClient({
             </section>
 
             {/* ══ 5. PRO — the offer, for anyone who left over the limits ══ */}
-            <section className="relative overflow-hidden py-20 md:py-28">
+            <section className="relative overflow-hidden py-16 md:py-20">
                 <div className="pointer-events-none absolute inset-0">
                     <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-violet-500/10 via-fuchsia-500/10 to-cyan-500/10 blur-3xl" />
                 </div>
