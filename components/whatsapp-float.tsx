@@ -20,7 +20,7 @@ export default function WhatsAppFloat() {
     >
       <WhatsAppIcon className="h-6 w-6 flex-shrink-0" />
       <span className="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-all duration-300 group-hover:ml-2 group-hover:max-w-[12rem] group-hover:opacity-100">
-        Join our WhatsApp
+        Join our WhatsApp Channel
       </span>
     </a>
   )

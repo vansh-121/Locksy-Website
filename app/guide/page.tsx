@@ -163,10 +163,13 @@ export default function GuidePage() {
           className="relative overflow-hidden pt-16 md:pt-20"
         />
 
-        {/* Closing CTA — full width, outside the two-column grid */}
+        {/* Closing CTA — full width, outside the two-column grid.
+            Heading is deliberately about the PDF, not "questions": SupportChatCTA
+            immediately below already owns "Still Have Questions?", and the two
+            collided. This block's real job is the offline copy of the guide. */}
         <div className="mx-auto max-w-2xl px-4 pt-16 md:px-6">
           <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5 p-8 text-center">
-            <h2 className="text-2xl font-black text-foreground">Still have a question?</h2>
+            <h2 className="text-2xl font-black text-foreground">Prefer it offline?</h2>
             <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">
               Take the guide with you as a PDF, or get in touch, we&apos;ll walk you through it.
             </p>
