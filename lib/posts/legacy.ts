@@ -413,12 +413,12 @@ Chrome dominates the browser market with roughly 65% share, which makes it both 
 
 **What Chrome gets right:**
 - **Safe Browsing** flags malicious sites before you even load them. The Enhanced Protection mode feeds URLs to Google's real-time threat detection, which catches phishing sites that just popped up minutes ago.
-- **Site isolation** runs every site in its own process, so a compromised website can't reach into another tab and steal your data. This was a massive security upgrade when it launched, and it's now on by default.
+- **Site isolation** runs every site in its own process, so a compromised website can't reach into another tab and steal your data. This was a massive security upgrade when it launched, and it's now on by default. It is not a guarantee, though — [sandbox escapes are real and worth understanding](/blog/browser-sandbox-escapes-what-they-are-and-why-you-should-care).
 - **Security updates** roll out every two weeks, patching vulnerabilities faster than any other major browser.
 
 **What Chrome gets wrong:**
 - **No built-in tab locking.** You cannot password-protect an individual tab. Full stop. It's been one of the most requested features for years, and Google hasn't shipped it.
-- **Sync is on by default.** Chrome syncs your open tabs across every device signed into your Google account. That means a tab you opened on your work laptop might show up on your personal phone, or your kid's Chromebook. You can turn this off, but you have to know to look for it.
+- **Sync is on by default.** Chrome syncs your open tabs across every device signed into your Google account. That is a convenience feature with a security cost — [tab sync across devices creates new attack surfaces](/blog/how-browser-tab-sync-across-devices-creates-new-attack-surfaces). That means a tab you opened on your work laptop might show up on your personal phone, or your kid's Chromebook. You can turn this off, but you have to know to look for it.
 - **Extension ecosystem is a double-edged sword.** Chrome has the largest extension store, which is great for functionality but also means more potential for malicious extensions. Google has gotten better at policing the Web Store, but bad actors still slip through.
 
 **Tab-level protection:** None natively. Requires a third-party extension.
@@ -469,7 +469,7 @@ This is the physical access problem, and it's one of the most common security ga
 
 No browser has shipped a solution for this. It's puzzling, because the technology isn't complicated (Locksy extensions have existed for years), and the demand is clearly there. Maybe it's a UX concern, maybe it's a prioritization issue, maybe they assume the OS screen lock is good enough.
 
-Whatever the reason, if you want tab-level password protection today, an extension is your only option.
+Whatever the reason, if you want tab-level password protection today, an extension is your only option. If you want the step-by-step version, we wrote one: [how to password protect browser tabs](/blog/how-to-password-protect-browser-tabs), covering Chrome, Edge and Firefox.
 
 ## So Which Browser Should You Use?
 
@@ -1814,7 +1814,7 @@ So, we've explored the native landscape, and I hope it's clear by now: Chrome, o
 2. **They are disruptive:** Closing tabs or switching entire profiles completely breaks your workflow and forces you to restart tasks.
 3. **They are inconvenient:** Remembering to do a multi-step dance every time you need privacy is exhausting and unrealistic.
 4. **They lack specificity:** You can't just secure *one* tab. You're often forced to hide an entire window or resort to closing it.
-5. **No password protection:** Not a single one of these native methods allows you to put a password on a *specific tab*. That's the holy grail of **lock chrome tabs** functionality, isn't it?
+5. **No password protection:** Not a single one of these native methods allows you to put a password on a *specific tab*. That's the holy grail of **lock chrome tabs** functionality, isn't it? If you'd rather skip straight to the working setup, [here's how to password protect browser tabs](/blog/how-to-password-protect-browser-tabs) in each browser.
 
 We're living in an era where our digital lives are more intertwined with our physical lives than ever before. Our browsers are not just for browsing; they are our workspaces, our personal diaries, our financial dashboards. To not have a simple, effective way to **protect chrome tabs** from casual, curious glances feels like a fundamental oversight in modern browser design. It forces us to either compromise our privacy or resort to clumsy, time-wasting maneuvers.
 

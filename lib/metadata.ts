@@ -201,7 +201,7 @@ export const jsonLdSoftwareApplication = {
             validFrom: '2024-01-01',
             priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
-            url: `${siteUrl}#pricing`,
+            url: `${siteUrl}/pricing`,
             description: 'Core tab password protection, biometric unlock, context menu locking, and local webcam captures. Free tier includes 3 domain locks, 3 intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs.',
             shippingDetails: {
                 '@type': 'OfferShippingDetails',
@@ -245,7 +245,7 @@ export const jsonLdSoftwareApplication = {
             validFrom: '2024-01-01',
             priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
-            url: `${siteUrl}#pricing`,
+            url: `${siteUrl}/pricing`,
             description: 'Unlimited domain locks, startup session lock, stealth mode, custom lock timers, and weekly privacy reports.',
             shippingDetails: {
                 '@type': 'OfferShippingDetails',
@@ -349,7 +349,7 @@ export const jsonLdProduct = {
             validFrom: '2024-01-01',
             priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
-            url: `${siteUrl}#pricing`,
+            url: `${siteUrl}/pricing`,
             shippingDetails: {
                 '@type': 'OfferShippingDetails',
                 shippingRate: {
@@ -392,7 +392,7 @@ export const jsonLdProduct = {
             validFrom: '2024-01-01',
             priceValidUntil: '2030-12-31',
             availability: 'https://schema.org/InStock',
-            url: `${siteUrl}#pricing`,
+            url: `${siteUrl}/pricing`,
             description: 'Unlimited domain locks, startup session lock, stealth mode, custom lock timers, weekly privacy reports & more.',
             shippingDetails: {
                 '@type': 'OfferShippingDetails',

@@ -135,7 +135,7 @@ export default function Header() {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
-            href="/#pricing"
+            href="/pricing"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
             Pricing
@@ -178,7 +178,7 @@ export default function Header() {
 
           {/* Pro Upgrade Button */}
           <a
-            href="/#pricing"
+            href="/pricing"
             className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-card border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg text-sm xl:text-base cursor-pointer"
           >
             <span aria-hidden="true">💎</span>
@@ -253,7 +253,7 @@ export default function Header() {
         {/* Mobile: Get Pro + Theme Toggle + Menu Toggle */}
         <div className="lg:hidden flex items-center gap-2">
           <a
-            href="/#pricing"
+            href="/pricing"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
           >
             <span aria-hidden="true">💎</span>
@@ -303,7 +303,7 @@ export default function Header() {
                   Security
                 </a>
                 <a
-                  href="/#pricing"
+                  href="/pricing"
                   className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -345,12 +345,13 @@ export default function Header() {
               {/* CTA Section */}
               <div className="space-y-2.5 mb-2">
                 <a
-                  href="/#pricing"
+                  href="/pricing"
                   className="flex items-center justify-center gap-2 p-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span aria-hidden="true">💎</span> Get Pro
                 </a>
+
                 <a
                   href="https://github.com/sponsors/vansh-121"
                   target="_blank"

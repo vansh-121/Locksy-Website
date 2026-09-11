@@ -66,7 +66,7 @@ Remember the good old days (read: bad old days) when many websites still used in
 
 ### The Ghost: Identity and Referrer Control
 
-Every time you click a link, your browser often sends a "referrer" header to the destination website. This header tells the new site where you came from. While seemingly innocuous, this can leak sensitive information – imagine clicking from a private forum to a public site, or from a confidential document to a search engine.
+Every time you click a link, your browser often sends a "referrer" header to the destination website. This header tells the new site where you came from. While seemingly innocuous, this can leak sensitive information – imagine clicking from a private forum to a public site, or from a confidential document to a search engine. If you want the underlying mechanics rather than a tool that hides them, [our referrer policy guide covers the whole mechanism](/blog/mastering-referrer-policy-a-technical-guide-to-controlling-information-leaks-from-your-browser).
 
 Extensions like **ClearURLs** or **RefControl** (though the latter is older and less maintained, the concept is valid) allow you to strip tracking parameters from URLs and control what referrer information is sent. ClearURLs, in particular, is a gem. It cleans up those ridiculously long URLs filled with \`utm_source\`, \`ref=\`, and other tracking parameters, making them shorter, cleaner, and most importantly, less information-rich for the destination site. It’s a small tweak, but it accumulates into significant privacy gains over time.
 
@@ -86,7 +86,7 @@ And speaking of isolation and keeping things separate...
 
 ### The Sentinel: Tab Locking and Session Protection (Hello, Locksy!)
 
-Remember my coffee shop mishap? That moment of sheer panic when a stranger was looking at my exposed financial data? That's precisely the kind of scenario that triggered my search for a solution to **password-protect specific browser tabs**. Because let's face it, locking your entire computer when you step away isn't always practical for a two-minute break, especially if you're collaborating or have others using your machine. And sometimes, you just want to secure *one* sensitive tab without closing it and losing your progress.
+Remember my coffee shop mishap? That moment of sheer panic when a stranger was looking at my exposed financial data? That's precisely the kind of scenario that triggered my search for a solution to [password-protect specific browser tabs](/blog/how-to-password-protect-browser-tabs). Because let's face it, locking your entire computer when you step away isn't always practical for a two-minute break, especially if you're collaborating or have others using your machine. And sometimes, you just want to secure *one* sensitive tab without closing it and losing your progress.
 
 This is where an extension like **Locksy** shines, and it’s a tool I genuinely recommend and use. Locksy allows you to instantly password-protect any active tab or group of tabs. So, if I step away from my laptop, even for a moment, I can click a button, and my banking tab, my medical portal, or any other sensitive tab is instantly obscured behind a password prompt. Anyone trying to peek will just see a locked screen.
 

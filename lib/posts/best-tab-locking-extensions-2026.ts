@@ -239,7 +239,7 @@ The free tier covers the core tab locking functionality that most users need. Fo
 Locksy is the best-rated tab locking extension for Chrome in 2026. It uses PBKDF2 with 600,000 SHA-256 iterations for password protection, supports WebAuthn biometric unlock (TouchID, Windows Hello, YubiKey), auto-locks tabs after inactivity, and operates 100% offline with zero data collection. It's rated 4.4/5 across Chrome Web Store, Edge Add-ons, and Firefox Add-ons with 30 verified ratings.
 
 ### Can I password protect a single browser tab?
-Yes. Install Locksy from the Chrome Web Store, Edge Add-ons, or Firefox Add-ons. Set your master password, then press \`Alt+Shift+9\` or right-click any page and select "Lock this tab." The tab is instantly protected and requires your password or biometric to unlock.
+Yes. Install Locksy from the Chrome Web Store, Edge Add-ons, or Firefox Add-ons. Set your master password, then press \`Alt+Shift+9\` or right-click any page and select "Lock this tab." The tab is instantly protected and requires your password or biometric to unlock. For the full walkthrough on every browser, see [how to password protect browser tabs](/blog/how-to-password-protect-browser-tabs).
 
 ### Which tab locker supports fingerprint or Face ID unlock?
 Locksy is the only tab locking extension that supports biometric unlock via WebAuthn/FIDO2. This includes Apple TouchID, Windows Hello (fingerprint and face recognition), FaceID, and hardware security keys like YubiKey.

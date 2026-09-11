@@ -10,6 +10,8 @@ import {
     LayoutDashboard,
     ShieldAlert,
     ShieldCheck,
+    Laptop,
+    Calendar,
     Sparkles,
     Zap,
 } from "lucide-react"
@@ -27,12 +29,14 @@ import { PRO_CHECKOUT_URL, PRO_PRICE } from "@/lib/pro"
  * gets a recovery key too and it isn't an honest differentiator.
  */
 const PRO_UNLOCKS = [
+    { icon: Laptop, label: "Use on up to 5 devices", was: "1 device on free" },
     { icon: Globe, label: "Unlimited domain locks", was: "3 on free" },
     { icon: Fingerprint, label: "Unlimited biometric unlocks", was: "5 a day on free" },
     { icon: Camera, label: "Unlimited intruder snapshots", was: "3 on free" },
     { icon: KeyRound, label: "1-click lock & unlock all", was: "3 total uses on free" },
     { icon: Clock, label: "Custom auto-lock timers", was: "10 minutes on free" },
     { icon: Blend, label: "Full privacy blur manager", was: "Basic blur on free" },
+    { icon: Calendar, label: "Scheduled locking", was: "Not on free" },
     { icon: EyeOff, label: "Stealth-mode disguise", was: "Not on free" },
     { icon: Zap, label: "Startup session lock", was: "Not on free" },
     { icon: ShieldAlert, label: "Custom lock-screen messages", was: "Not on free" },
@@ -115,7 +119,7 @@ export default function ProUpgradeCard({
                             <div className="text-center">
                                 <div className="text-6xl font-black tracking-tighter">{PRO_PRICE}</div>
                                 <p className="mt-1 text-sm font-bold text-violet-600 dark:text-violet-400">
-                                    One-time · Lifetime
+                                    One-time · Lifetime (5 devices)
                                 </p>
                             </div>
                             <a
@@ -135,7 +139,7 @@ export default function ProUpgradeCard({
                                 Secure payment via Polar.sh
                             </p>
                             <Link
-                                href="/#pricing"
+                                href="/pricing"
                                 className="text-xs font-semibold text-muted-foreground hover:text-primary hover:underline"
                             >
                                 Compare free vs Pro
