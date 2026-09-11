@@ -85,7 +85,7 @@ The integration of biometric capabilities into a browser extension like Locksy m
 
 The widespread adoption of WebAuthn and FIDO2 isn't just about making logins easier; it's about fundamentally shifting the security paradigm away from passwords. Imagine the word "password" becomes an archaic term, something we tell our grandchildren about like dial-up internet or floppy disks. That future, once a distant dream, is becoming increasingly tangible.
 
-The push for passkey technology, which is built directly on WebAuthn standards, is gaining incredible momentum. Major players like Apple, Google, and Microsoft are all committed to supporting passkeys across their platforms. This means that soon, you won't just be able to *choose* to use biometrics; it will be the default, seamless, and most secure way to authenticate across virtually every service you use.
+The push for passkey technology, which is built directly on WebAuthn standards, is gaining incredible momentum. (We looked separately at [what a passkey future means for tab protection](/blog/how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters) — worth reading if you assume passwordless login makes tab locks redundant.) Major players like Apple, Google, and Microsoft are all committed to supporting passkeys across their platforms. This means that soon, you won't just be able to *choose* to use biometrics; it will be the default, seamless, and most secure way to authenticate across virtually every service you use.
 
 This shift has profound implications:
 

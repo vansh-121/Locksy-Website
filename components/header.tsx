@@ -135,7 +135,7 @@ export default function Header() {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
           </a>
           <a
-            href="/#pricing"
+            href="/pricing"
             className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
           >
             Pricing
@@ -303,7 +303,7 @@ export default function Header() {
                   Security
                 </a>
                 <a
-                  href="/#pricing"
+                  href="/pricing"
                   className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
                   onClick={() => setIsMenuOpen(false)}
                 >
