@@ -11,6 +11,7 @@ import {
     ShieldAlert,
     ShieldCheck,
     Laptop,
+    Calendar,
     Sparkles,
     Zap,
 } from "lucide-react"
@@ -35,6 +36,7 @@ const PRO_UNLOCKS = [
     { icon: KeyRound, label: "1-click lock & unlock all", was: "3 total uses on free" },
     { icon: Clock, label: "Custom auto-lock timers", was: "10 minutes on free" },
     { icon: Blend, label: "Full privacy blur manager", was: "Basic blur on free" },
+    { icon: Calendar, label: "Scheduled locking", was: "Not on free" },
     { icon: EyeOff, label: "Stealth-mode disguise", was: "Not on free" },
     { icon: Zap, label: "Startup session lock", was: "Not on free" },
     { icon: ShieldAlert, label: "Custom lock-screen messages", was: "Not on free" },

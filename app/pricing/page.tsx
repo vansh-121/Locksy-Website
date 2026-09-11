@@ -41,6 +41,8 @@ const LIMITS = [
     { what: "Lock All Tabs", free: "3 uses total", pro: "Unlimited, plus 1-click unlock all" },
     { what: "Auto re-lock timer", free: "Fixed at 10 minutes", pro: "Configurable up to 8 hours" },
     { what: "Privacy blur", free: "Basic auto-masking", pro: "Full manager, categories & whitelists" },
+    { what: "Scheduled locking", free: "Not included", pro: "Included (time & day schedules)" },
+    { what: "Custom lock screen messages", free: "Not included", pro: "Included" },
     { what: "Stealth mode, startup session lock, weekly reports", free: "Not included", pro: "Included" },
 ]
 
@@ -78,7 +80,7 @@ const PRICING_FAQ = [
     {
         question: "What does paying for Pro actually change?",
         answer:
-            "It lifts the free tier's caps and adds features the free tier does not have. Domain auto-locks, biometric unlocks and webcam intruder captures become unlimited; the auto re-lock timer becomes configurable up to 8 hours; and stealth-mode disguise, startup session lock, custom lock-screen messages, the full privacy blur manager and weekly privacy reports are unlocked.",
+            "It lifts the free tier's caps and adds features the free tier does not have. You can use your license on up to 5 devices simultaneously. Domain auto-locks, biometric unlocks and webcam intruder captures become unlimited; the auto re-lock timer becomes configurable up to 8 hours; and scheduled locking, stealth-mode disguise, startup session lock, custom lock-screen messages, the full privacy blur manager and weekly privacy reports are unlocked.",
     },
     {
         question: "Do I need an account to use Locksy?",

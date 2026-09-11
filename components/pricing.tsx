@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop } from "lucide-react"
+import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar } from "lucide-react"
 import { PRO_CHECKOUT_URL } from "@/lib/pro"
 
 export default function Pricing() {
@@ -19,7 +19,7 @@ export default function Pricing() {
     { title: "Webcam Intruder captures", desc: "Unlimited local snapshots of failed access attempts", icon: <Camera className="w-4 h-4" /> },
     { title: "1-Click Unlock All Tabs", desc: "Unlock all protected tabs simultaneously", icon: <Key className="w-4 h-4" /> },
     { title: "Auto Re-Lock After a Set Time", desc: "Choose how long before Locksy asks for your password again (up to 60 min), with extra checks for sensitive actions", icon: <Clock className="w-4 h-4" /> },
-    { title: "Master Recovery Key Backup", desc: "Generate 16-char emergency recovery key for offline password reset", icon: <Key className="w-4 h-4" /> },
+    { title: "Scheduled Locking", desc: "Automate tab protection by schedule (work hours, night time, or custom days)", icon: <Calendar className="w-4 h-4" /> },
     { title: "Custom Auto-Lock Timers", desc: "Configure custom duration settings up to 8 hours", icon: <Clock className="w-4 h-4" /> },
   ]
 
