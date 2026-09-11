@@ -510,7 +510,7 @@ export default function SecurityPage() {
                 <Link href="/#download" className="btn-primary text-base py-3.5 px-8">
                   Install Locksy Free Now
                 </Link>
-                <Link href="/#pricing" className="btn-secondary text-base py-3.5 px-8">
+                <Link href="/pricing" className="btn-secondary text-base py-3.5 px-8">
                   Explore Locksy Pro
                 </Link>
               </div>

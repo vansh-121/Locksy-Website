@@ -137,7 +137,7 @@ export default function ProUpgradeCard({
                                 Secure payment via Polar.sh
                             </p>
                             <Link
-                                href="/#pricing"
+                                href="/pricing"
                                 className="text-xs font-semibold text-muted-foreground hover:text-primary hover:underline"
                             >
                                 Compare free vs Pro
