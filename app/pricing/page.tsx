@@ -34,6 +34,7 @@ export const metadata: Metadata = generatePageMetadata(
  * a change to any cap touches three files.
  */
 const LIMITS = [
+    { what: "Device activations", free: "1 active browser/device", pro: "Up to 5 devices simultaneously (with Device Manager)" },
     { what: "Domain auto-locks", free: "3 domains", pro: "Unlimited" },
     { what: "Biometric unlocks", free: "5 per day", pro: "Unlimited" },
     { what: "Webcam intruder captures", free: "3 stored", pro: "Unlimited" },
@@ -58,6 +59,12 @@ const LIMITS = [
  * site flagged before. Left out on purpose; worth writing once you decide it.
  */
 const PRICING_FAQ = [
+    {
+        question: "How many devices can I use my Pro license on?",
+        answer:
+            "Each Locksy Pro license covers up to 5 active device/browser installations simultaneously. You can use it across your personal laptop, desktop, and work computers. An inline Device Manager inside the extension makes it easy to release and transfer slots whenever you switch or reset a device.",
+    },
+
     {
         question: "Is Locksy free?",
         answer:

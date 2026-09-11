@@ -10,6 +10,7 @@ import {
     LayoutDashboard,
     ShieldAlert,
     ShieldCheck,
+    Laptop,
     Sparkles,
     Zap,
 } from "lucide-react"
@@ -27,6 +28,7 @@ import { PRO_CHECKOUT_URL, PRO_PRICE } from "@/lib/pro"
  * gets a recovery key too and it isn't an honest differentiator.
  */
 const PRO_UNLOCKS = [
+    { icon: Laptop, label: "Use on up to 5 devices", was: "1 device on free" },
     { icon: Globe, label: "Unlimited domain locks", was: "3 on free" },
     { icon: Fingerprint, label: "Unlimited biometric unlocks", was: "5 a day on free" },
     { icon: Camera, label: "Unlimited intruder snapshots", was: "3 on free" },
@@ -115,7 +117,7 @@ export default function ProUpgradeCard({
                             <div className="text-center">
                                 <div className="text-6xl font-black tracking-tighter">{PRO_PRICE}</div>
                                 <p className="mt-1 text-sm font-bold text-violet-600 dark:text-violet-400">
-                                    One-time · Lifetime
+                                    One-time · Lifetime (5 devices)
                                 </p>
                             </div>
                             <a

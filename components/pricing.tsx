@@ -1,13 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck } from "lucide-react"
+import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop } from "lucide-react"
 import { PRO_CHECKOUT_URL } from "@/lib/pro"
 
 export default function Pricing() {
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
 
   const proFeatures = [
+    { title: "Use on Up to 5 Devices", desc: "Simultaneous access across 5 personal computers/browsers with built-in Device Manager", icon: <Laptop className="w-4 h-4" /> },
     { title: "Privacy Blur Manager", desc: "Custom blur levels (Light to Solid), site categories & whitelists", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Unlimited Domain Auto-Locks", desc: "Lock any number of websites & subdomains", icon: <Globe className="w-4 h-4" /> },
     { title: "Unlimited Biometric Unlocks", desc: "Windows Hello, Touch ID, or Face ID access", icon: <Fingerprint className="w-4 h-4" /> },
@@ -134,7 +135,7 @@ export default function Pricing() {
                 <div className="flex items-baseline gap-2">
                   <span className="text-5xl md:text-7xl font-black text-foreground tracking-tighter">$2.99</span>
                 </div>
-                <p className="text-violet-600 dark:text-violet-400 mt-2 font-bold">One-time payment. Yours forever.</p>
+                <p className="text-violet-600 dark:text-violet-400 mt-2 font-bold">One-time payment. Valid on up to 5 devices forever.</p>
               </div>
 
               <div className="h-px w-full bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-transparent mb-8" />
@@ -169,7 +170,7 @@ export default function Pricing() {
               </a>
               <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
                 <ShieldCheck className="w-4 h-4 text-green-500" />
-                Secure payment via Polar.sh
+                Secure payment via Polar.sh · 5 device slots included
               </div>
             </div>
           </div>
