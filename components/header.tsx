@@ -351,6 +351,7 @@ export default function Header() {
                 >
                   <span aria-hidden="true">💎</span> Get Pro
                 </a>
+
                 <a
                   href="https://github.com/sponsors/vansh-121"
                   target="_blank"

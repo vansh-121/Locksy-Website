@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown } from "lucide-react"
+import { useState, useRef, useEffect } from "react"
+import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown, ExternalLink } from "lucide-react"
 import { PRO_CHECKOUT_URL } from "@/lib/pro"
 
 interface PricingProps {
@@ -11,9 +11,50 @@ interface PricingProps {
 
 const INITIAL_VISIBLE_COUNT = 6
 
+const BROWSER_DOWNLOADS = [
+  {
+    name: "Google Chrome",
+    store: "Chrome Web Store",
+    icon: "/browsers/chrome.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+  {
+    name: "Microsoft Edge",
+    store: "Edge Add-ons",
+    icon: "/browsers/edge.png",
+    url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
+  },
+  {
+    name: "Mozilla Firefox",
+    store: "Firefox Add-ons",
+    icon: "/browsers/firefox.png",
+    url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/",
+  },
+  {
+    name: "Brave / Opera / Vivaldi",
+    store: "Chrome Web Store",
+    icon: "/browsers/brave.png",
+    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
+  },
+]
+
 export default function Pricing({ hideHeader = false, className = "" }: PricingProps = {}) {
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
   const [showAllFeatures, setShowAllFeatures] = useState(false)
+  const [showInstallMenu, setShowInstallMenu] = useState(false)
+  const installDropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (installDropdownRef.current && !installDropdownRef.current.contains(event.target as Node)) {
+        setShowInstallMenu(false)
+      }
+    }
+    if (showInstallMenu) {
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [showInstallMenu])
 
   const proFeatures = [
     { title: "Unlimited Domain Auto-Locks", desc: "Lock any number of banking, work & private websites automatically", icon: <Globe className="w-4 h-4" /> },
@@ -129,15 +170,42 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               </button>
             </div>
 
-            <div className="mt-10 space-y-4">
+            <div className="mt-10 space-y-4 relative" ref={installDropdownRef}>
               <button
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent("open-install-dropdown"));
-                }}
-                className="w-full h-14 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center flex items-center justify-center transition-all duration-300 transform active:scale-[0.98] cursor-pointer text-sm sm:text-base"
+                type="button"
+                onClick={() => setShowInstallMenu((prev) => !prev)}
+                className="w-full h-14 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] cursor-pointer text-sm sm:text-base shadow-sm"
               >
-                Download Free Version
+                <span>Download Free Version</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showInstallMenu ? "rotate-180" : ""}`} />
               </button>
+
+              {/* Inline Browser Options Popover */}
+              {showInstallMenu && (
+                <div className="absolute bottom-full left-0 right-0 mb-3 bg-card/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-border/80 overflow-hidden z-50 p-2 space-y-1 animate-in fade-in slide-in-from-bottom-2 duration-200">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground border-b border-border/40">
+                    Choose Your Browser
+                  </div>
+                  {BROWSER_DOWNLOADS.map((browser) => (
+                    <a
+                      key={browser.name}
+                      href={browser.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-accent transition-colors group/store"
+                      onClick={() => setShowInstallMenu(false)}
+                    >
+                      <img src={browser.icon} alt={browser.name} className="w-6 h-6 object-contain flex-shrink-0" />
+                      <div className="flex-1 text-left">
+                        <div className="text-xs font-bold text-foreground group-hover/store:text-primary transition-colors">{browser.name}</div>
+                        <div className="text-[10px] text-muted-foreground">{browser.store}</div>
+                      </div>
+                      <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover/store:text-primary transition-colors flex-shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              )}
+
               <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
                 <ShieldCheck className="w-4 h-4 text-emerald-500" />
                 100% Free Forever • No Account Required
