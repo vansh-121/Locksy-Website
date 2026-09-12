@@ -4,6 +4,7 @@ import "./globals.css"
 import {
   metadata as seoMetadata,
   jsonLdWebsite,
+  jsonLdSiteNavigation,
   jsonLdOrganization,
   jsonLdSoftwareApplication,
   jsonLdProduct,
@@ -51,6 +52,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSiteNavigation) }}
         />
         <script
           type="application/ld+json"

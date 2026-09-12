@@ -141,8 +141,67 @@ export const jsonLdWebsite = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: siteName,
+    alternateName: ['Locksy Tab Locker', 'Locksy Security', 'locksy.dev'],
     url: siteUrl,
     description: siteDescription
+}
+
+// SiteNavigationElement schema feeds Google Sitelinks candidates
+export const jsonLdSiteNavigation = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Locksy Site Navigation',
+    itemListElement: [
+        {
+            '@type': 'SiteNavigationElement',
+            position: 1,
+            name: 'Pricing',
+            description: 'Locksy Free tier and $2.99 lifetime Pro license details.',
+            url: `${siteUrl}/pricing`
+        },
+        {
+            '@type': 'SiteNavigationElement',
+            position: 2,
+            name: 'Blog',
+            description: 'Expert guides on browser tab security, password protection, PBKDF2 encryption, and privacy.',
+            url: `${siteUrl}/blog`
+        },
+        {
+            '@type': 'SiteNavigationElement',
+            position: 3,
+            name: 'User Guide',
+            description: 'Complete user guide for locking tabs, keyboard shortcuts, auto-lock timers, and biometric unlock.',
+            url: `${siteUrl}/guide`
+        },
+        {
+            '@type': 'SiteNavigationElement',
+            position: 4,
+            name: 'Security Architecture',
+            description: 'Detailed security architecture: PBKDF2 with 600,000 iterations, WebAuthn, and local isolation.',
+            url: `${siteUrl}/security`
+        },
+        {
+            '@type': 'SiteNavigationElement',
+            position: 5,
+            name: 'Free Security Tools',
+            description: 'Free browser privacy score, password strength analyzer, and breach lookup tools.',
+            url: `${siteUrl}/tools`
+        },
+        {
+            '@type': 'SiteNavigationElement',
+            position: 6,
+            name: 'Privacy Policy',
+            description: 'Zero data collection policy and complete offline operation guarantees.',
+            url: `${siteUrl}/privacy-policy`
+        },
+        {
+            '@type': 'SiteNavigationElement',
+            position: 7,
+            name: 'Terms of Service',
+            description: 'Usage terms, licensing, and policies for the Locksy browser extension.',
+            url: `${siteUrl}/terms-of-service`
+        }
+    ]
 }
 
 export const jsonLdOrganization = {
