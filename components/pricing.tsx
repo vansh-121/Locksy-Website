@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown, ExternalLink } from "lucide-react"
-import { PRO_CHECKOUT_URL } from "@/lib/pro"
+import { PRO_CHECKOUT_URL, SALE_DEADLINE_UTC, PRO_EARLY_BIRD_PRICE, PRO_REGULAR_PRICE } from "@/lib/pro"
 
 interface PricingProps {
   hideHeader?: boolean
@@ -42,14 +42,14 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
   const [showAllFeatures, setShowAllFeatures] = useState(false)
   const [showInstallMenu, setShowInstallMenu] = useState(false)
+  const [isSaleActive, setIsSaleActive] = useState(true)
   const [saleTimeLeft, setSaleTimeLeft] = useState({ days: 15, hours: 0, mins: 0, secs: 0 })
 
   useEffect(() => {
-    // Target: 1 Oct 12:00 AM UTC (00:00:00 UTC)
-    const targetYear = new Date().getUTCFullYear()
-    let targetTime = Date.UTC(targetYear, 9, 1, 0, 0, 0)
-    if (Date.now() > targetTime) {
-      targetTime = Date.UTC(targetYear + 1, 9, 1, 0, 0, 0)
+    // If early-bird sale deadline has passed (Oct 1, 12:00 AM UTC), automatically deactivate
+    if (Date.now() >= SALE_DEADLINE_UTC) {
+      setIsSaleActive(false)
+      return
     }
 
     // Clear legacy relative localStorage key
@@ -58,7 +58,11 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
     }
 
     const tick = () => {
-      const diff = Math.max(0, targetTime - Date.now())
+      const diff = SALE_DEADLINE_UTC - Date.now()
+      if (diff <= 0) {
+        setIsSaleActive(false)
+        return
+      }
       setSaleTimeLeft({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
         hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -66,6 +70,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
         secs: Math.floor((diff % (1000 * 60)) / 1000),
       })
     }
+
     tick()
     const timer = setInterval(tick, 1000)
     return () => clearInterval(timer)
@@ -147,45 +152,47 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
         )}
 
         {/* Early-Bird Sale Countdown Banner */}
-        <div className="max-w-2xl mx-auto mb-8 sm:mb-10 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
+        {isSaleActive && (
+          <div className="max-w-2xl mx-auto mb-8 sm:mb-10 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
 
-          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-violet-600 dark:bg-violet-400 animate-ping" />
-              🔥 Early-Bird Launch Deal
-            </span>
-            <span className="text-xs sm:text-sm font-bold text-foreground">
-              Locksy Pro increases to <span className="text-violet-700 dark:text-violet-300 font-black">$4.99</span> on Oct 1 (12:00 AM UTC)
-            </span>
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-2">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-violet-600 dark:bg-violet-400 animate-ping" />
+                🔥 Early-Bird Launch Deal
+              </span>
+              <span className="text-xs sm:text-sm font-bold text-foreground">
+                Locksy Pro increases to <span className="text-violet-700 dark:text-violet-300 font-black">$4.99</span> on Oct 1 (12:00 AM UTC)
+              </span>
+            </div>
+
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 my-2 sm:my-2.5 font-mono">
+              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.days).padStart(2, '0')}</span>
+                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Days</span>
+              </div>
+              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.hours).padStart(2, '0')}</span>
+                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Hours</span>
+              </div>
+              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.mins).padStart(2, '0')}</span>
+                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Mins</span>
+              </div>
+              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.secs).padStart(2, '0')}</span>
+                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Secs</span>
+              </div>
+            </div>
+
+            <p className="text-[10px] sm:text-xs font-medium text-muted-foreground">
+              ⚡ Over 500+ lifetime licenses claimed • Lock in <strong className="text-foreground font-bold">$2.99 lifetime</strong> before Oct 1 (12:00 AM UTC)
+            </p>
           </div>
-
-          <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 my-2 sm:my-2.5 font-mono">
-            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
-              <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.days).padStart(2, '0')}</span>
-              <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Days</span>
-            </div>
-            <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
-            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
-              <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.hours).padStart(2, '0')}</span>
-              <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Hours</span>
-            </div>
-            <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
-            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
-              <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.mins).padStart(2, '0')}</span>
-              <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Mins</span>
-            </div>
-            <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
-            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
-              <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.secs).padStart(2, '0')}</span>
-              <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Secs</span>
-            </div>
-          </div>
-
-          <p className="text-[10px] sm:text-xs font-medium text-muted-foreground">
-            ⚡ Over 500+ lifetime licenses claimed • Lock in <strong className="text-foreground font-bold">$2.99 lifetime</strong> before Oct 1 (12:00 AM UTC)
-          </p>
-        </div>
+        )}
 
         {/* Pricing Cards Grid */}
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto items-stretch">
@@ -300,13 +307,25 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               {/* Price section */}
               <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">$2.99</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">
+                    {isSaleActive ? PRO_EARLY_BIRD_PRICE : PRO_REGULAR_PRICE}
+                  </span>
                   <div className="flex flex-col justify-center gap-1">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-700 dark:text-violet-300 text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs w-fit">
-                      <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-ping" />
-                      Early-Bird Price
-                    </span>
-                    <span className="text-[11px] sm:text-xs text-muted-foreground line-through font-semibold pl-1">Increases to $4.99</span>
+                    {isSaleActive ? (
+                      <>
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-700 dark:text-violet-300 text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs w-fit">
+                          <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-ping" />
+                          Early-Bird Price
+                        </span>
+                        <span className="text-[11px] sm:text-xs text-muted-foreground line-through font-semibold pl-1">
+                          Increases to {PRO_REGULAR_PRICE}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-700 dark:text-violet-300 text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs w-fit">
+                        Lifetime License
+                      </span>
+                    )}
                   </div>
                 </div>
                 <p className="text-violet-600 dark:text-violet-400 mt-1.5 sm:mt-2 font-bold text-xs sm:text-sm">One-time payment. Valid on up to 5 devices forever.</p>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { SALE_DEADLINE_UTC } from "@/lib/pro"
 
 const PRIMARY_BROWSERS = [
   {
@@ -67,11 +68,17 @@ export default function Header() {
         }
       } catch {}
 
+      const isExpired = Date.now() >= SALE_DEADLINE_UTC
       const isDismissed =
+        isExpired ||
         sessionStorage.getItem("locksy_banner_dismissed") === "true" ||
         document.documentElement.classList.contains("banner-dismissed")
+
       if (isDismissed) {
         setIsBannerVisible(false)
+        if (isExpired) {
+          document.documentElement.classList.add("banner-dismissed")
+        }
       }
     }
   }, [])
@@ -96,15 +103,24 @@ export default function Header() {
   }
 
   useEffect(() => {
-    // Target: 1 Oct 12:00 AM UTC (00:00:00 UTC)
-    const targetYear = new Date().getUTCFullYear()
-    let targetTime = Date.UTC(targetYear, 9, 1, 0, 0, 0)
-    if (Date.now() > targetTime) {
-      targetTime = Date.UTC(targetYear + 1, 9, 1, 0, 0, 0)
+    // If early-bird sale deadline has passed (Oct 1, 12:00 AM UTC), automatically hide
+    if (Date.now() >= SALE_DEADLINE_UTC) {
+      setIsBannerVisible(false)
+      return
     }
 
     const tick = () => {
-      const diff = Math.max(0, targetTime - Date.now())
+      const diff = SALE_DEADLINE_UTC - Date.now()
+      if (diff <= 0) {
+        // Sale just ended — automatically dismiss and hide the banner
+        setIsBannerVisible(false)
+        try {
+          document.documentElement.classList.add("banner-dismissed")
+          window.dispatchEvent(new CustomEvent("locksy-banner-dismissed"))
+        } catch {}
+        return
+      }
+
       setSaleTimeLeft({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
         hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -112,6 +128,7 @@ export default function Header() {
         secs: Math.floor((diff % (1000 * 60)) / 1000),
       })
     }
+
     tick()
     const timer = setInterval(tick, 1000)
     return () => clearInterval(timer)
