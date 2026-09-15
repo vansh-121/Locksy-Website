@@ -53,7 +53,7 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
 
             <Header />
 
-            <main className="relative max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
+            <main className="relative max-w-7xl mx-auto px-4 md:px-6 page-top-offset pb-12 md:pb-20">
                 {/* Hero Section */}
                 <div className="text-center space-y-6 mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">

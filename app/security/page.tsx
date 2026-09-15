@@ -146,7 +146,7 @@ export default function SecurityPage() {
 
       <Header />
 
-      <main className="min-h-screen bg-background relative overflow-hidden pt-28 pb-24">
+      <main className="min-h-screen bg-background relative overflow-hidden page-top-offset pb-24">
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/6 left-1/4 w-[500px] h-[500px] bg-primary/10 dark:bg-primary/20 rounded-full blur-[120px] animate-pulse" />
@@ -167,7 +167,10 @@ export default function SecurityPage() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6 leading-tight">
-              Locksy Security Architecture & <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">Cryptographic Deep Dive</span>
+              Locksy Security Architecture &{" "}
+              <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
+                Cryptographic Deep Dive
+              </span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">

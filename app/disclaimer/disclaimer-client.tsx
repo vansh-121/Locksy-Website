@@ -83,7 +83,7 @@ export default function DisclaimerClient() {
 
                 <main className="relative">
                     {/* Hero */}
-                    <section className="pt-32 pb-16 md:pt-40 md:pb-24">
+                    <section className="page-top-offset pb-16 md:pb-24">
                         <div className="max-w-7xl mx-auto px-4 md:px-6">
                             {/* Breadcrumb */}
                             <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">

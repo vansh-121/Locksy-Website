@@ -1,6 +1,8 @@
+"use client"
+
 import Image from "next/image"
 import WhatsAppIcon from "./whatsapp-icon"
-import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
+import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 
 export default function Footer() {
   return (
@@ -117,6 +119,7 @@ export default function Footer() {
               <li>
                 <a
                   href={WHATSAPP_CHANNEL_URL}
+                  onClick={openWhatsAppChannel}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
@@ -195,7 +198,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:vansh.sethi98760@gmail.com" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <a href="mailto:vanshsethi.me@gmail.com" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Contact Developer
                 </a>
@@ -319,6 +322,7 @@ export default function Footer() {
               </a>
               <a
                 href={WHATSAPP_CHANNEL_URL}
+                onClick={openWhatsAppChannel}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-neutral-800/50 hover:bg-gradient-to-r hover:from-green-600 hover:to-green-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"

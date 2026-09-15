@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown, ExternalLink } from "lucide-react"
-import { PRO_CHECKOUT_URL } from "@/lib/pro"
+import { PRO_CHECKOUT_URL, SALE_DEADLINE_UTC, PRO_EARLY_BIRD_PRICE, PRO_REGULAR_PRICE } from "@/lib/pro"
 
 interface PricingProps {
   hideHeader?: boolean
@@ -42,6 +42,39 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
   const [showAllFeatures, setShowAllFeatures] = useState(false)
   const [showInstallMenu, setShowInstallMenu] = useState(false)
+  const [isSaleActive, setIsSaleActive] = useState(true)
+  const [saleTimeLeft, setSaleTimeLeft] = useState({ days: 15, hours: 0, mins: 0, secs: 0 })
+
+  useEffect(() => {
+    // If early-bird sale deadline has passed (Oct 1, 12:00 AM UTC), automatically deactivate
+    if (Date.now() >= SALE_DEADLINE_UTC) {
+      setIsSaleActive(false)
+      return
+    }
+
+    // Clear legacy relative localStorage key
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("locksy_early_bird_sale_end")
+    }
+
+    const tick = () => {
+      const diff = SALE_DEADLINE_UTC - Date.now()
+      if (diff <= 0) {
+        setIsSaleActive(false)
+        return
+      }
+      setSaleTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        mins: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+        secs: Math.floor((diff % (1000 * 60)) / 1000),
+      })
+    }
+
+    tick()
+    const timer = setInterval(tick, 1000)
+    return () => clearInterval(timer)
+  }, [])
   const installDropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -96,7 +129,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
     >
       {/* Dynamic Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1000px] bg-gradient-to-tr from-violet-500/10 via-fuchsia-500/10 to-cyan-500/10 blur-3xl rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1000px] bg-gradient-to-tr from-primary/10 via-secondary/10 to-primary/10 blur-3xl rounded-full" />
         <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] opacity-20" />
       </div>
 
@@ -104,13 +137,13 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
         {/* Section Header */}
         {!hideHeader && (
           <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600/10 to-fuchsia-600/10 border border-violet-500/20 rounded-full text-sm font-bold text-violet-600 dark:text-violet-400 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-bold text-primary backdrop-blur-md mb-6 shadow-xs">
               <Sparkles className="w-4 h-4" />
               Simple Transparent Pricing
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent tracking-tight">
               Choose Your Level of <br className="hidden md:block" />
-              <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">Protection</span>
+              <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">Protection</span>
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Start with our powerful core features for free, or unlock the ultimate privacy suite with a one-time lifetime license.
@@ -118,33 +151,76 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
           </div>
         )}
 
-        {/* Pricing Cards Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
-          {/* FREE PLAN */}
-          <div className="group relative flex flex-col justify-between bg-card/20 backdrop-blur-xl rounded-[2.5rem] border border-border/50 p-8 md:p-10 shadow-2xl transition-all duration-300 hover:border-border hover:shadow-3xl hover:bg-card/40">
-            <div>
-              <div className="flex items-center justify-between mb-6 h-8">
-                <span className="text-xl font-black text-foreground tracking-tight">Free Core</span>
-                <span className="text-xs px-3 py-1.5 bg-muted text-muted-foreground rounded-full font-bold uppercase tracking-wider">Free Tier</span>
+        {/* Early-Bird Sale Countdown Banner */}
+        {isSaleActive && (
+          <div className="max-w-2xl mx-auto mb-8 sm:mb-10 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
+
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-2">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-violet-600 dark:bg-violet-400 animate-ping" />
+                🔥 Early-Bird Launch Deal
+              </span>
+              <span className="text-xs sm:text-sm font-bold text-foreground">
+                Locksy Pro increases to <span className="text-violet-700 dark:text-violet-300 font-black">$4.99</span> on Oct 1 (12:00 AM UTC)
+              </span>
+            </div>
+
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 my-2 sm:my-2.5 font-mono">
+              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.days).padStart(2, '0')}</span>
+                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Days</span>
               </div>
-              <div className="mb-8 h-24 flex flex-col justify-end">
+              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.hours).padStart(2, '0')}</span>
+                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Hours</span>
+              </div>
+              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.mins).padStart(2, '0')}</span>
+                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Mins</span>
+              </div>
+              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.secs).padStart(2, '0')}</span>
+                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Secs</span>
+              </div>
+            </div>
+
+            <p className="text-[10px] sm:text-xs font-medium text-muted-foreground">
+              ⚡ Over 500+ lifetime licenses claimed • Lock in <strong className="text-foreground font-bold">$2.99 lifetime</strong> before Oct 1 (12:00 AM UTC)
+            </p>
+          </div>
+        )}
+
+        {/* Pricing Cards Grid */}
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto items-stretch">
+          {/* FREE PLAN */}
+          <div className="group relative flex flex-col justify-between bg-card/20 backdrop-blur-xl rounded-3xl sm:rounded-[2.5rem] border border-border/50 p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-300 hover:border-border hover:shadow-3xl hover:bg-card/40">
+            <div>
+              <div className="flex items-center justify-between mb-4 sm:mb-6 h-8">
+                <span className="text-lg sm:text-xl font-black text-foreground tracking-tight">Free Core</span>
+                <span className="text-xs px-3 py-1 sm:py-1.5 bg-muted text-muted-foreground rounded-full font-bold uppercase tracking-wider">Free Tier</span>
+              </div>
+              <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl md:text-6xl font-black text-foreground tracking-tight">$0</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">$0</span>
                 </div>
-                <p className="text-muted-foreground mt-2 font-medium text-sm">Free forever, no credit card required.</p>
+                <p className="text-muted-foreground mt-1.5 sm:mt-2 font-medium text-xs sm:text-sm">Free forever, no credit card required.</p>
               </div>
 
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-8" />
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-6 sm:mb-8" />
 
               {/* Checklist */}
-              <ul className={`space-y-4 ${showAllFeatures ? "" : "min-h-[420px]"}`}>
+              <ul className={`space-y-3 sm:space-y-4 ${showAllFeatures ? "" : "lg:min-h-[420px]"}`}>
                 {visibleFreeLimits.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-4 min-h-[54px]">
+                  <li key={idx} className="flex items-start gap-3 sm:gap-4 min-h-0 lg:min-h-[54px]">
                     <div className="mt-0.5 p-1 rounded-full bg-muted/50 border border-border/50 text-muted-foreground group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                       {item.icon}
                     </div>
-                    <div className="flex-1">
-                      <strong className="text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
+                    <div className="flex-1 min-w-0">
+                      <strong className="text-xs sm:text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
                       <span className="text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-2">{item.desc}</span>
                     </div>
                   </li>
@@ -155,7 +231,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               <button
                 type="button"
                 onClick={() => setShowAllFeatures(!showAllFeatures)}
-                className="mt-6 flex items-center justify-center gap-2 w-full h-11 px-4 rounded-xl border border-border/60 bg-muted/30 hover:bg-muted/60 text-xs font-bold text-foreground transition-all duration-200 group/expand cursor-pointer"
+                className="mt-6 flex items-center justify-center gap-2 w-full h-10 sm:h-11 px-4 rounded-xl border border-border/60 bg-muted/30 hover:bg-muted/60 text-xs font-bold text-foreground transition-all duration-200 group/expand cursor-pointer"
               >
                 <span>
                   {showAllFeatures
@@ -163,18 +239,17 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                     : `+${freeLimits.length - INITIAL_VISIBLE_COUNT} more features`}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 text-muted-foreground group-hover/expand:text-foreground transition-transform duration-300 ${
-                    showAllFeatures ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 text-muted-foreground group-hover/expand:text-foreground transition-transform duration-300 ${showAllFeatures ? "rotate-180" : ""
+                    }`}
                 />
               </button>
             </div>
 
-            <div className="mt-10 space-y-4 relative" ref={installDropdownRef}>
+            <div className="mt-8 sm:mt-10 space-y-4 relative" ref={installDropdownRef}>
               <button
                 type="button"
                 onClick={() => setShowInstallMenu((prev) => !prev)}
-                className="w-full h-14 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] cursor-pointer text-sm sm:text-base shadow-sm"
+                className="w-full h-12 sm:h-14 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] cursor-pointer text-sm sm:text-base shadow-sm"
               >
                 <span>Download Free Version</span>
                 <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showInstallMenu ? "rotate-180" : ""}`} />
@@ -196,9 +271,9 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                       onClick={() => setShowInstallMenu(false)}
                     >
                       <img src={browser.icon} alt={browser.name} className="w-6 h-6 object-contain flex-shrink-0" />
-                      <div className="flex-1 text-left">
-                        <div className="text-xs font-bold text-foreground group-hover/store:text-primary transition-colors">{browser.name}</div>
-                        <div className="text-[10px] text-muted-foreground">{browser.store}</div>
+                      <div className="flex-1 text-left min-w-0">
+                        <div className="text-xs font-bold text-foreground group-hover/store:text-primary transition-colors truncate">{browser.name}</div>
+                        <div className="text-[10px] text-muted-foreground truncate">{browser.store}</div>
                       </div>
                       <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover/store:text-primary transition-colors flex-shrink-0" />
                     </a>
@@ -206,47 +281,67 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                 </div>
               )}
 
-              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                100% Free Forever • No Account Required
+              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium text-center">
+                <ShieldCheck className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                <span>100% Free Forever • No Account Required</span>
               </div>
             </div>
           </div>
 
           {/* PRO PLAN */}
-          <div className="group relative flex flex-col justify-between bg-card/60 backdrop-blur-2xl rounded-[2.5rem] border-2 border-violet-500/40 p-8 md:p-10 shadow-[0_0_40px_rgba(139,92,246,0.15)] hover:shadow-[0_0_60px_rgba(139,92,246,0.25)] transition-all duration-300 z-10 overflow-hidden">
+          <div className="group relative flex flex-col justify-between bg-card/60 backdrop-blur-2xl rounded-3xl sm:rounded-[2.5rem] border-2 border-primary/40 p-6 sm:p-8 md:p-10 shadow-[0_0_40px_rgba(37,99,235,0.15)] hover:shadow-[0_0_60px_rgba(37,99,235,0.25)] transition-all duration-300 z-10 overflow-hidden">
 
             {/* Animated Glow Effect */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-fuchsia-500/5 to-cyan-500/5 pointer-events-none" />
-
-            {/* Ribbon */}
-            <div className="absolute top-8 right-8 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(139,92,246,0.5)] font-bold text-xs uppercase tracking-wider animate-pulse">
-              Most Popular
-            </div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="flex items-center justify-between mb-6 h-8">
-                <span className="text-xl font-black bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent tracking-tight">Locksy Pro</span>
-              </div>
-              <div className="mb-8 h-24 flex flex-col justify-end">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-5xl md:text-6xl font-black text-foreground tracking-tight">$2.99</span>
-                </div>
-                <p className="text-violet-600 dark:text-violet-400 mt-2 font-bold text-sm">One-time payment. Valid on up to 5 devices forever.</p>
+              {/* Header with Title and Ribbon in single clean flex row */}
+              <div className="flex items-center justify-between mb-4 sm:mb-6 h-8">
+                <span className="text-lg sm:text-xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">Locksy Pro</span>
+                <span className="bg-gradient-to-r from-primary to-secondary text-white px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.4)] font-bold text-[11px] sm:text-xs uppercase tracking-wider animate-pulse">
+                  Most Popular
+                </span>
               </div>
 
-              <div className="h-px w-full bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-transparent mb-8" />
+              {/* Price section */}
+              <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">
+                    {isSaleActive ? PRO_EARLY_BIRD_PRICE : PRO_REGULAR_PRICE}
+                  </span>
+                  <div className="flex flex-col justify-center gap-1">
+                    {isSaleActive ? (
+                      <>
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-700 dark:text-violet-300 text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs w-fit">
+                          <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-ping" />
+                          Early-Bird Price
+                        </span>
+                        <span className="text-[11px] sm:text-xs text-muted-foreground line-through font-semibold pl-1">
+                          Increases to {PRO_REGULAR_PRICE}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-700 dark:text-violet-300 text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs w-fit">
+                        Lifetime License
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <p className="text-violet-600 dark:text-violet-400 mt-1.5 sm:mt-2 font-bold text-xs sm:text-sm">One-time payment. Valid on up to 5 devices forever.</p>
+              </div>
+
+              <div className="h-px w-full bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-transparent mb-6 sm:mb-8" />
 
               {/* Checklist */}
-              <ul className={`space-y-4 ${showAllFeatures ? "" : "min-h-[420px]"}`}>
+              <ul className={`space-y-3 sm:space-y-4 ${showAllFeatures ? "" : "lg:min-h-[420px]"}`}>
                 {visibleProFeatures.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-4 min-h-[54px]">
+                  <li key={idx} className="flex items-start gap-3 sm:gap-4 min-h-0 lg:min-h-[54px]">
                     <div className="mt-0.5 p-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-violet-500 group-hover:to-fuchsia-500 group-hover:text-white dark:group-hover:text-white transition-all duration-300 shadow-sm shadow-violet-500/10 flex-shrink-0">
                       {item.icon}
                     </div>
-                    <div className="flex-1">
-                      <strong className="text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
+                    <div className="flex-1 min-w-0">
+                      <strong className="text-xs sm:text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
                       <span className="text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-2">{item.desc}</span>
                     </div>
                   </li>
@@ -257,7 +352,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               <button
                 type="button"
                 onClick={() => setShowAllFeatures(!showAllFeatures)}
-                className="mt-6 flex items-center justify-center gap-2 w-full h-11 px-4 rounded-xl border border-violet-500/30 bg-violet-500/10 hover:bg-violet-500/20 text-xs font-bold text-violet-600 dark:text-violet-400 transition-all duration-200 group/expand cursor-pointer"
+                className="mt-6 flex items-center justify-center gap-2 w-full h-10 sm:h-11 px-4 rounded-xl border border-violet-500/30 bg-violet-500/10 hover:bg-violet-500/20 text-xs font-bold text-violet-600 dark:text-violet-400 transition-all duration-200 group/expand cursor-pointer"
               >
                 <span>
                   {showAllFeatures
@@ -265,28 +360,27 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                     : `+${proFeatures.length - INITIAL_VISIBLE_COUNT} more features`}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-300 ${
-                    showAllFeatures ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transition-transform duration-300 ${showAllFeatures ? "rotate-180" : ""
+                    }`}
                 />
               </button>
             </div>
 
-            <div className="mt-10 space-y-4 relative z-10">
+            <div className="mt-8 sm:mt-10 space-y-4 relative z-10">
               <a
                 href={PRO_CHECKOUT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative w-full h-14 bg-foreground text-background font-black rounded-2xl text-center flex items-center justify-center overflow-hidden transform transition-all duration-300 active:scale-[0.98] group/btn hover:shadow-xl hover:shadow-violet-500/20 text-sm sm:text-base"
+                className="relative w-full h-12 sm:h-14 bg-foreground text-background font-black rounded-2xl text-center flex items-center justify-center overflow-hidden transform transition-all duration-300 active:scale-[0.98] group/btn hover:shadow-xl hover:shadow-violet-500/20 text-sm sm:text-base"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
-                  Upgrade to Pro Now <Zap className="w-5 h-5 animate-pulse" />
+                  Get Lifetime Pro — $2.99 <Zap className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" />
                 </span>
               </a>
-              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
-                <ShieldCheck className="w-4 h-4 text-green-500" />
-                Secure payment via Polar.sh · 5 device slots included
+              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium text-center">
+                <ShieldCheck className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                <span>Secure payment via Polar.sh · 5 device slots included</span>
               </div>
             </div>
           </div>

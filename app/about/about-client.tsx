@@ -71,7 +71,7 @@ export default function AboutClient({ guideCount }: { guideCount: number }) {
 
                 <main className="relative">
                     {/* Hero */}
-                    <section className="pt-32 pb-20 md:pt-40 md:pb-28">
+                    <section className="page-top-offset pb-20 md:pb-28">
                         <div className="max-w-7xl mx-auto px-4 md:px-6">
                             <div className="text-center space-y-8">
                                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">

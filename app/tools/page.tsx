@@ -100,7 +100,7 @@ export default function ToolsHubPage() {
 
       <Header />
 
-      <main className="min-h-screen bg-background relative overflow-hidden pt-28 pb-24">
+      <main className="min-h-screen bg-background relative overflow-hidden page-top-offset pb-24">
         {/* Ambient Glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/6 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
@@ -116,7 +116,10 @@ export default function ToolsHubPage() {
               100% Free & Privacy-Preserving Web Tools
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
-              Free Online <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">Security & Privacy Tools</span>
+              Free Online{" "}
+              <span className="block sm:inline bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
+                Security &amp; Privacy Tools
+              </span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Explore our collection of free tools designed to help you secure your online presence, generate strong credentials, and protect your digital privacy.

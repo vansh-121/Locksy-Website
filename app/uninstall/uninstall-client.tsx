@@ -31,7 +31,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import ProUpgradeCard from "@/components/pro-upgrade-card"
 import WhatsAppIcon from "@/components/whatsapp-icon"
-import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
+import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 import { PRO_CHECKOUT_URL } from "@/lib/pro"
 
 const BROWSERS = [
@@ -304,7 +304,7 @@ export default function UninstallClient({
             <Header />
 
             {/* ══ 1. HERO — the loss, stated as a present-tense fact ═════════ */}
-            <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent via-background to-accent pt-28 pb-16 md:pt-36 md:pb-20">
+            <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent via-background to-accent page-top-offset pb-16 md:pb-20">
                 {/* Same wash as the marketing hero (components/hero.tsx) so the page
                     still reads as Locksy. The alarm is carried in red by the badge,
                     the headline and the unlocked-tabs mockup — the colour this site
@@ -463,14 +463,14 @@ export default function UninstallClient({
                                             onClick={() => toggle(reason.id)}
                                             aria-pressed={on}
                                             className={`group flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all duration-300 ${on
-                                                    ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
-                                                    : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                                                ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
+                                                : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
                                                 }`}
                                         >
                                             <span
                                                 className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-colors ${on
-                                                        ? "bg-gradient-to-br from-primary to-secondary text-white"
-                                                        : "bg-muted text-muted-foreground group-hover:text-primary"
+                                                    ? "bg-gradient-to-br from-primary to-secondary text-white"
+                                                    : "bg-muted text-muted-foreground group-hover:text-primary"
                                                     }`}
                                             >
                                                 <Icon className="h-5 w-5" />
@@ -628,6 +628,7 @@ export default function UninstallClient({
                                 </a>
                                 <a
                                     href={WHATSAPP_CHANNEL_URL}
+                                    onClick={openWhatsAppChannel}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-xl sm:w-auto"
@@ -957,6 +958,7 @@ export default function UninstallClient({
 
                         <a
                             href={WHATSAPP_CHANNEL_URL}
+                            onClick={openWhatsAppChannel}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#25D366]/50 hover:shadow-md"
@@ -1017,7 +1019,7 @@ export default function UninstallClient({
                         </a>
 
                         <a
-                            href="mailto:vansh.sethi98760@gmail.com"
+                            href="mailto:vanshsethi.me@gmail.com"
                             className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
                         >
                             <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white">

@@ -3,7 +3,7 @@
 import { MessageCircle, Clock, Shield, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import WhatsAppIcon from "@/components/whatsapp-icon"
-import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
+import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 
 export default function SupportChatCTA() {
   const openChat = () => {
@@ -78,6 +78,7 @@ export default function SupportChatCTA() {
 
             <a
               href={WHATSAPP_CHANNEL_URL}
+              onClick={openWhatsAppChannel}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 rounded-md bg-[#25D366] px-6 h-10 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-xl"

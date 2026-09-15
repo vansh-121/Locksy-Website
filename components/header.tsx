@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { SALE_DEADLINE_UTC } from "@/lib/pro"
 
 const PRIMARY_BROWSERS = [
   {
@@ -52,7 +53,86 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [showDownloadDropdown, setShowDownloadDropdown] = useState(false)
+  const [saleTimeLeft, setSaleTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number } | null>(null)
+  
+  // Always initialize to true so SSR HTML matches client initial render (avoids hydration error)
+  const [isBannerVisible, setIsBannerVisible] = useState(true)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Clear any legacy cross-tab cookie so dismissal is strictly per-tab
+      try {
+        if (document.cookie.includes("locksy_banner_dismissed")) {
+          document.cookie = "locksy_banner_dismissed=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+        }
+      } catch {}
+
+      const isExpired = Date.now() >= SALE_DEADLINE_UTC
+      const isDismissed =
+        isExpired ||
+        sessionStorage.getItem("locksy_banner_dismissed") === "true" ||
+        document.documentElement.classList.contains("banner-dismissed")
+
+      if (isDismissed) {
+        setIsBannerVisible(false)
+        if (isExpired) {
+          document.documentElement.classList.add("banner-dismissed")
+        }
+      }
+    }
+  }, [])
+
+  const handleDismissBanner = () => {
+    setIsBannerVisible(false)
+    if (typeof window !== "undefined") {
+      try {
+        sessionStorage.setItem("locksy_banner_dismissed", "true")
+        document.documentElement.classList.add("banner-dismissed")
+        let style = document.getElementById("banner-dismiss-style")
+        if (!style) {
+          style = document.createElement("style")
+          style.id = "banner-dismiss-style"
+          document.head.appendChild(style)
+        }
+        style.textContent =
+          "#top-announcement-banner { display: none !important; } html.banner-dismissed #hero-section { padding-top: 7rem !important; } @media (min-width: 768px) { html.banner-dismissed #hero-section { padding-top: 8rem !important; } } @media (min-width: 1024px) { html.banner-dismissed #hero-section { padding-top: 8rem !important; } } html.banner-dismissed .page-top-offset { padding-top: 5.75rem !important; } @media (min-width: 768px) { html.banner-dismissed .page-top-offset { padding-top: 7rem !important; } }"
+        window.dispatchEvent(new CustomEvent("locksy-banner-dismissed"))
+      } catch {}
+    }
+  }
+
+  useEffect(() => {
+    // If early-bird sale deadline has passed (Oct 1, 12:00 AM UTC), automatically hide
+    if (Date.now() >= SALE_DEADLINE_UTC) {
+      setIsBannerVisible(false)
+      return
+    }
+
+    const tick = () => {
+      const diff = SALE_DEADLINE_UTC - Date.now()
+      if (diff <= 0) {
+        // Sale just ended — automatically dismiss and hide the banner
+        setIsBannerVisible(false)
+        try {
+          document.documentElement.classList.add("banner-dismissed")
+          window.dispatchEvent(new CustomEvent("locksy-banner-dismissed"))
+        } catch {}
+        return
+      }
+
+      setSaleTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        mins: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+        secs: Math.floor((diff % (1000 * 60)) / 1000),
+      })
+    }
+
+    tick()
+    const timer = setInterval(tick, 1000)
+    return () => clearInterval(timer)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,11 +167,110 @@ export default function Header() {
 
   return (
     <header
+      suppressHydrationWarning
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
         ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
         : "bg-transparent"
         }`}
     >
+      {/* Early Bird Sale Top Announcement Banner */}
+      {isBannerVisible && (
+        <div
+          id="top-announcement-banner"
+          suppressHydrationWarning
+          className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-purple-900 to-fuchsia-950 border-b border-violet-500/25 text-white py-2 sm:py-2.5 pl-3 pr-9 sm:pl-4 sm:pr-10 md:px-12 shadow-sm"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-fuchsia-500/15 to-cyan-500/10 pointer-events-none" />
+
+          {/* Mobile View (< sm: 640px) - Single sleek, compact line that fits 320px+ */}
+          <div className="relative z-10 flex sm:hidden items-center justify-center gap-1.5 sm:gap-2 text-xs">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-violet-500/30 text-violet-200 border border-violet-400/35 flex-shrink-0">
+              🔥 40% OFF
+            </span>
+            <span className="font-semibold text-violet-100 text-[11px] truncate">
+              Lifetime <strong className="text-white font-extrabold text-xs">$2.99</strong>
+              <span className="hidden min-[380px]:inline line-through text-violet-300/60 text-[10px] ml-1">$4.99</span>
+            </span>
+            <a
+              href="/pricing"
+              className="inline-flex items-center gap-0.5 px-2.5 py-0.5 rounded-full bg-white text-violet-950 font-black text-[11px] shadow-xs hover:bg-violet-100 active:scale-95 transition-all flex-shrink-0"
+            >
+              <span>Get Pro</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          {/* Tablet & Desktop View (>= sm: 640px) - Adaptive single-line row */}
+          <div className="relative z-10 hidden sm:flex items-center justify-center gap-x-2 md:gap-x-4 lg:gap-x-6 text-xs sm:text-sm">
+            {/* Tag & Offer */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-500/25 text-violet-200 border border-violet-400/40 shadow-xs flex-shrink-0">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-fuchsia-300"></span>
+                </span>
+                <span>🔥 40% OFF</span>
+              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-medium text-violet-100">
+                  Locksy Pro <strong className="text-white font-bold">Lifetime</strong> for{" "}
+                  <strong className="text-white font-extrabold text-sm">$2.99</strong>
+                </span>
+                <span className="line-through text-violet-300/60 font-semibold text-xs">$4.99</span>
+                <span className="hidden xl:inline text-violet-300/85 text-xs font-medium">
+                  (Price rises Oct 1)
+                </span>
+              </div>
+            </div>
+
+            {/* Divider (lg+) */}
+            <div className="hidden lg:block h-3.5 w-px bg-white/20" />
+
+            {/* Action Area: Countdown & CTA Button */}
+            <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+              {/* Segmented Countdown (md+) */}
+              {saleTimeLeft && (
+                <div className="hidden md:flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/40 border border-white/20 backdrop-blur-md text-[11px] sm:text-xs shadow-inner">
+                  <span className="text-[11px]">⏳</span>
+                  <span className="text-violet-300/90 text-[10px] font-bold uppercase tracking-wider hidden lg:inline">Ends in</span>
+                  <div className="flex items-center gap-1 font-mono font-bold tracking-tight">
+                    <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{saleTimeLeft.days}d</span>
+                    <span className="text-violet-400 font-black">:</span>
+                    <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{String(saleTimeLeft.hours).padStart(2, "0")}h</span>
+                    <span className="text-violet-400 font-black">:</span>
+                    <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{String(saleTimeLeft.mins).padStart(2, "0")}m</span>
+                    <span className="text-violet-400 font-black hidden lg:inline">:</span>
+                    <span className="bg-fuchsia-500/30 text-fuchsia-200 px-1.5 py-0.5 rounded font-black hidden lg:inline">{String(saleTimeLeft.secs).padStart(2, "0")}s</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Claim Button */}
+              <a
+                href="/pricing"
+                className="relative inline-flex items-center gap-1 px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 rounded-full bg-white text-violet-950 hover:bg-violet-50 text-xs font-black shadow-md shadow-white/10 transition-all duration-200 hover:scale-105 active:scale-95 group flex-shrink-0 overflow-hidden"
+              >
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-violet-200/40 to-transparent pointer-events-none" />
+                <span className="relative hidden md:inline">Get Lifetime Access</span>
+                <span className="relative md:hidden">Get Access</span>
+                <span className="relative inline-block transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Close / Dismiss Button */}
+          <button
+            type="button"
+            onClick={handleDismissBanner}
+            aria-label="Dismiss banner"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-violet-300/80 hover:text-white hover:bg-white/10 transition-colors z-20 cursor-pointer"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">

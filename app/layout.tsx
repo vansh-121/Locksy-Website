@@ -12,6 +12,7 @@ import {
 } from "@/lib/metadata"
 import ChatSupport from "@/components/chat-support"
 import WhatsAppFloat from "@/components/whatsapp-float"
+import WhatsAppDialog from "@/components/whatsapp-dialog"
 import CookieConsent from "@/components/cookie-consent"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -28,6 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden" suppressHydrationWarning>
       <head>
+        {/* Prevent flash of dismissed sale banner & maintain hero spacing before React hydration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{document.cookie='locksy_banner_dismissed=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';if(sessionStorage.getItem('locksy_banner_dismissed')==='true'||Date.now()>=1790812800000){document.documentElement.classList.add('banner-dismissed');document.write('<style id="banner-dismiss-style">#top-announcement-banner{display:none!important;}html.banner-dismissed #hero-section{padding-top:7rem!important;}@media(min-width:768px){html.banner-dismissed #hero-section{padding-top:8rem!important;}}@media(min-width:1024px){html.banner-dismissed #hero-section{padding-top:8rem!important;}}html.banner-dismissed .page-top-offset{padding-top:5.75rem!important;}@media(min-width:768px){html.banner-dismissed .page-top-offset{padding-top:7rem!important;}}</style>');}}catch(e){}`,
+          }}
+        />
         {/* RSS Feed Auto-Discovery */}
         <link
           rel="alternate"
@@ -84,6 +91,7 @@ export default function RootLayout({
         >
           {children}
           <WhatsAppFloat />
+          <WhatsAppDialog />
           <ChatSupport />
           <CookieConsent />
         </ThemeProvider>

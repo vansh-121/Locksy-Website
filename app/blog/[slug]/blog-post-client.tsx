@@ -68,7 +68,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
 
             <Header />
 
-            <main className="relative max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
+            <main className="relative max-w-7xl mx-auto px-4 md:px-6 page-top-offset pb-12 md:pb-20">
                 {/* Breadcrumb */}
                 <div className="max-w-4xl mx-auto mb-8">
                     <Link href="/blog">
