@@ -338,8 +338,8 @@ export default function PricingPage() {
 
                         <div className="text-center">
                             {/* Eyebrow Badge */}
-                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-primary shadow-sm backdrop-blur-md">
-                                <Sparkles className="h-3.5 w-3.5 text-primary" />
+                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-gradient-to-r from-violet-600/10 via-fuchsia-600/10 to-cyan-600/10 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 shadow-sm backdrop-blur-md">
+                                <Sparkles className="h-3.5 w-3.5 text-violet-500" />
                                 <span>Zero Subscription Fatigue • Lifetime License</span>
                             </div>
 
@@ -446,7 +446,7 @@ export default function PricingPage() {
                         {/* Mobile Swipe Indicator */}
                         <div className="flex md:hidden items-center justify-between px-5 py-2.5 bg-muted/40 border-b border-border/50 text-[11px] font-medium text-muted-foreground">
                             <span>Feature Breakdown</span>
-                            <span className="flex items-center gap-1 text-primary font-bold">Swipe to compare &rarr;</span>
+                            <span className="flex items-center gap-1 text-violet-600 dark:text-violet-400 font-bold">Swipe to compare &rarr;</span>
                         </div>
 
                         {/* Scrollable Container on Mobile */}
@@ -465,8 +465,8 @@ export default function PricingPage() {
                                         </span>
                                     </div>
                                     <div className="col-span-3 text-center md:text-left">
-                                        <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
-                                            <Sparkles className="h-3 w-3" /> Locksy Pro
+                                        <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400">
+                                            <Sparkles className="h-3 w-3 text-violet-500" /> Locksy Pro
                                         </span>
                                     </div>
                                 </div>
@@ -529,14 +529,14 @@ export default function PricingPage() {
                                                         {/* Pro Column */}
                                                         <div className="col-span-3 flex items-center justify-center md:justify-start">
                                                             {feature.proType === "check" && (
-                                                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
-                                                                    <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                                                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-violet-600 dark:text-violet-400">
+                                                                    <Check className="h-4 w-4 text-violet-500 flex-shrink-0" />
                                                                     <span>{feature.pro}</span>
                                                                 </span>
                                                             )}
                                                             {feature.proType === "highlight" && (
-                                                                <span className="inline-flex items-center gap-1 rounded-lg border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary shadow-xs">
-                                                                    <Sparkles className="h-3 w-3 text-primary flex-shrink-0" />
+                                                                <span className="inline-flex items-center gap-1 rounded-lg border border-violet-500/30 bg-violet-500/10 px-2.5 py-1 text-xs font-bold text-violet-600 dark:text-violet-400 shadow-sm">
+                                                                    <Sparkles className="h-3 w-3 text-violet-500 flex-shrink-0" />
                                                                     <span>{feature.pro}</span>
                                                                 </span>
                                                             )}
