@@ -219,7 +219,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
+    <section className="relative pt-28 pb-20 md:pt-40 md:pb-32 lg:pt-44 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl animate-pulse" />
@@ -230,29 +230,29 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Left: Content */}
-          <div className="space-y-10 z-10">
-            {/* Badge */}
-            <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
+          <div className="space-y-8 z-10">
+            <div>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-4">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 Works on all major browsers
               </div>
-            </div>
 
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-7xl font-black leading-tight text-foreground">
-                Password Protect &amp; Lock Your{" "}
-                <span className="block bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
-                  Browser Tabs
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Locksy password-protects any browser tab — or a whole website — with a single click.
-                It's free, works offline, and needs no account.
-              </p>
+              <div className="space-y-6">
+                <h1 className="text-5xl md:text-7xl font-black leading-tight text-foreground">
+                  Password Protect &amp; Lock Your{" "}
+                  <span className="block bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
+                    Browser Tabs
+                  </span>
+                </h1>
+                <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+                  Locksy password-protects any browser tab — or a whole website — with a single click.
+                  It's free, works offline, and needs no account.
+                </p>
+              </div>
             </div>
 
             {/* Browser Download Buttons */}

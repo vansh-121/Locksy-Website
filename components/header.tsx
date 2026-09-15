@@ -116,46 +116,55 @@ export default function Header() {
         }`}
     >
       {/* Early Bird Sale Top Announcement Banner */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-purple-900 to-fuchsia-950 border-b border-violet-500/25 text-white py-2 px-4 shadow-sm">
+      <div className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-purple-900 to-fuchsia-950 border-b border-violet-500/25 text-white py-2.5 px-4 sm:px-6 shadow-sm">
         <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-fuchsia-500/15 to-cyan-500/10 pointer-events-none" />
         
-        <div className="relative z-10 max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs sm:text-sm">
+        <div className="relative z-10 max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 md:gap-x-10 gap-y-2.5 text-xs sm:text-sm">
           {/* Tag & Offer */}
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-500/25 text-violet-200 border border-violet-400/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 animate-ping" />
+          <div className="flex items-center gap-3 sm:gap-3.5">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-500/25 text-violet-200 border border-violet-400/35 shadow-xs flex-shrink-0">
               🔥 Early-Bird Sale
             </span>
-            <span className="font-medium text-violet-100">
-              Locksy Pro for <strong className="text-white font-extrabold">$2.99</strong>
-              <span className="hidden md:inline text-violet-300/80 text-xs ml-1.5">• Increases to $4.99 Oct 1</span>
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-violet-100">
+                Locksy Pro for <strong className="text-white font-extrabold text-sm">$2.99</strong>
+              </span>
+              <span className="hidden md:inline text-violet-300/80 text-xs">
+                (Increases to $4.99 on Oct 1)
+              </span>
+            </div>
           </div>
 
-          {/* Compact Segmented Countdown */}
-          {saleTimeLeft && (
-            <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/40 border border-white/15 backdrop-blur-md text-[11px] sm:text-xs">
-              <span className="text-violet-300/90 text-[10px] font-semibold uppercase tracking-wider hidden xs:inline">Ends in</span>
-              <div className="flex items-center gap-1 font-mono font-bold tracking-tight">
-                <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{saleTimeLeft.days}d</span>
-                <span className="text-violet-400 font-black">:</span>
-                <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{String(saleTimeLeft.hours).padStart(2, "0")}h</span>
-                <span className="text-violet-400 font-black">:</span>
-                <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{String(saleTimeLeft.mins).padStart(2, "0")}m</span>
-                <span className="text-violet-400 font-black">:</span>
-                <span className="bg-fuchsia-500/30 text-fuchsia-200 px-1.5 py-0.5 rounded font-black">{String(saleTimeLeft.secs).padStart(2, "0")}s</span>
-              </div>
-            </div>
-          )}
+          {/* Divider */}
+          <div className="hidden lg:block h-4 w-px bg-white/20" />
 
-          {/* Claim Button */}
-          <a
-            href="/pricing"
-            className="inline-flex items-center gap-1 px-3.5 py-1 rounded-full bg-white text-violet-950 hover:bg-violet-100 text-xs font-black shadow-sm transition-all duration-200 hover:scale-105 active:scale-95 group flex-shrink-0"
-          >
-            <span>Claim Deal</span>
-            <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
-          </a>
+          {/* Action Area: Countdown & CTA Button */}
+          <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0">
+            {/* Compact Segmented Countdown */}
+            {saleTimeLeft && (
+              <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/40 border border-white/20 backdrop-blur-md text-[11px] sm:text-xs shadow-inner">
+                <span className="text-violet-300/90 text-[10px] font-bold uppercase tracking-wider hidden sm:inline">Ends in</span>
+                <div className="flex items-center gap-1.5 font-mono font-bold tracking-tight">
+                  <span className="bg-white/10 px-2 py-0.5 rounded text-white font-black">{saleTimeLeft.days}d</span>
+                  <span className="text-violet-400 font-black">:</span>
+                  <span className="bg-white/10 px-2 py-0.5 rounded text-white font-black">{String(saleTimeLeft.hours).padStart(2, "0")}h</span>
+                  <span className="text-violet-400 font-black">:</span>
+                  <span className="bg-white/10 px-2 py-0.5 rounded text-white font-black">{String(saleTimeLeft.mins).padStart(2, "0")}m</span>
+                  <span className="text-violet-400 font-black">:</span>
+                  <span className="bg-fuchsia-500/30 text-fuchsia-200 px-2 py-0.5 rounded font-black">{String(saleTimeLeft.secs).padStart(2, "0")}s</span>
+                </div>
+              </div>
+            )}
+
+            {/* Claim Button */}
+            <a
+              href="/pricing"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white text-violet-950 hover:bg-violet-100 text-xs font-black shadow-sm transition-all duration-200 hover:scale-105 active:scale-95 group flex-shrink-0"
+            >
+              <span>Claim Deal</span>
+              <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+            </a>
+          </div>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
