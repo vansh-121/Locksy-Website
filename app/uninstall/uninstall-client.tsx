@@ -304,7 +304,7 @@ export default function UninstallClient({
             <Header />
 
             {/* ══ 1. HERO — the loss, stated as a present-tense fact ═════════ */}
-            <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent via-background to-accent pt-28 pb-16 md:pt-36 md:pb-20">
+            <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent via-background to-accent page-top-offset pb-16 md:pb-20">
                 {/* Same wash as the marketing hero (components/hero.tsx) so the page
                     still reads as Locksy. The alarm is carried in red by the badge,
                     the headline and the unlocked-tabs mockup — the colour this site

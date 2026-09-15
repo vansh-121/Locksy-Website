@@ -14,7 +14,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
         <>
             <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
                 <Header />
-                <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+                <section className="relative page-top-offset pb-20 md:pb-28 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
                         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
                         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />

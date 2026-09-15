@@ -68,7 +68,7 @@ export default function GuidePage() {
 
       <Header />
 
-      <main className="min-h-screen bg-background pt-28 pb-24">
+      <main className="min-h-screen bg-background page-top-offset pb-24">
         {/* ── Page header ─────────────────────────────────────────────── */}
         <div className="relative overflow-hidden border-b border-border/50">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">

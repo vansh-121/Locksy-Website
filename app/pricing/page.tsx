@@ -316,7 +316,7 @@ export default function PricingPage() {
             />
 
             <Header />
-            <main className="min-h-screen bg-background pt-28 sm:pt-32 md:pt-36">
+            <main className="min-h-screen bg-background page-top-offset">
                 {/* ── Page Hero ─────────────────────────────────────────────── */}
                 <div className="relative overflow-hidden pb-4 pt-4 md:pb-8 md:pt-8">
                     {/* Background glow effects */}

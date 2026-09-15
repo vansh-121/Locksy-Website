@@ -146,7 +146,7 @@ export default function SecurityPage() {
 
       <Header />
 
-      <main className="min-h-screen bg-background relative overflow-hidden pt-28 pb-24">
+      <main className="min-h-screen bg-background relative overflow-hidden page-top-offset pb-24">
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/6 left-1/4 w-[500px] h-[500px] bg-primary/10 dark:bg-primary/20 rounded-full blur-[120px] animate-pulse" />

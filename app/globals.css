@@ -210,6 +210,38 @@ html.transitioning *::after {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
 }
 
+/* Dynamic page offset below the fixed header (Globally synchronized with announcement banner) */
+:root {
+  --header-height: 108px;
+  --page-top-spacing: 8rem; /* 128px on mobile */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-height: 136px;
+    --page-top-spacing: 10rem; /* 160px on tablet/desktop */
+  }
+}
+
+/* When announcement banner is dismissed (per tab session) */
+html.banner-dismissed {
+  --header-height: 72px;
+  --page-top-spacing: 5.75rem; /* 92px on mobile */
+}
+
+@media (min-width: 768px) {
+  html.banner-dismissed {
+    --header-height: 88px;
+    --page-top-spacing: 7rem; /* 112px on tablet/desktop */
+  }
+}
+
+/* Global page header offset applied across all pages */
+.page-top-offset {
+  padding-top: var(--page-top-spacing) !important;
+  transition: padding-top 0.25s ease-out;
+}
+
 /* Instantly suppress dismissed announcement banner before JS hydration */
 html.banner-dismissed #top-announcement-banner {
   display: none !important;
@@ -231,3 +263,14 @@ html.banner-dismissed #hero-section {
     padding-top: 8rem !important; /* 128px on desktop */
   }
 }
+
+html.banner-dismissed .page-top-offset {
+  padding-top: 5.75rem !important;
+}
+
+@media (min-width: 768px) {
+  html.banner-dismissed .page-top-offset {
+    padding-top: 7rem !important;
+  }
+}
+

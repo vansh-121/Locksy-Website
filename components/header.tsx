@@ -89,7 +89,7 @@ export default function Header() {
           document.head.appendChild(style)
         }
         style.textContent =
-          "#top-announcement-banner { display: none !important; } html.banner-dismissed #hero-section { padding-top: 7rem !important; } @media (min-width: 768px) { html.banner-dismissed #hero-section { padding-top: 8rem !important; } } @media (min-width: 1024px) { html.banner-dismissed #hero-section { padding-top: 8rem !important; } }"
+          "#top-announcement-banner { display: none !important; } html.banner-dismissed #hero-section { padding-top: 7rem !important; } @media (min-width: 768px) { html.banner-dismissed #hero-section { padding-top: 8rem !important; } } @media (min-width: 1024px) { html.banner-dismissed #hero-section { padding-top: 8rem !important; } } html.banner-dismissed .page-top-offset { padding-top: 5.75rem !important; } @media (min-width: 768px) { html.banner-dismissed .page-top-offset { padding-top: 7rem !important; } }"
         window.dispatchEvent(new CustomEvent("locksy-banner-dismissed"))
       } catch {}
     }
