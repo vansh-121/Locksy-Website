@@ -301,9 +301,12 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
                 <div className="flex items-center gap-2.5 sm:gap-3">
                   <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">$2.99</span>
-                  <div className="flex flex-col justify-center">
-                    <span className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wide">Early-Bird Price</span>
-                    <span className="text-[11px] sm:text-xs text-muted-foreground line-through">Increases to $4.99</span>
+                  <div className="flex flex-col justify-center gap-1">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-700 dark:text-violet-300 text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs w-fit">
+                      <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-ping" />
+                      Early-Bird Price
+                    </span>
+                    <span className="text-[11px] sm:text-xs text-muted-foreground line-through font-semibold pl-1">Increases to $4.99</span>
                   </div>
                 </div>
                 <p className="text-violet-600 dark:text-violet-400 mt-1.5 sm:mt-2 font-bold text-xs sm:text-sm">One-time payment. Valid on up to 5 devices forever.</p>
