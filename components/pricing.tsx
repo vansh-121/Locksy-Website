@@ -149,7 +149,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
         {/* Early-Bird Sale Countdown Banner */}
         <div className="max-w-2xl mx-auto mb-10 p-4 sm:p-5 rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
-          
+
           <div className="flex flex-wrap items-center justify-center gap-2 mb-2.5">
             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-violet-600 dark:bg-violet-400 animate-ping" />
@@ -183,7 +183,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
           </div>
 
           <p className="text-[11px] sm:text-xs font-medium text-muted-foreground">
-            ⚡ Over 50+ lifetime licenses claimed • Lock in <strong className="text-foreground font-bold">$2.99 lifetime</strong> before Oct 1 (12:00 AM UTC)
+            ⚡ Over 500+ lifetime licenses claimed • Lock in <strong className="text-foreground font-bold">$2.99 lifetime</strong> before Oct 1 (12:00 AM UTC)
           </p>
         </div>
 
@@ -232,9 +232,8 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                     : `+${freeLimits.length - INITIAL_VISIBLE_COUNT} more features`}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 text-muted-foreground group-hover/expand:text-foreground transition-transform duration-300 ${
-                    showAllFeatures ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 text-muted-foreground group-hover/expand:text-foreground transition-transform duration-300 ${showAllFeatures ? "rotate-180" : ""
+                    }`}
                 />
               </button>
             </div>
@@ -339,9 +338,8 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                     : `+${proFeatures.length - INITIAL_VISIBLE_COUNT} more features`}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-300 ${
-                    showAllFeatures ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transition-transform duration-300 ${showAllFeatures ? "rotate-180" : ""
+                    }`}
                 />
               </button>
             </div>
