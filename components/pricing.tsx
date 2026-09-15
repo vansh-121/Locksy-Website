@@ -147,12 +147,12 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
         )}
 
         {/* Early-Bird Sale Countdown Banner */}
-        <div className="max-w-2xl mx-auto mb-10 p-4 sm:p-5 rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
+        <div className="max-w-2xl mx-auto mb-8 sm:mb-10 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
 
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-2.5">
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-violet-600 dark:bg-violet-400 animate-ping" />
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-violet-600 dark:bg-violet-400 animate-ping" />
               🔥 Early-Bird Launch Deal
             </span>
             <span className="text-xs sm:text-sm font-bold text-foreground">
@@ -160,60 +160,60 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
             </span>
           </div>
 
-          <div className="flex items-center justify-center gap-2 sm:gap-2.5 my-2.5 font-mono">
-            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-2xl px-3 py-1.5 min-w-[50px] shadow-sm">
-              <span className="text-lg sm:text-xl font-black text-foreground">{String(saleTimeLeft.days).padStart(2, '0')}</span>
-              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Days</span>
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 my-2 sm:my-2.5 font-mono">
+            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+              <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.days).padStart(2, '0')}</span>
+              <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Days</span>
             </div>
-            <span className="text-violet-600 dark:text-violet-400 font-black text-base pb-2">:</span>
-            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-2xl px-3 py-1.5 min-w-[50px] shadow-sm">
-              <span className="text-lg sm:text-xl font-black text-foreground">{String(saleTimeLeft.hours).padStart(2, '0')}</span>
-              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Hours</span>
+            <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+              <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.hours).padStart(2, '0')}</span>
+              <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Hours</span>
             </div>
-            <span className="text-violet-600 dark:text-violet-400 font-black text-base pb-2">:</span>
-            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-2xl px-3 py-1.5 min-w-[50px] shadow-sm">
-              <span className="text-lg sm:text-xl font-black text-foreground">{String(saleTimeLeft.mins).padStart(2, '0')}</span>
-              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Mins</span>
+            <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+              <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.mins).padStart(2, '0')}</span>
+              <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Mins</span>
             </div>
-            <span className="text-violet-600 dark:text-violet-400 font-black text-base pb-2">:</span>
-            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-2xl px-3 py-1.5 min-w-[50px] shadow-sm">
-              <span className="text-lg sm:text-xl font-black text-foreground">{String(saleTimeLeft.secs).padStart(2, '0')}</span>
-              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Secs</span>
+            <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
+            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
+              <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.secs).padStart(2, '0')}</span>
+              <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Secs</span>
             </div>
           </div>
 
-          <p className="text-[11px] sm:text-xs font-medium text-muted-foreground">
+          <p className="text-[10px] sm:text-xs font-medium text-muted-foreground">
             ⚡ Over 500+ lifetime licenses claimed • Lock in <strong className="text-foreground font-bold">$2.99 lifetime</strong> before Oct 1 (12:00 AM UTC)
           </p>
         </div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto items-stretch">
           {/* FREE PLAN */}
-          <div className="group relative flex flex-col justify-between bg-card/20 backdrop-blur-xl rounded-[2.5rem] border border-border/50 p-8 md:p-10 shadow-2xl transition-all duration-300 hover:border-border hover:shadow-3xl hover:bg-card/40">
+          <div className="group relative flex flex-col justify-between bg-card/20 backdrop-blur-xl rounded-3xl sm:rounded-[2.5rem] border border-border/50 p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-300 hover:border-border hover:shadow-3xl hover:bg-card/40">
             <div>
-              <div className="flex items-center justify-between mb-6 h-8">
-                <span className="text-xl font-black text-foreground tracking-tight">Free Core</span>
-                <span className="text-xs px-3 py-1.5 bg-muted text-muted-foreground rounded-full font-bold uppercase tracking-wider">Free Tier</span>
+              <div className="flex items-center justify-between mb-4 sm:mb-6 h-8">
+                <span className="text-lg sm:text-xl font-black text-foreground tracking-tight">Free Core</span>
+                <span className="text-xs px-3 py-1 sm:py-1.5 bg-muted text-muted-foreground rounded-full font-bold uppercase tracking-wider">Free Tier</span>
               </div>
-              <div className="mb-8 h-24 flex flex-col justify-end">
+              <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl md:text-6xl font-black text-foreground tracking-tight">$0</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">$0</span>
                 </div>
-                <p className="text-muted-foreground mt-2 font-medium text-sm">Free forever, no credit card required.</p>
+                <p className="text-muted-foreground mt-1.5 sm:mt-2 font-medium text-xs sm:text-sm">Free forever, no credit card required.</p>
               </div>
 
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-8" />
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-6 sm:mb-8" />
 
               {/* Checklist */}
-              <ul className={`space-y-4 ${showAllFeatures ? "" : "min-h-[420px]"}`}>
+              <ul className={`space-y-3 sm:space-y-4 ${showAllFeatures ? "" : "lg:min-h-[420px]"}`}>
                 {visibleFreeLimits.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-4 min-h-[54px]">
+                  <li key={idx} className="flex items-start gap-3 sm:gap-4 min-h-0 lg:min-h-[54px]">
                     <div className="mt-0.5 p-1 rounded-full bg-muted/50 border border-border/50 text-muted-foreground group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                       {item.icon}
                     </div>
-                    <div className="flex-1">
-                      <strong className="text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
+                    <div className="flex-1 min-w-0">
+                      <strong className="text-xs sm:text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
                       <span className="text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-2">{item.desc}</span>
                     </div>
                   </li>
@@ -224,7 +224,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               <button
                 type="button"
                 onClick={() => setShowAllFeatures(!showAllFeatures)}
-                className="mt-6 flex items-center justify-center gap-2 w-full h-11 px-4 rounded-xl border border-border/60 bg-muted/30 hover:bg-muted/60 text-xs font-bold text-foreground transition-all duration-200 group/expand cursor-pointer"
+                className="mt-6 flex items-center justify-center gap-2 w-full h-10 sm:h-11 px-4 rounded-xl border border-border/60 bg-muted/30 hover:bg-muted/60 text-xs font-bold text-foreground transition-all duration-200 group/expand cursor-pointer"
               >
                 <span>
                   {showAllFeatures
@@ -238,11 +238,11 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               </button>
             </div>
 
-            <div className="mt-10 space-y-4 relative" ref={installDropdownRef}>
+            <div className="mt-8 sm:mt-10 space-y-4 relative" ref={installDropdownRef}>
               <button
                 type="button"
                 onClick={() => setShowInstallMenu((prev) => !prev)}
-                className="w-full h-14 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] cursor-pointer text-sm sm:text-base shadow-sm"
+                className="w-full h-12 sm:h-14 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] cursor-pointer text-sm sm:text-base shadow-sm"
               >
                 <span>Download Free Version</span>
                 <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showInstallMenu ? "rotate-180" : ""}`} />
@@ -264,9 +264,9 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                       onClick={() => setShowInstallMenu(false)}
                     >
                       <img src={browser.icon} alt={browser.name} className="w-6 h-6 object-contain flex-shrink-0" />
-                      <div className="flex-1 text-left">
-                        <div className="text-xs font-bold text-foreground group-hover/store:text-primary transition-colors">{browser.name}</div>
-                        <div className="text-[10px] text-muted-foreground">{browser.store}</div>
+                      <div className="flex-1 text-left min-w-0">
+                        <div className="text-xs font-bold text-foreground group-hover/store:text-primary transition-colors truncate">{browser.name}</div>
+                        <div className="text-[10px] text-muted-foreground truncate">{browser.store}</div>
                       </div>
                       <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover/store:text-primary transition-colors flex-shrink-0" />
                     </a>
@@ -274,15 +274,15 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                 </div>
               )}
 
-              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                100% Free Forever • No Account Required
+              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium text-center">
+                <ShieldCheck className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                <span>100% Free Forever • No Account Required</span>
               </div>
             </div>
           </div>
 
           {/* PRO PLAN */}
-          <div className="group relative flex flex-col justify-between bg-card/60 backdrop-blur-2xl rounded-[2.5rem] border-2 border-primary/40 p-8 md:p-10 shadow-[0_0_40px_rgba(37,99,235,0.15)] hover:shadow-[0_0_60px_rgba(37,99,235,0.25)] transition-all duration-300 z-10 overflow-hidden">
+          <div className="group relative flex flex-col justify-between bg-card/60 backdrop-blur-2xl rounded-3xl sm:rounded-[2.5rem] border-2 border-primary/40 p-6 sm:p-8 md:p-10 shadow-[0_0_40px_rgba(37,99,235,0.15)] hover:shadow-[0_0_60px_rgba(37,99,235,0.25)] transition-all duration-300 z-10 overflow-hidden">
 
             {/* Animated Glow Effect */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
@@ -290,36 +290,36 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
 
             <div className="relative z-10">
               {/* Header with Title and Ribbon in single clean flex row */}
-              <div className="flex items-center justify-between mb-6 h-8">
-                <span className="text-xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">Locksy Pro</span>
-                <span className="bg-gradient-to-r from-primary to-secondary text-white px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)] font-bold text-xs uppercase tracking-wider animate-pulse">
+              <div className="flex items-center justify-between mb-4 sm:mb-6 h-8">
+                <span className="text-lg sm:text-xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">Locksy Pro</span>
+                <span className="bg-gradient-to-r from-primary to-secondary text-white px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.4)] font-bold text-[11px] sm:text-xs uppercase tracking-wider animate-pulse">
                   Most Popular
                 </span>
               </div>
 
               {/* Price section */}
-              <div className="mb-8 h-24 flex flex-col justify-end">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-5xl md:text-6xl font-black text-foreground tracking-tight">$2.99</span>
+              <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
+                <div className="flex items-baseline gap-2.5 sm:gap-3">
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">$2.99</span>
                   <div className="flex flex-col">
-                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wide">Early-Bird Price</span>
-                    <span className="text-xs text-muted-foreground line-through">Increases to $4.99</span>
+                    <span className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wide">Early-Bird Price</span>
+                    <span className="text-[11px] sm:text-xs text-muted-foreground line-through">Increases to $4.99</span>
                   </div>
                 </div>
-                <p className="text-violet-600 dark:text-violet-400 mt-2 font-bold text-sm">One-time payment. Valid on up to 5 devices forever.</p>
+                <p className="text-violet-600 dark:text-violet-400 mt-1.5 sm:mt-2 font-bold text-xs sm:text-sm">One-time payment. Valid on up to 5 devices forever.</p>
               </div>
 
-              <div className="h-px w-full bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-transparent mb-8" />
+              <div className="h-px w-full bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-transparent mb-6 sm:mb-8" />
 
               {/* Checklist */}
-              <ul className={`space-y-4 ${showAllFeatures ? "" : "min-h-[420px]"}`}>
+              <ul className={`space-y-3 sm:space-y-4 ${showAllFeatures ? "" : "lg:min-h-[420px]"}`}>
                 {visibleProFeatures.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-4 min-h-[54px]">
+                  <li key={idx} className="flex items-start gap-3 sm:gap-4 min-h-0 lg:min-h-[54px]">
                     <div className="mt-0.5 p-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-violet-500 group-hover:to-fuchsia-500 group-hover:text-white dark:group-hover:text-white transition-all duration-300 shadow-sm shadow-violet-500/10 flex-shrink-0">
                       {item.icon}
                     </div>
-                    <div className="flex-1">
-                      <strong className="text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
+                    <div className="flex-1 min-w-0">
+                      <strong className="text-xs sm:text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
                       <span className="text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-2">{item.desc}</span>
                     </div>
                   </li>
@@ -330,7 +330,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               <button
                 type="button"
                 onClick={() => setShowAllFeatures(!showAllFeatures)}
-                className="mt-6 flex items-center justify-center gap-2 w-full h-11 px-4 rounded-xl border border-violet-500/30 bg-violet-500/10 hover:bg-violet-500/20 text-xs font-bold text-violet-600 dark:text-violet-400 transition-all duration-200 group/expand cursor-pointer"
+                className="mt-6 flex items-center justify-center gap-2 w-full h-10 sm:h-11 px-4 rounded-xl border border-violet-500/30 bg-violet-500/10 hover:bg-violet-500/20 text-xs font-bold text-violet-600 dark:text-violet-400 transition-all duration-200 group/expand cursor-pointer"
               >
                 <span>
                   {showAllFeatures
@@ -344,21 +344,21 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               </button>
             </div>
 
-            <div className="mt-10 space-y-4 relative z-10">
+            <div className="mt-8 sm:mt-10 space-y-4 relative z-10">
               <a
                 href={PRO_CHECKOUT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative w-full h-14 bg-foreground text-background font-black rounded-2xl text-center flex items-center justify-center overflow-hidden transform transition-all duration-300 active:scale-[0.98] group/btn hover:shadow-xl hover:shadow-violet-500/20 text-sm sm:text-base"
+                className="relative w-full h-12 sm:h-14 bg-foreground text-background font-black rounded-2xl text-center flex items-center justify-center overflow-hidden transform transition-all duration-300 active:scale-[0.98] group/btn hover:shadow-xl hover:shadow-violet-500/20 text-sm sm:text-base"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
-                  Get Lifetime Pro — $2.99 <Zap className="w-5 h-5 animate-pulse" />
+                  Get Lifetime Pro — $2.99 <Zap className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" />
                 </span>
               </a>
-              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
-                <ShieldCheck className="w-4 h-4 text-green-500" />
-                Secure payment via Polar.sh · 5 device slots included
+              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium text-center">
+                <ShieldCheck className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                <span>Secure payment via Polar.sh · 5 device slots included</span>
               </div>
             </div>
           </div>

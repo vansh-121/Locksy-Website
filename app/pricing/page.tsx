@@ -316,10 +316,9 @@ export default function PricingPage() {
             />
 
             <Header />
-
-            <main className="min-h-screen bg-background pt-24 md:pt-28">
+            <main className="min-h-screen bg-background pt-28 sm:pt-32 md:pt-36">
                 {/* ── Page Hero ─────────────────────────────────────────────── */}
-                <div className="relative overflow-hidden pb-4 pt-6 md:pb-8 md:pt-10">
+                <div className="relative overflow-hidden pb-4 pt-4 md:pb-8 md:pt-8">
                     {/* Background glow effects */}
                     <div className="pointer-events-none absolute inset-0 overflow-hidden">
                         <div className="absolute -top-24 left-1/2 h-[450px] w-[800px] -translate-x-1/2 rounded-full bg-gradient-to-r from-primary/15 via-secondary/10 to-primary/15 blur-[140px]" />
@@ -327,7 +326,7 @@ export default function PricingPage() {
 
                     <div className="relative mx-auto max-w-5xl px-4 md:px-6">
                         {/* Breadcrumbs */}
-                        <nav aria-label="Breadcrumb" className="mb-8 text-xs sm:text-sm text-muted-foreground">
+                        <nav aria-label="Breadcrumb" className="mb-6 text-xs sm:text-sm text-muted-foreground">
                             <Link href="/" className="transition-colors hover:text-primary">
                                 Home
                             </Link>
@@ -339,13 +338,13 @@ export default function PricingPage() {
 
                         <div className="text-center">
                             {/* Eyebrow Badge */}
-                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-sm backdrop-blur-md">
+                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-primary shadow-sm backdrop-blur-md">
                                 <Sparkles className="h-3.5 w-3.5 text-primary" />
                                 <span>Zero Subscription Fatigue • Lifetime License</span>
                             </div>
 
                             {/* Main Title */}
-                            <h1 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
+                            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-[1.15]">
                                 Simple, Honest Pricing. <br />
                                 <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
                                     Pay Once, Own Forever.
@@ -353,23 +352,23 @@ export default function PricingPage() {
                             </h1>
 
                             {/* Description */}
-                            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                            <p className="mx-auto mt-5 sm:mt-6 max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground md:text-lg">
                                 Get zero-knowledge tab protection with offline biometric unlock free forever.
                                 Upgrade to Pro for just <strong className="text-foreground">{PRO_PRICE} once</strong> to lift every cap across up to 5 devices.
                                 No subscriptions, no accounts, and zero tracking.
                             </p>
 
                             {/* Key Highlights Bar */}
-                            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs font-semibold text-muted-foreground sm:text-sm">
-                                <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3.5 py-1.5 backdrop-blur-md">
+                            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2.5 sm:gap-x-6 sm:gap-y-3 text-xs font-semibold text-muted-foreground sm:text-sm">
+                                <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3 py-1 sm:px-3.5 sm:py-1.5 backdrop-blur-md">
                                     <CreditCard className="h-4 w-4 text-primary" />
                                     {PRO_PRICE} One-Time Payment
                                 </span>
-                                <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3.5 py-1.5 backdrop-blur-md">
+                                <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3 py-1 sm:px-3.5 sm:py-1.5 backdrop-blur-md">
                                     <Laptop className="h-4 w-4 text-primary" />
                                     Up to 5 Devices Included
                                 </span>
-                                <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3.5 py-1.5 backdrop-blur-md">
+                                <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3 py-1 sm:px-3.5 sm:py-1.5 backdrop-blur-md">
                                     <ShieldCheck className="h-4 w-4 text-emerald-500" />
                                     100% Offline & Private
                                 </span>
@@ -380,14 +379,14 @@ export default function PricingPage() {
 
                 {/* ── Pricing Cards (Shared Component, Header Suppressed) ───── */}
                 <div className="relative">
-                    <Pricing hideHeader className="py-8 md:py-12 relative overflow-hidden" />
+                    <Pricing hideHeader className="py-6 md:py-12 relative overflow-hidden" />
                 </div>
 
                 {/* ── Trust & Guarantees Strip ──────────────────────────────── */}
                 <section className="mx-auto max-w-5xl px-4 py-8 md:px-6">
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <div className="rounded-2xl border border-border/60 bg-card/40 p-5 backdrop-blur-xl transition-colors hover:border-violet-500/30">
-                            <div className="mb-3 inline-flex rounded-xl bg-violet-500/10 p-2.5 text-violet-600 dark:text-violet-400">
+                        <div className="rounded-2xl border border-border/60 bg-card/40 p-5 backdrop-blur-xl transition-colors hover:border-primary/30">
+                            <div className="mb-3 inline-flex rounded-xl bg-primary/10 p-2.5 text-primary">
                                 <InfinityIcon className="h-5 w-5" />
                             </div>
                             <h3 className="text-sm font-bold text-foreground">Lifetime Ownership</h3>
@@ -406,8 +405,8 @@ export default function PricingPage() {
                             </p>
                         </div>
 
-                        <div className="rounded-2xl border border-border/60 bg-card/40 p-5 backdrop-blur-xl transition-colors hover:border-cyan-500/30">
-                            <div className="mb-3 inline-flex rounded-xl bg-cyan-500/10 p-2.5 text-cyan-600 dark:text-cyan-400">
+                        <div className="rounded-2xl border border-border/60 bg-card/40 p-5 backdrop-blur-xl transition-colors hover:border-primary/30">
+                            <div className="mb-3 inline-flex rounded-xl bg-primary/10 p-2.5 text-primary">
                                 <Laptop className="h-5 w-5" />
                             </div>
                             <h3 className="text-sm font-bold text-foreground">5 Device Manager</h3>
@@ -416,8 +415,8 @@ export default function PricingPage() {
                             </p>
                         </div>
 
-                        <div className="rounded-2xl border border-border/60 bg-card/40 p-5 backdrop-blur-xl transition-colors hover:border-fuchsia-500/30">
-                            <div className="mb-3 inline-flex rounded-xl bg-fuchsia-500/10 p-2.5 text-fuchsia-600 dark:text-fuchsia-400">
+                        <div className="rounded-2xl border border-border/60 bg-card/40 p-5 backdrop-blur-xl transition-colors hover:border-secondary/30">
+                            <div className="mb-3 inline-flex rounded-xl bg-secondary/10 p-2.5 text-secondary">
                                 <Zap className="h-5 w-5" />
                             </div>
                             <h3 className="text-sm font-bold text-foreground">Instant Polar Checkout</h3>
@@ -429,122 +428,133 @@ export default function PricingPage() {
                 </section>
 
                 {/* ── Feature Comparison Matrix ─────────────────────────────── */}
-                <section className="mx-auto max-w-5xl px-4 py-16 md:px-6">
-                    <div className="mb-12 text-center">
+                <section className="mx-auto max-w-5xl px-4 py-12 md:py-16 md:px-6">
+                    <div className="mb-8 md:mb-12 text-center">
                         <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/60 px-3.5 py-1 text-xs font-bold text-muted-foreground">
                             Side-by-Side Comparison
                         </div>
-                        <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                        <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-4xl md:text-5xl">
                             Compare Free Core vs. Locksy Pro
                         </h2>
-                        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                        <p className="mx-auto mt-3 max-w-2xl text-xs sm:text-sm leading-relaxed text-muted-foreground md:text-base">
                             Free is not a crippled demo — it uses identical cryptography and provides permanent tab locking.
                             Here is the exact breakdown of features and caps.
                         </p>
                     </div>
 
                     <div className="overflow-hidden rounded-3xl border border-border/70 bg-card/40 shadow-2xl backdrop-blur-2xl">
-                        {/* Table Header */}
-                        <div className="sticky top-20 z-20 grid grid-cols-12 border-b border-border/70 bg-card/95 px-6 py-5 backdrop-blur-xl">
-                            <div className="col-span-6 md:col-span-6">
-                                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                                    Features & Capabilities
-                                </span>
-                            </div>
-                            <div className="col-span-3 md:col-span-3 text-center md:text-left">
-                                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                                    Free Core
-                                </span>
-                            </div>
-                            <div className="col-span-3 md:col-span-3 text-center md:text-left">
-                                <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400">
-                                    <Sparkles className="h-3 w-3" /> Locksy Pro
-                                </span>
-                            </div>
+                        {/* Mobile Swipe Indicator */}
+                        <div className="flex md:hidden items-center justify-between px-5 py-2.5 bg-muted/40 border-b border-border/50 text-[11px] font-medium text-muted-foreground">
+                            <span>Feature Breakdown</span>
+                            <span className="flex items-center gap-1 text-primary font-bold">Swipe to compare &rarr;</span>
                         </div>
 
-                        {/* Table Body Groups */}
-                        <div className="divide-y divide-border/50">
-                            {FEATURE_CATEGORIES.map((category) => (
-                                <div key={category.name} className="py-2">
-                                    {/* Category Subheader */}
-                                    <div className="bg-muted/40 px-6 py-3">
-                                        <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
-                                            {category.name}
-                                        </h3>
-                                        <p className="text-[11px] text-muted-foreground">{category.description}</p>
+                        {/* Scrollable Container on Mobile */}
+                        <div className="overflow-x-auto">
+                            <div className="min-w-[620px] md:min-w-0">
+                                {/* Table Header */}
+                                <div className="relative md:sticky md:top-24 z-20 grid grid-cols-12 border-b border-border/70 bg-card/95 px-6 py-4 md:py-5 backdrop-blur-xl">
+                                    <div className="col-span-6">
+                                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                            Features & Capabilities
+                                        </span>
                                     </div>
-
-                                    {/* Category Rows */}
-                                    <div className="divide-y divide-border/30">
-                                        {category.features.map((feature) => (
-                                            <div
-                                                key={feature.name}
-                                                className="grid grid-cols-12 items-center px-6 py-4 transition-colors hover:bg-accent/40"
-                                            >
-                                                {/* Feature Name & Description */}
-                                                <div className="col-span-6 md:col-span-6 pr-4">
-                                                    <div className="text-sm font-semibold text-foreground">
-                                                        {feature.name}
-                                                    </div>
-                                                    <div className="mt-0.5 text-xs text-muted-foreground leading-normal">
-                                                        {feature.desc}
-                                                    </div>
-                                                </div>
-
-                                                {/* Free Column */}
-                                                <div className="col-span-3 md:col-span-3 flex items-center justify-center md:justify-start">
-                                                    {feature.freeType === "check" && (
-                                                        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground">
-                                                            <Check className="h-4 w-4 text-emerald-500" />
-                                                            <span className="hidden sm:inline">{feature.free}</span>
-                                                        </span>
-                                                    )}
-                                                    {feature.freeType === "limit" && (
-                                                        <span className="inline-flex items-center rounded-lg bg-muted px-2.5 py-1 text-xs font-semibold text-muted-foreground">
-                                                            {feature.free}
-                                                        </span>
-                                                    )}
-                                                    {feature.freeType === "cross" && (
-                                                        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground/60">
-                                                            <Minus className="h-4 w-4" />
-                                                            <span className="hidden sm:inline">Not included</span>
-                                                        </span>
-                                                    )}
-                                                    {feature.freeType === "badge" && (
-                                                        <span className="text-xs font-semibold text-foreground">
-                                                            {feature.free}
-                                                        </span>
-                                                    )}
-                                                </div>
-
-                                                {/* Pro Column */}
-                                                <div className="col-span-3 md:col-span-3 flex items-center justify-center md:justify-start">
-                                                    {feature.proType === "check" && (
-                                                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-violet-600 dark:text-violet-400">
-                                                            <Check className="h-4 w-4 text-violet-500" />
-                                                            <span className="hidden sm:inline">{feature.pro}</span>
-                                                        </span>
-                                                    )}
-                                                    {feature.proType === "highlight" && (
-                                                        <span className="inline-flex items-center gap-1 rounded-lg border border-violet-500/30 bg-violet-500/10 px-2.5 py-1 text-xs font-bold text-violet-600 dark:text-violet-400 shadow-sm">
-                                                            <Sparkles className="h-3 w-3 text-violet-500" />
-                                                            {feature.pro}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        ))}
+                                    <div className="col-span-3 text-center md:text-left">
+                                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                            Free Core
+                                        </span>
+                                    </div>
+                                    <div className="col-span-3 text-center md:text-left">
+                                        <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+                                            <Sparkles className="h-3 w-3" /> Locksy Pro
+                                        </span>
                                     </div>
                                 </div>
-                            ))}
+
+                                {/* Table Body Groups */}
+                                <div className="divide-y divide-border/50">
+                                    {FEATURE_CATEGORIES.map((category) => (
+                                        <div key={category.name} className="py-2">
+                                            {/* Category Subheader */}
+                                            <div className="bg-muted/40 px-6 py-2.5 md:py-3">
+                                                <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                                                    {category.name}
+                                                </h3>
+                                                <p className="text-[11px] text-muted-foreground">{category.description}</p>
+                                            </div>
+
+                                            {/* Category Rows */}
+                                            <div className="divide-y divide-border/30">
+                                                {category.features.map((feature) => (
+                                                    <div
+                                                        key={feature.name}
+                                                        className="grid grid-cols-12 items-center px-6 py-3.5 md:py-4 transition-colors hover:bg-accent/40"
+                                                    >
+                                                        {/* Feature Name & Description */}
+                                                        <div className="col-span-6 pr-4">
+                                                            <div className="text-xs sm:text-sm font-semibold text-foreground">
+                                                                {feature.name}
+                                                            </div>
+                                                            <div className="mt-0.5 text-[11px] sm:text-xs text-muted-foreground leading-normal">
+                                                                {feature.desc}
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Free Column */}
+                                                        <div className="col-span-3 flex items-center justify-center md:justify-start">
+                                                            {feature.freeType === "check" && (
+                                                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground">
+                                                                    <Check className="h-4 w-4 text-emerald-500 flex-shrink-0" />
+                                                                    <span>{feature.free}</span>
+                                                                </span>
+                                                            )}
+                                                            {feature.freeType === "limit" && (
+                                                                <span className="inline-flex items-center rounded-lg bg-muted px-2.5 py-1 text-xs font-semibold text-muted-foreground">
+                                                                    {feature.free}
+                                                                </span>
+                                                            )}
+                                                            {feature.freeType === "cross" && (
+                                                                <span className="inline-flex items-center gap-1 text-xs text-muted-foreground/60">
+                                                                    <Minus className="h-4 w-4 flex-shrink-0" />
+                                                                    <span>Not included</span>
+                                                                </span>
+                                                            )}
+                                                            {feature.freeType === "badge" && (
+                                                                <span className="text-xs font-semibold text-foreground">
+                                                                    {feature.free}
+                                                                </span>
+                                                            )}
+                                                        </div>
+
+                                                        {/* Pro Column */}
+                                                        <div className="col-span-3 flex items-center justify-center md:justify-start">
+                                                            {feature.proType === "check" && (
+                                                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
+                                                                    <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                                                                    <span>{feature.pro}</span>
+                                                                </span>
+                                                            )}
+                                                            {feature.proType === "highlight" && (
+                                                                <span className="inline-flex items-center gap-1 rounded-lg border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary shadow-xs">
+                                                                    <Sparkles className="h-3 w-3 text-primary flex-shrink-0" />
+                                                                    <span>{feature.pro}</span>
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 {/* ── What Both Tiers Share (Security Model) ────────────────── */}
-                <section className="mx-auto max-w-5xl px-4 py-12 md:px-6">
-                    <div className="rounded-3xl border border-border/70 bg-gradient-to-b from-card/80 to-card/40 p-8 md:p-12 backdrop-blur-xl">
+                <section className="mx-auto max-w-5xl px-4 py-8 md:py-12 md:px-6">
+                    <div className="rounded-3xl border border-border/70 bg-gradient-to-b from-card/80 to-card/40 p-6 sm:p-8 md:p-12 backdrop-blur-xl">
                         <div className="max-w-2xl">
                             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                                 <ShieldCheck className="h-3.5 w-3.5" />
@@ -553,17 +563,17 @@ export default function PricingPage() {
                             <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
                                 Cryptography is Never Compromised for Free Users
                             </h2>
-                            <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground md:text-base">
                                 Paying for Pro unlocks productivity tools and lifts device/domain caps.
                                 It does not buy "better" encryption. Both tiers run on the identical zero-knowledge architecture.
                             </p>
                         </div>
 
-                        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                        <div className="mt-6 sm:mt-8 grid gap-4 sm:grid-cols-2">
                             {SHARED_GUARANTEES.map(({ icon: Icon, title, body }) => (
                                 <div
                                     key={title}
-                                    className="rounded-2xl border border-border/50 bg-background/50 p-5 backdrop-blur-md transition-colors hover:border-primary/30"
+                                    className="rounded-2xl border border-border/50 bg-background/50 p-4 sm:p-5 backdrop-blur-md transition-colors hover:border-primary/30"
                                 >
                                     <div className="mb-3 inline-flex rounded-xl bg-primary/10 p-2 text-primary">
                                         <Icon className="h-5 w-5" />
@@ -577,7 +587,7 @@ export default function PricingPage() {
                         </div>
 
                         <div className="mt-8 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-muted-foreground text-center sm:text-left">
                                 Want to inspect our cryptographic implementation details?
                             </p>
                             <Link
@@ -591,16 +601,16 @@ export default function PricingPage() {
                 </section>
 
                 {/* ── Interactive FAQ Section ──────────────────────────────── */}
-                <section className="mx-auto max-w-4xl px-4 py-16 md:px-6">
-                    <div className="mb-12 text-center">
+                <section className="mx-auto max-w-4xl px-4 py-12 md:py-16 md:px-6">
+                    <div className="mb-8 md:mb-12 text-center">
                         <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/60 px-3.5 py-1 text-xs font-bold text-muted-foreground">
                             <HelpCircle className="h-3.5 w-3.5" />
                             Frequently Asked Questions
                         </div>
-                        <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl">
+                        <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-4xl">
                             Frequently Asked Pricing Questions
                         </h2>
-                        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                        <p className="mx-auto mt-3 max-w-xl text-xs sm:text-sm leading-relaxed text-muted-foreground">
                             Everything you need to know about the lifetime license, devices, and guarantees.
                         </p>
                     </div>
@@ -610,9 +620,9 @@ export default function PricingPage() {
                             <details
                                 key={question}
                                 open={idx === 0}
-                                className="group rounded-2xl border border-border/60 bg-card/50 p-5 shadow-sm backdrop-blur-xl transition-all open:border-violet-500/40 open:bg-card/80"
+                                className="group rounded-2xl border border-border/60 bg-card/50 p-4 sm:p-5 shadow-sm backdrop-blur-xl transition-all open:border-violet-500/40 open:bg-card/80"
                             >
-                                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-bold text-foreground sm:text-base">
+                                <summary className="flex cursor-pointer list-none items-center justify-between text-xs sm:text-sm md:text-base font-bold text-foreground">
                                     <span>{question}</span>
                                     <span className="ml-4 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-muted transition-transform duration-300 group-open:rotate-180">
                                         <ArrowRight className="h-3.5 w-3.5 rotate-90 text-muted-foreground" />
@@ -627,38 +637,38 @@ export default function PricingPage() {
                 </section>
 
                 {/* ── Final Conversion CTA ─────────────────────────────────── */}
-                <section className="mx-auto max-w-5xl px-4 pb-24 md:px-6">
-                    <div className="relative overflow-hidden rounded-[2.5rem] border border-violet-500/30 bg-gradient-to-br from-violet-600/10 via-fuchsia-600/10 to-cyan-600/10 p-8 text-center md:p-14 shadow-2xl backdrop-blur-2xl">
+                <section className="mx-auto max-w-5xl px-4 pb-20 md:pb-24 md:px-6">
+                    <div className="relative overflow-hidden rounded-3xl md:rounded-[2.5rem] border border-violet-500/30 bg-gradient-to-br from-violet-600/10 via-fuchsia-600/10 to-cyan-600/10 p-6 sm:p-8 text-center md:p-14 shadow-2xl backdrop-blur-2xl">
                         <div className="relative z-10 max-w-2xl mx-auto">
-                            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 text-xs font-bold text-violet-600 dark:text-violet-400">
+                            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-3.5 sm:px-4 py-1.5 text-xs font-bold text-violet-600 dark:text-violet-400">
                                 <Sparkles className="h-4 w-4" /> Lifetime Upgrade Deal
                             </div>
-                            <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground">
                                 Ready to Lock Down Your Browser?
                             </h2>
-                            <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                            <p className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground md:text-base">
                                 Protect your banking tabs, confidential client documents, and personal chats in under 30 seconds.
                             </p>
 
-                            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                                 <a
                                     href={PRO_CHECKOUT_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-8 py-4 font-bold text-white shadow-xl shadow-violet-500/25 transition-all hover:scale-105 hover:shadow-violet-500/40"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-6 sm:px-8 py-3.5 sm:py-4 font-bold text-white shadow-xl shadow-violet-500/25 transition-all hover:scale-105 hover:shadow-violet-500/40 text-sm sm:text-base"
                                 >
                                     Get Locksy Pro — {PRO_PRICE} Lifetime
                                     <Zap className="h-4 w-4" />
                                 </a>
                                 <Link
                                     href="/#download"
-                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-border/80 bg-card/80 px-8 py-4 font-semibold text-foreground transition-all hover:bg-accent hover:border-primary/40"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-border/80 bg-card/80 px-6 sm:px-8 py-3.5 sm:py-4 font-semibold text-foreground transition-all hover:bg-accent hover:border-primary/40 text-sm sm:text-base"
                                 >
                                     Install Free Extension
                                 </Link>
                             </div>
 
-                            <p className="mt-6 text-xs text-muted-foreground">
+                            <p className="mt-5 sm:mt-6 text-[11px] sm:text-xs text-muted-foreground">
                                 One-time payment • Up to 5 devices included • 100% offline encryption
                             </p>
                         </div>
