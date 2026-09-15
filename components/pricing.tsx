@@ -42,6 +42,34 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
   const [showAllFeatures, setShowAllFeatures] = useState(false)
   const [showInstallMenu, setShowInstallMenu] = useState(false)
+  const [saleTimeLeft, setSaleTimeLeft] = useState({ days: 15, hours: 0, mins: 0, secs: 0 })
+
+  useEffect(() => {
+    // Target: 1 Oct 12:00 AM UTC (00:00:00 UTC)
+    const targetYear = new Date().getUTCFullYear()
+    let targetTime = Date.UTC(targetYear, 9, 1, 0, 0, 0)
+    if (Date.now() > targetTime) {
+      targetTime = Date.UTC(targetYear + 1, 9, 1, 0, 0, 0)
+    }
+
+    // Clear legacy relative localStorage key
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("locksy_early_bird_sale_end")
+    }
+
+    const tick = () => {
+      const diff = Math.max(0, targetTime - Date.now())
+      setSaleTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        mins: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+        secs: Math.floor((diff % (1000 * 60)) / 1000),
+      })
+    }
+    tick()
+    const timer = setInterval(tick, 1000)
+    return () => clearInterval(timer)
+  }, [])
   const installDropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -117,6 +145,47 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
             </p>
           </div>
         )}
+
+        {/* Early-Bird Sale Countdown Banner */}
+        <div className="max-w-2xl mx-auto mb-10 p-4 sm:p-5 rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500" />
+          
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-2.5">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-violet-600 dark:bg-violet-400 animate-ping" />
+              🔥 Early-Bird Launch Deal
+            </span>
+            <span className="text-xs sm:text-sm font-bold text-foreground">
+              Locksy Pro increases to <span className="text-violet-700 dark:text-violet-300 font-black">$4.99</span> on Oct 1 (12:00 AM UTC)
+            </span>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 sm:gap-2.5 my-2.5 font-mono">
+            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-2xl px-3 py-1.5 min-w-[50px] shadow-sm">
+              <span className="text-lg sm:text-xl font-black text-foreground">{String(saleTimeLeft.days).padStart(2, '0')}</span>
+              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Days</span>
+            </div>
+            <span className="text-violet-600 dark:text-violet-400 font-black text-base pb-2">:</span>
+            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-2xl px-3 py-1.5 min-w-[50px] shadow-sm">
+              <span className="text-lg sm:text-xl font-black text-foreground">{String(saleTimeLeft.hours).padStart(2, '0')}</span>
+              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Hours</span>
+            </div>
+            <span className="text-violet-600 dark:text-violet-400 font-black text-base pb-2">:</span>
+            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-2xl px-3 py-1.5 min-w-[50px] shadow-sm">
+              <span className="text-lg sm:text-xl font-black text-foreground">{String(saleTimeLeft.mins).padStart(2, '0')}</span>
+              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Mins</span>
+            </div>
+            <span className="text-violet-600 dark:text-violet-400 font-black text-base pb-2">:</span>
+            <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-2xl px-3 py-1.5 min-w-[50px] shadow-sm">
+              <span className="text-lg sm:text-xl font-black text-foreground">{String(saleTimeLeft.secs).padStart(2, '0')}</span>
+              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Secs</span>
+            </div>
+          </div>
+
+          <p className="text-[11px] sm:text-xs font-medium text-muted-foreground">
+            ⚡ Over 50+ lifetime licenses claimed • Lock in <strong className="text-foreground font-bold">$2.99 lifetime</strong> before Oct 1 (12:00 AM UTC)
+          </p>
+        </div>
 
         {/* Pricing Cards Grid */}
         <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
@@ -220,18 +289,23 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-fuchsia-500/5 to-cyan-500/5 pointer-events-none" />
 
-            {/* Ribbon */}
-            <div className="absolute top-8 right-8 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(139,92,246,0.5)] font-bold text-xs uppercase tracking-wider animate-pulse">
-              Most Popular
-            </div>
-
             <div className="relative z-10">
+              {/* Header with Title and Ribbon in single clean flex row */}
               <div className="flex items-center justify-between mb-6 h-8">
                 <span className="text-xl font-black bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent tracking-tight">Locksy Pro</span>
+                <span className="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(139,92,246,0.5)] font-bold text-xs uppercase tracking-wider animate-pulse">
+                  Most Popular
+                </span>
               </div>
+
+              {/* Price section */}
               <div className="mb-8 h-24 flex flex-col justify-end">
-                <div className="flex items-baseline gap-2">
+                <div className="flex items-baseline gap-3">
                   <span className="text-5xl md:text-6xl font-black text-foreground tracking-tight">$2.99</span>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wide">Early-Bird Price</span>
+                    <span className="text-xs text-muted-foreground line-through">Increases to $4.99</span>
+                  </div>
                 </div>
                 <p className="text-violet-600 dark:text-violet-400 mt-2 font-bold text-sm">One-time payment. Valid on up to 5 devices forever.</p>
               </div>
@@ -281,7 +355,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
-                  Upgrade to Pro Now <Zap className="w-5 h-5 animate-pulse" />
+                  Get Lifetime Pro — $2.99 <Zap className="w-5 h-5 animate-pulse" />
                 </span>
               </a>
               <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">

@@ -117,7 +117,13 @@ export default function ProUpgradeCard({
 
                         <div className="flex flex-col items-center gap-4 lg:min-w-[240px]">
                             <div className="text-center">
-                                <div className="text-6xl font-black tracking-tighter">{PRO_PRICE}</div>
+                                <div className="flex items-baseline justify-center gap-2">
+                                    <span className="text-6xl font-black tracking-tighter">{PRO_PRICE}</span>
+                                    <span className="text-sm text-muted-foreground line-through">$4.99</span>
+                                </div>
+                                <div className="inline-block mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                                    🔥 Early-Bird Limited Offer
+                                </div>
                                 <p className="mt-1 text-sm font-bold text-violet-600 dark:text-violet-400">
                                     One-time · Lifetime (5 devices)
                                 </p>
