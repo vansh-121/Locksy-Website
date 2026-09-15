@@ -322,7 +322,7 @@ export default function PricingPage() {
                 <div className="relative overflow-hidden pb-4 pt-6 md:pb-8 md:pt-10">
                     {/* Background glow effects */}
                     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                        <div className="absolute -top-24 left-1/2 h-[450px] w-[800px] -translate-x-1/2 rounded-full bg-gradient-to-r from-violet-500/15 via-fuchsia-500/10 to-cyan-500/15 blur-[140px]" />
+                        <div className="absolute -top-24 left-1/2 h-[450px] w-[800px] -translate-x-1/2 rounded-full bg-gradient-to-r from-primary/15 via-secondary/10 to-primary/15 blur-[140px]" />
                     </div>
 
                     <div className="relative mx-auto max-w-5xl px-4 md:px-6">
@@ -339,15 +339,15 @@ export default function PricingPage() {
 
                         <div className="text-center">
                             {/* Eyebrow Badge */}
-                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-gradient-to-r from-violet-600/10 via-fuchsia-600/10 to-cyan-600/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 shadow-sm backdrop-blur-md">
-                                <Sparkles className="h-3.5 w-3.5 text-violet-500" />
+                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-sm backdrop-blur-md">
+                                <Sparkles className="h-3.5 w-3.5 text-primary" />
                                 <span>Zero Subscription Fatigue • Lifetime License</span>
                             </div>
 
                             {/* Main Title */}
                             <h1 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
                                 Simple, Honest Pricing. <br />
-                                <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
+                                <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
                                     Pay Once, Own Forever.
                                 </span>
                             </h1>
@@ -362,11 +362,11 @@ export default function PricingPage() {
                             {/* Key Highlights Bar */}
                             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs font-semibold text-muted-foreground sm:text-sm">
                                 <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3.5 py-1.5 backdrop-blur-md">
-                                    <CreditCard className="h-4 w-4 text-violet-500" />
+                                    <CreditCard className="h-4 w-4 text-primary" />
                                     {PRO_PRICE} One-Time Payment
                                 </span>
                                 <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3.5 py-1.5 backdrop-blur-md">
-                                    <Laptop className="h-4 w-4 text-violet-500" />
+                                    <Laptop className="h-4 w-4 text-primary" />
                                     Up to 5 Devices Included
                                 </span>
                                 <span className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/60 px-3.5 py-1.5 backdrop-blur-md">

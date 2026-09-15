@@ -124,7 +124,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
     >
       {/* Dynamic Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1000px] bg-gradient-to-tr from-violet-500/10 via-fuchsia-500/10 to-cyan-500/10 blur-3xl rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1000px] bg-gradient-to-tr from-primary/10 via-secondary/10 to-primary/10 blur-3xl rounded-full" />
         <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] opacity-20" />
       </div>
 
@@ -132,13 +132,13 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
         {/* Section Header */}
         {!hideHeader && (
           <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600/10 to-fuchsia-600/10 border border-violet-500/20 rounded-full text-sm font-bold text-violet-600 dark:text-violet-400 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-bold text-primary backdrop-blur-md mb-6 shadow-xs">
               <Sparkles className="w-4 h-4" />
               Simple Transparent Pricing
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent tracking-tight">
               Choose Your Level of <br className="hidden md:block" />
-              <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">Protection</span>
+              <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">Protection</span>
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Start with our powerful core features for free, or unlock the ultimate privacy suite with a one-time lifetime license.
@@ -148,7 +148,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
 
         {/* Early-Bird Sale Countdown Banner */}
         <div className="max-w-2xl mx-auto mb-10 p-4 sm:p-5 rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
           
           <div className="flex flex-wrap items-center justify-center gap-2 mb-2.5">
             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
@@ -283,17 +283,17 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
           </div>
 
           {/* PRO PLAN */}
-          <div className="group relative flex flex-col justify-between bg-card/60 backdrop-blur-2xl rounded-[2.5rem] border-2 border-violet-500/40 p-8 md:p-10 shadow-[0_0_40px_rgba(139,92,246,0.15)] hover:shadow-[0_0_60px_rgba(139,92,246,0.25)] transition-all duration-300 z-10 overflow-hidden">
+          <div className="group relative flex flex-col justify-between bg-card/60 backdrop-blur-2xl rounded-[2.5rem] border-2 border-primary/40 p-8 md:p-10 shadow-[0_0_40px_rgba(37,99,235,0.15)] hover:shadow-[0_0_60px_rgba(37,99,235,0.25)] transition-all duration-300 z-10 overflow-hidden">
 
             {/* Animated Glow Effect */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-fuchsia-500/5 to-cyan-500/5 pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 pointer-events-none" />
 
             <div className="relative z-10">
               {/* Header with Title and Ribbon in single clean flex row */}
               <div className="flex items-center justify-between mb-6 h-8">
-                <span className="text-xl font-black bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent tracking-tight">Locksy Pro</span>
-                <span className="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(139,92,246,0.5)] font-bold text-xs uppercase tracking-wider animate-pulse">
+                <span className="text-xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">Locksy Pro</span>
+                <span className="bg-gradient-to-r from-primary to-secondary text-white px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)] font-bold text-xs uppercase tracking-wider animate-pulse">
                   Most Popular
                 </span>
               </div>

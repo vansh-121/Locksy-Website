@@ -69,29 +69,29 @@ export default function ProUpgradeCard({
     return (
         <section className={className}>
             <div className="pointer-events-none absolute inset-0">
-                <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-violet-500/10 via-fuchsia-500/10 to-cyan-500/10 blur-3xl" />
+                <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/10 via-secondary/10 to-primary/10 blur-3xl" />
             </div>
 
             <div className="relative mx-auto max-w-5xl px-4 md:px-6">
                 <div
                     className={`overflow-hidden rounded-[2rem] border bg-card/60 shadow-2xl backdrop-blur-xl transition-all duration-500 ${
                         highlighted
-                            ? "border-violet-500/50 shadow-[0_0_60px_rgba(139,92,246,0.2)]"
-                            : "border-violet-500/25"
+                            ? "border-primary/50 shadow-[0_0_60px_rgba(37,99,235,0.2)]"
+                            : "border-primary/25"
                     }`}
                 >
-                    <div className="h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500" />
+                    <div className="h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
 
                     <div className="grid gap-10 p-8 md:p-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
                         <div className="space-y-6">
-                            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-gradient-to-r from-violet-600/10 to-fuchsia-600/10 px-4 py-2 text-sm font-bold text-violet-600 backdrop-blur-md dark:text-violet-400">
+                            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-bold text-primary backdrop-blur-md">
                                 <Sparkles className="h-4 w-4" />
                                 {eyebrow}
                             </div>
 
                             <h2 className="max-w-md text-3xl font-black tracking-tight md:text-4xl">
                                 Everything unlimited, for{" "}
-                                <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
+                                <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
                                     {PRO_PRICE} once
                                 </span>
                             </h2>
