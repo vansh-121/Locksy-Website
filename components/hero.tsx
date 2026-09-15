@@ -75,7 +75,6 @@ export default function Hero() {
     if (typeof window !== "undefined") {
       const isDismissed =
         sessionStorage.getItem("locksy_banner_dismissed") === "true" ||
-        document.cookie.includes("locksy_banner_dismissed=true") ||
         document.documentElement.classList.contains("banner-dismissed")
 
       if (isDismissed) {
@@ -239,6 +238,7 @@ export default function Hero() {
   return (
     <section
       id="hero-section"
+      suppressHydrationWarning
       className={`relative pb-20 md:pb-32 overflow-hidden bg-gradient-to-br from-accent via-background to-accent transition-[padding] duration-300 ease-out ${
         isBannerDismissed
           ? "pt-28 md:pt-32 lg:pt-32"

@@ -463,14 +463,14 @@ export default function UninstallClient({
                                             onClick={() => toggle(reason.id)}
                                             aria-pressed={on}
                                             className={`group flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all duration-300 ${on
-                                                    ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
-                                                    : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                                                ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
+                                                : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
                                                 }`}
                                         >
                                             <span
                                                 className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-colors ${on
-                                                        ? "bg-gradient-to-br from-primary to-secondary text-white"
-                                                        : "bg-muted text-muted-foreground group-hover:text-primary"
+                                                    ? "bg-gradient-to-br from-primary to-secondary text-white"
+                                                    : "bg-muted text-muted-foreground group-hover:text-primary"
                                                     }`}
                                             >
                                                 <Icon className="h-5 w-5" />
@@ -1017,7 +1017,7 @@ export default function UninstallClient({
                         </a>
 
                         <a
-                            href="mailto:vansh.sethi98760@gmail.com"
+                            href="mailto:vanshsethi.me@gmail.com"
                             className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
                         >
                             <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white">

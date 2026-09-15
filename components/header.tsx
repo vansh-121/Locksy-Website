@@ -48,50 +48,39 @@ const SECONDARY_BROWSERS = [
   },
 ]
 
-// Global client-side navigation cache to prevent any flash across pages
-let isBannerDismissedCache: boolean | null = null
-
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [showDownloadDropdown, setShowDownloadDropdown] = useState(false)
   const [saleTimeLeft, setSaleTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number } | null>(null)
   
-  // Instant synchronous check from module cache / browser storage
-  const [isBannerVisible, setIsBannerVisible] = useState(() => {
-    if (typeof window !== "undefined") {
-      if (isBannerDismissedCache !== null) return !isBannerDismissedCache
-      try {
-        const isDismissed = sessionStorage.getItem("locksy_banner_dismissed") === "true" ||
-                            document.cookie.includes("locksy_banner_dismissed=true")
-        isBannerDismissedCache = isDismissed
-        return !isDismissed
-      } catch {
-        return true
-      }
-    }
-    return true
-  })
+  // Always initialize to true so SSR HTML matches client initial render (avoids hydration error)
+  const [isBannerVisible, setIsBannerVisible] = useState(true)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const isDismissed = sessionStorage.getItem("locksy_banner_dismissed") === "true" ||
-                          document.cookie.includes("locksy_banner_dismissed=true")
+      // Clear any legacy cross-tab cookie so dismissal is strictly per-tab
+      try {
+        if (document.cookie.includes("locksy_banner_dismissed")) {
+          document.cookie = "locksy_banner_dismissed=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+        }
+      } catch {}
+
+      const isDismissed =
+        sessionStorage.getItem("locksy_banner_dismissed") === "true" ||
+        document.documentElement.classList.contains("banner-dismissed")
       if (isDismissed) {
-        isBannerDismissedCache = true
         setIsBannerVisible(false)
       }
     }
   }, [])
 
   const handleDismissBanner = () => {
-    isBannerDismissedCache = true
     setIsBannerVisible(false)
     if (typeof window !== "undefined") {
       try {
         sessionStorage.setItem("locksy_banner_dismissed", "true")
-        document.cookie = "locksy_banner_dismissed=true; path=/; max-age=86400"
         document.documentElement.classList.add("banner-dismissed")
         let style = document.getElementById("banner-dismiss-style")
         if (!style) {
@@ -161,6 +150,7 @@ export default function Header() {
 
   return (
     <header
+      suppressHydrationWarning
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
         ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
         : "bg-transparent"
@@ -170,6 +160,7 @@ export default function Header() {
       {isBannerVisible && (
         <div
           id="top-announcement-banner"
+          suppressHydrationWarning
           className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-purple-900 to-fuchsia-950 border-b border-violet-500/25 text-white py-2 sm:py-2.5 pl-3 pr-9 sm:px-12 shadow-sm"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-fuchsia-500/15 to-cyan-500/10 pointer-events-none" />
