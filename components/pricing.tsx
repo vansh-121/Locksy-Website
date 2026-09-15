@@ -299,9 +299,9 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
 
               {/* Price section */}
               <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
-                <div className="flex items-baseline gap-2.5 sm:gap-3">
+                <div className="flex items-center gap-2.5 sm:gap-3">
                   <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">$2.99</span>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col justify-center">
                     <span className="text-[11px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wide">Early-Bird Price</span>
                     <span className="text-[11px] sm:text-xs text-muted-foreground line-through">Increases to $4.99</span>
                   </div>
