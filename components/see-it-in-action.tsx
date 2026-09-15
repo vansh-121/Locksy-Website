@@ -20,9 +20,9 @@ function InboxRow({
   time: string
 }) {
   return (
-    <div className="flex items-center gap-3 px-3 py-2.5 border-b border-border/60 last:border-b-0">
+    <div className="flex items-center gap-2.5 sm:gap-3 px-3 py-2 border-b border-border/50 last:border-b-0">
       <div
-        className={`w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white flex-shrink-0 ${color}`}
+        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[10px] sm:text-[11px] font-bold text-white flex-shrink-0 ${color}`}
       >
         {initials}
       </div>
@@ -75,7 +75,7 @@ export default function SeeItInAction() {
         </div>
 
         {/* Before / arrow / After */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-5 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-5 items-stretch">
 
           {/* ── WITHOUT LOCKSY ─────────────────────────────────────── */}
           <div className="flex flex-col items-center gap-4">
@@ -83,13 +83,37 @@ export default function SeeItInAction() {
               <span aria-hidden="true">✕</span> Without Locksy
             </span>
 
-            <div className="w-full max-w-sm rounded-2xl border border-red-500/20 bg-card shadow-xl overflow-hidden">
+            <div className="w-full max-w-sm rounded-2xl border border-red-500/25 bg-card shadow-xl overflow-hidden flex flex-col h-[420px]">
               <BrowserChrome url="mail.example.com" locked={false} />
-              <div className="p-2">
+
+              {/* Mock Inbox Search Toolbar */}
+              <div className="flex items-center justify-between px-3.5 py-2 bg-muted/40 border-b border-border/60 text-xs flex-shrink-0">
+                <div className="flex items-center gap-1.5 text-muted-foreground bg-background/80 border border-border/70 rounded-md px-2.5 py-1 flex-1 mr-2 text-[11px]">
+                  <span aria-hidden="true">🔍</span>
+                  <span className="truncate">Search private mail...</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 whitespace-nowrap flex-shrink-0">
+                  6 Unread
+                </span>
+              </div>
+
+              {/* Email List */}
+              <div className="p-1 flex-1 overflow-hidden divide-y divide-border/40">
                 <InboxRow initials="BA" color="bg-blue-600" sender="Bank of America" subject="Your April e-statement is ready" time="9:24 AM" />
                 <InboxRow initials="CH" color="bg-emerald-600" sender="City Health Clinic" subject="Your recent test results" time="8:10 AM" />
-                <InboxRow initials="PR" color="bg-violet-600" sender="Payroll" subject="Your latest salary slip" time="Yesterday" />
-                <InboxRow initials="RE" color="bg-orange-500" sender="Realtor" subject="Signed mortgage documents" time="Mon" />
+                <InboxRow initials="PR" color="bg-violet-600" sender="Payroll & HR" subject="Your latest salary slip & bonus" time="Yesterday" />
+                <InboxRow initials="RE" color="bg-orange-500" sender="Realtor" subject="Signed mortgage & wire details" time="Mon" />
+                <InboxRow initials="TX" color="bg-rose-600" sender="IRS Tax Center" subject="Tax refund deposit scheduled" time="Sun" />
+                <InboxRow initials="PW" color="bg-amber-600" sender="Account Security" subject="New 2FA backup codes generated" time="Oct 12" />
+              </div>
+
+              {/* Inbox Footer */}
+              <div className="px-3.5 py-2 bg-muted/30 border-t border-border/60 flex items-center justify-between text-[10px] text-muted-foreground flex-shrink-0">
+                <span>142 private emails visible</span>
+                <span className="font-semibold text-red-600 dark:text-red-400 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                  Unlocked
+                </span>
               </div>
             </div>
 
@@ -99,7 +123,7 @@ export default function SeeItInAction() {
           </div>
 
           {/* ── Arrow (points down on mobile, right on desktop) ─────── */}
-          <div className="flex lg:flex-col items-center justify-center gap-2">
+          <div className="flex lg:flex-col items-center justify-center gap-2 self-center">
             <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
               <svg
                 className="w-6 h-6 text-white rotate-90 lg:rotate-0"
@@ -122,11 +146,11 @@ export default function SeeItInAction() {
               <span aria-hidden="true">✓</span> With Locksy
             </span>
 
-            <div className="w-full max-w-sm rounded-2xl border border-primary/30 bg-card shadow-xl overflow-hidden">
+            <div className="w-full max-w-sm rounded-2xl border border-primary/30 bg-card shadow-xl overflow-hidden flex flex-col h-[420px]">
               <BrowserChrome url="mail.example.com · locked" locked={true} />
-              <div className="px-6 py-10 flex flex-col items-center gap-5 text-center min-h-[236px] justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+              <div className="px-6 py-8 flex flex-col items-center gap-4 text-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5 flex-1">
                 {/* Lock icon */}
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20 flex-shrink-0">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
@@ -134,15 +158,15 @@ export default function SeeItInAction() {
 
                 <div>
                   <p className="font-bold text-lg text-foreground">This Tab Is Locked</p>
-                  <p className="text-sm text-muted-foreground mt-1">Enter your master password to unlock it.</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">Enter your master password to unlock it.</p>
                 </div>
 
                 {/* Mock password field + button (visual only) */}
                 <div className="w-full space-y-2.5">
-                  <div className="w-full flex items-center px-3 py-2.5 rounded-lg border border-border bg-background text-muted-foreground text-lg tracking-[0.3em]">
+                  <div className="w-full flex items-center px-3 py-2.5 rounded-lg border border-border bg-background text-muted-foreground text-lg tracking-[0.3em] justify-center">
                     ••••••••
                   </div>
-                  <div className="w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white text-sm font-semibold">
+                  <div className="w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white text-sm font-semibold shadow-md">
                     Unlock
                   </div>
                 </div>
