@@ -12,6 +12,7 @@ import {
 } from "@/lib/metadata"
 import ChatSupport from "@/components/chat-support"
 import WhatsAppFloat from "@/components/whatsapp-float"
+import WhatsAppDialog from "@/components/whatsapp-dialog"
 import CookieConsent from "@/components/cookie-consent"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -90,6 +91,7 @@ export default function RootLayout({
         >
           {children}
           <WhatsAppFloat />
+          <WhatsAppDialog />
           <ChatSupport />
           <CookieConsent />
         </ThemeProvider>

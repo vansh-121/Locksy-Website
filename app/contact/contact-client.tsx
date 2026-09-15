@@ -21,7 +21,7 @@ import {
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import WhatsAppIcon from "@/components/whatsapp-icon"
-import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
+import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 
 const SOCIAL_LINKS = [
     {
@@ -229,6 +229,7 @@ Timestamp: ${new Date().toISOString()}
                                     <a
                                         key={action.title}
                                         href={action.href}
+                                        onClick={action.href === WHATSAPP_CHANNEL_URL ? openWhatsAppChannel : undefined}
                                         target={action.href.startsWith("http") || action.href.startsWith("mailto") ? "_blank" : undefined}
                                         rel={action.href.startsWith("http") || action.href.startsWith("mailto") ? "noopener noreferrer" : undefined}
                                         className="group"

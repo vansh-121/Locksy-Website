@@ -31,7 +31,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import ProUpgradeCard from "@/components/pro-upgrade-card"
 import WhatsAppIcon from "@/components/whatsapp-icon"
-import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
+import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 import { PRO_CHECKOUT_URL } from "@/lib/pro"
 
 const BROWSERS = [
@@ -628,6 +628,7 @@ export default function UninstallClient({
                                 </a>
                                 <a
                                     href={WHATSAPP_CHANNEL_URL}
+                                    onClick={openWhatsAppChannel}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-xl sm:w-auto"
@@ -957,6 +958,7 @@ export default function UninstallClient({
 
                         <a
                             href={WHATSAPP_CHANNEL_URL}
+                            onClick={openWhatsAppChannel}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#25D366]/50 hover:shadow-md"
