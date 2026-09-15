@@ -28,6 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden" suppressHydrationWarning>
       <head>
+        {/* Prevent flash of dismissed sale banner & maintain hero spacing before React hydration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('locksy_banner_dismissed')==='true'||document.cookie.indexOf('locksy_banner_dismissed=true')!==-1){document.documentElement.classList.add('banner-dismissed');document.write('<style id="banner-dismiss-style">#top-announcement-banner{display:none!important;}html.banner-dismissed #hero-section{padding-top:7rem!important;}@media(min-width:768px){html.banner-dismissed #hero-section{padding-top:8rem!important;}}@media(min-width:1024px){html.banner-dismissed #hero-section{padding-top:8rem!important;}}</style>');}}catch(e){}`,
+          }}
+        />
         {/* RSS Feed Auto-Discovery */}
         <link
           rel="alternate"

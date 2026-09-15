@@ -69,6 +69,24 @@ export default function Hero() {
   // actually asks for the video, so a cold page view writes zero third-party
   // cookies and downloads none of the ~1 MB YouTube player bundle.
   const [hasActivated, setHasActivated] = useState(false)
+  const [isBannerDismissed, setIsBannerDismissed] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isDismissed =
+        sessionStorage.getItem("locksy_banner_dismissed") === "true" ||
+        document.cookie.includes("locksy_banner_dismissed=true") ||
+        document.documentElement.classList.contains("banner-dismissed")
+
+      if (isDismissed) {
+        setIsBannerDismissed(true)
+      }
+
+      const handleDismiss = () => setIsBannerDismissed(true)
+      window.addEventListener("locksy-banner-dismissed", handleDismiss)
+      return () => window.removeEventListener("locksy-banner-dismissed", handleDismiss)
+    }
+  }, [])
 
   useEffect(() => {
     if (!hasActivated) return
@@ -219,7 +237,14 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative pt-28 pb-20 md:pt-40 md:pb-32 lg:pt-44 overflow-hidden bg-gradient-to-br from-accent via-background to-accent">
+    <section
+      id="hero-section"
+      className={`relative pb-20 md:pb-32 overflow-hidden bg-gradient-to-br from-accent via-background to-accent transition-[padding] duration-300 ease-out ${
+        isBannerDismissed
+          ? "pt-28 md:pt-32 lg:pt-32"
+          : "pt-36 md:pt-40 lg:pt-44"
+      }`}
+    >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl animate-pulse" />
