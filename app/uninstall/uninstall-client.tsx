@@ -434,7 +434,7 @@ export default function UninstallClient({
             </section>
 
             {/* ══ 2. WHY — the reason picker that answers back ══════════════ */}
-            <section id="why" className="relative scroll-mt-24 py-16 md:py-20">
+            <section id="why" className="relative scroll-mt-24 pt-16 pb-8 md:pt-20 md:pb-10">
                 <div className="mx-auto max-w-5xl px-4 md:px-6">
                     <div className="mb-12 text-center">
                         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur-sm">
@@ -643,7 +643,7 @@ export default function UninstallClient({
             </section>
 
             {/* ══ 3. COMPARE — for anyone who left for an alternative ══════ */}
-            <section className="px-4 py-16 md:px-6 md:py-20">
+            <section className="px-4 pt-4 pb-16 md:px-6 md:pt-6 md:pb-20">
                 <div className="mx-auto max-w-4xl">
                     <div className="mb-8 text-center">
                         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary dark:text-primary-on-dark">
