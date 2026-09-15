@@ -167,7 +167,10 @@ export default function SecurityPage() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6 leading-tight">
-              Locksy Security Architecture & <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">Cryptographic Deep Dive</span>
+              Locksy Security Architecture &{" "}
+              <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
+                Cryptographic Deep Dive
+              </span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">

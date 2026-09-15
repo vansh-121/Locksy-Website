@@ -46,8 +46,11 @@ export default function ToolsShowcase() {
             <Sparkles className="w-3.5 h-3.5" />
             100% Free Web Utilities
           </div>
-          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-4">
-            Free Online <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">Security & Privacy Tools</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-4">
+            Free Online{" "}
+            <span className="block sm:inline bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
+              Security &amp; Privacy Tools
+            </span>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base">
             No signup required. Everything runs right in your browser — nothing is uploaded, and there's no tracking.
