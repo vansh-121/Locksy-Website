@@ -453,20 +453,20 @@ export default function PricingPage() {
                         <div className="overflow-x-auto">
                             <div className="min-w-[620px] md:min-w-0">
                                 {/* Table Header */}
-                                <div className="relative md:sticky md:top-24 z-20 grid grid-cols-12 border-b border-border/70 bg-card/95 px-6 py-4 md:py-5 backdrop-blur-xl">
+                                <div className="grid grid-cols-12 border-b border-border/70 bg-muted/60 dark:bg-muted/40 px-6 py-4 md:py-5">
                                     <div className="col-span-6">
-                                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                        <span className="text-xs font-black uppercase tracking-wider text-foreground/80">
                                             Features & Capabilities
                                         </span>
                                     </div>
                                     <div className="col-span-3 text-center md:text-left">
-                                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                        <span className="text-xs font-black uppercase tracking-wider text-foreground/80">
                                             Free Core
                                         </span>
                                     </div>
                                     <div className="col-span-3 text-center md:text-left">
-                                        <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400">
-                                            <Sparkles className="h-3 w-3 text-violet-500" /> Locksy Pro
+                                        <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-violet-600 dark:text-violet-400">
+                                            <Sparkles className="h-3.5 w-3.5 text-violet-500" /> Locksy Pro
                                         </span>
                                     </div>
                                 </div>
@@ -474,13 +474,13 @@ export default function PricingPage() {
                                 {/* Table Body Groups */}
                                 <div className="divide-y divide-border/50">
                                     {FEATURE_CATEGORIES.map((category) => (
-                                        <div key={category.name} className="py-2">
+                                        <div key={category.name} className="py-0">
                                             {/* Category Subheader */}
-                                            <div className="bg-muted/40 px-6 py-2.5 md:py-3">
+                                            <div className="bg-muted/30 dark:bg-muted/20 px-6 py-3 border-b border-border/40">
                                                 <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
                                                     {category.name}
                                                 </h3>
-                                                <p className="text-[11px] text-muted-foreground">{category.description}</p>
+                                                <p className="text-[11px] text-muted-foreground font-medium mt-0.5">{category.description}</p>
                                             </div>
 
                                             {/* Category Rows */}
