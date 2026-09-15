@@ -84,8 +84,8 @@ export default function ProUpgradeCard({
 
                     <div className="grid gap-10 p-8 md:p-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
                         <div className="space-y-6">
-                            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-bold text-primary backdrop-blur-md">
-                                <Sparkles className="h-4 w-4" />
+                            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-gradient-to-r from-violet-600/10 via-fuchsia-600/10 to-cyan-600/10 px-4 py-2 text-sm font-bold text-violet-600 dark:text-violet-400 shadow-sm backdrop-blur-md">
+                                <Sparkles className="h-4 w-4 text-violet-500" />
                                 {eyebrow}
                             </div>
 
