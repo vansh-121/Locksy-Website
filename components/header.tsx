@@ -161,59 +161,69 @@ export default function Header() {
         <div
           id="top-announcement-banner"
           suppressHydrationWarning
-          className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-purple-900 to-fuchsia-950 border-b border-violet-500/25 text-white py-2 sm:py-2.5 pl-3 pr-9 sm:px-12 shadow-sm"
+          className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-purple-900 to-fuchsia-950 border-b border-violet-500/25 text-white py-2 sm:py-2.5 pl-3 pr-9 sm:pl-4 sm:pr-10 md:px-12 shadow-sm"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-fuchsia-500/15 to-cyan-500/10 pointer-events-none" />
 
-          {/* Mobile View (< sm: 640px) - Single sleek, compact line */}
-          <div className="relative z-10 flex sm:hidden items-center justify-center gap-2 text-xs">
-            <span className="inline-flex items-center gap-1 font-bold text-violet-200">
-              <span>🔥</span>
-              <span>Locksy Pro for <strong className="text-white font-extrabold text-xs">$2.99</strong></span>
+          {/* Mobile View (< sm: 640px) - Single sleek, compact line that fits 320px+ */}
+          <div className="relative z-10 flex sm:hidden items-center justify-center gap-1.5 sm:gap-2 text-xs">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-violet-500/30 text-violet-200 border border-violet-400/35 flex-shrink-0">
+              🔥 40% OFF
+            </span>
+            <span className="font-semibold text-violet-100 text-[11px] truncate">
+              Lifetime <strong className="text-white font-extrabold text-xs">$2.99</strong>
+              <span className="hidden min-[380px]:inline line-through text-violet-300/60 text-[10px] ml-1">$4.99</span>
             </span>
             <a
               href="/pricing"
               className="inline-flex items-center gap-0.5 px-2.5 py-0.5 rounded-full bg-white text-violet-950 font-black text-[11px] shadow-xs hover:bg-violet-100 active:scale-95 transition-all flex-shrink-0"
             >
-              <span>Claim</span>
+              <span>Get Pro</span>
               <span>&rarr;</span>
             </a>
           </div>
 
-          {/* Tablet & Desktop View (>= sm: 640px) - Full single-line row without wrapping */}
-          <div className="relative z-10 hidden sm:flex items-center justify-center gap-x-3 md:gap-x-5 lg:gap-x-8 text-xs sm:text-sm">
+          {/* Tablet & Desktop View (>= sm: 640px) - Adaptive single-line row */}
+          <div className="relative z-10 hidden sm:flex items-center justify-center gap-x-2 md:gap-x-4 lg:gap-x-6 text-xs sm:text-sm">
             {/* Tag & Offer */}
-            <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-500/25 text-violet-200 border border-violet-400/35 shadow-xs flex-shrink-0">
-                🔥 Early-Bird Sale
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-500/25 text-violet-200 border border-violet-400/40 shadow-xs flex-shrink-0">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-fuchsia-300"></span>
+                </span>
+                <span>🔥 40% OFF</span>
               </span>
               <div className="flex items-center gap-1.5">
                 <span className="font-medium text-violet-100">
-                  Locksy Pro for <strong className="text-white font-extrabold text-sm">$2.99</strong>
+                  Locksy Pro <strong className="text-white font-bold">Lifetime</strong> for{" "}
+                  <strong className="text-white font-extrabold text-sm">$2.99</strong>
                 </span>
-                <span className="hidden xl:inline text-violet-300/80 text-xs">
-                  (Increases to $4.99 on Oct 1)
+                <span className="line-through text-violet-300/60 font-semibold text-xs">$4.99</span>
+                <span className="hidden xl:inline text-violet-300/85 text-xs font-medium">
+                  (Price rises Oct 1)
                 </span>
               </div>
             </div>
 
-            {/* Divider */}
+            {/* Divider (lg+) */}
             <div className="hidden lg:block h-3.5 w-px bg-white/20" />
 
             {/* Action Area: Countdown & CTA Button */}
-            <div className="flex items-center gap-2.5 sm:gap-4 flex-shrink-0">
-              {/* Segmented Countdown */}
+            <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+              {/* Segmented Countdown (md+) */}
               {saleTimeLeft && (
-                <div className="flex items-center gap-1.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-black/40 border border-white/20 backdrop-blur-md text-[11px] sm:text-xs shadow-inner">
-                  <span className="text-violet-300/90 text-[10px] font-bold uppercase tracking-wider hidden md:inline">Ends in</span>
+                <div className="hidden md:flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/40 border border-white/20 backdrop-blur-md text-[11px] sm:text-xs shadow-inner">
+                  <span className="text-[11px]">⏳</span>
+                  <span className="text-violet-300/90 text-[10px] font-bold uppercase tracking-wider hidden lg:inline">Ends in</span>
                   <div className="flex items-center gap-1 font-mono font-bold tracking-tight">
                     <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{saleTimeLeft.days}d</span>
                     <span className="text-violet-400 font-black">:</span>
                     <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{String(saleTimeLeft.hours).padStart(2, "0")}h</span>
                     <span className="text-violet-400 font-black">:</span>
                     <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{String(saleTimeLeft.mins).padStart(2, "0")}m</span>
-                    <span className="text-violet-400 font-black">:</span>
-                    <span className="bg-fuchsia-500/30 text-fuchsia-200 px-1.5 py-0.5 rounded font-black">{String(saleTimeLeft.secs).padStart(2, "0")}s</span>
+                    <span className="text-violet-400 font-black hidden lg:inline">:</span>
+                    <span className="bg-fuchsia-500/30 text-fuchsia-200 px-1.5 py-0.5 rounded font-black hidden lg:inline">{String(saleTimeLeft.secs).padStart(2, "0")}s</span>
                   </div>
                 </div>
               )}
@@ -221,10 +231,12 @@ export default function Header() {
               {/* Claim Button */}
               <a
                 href="/pricing"
-                className="inline-flex items-center gap-1 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white text-violet-950 hover:bg-violet-100 text-xs font-black shadow-sm transition-all duration-200 hover:scale-105 active:scale-95 group flex-shrink-0"
+                className="relative inline-flex items-center gap-1 px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 rounded-full bg-white text-violet-950 hover:bg-violet-50 text-xs font-black shadow-md shadow-white/10 transition-all duration-200 hover:scale-105 active:scale-95 group flex-shrink-0 overflow-hidden"
               >
-                <span>Claim Deal</span>
-                <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-violet-200/40 to-transparent pointer-events-none" />
+                <span className="relative hidden md:inline">Get Lifetime Access</span>
+                <span className="relative md:hidden">Get Access</span>
+                <span className="relative inline-block transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
               </a>
             </div>
           </div>
