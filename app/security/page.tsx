@@ -5,6 +5,7 @@ import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
 import { generatePageMetadata, generateBreadcrumbSchema } from "@/lib/metadata"
 import Link from 'next/link'
+import { PRO_CHECKOUT_URL } from '@/lib/pro'
 
 export const metadata: Metadata = generatePageMetadata(
   // "Locksy" dropped from the front — the layout's title template re-adds it,
@@ -513,9 +514,14 @@ export default function SecurityPage() {
                 <Link href="/#download" className="btn-primary text-base py-3.5 px-8">
                   Install Locksy Free Now
                 </Link>
-                <Link href="/pricing" className="btn-secondary text-base py-3.5 px-8">
-                  Explore Locksy Pro
-                </Link>
+                <a
+                  href={PRO_CHECKOUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-base py-3.5 px-8 inline-flex items-center justify-center gap-2"
+                >
+                  Get Locksy Pro
+                </a>
               </div>
             </div>
           </div>

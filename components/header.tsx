@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { SALE_DEADLINE_UTC } from "@/lib/pro"
+import { PRO_CHECKOUT_URL, SALE_DEADLINE_UTC } from "@/lib/pro"
 
 const PRIMARY_BROWSERS = [
   {
@@ -192,7 +192,9 @@ export default function Header() {
               <span className="hidden min-[380px]:inline line-through text-violet-300/60 text-[10px] ml-1">$4.99</span>
             </span>
             <a
-              href="/pricing"
+              href={PRO_CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-0.5 px-2.5 py-0.5 rounded-full bg-white text-violet-950 font-black text-[11px] shadow-xs hover:bg-violet-100 active:scale-95 transition-all flex-shrink-0"
             >
               <span>Get Pro</span>
@@ -247,7 +249,9 @@ export default function Header() {
 
               {/* Claim Button */}
               <a
-                href="/pricing"
+                href={PRO_CHECKOUT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative inline-flex items-center gap-1 px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 rounded-full bg-white text-violet-950 hover:bg-violet-50 text-xs font-black shadow-md shadow-white/10 transition-all duration-200 hover:scale-105 active:scale-95 group flex-shrink-0 overflow-hidden"
               >
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-violet-200/40 to-transparent pointer-events-none" />
@@ -357,7 +361,9 @@ export default function Header() {
 
           {/* Pro Upgrade Button */}
           <a
-            href="/pricing"
+            href={PRO_CHECKOUT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-card border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg text-sm xl:text-base cursor-pointer"
           >
             <span aria-hidden="true">💎</span>
@@ -432,7 +438,9 @@ export default function Header() {
         {/* Mobile: Get Pro + Theme Toggle + Menu Toggle */}
         <div className="lg:hidden flex items-center gap-2">
           <a
-            href="/pricing"
+            href={PRO_CHECKOUT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
           >
             <span aria-hidden="true">💎</span>
@@ -524,7 +532,9 @@ export default function Header() {
               {/* CTA Section */}
               <div className="space-y-2.5 mb-2">
                 <a
-                  href="/pricing"
+                  href={PRO_CHECKOUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
