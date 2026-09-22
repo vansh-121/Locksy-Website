@@ -306,7 +306,20 @@ export default function Footer() {
               <p className="text-xs text-neutral-500">Made with ❤️ for Privacy & Security</p>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center justify-center md:justify-end gap-4">
+              <a
+                href="https://peerpush.com/p/locksy-tab-locker-and-password-protection"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-90 inline-flex items-center"
+                title="Locksy: Launching Soon on PeerPush"
+              >
+                <img
+                  src="https://peerpush.com/p/locksy-tab-locker-and-password-protection/badge.png"
+                  alt="Locksy: Launching Soon on PeerPush"
+                  style={{ height: "40px", width: "auto" }}
+                />
+              </a>
               <a
                 href="https://sellwithboost.com"
                 target="_blank"

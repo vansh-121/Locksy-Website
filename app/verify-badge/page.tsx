@@ -23,7 +23,19 @@ export const metadata: Metadata = {
 
 export default function VerifyPage() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <a
+        href="https://peerpush.com/p/locksy-tab-locker-and-password-protection"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Locksy: Launching Soon on PeerPush"
+      >
+        <img
+          src="https://peerpush.com/p/locksy-tab-locker-and-password-protection/badge.png"
+          alt="Locksy: Launching Soon on PeerPush"
+          style={{ height: '40px', width: 'auto' }}
+        />
+      </a>
       <a href="https://sellwithboost.com" target="_blank" rel="noopener noreferrer">
         <img src="https://sellwithboost.com/badge/listing.svg" alt="Listed on Sell With boost" style={{ height: '40px', width: 'auto' }} />
       </a>

@@ -77,6 +77,7 @@ A: No. Older tab locking extensions use a CSS overlay approach where the protect
 - [Locksy Official Blog](https://www.locksy.dev/blog): Security guides, browser privacy tips, and release notes.
 - [GitHub Repository](https://github.com/vansh-121/Locksy): Open repository and issue tracker.
 - [ProductHunt Listing](https://www.producthunt.com/products/locksy-tab-locker-password-protection): User reviews and community feedback.
+- [PeerPush Launch](https://peerpush.com/p/locksy-tab-locker-and-password-protection): Upcoming product launch on PeerPush (Coming Soon - pre-launch listing).
 
 ## Frequently Asked Questions
 

@@ -224,6 +224,7 @@ export const jsonLdOrganization = {
     sameAs: [
         'https://github.com/vansh-121/Locksy',
         'https://www.producthunt.com/products/locksy-tab-locker-password-protection',
+        'https://peerpush.com/p/locksy-tab-locker-and-password-protection',
         'https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim',
         'https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn',
         'https://addons.mozilla.org/en-US/firefox/addon/locksy/',
