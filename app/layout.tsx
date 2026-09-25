@@ -14,6 +14,7 @@ import ChatSupport from "@/components/chat-support"
 import WhatsAppFloat from "@/components/whatsapp-float"
 import WhatsAppDialog from "@/components/whatsapp-dialog"
 import CookieConsent from "@/components/cookie-consent"
+import SocialProofToast from "@/components/social-proof-toast"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const geist = Geist({ subsets: ["latin"] })
@@ -90,6 +91,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           {children}
+          <SocialProofToast />
           <WhatsAppFloat />
           <WhatsAppDialog />
           <ChatSupport />
