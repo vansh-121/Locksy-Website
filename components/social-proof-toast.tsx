@@ -86,8 +86,9 @@ interface DisplayEvent {
   timeAgo: string
 }
 
-// Display settings for organic, non-spammy feel
-const SHOW_DURATION = 5500
+// Display settings: extended duration so it stays long enough to read and passes slowly
+const SHOW_DURATION = 8500
+const EXIT_DURATION = 800
 const MIN_INTERVAL = 14000
 const MAX_INTERVAL = 26000
 const SESSION_STORAGE_KEY = "locksy_shown_purchases"
@@ -96,6 +97,7 @@ const DISMISSED_STORAGE_KEY = "locksy_social_proof_dismissed"
 export default function SocialProofToast() {
   const [mounted, setMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [isLeaving, setIsLeaving] = useState(false)
   const [isDismissed, setIsDismissed] = useState(false)
   const [currentEvent, setCurrentEvent] = useState<DisplayEvent | null>(null)
   const [progress, setProgress] = useState(100)
@@ -200,6 +202,7 @@ export default function SocialProofToast() {
 
     remainingTimeRef.current = SHOW_DURATION
     setProgress(100)
+    setIsLeaving(false)
     setIsVisible(true)
     lastStartTimeRef.current = Date.now()
 
@@ -225,25 +228,37 @@ export default function SocialProofToast() {
   }
 
   const dismissCurrent = () => {
-    setIsVisible(false)
     if (progressIntervalRef.current) clearInterval(progressIntervalRef.current)
+    setIsLeaving(true)
 
-    // Interval between notifications (14 to 26 seconds for a calm, realistic cadence)
-    const nextWait =
-      Math.floor(Math.random() * (MAX_INTERVAL - MIN_INTERVAL + 1)) + MIN_INTERVAL
+    // Allow graceful 800ms exit glide before hiding completely
+    setTimeout(() => {
+      setIsVisible(false)
+      setIsLeaving(false)
 
-    showTimerRef.current = setTimeout(() => {
-      triggerNotification()
-    }, nextWait)
+      // Interval between notifications (14 to 26 seconds for a calm, realistic cadence)
+      const nextWait =
+        Math.floor(Math.random() * (MAX_INTERVAL - MIN_INTERVAL + 1)) + MIN_INTERVAL
+
+      showTimerRef.current = setTimeout(() => {
+        triggerNotification()
+      }, nextWait)
+    }, EXIT_DURATION)
   }
 
   // Handle manual dismiss (user clicks X)
   const handleUserDismiss = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    setIsVisible(false)
-    setIsDismissed(true)
+    if (progressIntervalRef.current) clearInterval(progressIntervalRef.current)
+    setIsLeaving(true)
     clearAllTimers()
+
+    setTimeout(() => {
+      setIsVisible(false)
+      setIsLeaving(false)
+      setIsDismissed(true)
+    }, EXIT_DURATION)
 
     try {
       sessionStorage.setItem(DISMISSED_STORAGE_KEY, "true")
@@ -252,7 +267,7 @@ export default function SocialProofToast() {
 
   // Pause timer on hover
   const handleMouseEnter = () => {
-    if (!isVisible) return
+    if (!isVisible || isLeaving) return
     if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
     if (progressIntervalRef.current) clearInterval(progressIntervalRef.current)
 
@@ -262,7 +277,7 @@ export default function SocialProofToast() {
 
   // Resume timer on mouse leave
   const handleMouseLeave = () => {
-    if (!isVisible || isDismissed) return
+    if (!isVisible || isDismissed || isLeaving) return
     lastStartTimeRef.current = Date.now()
 
     const resumeDuration = Math.max(1000, remainingTimeRef.current)
@@ -283,7 +298,11 @@ export default function SocialProofToast() {
       aria-live="polite"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="fixed bottom-20 left-4 sm:left-6 z-40 max-w-[calc(100vw-2rem)] sm:max-w-[340px] w-full print:hidden select-none transition-all duration-300 animate-in fade-in-0 slide-in-from-bottom-5 zoom-in-95"
+      className={`fixed bottom-20 left-4 sm:left-6 z-40 max-w-[calc(100vw-2rem)] sm:max-w-[340px] w-full print:hidden select-none transition-all duration-700 ease-in-out transform ${
+        isLeaving
+          ? "opacity-0 translate-y-4 scale-95 pointer-events-none"
+          : "opacity-100 translate-y-0 scale-100 animate-in fade-in-0 slide-in-from-bottom-5 duration-500"
+      }`}
     >
       <a
         href={PRO_CHECKOUT_URL}
@@ -359,7 +378,7 @@ export default function SocialProofToast() {
         {/* Dynamic progress countdown bar */}
         <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-muted/40 overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-[width] duration-75 ease-linear"
+            className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-[width] duration-100 ease-linear"
             style={{ width: `${progress}%` }}
           />
         </div>
