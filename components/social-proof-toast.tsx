@@ -346,12 +346,12 @@ export default function SocialProofToast() {
           </div>
         </div>
 
-        {/* Close button */}
+        {/* Close button with comfortable mobile touch target */}
         <button
           type="button"
           onClick={handleUserDismiss}
           aria-label="Dismiss purchase notification"
-          className="absolute top-2 right-2 p-1 rounded-md text-muted-foreground/60 hover:text-foreground hover:bg-muted/80 transition-colors z-10 cursor-pointer"
+          className="absolute top-1.5 right-1.5 p-1.5 rounded-lg text-muted-foreground/60 hover:text-foreground hover:bg-muted/80 active:scale-90 transition-all z-10 cursor-pointer"
         >
           <X className="w-3.5 h-3.5" />
         </button>
