@@ -86,12 +86,19 @@ interface DisplayEvent {
   timeAgo: string
 }
 
-// Display settings: extended duration so it stays long enough to read and passes slowly
-const SHOW_DURATION = 8500
-const EXIT_DURATION = 800
-const MIN_INTERVAL = 14000
-const MAX_INTERVAL = 26000
+// Display settings: Wave & Cooldown architecture
+const SHOW_DURATION = 8500        // On screen for 8.5 seconds
+const EXIT_DURATION = 800         // Graceful exit glide
+const MIN_GAP_IN_WAVE = 28000     // 28s minimum gap within a wave
+const MAX_GAP_IN_WAVE = 45000     // 45s maximum gap within a wave
+const WAVE_SIZE = 3               // 3 notifications per wave
+const MIN_WAVE_COOLDOWN = 150000  // 2.5 minutes quiet cooldown between waves
+const MAX_WAVE_COOLDOWN = 200000  // ~3.3 minutes quiet cooldown between waves
+const MAX_TOTAL_WAVES = 2         // Max 2 waves (total 6 alerts across a visit)
+const MAX_TOTAL_ALERTS = WAVE_SIZE * MAX_TOTAL_WAVES
+
 const SESSION_STORAGE_KEY = "locksy_shown_purchases"
+const SESSION_COUNT_KEY = "locksy_toast_session_count"
 const DISMISSED_STORAGE_KEY = "locksy_social_proof_dismissed"
 
 // Shared persistent audio context across notifications (never closed so subsequent notifications from timers can play freely)
@@ -207,6 +214,13 @@ export default function SocialProofToast() {
         return
       }
 
+      // Respect session limit: if user already saw MAX_TOTAL_ALERTS cards, do not show more
+      const sessionCount = parseInt(sessionStorage.getItem(SESSION_COUNT_KEY) || "0", 10)
+      if (sessionCount >= MAX_TOTAL_ALERTS) {
+        setIsDismissed(true)
+        return
+      }
+
       const storedSeen = sessionStorage.getItem(SESSION_STORAGE_KEY)
       if (storedSeen) {
         const parsed: string[] = JSON.parse(storedSeen)
@@ -214,8 +228,8 @@ export default function SocialProofToast() {
       }
     } catch {}
 
-    // First appearance after natural initial delay (6.5s to 9s)
-    const initialDelay = Math.floor(Math.random() * 2500) + 6500
+    // First appearance after natural initial browsing delay (8.5s to 12.5s)
+    const initialDelay = Math.floor(Math.random() * 4000) + 8500
     const initialTimer = setTimeout(() => {
       triggerNotification()
     }, initialDelay)
@@ -278,6 +292,11 @@ export default function SocialProofToast() {
       if (sessionStorage.getItem(DISMISSED_STORAGE_KEY) === "true") {
         return
       }
+      const count = parseInt(sessionStorage.getItem(SESSION_COUNT_KEY) || "0", 10)
+      if (count >= MAX_TOTAL_ALERTS) {
+        return
+      }
+      sessionStorage.setItem(SESSION_COUNT_KEY, String(count + 1))
     } catch {}
 
     const buyer = getNextBuyer()
@@ -331,9 +350,22 @@ export default function SocialProofToast() {
       setIsVisible(false)
       setIsLeaving(false)
 
-      // Interval between notifications (14 to 26 seconds for a calm, realistic cadence)
-      const nextWait =
-        Math.floor(Math.random() * (MAX_INTERVAL - MIN_INTERVAL + 1)) + MIN_INTERVAL
+      let count = 0
+      try {
+        count = parseInt(sessionStorage.getItem(SESSION_COUNT_KEY) || "0", 10)
+        // Stop scheduling once total session limit is reached
+        if (count >= MAX_TOTAL_ALERTS) {
+          return
+        }
+      } catch {}
+
+      // Wave & Cooldown calculation:
+      // If we just completed a wave of 3 alerts, enter a 2.5 - 3.3 minute quiet cooldown.
+      // Otherwise, space the alerts by 28s - 45s within the wave.
+      const isWaveComplete = count % WAVE_SIZE === 0
+      const nextWait = isWaveComplete
+        ? Math.floor(Math.random() * (MAX_WAVE_COOLDOWN - MIN_WAVE_COOLDOWN + 1)) + MIN_WAVE_COOLDOWN
+        : Math.floor(Math.random() * (MAX_GAP_IN_WAVE - MIN_GAP_IN_WAVE + 1)) + MIN_GAP_IN_WAVE
 
       showTimerRef.current = setTimeout(() => {
         triggerNotification()
