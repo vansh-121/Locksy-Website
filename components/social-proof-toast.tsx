@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { CheckCircle2, X, ExternalLink } from "lucide-react"
 import { PRO_CHECKOUT_URL, PRO_PRICE } from "@/lib/pro"
@@ -177,6 +178,13 @@ function playNotificationChime() {
 }
 
 export default function SocialProofToast() {
+  const pathname = usePathname()
+  // Blog articles and user guides are deep-reading contexts
+  const isReadingPage = Boolean(
+    pathname && (pathname.startsWith("/blog") || pathname.startsWith("/guide"))
+  )
+  const maxAlerts = isReadingPage ? 2 : MAX_TOTAL_ALERTS
+
   const [mounted, setMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [isLeaving, setIsLeaving] = useState(false)
@@ -214,9 +222,9 @@ export default function SocialProofToast() {
         return
       }
 
-      // Respect session limit: if user already saw MAX_TOTAL_ALERTS cards, do not show more
+      // Respect session limit: if user already saw maxAlerts cards, do not show more
       const sessionCount = parseInt(sessionStorage.getItem(SESSION_COUNT_KEY) || "0", 10)
-      if (sessionCount >= MAX_TOTAL_ALERTS) {
+      if (sessionCount >= maxAlerts) {
         setIsDismissed(true)
         return
       }
@@ -228,8 +236,12 @@ export default function SocialProofToast() {
       }
     } catch {}
 
-    // First appearance after natural initial browsing delay (8.5s to 12.5s)
-    const initialDelay = Math.floor(Math.random() * 4000) + 8500
+    // On reading pages (blog/guide), wait 25s-32s so reader gets deep into the content;
+    // on landing/pricing pages, show after 8.5s-12.5s.
+    const initialDelay = isReadingPage
+      ? Math.floor(Math.random() * 7000) + 25000
+      : Math.floor(Math.random() * 4000) + 8500
+
     const initialTimer = setTimeout(() => {
       triggerNotification()
     }, initialDelay)
@@ -293,7 +305,7 @@ export default function SocialProofToast() {
         return
       }
       const count = parseInt(sessionStorage.getItem(SESSION_COUNT_KEY) || "0", 10)
-      if (count >= MAX_TOTAL_ALERTS) {
+      if (count >= maxAlerts) {
         return
       }
       sessionStorage.setItem(SESSION_COUNT_KEY, String(count + 1))
@@ -317,8 +329,10 @@ export default function SocialProofToast() {
     setIsVisible(true)
     lastStartTimeRef.current = Date.now()
 
-    // Play subtle arrival chime
-    playNotificationChime()
+    // Play subtle arrival chime only on conversion/landing pages; silent on reading pages (blogs/guide)
+    if (!isReadingPage) {
+      playNotificationChime()
+    }
 
     startProgressCountdown(SHOW_DURATION)
 
@@ -354,7 +368,7 @@ export default function SocialProofToast() {
       try {
         count = parseInt(sessionStorage.getItem(SESSION_COUNT_KEY) || "0", 10)
         // Stop scheduling once total session limit is reached
-        if (count >= MAX_TOTAL_ALERTS) {
+        if (count >= maxAlerts) {
           return
         }
       } catch {}

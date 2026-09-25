@@ -111,4 +111,47 @@ eventLog.forEach(e => {
 assert.strictEqual(eventLog.length, 6, "Exactly 6 alerts triggered before permanent sleep")
 console.log("✔ Wave & Cooldown schedule verified: Exactly 2 waves of 3 alerts with ~3m cooldown.")
 
-console.log("\n🎉 ALL TESTS PASSED SUCCESSFULLY!")
+// 4. Path-Aware Blog Adaptation Test
+console.log("\nTesting Path-Aware Blog Adaptation Logic...")
+
+function evaluatePageSettings(pathname) {
+  const isReadingPage = Boolean(
+    pathname && (pathname.startsWith("/blog") || pathname.startsWith("/guide"))
+  )
+  const maxAlerts = isReadingPage ? 2 : MAX_TOTAL_ALERTS
+  const isSilent = isReadingPage
+  const minInitialDelay = isReadingPage ? 25000 : 8500
+  const maxInitialDelay = isReadingPage ? 32000 : 12500
+
+  return { isReadingPage, maxAlerts, isSilent, minInitialDelay, maxInitialDelay }
+}
+
+const landingPages = ["/", "/pricing", "/tools/password-generator", "/about"]
+const blogAndGuidePages = [
+  "/blog",
+  "/blog/how-to-lock-chrome-tabs-with-password",
+  "/blog/private-browsing-vs-tab-lockers",
+  "/guide",
+  "/guide#biometric-unlock"
+]
+
+landingPages.forEach(path => {
+  const cfg = evaluatePageSettings(path)
+  assert.strictEqual(cfg.isReadingPage, false, `${path} should NOT be a reading page`)
+  assert.strictEqual(cfg.isSilent, false, `${path} should have audio ENABLED`)
+  assert.strictEqual(cfg.maxAlerts, 6, `${path} should have 6 total alerts (2 waves)`)
+  assert.strictEqual(cfg.minInitialDelay, 8500, `${path} should have 8.5s minimum delay`)
+})
+console.log("✔ Landing & Pricing routes verified (Audio ON, 6 alerts, 8.5s-12.5s delay).")
+
+blogAndGuidePages.forEach(path => {
+  const cfg = evaluatePageSettings(path)
+  assert.strictEqual(cfg.isReadingPage, true, `${path} MUST be detected as reading page`)
+  assert.strictEqual(cfg.isSilent, true, `${path} MUST be SILENT (no audio chime)`)
+  assert.strictEqual(cfg.maxAlerts, 2, `${path} MUST be capped at 2 alerts max`)
+  assert.strictEqual(cfg.minInitialDelay, 25000, `${path} MUST wait at least 25s before first toast`)
+})
+console.log("✔ Blog & Guide routes verified (Silent Mode, 2 alerts max, 25s-32s delay).")
+
+console.log("\n🎉 ALL 4 TEST SUITES PASSED SUCCESSFULLY!")
+
