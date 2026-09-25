@@ -94,6 +94,81 @@ const MAX_INTERVAL = 26000
 const SESSION_STORAGE_KEY = "locksy_shown_purchases"
 const DISMISSED_STORAGE_KEY = "locksy_social_proof_dismissed"
 
+// Shared persistent audio context across notifications (never closed so subsequent notifications from timers can play freely)
+let sharedAudioCtx: AudioContext | null = null
+
+function getAudioContext(): AudioContext | null {
+  if (typeof window === "undefined") return null
+  try {
+    if (!sharedAudioCtx) {
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+      if (AudioContextClass) {
+        sharedAudioCtx = new AudioContextClass()
+      }
+    }
+    if (sharedAudioCtx && sharedAudioCtx.state === "suspended") {
+      sharedAudioCtx.resume().catch(() => {})
+    }
+    return sharedAudioCtx
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Synthesizes a gentle, two-tone notification chime using the Web Audio API.
+ * Uses soft sine waves (E5 -> B5) with quick decay to create an elegant,
+ * non-intrusive sound without requiring external audio asset downloads.
+ */
+function playNotificationChime() {
+  try {
+    const ctx = getAudioContext()
+    if (!ctx) return
+
+    // Ensure running state
+    if (ctx.state === "suspended") {
+      ctx.resume().catch(() => {})
+    }
+
+    const now = ctx.currentTime
+
+    // Master gain: soft, pleasant volume (not jarring)
+    const masterGain = ctx.createGain()
+    masterGain.gain.setValueAtTime(0.08, now)
+    masterGain.connect(ctx.destination)
+
+    // Primary Tone: E5 (659.25 Hz)
+    const osc1 = ctx.createOscillator()
+    const gain1 = ctx.createGain()
+    osc1.type = "sine"
+    osc1.frequency.setValueAtTime(659.25, now)
+    gain1.gain.setValueAtTime(0, now)
+    gain1.gain.linearRampToValueAtTime(0.8, now + 0.02)
+    gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.35)
+    osc1.connect(gain1)
+    gain1.connect(masterGain)
+    osc1.start(now)
+    osc1.stop(now + 0.36)
+
+    // Secondary Tone: B5 (987.77 Hz) - cheerful upward bell, plays 60ms later
+    const osc2 = ctx.createOscillator()
+    const gain2 = ctx.createGain()
+    osc2.type = "sine"
+    osc2.frequency.setValueAtTime(987.77, now + 0.06)
+    gain2.gain.setValueAtTime(0, now + 0.06)
+    gain2.gain.linearRampToValueAtTime(0.9, now + 0.08)
+    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.45)
+    osc2.connect(gain2)
+    gain2.connect(masterGain)
+    osc2.start(now + 0.06)
+    osc2.stop(now + 0.46)
+  } catch {
+    // Autoplay policy or unsupported environment handled silently
+  }
+}
+
 export default function SocialProofToast() {
   const [mounted, setMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -112,6 +187,19 @@ export default function SocialProofToast() {
   // Load seen names from sessionStorage so names NEVER repeat during user session
   useEffect(() => {
     setMounted(true)
+
+    // Unlock AudioContext on user interaction to comply with browser autoplay policies
+    const unlockAudio = () => {
+      const ctx = getAudioContext()
+      if (ctx && ctx.state === "suspended") {
+        ctx.resume().catch(() => {})
+      }
+    }
+
+    window.addEventListener("click", unlockAudio, { passive: true })
+    window.addEventListener("keydown", unlockAudio, { passive: true })
+    window.addEventListener("touchstart", unlockAudio, { passive: true })
+    window.addEventListener("pointerdown", unlockAudio, { passive: true })
 
     try {
       if (sessionStorage.getItem(DISMISSED_STORAGE_KEY) === "true") {
@@ -135,6 +223,10 @@ export default function SocialProofToast() {
     return () => {
       clearTimeout(initialTimer)
       clearAllTimers()
+      window.removeEventListener("click", unlockAudio)
+      window.removeEventListener("keydown", unlockAudio)
+      window.removeEventListener("touchstart", unlockAudio)
+      window.removeEventListener("pointerdown", unlockAudio)
     }
   }, [])
 
@@ -205,6 +297,9 @@ export default function SocialProofToast() {
     setIsLeaving(false)
     setIsVisible(true)
     lastStartTimeRef.current = Date.now()
+
+    // Play subtle arrival chime
+    playNotificationChime()
 
     startProgressCountdown(SHOW_DURATION)
 
