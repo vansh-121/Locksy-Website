@@ -134,7 +134,7 @@ const REASONS = [
         id: "limits",
         icon: Lock,
         label: "I hit the free limits",
-        headline: "Pro lifts every one of them. $2.99, once.",
+        headline: "Pro lifts every one of them. $4.99, once.",
         body: "Three domain locks becomes unlimited. Five biometric unlocks a day becomes unlimited. Three intruder snapshots becomes unlimited. Plus stealth mode, custom timers and 1-click unlock all. One payment, no subscription, yours forever.",
         chapter: "free-vs-pro",
         chapterTitle: "What's free and what's Pro",
@@ -542,7 +542,7 @@ export default function UninstallClient({
                                                                     className="inline-flex items-center gap-1.5 text-sm font-bold text-violet-600 hover:underline dark:text-violet-400"
                                                                 >
                                                                     <Sparkles className="h-4 w-4 flex-shrink-0" />
-                                                                    Get Pro — $2.99 once
+                                                                    Get Pro — $4.99 once
                                                                     <ArrowRight className="h-3.5 w-3.5 flex-shrink-0" />
                                                                 </a>
                                                             )}

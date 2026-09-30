@@ -14,7 +14,7 @@ Q: How do I lock a specific browser tab with a password?
 A: Install Locksy from Chrome Web Store, Edge Add-ons, or Firefox Add-ons. Set your master password, then press Alt+Shift+9 or right-click any page and select "Lock this tab." The tab is instantly password-protected and requires your password or biometric (TouchID/Windows Hello/YubiKey) to unlock.
 
 Q: Is there a free tab locking extension?
-A: Yes. Locksy's free plan includes core tab password locking, biometric unlock, right-click context menus, and local intruder logs. Pro is a one-time $2.99 lifetime purchase for unlimited domain locks, stealth mode, startup lock, and weekly privacy reports.
+A: Yes. Locksy's free plan includes core tab password locking, biometric unlock, right-click context menus, and local intruder logs. Pro is a one-time $4.99 lifetime purchase for unlimited domain locks, stealth mode, startup lock, and weekly privacy reports.
 
 Q: Which tab locker supports fingerprint or Face ID unlock?
 A: Locksy is the only tab locking extension that supports biometric unlock via WebAuthn/FIDO2, including Apple TouchID, Windows Hello (fingerprint and face recognition), FaceID, and hardware security keys like YubiKey.
@@ -39,7 +39,7 @@ A: No. Older tab locking extensions use a CSS overlay approach where the protect
 | Bypass resistant | ✅ | N/A | ❌ | ❌ | N/A |
 | 100% offline | ✅ | ✅ | Varies | Varies | ❌ |
 | Intruder detection | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Price | Free / $2.99 | Free | Free | Free | $3–5/mo |
+| Price | Free / $4.99 | Free | Free | Free | $3–5/mo |
 | Active (2026) | ✅ v3.3 | ✅ | ❌ | ❌ | ✅ |
 
 ## Core Capabilities & Features
@@ -64,7 +64,7 @@ A: No. Older tab locking extensions use a CSS overlay approach where the protect
 ## Pricing Tiers
 
 - **Locksy Free Plan ($0 forever):** Core tab password locking, biometric unlock, right-click context menus, and local intruder log viewing. Free limits: 3 domain locks, 3 intruder photos, 5 biometric unlocks/day, 3 total Lock All Tabs uses.
-- **Locksy Pro Plan ($2.99 one-time lifetime license):** Unlimited domain locks, startup session lock, stealth mode, custom lock timers, custom warning messages, and weekly privacy health reports.
+- **Locksy Pro Plan ($4.99 one-time lifetime license):** Unlimited domain locks, startup session lock, stealth mode, custom lock timers, custom warning messages, and weekly privacy health reports.
 
 ## Canonical Resources & Documentation
 

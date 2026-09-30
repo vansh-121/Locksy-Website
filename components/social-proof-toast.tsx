@@ -71,12 +71,12 @@ const BUYER_PROFILES: BuyerTemplate[] = [
 // Natural purchase actions reflecting lifetime benefits
 const ACTIONS = [
   "Purchased Locksy Pro Lifetime",
-  `Unlocked Pro Early-Bird (${PRO_PRICE})`,
+  `Unlocked Locksy Pro (${PRO_PRICE})`,
   "Claimed Lifetime Pro License",
   "Purchased Locksy Pro (5 Devices)",
   "Upgraded to Lifetime Pro",
   `Purchased Locksy Pro (${PRO_PRICE})`,
-  "Unlocked Pro Early-Bird Access",
+  "Unlocked Locksy Pro Lifetime Access",
 ]
 
 interface DisplayEvent {

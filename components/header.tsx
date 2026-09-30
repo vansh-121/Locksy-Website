@@ -55,8 +55,8 @@ export default function Header() {
   const [showDownloadDropdown, setShowDownloadDropdown] = useState(false)
   const [saleTimeLeft, setSaleTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number } | null>(null)
   
-  // Always initialize to true so SSR HTML matches client initial render (avoids hydration error)
-  const [isBannerVisible, setIsBannerVisible] = useState(true)
+  // Initialize to false so SSR HTML does not flash expired early bird banner
+  const [isBannerVisible, setIsBannerVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -79,6 +79,8 @@ export default function Header() {
         if (isExpired) {
           document.documentElement.classList.add("banner-dismissed")
         }
+      } else {
+        setIsBannerVisible(true)
       }
     }
   }, [])
