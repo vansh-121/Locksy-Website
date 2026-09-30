@@ -5,25 +5,56 @@ import type { BlogPost } from '@/lib/blog-data'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen, User } from 'lucide-react'
-import React from 'react'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen, User, Sparkles, CheckCircle2, HelpCircle } from 'lucide-react'
+import React, { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useEffect, useState } from 'react'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import BlogViewCounter from '@/components/blog-view-counter'
+import BlogToc, { extractHeadings } from '@/components/blog-toc'
+import { slugify } from '@/lib/utils'
 
 interface BlogPostClientProps {
     post: BlogPost
     relatedPosts: BlogPost[]
 }
 
+// Flatten ReactMarkdown heading children to plain text so we can derive the
+// same id the TOC computed from the raw markdown. Handles strings, arrays, and
+// nested React elements (e.g. `**bold**` inside a heading).
+function nodeToText(node: React.ReactNode): string {
+    if (node == null || typeof node === 'boolean') return ''
+    if (typeof node === 'string' || typeof node === 'number') return String(node)
+    if (Array.isArray(node)) return node.map(nodeToText).join('')
+    if (React.isValidElement(node)) return nodeToText((node.props as { children?: React.ReactNode }).children)
+    return ''
+}
+
 export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     const [currentUrl, setCurrentUrl] = useState('')
+
+    // Parse headings once for the TOC. The heading renderers below slugify their
+    // own text the same way, and a shared counter keeps duplicate headings in
+    // sync with extractHeadings' de-duping.
+    const headings = useMemo(() => extractHeadings(post.content), [post.content])
 
     useEffect(() => {
         setCurrentUrl(window.location.href)
     }, [])
+
+    // Per-render id assigner: mirrors extractHeadings' dedupe so the Nth "## Foo"
+    // gets the same `foo`, `foo-1`, … id the TOC links to.
+    const headingCounts = new Map<string, number>()
+    const idForHeading = (text: string): string => {
+        const base = slugify(text)
+        if (!base) return ''
+        const count = headingCounts.get(base) ?? 0
+        headingCounts.set(base, count + 1)
+        return count > 0 ? `${base}-${count}` : base
+    }
 
     const shareToTwitter = () => {
         const text = `${post.title}`
@@ -105,15 +136,32 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                 <User className="h-4 w-4" />
                                 By {post.author}
                             </Link>
+                            <BlogViewCounter slug={post.slug} />
                         </div>
 
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                             {post.title}
                         </h1>
 
-                        <p className="text-xl text-muted-foreground">
+                        <p className="blog-description text-xl text-muted-foreground">
                             {post.description}
                         </p>
+
+                        {/* TL;DR — answer-first summary. Rendered synchronously from
+                            props so it's in the server HTML: quotable by AI answer
+                            engines (GEO) and adds rendered words. The .blog-tldr class
+                            is the speakable target declared in page.tsx. */}
+                        {post.tldr && (
+                            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5 md:p-6">
+                                <div className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary">
+                                    <Sparkles className="h-4 w-4" />
+                                    TL;DR
+                                </div>
+                                <p className="blog-tldr text-base md:text-lg leading-relaxed text-foreground/90">
+                                    {post.tldr}
+                                </p>
+                            </div>
+                        )}
 
                         <div className="flex flex-wrap gap-2">
                             {post.tags.map((tag) => (
@@ -158,13 +206,42 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                     </div>
                 </div>
 
+                {/* Key Takeaways — scannable bullets for answer engines (AEO).
+                    Rendered from props, present in server HTML. */}
+                {post.keyTakeaways && post.keyTakeaways.length > 0 && (
+                    <div className="max-w-4xl mx-auto mb-12">
+                        <div className="rounded-2xl border border-border/50 bg-card/60 p-6 md:p-8 backdrop-blur-sm">
+                            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-foreground">
+                                <CheckCircle2 className="h-5 w-5 text-primary" />
+                                Key Takeaways
+                            </h2>
+                            <ul className="space-y-2.5">
+                                {post.keyTakeaways.map((point, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-foreground/90">
+                                        <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-primary/70" />
+                                        <span className="leading-7 text-base md:text-lg">{point}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                )}
+
                 {/* Divider */}
                 <div className="max-w-4xl mx-auto">
                     <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent mb-12" />
                 </div>
 
-                {/* Article Content */}
-                <article className="max-w-4xl mx-auto">
+                {/* Article Content — with a sticky Table of Contents sidebar on
+                    large screens. The TOC renders its full list in the server HTML
+                    (never null) so it survives before hydration. */}
+                <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-10">
+                    {headings.length > 0 && (
+                        <aside className="lg:col-start-1">
+                            <BlogToc headings={headings} />
+                        </aside>
+                    )}
+                    <article className={headings.length > 0 ? 'lg:col-start-2 min-w-0' : 'max-w-4xl mx-auto'}>
                     <div className="relative group">
                         <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 to-secondary/5 blur-2xl opacity-0 group-hover:opacity-50 transition-opacity rounded-3xl" />
                         <div className="relative bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-6 md:p-10 lg:p-12 shadow-lg">
@@ -177,13 +254,13 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                         </h1>
                                     ),
                                     h2: ({ children }) => (
-                                        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mt-10 mb-4 text-foreground flex items-center gap-3">
+                                        <h2 id={idForHeading(nodeToText(children))} className="scroll-mt-24 text-2xl font-bold tracking-tight sm:text-3xl mt-10 mb-4 text-foreground flex items-center gap-3">
                                             <span className="w-1 h-7 bg-gradient-to-b from-primary to-secondary rounded-full flex-shrink-0" />
                                             {children}
                                         </h2>
                                     ),
                                     h3: ({ children }) => (
-                                        <h3 className="text-xl font-semibold tracking-tight sm:text-2xl mt-8 mb-3 text-foreground">
+                                        <h3 id={idForHeading(nodeToText(children))} className="scroll-mt-24 text-xl font-semibold tracking-tight sm:text-2xl mt-8 mb-3 text-foreground">
                                             {children}
                                         </h3>
                                     ),
@@ -310,7 +387,36 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                             </ReactMarkdown>
                         </div>
                     </div>
-                </article>
+                    </article>
+                </div>
+
+                {/* FAQ — per-post Q&A. Rendered when present; also emitted as
+                    FAQPage JSON-LD from page.tsx for rich results (AEO). */}
+                {post.faq && post.faq.length > 0 && (
+                    <section className="max-w-4xl mx-auto mt-16" aria-labelledby="faq-heading">
+                        <h2 id="faq-heading" className="scroll-mt-24 text-2xl md:text-3xl font-bold tracking-tight mb-8 flex items-center gap-3">
+                            <span className="w-1 h-7 bg-gradient-to-b from-primary to-secondary rounded-full" />
+                            Frequently Asked Questions
+                        </h2>
+                        <div className="rounded-2xl border border-border/30 bg-card/60 backdrop-blur-sm p-2 md:p-4">
+                            <Accordion type="single" collapsible className="w-full">
+                                {post.faq.map((item, i) => (
+                                    <AccordionItem key={i} value={`faq-${i}`} className="px-4">
+                                        <AccordionTrigger className="text-left text-base md:text-lg font-semibold text-foreground">
+                                            <span className="flex items-start gap-3">
+                                                <HelpCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                                                {item.question}
+                                            </span>
+                                        </AccordionTrigger>
+                                        <AccordionContent className="pl-8 text-base leading-7 text-foreground/90">
+                                            {item.answer}
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                ))}
+                            </Accordion>
+                        </div>
+                    </section>
+                )}
 
                 {/* Author Bio Card — E-E-A-T signal for AdSense & Google */}
                 <div className="max-w-4xl mx-auto mt-10">

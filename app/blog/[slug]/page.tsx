@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { blogPosts, getBlogPost, getRelatedPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
-import { jsonLdItemList } from '@/lib/metadata'
+import { jsonLdItemList, generateFAQSchema } from '@/lib/metadata'
 import { BlogPostClient } from './blog-post-client'
 
 export async function generateStaticParams() {
@@ -89,10 +89,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         image: post.image,
         datePublished: post.publishDate,
         dateModified: post.lastModified,
+        // Person author (not Organization) is a stronger E-E-A-T signal: it ties
+        // the article to a named, verifiable individual with an external profile.
         author: {
-            '@type': 'Organization',
+            '@type': 'Person',
             name: post.author,
-            url: siteUrl,
+            url: `${siteUrl}/about`,
+            sameAs: ['https://github.com/vansh-121'],
         },
         publisher: {
             '@type': 'Organization',
@@ -105,6 +108,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         mainEntityOfPage: {
             '@type': 'WebPage',
             '@id': postUrl,
+        },
+        // speakable marks the answer-first summary for voice assistants (AEO).
+        // The TL;DR renders inside .blog-tldr; description is the fallback target.
+        speakable: {
+            '@type': 'SpeakableSpecification',
+            cssSelector: ['.blog-tldr', '.blog-description'],
         },
         keywords: post.keywords.join(', '),
         articleSection: post.category,
@@ -124,6 +133,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     // Add inLanguage to the article schema
     const fullJsonLd = { ...jsonLd, inLanguage: 'en-US' }
 
+    // FAQPage schema — only when the post actually has FAQs, so the rendered
+    // page and the structured data always agree (Google penalises FAQ markup
+    // with no matching on-page content).
+    const faqJsonLd = post.faq && post.faq.length > 0 ? generateFAQSchema(post.faq) : null
+
     return (
         <>
             <script
@@ -134,6 +148,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
             />
+            {faqJsonLd && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }}
+                />
+            )}
             {slug === 'best-tab-locking-extensions-2026' && (
                 <script
                     type="application/ld+json"

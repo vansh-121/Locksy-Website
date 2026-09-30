@@ -12,6 +12,14 @@ export interface BlogPost {
     keywords: string[]
     image: string
     imageAlt: string
+    // Optional SEO/GEO/AEO enrichment. All backward-compatible: existing posts
+    // and older generator output omit them and still type-check.
+    //   tldr         — 1-2 sentence answer-first summary, quotable by AI engines (GEO)
+    //   keyTakeaways — scannable bullet points (AEO)
+    //   faq          — per-post Q&A; also emitted as FAQPage JSON-LD (AEO)
+    tldr?: string
+    keyTakeaways?: string[]
+    faq?: { question: string; answer: string }[]
 }
 
 import { allPosts } from './posts/index'

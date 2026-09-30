@@ -29,6 +29,15 @@ const post = {
   ],
   image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&h=630&q=80',
   imageAlt: 'Comparison of browser tab locking extensions showing security padlock icons on multiple browser tabs',
+  tldr: 'After testing seven ways to lock browser tabs in 2026, Locksy ranked first: the only option combining PBKDF2 (600,000 SHA-256 iterations), WebAuthn biometric unlock, and navigation-based locking that DevTools can\'t bypass — all 100% offline. Older overlay lockers like Tab Lock and LockPW are easily bypassed and no longer maintained.',
+  keyTakeaways: [
+    'Tab locking protects individual sensitive tabs — like banking or email — without locking your entire computer the way Win+L or Cmd+Control+Q does.',
+    'Enforcement is the real security divide: Locksy navigates the tab away and unloads the page, while older lockers like Tab Lock and LockPW only place a CSS overlay that anyone can delete in DevTools.',
+    'Locksy derives its key with PBKDF2-HMAC-SHA256 at 600,000 iterations (above the OWASP minimum), a 16-byte random salt, and constant-time password comparison.',
+    'It adds WebAuthn biometric unlock (TouchID, Windows Hello, FaceID, YubiKey), auto-lock timers, scheduled locks, domain wildcard locks, and stealth mode — all running 100% offline with no accounts or telemetry.',
+    'Password managers and separate browser profiles don\'t lock active sessions; they complement a tab locker rather than replace it.',
+    'Locksy\'s core tab locking is free, with Pro a one-time $2.99 lifetime purchase (no subscription) for unlimited domain locks, startup lock, stealth mode, and weekly reports.',
+  ],
   content: `
 ## Why You Need a Tab Locking Extension in 2026
 
