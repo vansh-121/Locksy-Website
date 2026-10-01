@@ -235,16 +235,15 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                 {/* Article Content — with a sticky Table of Contents sidebar on
                     large screens. The TOC renders its full list in the server HTML
                     (never null) so it survives before hydration. */}
-                <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-10">
+                <div className="mx-auto lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12 xl:gap-16">
                     {headings.length > 0 && (
                         <aside className="lg:col-start-1">
                             <BlogToc headings={headings} />
                         </aside>
                     )}
-                    <article className={headings.length > 0 ? 'lg:col-start-2 min-w-0' : 'max-w-4xl mx-auto'}>
-                    <div className="relative group">
-                        <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 to-secondary/5 blur-2xl opacity-0 group-hover:opacity-50 transition-opacity rounded-3xl" />
-                        <div className="relative bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-6 md:p-10 lg:p-12 shadow-lg">
+                    <article className={headings.length > 0 ? 'lg:col-start-2 min-w-0' : 'max-w-3xl mx-auto'}>
+                    <div className="relative">
+                        <div className="relative px-2 md:px-0">
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
