@@ -91,7 +91,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-x-clip">
             {/* Background decoration */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -235,15 +235,18 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                 {/* Article Content — with a sticky Table of Contents sidebar on
                     large screens. The TOC renders its full list in the server HTML
                     (never null) so it survives before hydration. */}
-                <div className="mx-auto lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12 xl:gap-16">
+                <div className="max-w-4xl mx-auto relative">
+                    {/* TOC: on lg+ it floats in the left margin via absolute positioning
+                        so the article content aligns with the header/hero/takeaways above.
+                        On mobile, BlogToc's own collapsible panel renders in-flow. */}
                     {headings.length > 0 && (
-                        <aside className="lg:col-start-1">
+                        <div className="lg:absolute lg:-left-[16rem] lg:top-0 lg:bottom-0 lg:w-[14rem]">
                             <BlogToc headings={headings} />
-                        </aside>
+                        </div>
                     )}
-                    <article className={headings.length > 0 ? 'lg:col-start-2 min-w-0' : 'max-w-3xl mx-auto'}>
+                    <article className="overflow-hidden">
                     <div className="relative">
-                        <div className="relative px-2 md:px-0">
+                        <div className="relative">
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
