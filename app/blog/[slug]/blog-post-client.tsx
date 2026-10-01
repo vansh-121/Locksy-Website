@@ -236,15 +236,15 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                     large screens. The TOC renders its full list in the server HTML
                     (never null) so it survives before hydration. */}
                 <div className="max-w-4xl mx-auto relative">
-                    {/* TOC: on lg+ it floats in the left margin via absolute positioning
-                        so the article content aligns with the header/hero/takeaways above.
-                        On mobile, BlogToc's own collapsible panel renders in-flow. */}
+                    {/* TOC: on wide screens (>=1400px) it floats in the left margin via absolute positioning
+                        so the article content stays perfectly aligned with the header/hero/takeaways above.
+                        On smaller screens (<1400px: laptops, tablets, mobile), BlogToc's collapsible panel renders in-flow. */}
                     {headings.length > 0 && (
-                        <div className="lg:absolute lg:-left-[16rem] lg:top-0 lg:bottom-0 lg:w-[14rem]">
+                        <div className="min-[1400px]:absolute min-[1400px]:-left-[15.5rem] min-[1400px]:top-0 min-[1400px]:bottom-0 min-[1400px]:w-[13.5rem]">
                             <BlogToc headings={headings} />
                         </div>
                     )}
-                    <article className="overflow-hidden">
+                    <article className="min-w-0">
                     <div className="relative">
                         <div className="relative">
                             <ReactMarkdown

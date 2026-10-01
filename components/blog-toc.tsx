@@ -109,10 +109,10 @@ export default function BlogToc({ headings }: { headings: TocHeading[] }) {
 
     return (
         <>
-            {/* Desktop: sticky sidebar */}
+            {/* Desktop: sticky sidebar on wide viewports (>=1400px) */}
             <nav
                 aria-label="Table of contents"
-                className="hidden lg:block sticky top-24 self-start max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-border/60 bg-card/60 p-4 backdrop-blur-sm"
+                className="hidden min-[1400px]:block sticky top-24 self-start max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-border/60 bg-card/60 p-4 backdrop-blur-sm"
             >
                 <p className="mb-3 flex items-center gap-2 px-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
                     <List className="h-3.5 w-3.5" />
@@ -121,8 +121,8 @@ export default function BlogToc({ headings }: { headings: TocHeading[] }) {
                 {links}
             </nav>
 
-            {/* Mobile: collapsible panel above the content */}
-            <div className="lg:hidden mb-8 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm">
+            {/* Mobile / Tablet / Laptop: collapsible panel above the content (<1400px) */}
+            <div className="min-[1400px]:hidden mb-8 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm">
                 <button
                     type="button"
                     onClick={() => setIsOpen((open) => !open)}
