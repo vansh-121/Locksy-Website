@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { BlogPost } from '@/lib/blog-data'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Clock, Calendar, Filter, Search, BookOpen, ArrowRight } from 'lucide-react'
+import { Clock, Calendar, Filter, Search, BookOpen, ArrowRight, Eye } from 'lucide-react'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 
@@ -21,6 +21,28 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
     const [selectedTag, setSelectedTag] = useState<string | null>(null)
+    // Real view counts, batch-fetched once for all posts (read-only — the listing
+    // never increments). Empty until loaded, or if Upstash isn't configured.
+    const [views, setViews] = useState<Record<string, number>>({})
+
+    useEffect(() => {
+        if (posts.length === 0) return
+        const slugs = posts.map(p => p.slug).join(',')
+        let cancelled = false
+        fetch(`/api/views?slugs=${encodeURIComponent(slugs)}`)
+            .then(res => (res.ok ? res.json() : null))
+            .then(data => {
+                if (!cancelled && data && data.views) setViews(data.views)
+            })
+            .catch(() => { /* counts are optional; ignore */ })
+        return () => { cancelled = true }
+    }, [posts])
+
+    const formatViews = (n: number): string => {
+        if (n < 1000) return String(n)
+        if (n < 1_000_000) return `${(n / 1000).toFixed(n % 1000 >= 100 ? 1 : 0).replace(/\.0$/, '')}K`
+        return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, '')}M`
+    }
 
     const filteredPosts = posts.filter(post => {
         const matchesSearch = searchQuery === '' ||
@@ -237,13 +259,21 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
                                     </CardContent>
 
                                     <CardFooter className="flex items-center justify-between pt-3 border-t border-border/30">
-                                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                                            <Calendar className="h-3 w-3" />
-                                            {new Date(post.publishDate.replace(/-/g, '/')).toLocaleDateString('en-US', {
-                                                year: 'numeric',
-                                                month: 'short',
-                                                day: 'numeric'
-                                            })}
+                                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                                            <span className="flex items-center gap-1">
+                                                <Calendar className="h-3 w-3" />
+                                                {new Date(post.publishDate.replace(/-/g, '/')).toLocaleDateString('en-US', {
+                                                    year: 'numeric',
+                                                    month: 'short',
+                                                    day: 'numeric'
+                                                })}
+                                            </span>
+                                            {views[post.slug] != null && (
+                                                <span className="flex items-center gap-1" title={`${views[post.slug].toLocaleString('en-US')} views`}>
+                                                    <Eye className="h-3 w-3" />
+                                                    {formatViews(views[post.slug])}
+                                                </span>
+                                            )}
                                         </div>
                                         <Link href={`/blog/${post.slug}`}>
                                             <Button variant="ghost" size="sm" className="gap-1 group-hover:text-primary transition-colors">

@@ -25,7 +25,7 @@ const COOKIE_TYPES = [
         name: "Analytics Cookies",
         required: false,
         color: "from-purple-500 to-indigo-500",
-        description: "Locksy does NOT use any analytics cookies. We do not use Google Analytics, Hotjar, Mixpanel, or any other analytics tracking service. We do not track your behavior, page views, click patterns, or session duration. We believe your browsing habits are your own business.",
+        description: "We do not use Google Analytics, Hotjar, Mixpanel, or any behavioral analytics service, and we set no analytics cookies. We do not track your click patterns, session duration, or browsing habits across sites. The one thing we do count is how many times each blog article has been viewed — a single running total per article, incremented on page load. It uses no cookies and stores no personal data, no IP address, and nothing that identifies you or links views together; it is an anonymous tally shown on the article, nothing more.",
         examples: []
     },
     {

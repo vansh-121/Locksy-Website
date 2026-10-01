@@ -388,6 +388,18 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                     </div>
 
                                     <div className="p-5 rounded-xl bg-muted/40 border border-border">
+                                        <h3 className="font-bold mb-1.5">Blog view counts</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                            Each blog article shows how many times it has been viewed. This is a single
+                                            running total per article, kept on our side and incremented by one each time
+                                            the article loads. It uses no cookies, sets no identifier, and stores no IP
+                                            address or anything else personal — just an integer per article. We cannot
+                                            tell who viewed a post or link views together; it is an anonymous tally, and
+                                            it exists only for the website&apos;s blog, never in the Extension.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 rounded-xl bg-muted/40 border border-border">
                                         <h3 className="font-bold mb-1.5">Advertising</h3>
                                         <p className="text-sm text-muted-foreground leading-relaxed">
                                             We may display advertising through the Google AdSense network to fund the
@@ -456,7 +468,8 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
 
                                 <p className="text-muted-foreground leading-relaxed">
                                     What we do not do on the website either: sell your data, run behavioural analytics of
-                                    our own, or require an account to read anything here. If your browser sends a Global
+                                    our own — the anonymous per-article view tally above is the only thing we count, and
+                                    it profiles no one — or require an account to read anything here. If your browser sends a Global
                                     Privacy Control signal, ad networks subject to applicable privacy law are required to
                                     honour it as an opt-out request — our{' '}
                                     <Link href="/tools/browser-privacy-score" className="text-primary hover:underline font-semibold">browser

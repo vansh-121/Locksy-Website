@@ -1095,8 +1095,20 @@ const FALSE_LOCKSY_CLAIMS = [
  * Post-generation quality audit.
  * Returns { pass: boolean, issues: string[] }
  */
-function auditContentQuality(articleBody, wordCount) {
+function auditContentQuality(articleBody, wordCount, extras = {}) {
     const issues = []
+    const { tldr = '', keyTakeaways = [], faq = [] } = extras
+
+    // Promotional / filler / false-claim checks run across the article AND the
+    // structured GEO/AEO fields (TL;DR, takeaways, FAQ), so a false claim or a
+    // second Locksy mention can't slip through in a section the old audit didn't
+    // see. Word-count / heading / exclamation checks stay scoped to the prose.
+    const combined = [
+        articleBody,
+        tldr,
+        ...keyTakeaways,
+        ...faq.flatMap(f => [f.question, f.answer]),
+    ].join('\n')
 
     // 1. Word count bounds
     if (wordCount < 1800) {
@@ -1106,8 +1118,8 @@ function auditContentQuality(articleBody, wordCount) {
         issues.push(`Too long: ${wordCount} words (maximum 5000) — likely padded with filler`)
     }
 
-    // 2. Locksy mention count — max 1
-    const locksyMentions = (articleBody.match(/\blocksy\b/gi) || []).length
+    // 2. Locksy mention count — max 1 (across article + structured fields)
+    const locksyMentions = (combined.match(/\blocksy\b/gi) || []).length
     if (locksyMentions > 1) {
         issues.push(`Locksy mentioned ${locksyMentions} times (maximum 1) — too promotional`)
     }
@@ -1115,8 +1127,8 @@ function auditContentQuality(articleBody, wordCount) {
     // 3. AI filler phrases
     const foundFillers = []
     for (const pattern of AI_FILLER_PATTERNS) {
-        if (pattern.test(articleBody)) {
-            const match = articleBody.match(pattern)
+        if (pattern.test(combined)) {
+            const match = combined.match(pattern)
             foundFillers.push(match[0])
         }
     }
@@ -1127,8 +1139,8 @@ function auditContentQuality(articleBody, wordCount) {
     // 4. False Locksy claims
     const falseClaims = []
     for (const pattern of FALSE_LOCKSY_CLAIMS) {
-        if (pattern.test(articleBody)) {
-            const match = articleBody.match(pattern)
+        if (pattern.test(combined)) {
+            const match = combined.match(pattern)
             falseClaims.push(match[0])
         }
     }
@@ -1146,6 +1158,21 @@ function auditContentQuality(articleBody, wordCount) {
     const exclamationCount = (articleBody.match(/!/g) || []).length
     if (exclamationCount > 8) {
         issues.push(`${exclamationCount} exclamation marks (max 8) — reads as overly enthusiastic AI`)
+    }
+
+    // 7. GEO/AEO structured fields — required so every new post is answer-engine
+    //    ready (quotable TL;DR, snippet-friendly FAQ, scannable takeaways).
+    if (!tldr || tldr.trim().length < 20) {
+        issues.push('Missing or too-short TL;DR (need an answer-first summary of at least 20 characters)')
+    }
+    if (tldr && tldr.length > 320) {
+        issues.push(`TL;DR too long: ${tldr.length} chars (max 320) — keep it quotable`)
+    }
+    if (faq.length < 3) {
+        issues.push(`Only ${faq.length} FAQ Q&A pairs (need at least 3 for AEO rich results)`)
+    }
+    if (keyTakeaways.length < 3) {
+        issues.push(`Only ${keyTakeaways.length} key takeaways (need at least 3)`)
     }
 
     return {
@@ -1227,11 +1254,30 @@ Place these images at natural section breaks. Use EXACTLY this markdown:
 
 ${selectedImages.join('\n')}
 
-OUTPUT FORMAT:
+OUTPUT FORMAT — follow this EXACTLY:
 Line 1: META_DESC: {140-155 char description with primary keyword, written as a factual statement}
 Line 2: IMAGE_KEYWORDS: {3-5 visual search terms}
-Line 3: (blank)
-Line 4+: Article body starting with first ## heading. No H1.`
+Line 3: TLDR: {1-2 sentence answer-first summary of the article's core answer. Max 280 characters, plain factual English, no marketing. This gets quoted verbatim by AI answer engines, so it must stand on its own.}
+Line 4: (blank)
+Line 5+: Article body starting with the first ## heading. No H1.
+
+After the FULL article body, append these two blocks EXACTLY as shown, each marker on its own line:
+
+<<<KEY_TAKEAWAYS>>>
+- {a specific, actionable takeaway in one plain sentence}
+- {4-6 bullets total, each a distinct point actually made in the article}
+
+<<<FAQ>>>
+Q: {a real question a reader or searcher would type about this topic}
+A: {a direct, factual 1-3 sentence answer — no hedging, no marketing}
+Q: {next question}
+A: {answer}
+<<<END>>>
+
+RULES FOR THESE BLOCKS (violating them rejects the article):
+- Provide 3-5 Q/A pairs. Every FAQ answer and takeaway must be factual and fully supported by the article above — introduce no new claims.
+- Do NOT mention Locksy anywhere in the TLDR, KEY_TAKEAWAYS, or FAQ.
+- Keep each takeaway and each FAQ answer as plain single-line text: no line breaks inside an item, no markdown headings, no nested bullets.`
 
     const data = await retryWithBackoff(async () => {
         const response = await fetchWithTimeout(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
@@ -1262,6 +1308,11 @@ Line 4+: Article body starting with first ## heading. No H1.`
 
     const raw = data.candidates[0].content.parts[0].text
 
+    // Collapse any internal whitespace/newlines to a single space. The structured
+    // fields (TL;DR, takeaways, FAQ) are stored as single-quoted JS string
+    // literals in the generated post file, so they must be plain single-line text.
+    const normInline = (s) => String(s).replace(/\s+/g, ' ').trim()
+
     // Parse the META_DESC line that the prompt asks Gemini to output first
     const metaDescMatch = raw.match(/^META_DESC:\s*(.+)/m)
     const metaDescription = metaDescMatch
@@ -1273,14 +1324,45 @@ Line 4+: Article body starting with first ## heading. No H1.`
         ? imageKeywordsMatch[1].trim()
         : null
 
-    // Strip the META_DESC and IMAGE_KEYWORDS lines from article body
+    // TL;DR — answer-first summary (GEO). Single line.
+    const tldrMatch = raw.match(/^TLDR:\s*(.+)/m)
+    const tldr = tldrMatch ? normInline(tldrMatch[1]) : ''
+
+    // KEY_TAKEAWAYS block: bullet lines between the marker and the next marker.
+    const takeawaysMatch = raw.match(/<<<KEY_TAKEAWAYS>>>([\s\S]*?)(?:<<<FAQ>>>|<<<END>>>|$)/)
+    const keyTakeaways = takeawaysMatch
+        ? takeawaysMatch[1]
+            .split('\n')
+            .filter(line => /^\s*[-*]\s+/.test(line))
+            .map(line => normInline(line.replace(/^\s*[-*]\s+/, '')))
+            .filter(Boolean)
+            .slice(0, 8)
+        : []
+
+    // FAQ block: sequential Q:/A: pairs between <<<FAQ>>> and <<<END>>>.
+    const faqMatch = raw.match(/<<<FAQ>>>([\s\S]*?)(?:<<<END>>>|$)/)
+    const faq = []
+    if (faqMatch) {
+        const pairRe = /Q:\s*([\s\S]*?)\s*A:\s*([\s\S]*?)(?=\n\s*Q:|<<<END>>>|$)/g
+        let m
+        while ((m = pairRe.exec(faqMatch[1])) !== null) {
+            const question = normInline(m[1])
+            const answer = normInline(m[2])
+            if (question && answer) faq.push({ question, answer })
+        }
+    }
+
+    // Strip the meta lines AND the trailing structured blocks from the article
+    // body. wordCount and the prose audit then see only the article itself.
     const articleBody = raw
+        .split(/<<<KEY_TAKEAWAYS>>>/)[0]
         .replace(/^META_DESC:.*\n?/m, '')
         .replace(/^IMAGE_KEYWORDS:.*\n?/m, '')
+        .replace(/^TLDR:.*\n?/m, '')
         .replace(/^\n/, '') // remove leading blank line left behind
         .trim()
 
-    return { articleBody, metaDescription, imageKeywords }
+    return { articleBody, metaDescription, imageKeywords, tldr, keyTakeaways, faq }
 }
 
 /**
@@ -1310,6 +1392,20 @@ function createPostFile(post, coverImage) {
         .replace(/`/g, '\\`')
         .replace(/\$\{/g, '\\${')
 
+    // Optional GEO/AEO fields (TL;DR, key takeaways, FAQ) — emitted only when
+    // present. Each value is normalized to a single line so it is a safe
+    // single-quoted string literal in the generated file.
+    const norm = (s) => String(s).replace(/\s+/g, ' ').trim()
+    const tldrLine = post.tldr
+        ? `    tldr: '${escSQ(norm(post.tldr))}',\n`
+        : ''
+    const takeawaysBlock = (post.keyTakeaways && post.keyTakeaways.length)
+        ? `    keyTakeaways: [\n${post.keyTakeaways.map(t => `        '${escSQ(norm(t))}',`).join('\n')}\n    ],\n`
+        : ''
+    const faqBlock = (post.faq && post.faq.length)
+        ? `    faq: [\n${post.faq.map(f => `        { question: '${escSQ(norm(f.question))}', answer: '${escSQ(norm(f.answer))}' },`).join('\n')}\n    ],\n`
+        : ''
+
     const fileContent = `// lib/posts/${post.slug}.ts
 // Auto-generated by scripts/generate-blog.mjs on ${post.publishDate}
 // DO NOT EDIT MANUALLY — regenerate via the blog generator script.
@@ -1327,7 +1423,7 @@ const post = {
     keywords: [${post.keywords.map(k => `'${escSQ(k)}'`).join(', ')}],
     image: '${escSQ(coverImage.url)}',
     imageAlt: '${escSQ(coverImage.alt)}',
-    content: \`
+${tldrLine}${takeawaysBlock}${faqBlock}    content: \`
 ${escapedContent}
 \`
 }
@@ -1451,7 +1547,7 @@ async function main() {
 
     try {
         // Generate the blog content using AI
-        const { articleBody, metaDescription, imageKeywords } = await generateBlogContent(selectedTopic)
+        const { articleBody, metaDescription, imageKeywords, tldr, keyTakeaways, faq } = await generateBlogContent(selectedTopic)
         const wordCount = articleBody.split(/\s+/).length
         const readTime = calculateReadTime(wordCount)
         const today = getTodayDate()
@@ -1459,9 +1555,11 @@ async function main() {
         console.log(`✍️  Generated ${wordCount} words (${readTime})`)
         if (metaDescription) console.log(`📝 Meta description: ${metaDescription}`)
         if (imageKeywords) console.log(`🔍 Image keywords: ${imageKeywords}`)
+        if (tldr) console.log(`💡 TL;DR: ${tldr}`)
+        console.log(`✅ ${keyTakeaways.length} key takeaways, ${faq.length} FAQ pairs`)
 
         // ── Comprehensive quality audit ────────────────────────────────
-        const audit = auditContentQuality(articleBody, wordCount)
+        const audit = auditContentQuality(articleBody, wordCount, { tldr, keyTakeaways, faq })
         if (!audit.pass) {
             console.error(`\n❌ QUALITY AUDIT FAILED:`)
             for (const issue of audit.issues) {
@@ -1486,6 +1584,9 @@ async function main() {
             category: selectedTopic.category,
             tags: selectedTopic.tags,
             keywords: selectedTopic.keywords,
+            tldr,
+            keyTakeaways,
+            faq,
             content: articleBody
         }
 
