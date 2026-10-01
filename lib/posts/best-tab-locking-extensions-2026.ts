@@ -36,7 +36,7 @@ const post = {
     'Locksy derives its key with PBKDF2-HMAC-SHA256 at 600,000 iterations (above the OWASP minimum), a 16-byte random salt, and constant-time password comparison.',
     'It adds WebAuthn biometric unlock (TouchID, Windows Hello, FaceID, YubiKey), auto-lock timers, scheduled locks, domain wildcard locks, and stealth mode — all running 100% offline with no accounts or telemetry.',
     'Password managers and separate browser profiles don\'t lock active sessions; they complement a tab locker rather than replace it.',
-    'Locksy\'s core tab locking is free, with Pro a one-time $2.99 lifetime purchase (no subscription) for unlimited domain locks, startup lock, stealth mode, and weekly reports.',
+    'Locksy\'s core tab locking is free, with Pro a one-time $4.99 lifetime purchase (no subscription) for unlimited domain locks, startup lock, stealth mode, and weekly reports.',
   ],
   content: `
 ## Why You Need a Tab Locking Extension in 2026
