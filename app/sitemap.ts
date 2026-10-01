@@ -26,14 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${siteUrl}/guide`,
-            lastModified: new Date('2026-09-09'),
-            changeFrequency: 'monthly',
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${siteUrl}/pricing`,
-            lastModified: new Date('2026-09-11'),
-            changeFrequency: 'monthly',
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
             priority: 0.9,
         },
         {

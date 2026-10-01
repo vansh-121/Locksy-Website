@@ -27,8 +27,8 @@ import { generatePageMetadata, generateBreadcrumbSchema, generateFAQSchema } fro
 import { PRO_CHECKOUT_URL, PRO_PRICE } from "@/lib/pro"
 
 export const metadata: Metadata = generatePageMetadata(
-    "Pricing — Free Core & $2.99 Lifetime Pro",
-    "Locksy pricing: a free tier with core tab locking, biometric unlock and offline encryption, or a one-time $2.99 lifetime Pro licence that lifts every limit across 5 devices. No subscription, no account.",
+    "Pricing — Free Core & $4.99 Lifetime Pro",
+    "Locksy pricing: a free tier with core tab locking, biometric unlock and offline encryption, or a one-time $4.99 lifetime Pro licence that lifts every limit across 5 devices. No subscription, no account.",
     "/pricing",
     [
         "locksy pricing",
@@ -217,7 +217,7 @@ const FEATURE_CATEGORIES = [
                 desc: "Recurring subscription vs. one-off ownership",
                 free: "Free Forever ($0)",
                 freeType: "badge",
-                pro: "$2.99 Lifetime (Pay once)",
+                pro: "$4.99 Lifetime (Pay once)",
                 proType: "highlight",
             },
             {
@@ -244,7 +244,7 @@ const PRICING_FAQ = [
     {
         question: "Is Locksy Pro really a one-time payment or a subscription?",
         answer:
-            "Locksy Pro is strictly a single, one-time payment of $2.99 for a lifetime license. There are zero recurring fees, no annual renewals, and no surprise charges. Once purchased, your license key is yours forever.",
+            "Locksy Pro is strictly a single, one-time payment of $4.99 for a lifetime license. There are zero recurring fees, no annual renewals, and no surprise charges. Once purchased, your license key is yours forever.",
     },
     {
         question: "Can I try Locksy before upgrading to Pro?",

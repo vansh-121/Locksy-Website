@@ -375,11 +375,11 @@
       "num": 9,
       "title": "What's free and what's Pro",
       "icon": "💎",
-      "summary": "Everything essential is free. Pro is a one-time $2.99 — there is no subscription.",
+      "summary": "Everything essential is free. Pro is a one-time $4.99 — there is no subscription.",
       "blocks": [
         {
           "type": "prose",
-          "body": "You can protect your tabs properly without paying anything. The free plan includes password locking, biometric unlock, right-click menus, scheduled locking and incognito support. Pro lifts the limits and adds the automation features below. It's a single $2.99 payment, once, for good."
+          "body": "You can protect your tabs properly without paying anything. The free plan includes password locking, biometric unlock, right-click menus, scheduled locking and incognito support. Pro lifts the limits and adds the automation features below. It's a single $4.99 payment, once, for good."
         },
         {
           "type": "table",
@@ -403,7 +403,7 @@
             ["Master Recovery Key", "Yes", "Yes"],
             ["Incognito support", "Yes", "Yes"],
             ["Works fully offline", "Yes", "Yes"],
-            ["Price", "$0 forever", "$2.99 once"]
+            ["Price", "$0 forever", "$4.99 once"]
           ]
         },
         {

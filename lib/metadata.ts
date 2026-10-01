@@ -156,7 +156,7 @@ export const jsonLdSiteNavigation = {
             '@type': 'SiteNavigationElement',
             position: 1,
             name: 'Pricing',
-            description: 'Locksy Free tier and $2.99 lifetime Pro license details.',
+            description: 'Locksy Free tier and $4.99 lifetime Pro license details.',
             url: `${siteUrl}/pricing`
         },
         {
@@ -300,7 +300,7 @@ export const jsonLdSoftwareApplication = {
         {
             '@type': 'Offer',
             name: 'Locksy Pro Lifetime',
-            price: '2.99',
+            price: '4.99',
             priceCurrency: 'USD',
             validFrom: '2024-01-01',
             priceValidUntil: '2030-12-31',
@@ -447,7 +447,7 @@ export const jsonLdProduct = {
         {
             '@type': 'Offer',
             name: 'Locksy Pro Lifetime',
-            price: '2.99',
+            price: '4.99',
             priceCurrency: 'USD',
             validFrom: '2024-01-01',
             priceValidUntil: '2030-12-31',
@@ -649,7 +649,7 @@ export const jsonLdItemList = {
             '@type': 'ListItem',
             position: 1,
             name: 'Locksy — Best Overall Tab Locking Extension',
-            description: 'Zero-knowledge tab locker with PBKDF2 600k iterations, WebAuthn biometric unlock, auto-lock timers, scheduled locking, domain wildcard locks, stealth mode, and intruder detection. 100% offline, free core + $2.99 lifetime Pro.',
+            description: 'Zero-knowledge tab locker with PBKDF2 600k iterations, WebAuthn biometric unlock, auto-lock timers, scheduled locking, domain wildcard locks, stealth mode, and intruder detection. 100% offline, free core + $4.99 lifetime Pro.',
             url: `${siteUrl}`,
             item: {
                 '@type': 'SoftwareApplication',

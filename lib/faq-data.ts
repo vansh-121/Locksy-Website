@@ -26,7 +26,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Is there a free extension to password protect browser tabs?",
-    answer: "Yes. Locksy offers a free plan ($0 forever) that includes core tab password locking, biometric WebAuthn unlock, right-click context menus for instant locking, and local intruder log viewing. Free plan limits: 3 domain locks, 3 stored intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs. For unlimited features, Locksy Pro is a one-time $2.99 lifetime purchase — no monthly subscription.",
+    answer: "Yes. Locksy offers a free plan ($0 forever) that includes core tab password locking, biometric WebAuthn unlock, right-click context menus for instant locking, and local intruder log viewing. Free plan limits: 3 domain locks, 3 stored intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs. For unlimited features, Locksy Pro is a one-time $4.99 lifetime purchase — no monthly subscription.",
   },
   {
     question: "Does Locksy work on shared or public computers?",

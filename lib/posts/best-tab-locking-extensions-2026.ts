@@ -59,7 +59,7 @@ We tested every major approach to locking browser tabs in 2026 and ranked them b
 | **100% offline** | ✅ | ✅ | ⚠️ Varies | ⚠️ Varies | ✅ | ❌ Cloud sync | ✅ |
 | **Intruder detection** | ✅ Webcam snaps | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Free tier** | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ Freemium | ✅ |
-| **Price** | Free / $2.99 lifetime | Free (OS built-in) | Free | Free | Free | $3–5/mo | Free |
+| **Price** | Free / $4.99 lifetime | Free (OS built-in) | Free | Free | Free | $3–5/mo | Free |
 | **Active development** | ✅ v3.3 (2026) | ✅ | ❌ Abandoned | ❌ Last update 2021 | ✅ | ✅ | N/A |
 | **Browsers** | Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc | N/A | Chrome only | Chrome only | Chrome, Edge, Firefox | All | All |
 
@@ -101,7 +101,7 @@ Unlike older extensions that place a CSS overlay on top of your page content (wh
 - Rate limiting with exponential backoff after failed attempts
 - Frame refusal — extension pages cannot be loaded in iframes
 
-**Pricing:** Free plan covers core tab locking, biometric unlock, right-click menus, and 3 domain locks. Pro is a **one-time $2.99 lifetime purchase** (no subscription) for unlimited domain locks, startup lock, stealth mode, custom timers, and weekly reports.
+**Pricing:** Free plan covers core tab locking, biometric unlock, right-click menus, and 3 domain locks. Pro is a **one-time $4.99 lifetime purchase** (no subscription) for unlimited domain locks, startup lock, stealth mode, custom timers, and weekly reports.
 
 **Browsers:** Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc, Comet, and all Chromium-based browsers.
 
@@ -222,7 +222,7 @@ Our comparison criteria, in order of importance:
 
 After testing every approach, **Locksy is the clear winner** for anyone who needs to password-protect individual browser tabs. It's the only extension that combines industrial-grade PBKDF2 encryption, navigation-based lock enforcement (not a bypassable overlay), biometric WebAuthn unlock, comprehensive automation (auto-lock, scheduled locks, domain locks), stealth disguise mode, and intruder detection — all while running 100% offline with zero data collection.
 
-The free tier covers the core tab locking functionality that most users need. For power users who want unlimited domain locks, startup session lock, stealth mode, and weekly privacy reports, the Pro upgrade is a **one-time $2.99 lifetime purchase** — no monthly subscription.
+The free tier covers the core tab locking functionality that most users need. For power users who want unlimited domain locks, startup session lock, stealth mode, and weekly privacy reports, the Pro upgrade is a **one-time $4.99 lifetime purchase** — no monthly subscription.
 
 **Ready to secure your browser tabs?**
 
@@ -245,7 +245,7 @@ Yes. Install Locksy from the Chrome Web Store, Edge Add-ons, or Firefox Add-ons.
 Locksy is the only tab locking extension that supports biometric unlock via WebAuthn/FIDO2. This includes Apple TouchID, Windows Hello (fingerprint and face recognition), FaceID, and hardware security keys like YubiKey.
 
 ### Is there a free tab locking extension?
-Yes. Locksy's free plan includes core tab password locking, biometric unlock, right-click context menus, and local intruder logs. The free tier includes 3 domain locks, 3 intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs. Locksy Pro ($2.99 one-time lifetime purchase) adds unlimited domain locks, startup lock, stealth mode, and more.
+Yes. Locksy's free plan includes core tab password locking, biometric unlock, right-click context menus, and local intruder logs. The free tier includes 3 domain locks, 3 intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs. Locksy Pro ($4.99 one-time lifetime purchase) adds unlimited domain locks, startup lock, stealth mode, and more.
 
 ### Are older tab locking extensions like Tab Lock or LockPW safe?
 No. Older tab locking extensions like Tab Lock and LockPW use a CSS overlay approach where the protected page is still loaded behind the password prompt. Anyone with basic DevTools knowledge can delete the overlay element and access the page content. Additionally, both extensions have been abandoned with no updates since 2020–2021 and don't use any real cryptographic key derivation. We recommend Locksy, which navigates the tab away from the protected page entirely and uses PBKDF2 with 600,000 iterations.

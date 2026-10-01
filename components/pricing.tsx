@@ -42,15 +42,17 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
   const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
   const [showAllFeatures, setShowAllFeatures] = useState(false)
   const [showInstallMenu, setShowInstallMenu] = useState(false)
-  const [isSaleActive, setIsSaleActive] = useState(true)
-  const [saleTimeLeft, setSaleTimeLeft] = useState({ days: 15, hours: 0, mins: 0, secs: 0 })
+  const [isSaleActive, setIsSaleActive] = useState(false)
+  const [saleTimeLeft, setSaleTimeLeft] = useState({ days: 0, hours: 0, mins: 0, secs: 0 })
 
   useEffect(() => {
-    // If early-bird sale deadline has passed (Oct 1, 12:00 AM UTC), automatically deactivate
+    // If early-bird sale deadline has passed (Oct 1, 12:00 AM UTC), keep deactivated
     if (Date.now() >= SALE_DEADLINE_UTC) {
       setIsSaleActive(false)
       return
     }
+
+    setIsSaleActive(true)
 
     // Clear legacy relative localStorage key
     if (typeof window !== "undefined") {
@@ -375,7 +377,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
-                  Get Lifetime Pro — $2.99 <Zap className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" />
+                  Get Lifetime Pro — {isSaleActive ? PRO_EARLY_BIRD_PRICE : PRO_REGULAR_PRICE} <Zap className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" />
                 </span>
               </a>
               <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium text-center">

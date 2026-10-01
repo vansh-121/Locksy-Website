@@ -24,5 +24,5 @@ export const PRO_EARLY_BIRD_PRICE = "$2.99"
 /** Regular price after early bird sale expires. */
 export const PRO_REGULAR_PRICE = "$4.99"
 
-/** Active price as displayed during early-bird launch. */
-export const PRO_PRICE = "$2.99"
+/** Active price for Locksy Pro lifetime license. */
+export const PRO_PRICE = "$4.99"
