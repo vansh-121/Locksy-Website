@@ -91,7 +91,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-x-clip">
             {/* Background decoration */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -235,16 +235,18 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                 {/* Article Content — with a sticky Table of Contents sidebar on
                     large screens. The TOC renders its full list in the server HTML
                     (never null) so it survives before hydration. */}
-                <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-10">
+                <div className="max-w-4xl mx-auto relative">
+                    {/* TOC: on wide screens (>=1400px) it floats in the left margin via absolute positioning
+                        so the article content stays perfectly aligned with the header/hero/takeaways above.
+                        On smaller screens (<1400px: laptops, tablets, mobile), BlogToc's collapsible panel renders in-flow. */}
                     {headings.length > 0 && (
-                        <aside className="lg:col-start-1">
+                        <div className="min-[1400px]:absolute min-[1400px]:-left-[15.5rem] min-[1400px]:top-0 min-[1400px]:bottom-0 min-[1400px]:w-[13.5rem]">
                             <BlogToc headings={headings} />
-                        </aside>
+                        </div>
                     )}
-                    <article className={headings.length > 0 ? 'lg:col-start-2 min-w-0' : 'max-w-4xl mx-auto'}>
-                    <div className="relative group">
-                        <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 to-secondary/5 blur-2xl opacity-0 group-hover:opacity-50 transition-opacity rounded-3xl" />
-                        <div className="relative bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-6 md:p-10 lg:p-12 shadow-lg">
+                    <article className="min-w-0">
+                    <div className="relative">
+                        <div className="relative">
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
