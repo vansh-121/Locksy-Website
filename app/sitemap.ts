@@ -1,14 +1,21 @@
 import { MetadataRoute } from 'next'
 import { blogPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    const siteUrl = 'https://www.locksy.dev'
+const siteUrl = 'https://www.locksy.dev'
 
+// Stable last-modified date for the evergreen marketing/content pages. Using a
+// fixed date instead of `new Date()` keeps <lastmod> truthful and stable across
+// builds — "everything changed today, every crawl" trains Google to distrust the
+// signal. Bump this when the home / security / guide / pricing / tools pages get a
+// meaningful content update. Legal pages carry their own explicit dates below.
+const LAST_UPDATED = '2026-09-15'
+
+export default function sitemap(): MetadataRoute.Sitemap {
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [
         {
             url: `${siteUrl}/`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 1.0,
         },
@@ -20,49 +27,49 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${siteUrl}/security`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${siteUrl}/guide`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${siteUrl}/pricing`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${siteUrl}/tools`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${siteUrl}/tools/password-strength-checker`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${siteUrl}/tools/password-generator`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${siteUrl}/tools/browser-privacy-score`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
             url: `${siteUrl}/tools/email-breach-checker`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
@@ -104,7 +111,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${siteUrl}/blog`,
-            lastModified: new Date(),
+            lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
         },

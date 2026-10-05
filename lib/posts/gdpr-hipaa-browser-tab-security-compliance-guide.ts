@@ -19,6 +19,37 @@ const post = {
   ],
   image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=630&q=80',
   imageAlt: 'Digital security lock and compliance dashboard overlay',
+  tldr: "Unattended, authenticated browser tabs on shared workstations are a real but widely-overlooked compliance gap under GDPR Article 32 and the HIPAA Security Rule. Client-side, zero-knowledge tab locking is a reasonable, documentable technical control for that specific gap — but it is not encryption for HIPAA safe-harbor purposes, not centrally attestable today, and not a compliance program on its own.",
+  keyTakeaways: [
+    "Audits usually focus on cloud encryption, TLS, and MFA; what survives unexamined is an unattended tab showing personal data or PHI on a screen other people can see.",
+    "GDPR Article 32 is deliberately risk-based and names no technology — auditors ask whether you assessed the risk and responded proportionately, so documentation matters as much as the software.",
+    "HIPAA's automatic-logoff specification is 'addressable', not optional: an ignored spec with nothing in writing is a finding, while a documented compensating control is defensible.",
+    "NIST 800-53 AC-11(1) and 800-171 3.1.10 explicitly distinguish access from viewing and require concealing what was previously on screen — an unusually exact description of what a tab lock does.",
+    "A compliance-appropriate lock should derive keys locally (PBKDF2-HMAC-SHA256, 600,000 iterations), send zero telemetry, and navigate the tab away rather than draw a bypassable overlay.",
+    "A tab lock does not qualify for the HIPAA encryption safe harbor, does not invalidate the server-side session, has no central management console, and does not replace RBAC, BAAs, training, or encryption at rest.",
+  ],
+  faq: [
+    {
+      question: "Does installing a tab locker make my organization HIPAA or GDPR compliant?",
+      answer: "No. No software makes an organization compliant — compliance is overwhelmingly organizational: risk analysis, documented policy, workforce training, vendor agreements, and incident response. A tab lock is a technical control that can support a few specific safeguard requirements, nothing more.",
+    },
+    {
+      question: "Is HIPAA's automatic-logoff requirement optional because it is 'addressable'?",
+      answer: "No. 'Addressable' means that if the specification is not reasonable and appropriate for your environment, you must document why and implement an equivalent alternative measure where reasonable. An addressable spec you simply ignored, with nothing in writing, is an audit finding.",
+    },
+    {
+      question: "Does a tab lock count as encryption for the HIPAA breach safe harbor?",
+      answer: "No — this is the most important limitation. The safe harbor points at NIST-validated encryption of data at rest and in transit. A tab lock is an access and concealment control, not encryption of the ePHI itself; the record still lives in the web application and its cache. Do not represent it as safe-harbor encryption.",
+    },
+    {
+      question: "Can I centrally prove a specific lock timer is enforced across every workstation?",
+      answer: "Not today. You can force-install the extension fleet-wide through Chrome or Edge enterprise policy, but per-user settings like timer length and locked domains are configured locally, and there is no admin dashboard reporting configuration state back. Plan your attestation approach around that limitation.",
+    },
+    {
+      question: "Which compliance frameworks put a specific number on unattended-session timeouts?",
+      answer: "PCI DSS v4.0 Req. 8.2.8 requires re-authentication after 15 minutes of idle time; for ePHI on a shared workstation, a 1-3 minute lock is easier to defend. NIST 800-53 AC-11, NIST 800-171 3.1.10, ISO/IEC 27001 Annex A 7.7, and SOC 2 CC6.1 also cover session lock and clear-screen requirements.",
+    },
+  ],
   content: `
 ## The Hidden Compliance Risk in Modern Workstations
 

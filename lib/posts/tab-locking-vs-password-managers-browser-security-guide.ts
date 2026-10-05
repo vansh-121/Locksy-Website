@@ -19,6 +19,37 @@ const post = {
   ],
   image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1200&h=630&q=80',
   imageAlt: 'Comparison diagram of password manager vault vs tab locking overlay',
+  tldr: "Password managers protect authentication — getting you logged in — while tab locking protects the already-authenticated session an attacker in the room can read or act on. They defend opposite threats (remote credential attacks vs. local, shoulder-surfing access), so the two are complementary layers, not competitors.",
+  keyTakeaways: [
+    "A password manager's job ends the moment the server sets a session cookie; after login it has no further opinion about what happens in that tab.",
+    "After you log in, your password stops mattering — the session token is the real credential, and it is often valid for days or weeks.",
+    "HttpOnly, Secure, and SameSite cookie flags all assume a remote attacker; none of them stop a person standing at your desk who simply moves your mouse.",
+    "Tab locking derives a key with PBKDF2-HMAC-SHA256 at 600,000 iterations and navigates the tab to an internal page, discarding the rendered document instead of hiding it behind a bypassable overlay.",
+    "A locked tab does not invalidate the server-side session — someone can open a new tab to the same domain and get a live session, which is why Domain Lock also auto-locks new tabs on protected domains.",
+    "Tab locking is not a substitute for a password manager, MFA, full-disk encryption, or a locked OS account; it is a control against opportunistic local access like coworkers, housemates, and screen shares.",
+  ],
+  faq: [
+    {
+      question: "Do I still need a password manager if I use a tab locker?",
+      answer: "Yes, and the password manager comes first. It defends against remote credential attacks and reused passwords, which are more common and scalable than someone walking up to your desk. Tab locking is an additional layer for local access after you are logged in, not a replacement — the two solve opposite halves of the problem.",
+    },
+    {
+      question: "Does locking a tab log me out of the website?",
+      answer: "No. A locked tab is one you cannot read, but the session cookie is still valid in the browser. Someone who opens a new tab and types the domain gets a live session, which is why Locksy Domain Lock also locks new tabs on protected domains. To truly revoke access you must log out.",
+    },
+    {
+      question: "Can someone bypass a tab lock using DevTools?",
+      answer: "Not when the lock navigates the tab away to an internal extension page, as Locksy does — the original document is discarded, so there is no hidden element to delete. Overlay-based lockers that leave the page loaded underneath can be bypassed with DevTools or the Esc key.",
+    },
+    {
+      question: "Why is locking a tab better than just logging out every time?",
+      answer: "Logging out of a dozen tabs and back in twenty minutes later is an unreasonable ask, so people choose convenience and the security advice quietly loses. Tab locking makes the same threat manageable at a cost people will actually pay: one password prompt or one fingerprint on the way back.",
+    },
+    {
+      question: "Does tab locking protect against an attacker who controls my computer?",
+      answer: "No. Someone with your OS account can disable the extension or read the browser profile off disk; an extension runs inside the browser trust boundary and cannot defend the boundary that contains it. Full-disk encryption and a locked OS account cover that threat — tab locking defends against opportunistic local access.",
+    },
+  ],
   content: `
 ## The Missing Piece in Your Browser Defense Model
 

@@ -200,6 +200,10 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         <img
                             src={post.image}
                             alt={post.imageAlt}
+                            width={1200}
+                            height={630}
+                            fetchPriority="high"
+                            decoding="async"
                             className="w-full h-64 md:h-[420px] object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />

@@ -15,6 +15,37 @@ const post = {
  keywords: ['passkeys vs passwords', 'webauthn adoption', 'passwordless authentication', 'passkey security'],
  image: 'https://images.unsplash.com/photo-1624916145576-5b5772d9bccb?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzU0NjY4MDN8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
  imageAlt: 'black and silver laptop computer on black table',
+ tldr: "Passkeys fix the login problem: they replace shared secrets with a device-held private key and a site-held public key, which makes phishing nearly impossible and leaves nothing useful behind in a server breach. What they do not fix is the session that stays open after you are logged in — anyone with physical access to the device can still read or act on an authenticated tab. Passkeys and tab locking defend different stages of the same journey, so you need both.",
+ keyTakeaways: [
+  "A passkey is a key pair: the public key goes to the website, the private key never leaves your device and is typically unlocked by a biometric or device PIN.",
+  "Passkeys are phishing-resistant because the device will not sign a challenge for a domain that does not match the one the key was registered to.",
+  "Server breaches stop being credential breaches — there is no password or hash to steal, only a public key that is useless without your private key.",
+  "Passkeys secure authentication, the point of entry; they do not secure the active session inside the browser.",
+  "Shared computers, over-the-shoulder reading, accidental clicks, and unattended work-from-home laptops all expose already-authenticated tabs even when the login itself was flawless.",
+  "Tab locking is the complement: it requires a fresh unlock to view a specific already-logged-in tab, so the contents stay protected after the front door has been opened."
+ ],
+ faq: [
+  {
+   question: "Do passkeys make passwords completely obsolete?",
+   answer: "Not yet. Passkeys are becoming the standard and major platforms support them, but many sites still rely on passwords and some do not even offer 2FA, so we are in a transition period where both exist side by side."
+  },
+  {
+   question: "If passkeys are phishing-resistant, can a fake site still steal my login?",
+   answer: "No. Your device will not sign the authentication challenge unless the site's domain matches the one your passkey was registered to, so a fake login page has nothing to capture."
+  },
+  {
+   question: "If I use a passkey, is my account safe when I walk away from my laptop?",
+   answer: "No. The passkey secured how you logged in, not the session that is now open. Anyone who reaches the device can browse your already-authenticated tabs without needing to authenticate again."
+  },
+  {
+   question: "What problem does tab protection solve that passkeys cannot?",
+   answer: "Session security. It protects the specific tabs that are already logged in, requiring an additional password or biometric unlock to view them — covering shared computers, shoulder-surfing, accidental exposure, and unattended laptops."
+  },
+  {
+   question: "Are passkeys and tab locking competing approaches?",
+   answer: "No, they are complementary layers. Passkeys secure the entrance and tab protection secures the contents within, so using both gives far more coverage than either alone."
+  }
+ ],
  content: `
 ## The Ghost in the Machine, or, "Did I Leave the Digital Door Open?"
 

@@ -16,7 +16,7 @@ Q: How do I lock a specific browser tab with a password?
 A: Install Locksy from Chrome Web Store (https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim), Edge Add-ons, or Firefox Add-ons. Set your master password on first launch. Then press Alt+Shift+9, or right-click any page and select "Lock this tab." The tab is instantly password-protected.
 
 Q: Is there a free tab locking extension?
-A: Yes. Locksy's free plan ($0 forever) includes core tab password locking, biometric unlock (WebAuthn), right-click context menus, and local intruder logs. Free limits: 3 domain locks, 3 intruder photos, 5 biometric unlocks/day. Pro is a one-time $4.99 lifetime purchase for unlimited everything.
+A: Yes. Locksy's free plan (free core tier, no account or subscription) includes core tab password locking, biometric unlock (WebAuthn), right-click context menus, and local intruder logs. Free limits: 3 domain locks, 3 intruder photos, 5 biometric unlocks/day. Pro is a one-time $4.99 lifetime purchase for unlimited everything.
 
 Q: Which tab locker supports fingerprint, Touch ID, or Face ID unlock?
 A: Locksy is the only tab locking extension that supports biometric unlock via WebAuthn/FIDO2. Supported methods: Apple TouchID, Windows Hello (fingerprint and facial recognition), Apple FaceID, and hardware security keys (YubiKey, SoloKey, Titan).

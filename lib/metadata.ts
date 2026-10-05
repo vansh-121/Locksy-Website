@@ -121,7 +121,7 @@ export const metadata: Metadata = {
         'ai:description': siteDescription,
         'ai:category': 'Browser Extension for Tab Security',
         'ai:use_case': 'Password protection for browser tabs with PBKDF2 (600k iterations) and AES-256 encryption',
-        'ai:features': 'Password protect tabs, PBKDF2 600k iterations, rate limiting, domain lock, keyboard shortcuts, visual indicators, incognito support, 8+ security layers, offline operation, biometric unlock (WebAuthn/FIDO2), right-click context menus, stealth mode (disguise locked tabs), persistent light/dark theme toggle, free forever',
+        'ai:features': 'Password protect tabs, PBKDF2 600k iterations, rate limiting, domain lock, keyboard shortcuts, visual indicators, incognito support, 8+ security layers, offline operation, biometric unlock (WebAuthn/FIDO2), right-click context menus, stealth mode (disguise locked tabs), persistent light/dark theme toggle, free core tier with optional one-time $4.99 Pro upgrade',
         'ai:target_audience': 'Users who need to secure sensitive browser tabs on shared computers',
     }
 }

@@ -47,6 +47,28 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'About', url: '/about' }
 ])
 
+// Person / author entity for E-E-A-T. Gives the blog's "Vansh Sethi" byline a
+// real, crawlable identity (with a verifiable GitHub profile) that Google and AI
+// answer engines can attribute expertise to. The @id lets BlogPosting authors
+// reference this same entity.
+const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://www.locksy.dev/about#vansh-sethi',
+    name: 'Vansh Sethi',
+    url: 'https://www.locksy.dev/about',
+    jobTitle: 'Developer',
+    description: 'Creator and developer of Locksy, the zero-knowledge browser extension for password-protecting and auto-locking browser tabs.',
+    worksFor: {
+        '@type': 'Organization',
+        name: 'Locksy',
+        url: 'https://www.locksy.dev',
+    },
+    sameAs: [
+        'https://github.com/vansh-121',
+    ],
+}
+
 export default function AboutPage() {
     return (
         <>
@@ -54,6 +76,11 @@ export default function AboutPage() {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            {/* Person / author schema (E-E-A-T) */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
             />
             <AboutClient guideCount={filteredBlogPosts.length} />
         </>
