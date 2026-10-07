@@ -1,0 +1,142 @@
+// scripts/migrate-legacy-posts.mjs
+//
+// One-shot migration: split lib/posts/legacy.ts (18 posts in one array) into
+// 18 individual lib/posts/<slug>.ts files, then regenerate lib/posts/index.ts
+// in the exact format generate-blog.mjs emits.
+//
+// The post bodies are copied byte-for-byte — this script NEVER rewrites content,
+// it only re-indents the object headers. Re-runnable: it fails loudly if a
+// target file already exists so it cannot silently clobber edited posts.
+
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const POSTS_DIR = join(__dirname, '..', 'lib', 'posts')
+const LEGACY_PATH = join(POSTS_DIR, 'legacy.ts')
+const INDEX_PATH = join(POSTS_DIR, 'index.ts')
+
+const src = readFileSync(LEGACY_PATH, 'utf-8')
+
+// Isolate the array body: between `const legacyPosts = [` and the final `export default`.
+const arrayStart = src.indexOf('const legacyPosts = [')
+const exportIdx = src.lastIndexOf('export default legacyPosts')
+if (arrayStart === -1 || exportIdx === -1) {
+    throw new Error('Could not locate the legacyPosts array or its export statement.')
+}
+const body = src.slice(arrayStart, exportIdx)
+const lines = body.split('\n')
+
+// Object boundaries: a line that is exactly ` {` followed by a `slug:` line.
+// legacy.ts uses 1-space indent inside the array; each object opens with ` {`.
+const isOpen = (i) => /^ \{$/.test(lines[i]) && /^\s*slug:\s*'/.test(lines[i + 1] || '')
+
+const chunks = []
+let current = null
+for (let i = 0; i < lines.length; i++) {
+    if (isOpen(i)) {
+        if (current) chunks.push(current)
+        current = []
+        // Do NOT skip the next line here: the ` {` opener is at lines[i], and the
+        // loop's own i++ (via continue) already advances past it. The object body,
+        // starting with the `slug:` line, is collected from the next iteration. The
+        // output re-adds the opener as `const post = {`.
+        continue
+    }
+    if (current) current.push(lines[i])
+}
+if (current) chunks.push(current)
+
+if (chunks.length !== 18) {
+    throw new Error(`Expected 18 post chunks, parsed ${chunks.length}. Refusing to write.`)
+}
+
+// The final chunk still carries the array's closing ` }]`.
+const results = []
+for (let n = 0; n < chunks.length; n++) {
+    let c = chunks[n]
+    // Drop trailing blank lines from the chunk tail.
+    while (c.length && c[c.length - 1].trim() === '') c.pop()
+    // legacy.ts separates array elements with a lone `,` on its own line
+    // (` }` on one line, then `,` on the next), so drop a trailing separator
+    // comma — and any blanks behind it — before we reach the object closer.
+    if (c.length && c[c.length - 1].trim() === ',') {
+        c.pop()
+        while (c.length && c[c.length - 1].trim() === '') c.pop()
+    }
+    // Last line is now the object closer: ` }` (lone-comma style), ` },`
+    // (inline style), or ` }]` (final post, which also closes the array).
+    const closer = c.pop()
+    if (!/^\s*\}[,\]]?$/.test(closer)) {
+        throw new Error(`Chunk ${n + 1}: unexpected closer line ${JSON.stringify(closer)}`)
+    }
+    const slugMatch = c.find((l) => /^\s*slug:\s*'/.test(l))
+    const slug = slugMatch.match(/^\s*slug:\s*'([^']+)'/)[1]
+
+    if (existsSync(join(POSTS_DIR, `${slug}.ts`))) {
+        throw new Error(`${slug}.ts already exists — refusing to overwrite.`)
+    }
+    if (!c.some((l) => /^\s*content: `/.test(l))) {
+        throw new Error(`${slug}: no content field found.`)
+    }
+
+    const file = [
+        `// lib/posts/${slug}.ts`,
+        '// Migrated from lib/posts/legacy.ts on 2026-10-06.',
+        '// Split out of the single-file archive so it follows the per-file post convention.',
+        '',
+        'const post = {',
+        ...c,
+        '}',
+        '',
+        'export default post',
+        '',
+    ].join('\n')
+
+    writeFileSync(join(POSTS_DIR, `${slug}.ts`), file, 'utf-8')
+    results.push(slug)
+}
+
+// --- Regenerate index.ts, matching generate-blog.mjs's format exactly. ---
+const toVarName = (f) => {
+    const raw = f.replace(/\.ts$/, '').replace(/-/g, '_')
+    const safe = raw.replace(/[^a-zA-Z0-9_]/g, '')
+    if (!safe) throw new Error(`Cannot derive a safe variable name from filename: "${f}"`)
+    return /^[0-9]/.test(safe) ? `post_${safe}` : safe
+}
+
+const { readdirSync } = await import('fs')
+const individualFiles = readdirSync(POSTS_DIR)
+    .filter((f) => f.endsWith('.ts') && f !== 'index.ts' && f !== 'legacy.ts')
+    .sort()
+
+const importLines = individualFiles
+    .map((f) => `import post_${toVarName(f)} from './${f.replace(/\.ts$/, '')}'`)
+    .join('\n')
+
+const entryLines = individualFiles.map((f) => `    post_${toVarName(f)},`).join('\n')
+
+writeFileSync(
+    INDEX_PATH,
+    `// lib/posts/index.ts
+//
+// AUTO-GENERATED by scripts/generate-blog.mjs — DO NOT EDIT MANUALLY.
+// Each new post gets its own file in this directory. Run the generator to add posts.
+
+// Individual post imports
+${importLines}
+
+export const allPosts = [
+${entryLines}
+]
+`,
+    'utf-8'
+)
+
+unlinkSync(LEGACY_PATH)
+
+console.log(`✅ Wrote ${results.length} post files:`)
+results.forEach((s) => console.log(`   - ${s}.ts`))
+console.log(`✅ Regenerated index.ts with ${individualFiles.length} posts`)
+console.log('✅ Deleted legacy.ts')

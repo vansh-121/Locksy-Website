@@ -38,6 +38,36 @@ const post = {
     'Password managers and separate browser profiles don\'t lock active sessions; they complement a tab locker rather than replace it.',
     'Locksy\'s core tab locking is free, with Pro a one-time $4.99 lifetime purchase (no subscription) for unlimited domain locks, startup lock, stealth mode, and weekly reports.',
   ],
+  faq: [
+    {
+      question: 'What is the best tab locking extension for Chrome in 2026?',
+      answer: 'Locksy is the best-rated tab locking extension for Chrome in 2026. It uses PBKDF2 with 600,000 SHA-256 iterations for password protection, supports WebAuthn biometric unlock (TouchID, Windows Hello, YubiKey), auto-locks tabs after inactivity, and operates 100% offline with zero data collection. It\'s rated 4.4/5 across Chrome Web Store, Edge Add-ons, and Firefox Add-ons with 30 verified ratings.',
+    },
+    {
+      question: 'Can I password protect a single browser tab?',
+      answer: 'Yes. Install Locksy from the Chrome Web Store, Edge Add-ons, or Firefox Add-ons. Set your master password, then press `Alt+Shift+9` or right-click any page and select "Lock this tab." The tab is instantly protected and requires your password or biometric to unlock. For the full walkthrough on every browser, see [how to password protect browser tabs](/blog/how-to-password-protect-browser-tabs).',
+    },
+    {
+      question: 'Which tab locker supports fingerprint or Face ID unlock?',
+      answer: 'Locksy is the only tab locking extension that supports biometric unlock via WebAuthn/FIDO2. This includes Apple TouchID, Windows Hello (fingerprint and face recognition), FaceID, and hardware security keys like YubiKey.',
+    },
+    {
+      question: 'Is there a free tab locking extension?',
+      answer: 'Yes. Locksy\'s free plan includes core tab password locking, biometric unlock, right-click context menus, and local intruder logs. The free tier includes 3 domain locks, 3 intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs. Locksy Pro ($4.99 one-time lifetime purchase) adds unlimited domain locks, startup lock, stealth mode, and more.',
+    },
+    {
+      question: 'Are older tab locking extensions like Tab Lock or LockPW safe?',
+      answer: 'No. Older tab locking extensions like Tab Lock and LockPW use a CSS overlay approach where the protected page is still loaded behind the password prompt. Anyone with basic DevTools knowledge can delete the overlay element and access the page content. Additionally, both extensions have been abandoned with no updates since 2020-2021 and don\'t use any real cryptographic key derivation. We recommend Locksy, which navigates the tab away from the protected page entirely and uses PBKDF2 with 600,000 iterations.',
+    },
+    {
+      question: 'Does Locksy send my data to any servers?',
+      answer: 'No. Locksy operates with a zero-knowledge architecture. There are zero server requests, zero telemetry, zero analytics tracking, and zero accounts required. All encryption, password verification, and logs run 100% locally within your browser sandbox. Your data never leaves your device.',
+    },
+    {
+      question: 'Can I lock tabs automatically when I\'m away from my computer?',
+      answer: 'Yes. Locksy\'s Auto-Lock Timer automatically locks your tabs after a period of inactivity ranging from 1 to 480 minutes. It features smart activity detection that monitors mouse movement, keyboard input, scrolling, and video/audio playback — so it only locks when you\'re truly inactive and won\'t interrupt your video calls or music.',
+    },
+  ],
   content: `
 ## Why You Need a Tab Locking Extension in 2026
 
@@ -239,31 +269,6 @@ The free tier covers the core tab locking functionality that most users need. Fo
 - [Install Locksy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/locksy/)
 - [Install Locksy for Edge](https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn)
 - [Learn more at locksy.dev](https://www.locksy.dev)
-
----
-
-## Frequently Asked Questions
-
-### What is the best tab locking extension for Chrome in 2026?
-Locksy is the best-rated tab locking extension for Chrome in 2026. It uses PBKDF2 with 600,000 SHA-256 iterations for password protection, supports WebAuthn biometric unlock (TouchID, Windows Hello, YubiKey), auto-locks tabs after inactivity, and operates 100% offline with zero data collection. It's rated 4.4/5 across Chrome Web Store, Edge Add-ons, and Firefox Add-ons with 30 verified ratings.
-
-### Can I password protect a single browser tab?
-Yes. Install Locksy from the Chrome Web Store, Edge Add-ons, or Firefox Add-ons. Set your master password, then press \`Alt+Shift+9\` or right-click any page and select "Lock this tab." The tab is instantly protected and requires your password or biometric to unlock. For the full walkthrough on every browser, see [how to password protect browser tabs](/blog/how-to-password-protect-browser-tabs).
-
-### Which tab locker supports fingerprint or Face ID unlock?
-Locksy is the only tab locking extension that supports biometric unlock via WebAuthn/FIDO2. This includes Apple TouchID, Windows Hello (fingerprint and face recognition), FaceID, and hardware security keys like YubiKey.
-
-### Is there a free tab locking extension?
-Yes. Locksy's free plan includes core tab password locking, biometric unlock, right-click context menus, and local intruder logs. The free tier includes 3 domain locks, 3 intruder photos, 5 biometric unlocks per day, and 3 total uses of Lock All Tabs. Locksy Pro ($4.99 one-time lifetime purchase) adds unlimited domain locks, startup lock, stealth mode, and more.
-
-### Are older tab locking extensions like Tab Lock or LockPW safe?
-No. Older tab locking extensions like Tab Lock and LockPW use a CSS overlay approach where the protected page is still loaded behind the password prompt. Anyone with basic DevTools knowledge can delete the overlay element and access the page content. Additionally, both extensions have been abandoned with no updates since 2020–2021 and don't use any real cryptographic key derivation. We recommend Locksy, which navigates the tab away from the protected page entirely and uses PBKDF2 with 600,000 iterations.
-
-### Does Locksy send my data to any servers?
-No. Locksy operates with a zero-knowledge architecture. There are zero server requests, zero telemetry, zero analytics tracking, and zero accounts required. All encryption, password verification, and logs run 100% locally within your browser sandbox. Your data never leaves your device.
-
-### Can I lock tabs automatically when I'm away from my computer?
-Yes. Locksy's Auto-Lock Timer automatically locks your tabs after a period of inactivity ranging from 1 to 480 minutes. It features smart activity detection that monitors mouse movement, keyboard input, scrolling, and video/audio playback — so it only locks when you're truly inactive and won't interrupt your video calls or music.
 `
 }
 

@@ -136,7 +136,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     // FAQPage schema — only when the post actually has FAQs, so the rendered
     // page and the structured data always agree (Google penalises FAQ markup
     // with no matching on-page content).
-    const faqJsonLd = post.faq && post.faq.length > 0 ? generateFAQSchema(post.faq) : null
+    //
+    // FAQ answers may contain the small markdown subset the on-page accordion
+    // renders (internal links, inline code, bold). schema.org acceptedAnswer
+    // wants plain text, so strip that markup here before building the schema.
+    // Scoped to this page — the shared generateFAQSchema still receives plain
+    // strings from the tools/pricing/guide pages.
+    const stripFaqMarkdown = (md: string): string =>
+        md
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // [text](url) -> text
+            .replace(/`([^`]+)`/g, '$1') // `code` -> code
+            .replace(/\*\*([^*]+)\*\*/g, '$1') // **bold** -> bold
+            .replace(/\*([^*]+)\*/g, '$1') // *italic* -> italic
+            .trim()
+
+    const faqJsonLd =
+        post.faq && post.faq.length > 0
+            ? generateFAQSchema(
+                  post.faq.map((f) => ({ question: f.question, answer: stripFaqMarkdown(f.answer) }))
+              )
+            : null
 
     return (
         <>
