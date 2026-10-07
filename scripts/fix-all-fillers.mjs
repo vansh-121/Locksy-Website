@@ -43,7 +43,7 @@ const FALSE_CLAIMS = [
 
 let totalFilesFixed = 0
 
-// 1. Fix Individual Posts
+// Fix every post (each lives in its own file)
 const individualFiles = readdirSync(POSTS_DIR)
     .filter(f => f.endsWith('.ts') && f !== 'index.ts' && f !== 'legacy.ts')
 
@@ -67,26 +67,6 @@ for (const file of individualFiles) {
         writeFileSync(filePath, content, 'utf-8')
         totalFilesFixed++
     }
-}
-
-// 2. Fix Legacy Posts
-const legacyPath = join(POSTS_DIR, 'legacy.ts')
-let legacyContent = readFileSync(legacyPath, 'utf-8')
-let originalLegacy = legacyContent
-
-for (const pattern of AI_FILLER_PATTERNS) {
-    legacyContent = legacyContent.replace(pattern, '')
-}
-for (const [pattern, replacement] of FALSE_CLAIMS) {
-    legacyContent = legacyContent.replace(pattern, replacement)
-}
-
-legacyContent = legacyContent.replace(/\n\n\n+/g, '\n\n')
-legacyContent = legacyContent.replace(/  +/g, ' ')
-
-if (legacyContent !== originalLegacy) {
-    writeFileSync(legacyPath, legacyContent, 'utf-8')
-    totalFilesFixed++
 }
 
 console.log(`✅ Removed all AI fillers and false claims from ${totalFilesFixed} files.`)

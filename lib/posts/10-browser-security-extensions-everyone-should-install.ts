@@ -15,6 +15,37 @@ const post = {
  keywords: ['browser security extensions', 'best browser extensions 2026', 'privacy extensions', 'security add-ons'],
  image: 'https://images.unsplash.com/photo-1669023414162-8b0573b9c6b2?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzM3Mzc4OTV8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
  imageAlt: 'a computer with a keyboard and mouse',
+ tldr: "Modern browsers ship with decent baseline protection, but they are built for the average user and cannot cover every tracking method, script, or the simple case of you leaving an unlocked laptop with sensitive tabs open. The right set of extensions plugs those specific gaps — content blocking, credential management, connection encryption, referrer and cookie control, session isolation, and tab locking — rather than piling on every add-on you find.",
+ keyTakeaways: [
+  "A wide-spectrum content blocker like uBlock Origin is the single highest-value install: it blocks ads, trackers, and malware domains using community filter lists, not just pop-ups.",
+  "A password manager such as Bitwarden is the bedrock of account security because it lets you use a unique strong password everywhere, so one breach does not cascade across your digital life.",
+  "Referrer and URL-tracking extensions like ClearURLs strip utm_ and ref parameters and control the referrer header, which otherwise leaks where you came from to every site you click into.",
+  "Container tabs give each browsing context its own cookies and sessions, so a script in a shopping tab cannot reach the cookies in your banking tab.",
+  "Tab locking closes the physical-access gap that no authentication method covers: the already-authenticated tab left open when you step away.",
+  "Extensions are themselves an attack surface — read the permissions, prefer open source, and periodically uninstall what you no longer use."
+ ],
+ faq: [
+  {
+   question: "If my browser already has security features, why do I need extensions?",
+   answer: "Built-in features are designed for the average user and aim for a balance between security and simplicity, so they miss niche privacy concerns, novel tracking methods, and the case of an unattended browser with sensitive tabs open. Extensions let you add granular control the defaults do not offer."
+  },
+  {
+   question: "Which single browser security extension should I install first?",
+   answer: "A wide-spectrum content blocker — uBlock Origin specifically, not the similarly named uBlock. It blocks ads, trackers, and malware domains with community-maintained filter lists and is the highest-value single install."
+  },
+  {
+   question: "How do container tabs improve security over normal tabs?",
+   answer: "Each container keeps its own cookies, local storage, and login sessions. That isolation means a tracking script or malicious script in one container cannot read the cookies or session of another, so your banking and shopping contexts cannot be linked or cross-contaminated."
+  },
+  {
+   question: "Why lock individual tabs instead of just locking my whole computer?",
+   answer: "Locking the whole machine is not practical for a two-minute break, when you are collaborating, or when others share the computer. Tab locking secures just the sensitive tab without closing it or disrupting your workflow."
+  },
+  {
+   question: "Are browser extensions themselves a security risk?",
+   answer: "Yes. Extensions often request broad permissions like reading and changing data on all sites, and a rogue or compromised one has privileged access to everything you do in the browser. Install only what you need, read the permissions, prefer open-source options, and review your installs periodically."
+  }
+ ],
  content: `
 ## That Time I Almost Shared My Financials with a Stranger
 

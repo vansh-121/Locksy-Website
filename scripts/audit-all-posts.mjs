@@ -110,7 +110,7 @@ console.log('🔍 Auditing all existing blog posts for AdSense compliance...\n')
 let totalPosts = 0
 let failedPosts = 0
 
-// 1. Audit Individual Posts
+// Audit every post (each lives in its own file)
 const individualFiles = readdirSync(POSTS_DIR)
     .filter(f => f.endsWith('.ts') && f !== 'index.ts' && f !== 'legacy.ts')
 
@@ -127,34 +127,6 @@ for (const file of individualFiles) {
         if (!audit.pass) {
             failedPosts++
             console.log(`❌ ${file}`)
-            audit.issues.forEach(issue => console.log(`   - ${issue}`))
-        }
-    }
-}
-
-// 2. Audit Legacy Posts
-console.log(`\n--- Legacy Posts ---`)
-const legacyContent = readFileSync(join(POSTS_DIR, 'legacy.ts'), 'utf-8')
-const legacyParts = legacyContent.split(/slug:\s*'([^']+)'/)
-// legacyParts: [0]=header, [1]=slug1, [2]=body1, [3]=slug2, [4]=body2, etc.
-
-console.log(`Found ${(legacyParts.length - 1) / 2} legacy posts`)
-
-for (let i = 1; i < legacyParts.length; i += 2) {
-    totalPosts++
-    const slug = legacyParts[i]
-    const bodyStr = legacyParts[i+1]
-    const contentStartIdx = bodyStr.indexOf('content: `')
-    if (contentStartIdx !== -1) {
-        const bodyStart = contentStartIdx + 'content: `'.length
-        // Find the matching end backtick before the next object or end of file
-        const bodyEnd = bodyStr.lastIndexOf('`')
-        const contentBody = bodyStr.slice(bodyStart, bodyEnd)
-        
-        const audit = auditContentQuality(contentBody)
-        if (!audit.pass) {
-            failedPosts++
-            console.log(`❌ ${slug} (Legacy)`)
             audit.issues.forEach(issue => console.log(`   - ${issue}`))
         }
     }

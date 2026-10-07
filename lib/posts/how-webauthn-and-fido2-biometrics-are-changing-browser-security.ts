@@ -15,6 +15,37 @@ const post = {
  keywords: ['webauthn browser extension', 'FIDO2 authentication', 'biometric browser security', 'fingerprint browser unlock'],
  image: 'https://images.unsplash.com/photo-1675627453084-505806a00406?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzIwOTYwNzd8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
  imageAlt: 'a computer monitor with a lot of code on it',
+ tldr: "WebAuthn and FIDO2 replace passwords with public-key cryptography: your device keeps a private key that never leaves it, and each site stores only a matching public key — which makes logins phishing-resistant and removes the password database attackers love to breach. But they secure the moment of login, not the authenticated session that stays open afterward, so a tab left unlocked on a shared machine is still exposed. That gap is what a tab locker like Locksy covers.",
+ keyTakeaways: [
+  "WebAuthn generates a unique key pair per site; the private key stays on your device and only the public key is sent to the website, so there is no shared secret to phish or steal from a server.",
+  "Phishing resistance comes from origin binding: the authenticator refuses to sign a challenge when the site URL does not match the one the key was registered to.",
+  "It is multi-factor by design — an authenticator you have plus a biometric you are or a PIN you know — without the friction of traditional 2FA.",
+  "Passkeys are built directly on WebAuthn, and Apple, Google, and Microsoft are all shipping them, so biometric login is becoming the default rather than an option.",
+  "WebAuthn protects the access point, not the ongoing session: once you are logged in, the open tab is vulnerable to anyone with physical access to your device.",
+  "A tab locker closes that gap by locking the tab or window after inactivity and requiring a fresh biometric unlock, securing the view into an already-authenticated site without logging you out."
+ ],
+ faq: [
+  {
+   question: "Does WebAuthn replace my password entirely?",
+   answer: "For sites that support it, yes. You authenticate with a biometric or a security key instead of a password, and the site stores only your public key, so there is no password to remember, reuse, or have stolen in a server breach."
+  },
+  {
+   question: "Why is WebAuthn phishing-resistant when passwords are not?",
+   answer: "Your private key is bound to the real site's origin URL. If a phishing page impersonates your bank, your authenticator refuses to sign the challenge because the origin does not match, so there is nothing for you to hand over."
+  },
+  {
+   question: "If my login is already biometric, do I still need a tab locker?",
+   answer: "Yes. WebAuthn secures the moment you log in, not the session that stays open afterward. If you step away from an unlocked laptop, anyone with physical access can read or act on that authenticated tab, which a tab locker prevents by re-locking it."
+  },
+  {
+   question: "Does locking a tab log me out of the website?",
+   answer: "No. A tab locker like Locksy secures the view into the site, not the session itself. It navigates the tab away and requires a biometric to return, but your WebAuthn login stays valid."
+  },
+  {
+   question: "Do passkeys make tab protection unnecessary?",
+   answer: "No. Even in a passwordless world your browser still holds active sessions, cached data, and history. Passkeys secure the front door; a tab locker provides the internal locks for individual rooms once someone is already inside."
+  }
+ ],
  content: `
 ## The Password Panic and Our Collective Amnesia
 

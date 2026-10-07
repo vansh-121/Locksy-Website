@@ -176,7 +176,7 @@ export default function TermsOfServiceClient() {
                             <div className="max-w-4xl mx-auto">
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {[
-                                        { title: "Free Forever", desc: "Locksy will never charge you. No premium tiers, no subscriptions, no paywalls." },
+                                        { title: "Free Forever", desc: "Locksy's core features are free forever — we'll never charge you to keep using them. Pro is an optional one-time upgrade, not a subscription or recurring paywall." },
                                         { title: "Data Ownership", desc: "All your data belongs to you and stays on your device. We never access or transmit it." },
                                         { title: "Uninstall Anytime", desc: "Remove the Extension at any time. All locally stored data is automatically deleted." },
                                         { title: "Full Transparency", desc: "Source code is public. Audit, inspect, and verify every claim we make." },

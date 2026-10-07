@@ -15,6 +15,38 @@ const post = {
  keywords: ['browser extension api security', 'chrome extension security', 'extension vulnerability prevention', 'secure extension development'],
  image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixid=M3w4ODE2OTR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzQ0MjkwMjJ8&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&auto=format&q=80',
  imageAlt: 'red padlock on black computer keyboard',
+ tldr: "Browser extensions run with real power: access to browsing history, cookies, tab contents, and the ability to inject scripts and talk to external servers. Declaring a permission in manifest.json only grants the potential for action, so the actual security battle is fought in the code that invokes those APIs. The recurring failure modes are unvalidated input flowing into privileged calls, secrets stored in plain chrome.storage, and background scripts that trust messages without checking their origin. The fix is a mindset rather than a checklist: least privilege, a strict Content Security Policy, client-side encryption for sensitive data, and constant skepticism about every input and API response.",
+ keyTakeaways: [
+  "Permissions in manifest.json declare what an extension intends to do, but they do not make it secure — the risk lives in how the APIs are actually invoked.",
+  "Unvalidated input that reaches an API like chrome.scripting.executeScript turns a legitimate feature into a cross-site scripting vector.",
+  "Storing API keys or passwords in plain chrome.storage.local is dangerous; sensitive data needs client-side encryption with a key derived from a user passphrase that is never stored.",
+  "Message passing between content scripts and the background script is a common source of bugs — always verify sender.tab.url or sender.origin before acting.",
+  "Follow the principle of least privilege: request only the permissions and host patterns the extension truly needs, and prefer optional permissions for advanced features.",
+  "A strict Content Security Policy in manifest.json is a crucial defense-in-depth layer that blocks injected scripts even when other checks fail.",
+  "Audit third-party dependencies with tools like npm audit and add code review plus automated scanning to your pipeline.",
+ ],
+ faq: [
+  {
+   question: "Does declaring fewer permissions make my browser extension secure?",
+   answer: "No. A permission only grants the potential for action. The real chrome extension security work happens in the code, in how privileged APIs are invoked and how their inputs and outputs are handled."
+  },
+  {
+   question: "Why is unvalidated input dangerous in an extension API call?",
+   answer: "If your extension takes data from an untrusted source such as a user or an external API and passes it straight into a call like chrome.scripting.executeScript, you are handing a loaded gun to an attacker. Always sanitize and validate any input used to build dynamic code or URLs."
+  },
+  {
+   question: "Is chrome.storage.local safe for storing passwords or API keys?",
+   answer: "Not on its own. Storing an unencrypted API key or password there is a terrible idea, and malware on a user machine could potentially reach it. For sensitive data, client-side encryption is non-negotiable: encrypt with a key derived from the user master password, which is never stored."
+  },
+  {
+   question: "How can a malicious web page fool my extension background script?",
+   answer: "If the background script blindly trusts a message content or origin, a malicious page could impersonate a content script and trigger unauthorized actions. Always check sender.tab.url or sender.origin in the message listener, and validate the origin of any message from an external website."
+  },
+  {
+   question: "What does a Content Security Policy do for an extension?",
+   answer: "Defined in manifest.json, the CSP tells the browser exactly which resources your extension may load and execute. A strict policy such as script-src 'self' can prevent an attacker from injecting and running malicious scripts even if they bypass other input validation or API security checks.",
+  },
+ ],
  content: `
 ## The Spy in Your Browser: Why Your Favorite Extension Might Be a Ticking Time Bomb
 

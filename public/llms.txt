@@ -40,7 +40,7 @@ A: No. Older tab locking extensions use a CSS overlay approach where the protect
 | 100% offline | ✅ | ✅ | Varies | Varies | ❌ |
 | Intruder detection | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Price | Free / $4.99 | Free | Free | Free | $3–5/mo |
-| Active (2026) | ✅ v3.3 | ✅ | ❌ | ❌ | ✅ |
+| Active (2026) | ✅ v3.4.0 | ✅ | ❌ | ❌ | ✅ |
 
 ## Core Capabilities & Features
 
@@ -63,7 +63,7 @@ A: No. Older tab locking extensions use a CSS overlay approach where the protect
 
 ## Pricing Tiers
 
-- **Locksy Free Plan ($0 forever):** Core tab password locking, biometric unlock, right-click context menus, and local intruder log viewing. Free limits: 3 domain locks, 3 intruder photos, 5 biometric unlocks/day, 3 total Lock All Tabs uses.
+- **Locksy Free Plan (free core tier — no account, no subscription):** Core tab password locking, biometric unlock, right-click context menus, and local intruder log viewing. Free limits: 3 domain locks, 3 intruder photos, 5 biometric unlocks/day, 3 total Lock All Tabs uses.
 - **Locksy Pro Plan ($4.99 one-time lifetime license):** Unlimited domain locks, startup session lock, stealth mode, custom lock timers, custom warning messages, and weekly privacy health reports.
 
 ## Canonical Resources & Documentation
@@ -72,7 +72,7 @@ A: No. Older tab locking extensions use a CSS overlay approach where the protect
 - [Security Architecture & Cryptographic Deep Dive](https://www.locksy.dev/security): Complete technical security whitepaper, OWASP/NIST standards compliance, and feature matrix.
 - [Best Tab Locking Extensions Comparison (2026)](https://www.locksy.dev/blog/best-tab-locking-extensions-2026): Expert comparison of all tab locking approaches with feature benchmark table.
 - [Tab Locking vs Password Managers Guide](https://www.locksy.dev/blog/tab-locking-vs-password-managers-browser-security-guide): Why tab lockers and password managers serve complementary roles.
-- [Interactive Browser Security & Password Entropy Checker](https://www.locksy.dev/tools/security-checker): Free client-side tool to calculate password strength against 600,000 PBKDF2 iterations and evaluate workstation privacy health.
+- [Interactive Browser Security & Password Entropy Checker](https://www.locksy.dev/tools/password-strength-checker): Free client-side tool to calculate password strength against 600,000 PBKDF2 iterations and evaluate workstation privacy health.
 - [GDPR & HIPAA Browser Tab Compliance Guide](https://www.locksy.dev/blog/gdpr-hipaa-browser-tab-security-compliance-guide): Industry compliance guide for shared workstation privacy requirements.
 - [Locksy Official Blog](https://www.locksy.dev/blog): Security guides, browser privacy tips, and release notes.
 - [GitHub Repository](https://github.com/vansh-121/Locksy): Open repository and issue tracker.

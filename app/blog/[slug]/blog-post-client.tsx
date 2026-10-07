@@ -5,8 +5,8 @@ import type { BlogPost } from '@/lib/blog-data'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen, User, Sparkles, CheckCircle2, HelpCircle } from 'lucide-react'
+import BlogFaq from '@/components/blog-faq'
+import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen, User, Sparkles, CheckCircle2 } from 'lucide-react'
 import React, { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -200,6 +200,10 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         <img
                             src={post.image}
                             alt={post.imageAlt}
+                            width={1200}
+                            height={630}
+                            fetchPriority="high"
+                            decoding="async"
                             className="w-full h-64 md:h-[420px] object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
@@ -400,23 +404,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                             <span className="w-1 h-7 bg-gradient-to-b from-primary to-secondary rounded-full" />
                             Frequently Asked Questions
                         </h2>
-                        <div className="rounded-2xl border border-border/30 bg-card/60 backdrop-blur-sm p-2 md:p-4">
-                            <Accordion type="single" collapsible className="w-full">
-                                {post.faq.map((item, i) => (
-                                    <AccordionItem key={i} value={`faq-${i}`} className="px-4">
-                                        <AccordionTrigger className="text-left text-base md:text-lg font-semibold text-foreground">
-                                            <span className="flex items-start gap-3">
-                                                <HelpCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                                                {item.question}
-                                            </span>
-                                        </AccordionTrigger>
-                                        <AccordionContent className="pl-8 text-base leading-7 text-foreground/90">
-                                            {item.answer}
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                ))}
-                            </Accordion>
-                        </div>
+                        <BlogFaq items={post.faq} />
                     </section>
                 )}
 
