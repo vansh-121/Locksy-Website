@@ -6,9 +6,15 @@
  * lives here so every "Get Pro" button on the site resolves to one string.
  */
 
-/** Polar.sh checkout for the one-time lifetime license. */
-export const PRO_CHECKOUT_URL =
+/** Direct Polar.sh checkout URL for the one-time lifetime license. */
+export const POLAR_CHECKOUT_URL =
     "https://buy.polar.sh/polar_cl_h8dabKldTUY7gf2g9MfFicCSIn0Ghc34SadGc3xl1cI"
+
+/**
+ * Public branded checkout route for Locksy Pro.
+ * All on-site buttons link to this clean URL, which automatically redirects to Polar.
+ */
+export const PRO_CHECKOUT_URL = "/checkout"
 
 /** Early-bird sale deadline: Oct 1, 2026 at 12:00 AM UTC (00:00:00 UTC). */
 export const SALE_DEADLINE_UTC = Date.UTC(2026, 9, 1, 0, 0, 0)

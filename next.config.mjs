@@ -38,6 +38,12 @@ const nextConfig = {
         destination: '/refund-policy',
         permanent: true,
       },
+      // Branded checkout route forwarding to Polar.sh
+      {
+        source: '/checkout',
+        destination: 'https://buy.polar.sh/polar_cl_h8dabKldTUY7gf2g9MfFicCSIn0Ghc34SadGc3xl1cI',
+        permanent: false,
+      },
     ]
   },
   async headers() {
