@@ -1,7 +1,7 @@
 import { blogPosts } from '@/lib/blog-data'
 
 const SITE_URL = 'https://www.locksy.dev'
-const INDEXNOW_KEY = process.env.INDEXNOW_KEY || ''
+const INDEXNOW_KEY = (process.env.INDEXNOW_KEY || '').trim()
 const SITEMAP_URL = `${SITE_URL}/sitemap.xml`
 
 // IndexNow endpoints for search engines

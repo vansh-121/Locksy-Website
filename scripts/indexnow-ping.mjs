@@ -17,7 +17,7 @@
 // consumer. It is safe to run repeatedly; IndexNow de-dupes on its side.
 
 const HOST = 'www.locksy.dev'
-const KEY = '263e3ef6a5884f15867d71346faed712'
+const KEY = 'd232914914b64af39508b08a62d409bf'
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`
 const SITEMAP_URL = `https://${HOST}/sitemap.xml`
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow'
