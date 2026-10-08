@@ -83,7 +83,7 @@ export default function RootLayout({
         />
 
       </head>
-      <body className={`${geist.className} overflow-x-hidden`}>
+      <body className={`${geist.className} overflow-x-hidden`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

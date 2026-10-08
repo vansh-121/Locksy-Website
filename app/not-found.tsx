@@ -56,7 +56,7 @@ const QUICK_LINKS = [
 
 export default function NotFound() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden flex flex-col justify-between">
+        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden flex flex-col justify-between" suppressHydrationWarning>
             {/* Background pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse pointer-events-none" />

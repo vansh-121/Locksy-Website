@@ -81,7 +81,7 @@ export default function RefundPolicyClient() {
     ]
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden" suppressHydrationWarning>
             {/* Background pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
@@ -106,7 +106,7 @@ export default function RefundPolicyClient() {
                                 Non-Refundable Digital Products
                             </div>
 
-                            <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight">
+                            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black leading-tight tracking-tight">
                                 Refund & Cancellation{" "}
                                 <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary bg-clip-text text-transparent">
                                     Policy
