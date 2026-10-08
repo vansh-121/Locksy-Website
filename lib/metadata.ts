@@ -339,6 +339,7 @@ export const jsonLdSoftwareApplication = {
                 applicableCountry: 'US',
                 returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
                 merchantReturnDays: 0,
+                url: `${siteUrl}/refund-policy`,
             },
         }
     ],
@@ -486,6 +487,7 @@ export const jsonLdProduct = {
                 applicableCountry: 'US',
                 returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
                 merchantReturnDays: 0,
+                url: `${siteUrl}/refund-policy`,
             },
         }
     ]

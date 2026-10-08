@@ -32,6 +32,12 @@ const nextConfig = {
         destination: '/tools/password-strength-checker',
         permanent: true,
       },
+      // Convenience alias for payment gateways expecting /refunds
+      {
+        source: '/refunds',
+        destination: '/refund-policy',
+        permanent: true,
+      },
     ]
   },
   async headers() {
