@@ -58,7 +58,7 @@ const refundFaqSchema = generateFAQSchema([
     },
     {
         question: "What if I was charged twice by accident?",
-        answer: "Accidental duplicate charges from checkout timeouts are gladly investigated and refunded upon contacting vanshsethi.me@gmail.com with your receipt.",
+        answer: "Accidental duplicate charges from checkout timeouts are gladly investigated and refunded upon contacting support@locksy.dev with your receipt.",
     },
 ])
 

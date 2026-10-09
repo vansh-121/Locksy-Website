@@ -1019,7 +1019,7 @@ export default function UninstallClient({
                         </a>
 
                         <a
-                            href="mailto:vanshsethi.me@gmail.com"
+                            href="mailto:support@locksy.dev"
                             className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
                         >
                             <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white">

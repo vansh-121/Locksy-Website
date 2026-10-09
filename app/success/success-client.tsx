@@ -461,7 +461,7 @@ export default function SuccessClient() {
                         </p>
                         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                             <a
-                                href="mailto:vanshsethi.me@gmail.com?subject=Need%20Help%20with%20Locksy%20Pro%20License"
+                                href="mailto:support@locksy.dev?subject=Need%20Help%20with%20Locksy%20Pro%20License"
                                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary text-white font-bold text-sm shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300"
                             >
                                 <Mail className="h-4 w-4" />

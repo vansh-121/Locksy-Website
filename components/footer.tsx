@@ -36,7 +36,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-12 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-16">
           {/* Product */}
           <div>
             <h3 className="font-bold text-white text-lg mb-6 flex items-center gap-2">
@@ -78,6 +78,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="/pricing" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="/#features" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Features
+                </a>
+              </li>
+              <li>
                 <a
                   href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
                   target="_blank"
@@ -88,22 +100,56 @@ export default function Footer() {
                   Watch Demo Video
                 </a>
               </li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h3 className="font-bold text-white text-lg mb-6 flex items-center gap-2">
+              <span className="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full" />
+              Resources
+            </h3>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <a href="/guide" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  User Guide
+                </a>
+              </li>
+              <li>
+                <a href="/security" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Security
+                </a>
+              </li>
+              <li>
+                <a href="/tools" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Free Security Tools
+                </a>
+              </li>
+              <li>
+                <a href="/blog" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="/blog/best-tab-locking-extensions-2026" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Best Tab Lockers 2026
+                </a>
+              </li>
               <li>
                 <a href="/about" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   About Locksy
                 </a>
               </li>
-              <li>
-                <a href="/#features" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Features
-                </a>
-              </li>
             </ul>
           </div>
 
-          {/* Help */}
+          {/* Help & Support */}
           <div>
             <h3 className="font-bold text-white text-lg mb-6 flex items-center gap-2">
               <span className="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full" />
@@ -111,9 +157,15 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="/guide" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <a href="/contact" className="hover:text-primary transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  User Guide
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="mailto:support@locksy.dev" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
+                  Contact Developer
                 </a>
               </li>
               <li>
@@ -126,30 +178,6 @@ export default function Footer() {
                 >
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   WhatsApp Channel
-                </a>
-              </li>
-              <li>
-                <a href="/tools" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Free Security Tools
-                </a>
-              </li>
-              <li>
-                <a href="/security" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Security
-                </a>
-              </li>
-              <li>
-                <a href="/pricing" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Contact Us
                 </a>
               </li>
               <li>
@@ -171,17 +199,6 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/vansh-121/Locksy/issues/new?template=feature_request.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Request Feature
-                </a>
-              </li>
-              <li>
-                <a
                   href="https://github.com/vansh-121/Locksy/discussions"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -189,30 +206,6 @@ export default function Footer() {
                 >
                   <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
                   Discussions
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Support Form
-                </a>
-              </li>
-              <li>
-                <a href="mailto:vanshsethi.me@gmail.com" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Contact Developer
-                </a>
-              </li>
-              <li>
-                <a href="/blog" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="/blog/best-tab-locking-extensions-2026" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Best Tab Lockers 2026
                 </a>
               </li>
             </ul>

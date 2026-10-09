@@ -72,11 +72,11 @@ export default function RefundPolicyClient() {
         },
         {
             q: "What if I was charged twice by accident?",
-            a: "If a technical glitch or network timeout caused an accidental duplicate charge for the same license, please email us immediately at vanshsethi.me@gmail.com with your receipt details. We will gladly reverse the duplicate charge."
+            a: "If a technical glitch or network timeout caused an accidental duplicate charge for the same license, please email us immediately at support@locksy.dev with your receipt details. We will gladly reverse the duplicate charge."
         },
         {
             q: "What if I experience a technical issue or bug?",
-            a: "We want your experience with Locksy to be seamless. If you encounter any technical glitch or unexpected browser behavior, contact us at vanshsethi.me@gmail.com or open an issue on GitHub. We provide direct developer support to resolve technical problems promptly."
+            a: "We want your experience with Locksy to be seamless. If you encounter any technical glitch or unexpected browser behavior, contact us at support@locksy.dev or open an issue on GitHub. We provide direct developer support to resolve technical problems promptly."
         }
     ]
 
@@ -285,7 +285,7 @@ export default function RefundPolicyClient() {
                                     <li>A payment gateway charge occurring without a license key being issued.</li>
                                 </ul>
                                 <p className="text-muted-foreground text-sm leading-relaxed">
-                                    If you notice a duplicate charge, please contact <a href="mailto:vanshsethi.me@gmail.com" className="text-primary hover:underline font-semibold">vanshsethi.me@gmail.com</a> within 14 days with your checkout receipt. Upon verification, any erroneous duplicate payment will be refunded directly to your original payment method.
+                                    If you notice a duplicate charge, please contact <a href="mailto:support@locksy.dev" className="text-primary hover:underline font-semibold">support@locksy.dev</a> within 14 days with your checkout receipt. Upon verification, any erroneous duplicate payment will be refunded directly to your original payment method.
                                 </p>
                             </div>
 
@@ -368,7 +368,7 @@ export default function RefundPolicyClient() {
                         </p>
                         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
                             <a
-                                href="mailto:vanshsethi.me@gmail.com"
+                                href="mailto:support@locksy.dev"
                                 className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary text-white font-bold hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:-translate-y-0.5 shadow-xl shadow-primary/25 text-base"
                             >
                                 <Mail className="h-5 w-5" />

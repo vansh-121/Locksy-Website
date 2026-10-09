@@ -27,8 +27,8 @@ const SOCIAL_LINKS = [
     {
         name: "Email",
         icon: Mail,
-        href: "mailto:vanshsethi.me@gmail.com",
-        username: "vanshsethi.me@gmail.com",
+        href: "mailto:support@locksy.dev",
+        username: "support@locksy.dev",
         description: "Direct email for inquiries and support",
         color: "from-red-500 to-orange-500",
         hoverColor: "hover:from-red-600 hover:to-orange-600",
@@ -81,7 +81,7 @@ const QUICK_ACTIONS = [
         title: "General Support",
         description: "Need help with Locksy?",
         icon: Heart,
-        href: "mailto:vanshsethi.me@gmail.com",
+        href: "mailto:support@locksy.dev",
         color: "from-green-500 to-emerald-500",
     },
     {
