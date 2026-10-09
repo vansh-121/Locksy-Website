@@ -99,7 +99,7 @@ We tested every major approach to locking browser tabs in 2026 and ranked them b
 | **Intruder detection** | ✅ Webcam snaps | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Free tier** | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ Freemium | ✅ |
 | **Price** | Free / $4.99 lifetime | Free (OS built-in) | Free | Free | Free | $3–5/mo | Free |
-| **Active development** | ✅ v3.4.0 (2026) | ✅ | ❌ Abandoned | ❌ Last update 2021 | ✅ | ✅ | N/A |
+| **Active development** | ✅ v3.6.0 (2026) | ✅ | ❌ Abandoned | ❌ Last update 2021 | ✅ | ✅ | N/A |
 | **Browsers** | Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc | N/A | Chrome only | Chrome only | Chrome, Edge, Firefox | All | All |
 
 ---

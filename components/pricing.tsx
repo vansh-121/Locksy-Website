@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown, ExternalLink } from "lucide-react"
+import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown, ExternalLink, ScreenShare } from "lucide-react"
 import { PRO_CHECKOUT_URL, SALE_DEADLINE_UTC, PRO_EARLY_BIRD_PRICE, PRO_REGULAR_PRICE } from "@/lib/pro"
 
 interface PricingProps {
@@ -98,6 +98,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
     { title: "Custom Auto-Lock Timers", desc: "Configure custom inactivity re-lock intervals up to 8 hours", icon: <Clock className="w-4 h-4" /> },
     { title: "Unlimited Lock & 1-Click Unlock All", desc: "Unlimited panic hotkey + unlock all tabs simultaneously", icon: <Key className="w-4 h-4" /> },
     { title: "Full Privacy Blur Manager", desc: "Custom blur levels (Light to Solid), site categories & whitelists", icon: <EyeOff className="w-4 h-4" /> },
+    { title: "Automatic Screen Share Shield", desc: "Auto-masks private tabs & titles when presenting on Meet, Zoom & Teams", icon: <ScreenShare className="w-4 h-4" /> },
     { title: "Unlimited Webcam Captures", desc: "Unlimited local snapshots of unauthorized access attempts", icon: <Camera className="w-4 h-4" /> },
     { title: "Scheduled Locking Included", desc: "Automate tab locks by schedule (work hours, night, or custom days)", icon: <Calendar className="w-4 h-4" /> },
     { title: "Startup Session Lock Included", desc: "Instantly lock all session-restored tabs on launch before rendering", icon: <Zap className="w-4 h-4" /> },
@@ -113,6 +114,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
     { title: "Auto Re-Lock Timer (Fixed 10 min)", desc: "Locksy automatically locks inactive tabs after 10 minutes", icon: <Clock className="w-4 h-4" /> },
     { title: "Lock All Tabs (3 total uses)", desc: "Instant panic hotkey to lock all tabs with 3 total uses", icon: <Key className="w-4 h-4" /> },
     { title: "Privacy Blur Shield (Basic)", desc: "Auto-mask passwords/cards & window focus loss blur", icon: <EyeOff className="w-4 h-4" /> },
+    { title: "Screen Share Shield (Manual)", desc: "1-click manual toggle to shield private tabs while screen sharing", icon: <ScreenShare className="w-4 h-4" /> },
     { title: "Webcam Captures (Max 3 stored)", desc: "Store up to 3 local snapshots of failed access attempts", icon: <Camera className="w-4 h-4" /> },
     { title: "Scheduled Locking", desc: "Not included on free tier", icon: <Calendar className="w-4 h-4" /> },
     { title: "Startup Session Lock", desc: "Not included on free tier", icon: <Zap className="w-4 h-4" /> },

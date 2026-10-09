@@ -5,6 +5,18 @@
 // section it replaces, in plain language.
 const updates = [
   {
+    version: "v3.6.0",
+    icon: "🎥",
+    title: "Screen Share Shield",
+    desc: "Opaque shield automatically blanks sensitive tabs, banking, webmail, tab titles, and favicons when presenting on Google Meet, Zoom, or Teams. Click to peek, auto-hides when you switch away.",
+  },
+  {
+    version: "v3.5.5",
+    icon: "🔗",
+    title: "URL Path Locking",
+    desc: "Lock specific pages or sub-directories (like notion.so/work/*) instead of entire websites. Support for wildcards, custom path reach, and scoped unlocking.",
+  },
+  {
     version: "v3.4.0",
     icon: "🔑",
     title: "Master Recovery Key",

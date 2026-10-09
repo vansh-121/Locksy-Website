@@ -1,10 +1,16 @@
 export default function Features() {
   const features = [
     {
-      icon: "🛡️",
-      title: "Privacy Blur Shield",
-      desc: "Automatically masks passwords, credit cards, emails, and OTPs on web pages, plus instantly blurs the page overlay when switching windows or leaving your computer.",
-      gradient: "from-indigo-500 to-purple-500",
+      icon: "🌐",
+      title: "Domain & URL Path Lock",
+      desc: "Lock entire domains or specific URL paths (e.g. notion.so/work/*) with wildcard patterns. Auto-lock new tabs matching locked rules with persistent protection.",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: "👆",
+      title: "Biometric Unlock",
+      desc: "Unlock protected tabs with your fingerprint or face — Touch ID, Windows Hello, Face ID, Android biometrics, or a USB security key. Your biometric data never leaves your device.",
+      gradient: "from-violet-500 to-indigo-500",
     },
     {
       icon: "⏱️",
@@ -13,34 +19,28 @@ export default function Features() {
       gradient: "from-indigo-500 to-violet-500",
     },
     {
-      icon: "📅",
-      title: "Scheduled Locking",
-      desc: "Time-based security on autopilot. Lock tabs during specific hours and days automatically—perfect for work hours or sleep time. Overnight schedule support included.",
-      gradient: "from-emerald-500 to-teal-500",
-    },
-    {
       icon: "⌨️",
       title: "Keyboard Shortcuts",
       desc: "Lock the current tab (Alt+Shift+9), open the manager (Alt+Shift+0), lock every tab (Alt+Shift+8, 3 free uses then Pro), or hide Locksy with Stealth Mode (Alt+Shift+7). All shortcuts are customizable, and locked tabs show a lock icon plus a live badge counter.",
       gradient: "from-violet-500 to-purple-500",
     },
-    // {
-    //   icon: "🎨",
-    //   title: "Visual Lock Indicators",
-    //   desc: "Red lock icon on tab favicons and real-time badge counter on extension icon. Always know which tabs are protected at a glance.",
-    //   gradient: "from-rose-500 to-pink-500",
-    // },
     {
-      icon: "🌐",
-      title: "Domain Lock",
-      desc: "Lock entire domains with wildcard patterns. Auto-lock new tabs matching locked domains with persistent protection.",
-      gradient: "from-blue-500 to-cyan-500",
+      icon: "🛡️",
+      title: "Privacy Blur Shield",
+      desc: "Automatically masks passwords, credit cards, emails, and OTPs on web pages, plus instantly blurs the page overlay when switching windows or leaving your computer.",
+      gradient: "from-indigo-500 to-purple-500",
     },
     {
-      icon: "👆",
-      title: "Biometric Unlock",
-      desc: "Unlock protected tabs with your fingerprint or face — Touch ID, Windows Hello, Face ID, Android biometrics, or a USB security key. Your biometric data never leaves your device.",
-      gradient: "from-violet-500 to-indigo-500",
+      icon: "🎥",
+      title: "Screen Share Shield",
+      desc: "Presenting on Google Meet, Zoom, or Teams? Screen Share Shield automatically covers locked tabs, banking, webmail, and tab titles with an opaque shield so nothing sensitive leaks.",
+      gradient: "from-cyan-500 to-blue-500",
+    },
+    {
+      icon: "📅",
+      title: "Scheduled Locking",
+      desc: "Time-based security on autopilot. Lock tabs during specific hours and days automatically—perfect for work hours or sleep time. Overnight schedule support included.",
+      gradient: "from-emerald-500 to-teal-500",
     },
     {
       icon: "🖱️",

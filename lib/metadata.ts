@@ -237,7 +237,7 @@ export const jsonLdSoftwareApplication = {
     name: siteName,
     applicationCategory: 'SecurityApplication',
     operatingSystem: 'Windows, macOS, Linux, ChromeOS',
-    softwareVersion: '3.4.0',
+    softwareVersion: '3.6.0',
     description: siteDescription,
     url: siteUrl,
     browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
