@@ -223,6 +223,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📧 Contact
 
+**Support:** [support@locksy.dev](mailto:support@locksy.dev)  
 **Developer:** Vansh Sethi  
 **GitHub:** [@vansh-121](https://github.com/vansh-121)  
 **Issues:** [GitHub Issues](https://github.com/vansh-121/Locksy/issues)
