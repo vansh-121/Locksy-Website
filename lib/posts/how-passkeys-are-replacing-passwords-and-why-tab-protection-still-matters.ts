@@ -117,7 +117,7 @@ Passkeys solved the "how do I get in securely?" problem. But they left wide open
 
 ## Why Tab Protection Still Matters: Securing the Digital Room
 
-This is precisely why I've found tools like Locksy to be absolutely indispensable in my daily digital life, even as I embrace passkeys with open arms. Locksy doesn't replace passkeys; it complements them, adding a crucial layer of security that passkeys simply aren't designed to provide.
+This is precisely why I've found tools like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) to be absolutely indispensable in my daily digital life, even as I embrace passkeys with open arms. Locksy doesn't replace passkeys; it complements them, adding a crucial layer of security that passkeys simply aren't designed to provide.
 
 Think back to our house analogy: Passkeys are the unbreachable front door. Locksy is like having individual locks on the doors to your study, your bedroom, and your safe, *even after you've entered the main house*. It's about protecting the specific rooms where your most sensitive information resides, even when the main entrance is open.
 

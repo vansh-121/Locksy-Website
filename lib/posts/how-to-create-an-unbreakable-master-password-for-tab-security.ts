@@ -55,7 +55,7 @@ We’ve all been there, right? You step away from your computer for "just a minu
 
 My stomach used to knot up just thinking about it. A friend, a colleague, or even a curious family member could just… wander over. One casual glance. One accidental click. And suddenly, your private digital world is laid bare. It's not about hiding anything nefarious; it's about boundaries. It's about respecting your own space, your privacy, and the sensitive information you handle every day.
 
-That gnawing feeling is exactly why I became obsessed with tools like Locksy. It’s brilliant, really. The idea that you can password-protect your browser tabs, locking them down with a single, powerful key. But here’s the kicker, the absolute linchpin: that key? It has to be **unbreakable**. If your master password for Locksy is weak, you might as well leave the front door ajar with a "Welcome, Intruders!" sign hanging from the knob.
+That gnawing feeling is exactly why I became obsessed with tools like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim). It’s brilliant, really. The idea that you can password-protect your browser tabs, locking them down with a single, powerful key. But here’s the kicker, the absolute linchpin: that key? It has to be **unbreakable**. If your master password for Locksy is weak, you might as well leave the front door ajar with a "Welcome, Intruders!" sign hanging from the knob.
 
 So, let's talk about building that digital fortress, brick by cryptographic brick. Forget everything you think you know about "good" passwords. We're aiming for legendary. We're aiming for something that would make a supercomputer groan.
 

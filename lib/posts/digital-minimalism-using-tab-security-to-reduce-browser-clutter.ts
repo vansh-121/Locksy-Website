@@ -117,7 +117,7 @@ Even with the best intentions and the most rigorous tab management systems, ther
 
 These tabs are too important to close, but too sensitive or distracting to leave completely exposed. You might move them to a separate window, minimize that window, or even create a whole new browser profile just for one or two tabs – which kind of defeats the purpose of a **minimal browser setup**.
 
-This is precisely where a tool like **Locksy** comes in, and why I genuinely find it to be a fantastic fit for anyone serious about digital minimalism and browser security. Locksy is a browser extension that allows you to password-protect individual tabs or an entire browser window.
+This is precisely where a tool like **[Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)** comes in, and why I genuinely find it to be a fantastic fit for anyone serious about digital minimalism and browser security. Locksy is a browser extension that allows you to password-protect individual tabs or an entire browser window.
 
 Think about that for a second. If you have a tab open that contains information you wouldn't want someone else (or even yourself, accidentally) stumbling upon, Locksy lets you put a lock on it. You set a password, and the tab (or window) becomes inaccessible until you unlock it.
 

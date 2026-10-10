@@ -16,6 +16,7 @@ import Footer from '@/components/footer'
 import BlogViewCounter from '@/components/blog-view-counter'
 import BlogToc, { extractHeadings } from '@/components/blog-toc'
 import { slugify } from '@/lib/utils'
+import { MidArticleInstallCta, useDetectedBrowser, BROWSER_STORES } from '@/components/browser-install-cta'
 
 interface BlogPostClientProps {
     post: BlogPost
@@ -40,6 +41,19 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     // own text the same way, and a shared counter keeps duplicate headings in
     // sync with extractHeadings' de-duping.
     const headings = useMemo(() => extractHeadings(post.content), [post.content])
+    const midH2Id = useMemo(() => {
+        const h2s = headings.filter((h) => h.level === 2)
+        if (h2s.length < 2) return null
+        return h2s[Math.floor(h2s.length / 2)]?.id ?? null
+    }, [headings])
+
+    const detected = useDetectedBrowser()
+    const bottomOthers = useMemo(() => {
+        const primaryKey = detected.key === 'brave' ? 'chrome' : detected.key
+        return [BROWSER_STORES.chrome, BROWSER_STORES.edge, BROWSER_STORES.firefox].filter(
+            (b) => b.key !== primaryKey
+        )
+    }, [detected])
 
     useEffect(() => {
         setCurrentUrl(window.location.href)
@@ -259,12 +273,20 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                             {children}
                                         </h1>
                                     ),
-                                    h2: ({ children }) => (
-                                        <h2 id={idForHeading(nodeToText(children))} className="scroll-mt-24 text-2xl font-bold tracking-tight sm:text-3xl mt-10 mb-4 text-foreground flex items-center gap-3">
-                                            <span className="w-1 h-7 bg-gradient-to-b from-primary to-secondary rounded-full flex-shrink-0" />
-                                            {children}
-                                        </h2>
-                                    ),
+                                    h2: ({ children }) => {
+                                        const headingId = idForHeading(nodeToText(children))
+                                        const isMidArticle = midH2Id && headingId === midH2Id
+
+                                        return (
+                                            <>
+                                                {isMidArticle && <MidArticleInstallCta />}
+                                                <h2 id={headingId} className="scroll-mt-24 text-2xl font-bold tracking-tight sm:text-3xl mt-10 mb-4 text-foreground flex items-center gap-3">
+                                                    <span className="w-1 h-7 bg-gradient-to-b from-primary to-secondary rounded-full flex-shrink-0" />
+                                                    {children}
+                                                </h2>
+                                            </>
+                                        )
+                                    },
                                     h3: ({ children }) => (
                                         <h3 id={idForHeading(nodeToText(children))} className="scroll-mt-24 text-xl font-semibold tracking-tight sm:text-2xl mt-8 mb-3 text-foreground">
                                             {children}
@@ -348,7 +370,21 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                         </td>
                                     ),
                                     a: ({ children, href }) => {
-                                        const safeHref = href && /^(https?:|mailto:|tel:|\/|#)/.test(href) ? href : undefined
+                                        const textContent = nodeToText(children)
+                                        const isExplicitStoreLabel = /Firefox Add-ons|Edge Add-ons|Chrome Web Store/i.test(textContent)
+
+                                        const isLocksyStoreLink = href && (
+                                            href.includes('chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim') ||
+                                            href.includes('microsoftedge.microsoft.com/addons/detail/locksy') ||
+                                            href.includes('addons.mozilla.org/en-US/firefox/addon/locksy') ||
+                                            href === '/install' ||
+                                            href === 'https://www.locksy.dev/install'
+                                        )
+
+                                        // Route in-article Locksy store links to the visitor's detected browser store
+                                        const targetHref = (isLocksyStoreLink && !isExplicitStoreLabel) ? detected.url : href
+                                        const safeHref = targetHref && /^(https?:|mailto:|tel:|\/|#)/.test(targetHref) ? targetHref : undefined
+
                                         return (
                                             <a
                                                 href={safeHref}
@@ -451,6 +487,60 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                     </div>
                 </div>
 
+                {/* CTA */}
+                <div className="max-w-3xl mx-auto mt-16">
+                    <div className="relative group">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+                        <Card className="relative border-2 border-primary/20 bg-card/50 backdrop-blur-sm shadow-xl overflow-hidden">
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
+                            <CardHeader className="text-center pt-10">
+                                <CardTitle className="text-3xl font-bold">Ready to Secure Your Browser Tabs?</CardTitle>
+                                <CardDescription className="text-base max-w-xl mx-auto">
+                                    Get started with Locksy today — free core version, trusted by thousands
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="flex flex-col items-center gap-4 pb-10 px-8">
+                                <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
+                                    <a
+                                        href={detected.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-full sm:w-auto"
+                                    >
+                                        <Button
+                                            size="lg"
+                                            className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg shadow-primary/20"
+                                        >
+                                            {detected.buttonLabel}
+                                        </Button>
+                                    </a>
+                                    <Link href="/pricing" className="w-full sm:w-auto">
+                                        <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                                            View Pro Features
+                                        </Button>
+                                    </Link>
+                                </div>
+                                <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground mt-1">
+                                    <span>Also available for:</span>
+                                    {bottomOthers.map((other, idx) => (
+                                        <React.Fragment key={other.key}>
+                                            <a
+                                                href={other.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="font-medium text-primary hover:underline underline-offset-2 transition-colors"
+                                            >
+                                                {other.shortName}
+                                            </a>
+                                            {idx < bottomOthers.length - 1 && <span className="text-border">·</span>}
+                                        </React.Fragment>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+
                 {/* Related Posts */}
                 {relatedPosts.length > 0 && (
                     <div className="max-w-4xl mx-auto mt-16">
@@ -502,37 +592,6 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         </div>
                     </div>
                 )}
-
-                {/* CTA */}
-                <div className="max-w-3xl mx-auto mt-16">
-                    <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-                        <Card className="relative border-2 border-primary/20 bg-card/50 backdrop-blur-sm shadow-xl overflow-hidden">
-                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
-                            <CardHeader className="text-center pt-10">
-                                <CardTitle className="text-3xl font-bold">Ready to Secure Your Browser Tabs?</CardTitle>
-                                <CardDescription className="text-base max-w-xl mx-auto">
-                                    Get started with Locksy today — free core version, trusted by thousands
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="flex flex-col sm:flex-row justify-center gap-4 pb-10 px-8">
-                                <Link href="/">
-                                    <Button
-                                        size="lg"
-                                        className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg shadow-primary/20"
-                                    >
-                                        Install Locksy Free
-                                    </Button>
-                                </Link>
-                                <Link href="/contact">
-                                    <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                                        Contact Support
-                                    </Button>
-                                </Link>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </div>
             </main>
 
             <Footer />

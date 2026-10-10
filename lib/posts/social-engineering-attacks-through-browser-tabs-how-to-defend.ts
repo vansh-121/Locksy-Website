@@ -71,7 +71,7 @@ So, why are we so susceptible to these relatively low-tech \`social engineering 
 
 The truth is, our browsers are the frontline of our digital lives, and every open tab is a potential vulnerability. It's a bit like leaving your front door unlocked, even if you're "just running to the mailbox." You might be back in 30 seconds, but that's 30 seconds of opportunity for someone else.
 
-### Plugging the Leaks: Introducing Locksy and a Proactive Defense
+### Plugging the Leaks: Introducing [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) and a Proactive Defense
 
 So, what do we do about this? We can't realistically close every tab every time we step away. That's simply not how we work. And constantly logging in and out of every service is a productivity killer. We need a solution that acknowledges human behavior while bolstering our security.
 

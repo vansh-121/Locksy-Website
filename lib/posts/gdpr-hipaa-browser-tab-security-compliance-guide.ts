@@ -156,7 +156,7 @@ If you're evaluating this class of tool for a regulated environment, these are t
 5. **Strong, fast re-authentication.** WebAuthn/FIDO2 platform authenticators — Windows Hello, Touch ID, or a hardware key — because a control staff find slow is a control staff will circumvent, and a circumvented control is worse than none at all (you now have a documented safeguard that isn't operating). See [how WebAuthn and FIDO2 biometrics are changing browser security](/blog/how-webauthn-and-fido2-biometrics-are-changing-browser-security).
 6. **A local record of failed unlock attempts**, for internal review.
 
-## Mapping Locksy's Features to Specific Provisions
+## Mapping [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)'s Features to Specific Provisions
 
 | Locksy capability | Supports | How |
 | :--- | :--- | :--- |

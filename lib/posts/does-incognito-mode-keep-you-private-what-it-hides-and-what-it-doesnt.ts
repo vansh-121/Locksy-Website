@@ -147,7 +147,7 @@ None of it applies to the window currently on your screen.
 
 A private window holding your medical portal, a second email account, a legal document, or a bank statement is exactly as readable to the person standing behind you as a normal one. If you walk away from the machine, the session is still authenticated and still rendered. The disposable cookie jar protects a future user of the device from your past; it does nothing for your present. This is the same structural distinction that makes passkeys and session protection complementary rather than redundant — [strong authentication secures the entrance, not the room](/blog/how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters).
 
-Closing the window every time you step away works and costs you the page state. Locking the screen — \`Win\`+\`L\` on Windows, \`Control\`+\`Command\`+\`Q\` on macOS — is faster and covers everything at once. For the narrower case of one sensitive tab among twenty that you want gated behind a password while the rest stay usable, a tab-level lock such as Locksy sits in front of that single tab's contents. Pick whichever matches how often you actually leave the desk.
+Closing the window every time you step away works and costs you the page state. Locking the screen — \`Win\`+\`L\` on Windows, \`Control\`+\`Command\`+\`Q\` on macOS — is faster and covers everything at once. For the narrower case of one sensitive tab among twenty that you want gated behind a password while the rest stay usable, a tab-level lock such as [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) sits in front of that single tab's contents. Pick whichever matches how often you actually leave the desk.
 
 ## A threat-model-first replacement table
 

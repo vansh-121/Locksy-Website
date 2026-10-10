@@ -137,7 +137,7 @@ We're living in an era where our digital lives are more intertwined with our phy
 
 This isn't just about hiding a gift purchase; it's about safeguarding sensitive personal information, client data, or even just preventing spoilers for your favorite show. The mental burden of constantly being on guard, of having to scramble when someone approaches, is real. It detracts from focus and adds unnecessary stress to our digital interactions. We shouldn't have to choose between convenience and privacy when it comes to something as fundamental as an open browser tab.
 
-## Locksy to the Rescue: A Better Way to Lock Chrome Tabs (and Your Peace of Mind)
+## [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) to the Rescue: A Better Way to Lock Chrome Tabs (and Your Peace of Mind)
 
 This is where the idea of a dedicated, purpose-built solution starts to make a lot of sense. After wrestling with all those clunky native workarounds, you start to yearn for something that just *works*. Something that respects your need for specific, immediate **chrome tab security** without forcing you into a digital obstacle course.
 

@@ -203,7 +203,7 @@ Two gaps remain after everything above, and both are about the session rather th
 
 The first is stolen session cookies. Modern infostealer malware exfiltrates cookie databases directly, because a valid session cookie replays an *already-authenticated* session and skips both the password and the MFA prompt. Rotating the password does not help unless the service also invalidates the session server-side — which is exactly why the revoke-sessions step sits at minute two rather than minute nine. [Session hijacking](/blog/session-hijacking-how-stolen-cookies-bypass-your-password-and-mfa) covers the mechanics and the defences that actually bind a session to a device.
 
-The second is physical. A hardened account with a generated password, a hardware key, and clean recovery settings is still fully readable to anyone who walks up to the unlocked laptop where it is already open. Account security and session security are different layers; for the handful of tabs where that matters, a tab-level unlock prompt such as Locksy gates the contents of those specific tabs without closing them.
+The second is physical. A hardened account with a generated password, a hardware key, and clean recovery settings is still fully readable to anyone who walks up to the unlocked laptop where it is already open. Account security and session security are different layers; for the handful of tabs where that matters, a tab-level unlock prompt such as [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) gates the contents of those specific tabs without closing them.
 
 ## Set up monitoring, then stop thinking about it
 

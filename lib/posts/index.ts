@@ -24,8 +24,10 @@ import post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_ma
 import post_how_students_can_protect_their_browser_tabs_on_shared_school_computers from './how-students-can-protect-their-browser-tabs-on-shared-school-computers'
 import post_how_to_check_if_your_password_was_leaked_and_what_to_do_next from './how-to-check-if-your-password-was-leaked-and-what-to-do-next'
 import post_how_to_create_an_unbreakable_master_password_for_tab_security from './how-to-create-an-unbreakable-master-password-for-tab-security'
+import post_how_to_hide_and_password_protect_tabs_during_screen_sharing from './how-to-hide-and-password-protect-tabs-during-screen-sharing'
 import post_how_to_lock_specific_tabs_in_chrome_without_extensions from './how-to-lock-specific-tabs-in-chrome-without-extensions'
 import post_how_to_password_protect_browser_tabs from './how-to-password-protect-browser-tabs'
+import post_how_to_password_protect_microsoft_edge_and_brave_tabs from './how-to-password-protect-microsoft-edge-and-brave-tabs'
 import post_how_to_tell_if_a_chrome_extension_is_safe_before_you_install_it from './how-to-tell-if-a-chrome-extension-is-safe-before-you-install-it'
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
 import post_is_public_wifi_safe_what_attackers_can_actually_steal from './is-public-wifi-safe-what-attackers-can-actually-steal'
@@ -67,8 +69,10 @@ export const allPosts = [
     post_how_students_can_protect_their_browser_tabs_on_shared_school_computers,
     post_how_to_check_if_your_password_was_leaked_and_what_to_do_next,
     post_how_to_create_an_unbreakable_master_password_for_tab_security,
+    post_how_to_hide_and_password_protect_tabs_during_screen_sharing,
     post_how_to_lock_specific_tabs_in_chrome_without_extensions,
     post_how_to_password_protect_browser_tabs,
+    post_how_to_password_protect_microsoft_edge_and_brave_tabs,
     post_how_to_tell_if_a_chrome_extension_is_safe_before_you_install_it,
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
     post_is_public_wifi_safe_what_attackers_can_actually_steal,

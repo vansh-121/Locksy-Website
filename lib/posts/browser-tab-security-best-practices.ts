@@ -65,7 +65,7 @@ I'm not here to scare you into becoming a digital hermit. I'm here to share 15 p
 
 Screen lock protects your entire computer, which is great when you walk away completely. But what about the dozen times a day someone glances at your screen while you're sitting right there? What about when your kid grabs your laptop to watch YouTube and your bank account is two tabs to the right?
 
-Tab-level password protection solves the in-between moments. You keep working, but specific tabs stay locked until you deliberately unlock them. With a tool like Locksy, you set a master password and choose which tabs (or which domains) get locked. Everything else stays accessible.
+Tab-level password protection solves the in-between moments. You keep working, but specific tabs stay locked until you deliberately unlock them. With a tool like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim), you set a master password and choose which tabs (or which domains) get locked. Everything else stays accessible.
 
 ## 2. Understand Encryption — Even If You're Not Technical
 

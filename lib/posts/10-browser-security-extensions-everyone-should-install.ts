@@ -115,7 +115,7 @@ Firefox users have **Multi-Account Containers** built directly into their ecosys
 
 And speaking of isolation and keeping things separate...
 
-### The Sentinel: Tab Locking and Session Protection (Hello, Locksy!)
+### The Sentinel: Tab Locking and Session Protection (Hello, [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)!)
 
 Remember my coffee shop mishap? That moment of sheer panic when a stranger was looking at my exposed financial data? That's precisely the kind of scenario that triggered my search for a solution to [password-protect specific browser tabs](/blog/how-to-password-protect-browser-tabs). Because let's face it, locking your entire computer when you step away isn't always practical for a two-minute break, especially if you're collaborating or have others using your machine. And sometimes, you just want to secure *one* sensitive tab without closing it and losing your progress.
 

@@ -13,6 +13,7 @@
 import { useEffect, useState } from 'react'
 import { List } from 'lucide-react'
 import { slugify } from '@/lib/utils'
+import { TocInstallWidget } from './browser-install-cta'
 
 export interface TocHeading {
     id: string
@@ -119,6 +120,7 @@ export default function BlogToc({ headings }: { headings: TocHeading[] }) {
                     On this page
                 </p>
                 {links}
+                <TocInstallWidget />
             </nav>
 
             {/* Mobile / Tablet / Laptop: collapsible panel above the content (<1400px) */}

@@ -87,7 +87,7 @@ This isn't just about external perceptions either. It's about your own peace of 
 
 ![Person working at a computer in a bright office](https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450&fit=crop&auto=format&q=80)
 
-### The Solution I Wish I'd Had Years Ago: Locksy
+### The Solution I Wish I'd Had Years Ago: [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
 
 This is where a tool like Locksy comes into its own. I stumbled upon it a while back, initially looking for something to just "hide" tabs quickly, but what I found was far more powerful. Locksy is a browser extension that allows you to password-protect individual tabs or entire browser windows. It’s not about closing them, losing your place, or juggling multiple profiles. It's about putting a secure, instantaneous lock on exactly what you need, exactly when you need it.
 

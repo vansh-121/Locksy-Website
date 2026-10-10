@@ -103,7 +103,7 @@ This is the most robust and recommended way to set your policy. You configure yo
 \`\`\`
 Referrer-Policy: strict-origin-when-cross-origin
 \`\`\`
-When a browser receives this header, it applies the specified policy to all subsequent requests originating from that document. If you set it site-wide, every page on your domain will adhere to it. This is powerful because it's applied consistently, and it's the first place the browser looks. For keeping track of these policies across many sites or ensuring consistent application, I find something like Locksy invaluable because it helps audit and manage security headers across your entire digital footprint. It takes the guesswork out of "did I remember to set this on *that* microservice?"
+When a browser receives this header, it applies the specified policy to all subsequent requests originating from that document. If you set it site-wide, every page on your domain will adhere to it. This is powerful because it's applied consistently, and it's the first place the browser looks. For keeping track of these policies across many sites or ensuring consistent application, I find something like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) invaluable because it helps audit and manage security headers across your entire digital footprint. It takes the guesswork out of "did I remember to set this on *that* microservice?"
 
 ### 2. The \`<meta>\` Tag (The Fallback)
 

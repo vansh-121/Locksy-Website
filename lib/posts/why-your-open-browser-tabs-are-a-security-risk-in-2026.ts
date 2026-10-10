@@ -169,7 +169,7 @@ So, what's the solution? A in how we think about browser security, moving from r
 
 This is where I genuinely believe we need a new layer of security, something that goes beyond the operating system's lock screen and addresses the specific **browser tab security risk**. We need a way to instantly protect the *contents* of our browsers, even if the device itself is temporarily accessible.
 
-This is why I started looking for tools that would password-protect individual browser windows or even specific tabs. After some searching and experimenting, I stumbled upon a browser extension called **Locksy**. It's remarkably simple, which is its genius. Instead of having to log out of everything, or meticulously close dozens of tabs, Locksy allows you to instantly lock down your active browser window (or specific tabs within it) with a separate, quick password or PIN.
+This is why I started looking for tools that would password-protect individual browser windows or even specific tabs. After some searching and experimenting, I stumbled upon a browser extension called **[Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)**. It's remarkably simple, which is its genius. Instead of having to log out of everything, or meticulously close dozens of tabs, Locksy allows you to instantly lock down your active browser window (or specific tabs within it) with a separate, quick password or PIN.
 
 Think about it:
 * You're working on something sensitive, step away for coffee. Instead of just locking your computer, you hit the Locksy shortcut. Now, even if someone bypasses your OS lock, they're met with another barrier before they can see your browser contents.

@@ -81,7 +81,7 @@ Some applications do implement **step-up authentication** — asking again befor
 
 ## The Fundamental Difference
 
-| Security Layer | Password Managers | Locksy Tab Locker |
+| Security Layer | Password Managers | [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) Tab Locker |
 | :--- | :--- | :--- |
 | **Primary Focus** | Credential vaulting & login autofill | Protecting already-authenticated sessions |
 | **Protection State** | Pre-login (authentication) | Post-login (active browsing session) |

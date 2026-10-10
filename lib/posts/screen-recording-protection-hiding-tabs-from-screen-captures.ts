@@ -69,7 +69,7 @@ Before we talk about solutions, let's just briefly unpack *who* might be recordi
 
 Given this diverse threat landscape, it becomes clear that simply closing tabs or minimizing windows is a flimsy defense at best. It’s a reactive patch on a systemic problem. What we require is a more robust, active **screen recording protection** mechanism, something that understands that certain tabs, certain pieces of information, are simply off-limits to any form of capture.
 
-This is where I started looking for a smarter solution, something that understood the nuance of my workflow and the inherent risks of our always-on, always-connected world. I didn't want to change my browsing habits; I wanted a tool that adapted to them, adding a layer of intelligent defense. And honestly, this is where extensions like Locksy really started to click for me.
+This is where I started looking for a smarter solution, something that understood the nuance of my workflow and the inherent risks of our always-on, always-connected world. I didn't want to change my browsing habits; I wanted a tool that adapted to them, adding a layer of intelligent defense. And honestly, this is where extensions like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) really started to click for me.
 
 ![Digital shield protecting data](https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=450&fit=crop&auto=format&q=80)
 

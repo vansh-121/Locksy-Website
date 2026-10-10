@@ -77,7 +77,7 @@ Browser profiles are like having separate drawers in a desk. They organize thing
 
 If you want actual password protection on individual tabs, you need a browser extension. That's where the real solution lives.
 
-## Setting Up Tab Protection with Locksy
+## Setting Up Tab Protection with [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)
 
 Locksy is a free, open-source extension that works across Chrome, Edge, Firefox, Brave, and basically any Chromium-based browser. Here's how to get started — it takes about 90 seconds.
 
