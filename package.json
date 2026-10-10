@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "blog:sync": "node scripts/sync-posts.mjs",
     "dev": "next dev",
     "guide:pdf": "node scripts/generate-guide-pdf.mjs",
     "lint": "eslint .",

@@ -8,6 +8,7 @@ import post_post_10_browser_security_extensions_everyone_should_install from './
 import post_api_security_for_browser_tab_extension_developers from './api-security-for-browser-tab-extension-developers'
 import post_best_tab_locking_extensions_2026 from './best-tab-locking-extensions-2026'
 import post_browser_extension_permissions_the_hidden_security_risk_youre_ignoring from './browser-extension-permissions-the-hidden-security-risk-youre-ignoring'
+import post_browser_fingerprinting_explained_how_sites_track_you_without_cookies from './browser-fingerprinting-explained-how-sites-track-you-without-cookies'
 import post_browser_sandbox_escapes_what_they_are_and_why_you_should_care from './browser-sandbox-escapes-what-they-are-and-why-you-should-care'
 import post_browser_security_on_a_schedule_how_time_based_tab_locking_works from './browser-security-on-a-schedule-how-time-based-tab-locking-works'
 import post_browser_tab_security_best_practices from './browser-tab-security-best-practices'
@@ -15,25 +16,31 @@ import post_browser_tab_security_for_content_creators_and_streamers from './brow
 import post_chrome_vs_firefox_vs_edge_tab_security from './chrome-vs-firefox-vs-edge-tab-security'
 import post_complete_guide_to_pbkdf2_vs_bcrypt_vs_argon2_for_password_hashing from './complete-guide-to-pbkdf2-vs-bcrypt-vs-argon2-for-password-hashing'
 import post_digital_minimalism_using_tab_security_to_reduce_browser_clutter from './digital-minimalism-using-tab-security-to-reduce-browser-clutter'
+import post_does_incognito_mode_keep_you_private_what_it_hides_and_what_it_doesnt from './does-incognito-mode-keep-you-private-what-it-hides-and-what-it-doesnt'
 import post_gdpr_hipaa_browser_tab_security_compliance_guide from './gdpr-hipaa-browser-tab-security-compliance-guide'
 import post_how_browser_tab_sync_across_devices_creates_new_attack_surfaces from './how-browser-tab-sync-across-devices-creates-new-attack-surfaces'
 import post_how_locksy_uses_client_side_encryption_to_keep_your_tabs_private from './how-locksy-uses-client-side-encryption-to-keep-your-tabs-private'
 import post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters from './how-passkeys-are-replacing-passwords-and-why-tab-protection-still-matters'
 import post_how_students_can_protect_their_browser_tabs_on_shared_school_computers from './how-students-can-protect-their-browser-tabs-on-shared-school-computers'
+import post_how_to_check_if_your_password_was_leaked_and_what_to_do_next from './how-to-check-if-your-password-was-leaked-and-what-to-do-next'
 import post_how_to_create_an_unbreakable_master_password_for_tab_security from './how-to-create-an-unbreakable-master-password-for-tab-security'
 import post_how_to_lock_specific_tabs_in_chrome_without_extensions from './how-to-lock-specific-tabs-in-chrome-without-extensions'
 import post_how_to_password_protect_browser_tabs from './how-to-password-protect-browser-tabs'
+import post_how_to_tell_if_a_chrome_extension_is_safe_before_you_install_it from './how-to-tell-if-a-chrome-extension-is-safe-before-you-install-it'
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
+import post_is_public_wifi_safe_what_attackers_can_actually_steal from './is-public-wifi-safe-what-attackers-can-actually-steal'
 import post_keyboard_shortcuts_for_tab_security from './keyboard-shortcuts-for-tab-security'
 import post_mastering_referrer_policy_a_technical_guide_to_controlling_information_leaks_from_your_browser from './mastering-referrer-policy-a-technical-guide-to-controlling-information-leaks-from-your-browser'
 import post_protect_banking_tabs_from_prying_eyes from './protect-banking-tabs-from-prying-eyes'
 import post_screen_recording_protection_hiding_tabs_from_screen_captures from './screen-recording-protection-hiding-tabs-from-screen-captures'
+import post_session_hijacking_how_stolen_cookies_bypass_your_password_and_mfa from './session-hijacking-how-stolen-cookies-bypass-your-password-and-mfa'
 import post_shared_computer_security_ultimate_guide from './shared-computer-security-ultimate-guide'
 import post_social_engineering_attacks_through_browser_tabs_how_to_defend from './social-engineering-attacks-through-browser-tabs-how-to-defend'
 import post_tab_locking_vs_password_managers_browser_security_guide from './tab-locking-vs-password-managers-browser-security-guide'
 import post_the_anatomy_of_a_phishing_page_how_attackers_clone_legitimate_sites_in_your_browser from './the-anatomy-of-a-phishing-page-how-attackers-clone-legitimate-sites-in-your-browser'
 import post_the_psychology_of_digital_privacy_why_people_ignore_tab_security from './the-psychology-of-digital-privacy-why-people-ignore-tab-security'
 import post_top_5_keyboard_shortcuts_for_better_browser_security from './top-5-keyboard-shortcuts-for-better-browser-security'
+import post_two_factor_authentication_guide_sms_vs_authenticator_app_vs_security_key from './two-factor-authentication-guide-sms-vs-authenticator-app-vs-security-key'
 import post_webrtc_ip_leak_how_video_calls_expose_your_real_ip_address_through_the_browser from './webrtc-ip-leak-how-video-calls-expose-your-real-ip-address-through-the-browser'
 import post_what_happens_when_someone_accesses_your_unlocked_browser_tabs from './what-happens-when-someone-accesses-your-unlocked-browser-tabs'
 import post_what_is_pbkdf2_encryption_explained from './what-is-pbkdf2-encryption-explained'
@@ -44,6 +51,7 @@ export const allPosts = [
     post_api_security_for_browser_tab_extension_developers,
     post_best_tab_locking_extensions_2026,
     post_browser_extension_permissions_the_hidden_security_risk_youre_ignoring,
+    post_browser_fingerprinting_explained_how_sites_track_you_without_cookies,
     post_browser_sandbox_escapes_what_they_are_and_why_you_should_care,
     post_browser_security_on_a_schedule_how_time_based_tab_locking_works,
     post_browser_tab_security_best_practices,
@@ -51,25 +59,31 @@ export const allPosts = [
     post_chrome_vs_firefox_vs_edge_tab_security,
     post_complete_guide_to_pbkdf2_vs_bcrypt_vs_argon2_for_password_hashing,
     post_digital_minimalism_using_tab_security_to_reduce_browser_clutter,
+    post_does_incognito_mode_keep_you_private_what_it_hides_and_what_it_doesnt,
     post_gdpr_hipaa_browser_tab_security_compliance_guide,
     post_how_browser_tab_sync_across_devices_creates_new_attack_surfaces,
     post_how_locksy_uses_client_side_encryption_to_keep_your_tabs_private,
     post_how_passkeys_are_replacing_passwords_and_why_tab_protection_still_matters,
     post_how_students_can_protect_their_browser_tabs_on_shared_school_computers,
+    post_how_to_check_if_your_password_was_leaked_and_what_to_do_next,
     post_how_to_create_an_unbreakable_master_password_for_tab_security,
     post_how_to_lock_specific_tabs_in_chrome_without_extensions,
     post_how_to_password_protect_browser_tabs,
+    post_how_to_tell_if_a_chrome_extension_is_safe_before_you_install_it,
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
+    post_is_public_wifi_safe_what_attackers_can_actually_steal,
     post_keyboard_shortcuts_for_tab_security,
     post_mastering_referrer_policy_a_technical_guide_to_controlling_information_leaks_from_your_browser,
     post_protect_banking_tabs_from_prying_eyes,
     post_screen_recording_protection_hiding_tabs_from_screen_captures,
+    post_session_hijacking_how_stolen_cookies_bypass_your_password_and_mfa,
     post_shared_computer_security_ultimate_guide,
     post_social_engineering_attacks_through_browser_tabs_how_to_defend,
     post_tab_locking_vs_password_managers_browser_security_guide,
     post_the_anatomy_of_a_phishing_page_how_attackers_clone_legitimate_sites_in_your_browser,
     post_the_psychology_of_digital_privacy_why_people_ignore_tab_security,
     post_top_5_keyboard_shortcuts_for_better_browser_security,
+    post_two_factor_authentication_guide_sms_vs_authenticator_app_vs_security_key,
     post_webrtc_ip_leak_how_video_calls_expose_your_real_ip_address_through_the_browser,
     post_what_happens_when_someone_accesses_your_unlocked_browser_tabs,
     post_what_is_pbkdf2_encryption_explained,
