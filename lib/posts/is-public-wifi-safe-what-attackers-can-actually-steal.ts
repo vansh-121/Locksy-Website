@@ -183,7 +183,7 @@ Running the numbers on a typical cafe: the probability that a given customer is 
 
 Public spaces put strangers behind you at eye level with your monitor for an hour at a stretch. Open tabs showing a bank balance, a client contract, an internal dashboard, or a half-written message are readable at two metres without any technical capability whatsoever — and unlike a network attack, this one leaves no trace and needs no setup. The mechanics and the realistic exposure window are covered in [what someone can do with an unlocked browser tab](/blog/what-happens-when-someone-accesses-your-unlocked-browser-tabs).
 
-The controls are unglamorous and effective. A privacy filter on the screen defeats off-axis viewing. A short screen-lock timeout — two minutes, not fifteen — covers the walk to the counter. For the specific case of a handful of sensitive tabs among many, a tab-level password gate like Locksy keeps those contents behind an unlock prompt while the rest of the window stays usable. Pick based on how often you leave the machine, not on how sophisticated the control sounds.
+The controls are unglamorous and effective. A privacy filter on the screen defeats off-axis viewing. A short screen-lock timeout — two minutes, not fifteen — covers the walk to the counter. For the specific case of a handful of sensitive tabs among many, a tab-level password gate like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) keeps those contents behind an unlock prompt while the rest of the window stays usable. Pick based on how often you leave the machine, not on how sophisticated the control sounds.
 
 ## A pre-flight checklist
 

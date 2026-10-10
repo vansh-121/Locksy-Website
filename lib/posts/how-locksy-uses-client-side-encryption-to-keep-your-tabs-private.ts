@@ -67,7 +67,7 @@ This is where I started looking for something more substantial. Something that d
 
 ## The Power of Client-Side Encryption: Keeping Secrets *Your* Secrets
 
-This brings us to the core of how a tool like Locksy can genuinely transform your browser privacy: **client-side encryption**. Now, don't let the technical jargon scare you off. It's actually a beautifully simple, powerful concept once you understand it, and it’s arguably the *only* way to truly secure sensitive data from prying eyes without relying on a third party.
+This brings us to the core of how a tool like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) can genuinely transform your browser privacy: **client-side encryption**. Now, don't let the technical jargon scare you off. It's actually a beautifully simple, powerful concept once you understand it, and it’s arguably the *only* way to truly secure sensitive data from prying eyes without relying on a third party.
 
 Think of it this way: imagine you have a diary. A physical diary. If you write your secrets in it and then give the diary to a friend to hold for you, even if they promise not to read it, you're still relying on their trustworthiness. That's a bit like server-side encryption, where your data is encrypted, but the key to unlock it (or at least, the ability to access it) might reside with the service provider. They hold the key, or they have the means to access it.
 

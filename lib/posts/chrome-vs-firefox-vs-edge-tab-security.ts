@@ -119,7 +119,7 @@ But none of them protect your tabs from the person **behind the keyboard**. Not 
 
 This is the physical access problem, and it's one of the most common security gaps in everyday life. Your coworker, your roommate, your family member — anyone who can see or touch your device can see everything that's open in your browser.
 
-No browser has shipped a solution for this. It's puzzling, because the technology isn't complicated (Locksy extensions have existed for years), and the demand is clearly there. Maybe it's a UX concern, maybe it's a prioritization issue, maybe they assume the OS screen lock is good enough.
+No browser has shipped a solution for this. It's puzzling, because the technology isn't complicated ([Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) extensions have existed for years), and the demand is clearly there. Maybe it's a UX concern, maybe it's a prioritization issue, maybe they assume the OS screen lock is good enough.
 
 Whatever the reason, if you want tab-level password protection today, an extension is your only option. If you want the step-by-step version, we wrote one: [how to password protect browser tabs](/blog/how-to-password-protect-browser-tabs), covering Chrome, Edge and Firefox.
 

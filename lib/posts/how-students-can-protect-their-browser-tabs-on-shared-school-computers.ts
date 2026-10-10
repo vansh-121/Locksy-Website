@@ -106,7 +106,7 @@ This is where browser extensions come into their own, offering a level of granul
 
 Imagine a scenario: You're deep into research for a history paper on the Franco-Prussian War (fascinating, I know). You have ten tabs open: Wikipedia, Britannica, a couple of JSTOR articles, a map, and perhaps a YouTube documentary queue. You need to grab a coffee, or pop to the restroom, or your friend waves you over for a quick chat. You don't want to close all those tabs, losing your place. You definitely don't want someone else seeing your carefully curated information (or, heaven forbid, that YouTube tab with cat videos you opened "just for a second").
 
-This is precisely the kind of situation where an extension like **Locksy** shines. Instead of logging out of the computer entirely, or meticulously closing every tab, Locksy allows you to instantly password-protect your *entire browser window* or even *specific tabs*.
+This is precisely the kind of situation where an extension like **[Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)** shines. Instead of logging out of the computer entirely, or meticulously closing every tab, Locksy allows you to instantly password-protect your *entire browser window* or even *specific tabs*.
 
 #### How Locksy Changes the Game for Student Browser Security
 

@@ -226,7 +226,7 @@ A five-step routine that avoids the usual mistakes:
 
 Every method above answers one question: is the person logging in the account owner? Once answered, the service issues a session, and the session is a separate security problem with separate failure modes.
 
-A stolen session cookie replays an authenticated session without touching the login flow, which is why hardened accounts still get taken over — covered in [session hijacking](/blog/session-hijacking-how-stolen-cookies-bypass-your-password-and-mfa). And an authenticated tab sitting open on an unlocked machine is readable by anyone who sits down, regardless of how it was authenticated. For that narrower case a tab-level unlock such as Locksy puts a password in front of specific tabs' contents while the rest of the browser stays usable.
+A stolen session cookie replays an authenticated session without touching the login flow, which is why hardened accounts still get taken over — covered in [session hijacking](/blog/session-hijacking-how-stolen-cookies-bypass-your-password-and-mfa). And an authenticated tab sitting open on an unlocked machine is readable by anyone who sits down, regardless of how it was authenticated. For that narrower case a tab-level unlock such as [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) puts a password in front of specific tabs' contents while the rest of the browser stays usable.
 
 Strong authentication and session protection are different layers. Getting the first one right is the higher-value work, and it is what this page is for — but finishing it does not finish the job.
 

@@ -104,7 +104,7 @@ This is precisely the kind of problem that a good **webauthn browser extension**
 
 ![Person working at a computer in a bright office](https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450?w=800&h=450&fit=crop&auto=format&q=80)
 
-This is where a tool like Locksy comes into play, and frankly, I wish I'd had something like it years ago. Locksy offers a critical layer of **biometric browser security** by allowing you to password-protect individual tabs or even entire browser windows. What makes it particularly powerful in the context of WebAuthn and FIDO2 is its ability to leverage your system's existing biometric capabilities for that **fingerprint browser unlock**.
+This is where a tool like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) comes into play, and frankly, I wish I'd had something like it years ago. Locksy offers a critical layer of **biometric browser security** by allowing you to password-protect individual tabs or even entire browser windows. What makes it particularly powerful in the context of WebAuthn and FIDO2 is its ability to leverage your system's existing biometric capabilities for that **fingerprint browser unlock**.
 
 Think about it: you've just logged into your banking portal using your fingerprint via WebAuthn. You step away for a minute. Locksy can automatically lock that tab (or the whole browser) after a set period of inactivity, requiring another quick fingerprint scan to regain access. It's not about logging you out of the website; it’s about securing the *view* into that website from anyone else who might gain physical access to your computer.
 

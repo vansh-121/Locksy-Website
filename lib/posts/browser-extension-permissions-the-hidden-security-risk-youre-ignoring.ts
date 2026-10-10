@@ -138,7 +138,7 @@ So, while browser vendors are making strides, the responsibility largely remains
  * Before installing *any* extension, check the developer. Are they reputable? Do they have other well-reviewed extensions? Is their website professional?
  * **Read the privacy policy.** Yes, it's often dense, but look for phrases about data collection, sharing with third parties, and anonymization. If it's vague or aggressive, steer clear. If an extension is "free," remember the old adage: if you're not paying for the product, you *are* the product. They're making money somehow, and often, it's from your data.
 
-6. **Utilize a Management Tool (like Locksy):**
+6. **Utilize a Management Tool (like [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)):**
  * Manually digging through permissions for dozens of extensions is a soul-crushing task, especially with updates. This is where specialized tools shine.
  * I've personally found tools like **Locksy** invaluable. It cuts through the noise and gives me a clear, dashboard-like view of every extension, every permission, and highlights potential risks. It alerts me to permission changes after updates, helps me revoke unnecessary access, and provides a much-needed layer of active monitoring that no human can realistically maintain on their own. It's not about being paranoid; it's about being proactive and efficient. When I get an alert that an extension just updated and requested \`history\` access when it never had it before, I can investigate *immediately* rather than finding out months later. It gives me granular control to approve or deny those new requests without having to uninstall the whole thing.
 

@@ -146,7 +146,7 @@ Argon2 comes in three main variants:
 
 When I think about services that truly care about my data, I expect them to be using Argon2. It's like the difference between a traditional deadbolt and a multi-point locking system with hardened steel plates. Both are better than nothing, but one offers a vastly superior level of protection against dedicated attackers.
 
-And this isn't just for cloud services. The same principles apply to securing your local browser environment. If you're using a tool like **Locksy** to protect sensitive tabs, you want to be damn sure the password *you* set to unlock those tabs is hashed with something robust like Argon2 or bcrypt, not some ancient relic. It's about protecting your local digital fort, and the choice of hashing algorithm directly impacts how well that fort holds up to an assault.
+And this isn't just for cloud services. The same principles apply to securing your local browser environment. If you're using a tool like **[Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim)** to protect sensitive tabs, you want to be damn sure the password *you* set to unlock those tabs is hashed with something robust like Argon2 or bcrypt, not some ancient relic. It's about protecting your local digital fort, and the choice of hashing algorithm directly impacts how well that fort holds up to an assault.
 
 ### The Showdown: PBKDF2 vs. bcrypt vs. Argon2
 

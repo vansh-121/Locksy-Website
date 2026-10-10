@@ -96,7 +96,7 @@ When you see "600,000 iterations," that's the number of times PBKDF2 runs the ha
 - **600,000 iterations** (OWASP recommended in 2023+): Current security standard
 - **1,000,000+ iterations**: Maximum security, slightly slower verification
 
-Locksy uses 600,000+ iterations, which is the current recommendation from OWASP (the Open Web Application Security Project). It's the sweet spot between security and user experience — strong enough to stop any practical brute-force attack, fast enough that you never notice a delay.
+[Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) uses 600,000+ iterations, which is the current recommendation from OWASP (the Open Web Application Security Project). It's the sweet spot between security and user experience — strong enough to stop any practical brute-force attack, fast enough that you never notice a delay.
 
 ## What About Salt?
 

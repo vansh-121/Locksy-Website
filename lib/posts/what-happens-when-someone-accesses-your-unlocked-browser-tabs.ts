@@ -137,7 +137,7 @@ Even if they don't *interact* with an open tab, simply having access to your bro
 
 This isn't just about what's *currently* visible; it's about the keys your browser holds to your entire digital past and future. The **unprotected browser danger** is multifaceted and extends far beyond a single open tab.
 
-## Locksy: Your Digital Bouncer for Browser Tabs
+## [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim): Your Digital Bouncer for Browser Tabs
 
 So, what's a person to do? Constantly lock your entire computer every time you stand up? While that's the ideal security posture, let's be real – it's not always practical or convenient. We often want to step away for a moment without fully interrupting our workflow, especially if we're just grabbing a drink or stretching our legs.
 

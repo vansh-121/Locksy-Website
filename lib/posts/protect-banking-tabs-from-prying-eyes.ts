@@ -87,7 +87,7 @@ Some banks have explored fingerprint or Face ID re-authentication for individual
 
 The most practical defense is conceptually simple: put a password gate in front of your banking tabs so they can't be viewed without authentication.
 
-Here's how to set it up with Locksy:
+Here's how to set it up with [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim):
 
 **Step 1: Install Locksy** from your browser's extension store. It's free and works on Chrome, Edge, Firefox, and Brave.
 

@@ -152,7 +152,7 @@ Nonce-based \`script-src\` with no \`unsafe-inline\` means an injected \`<script
 
 The least technical vector and the most common in practice. Every authenticated session on a machine is live the moment the screen is on. No malware, no proxy, no injection — somebody sits down.
 
-This is the case where the browser's own defences are irrelevant by construction: the attacker is the legitimate browser, driven by the wrong person. The controls are a short screen-lock timeout, full-disk encryption so the cookie database is not readable from a stolen drive, and — for the specific tabs that would hurt most — a tab-level password prompt such as Locksy that requires an unlock before the contents render. The exposure window and what is reachable in it are detailed in [what happens when someone accesses your unlocked tabs](/blog/what-happens-when-someone-accesses-your-unlocked-browser-tabs).
+This is the case where the browser's own defences are irrelevant by construction: the attacker is the legitimate browser, driven by the wrong person. The controls are a short screen-lock timeout, full-disk encryption so the cookie database is not readable from a stolen drive, and — for the specific tabs that would hurt most — a tab-level password prompt such as [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim) that requires an unlock before the contents render. The exposure window and what is reachable in it are detailed in [what happens when someone accesses your unlocked tabs](/blog/what-happens-when-someone-accesses-your-unlocked-browser-tabs).
 
 ## Which control stops which vector
 
