@@ -40,7 +40,7 @@ A: No. Older tab locking extensions use a CSS overlay approach where the protect
 | 100% offline | ✅ | ✅ | Varies | Varies | ❌ |
 | Intruder detection | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Price | Free / $4.99 | Free | Free | Free | $3–5/mo |
-| Active (2026) | ✅ v3.4.0 | ✅ | ❌ | ❌ | ✅ |
+| Active (2026) | ✅ v3.6.5 | ✅ | ❌ | ❌ | ✅ |
 
 ## Core Capabilities & Features
 

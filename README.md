@@ -206,7 +206,7 @@ pnpm start
 ### Resources
 - **Website:** [locksy.vercel.app](https://locksy.vercel.app)
 - **Extension Source:** [GitHub Repository](https://github.com/vansh-121/Locksy)
-- **Video Tutorial:** [YouTube](https://www.youtube.com/watch?v=6uyd4sN5WiA)
+- **Video Tutorial:** [YouTube](https://www.youtube.com/watch?v=mZxIBLo9ezY)
 - **Product Hunt:** [Locksy on Product Hunt](https://www.producthunt.com/products/locksy-tab-locker-password-protection)
 - **PeerPush:** [Launching Soon on PeerPush](https://peerpush.com/p/locksy-tab-locker-and-password-protection) (Upcoming Launch)
 - **Report Issues:** [GitHub Issues](https://github.com/vansh-121/Locksy/issues)

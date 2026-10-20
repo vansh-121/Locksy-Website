@@ -40,7 +40,7 @@ export default function CTASection() {
           </a>
 
           {/* <a
-            href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
+            href="https://www.youtube.com/watch?v=mZxIBLo9ezY"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition inline-flex items-center justify-center gap-2"

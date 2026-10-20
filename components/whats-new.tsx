@@ -5,6 +5,12 @@
 // section it replaces, in plain language.
 const updates = [
   {
+    version: "v3.6.5",
+    icon: "🪟",
+    title: "Window Scope Control",
+    desc: "By popular demand: choose whether Lock All and Unlock All apply strictly to your active window or across all open browser windows at once, with persistent memory across sessions.",
+  },
+  {
     version: "v3.6.0",
     icon: "🎥",
     title: "Screen Share Shield",

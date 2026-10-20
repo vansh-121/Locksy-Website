@@ -55,13 +55,13 @@ const SECONDARY_BROWSERS = [
   },
 ]
 
-const VIDEO_ID = '6uyd4sN5WiA'
+const VIDEO_ID = 'mZxIBLo9ezY'
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<any>(null)
   const [isVideoVisible, setIsVideoVisible] = useState(false)
-  const [isMuted, setIsMuted] = useState(true)
+  const [isMuted, setIsMuted] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showControls, setShowControls] = useState(false)
   const [playerReady, setPlayerReady] = useState(false)
@@ -109,7 +109,7 @@ export default function Hero() {
         host: 'https://www.youtube-nocookie.com',
         playerVars: {
           autoplay: 1,
-          mute: 1,
+          mute: 0,
           controls: 0,
           modestbranding: 1,
           rel: 0,
@@ -126,7 +126,8 @@ export default function Hero() {
           onReady: (event: any) => {
             playerRef.current = event.target
             setPlayerReady(true)
-            event.target.mute()
+            event.target.unMute()
+            event.target.setVolume(100)
             // Honour the click that mounted us.
             event.target.playVideo()
             const frame = event.target.getIframe?.()

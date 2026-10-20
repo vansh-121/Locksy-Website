@@ -91,7 +91,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
+                  href="https://www.youtube.com/watch?v=mZxIBLo9ezY"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors flex items-center gap-2 group"
@@ -343,7 +343,7 @@ export default function Footer() {
                 <WhatsAppIcon className="w-5 h-5" />
               </a>
               <a
-                href="https://www.youtube.com/watch?v=6uyd4sN5WiA"
+                href="https://www.youtube.com/watch?v=mZxIBLo9ezY"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-neutral-800/50 hover:bg-gradient-to-r hover:from-red-600 hover:to-red-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
