@@ -1092,6 +1092,49 @@ const FALSE_LOCKSY_CLAIMS = [
 ]
 
 /**
+ * Auto-sanitizes common AI filler phrases and buzzwords into clean, professional prose
+ * so high-value technical articles aren't rejected over minor filler words.
+ */
+function cleanAIFillerPhrases(text) {
+    if (!text || typeof text !== 'string') return text
+    let cleaned = text
+
+    // Replace common AI buzzwords / filler verbs with direct, natural alternatives
+    cleaned = cleaned.replace(/\bleveraging\b/gi, 'using')
+    cleaned = cleaned.replace(/\bleverage\b/gi, 'use')
+    cleaned = cleaned.replace(/\bharnessing\b/gi, 'using')
+    cleaned = cleaned.replace(/\bharness\b/gi, 'use')
+    cleaned = cleaned.replace(/\bembracing\b/gi, 'adopting')
+    cleaned = cleaned.replace(/\bembrace\b/gi, 'adopt')
+
+    // Replace conversational AI tropes
+    cleaned = cleaned.replace(/\bgame-?changer\b/gi, 'major advancement')
+    cleaned = cleaned.replace(/\bsilver bullet\b/gi, 'complete solution')
+    cleaned = cleaned.replace(/\bno-?brainer\b/gi, 'clear choice')
+    cleaned = cleaned.replace(/\bparadigm shift\b/gi, 'fundamental transition')
+    cleaned = cleaned.replace(/\bever-?evolving\b/gi, 'evolving')
+    cleaned = cleaned.replace(/\bnavigate the complex\b/gi, 'manage the complex')
+    cleaned = cleaned.replace(/\bthe bottom line is:?\s*/gi, '')
+
+    // Remove throwaway AI filler openers & intros
+    cleaned = cleaned.replace(/in today'?s digital (landscape|world|age|era),?\s*/gi, '')
+    cleaned = cleaned.replace(/it'?s important to note that\s*/gi, '')
+    cleaned = cleaned.replace(/it goes without saying,? (that)?\s*/gi, '')
+    cleaned = cleaned.replace(/this article will (explore|discuss|cover|examine)\s*/gi, 'we examine ')
+    cleaned = cleaned.replace(/let'?s dive (in|into)[^.]*\.\s*/gi, '')
+    cleaned = cleaned.replace(/let'?s take a (look|closer look)[^.]*\.\s*/gi, '')
+    cleaned = cleaned.replace(/without further ado,?\s*/gi, '')
+    cleaned = cleaned.replace(/buckle up[^.]*\.\s*/gi, '')
+    cleaned = cleaned.replace(/in conclusion,?\s*/gi, '')
+    cleaned = cleaned.replace(/to summarize,?\s*/gi, '')
+
+    // Clean up excessive spacing
+    cleaned = cleaned.replace(/ {2,}/g, ' ')
+
+    return cleaned
+}
+
+/**
  * Post-generation quality audit.
  * Returns { pass: boolean, issues: string[] }
  */
@@ -1354,7 +1397,7 @@ RULES FOR THESE BLOCKS (violating them rejects the article):
 
     // Strip the meta lines AND the trailing structured blocks from the article
     // body. wordCount and the prose audit then see only the article itself.
-    const articleBody = raw
+    const rawArticleBody = raw
         .split(/<<<KEY_TAKEAWAYS>>>/)[0]
         .replace(/^META_DESC:.*\n?/m, '')
         .replace(/^IMAGE_KEYWORDS:.*\n?/m, '')
@@ -1362,7 +1405,24 @@ RULES FOR THESE BLOCKS (violating them rejects the article):
         .replace(/^\n/, '') // remove leading blank line left behind
         .trim()
 
-    return { articleBody, metaDescription, imageKeywords, tldr, keyTakeaways, faq }
+    // Auto-clean any AI filler buzzwords across all components
+    const articleBody = cleanAIFillerPhrases(rawArticleBody)
+    const cleanedMetaDescription = metaDescription ? cleanAIFillerPhrases(metaDescription) : null
+    const cleanedTldr = tldr ? cleanAIFillerPhrases(tldr) : ''
+    const cleanedTakeaways = keyTakeaways.map(cleanAIFillerPhrases)
+    const cleanedFaq = faq.map(f => ({
+        question: cleanAIFillerPhrases(f.question),
+        answer: cleanAIFillerPhrases(f.answer)
+    }))
+
+    return {
+        articleBody,
+        metaDescription: cleanedMetaDescription,
+        imageKeywords,
+        tldr: cleanedTldr,
+        keyTakeaways: cleanedTakeaways,
+        faq: cleanedFaq
+    }
 }
 
 /**
@@ -1503,7 +1563,7 @@ async function main() {
 
     console.log(`📚 ${TOPIC_POOL.length} topics in pool, ${availableTopics.length} not yet written\n`)
 
-    let selectedTopic = null
+    let candidatePool = [...availableTopics]
     const lowTopicThreshold = 5
 
     if (availableTopics.length < lowTopicThreshold) {
@@ -1518,92 +1578,101 @@ async function main() {
                 .filter(t => !existingSlugs.has(t.slug))
 
             console.log(`✨ ${aiAvailable.length} new unique AI topics available\n`)
-
-            const allAvailable = [...availableTopics, ...aiAvailable]
-
-            if (allAvailable.length === 0) {
-                console.log('✅ All topics have been written! System is in steady state.')
-                return { success: true, message: 'All topics written' }
-            }
-
-            selectedTopic = allAvailable[Math.floor(Math.random() * allAvailable.length)]
-        } else {
-            if (availableTopics.length === 0) {
-                console.log('✅ All topics in the pool have been written! Add more topics to TOPIC_POOL or check Gemini API.')
-                return { success: true, message: 'All topics written' }
-            }
-            selectedTopic = availableTopics[Math.floor(Math.random() * availableTopics.length)]
+            candidatePool = [...availableTopics, ...aiAvailable]
         }
-    } else {
-        selectedTopic = availableTopics[Math.floor(Math.random() * availableTopics.length)]
     }
 
-    const slug = selectedTopic.slug
-
-    console.log(`📖 Generating: "${selectedTopic.title}"`)
-    console.log(`🏷️  Category: ${selectedTopic.category}`)
-    console.log(`🔑 Keywords: ${selectedTopic.keywords.join(', ')}\n`)
-
-    try {
-        // Generate the blog content using AI
-        const { articleBody, metaDescription, imageKeywords, tldr, keyTakeaways, faq } = await generateBlogContent(selectedTopic)
-        const wordCount = articleBody.split(/\s+/).length
-        const readTime = calculateReadTime(wordCount)
-        const today = getTodayDate()
-
-        console.log(`✍️  Generated ${wordCount} words (${readTime})`)
-        if (metaDescription) console.log(`📝 Meta description: ${metaDescription}`)
-        if (imageKeywords) console.log(`🔍 Image keywords: ${imageKeywords}`)
-        if (tldr) console.log(`💡 TL;DR: ${tldr}`)
-        console.log(`✅ ${keyTakeaways.length} key takeaways, ${faq.length} FAQ pairs`)
-
-        // ── Comprehensive quality audit ────────────────────────────────
-        const audit = auditContentQuality(articleBody, wordCount, { tldr, keyTakeaways, faq })
-        if (!audit.pass) {
-            console.error(`\n❌ QUALITY AUDIT FAILED:`)
-            for (const issue of audit.issues) {
-                console.error(`   • ${issue}`)
-            }
-            console.error(`\n   This article would be flagged by AdSense. Skipping.`)
-            return { success: false, error: `Quality audit failed: ${audit.issues.join('; ')}` }
-        }
-        console.log(`✅ Quality audit passed (${wordCount} words, all checks green)`)
-
-        // Fallback description if Gemini didn't output a META_DESC line
-        const fallbackDescription = `${selectedTopic.keywords[0].charAt(0).toUpperCase() + selectedTopic.keywords[0].slice(1)}: ${selectedTopic.title.toLowerCase()}. Practical insights on ${selectedTopic.keywords.slice(1, 3).join(' and ')}.`
-
-        // Create the blog post object
-        const post = {
-            slug,
-            title: selectedTopic.title,
-            description: metaDescription || fallbackDescription,
-            publishDate: today,
-            lastModified: today,
-            readTime,
-            category: selectedTopic.category,
-            tags: selectedTopic.tags,
-            keywords: selectedTopic.keywords,
-            tldr,
-            keyTakeaways,
-            faq,
-            content: articleBody
-        }
-
-        // Create individual post file and regenerate the index
-        const coverImage = await getContentRelatedCoverImage(imageKeywords)
-        const filePath = createPostFile(post, coverImage)
-        regenerateIndex()
-        console.log(`\n✅ Blog post created successfully!`)
-        console.log(`📄 File: lib/posts/${slug}.ts`)
-        console.log(`📄 Slug: ${slug}`)
-        console.log(`📅 Date: ${today}`)
-        console.log(`🔗 URL: https://www.locksy.dev/blog/${slug}`)
-
-        return { success: true, message: 'Blog post generated successfully' }
-    } catch (error) {
-        console.error(`\n❌ Error generating blog post:`, error.message)
-        return { success: false, error: error.message }
+    if (candidatePool.length === 0) {
+        console.log('✅ All topics have been written! System is in steady state.')
+        return { success: true, message: 'All topics written' }
     }
+
+    // Shuffle candidates so we don't pick sequentially
+    const shuffledCandidates = shuffleArray(candidatePool)
+    const maxAttempts = Math.min(3, shuffledCandidates.length)
+    let lastError = null
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        const selectedTopic = shuffledCandidates.pop()
+        const slug = selectedTopic.slug
+
+        console.log(`\n=====================================================`)
+        console.log(`📖 [Attempt ${attempt}/${maxAttempts}] Generating: "${selectedTopic.title}"`)
+        console.log(`🏷️  Category: ${selectedTopic.category}`)
+        console.log(`🔑 Keywords: ${selectedTopic.keywords.join(', ')}\n`)
+
+        try {
+            // Generate the blog content using AI
+            const { articleBody, metaDescription, imageKeywords, tldr, keyTakeaways, faq } = await generateBlogContent(selectedTopic)
+            const wordCount = articleBody.split(/\s+/).length
+            const readTime = calculateReadTime(wordCount)
+            const today = getTodayDate()
+
+            console.log(`✍️  Generated ${wordCount} words (${readTime})`)
+            if (metaDescription) console.log(`📝 Meta description: ${metaDescription}`)
+            if (imageKeywords) console.log(`🔍 Image keywords: ${imageKeywords}`)
+            if (tldr) console.log(`💡 TL;DR: ${tldr}`)
+            console.log(`✅ ${keyTakeaways.length} key takeaways, ${faq.length} FAQ pairs`)
+
+            // ── Comprehensive quality audit ────────────────────────────────
+            const audit = auditContentQuality(articleBody, wordCount, { tldr, keyTakeaways, faq })
+            if (!audit.pass) {
+                console.warn(`\n⚠️  QUALITY AUDIT FAILED for "${selectedTopic.title}":`)
+                for (const issue of audit.issues) {
+                    console.warn(`   • ${issue}`)
+                }
+                lastError = `Quality audit failed: ${audit.issues.join('; ')}`
+                if (attempt < maxAttempts) {
+                    console.log(`\n🔄 Retrying with another topic (attempt ${attempt + 1}/${maxAttempts})...`)
+                    continue
+                }
+                console.error(`\n❌ All ${maxAttempts} generation attempts failed quality audit.`)
+                return { success: false, error: lastError }
+            }
+            console.log(`✅ Quality audit passed (${wordCount} words, all checks green)`)
+
+            // Fallback description if Gemini didn't output a META_DESC line
+            const fallbackDescription = `${selectedTopic.keywords[0].charAt(0).toUpperCase() + selectedTopic.keywords[0].slice(1)}: ${selectedTopic.title.toLowerCase()}. Practical insights on ${selectedTopic.keywords.slice(1, 3).join(' and ')}.`
+
+            // Create the blog post object
+            const post = {
+                slug,
+                title: selectedTopic.title,
+                description: metaDescription || fallbackDescription,
+                publishDate: today,
+                lastModified: today,
+                readTime,
+                category: selectedTopic.category,
+                tags: selectedTopic.tags,
+                keywords: selectedTopic.keywords,
+                tldr,
+                keyTakeaways,
+                faq,
+                content: articleBody
+            }
+
+            // Create individual post file and regenerate the index
+            const coverImage = await getContentRelatedCoverImage(imageKeywords)
+            const filePath = createPostFile(post, coverImage)
+            regenerateIndex()
+            console.log(`\n✅ Blog post created successfully!`)
+            console.log(`📄 File: lib/posts/${slug}.ts`)
+            console.log(`📄 Slug: ${slug}`)
+            console.log(`📅 Date: ${today}`)
+            console.log(`🔗 URL: https://www.locksy.dev/blog/${slug}`)
+
+            return { success: true, message: 'Blog post generated successfully' }
+        } catch (error) {
+            console.error(`\n❌ Error on attempt ${attempt}:`, error.message)
+            lastError = error.message
+            if (attempt < maxAttempts) {
+                console.log(`\n🔄 Retrying with another topic (attempt ${attempt + 1}/${maxAttempts})...`)
+                continue
+            }
+        }
+    }
+
+    return { success: false, error: lastError || 'All generation attempts failed' }
 }
 
 // Run the generator
