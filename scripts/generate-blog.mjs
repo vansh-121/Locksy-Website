@@ -1224,6 +1224,153 @@ function auditContentQuality(articleBody, wordCount, extras = {}) {
     }
 }
 
+/**
+ * Parse structured GEO/AEO fields (takeaways and FAQ) from raw output using flexible regexes.
+ * If Gemini formatted them as standard markdown or omitted them, it extracts them or calls a quick mini-prompt.
+ */
+async function parseOrFallbackGeoFields(raw, topic, tldr, articleBody, apiKey) {
+    const normInline = (s) => String(s).replace(/\s+/g, ' ').trim()
+
+    // 1. Extract Key Takeaways with multi-format pattern
+    let keyTakeaways = []
+    const takeawaysMatch = raw.match(/(?:<<<KEY_TAKEAWAYS>>>|##+\s*(?:Key\s*Takeaways|Takeaways)|\*\*(?:Key\s*Takeaways|Takeaways):?\*\*)([\s\S]*?)(?:<<<FAQ>>>|##+\s*(?:FAQ|Frequently\s*Asked\s*Questions)|\*\*(?:FAQ|Frequently\s*Asked\s*Questions):?\*\*|<<<END>>>|$)/i)
+
+    if (takeawaysMatch) {
+        keyTakeaways = takeawaysMatch[1]
+            .split('\n')
+            // Match standard bullets (- or *), unicode bullets (• or –), or numbered items (1., 1), etc.)
+            .filter(line => /^\s*(?:[-*•–]|\d+[.)])\s+/.test(line))
+            .map(line => normInline(line.replace(/^\s*(?:[-*•–]|\d+[.)])\s+/, '')))
+            .filter(Boolean)
+            .slice(0, 8)
+    }
+
+    // 2. Extract FAQ with multi-format pattern
+    let faq = []
+    const faqMatch = raw.match(/(?:<<<FAQ>>>|##+\s*(?:FAQ|Frequently\s*Asked\s*Questions)|\*\*(?:FAQ|Frequently\s*Asked\s*Questions):?\*\*|###\s*FAQ)([\s\S]*?)(?:<<<END>>>|$)/i)
+
+    if (faqMatch) {
+        const faqText = faqMatch[1]
+        // Flexible regex for Q & A:
+        // Handles: Q:, **Q:**, **Q**: , Q., ### Q:, Question 1:, etc.
+        const pairRe = /(?:^|\n)\s*(?:\*\*|#+\s*)?Q(?:uestion(?:\s*\d+)?)?[:.]?\*?\*?\s*([\s\S]*?)\s*(?:\n\s*(?:\*\*|#+\s*)?A(?:nswer(?:\s*\d+)?)?[:.]?\*?\*?\s*)([\s\S]*?)(?=(?:\n\s*(?:\*\*|#+\s*)?Q(?:uestion(?:\s*\d+)?)?[:.]?)|<<<END>>>|$)/gi
+        let m
+        while ((m = pairRe.exec(faqText)) !== null) {
+            const question = normInline(m[1])
+            const answer = normInline(m[2])
+            if (question && answer) faq.push({ question, answer })
+        }
+    }
+
+    // 3. If either block has fewer than 3 items, request them via a fast mini-prompt
+    if ((keyTakeaways.length < 3 || faq.length < 3) && apiKey) {
+        console.log(`⚠️  Structured fields incomplete (${keyTakeaways.length} takeaways, ${faq.length} FAQs) — generating fallback via Gemini...`)
+        try {
+            const miniPrompt = `You are an expert web security author. Based on the article titled "${topic.title}" with core summary "${tldr}", generate:
+1. Exactly 5 concise, actionable key takeaways (one sentence each, starting with "- ").
+2. Exactly 4 realistic FAQ Q&A pairs (one direct question and a 1-2 sentence factual answer). Do NOT mention Locksy.
+
+Format EXACTLY as:
+<<<KEY_TAKEAWAYS>>>
+- {takeaway 1}
+- {takeaway 2}
+- {takeaway 3}
+- {takeaway 4}
+- {takeaway 5}
+
+<<<FAQ>>>
+Q: {question 1}
+A: {answer 1}
+Q: {question 2}
+A: {answer 2}
+Q: {question 3}
+A: {answer 3}
+Q: {question 4}
+A: {answer 4}
+<<<END>>>`
+
+            const res = await fetchWithTimeout(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: miniPrompt }] }],
+                    generationConfig: { temperature: 0.5, maxOutputTokens: 1024 }
+                })
+            }, 25000)
+
+            if (res.ok) {
+                const miniData = await res.json()
+                const miniRaw = miniData.candidates?.[0]?.content?.parts?.[0]?.text || ''
+
+                if (keyTakeaways.length < 3) {
+                    const fallbackTakeawaysMatch = miniRaw.match(/<<<KEY_TAKEAWAYS>>>([\s\S]*?)(?:<<<FAQ>>>|<<<END>>>|$)/i)
+                    if (fallbackTakeawaysMatch) {
+                        const parsed = fallbackTakeawaysMatch[1]
+                            .split('\n')
+                            .filter(line => /^\s*(?:[-*•–]|\d+[.)])\s+/.test(line))
+                            .map(line => normInline(line.replace(/^\s*(?:[-*•–]|\d+[.)])\s+/, '')))
+                            .filter(Boolean)
+                            .slice(0, 8)
+                        if (parsed.length >= 3) keyTakeaways = parsed
+                    }
+                }
+
+                if (faq.length < 3) {
+                    const fallbackFaqMatch = miniRaw.match(/<<<FAQ>>>([\s\S]*?)(?:<<<END>>>|$)/i)
+                    if (fallbackFaqMatch) {
+                        const pairRe = /(?:^|\n)\s*(?:\*\*|#+\s*)?Q(?:uestion(?:\s*\d+)?)?[:.]?\*?\*?\s*([\s\S]*?)\s*(?:\n\s*(?:\*\*|#+\s*)?A(?:nswer(?:\s*\d+)?)?[:.]?\*?\*?\s*)([\s\S]*?)(?=(?:\n\s*(?:\*\*|#+\s*)?Q(?:uestion(?:\s*\d+)?)?[:.]?)|<<<END>>>|$)/gi
+                        let m
+                        const parsedFaq = []
+                        while ((m = pairRe.exec(fallbackFaqMatch[1])) !== null) {
+                            const question = normInline(m[1])
+                            const answer = normInline(m[2])
+                            if (question && answer) parsedFaq.push({ question, answer })
+                        }
+                        if (parsedFaq.length >= 3) faq = parsedFaq
+                    }
+                }
+            }
+        } catch (err) {
+            console.warn(`⚠️  Mini-prompt for fallback GEO fields failed: ${err.message}`)
+        }
+    }
+
+    // 4. Final safety net: If keyTakeaways is STILL < 3, extract from article section headings
+    if (keyTakeaways.length < 3 && articleBody) {
+        const sectionMatches = [...articleBody.matchAll(/^##\s+([^\n]+)\n+([\s\S]*?)(?=\n##|\n$|$)/gm)]
+        for (const match of sectionMatches) {
+            const heading = match[1].replace(/[:*#]/g, '').trim()
+            const text = match[2].trim()
+            const firstSentence = text.split(/(?<=[.?!])\s+/)[0]
+            if (firstSentence && firstSentence.length > 25 && firstSentence.length < 250) {
+                keyTakeaways.push(normInline(`${heading}: ${firstSentence}`))
+            }
+            if (keyTakeaways.length >= 5) break
+        }
+    }
+
+    // 5. Final safety net: If FAQ is STILL < 3, provide factual defaults for the topic
+    if (faq.length < 3) {
+        const topicSubject = topic.title.toLowerCase().replace(/[?.]/g, '')
+        faq.push(
+            {
+                question: `What is the key security takeaway regarding ${topicSubject}?`,
+                answer: normInline(tldr || `Understanding how client-side security boundaries operate is critical to preventing session theft and data leaks.`)
+            },
+            {
+                question: `Why are browser-level controls important in addition to server security?`,
+                answer: `Server-side security protects data in transit and on the server, but cannot prevent unauthorized visual or interactive access on unattended local endpoints.`
+            },
+            {
+                question: `What proactive measures should power users implement?`,
+                answer: `Configure automatic tab timeouts, lock sensitive tabs when stepping away, avoid storing master credentials in plain view, and audit active sessions regularly.`
+            }
+        )
+    }
+
+    return { keyTakeaways, faq }
+}
+
 async function generateBlogContent(topic) {
     const apiKey = process.env.GEMINI_API_KEY
     if (!apiKey) {
@@ -1371,44 +1518,24 @@ RULES FOR THESE BLOCKS (violating them rejects the article):
     const tldrMatch = raw.match(/^TLDR:\s*(.+)/m)
     const tldr = tldrMatch ? normInline(tldrMatch[1]) : ''
 
-    // KEY_TAKEAWAYS block: bullet lines between the marker and the next marker.
-    const takeawaysMatch = raw.match(/<<<KEY_TAKEAWAYS>>>([\s\S]*?)(?:<<<FAQ>>>|<<<END>>>|$)/)
-    const keyTakeaways = takeawaysMatch
-        ? takeawaysMatch[1]
-            .split('\n')
-            .filter(line => /^\s*[-*]\s+/.test(line))
-            .map(line => normInline(line.replace(/^\s*[-*]\s+/, '')))
-            .filter(Boolean)
-            .slice(0, 8)
-        : []
-
-    // FAQ block: sequential Q:/A: pairs between <<<FAQ>>> and <<<END>>>.
-    const faqMatch = raw.match(/<<<FAQ>>>([\s\S]*?)(?:<<<END>>>|$)/)
-    const faq = []
-    if (faqMatch) {
-        const pairRe = /Q:\s*([\s\S]*?)\s*A:\s*([\s\S]*?)(?=\n\s*Q:|<<<END>>>|$)/g
-        let m
-        while ((m = pairRe.exec(faqMatch[1])) !== null) {
-            const question = normInline(m[1])
-            const answer = normInline(m[2])
-            if (question && answer) faq.push({ question, answer })
-        }
-    }
-
     // Strip the meta lines AND the trailing structured blocks from the article
     // body. wordCount and the prose audit then see only the article itself.
     const rawArticleBody = raw
-        .split(/<<<KEY_TAKEAWAYS>>>/)[0]
+        .split(/(?:<<<KEY_TAKEAWAYS>>>|##+\s*(?:Key\s*Takeaways|Takeaways)|\*\*(?:Key\s*Takeaways|Takeaways):?\*\*)/i)[0]
         .replace(/^META_DESC:.*\n?/m, '')
         .replace(/^IMAGE_KEYWORDS:.*\n?/m, '')
         .replace(/^TLDR:.*\n?/m, '')
         .replace(/^\n/, '') // remove leading blank line left behind
         .trim()
 
-    // Auto-clean any AI filler buzzwords across all components
+    // Auto-clean any AI filler buzzwords across article prose
     const articleBody = cleanAIFillerPhrases(rawArticleBody)
     const cleanedMetaDescription = metaDescription ? cleanAIFillerPhrases(metaDescription) : null
     const cleanedTldr = tldr ? cleanAIFillerPhrases(tldr) : ''
+
+    // Parse structured GEO fields with multi-format regexes and guaranteed fallbacks
+    const { keyTakeaways, faq } = await parseOrFallbackGeoFields(raw, topic, cleanedTldr, articleBody, apiKey)
+
     const cleanedTakeaways = keyTakeaways.map(cleanAIFillerPhrases)
     const cleanedFaq = faq.map(f => ({
         question: cleanAIFillerPhrases(f.question),
