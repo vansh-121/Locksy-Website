@@ -7,6 +7,7 @@
 import post_post_10_browser_security_extensions_everyone_should_install from './10-browser-security-extensions-everyone-should-install'
 import post_api_security_for_browser_tab_extension_developers from './api-security-for-browser-tab-extension-developers'
 import post_best_tab_locking_extensions_2026 from './best-tab-locking-extensions-2026'
+import post_brave_vs_chrome_privacy_and_tab_security_2026 from './brave-vs-chrome-privacy-and-tab-security-2026'
 import post_browser_extension_permissions_the_hidden_security_risk_youre_ignoring from './browser-extension-permissions-the-hidden-security-risk-youre-ignoring'
 import post_browser_fingerprinting_explained_how_sites_track_you_without_cookies from './browser-fingerprinting-explained-how-sites-track-you-without-cookies'
 import post_browser_sandbox_escapes_what_they_are_and_why_you_should_care from './browser-sandbox-escapes-what-they-are-and-why-you-should-care'
@@ -28,6 +29,7 @@ import post_how_to_hide_and_password_protect_tabs_during_screen_sharing from './
 import post_how_to_lock_specific_tabs_in_chrome_without_extensions from './how-to-lock-specific-tabs-in-chrome-without-extensions'
 import post_how_to_password_protect_browser_tabs from './how-to-password-protect-browser-tabs'
 import post_how_to_password_protect_microsoft_edge_and_brave_tabs from './how-to-password-protect-microsoft-edge-and-brave-tabs'
+import post_how_to_password_protect_whatsapp_web_in_chrome from './how-to-password-protect-whatsapp-web-in-chrome'
 import post_how_to_tell_if_a_chrome_extension_is_safe_before_you_install_it from './how-to-tell-if-a-chrome-extension-is-safe-before-you-install-it'
 import post_how_webauthn_and_fido2_biometrics_are_changing_browser_security from './how-webauthn-and-fido2-biometrics-are-changing-browser-security'
 import post_is_public_wifi_safe_what_attackers_can_actually_steal from './is-public-wifi-safe-what-attackers-can-actually-steal'
@@ -52,6 +54,7 @@ export const allPosts = [
     post_post_10_browser_security_extensions_everyone_should_install,
     post_api_security_for_browser_tab_extension_developers,
     post_best_tab_locking_extensions_2026,
+    post_brave_vs_chrome_privacy_and_tab_security_2026,
     post_browser_extension_permissions_the_hidden_security_risk_youre_ignoring,
     post_browser_fingerprinting_explained_how_sites_track_you_without_cookies,
     post_browser_sandbox_escapes_what_they_are_and_why_you_should_care,
@@ -73,6 +76,7 @@ export const allPosts = [
     post_how_to_lock_specific_tabs_in_chrome_without_extensions,
     post_how_to_password_protect_browser_tabs,
     post_how_to_password_protect_microsoft_edge_and_brave_tabs,
+    post_how_to_password_protect_whatsapp_web_in_chrome,
     post_how_to_tell_if_a_chrome_extension_is_safe_before_you_install_it,
     post_how_webauthn_and_fido2_biometrics_are_changing_browser_security,
     post_is_public_wifi_safe_what_attackers_can_actually_steal,
