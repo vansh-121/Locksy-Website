@@ -22,7 +22,7 @@ import Footer from "@/components/footer"
 import MilestoneBanner from "@/components/milestone-banner"
 import ToolsShowcase from "@/components/tools-showcase"
 import { jsonLdFAQPage } from "@/lib/metadata"
-import { filteredBlogPosts } from "@/lib/blog-data"
+import { blogPostSummaries } from "@/lib/blog-data"
 
 export default function Home() {
   return (
@@ -89,7 +89,7 @@ export default function Home() {
         <ToolsShowcase />
 
         {/* Latest blog articles — editorial content for SEO value */}
-        <LatestBlogPosts posts={filteredBlogPosts} />
+        <LatestBlogPosts posts={blogPostSummaries.slice(0, 3)} />
 
         {/* Support and final CTAs */}
         <SupportChatCTA />

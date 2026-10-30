@@ -22,6 +22,25 @@ export interface BlogPost {
     faq?: { question: string; answer: string }[]
 }
 
+export type BlogPostSummary = Pick<
+    BlogPost,
+    'slug' | 'title' | 'description' | 'category' | 'tags' | 'publishDate' | 'readTime' | 'image' | 'imageAlt'
+>
+
+export function toBlogPostSummary(post: BlogPost): BlogPostSummary {
+    return {
+        slug: post.slug,
+        title: post.title,
+        description: post.description,
+        category: post.category,
+        tags: post.tags,
+        publishDate: post.publishDate,
+        readTime: post.readTime,
+        image: post.image,
+        imageAlt: post.imageAlt,
+    }
+}
+
 import { allPosts } from './posts/index'
 
 // All posts — used for individual page routing (so noindexed pages still render)
@@ -36,6 +55,10 @@ export const NOINDEX_SLUGS = new Set<string>([])
 export const filteredBlogPosts: BlogPost[] = blogPosts
     .filter(post => !NOINDEX_SLUGS.has(post.slug))
     .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+
+// Lightweight summaries for listings, homepage, and related links to avoid serializing
+// megabytes of markdown into the RSC stream and HTML payloads.
+export const blogPostSummaries: BlogPostSummary[] = filteredBlogPosts.map(toBlogPostSummary)
 
 // Helper function to get a single blog post by slug
 export function getBlogPost(slug: string): BlogPost | undefined {
@@ -139,6 +162,10 @@ export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPos
         .sort((a, b) => b.score - a.score)
         .slice(0, limit)
         .map(item => item.post)
+}
+
+export function getRelatedPostSummaries(currentSlug: string, limit: number = 3): BlogPostSummary[] {
+    return getRelatedPosts(currentSlug, limit).map(toBlogPostSummary)
 }
 
 export function getPostsByCategory(category: string): BlogPost[] {

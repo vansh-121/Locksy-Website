@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import type { BlogPost } from "@/lib/blog-data"
+import type { BlogPost, BlogPostSummary } from "@/lib/blog-data"
 import { ArrowRight, Calendar, Clock, BookOpen } from "lucide-react"
 
 interface LatestBlogPostsProps {
-    posts: BlogPost[]
+    posts: (BlogPost | BlogPostSummary)[]
 }
 
 export default function LatestBlogPosts({ posts }: LatestBlogPostsProps) {

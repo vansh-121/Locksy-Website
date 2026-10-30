@@ -1,8 +1,10 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { blogPosts, getBlogPost, getRelatedPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
+import { blogPosts, getBlogPost, getRelatedPostSummaries, NOINDEX_SLUGS } from '@/lib/blog-data'
 import { jsonLdItemList, generateFAQSchema } from '@/lib/metadata'
 import { BlogPostClient } from './blog-post-client'
+
+export const dynamicParams = false
 
 export async function generateStaticParams() {
     return blogPosts.map((post) => ({
@@ -179,7 +181,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdItemList).replace(/</g, '\\u003c') }}
                 />
             )}
-            <BlogPostClient post={post} relatedPosts={getRelatedPosts(post.slug, 3)} />
+            <BlogPostClient post={post} relatedPosts={getRelatedPostSummaries(post.slug, 3)} />
         </>
     )
 }
