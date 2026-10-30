@@ -93,7 +93,7 @@ Before examining individual features, it is vital to understand the foundational
 | **Extension Store** | Chrome Web Store | Chrome Web Store | Identical access to privacy extensions |
 | **Native Tab Locking** | ❌ None | ❌ None | Neither protects tabs from physical access |
 
-![Monitor displaying code in a development environment](https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=450&fit=crop&auto=format&q=80)
+![Brave Browser Shields panel open on laptop displaying blocked trackers and fingerprinting defenses](/blog/brave-shields-panel.jpg)
 
 ---
 
@@ -123,7 +123,7 @@ Brave was founded specifically to combat behavioral advertising. Rather than tre
 
 When analyzing memory corruption exploits, cross-site scripting (XSS), and privilege escalations, both browsers share the exact same battle-tested engine: **Chromium**.
 
-![Developer at a multi-monitor desk setup](https://images.unsplash.com/photo-1593642634402-b0eb5e2eebc9?w=800&h=450&fit=crop&auto=format&q=80)
+![Process-per-tab sandbox architecture diagram showing isolated browser zones for banking, social, and work](/blog/chromium-tab-sandbox.jpg)
 
 ### Site Isolation Architecture
 Both Chrome and Brave enforce strict **Site Isolation**:
@@ -171,7 +171,7 @@ Because Brave is built on Chromium, it maintains full compatibility with extensi
 
 This allows you to add the missing layer of local access control to both Brave and Chrome using [Locksy](https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim).
 
-![Fingerprint scan biometric authentication](https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=800&h=450&fit=crop&auto=format&q=80)
+![Touch ID biometric sensor on MacBook keyboard unlocking tab](/blog/touch-id-tab-unlock.jpg)
 
 ### How Locksy Complements Brave and Chrome:
 - **Cryptographic Navigation Locking:** Unlike older extensions that place a flimsy CSS banner over your content, Locksy unmounts the tab's DOM entirely and routes the tab to an isolated extension sandbox. Chrome DevTools cannot inspect or retrieve the hidden page content.
@@ -211,7 +211,7 @@ Regardless of whether you choose Brave or Google Chrome, follow this 5-step chec
 4. **Install Locksy and Configure Domain Rules:** [Install Locksy](/install) on your browser, set your master password, and add domain rules for banking, email, and personal messaging portals.
 5. **Audit Your Browser Privacy Posture:** Run our interactive [Browser Privacy Score tool](/tools/browser-privacy-score) to evaluate your current configuration against known tracking and data leakage vectors.
 
-![Digital shield icon on technology background](https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=450&fit=crop&auto=format&q=80)
+
 
 ---
 

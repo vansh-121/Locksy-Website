@@ -146,7 +146,6 @@ For a deeper dive into how this architecture prevents browser tampering, see our
 
 Here is the exact setup to achieve military-grade, biometric-protected privacy for WhatsApp Web on Google Chrome, Microsoft Edge, Brave, or Arc.
 
-![Smartphone paired with desktop browser displaying communication applications](https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop&auto=format&q=80)
 
 ### Step 1: Install Locksy Free
 
@@ -176,7 +175,7 @@ Typing a 16-character master password 20 times a day creates friction. Locksy so
 
 You can now unlock your locked tabs in **0.1 seconds** with a single touch of your finger.
 
-![Fingerprint scan biometric authentication](https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=800&h=450&fit=crop&auto=format&q=80)
+![Touch ID biometric sensor on MacBook keyboard unlocking tab](/blog/touch-id-tab-unlock.jpg)
 
 ---
 
@@ -228,7 +227,7 @@ If someone sits at your desk while you are away and attempts to guess your maste
 - After three consecutive failed attempts, Locksy can optionally trigger your laptop's front-facing webcam to capture an intruder photograph.
 - The photo and timestamp are stored strictly in your local browser sandbox. No photo is ever uploaded to the cloud or transmitted over the internet.
 
-![Padlock on a laptop keyboard symbolizing security](https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=450&fit=crop&auto=format&q=80)
+![Laptop in open office running Google Chrome with a tab disguised in Stealth Mode as a 404 error page](/blog/whatsapp-stealth-404.jpg)
 
 ---
 
