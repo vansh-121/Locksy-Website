@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { generatePageMetadata, generateBreadcrumbSchema } from '@/lib/metadata'
-import { filteredBlogPosts, getAllCategories, getAllTags } from '@/lib/blog-data'
+import { filteredBlogPosts, blogPostSummaries, getAllCategories, getAllTags } from '@/lib/blog-data'
 import { BlogClient } from './blog-client'
 
 const siteUrl = 'https://www.locksy.dev'
@@ -88,7 +88,7 @@ export default function BlogPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd).replace(/</g, '\\u003c') }}
             />
-            <BlogClient posts={posts} categories={categories} tags={tags} />
+            <BlogClient posts={blogPostSummaries} categories={categories} tags={tags} />
         </>
     )
 }

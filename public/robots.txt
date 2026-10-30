@@ -40,7 +40,7 @@ User-agent: Bravebot
 Allow: /
 Disallow: /api/
 
-# AI Crawlers - Explicitly allow for LLM search indexing, retrieval, and training
+# AI & Search Answer Crawlers - Allowed for search indexing and retrieval
 User-agent: GPTBot
 Allow: /
 
@@ -48,21 +48,6 @@ User-agent: ChatGPT-User
 Allow: /
 
 User-agent: Google-Extended
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: cohere-ai
 Allow: /
 
 User-agent: PerplexityBot
@@ -74,18 +59,34 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-User-agent: Amazonbot
+User-agent: ClaudeBot
 Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Aggressive bulk scrapers & trainers - Disallowed to prevent excessive bandwidth and ISR read quotas
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
 
 User-agent: Meta-ExternalAgent
-Allow: /
-
-User-agent: Bytespider
-Allow: /
+Disallow: /
 
 User-agent: Diffbot
-Allow: /
+Disallow: /
 
 User-agent: Omgilibot
-Allow: /
+Disallow: /
 

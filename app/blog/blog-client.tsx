@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import type { BlogPost } from '@/lib/blog-data'
+import type { BlogPost, BlogPostSummary } from '@/lib/blog-data'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -12,7 +12,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 
 interface BlogClientProps {
-    posts: BlogPost[]
+    posts: (BlogPost | BlogPostSummary)[]
     categories: string[]
     tags: string[]
 }

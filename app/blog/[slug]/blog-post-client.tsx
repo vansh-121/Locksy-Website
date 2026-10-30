@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import type { BlogPost } from '@/lib/blog-data'
+import type { BlogPost, BlogPostSummary } from '@/lib/blog-data'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -20,7 +20,7 @@ import { MidArticleInstallCta, useDetectedBrowser, BROWSER_STORES } from '@/comp
 
 interface BlogPostClientProps {
     post: BlogPost
-    relatedPosts: BlogPost[]
+    relatedPosts: (BlogPost | BlogPostSummary)[]
 }
 
 // Flatten ReactMarkdown heading children to plain text so we can derive the
