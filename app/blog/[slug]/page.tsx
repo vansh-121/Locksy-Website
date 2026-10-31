@@ -28,6 +28,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     // Noindex duplicate/variant posts to avoid thin content penalties
     const shouldNoindex = NOINDEX_SLUGS.has(slug)
 
+    const imageUrl = post.image.startsWith('http') ? post.image : `${siteUrl}${post.image}`
+
     return {
         title: post.title,
         description: post.description,
@@ -40,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             description: post.description,
             images: [
                 {
-                    url: post.image,
+                    url: imageUrl,
                     width: 1200,
                     height: 630,
                     alt: post.imageAlt,
@@ -55,7 +57,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             card: 'summary_large_image',
             title: post.title,
             description: post.description,
-            images: [post.image],
+            images: [imageUrl],
             creator: '@locksy',
         },
         alternates: {

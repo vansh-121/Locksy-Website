@@ -400,7 +400,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                         <div className="my-10 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
                                     ),
                                     img: ({ src, alt }) => {
-                                        const safeSrc = typeof src === 'string' && /^https?:\/\//.test(src) ? src : undefined
+                                        const safeSrc = typeof src === 'string' && (/^https?:\/\//.test(src) || src.startsWith('/')) ? src : undefined
                                         if (!safeSrc) return null
                                         return (
                                             <figure className="my-8">

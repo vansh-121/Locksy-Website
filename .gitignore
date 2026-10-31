@@ -35,3 +35,9 @@ next-env.d.ts
 
 # Claude Code local config
 .claude/
+
+# Agent memory & rules (local only)
+.agents/
+AGENTS.md
+CLAUDE.md
+GEMINI.md

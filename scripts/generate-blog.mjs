@@ -512,6 +512,49 @@ const TOPIC_POOL = [
         keywords: ["screen share tab protection", "hide tabs video call", "zoom meeting browser privacy", "secure tab sharing online"],
         tags: ["Video Calls", "Screen Sharing", "Privacy"]
     },
+    // ── HIGH-CONVERTING VIRAL & LISTICLE TOPICS (Winning Pattern) ────────────
+    {
+        title: "How to Password Protect Specific Tabs in Microsoft Edge (2026 Guide)",
+        category: "Tutorial",
+        keywords: ["lock edge tabs with password", "password protect microsoft edge tabs", "edge browser tab locker", "secure edge tabs"],
+        tags: ["Edge", "Tutorial", "Password Protection", "Tab Security"]
+    },
+    {
+        title: "Top 7 Chrome Extensions to Protect Your Privacy from Coworkers",
+        category: "Comparison",
+        keywords: ["best chrome privacy extensions work", "hide tabs from coworkers", "office privacy extensions chrome", "workplace tab security"],
+        tags: ["Extensions", "Comparison", "Workplace Privacy", "Chrome"]
+    },
+    {
+        title: "Arc Browser Tab Security: How to Password Protect Your Spaces and Tabs",
+        category: "Tutorial",
+        keywords: ["arc browser tab lock", "password protect arc browser", "arc browser privacy", "lock tabs in arc"],
+        tags: ["Arc Browser", "Tutorial", "Privacy", "Tab Security"]
+    },
+    {
+        title: "Best Tab Lockers with Touch ID and Windows Hello Fingerprint Unlock in 2026",
+        category: "Comparison",
+        keywords: ["biometric tab locker extension", "touch id tab locker", "windows hello browser lock", "fingerprint lock chrome tabs"],
+        tags: ["Biometrics", "Comparison", "Touch ID", "Windows Hello"]
+    },
+    {
+        title: "How to Lock Browser Tabs on a Shared Family PC or Chromebook",
+        category: "Tutorial",
+        keywords: ["lock tabs shared computer", "chromebook lock tabs password", "family pc tab privacy", "shared laptop tab lock"],
+        tags: ["Shared Computer", "Chromebook", "Tutorial", "Family"]
+    },
+    {
+        title: "5 Best Privacy Extensions to Stop Shoulder Surfing in Coffee Shops and Offices",
+        category: "Comparison",
+        keywords: ["stop shoulder surfing browser", "anti shoulder surfing extensions", "public wifi tab privacy", "coffee shop laptop security"],
+        tags: ["Shoulder Surfing", "Comparison", "Privacy", "Security"]
+    },
+    {
+        title: "How to Password Protect Gmail and Work Email Tabs in Google Chrome",
+        category: "Tutorial",
+        keywords: ["lock gmail tab password", "password protect email tab chrome", "secure gmail tabs work", "gmail tab locker extension"],
+        tags: ["Gmail", "Email Privacy", "Tutorial", "Chrome"]
+    }
 ]
 
 // Pool of high-quality Unsplash images for blog cover photos.

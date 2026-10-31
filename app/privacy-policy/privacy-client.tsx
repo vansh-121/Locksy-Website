@@ -400,6 +400,17 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                     </div>
 
                                     <div className="p-5 rounded-xl bg-muted/40 border border-border">
+                                        <h3 className="font-bold mb-1.5">Website performance and analytics</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                            We use Vercel Web Analytics to measure aggregated website traffic, page views, and
+                                            Core Web Vitals. It is cookieless and privacy-friendly: it does not use cookies, does
+                                            not store or log your IP address, and does not build personal visitor profiles or track
+                                            users across websites. All data is aggregated (e.g., aggregate page views, referrer
+                                            sources, device/browser types, and country-level location).
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 rounded-xl bg-muted/40 border border-border">
                                         <h3 className="font-bold mb-1.5">Advertising</h3>
                                         <p className="text-sm text-muted-foreground leading-relaxed">
                                             We may display advertising through the Google AdSense network to fund the
@@ -467,9 +478,10 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                 </div>
 
                                 <p className="text-muted-foreground leading-relaxed">
-                                    What we do not do on the website either: sell your data, run behavioural analytics of
-                                    our own — the anonymous per-article view tally above is the only thing we count, and
-                                    it profiles no one — or require an account to read anything here. If your browser sends a Global
+                                    What we do not do on the website either: sell your data, run invasive behavioural tracking
+                                    or session replay tools, build individual visitor profiles, track you across third-party websites,
+                                    or require an account to read anything here. Our analytics and blog view counts are strictly
+                                    aggregated and cookieless. If your browser sends a Global
                                     Privacy Control signal, ad networks subject to applicable privacy law are required to
                                     honour it as an opt-out request — our{' '}
                                     <Link href="/tools/browser-privacy-score" className="text-primary hover:underline font-semibold">browser

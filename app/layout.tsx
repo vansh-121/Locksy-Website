@@ -16,6 +16,7 @@ import WhatsAppDialog from "@/components/whatsapp-dialog"
 import CookieConsent from "@/components/cookie-consent"
 import SocialProofToast from "@/components/social-proof-toast"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Analytics } from "@vercel/analytics/next"
 
 const geist = Geist({ subsets: ["latin"] })
 const geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -96,6 +97,7 @@ export default function RootLayout({
           <WhatsAppDialog />
           <ChatSupport />
           <CookieConsent />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

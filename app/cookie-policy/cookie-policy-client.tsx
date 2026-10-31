@@ -25,7 +25,7 @@ const COOKIE_TYPES = [
         name: "Analytics Cookies",
         required: false,
         color: "from-purple-500 to-indigo-500",
-        description: "We do not use Google Analytics, Hotjar, Mixpanel, or any behavioral analytics service, and we set no analytics cookies. We do not track your click patterns, session duration, or browsing habits across sites. The one thing we do count is how many times each blog article has been viewed — a single running total per article, incremented on page load. It uses no cookies and stores no personal data, no IP address, and nothing that identifies you or links views together; it is an anonymous tally shown on the article, nothing more.",
+        description: "We do not use Google Analytics, Hotjar, Mixpanel, or invasive behavioural profiling tools, and we set no analytics cookies. We do not track your individual click patterns or personal browsing habits across sites. For website performance, we use cookieless Vercel Web Analytics to measure aggregated traffic and Web Vitals without storing IP addresses, alongside an anonymous per-article view tally on our blog. Neither sets tracking cookies or stores personal data.",
         examples: []
     },
     {
