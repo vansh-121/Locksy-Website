@@ -56,7 +56,7 @@ const post = {
     },
     {
       question: 'What is the fastest way to lock all tabs before stepping away for lunch?',
-      answer: 'You can configure an emergency hotkey (e.g., Option+L on Mac or Alt+L on Windows) to lock all active sensitive tabs in a single keystroke, or rely on Locksy automatic idle timeout to lock tabs after 2–5 minutes of inactivity.'
+      answer: 'The fastest method is pressing Locksy\'s emergency hotkey — **Alt+Shift+8** (or **Option+Shift+8** on Mac) to lock all tabs in your active window instantly, or **Alt+Shift+9** (**Option+Shift+9** on Mac) for your active tab. You can also customize your preferred shortcut in chrome://extensions/shortcuts, or rely on Locksy\'s automatic idle timeout to lock tabs after 2–5 minutes of inactivity.'
     }
   ],
   content: `
@@ -192,7 +192,7 @@ For employees who share a communal computer or hot-desk workstation where leavin
 | **State & Form Persistence** | ✅ **Preserves Active State** | ❌ Reloads page | ⚠️ Partial | ❌ Discards state | ❌ Clears all |
 | **DevTools Bypass Proof** | ✅ **Yes (Purged DOM)** | N/A (Tabs closed) | ❌ (Easily opened) | ❌ Plaintext storage | N/A |
 | **Zero Telemetry / Offline** | ✅ **100% Offline** | ⚠️ Varies | ✅ Local | ⚠️ Local | ✅ Local |
-| **Emergency Hotkey** | ✅ **Option/Alt + L** | ✅ Configurable | ⚠️ Limited | ❌ No | ⚠️ Toolbar only |
+| **Emergency Hotkey** | ✅ **Alt+Shift+9 / Option+Shift+9** | ✅ Configurable | ⚠️ Limited | ❌ No | ⚠️ Toolbar only |
 
 ---
 

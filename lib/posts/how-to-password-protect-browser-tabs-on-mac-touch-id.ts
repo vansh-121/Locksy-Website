@@ -182,7 +182,7 @@ Once your vault is initialized:
 
 You can now lock any open tab using three distinct methods:
 
-* **Keyboard Shortcut (Fastest)**: While viewing any sensitive tab, press **Option + L** (or **Alt + L**). The tab locks instantly.
+* **Keyboard Shortcut (Fastest)**: While viewing any sensitive tab, press **Option + Shift + 9** (or **Alt + Shift + 9** on Windows/Linux). The tab locks instantly. If you prefer a different combination like \`Option + L\`, you can easily customize it anytime by navigating to \`chrome://extensions/shortcuts\` (or \`brave://extensions/shortcuts\`).
 * **Context Menu**: Right-click anywhere on the webpage and select **Locksy > Lock This Tab**.
 * **Toolbar Extension Popup**: Click the Locksy icon and toggle **Lock Current Tab**.
 
@@ -274,7 +274,7 @@ When Disguise Mode is active:
 To maintain seamless security without disrupting your productivity, apply these three workflow optimizations:
 
 ### 1. Configure the Idle Auto-Lock Timer
-If you frequently step away from your desk without pressing **Option + L**, configure an automatic lock timer:
+If you frequently step away from your desk without pressing **Option + Shift + 9**, configure an automatic lock timer:
 1. Open Locksy Settings.
 2. Set **Auto-Lock Inactive Tabs** to **3 minutes** (or **5 minutes**).
 3. Any sensitive tab left untouched in the background will automatically unmount and require Touch ID to view again.
