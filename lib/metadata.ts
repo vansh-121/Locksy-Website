@@ -375,7 +375,7 @@ export const jsonLdProduct = {
     '@type': 'Product',
     name: 'Locksy Browser Tab Locker',
     image: `${siteUrl}/web-app-manifest-512x512.png`,
-    description: 'Military-grade tab locking browser extension with PBKDF2 encryption, biometric WebAuthn unlock, auto-lock timers, and local intruder logs.',
+    description: 'Privacy-focused tab locking browser extension with PBKDF2 key derivation, biometric WebAuthn unlock, auto-lock timers, and local intruder logs.',
     brand: {
         '@type': 'Brand',
         name: 'Locksy'

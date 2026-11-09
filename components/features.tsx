@@ -93,7 +93,7 @@ export default function Features() {
     {
       icon: "🔒",
       title: "Strong Password Encryption",
-      desc: "Your master password is protected with heavy-duty hashing (PBKDF2, 600k rounds, SHA-256) — the approach security experts recommend, with an estimated 120 years to crack.",
+      desc: "Your master password is protected with heavy-duty hashing (PBKDF2, 600k rounds, SHA-256) — exceeding OWASP guidelines with timing-attack protection.",
       gradient: "from-purple-500 to-pink-500",
     },
     {

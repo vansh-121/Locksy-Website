@@ -62,7 +62,7 @@ const post = {
   content: `
 Modern MacBooks running Apple Silicon (M1 through M4 chips) are among the most physically secure consumer computers in existence. With FileVault disk encryption, hardware-isolated Secure Enclaves, and instantaneous Touch ID biometric login, unauthorized access to a locked Mac requires nation-state cryptanalysis.
 
-Yet the moment you sit down, place your finger on the sensor, and unlock your MacBook, all of that military-grade security vanishes from your browser.
+Yet the moment you sit down, place your finger on the sensor, and unlock your MacBook, all of that hardware-level security stops at the browser window.
 
 ![MacBook Pro displaying a Touch ID Tab Unlock Privacy Dialog](/blog/mac-touch-id-browser-security.jpg)
 

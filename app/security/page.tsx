@@ -55,7 +55,7 @@ export default function SecurityPage() {
     { stat: "73%", label: "Device Intrusions", desc: "Of workplace security incidents originate from briefly unattended unlocked browser sessions.", icon: "🔓" },
     { stat: "600,000", label: "PBKDF2 Iterations", desc: "Exceeds OWASP 2023 minimum recommendation for password key derivation by 2x.", icon: "⚡" },
     { stat: "0 Bytes", label: "Remote Requests", desc: "Zero outbound network telemetry requests sent during tab locking or password checks.", icon: "🛡️" },
-    { stat: "120+ Yrs", label: "Cracking Resistance", desc: "Estimated compute time required to brute-force master key using GPU clusters.", icon: "🔐" }
+    { stat: "OWASP+", label: "Derivation Standard", desc: "600,000 PBKDF2 iterations exceeding industry security baselines.", icon: "🔐" }
   ]
 
   const comparisonData = [
@@ -181,6 +181,9 @@ export default function SecurityPage() {
             <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
               <a href="#tldr" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-border hover:border-primary/50 text-foreground transition-all">
                 ⚡ TL;DR Summary
+              </a>
+              <a href="#threat-model" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-primary/40 text-primary hover:bg-primary/10 transition-all">
+                🎯 Threat Model & Scope
               </a>
               <a href="#metrics" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-border hover:border-primary/50 text-foreground transition-all">
                 📊 Statistical Metrics
@@ -459,6 +462,125 @@ export default function SecurityPage() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </section>
+
+          {/* Threat Model & Operational Boundaries Section */}
+          <section id="threat-model" className="mb-20">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+                Radical Transparency
+              </div>
+              <h2 className="text-3xl font-extrabold text-foreground mb-3">Threat Model & Architectural Scope</h2>
+              <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
+                Security tools are only as trustworthy as their honesty about what they protect against — and what they don&apos;t. Here is Locksy&apos;s realistic threat model.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* What Locksy Protects Against */}
+              <div className="p-8 rounded-3xl bg-card/90 backdrop-blur-xl border border-emerald-500/30 shadow-xl relative overflow-hidden">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center text-xl font-bold">
+                    ✓
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-black text-foreground">What Locksy Protects Against</h3>
+                    <p className="text-xs text-muted-foreground">Primary design targets and real-world scenarios</p>
+                  </div>
+                </div>
+
+                <ul className="space-y-4 text-sm">
+                  <li className="flex items-start gap-3">
+                    <span className="text-emerald-500 font-bold text-base mt-0.5">•</span>
+                    <div>
+                      <strong className="text-foreground block">Visual Privacy & Shoulder Surfing</strong>
+                      <span className="text-muted-foreground text-xs leading-relaxed">
+                        Colleagues, classmates, or strangers in cafes, trains, and open offices glancing at sensitive tabs (WhatsApp, banking, personal email, medical portals).
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-emerald-500 font-bold text-base mt-0.5">•</span>
+                    <div>
+                      <strong className="text-foreground block">Casual Laptop Borrowing</strong>
+                      <span className="text-muted-foreground text-xs leading-relaxed">
+                        Handing your unlocked computer to a coworker, friend, or child for 2 minutes to Google something or play a video without exposing private open work or conversations.
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-emerald-500 font-bold text-base mt-0.5">•</span>
+                    <div>
+                      <strong className="text-foreground block">Screen-Sharing Leaks During Video Calls</strong>
+                      <span className="text-muted-foreground text-xs leading-relaxed">
+                        Preventing confidential tabs from flashing on screen during Zoom, Google Meet, or Microsoft Teams window shares.
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-emerald-500 font-bold text-base mt-0.5">•</span>
+                    <div>
+                      <strong className="text-foreground block">Zero-Knowledge Offline Privacy</strong>
+                      <span className="text-muted-foreground text-xs leading-relaxed">
+                        Zero telemetry, zero servers, and zero cloud backups. All hashing and verification occur strictly within your local browser runtime.
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              {/* What Locksy Does Not Claim to Replace */}
+              <div className="p-8 rounded-3xl bg-card/90 backdrop-blur-xl border border-amber-500/30 shadow-xl relative overflow-hidden">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center text-xl font-bold">
+                    !
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-black text-foreground">Operational Boundaries</h3>
+                    <p className="text-xs text-muted-foreground">What a browser extension cannot and should not promise</p>
+                  </div>
+                </div>
+
+                <ul className="space-y-4 text-sm">
+                  <li className="flex items-start gap-3">
+                    <span className="text-amber-500 font-bold text-base mt-0.5">•</span>
+                    <div>
+                      <strong className="text-foreground block">Not an OS-Level Lock Screen Replacement</strong>
+                      <span className="text-muted-foreground text-xs leading-relaxed">
+                        Locksy runs within the browser sandbox. When leaving your laptop completely unattended in untrusted environments, always lock your operating system (<kbd className="px-1.5 py-0.5 text-[10px] bg-muted rounded font-mono">Win + L</kbd> or <kbd className="px-1.5 py-0.5 text-[10px] bg-muted rounded font-mono">Cmd + Ctrl + Q</kbd>).
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-amber-500 font-bold text-base mt-0.5">•</span>
+                    <div>
+                      <strong className="text-foreground block">Physical Console Access with DevTools</strong>
+                      <span className="text-muted-foreground text-xs leading-relaxed">
+                        In any modern browser, a user with active physical access to your logged-in machine can open <code className="px-1 py-0.5 text-[10px] bg-muted rounded font-mono">chrome://extensions</code> or use developer tools. Locksy is a privacy deterrent against casual snooping, not a defense against adversaries with physical administrative control.
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-amber-500 font-bold text-base mt-0.5">•</span>
+                    <div>
+                      <strong className="text-foreground block">Not Anti-Malware or Keylogger Protection</strong>
+                      <span className="text-muted-foreground text-xs leading-relaxed">
+                        Locksy does not inspect network packets, scan disks, or prevent hardware keyloggers. If your host operating system is compromised by malware, no browser extension can guarantee privacy.
+                      </span>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-amber-500 font-bold text-base mt-0.5">•</span>
+                    <div>
+                      <strong className="text-foreground block">Defense-in-Depth Principle</strong>
+                      <span className="text-muted-foreground text-xs leading-relaxed">
+                        Locksy is best used as a layer in defense-in-depth: combine a reputable password manager, full-disk encryption (BitLocker/FileVault), and Locksy for everyday tab-level privacy.
+                      </span>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </section>

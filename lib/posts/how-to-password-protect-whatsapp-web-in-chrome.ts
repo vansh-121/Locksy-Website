@@ -144,7 +144,7 @@ For a deeper dive into how this architecture prevents browser tampering, see our
 
 ## Step-by-Step Setup: Locking WhatsApp Web in 90 Seconds
 
-Here is the exact setup to achieve military-grade, biometric-protected privacy for WhatsApp Web on Google Chrome, Microsoft Edge, Brave, or Arc.
+Here is the exact setup to achieve instant, biometric-protected privacy for WhatsApp Web on Google Chrome, Microsoft Edge, Brave, or Arc.
 
 
 ### Step 1: Install Locksy Free

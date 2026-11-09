@@ -175,7 +175,7 @@ This allows you to add the missing layer of local access control to both Brave a
 
 ### How Locksy Complements Brave and Chrome:
 - **Cryptographic Navigation Locking:** Unlike older extensions that place a flimsy CSS banner over your content, Locksy unmounts the tab's DOM entirely and routes the tab to an isolated extension sandbox. Chrome DevTools cannot inspect or retrieve the hidden page content.
-- **Military-Grade Key Derivation:** Locksy uses **PBKDF2-HMAC-SHA256 with 600,000 iterations** and a 16-byte random salt, exceeding corporate OWASP guidelines.
+- **OWASP-Exceeding Key Derivation:** Locksy uses **PBKDF2-HMAC-SHA256 with 600,000 iterations** and a 16-byte random salt, exceeding industry security guidelines.
 - **Biometric Unlock in 0.1 Seconds:** Unlock your sensitive tabs instantly using **Apple Touch ID** on macOS, **Windows Hello** (fingerprint, face, or PIN) on Windows, or hardware security keys (like YubiKey).
 - **Smart Idle Auto-Lock:** Configure your financial or work tabs to automatically lock after 2 minutes of inactivity, with smart media detection that prevents interrupting video or audio playback.
 - **Domain Wildcards:** Automatically enforce password or biometric gates whenever sensitive domains (e.g., \`*.binance.com\`, \`chase.com\`, \`web.whatsapp.com\`) are opened.
