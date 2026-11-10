@@ -25,7 +25,7 @@ const DISCLAIMER_SECTIONS = [
         content: [
             "Locksy uses PBKDF2 with 600,000 iterations for password hashing, which meets and exceeds current OWASP 2023 recommendations. However, no security measure is 100% infallible. While we implement industry-standard encryption and multiple security layers, we cannot guarantee absolute protection against all possible attack vectors.",
             "Users are responsible for maintaining the confidentiality of their master password. If you forget your password, it cannot be recovered due to the zero-knowledge architecture of the extension. We strongly recommend using a unique, strong password and keeping a secure backup.",
-            "The term \"military-grade encryption\" used throughout this website refers to PBKDF2 with SHA-256 hashing at 600,000 iterations — a key-derivation standard recognized by NIST and widely used in defense and financial applications. It is not a certification or endorsement by any military organization."
+            "Threat Model & Browser Scope: Locksy operates within the WebExtension sandbox. It is engineered specifically to prevent visual privacy leaks, shoulder-surfing in open workplaces, and unauthorized browsing on briefly unattended or shared computers. Locksy is not an operating system-level lock or anti-malware solution, and does not claim to defend against adversaries with physical administrative access to your operating system or browser developer tools. Users should always secure their device at the OS level (Win+L / Cmd+Ctrl+Q) when leaving hardware unattended."
         ]
     },
     {

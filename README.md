@@ -6,7 +6,7 @@
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://locksy.vercel.app)
 [![Version](https://img.shields.io/badge/version-2.5.0-blue)](https://github.com/vansh-121/Locksy)
 
-Official landing page for **Locksy** — A powerful browser extension that provides military-grade tab protection with PBKDF2 encryption (600,000 iterations, OWASP 2023 compliant). Now featuring a Sleek UI Redesign, Weekly Privacy Reports, Startup Session Lock, and Webcam Intruder Detection.
+Official landing page for **Locksy** — A privacy-focused browser extension that provides instant tab protection with PBKDF2 key derivation (600,000 iterations, OWASP 2023 compliant). Now featuring a Sleek UI Redesign, Weekly Privacy Reports, Startup Session Lock, and Webcam Intruder Detection.
 
 ## 🚀 What's New in v3.0.0
 
@@ -18,7 +18,7 @@ Official landing page for **Locksy** — A powerful browser extension that provi
 ## 🔒 Security Features
 
 - 🛡️ **PBKDF2 with 600k Iterations** — Ultimate Key Derivation Function (KDF) Encryption
-- ⚡ **120 Years Crack Resistance** — Military-grade password protection
+- ⚡ **OWASP-Compliant Key Derivation** — PBKDF2 HMAC-SHA-256 with 600,000 iterations
 - 🚫 **Rate Limiting & Brute-Force Protection** — Advanced timing attack prevention
 - 🔐 **Zero Data Collection** — Everything stored locally on your device
 - 📴 **100% Offline** — No external servers or data transmission

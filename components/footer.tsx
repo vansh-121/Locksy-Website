@@ -32,7 +32,7 @@ export default function Footer() {
             </span>
           </div>
           <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
-            Military-grade tab protection for everyone. Secure your sensitive information with just one click.
+            Privacy-first tab protection for everyone. Keep sensitive tabs safe from shoulder-surfing with just one click.
           </p>
         </div>
 

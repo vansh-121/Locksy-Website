@@ -42,7 +42,7 @@ const VALUES = [
     {
         icon: Zap,
         title: "Zero Compromise",
-        desc: "Military-grade PBKDF2 encryption with 600k iterations. We don't cut corners on security.",
+        desc: "Standard-exceeding PBKDF2 key derivation with 600,000 iterations. We don't cut corners on cryptography.",
         color: "from-amber-500 to-orange-500",
     },
 ]

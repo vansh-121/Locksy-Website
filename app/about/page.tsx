@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     // template this ran to 70 chars and Google truncated it. Matches the
     // openGraph title below, which was already the shorter form.
     title: 'About Locksy - Our Mission & Story',
-    description: 'Learn about Locksy, the browser extension that protects your tabs with military-grade encryption. Discover our mission, values, and the developer behind the project.',
+    description: 'Learn about Locksy, the browser extension that protects your tabs with local zero-knowledge privacy and PBKDF2 key derivation. Discover our mission, values, and the developer behind the project.',
     keywords: 'about locksy, locksy story, browser extension developer, locksy mission, tab locker creator, vansh sethi, tab security, locksy team',
     alternates: {
         canonical: 'https://www.locksy.dev/about',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: 'https://www.locksy.dev/about',
         siteName: 'Locksy',
         title: 'About Locksy - Our Mission & Story',
-        description: 'Learn about Locksy — the secure browser extension that protects your tabs with military-grade encryption.',
+        description: 'Learn about Locksy — the secure browser extension that protects your tabs with local zero-knowledge privacy.',
         images: [
             {
                 url: 'https://www.locksy.dev/web-app-manifest-512x512.png',

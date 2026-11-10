@@ -109,8 +109,12 @@ export const faqData: FAQItem[] = [
     answer: "Absolutely! Locksy is perfect for shared or work computers. Lock sensitive tabs when stepping away, and no one can access them without your password. It's 100% offline and private.",
   },
   {
-    question: "What is PBKDF2 encryption?",
-    answer: "PBKDF2 is a key derivation function that applies 600,000 iterations of SHA-256 hashing to your password, making it virtually impossible to crack. This is military-grade encryption exceeding OWASP 2023 security standards.",
+    question: "What is Locksy's threat model, and what are its limits?",
+    answer: "Locksy is designed specifically to prevent visual snooping, shoulder surfing in open offices, and unauthorized tab browsing when friends, kids, or colleagues borrow your unlocked computer for a few minutes. Because it runs as a browser extension, it is not an OS-level cryptographic enclave or anti-malware system. If a technical adversary has full physical access to your device, they can access DevTools or disk files. For complete protection against physical theft or malware, always combine Locksy with your operating system's lock screen (Win + L / Cmd + Ctrl + Q) and full-disk encryption.",
+  },
+  {
+    question: "What is PBKDF2 key derivation?",
+    answer: "PBKDF2 (Password-Based Key Derivation Function 2) applies 600,000 iterations of SHA-256 hashing to your password locally in your browser. This computationally intensive derivation adheres to and exceeds OWASP recommendations, protecting your stored hash against offline brute-force attempts without sending any data over the internet.",
   },
   {
     question: "Is Locksy open source?",

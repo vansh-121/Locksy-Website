@@ -70,7 +70,7 @@ export default function PasswordStrengthCheckerClient() {
     if (isCommon || entropy < 30) return { label: "Very Weak (Dangerous)", color: "bg-red-500", text: "text-red-500", width: 25 }
     if (entropy < 55) return { label: "Moderate (Basic)", color: "bg-amber-500", text: "text-amber-500", width: 50 }
     if (entropy < 80) return { label: "Strong (Recommended)", color: "bg-blue-500", text: "text-blue-500", width: 75 }
-    return { label: "Military Grade (Maximum)", color: "bg-emerald-500", text: "text-emerald-500", width: 100 }
+    return { label: "Exceptional (Maximum)", color: "bg-emerald-500", text: "text-emerald-500", width: 100 }
   }
 
   const rating = getScoreRating()
@@ -163,7 +163,7 @@ export default function PasswordStrengthCheckerClient() {
               <div className="p-5 rounded-2xl bg-primary/10 border border-primary/30 text-center">
                 <div className="text-xs text-primary font-bold uppercase mb-1">Locksy PBKDF2 600,000 Iteration Time</div>
                 <div className="text-2xl font-black text-primary mb-1">{pbkdf2Time}</div>
-                <div className="text-[11px] text-muted-foreground">Military-grade key derivation protection</div>
+                <div className="text-[11px] text-muted-foreground">High-entropy key derivation protection</div>
               </div>
             </div>
 

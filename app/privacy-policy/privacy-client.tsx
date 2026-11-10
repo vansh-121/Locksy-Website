@@ -124,7 +124,7 @@ export default function PrivacyPolicyClient({ lastUpdated }: PrivacyPolicyClient
                                     {
                                         icon: "🔐",
                                         title: "Master Password (Hashed)",
-                                        desc: "Your password is hashed using PBKDF2 with 600k iterations before storage. Military-grade security with 120 years crack resistance.",
+                                        desc: "Your password is hashed using PBKDF2 with 600k iterations before local storage, meeting OWASP key-derivation standards with timing-attack protection.",
                                         gradient: "from-blue-500 to-cyan-500"
                                     },
                                     {

@@ -346,7 +346,7 @@ export default function SuccessClient() {
                                 </span>
                             </h2>
                             <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-                                You now own every single military-grade tab security capability across 5 devices with zero subscription renewals.
+                                You now own every single premium tab privacy and security feature across 5 devices with zero subscription renewals.
                             </p>
 
                             {/* Category Filter Tabs */}
