@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown, ExternalLink, ScreenShare } from "lucide-react"
+import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown, ExternalLink, ScreenShare, Palette } from "lucide-react"
 import { PRO_CHECKOUT_URL, SALE_DEADLINE_UTC, PRO_EARLY_BIRD_PRICE, PRO_REGULAR_PRICE } from "@/lib/pro"
 
 interface PricingProps {
@@ -105,6 +105,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
     { title: "Stealth Mode Disguise Included", desc: "Disguise locked tabs as fake browser error (ERR_CONNECTION) pages", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Weekly Privacy Reports Included", desc: "Personalized offline dashboard & security score tracking", icon: <LayoutDashboard className="w-4 h-4" /> },
     { title: "Custom Lock Messages Included", desc: "Display personal notes or warnings on the lock screen", icon: <ShieldAlert className="w-4 h-4" /> },
+    { title: "All 6 Handcrafted Themes", desc: "Unlock Ocean, Forest, Ember, and Rose palettes alongside Classic Light & Dark", icon: <Palette className="w-4 h-4" /> },
   ]
 
   const freeLimits = [
@@ -116,6 +117,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
     { title: "Privacy Blur Shield (Basic)", desc: "Auto-mask passwords/cards & window focus loss blur", icon: <EyeOff className="w-4 h-4" /> },
     { title: "Screen Share Shield (Manual)", desc: "1-click manual toggle to shield private tabs while screen sharing", icon: <ScreenShare className="w-4 h-4" /> },
     { title: "Webcam Captures (Max 3 stored)", desc: "Store up to 3 local snapshots of failed access attempts", icon: <Camera className="w-4 h-4" /> },
+    { title: "Locksy Themes (Classic Only)", desc: "Includes signature Classic Light & Midnight Dark contrast palettes", icon: <Palette className="w-4 h-4" /> },
     { title: "Scheduled Locking", desc: "Not included on free tier", icon: <Calendar className="w-4 h-4" /> },
     { title: "Startup Session Lock", desc: "Not included on free tier", icon: <Zap className="w-4 h-4" /> },
     { title: "Stealth Mode Disguise", desc: "Not included on free tier", icon: <EyeOff className="w-4 h-4" /> },

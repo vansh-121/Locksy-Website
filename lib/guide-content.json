@@ -1,6 +1,6 @@
 {
-  "version": "3.6.5",
-  "updated": "2026-10-20",
+  "version": "3.7.0",
+  "updated": "2026-11-12",
   "title": "Locksy User Guide",
   "tagline": "Everything Locksy does, in plain English — from installing it to locking your first tab to catching someone who tries to snoop.",
   "chapters": [
@@ -395,6 +395,7 @@
             ["Webcam intruder photos", "3 stored", "Unlimited"],
             ["Real-time intruder alerts", "—", "Yes"],
             ["Privacy Blur Shield", "Basic auto-masking", "Custom strength, per-site rules, trusted list"],
+            ["Color Themes", "Classic Light & Dark", "All 6 Palettes (Classic, Ocean, Forest, Ember, Rose)"],
             ["Stealth Mode", "—", "Yes"],
             ["Startup Session Lock", "—", "Yes"],
             ["Weekly Privacy Reports", "—", "Yes"],

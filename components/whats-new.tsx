@@ -5,6 +5,12 @@
 // section it replaces, in plain language.
 const updates = [
   {
+    version: "v3.7.0",
+    icon: "🎨",
+    title: "Locksy Themes Engine",
+    desc: "Personalize your tab protection with 6 handcrafted palettes — Classic Light & Dark (Free), plus Ocean, Forest, Ember, and Rose (Pro). Zero-flicker pre-rendering applies your theme instantly across all lock screens and popups.",
+  },
+  {
     version: "v3.6.5",
     icon: "🪟",
     title: "Window Scope Control",

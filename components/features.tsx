@@ -126,18 +126,12 @@ export default function Features() {
       desc: "Everything stored locally on your device. No data sent to servers.",
       gradient: "from-indigo-500 to-blue-500",
     },
-    // {
-    //   icon: "🎨",
-    //   title: "Modern UI",
-    //   desc: "Beautiful gradient interface with smooth animations.",
-    //   gradient: "from-pink-500 to-purple-500",
-    // },
-    // {
-    //   icon: "🔄",
-    //   title: "Smart Unlock Preferences",
-    //   desc: "Choose to unlock just the current tab or all tabs for a domain. Locksy remembers your preference.",
-    //   gradient: "from-teal-500 to-cyan-500",
-    // },
+    {
+      icon: "🎨",
+      title: "Locksy Themes Engine",
+      desc: "Personalize your tab protection with 6 distraction-free color palettes (Classic Light & Dark, Ocean, Forest, Ember, Rose) with zero-flicker instant rendering.",
+      gradient: "from-pink-500 to-purple-500",
+    },
     {
       icon: "🚫",
       title: "No Account Required",
