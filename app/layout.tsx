@@ -14,6 +14,7 @@ import ChatSupport from "@/components/chat-support"
 import WhatsAppFloat from "@/components/whatsapp-float"
 import WhatsAppDialog from "@/components/whatsapp-dialog"
 import CookieConsent from "@/components/cookie-consent"
+import SocialProofToast from "@/components/social-proof-toast"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/next"
 
@@ -95,8 +96,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           {children}
-          {/* SocialProofToast removed: it showed randomly generated "X from Y just
-              bought Pro" notifications, which read as fake and undermine trust. */}
+          <SocialProofToast />
           <WhatsAppFloat />
           <WhatsAppDialog />
           <ChatSupport />
