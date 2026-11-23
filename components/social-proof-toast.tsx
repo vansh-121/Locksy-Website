@@ -84,6 +84,78 @@ const SESSION_STORAGE_SEEN_NAMES = "locksy_sales_seen_names"
 const SESSION_STORAGE_COUNT = "locksy_sales_toast_count"
 const SESSION_STORAGE_DISMISSED = "locksy_sales_toast_dismissed"
 
+// Persistent Web Audio context for pleasant, non-intrusive notification chime
+let sharedAudioCtx: AudioContext | null = null
+
+function getAudioContext(): AudioContext | null {
+  if (typeof window === "undefined") return null
+  try {
+    if (!sharedAudioCtx) {
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+      if (AudioContextClass) {
+        sharedAudioCtx = new AudioContextClass()
+      }
+    }
+    if (sharedAudioCtx && sharedAudioCtx.state === "suspended") {
+      sharedAudioCtx.resume().catch(() => {})
+    }
+    return sharedAudioCtx
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Plays a gentle, pleasant two-tone chime (E5 -> B5 sine waves) when a notification appears.
+ */
+function playNotificationChime() {
+  try {
+    const ctx = getAudioContext()
+    if (!ctx) return
+
+    if (ctx.state === "suspended") {
+      ctx.resume().catch(() => {})
+    }
+
+    const now = ctx.currentTime
+
+    // Master volume: soft, pleasant level
+    const masterGain = ctx.createGain()
+    masterGain.gain.setValueAtTime(0.07, now)
+    masterGain.connect(ctx.destination)
+
+    // Primary Tone: E5 (659.25 Hz)
+    const osc1 = ctx.createOscillator()
+    const gain1 = ctx.createGain()
+    osc1.type = "sine"
+    osc1.frequency.setValueAtTime(659.25, now)
+    gain1.gain.setValueAtTime(0, now)
+    gain1.gain.linearRampToValueAtTime(0.7, now + 0.02)
+    gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.32)
+    osc1.connect(gain1)
+    gain1.connect(masterGain)
+    osc1.start(now)
+    osc1.stop(now + 0.33)
+
+    // Secondary Tone: B5 (987.77 Hz) - cheerful upward bell
+    const osc2 = ctx.createOscillator()
+    const gain2 = ctx.createGain()
+    osc2.type = "sine"
+    osc2.frequency.setValueAtTime(987.77, now + 0.05)
+    gain2.gain.setValueAtTime(0, now + 0.05)
+    gain2.gain.linearRampToValueAtTime(0.8, now + 0.07)
+    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.42)
+    osc2.connect(gain2)
+    gain2.connect(masterGain)
+    osc2.start(now + 0.05)
+    osc2.stop(now + 0.43)
+  } catch {
+    // Graceful fallback if audio is blocked by user policy
+  }
+}
+
 export default function SocialProofToast() {
   const pathname = usePathname()
   const isReadingPage = Boolean(
@@ -107,6 +179,19 @@ export default function SocialProofToast() {
 
   useEffect(() => {
     setMounted(true)
+
+    // Unlock AudioContext on first user gesture to comply with browser autoplay policies
+    const unlockAudio = () => {
+      const ctx = getAudioContext()
+      if (ctx && ctx.state === "suspended") {
+        ctx.resume().catch(() => {})
+      }
+    }
+
+    window.addEventListener("click", unlockAudio, { passive: true })
+    window.addEventListener("keydown", unlockAudio, { passive: true })
+    window.addEventListener("touchstart", unlockAudio, { passive: true })
+    window.addEventListener("pointerdown", unlockAudio, { passive: true })
 
     try {
       if (sessionStorage.getItem(SESSION_STORAGE_DISMISSED) === "true") {
@@ -136,6 +221,10 @@ export default function SocialProofToast() {
     return () => {
       clearTimeout(timer)
       clearAllTimers()
+      window.removeEventListener("click", unlockAudio)
+      window.removeEventListener("keydown", unlockAudio)
+      window.removeEventListener("touchstart", unlockAudio)
+      window.removeEventListener("pointerdown", unlockAudio)
     }
   }, [isReadingPage, maxAlerts])
 
@@ -201,6 +290,9 @@ export default function SocialProofToast() {
     setIsLeaving(false)
     setIsVisible(true)
     lastStartTimeRef.current = Date.now()
+
+    // Play subtle notification chime
+    playNotificationChime()
 
     startProgressCountdown(SHOW_DURATION)
 
