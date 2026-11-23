@@ -1,5 +1,5 @@
 import type React from "react"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Inter, DM_Sans, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import {
   metadata as seoMetadata,
@@ -14,12 +14,12 @@ import ChatSupport from "@/components/chat-support"
 import WhatsAppFloat from "@/components/whatsapp-float"
 import WhatsAppDialog from "@/components/whatsapp-dialog"
 import CookieConsent from "@/components/cookie-consent"
-import SocialProofToast from "@/components/social-proof-toast"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/next"
 
-const geist = Geist({ subsets: ["latin"] })
-const geistMono = Geist_Mono({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" })
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" })
 
 export const metadata = seoMetadata
 
@@ -34,7 +34,7 @@ export default function RootLayout({
         {/* Prevent flash of dismissed sale banner & maintain hero spacing before React hydration */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{document.cookie='locksy_banner_dismissed=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';if(sessionStorage.getItem('locksy_banner_dismissed')==='true'||Date.now()>=1790812800000){document.documentElement.classList.add('banner-dismissed');document.write('<style id="banner-dismiss-style">#top-announcement-banner{display:none!important;}html.banner-dismissed #hero-section{padding-top:7rem!important;}@media(min-width:768px){html.banner-dismissed #hero-section{padding-top:8rem!important;}}@media(min-width:1024px){html.banner-dismissed #hero-section{padding-top:8rem!important;}}html.banner-dismissed .page-top-offset{padding-top:5.75rem!important;}@media(min-width:768px){html.banner-dismissed .page-top-offset{padding-top:7rem!important;}}</style>');}}catch(e){}`,
+            __html: `try{document.cookie='locksy_banner_dismissed=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';if(sessionStorage.getItem('locksy_banner_dismissed')==='true'||Date.now()>=1790812800000){document.documentElement.classList.add('banner-dismissed');document.write('<style id="banner-dismiss-style">#top-announcement-banner{display:none!important;}</style>');}}catch(e){}`,
           }}
         />
         {/* RSS Feed Auto-Discovery */}
@@ -84,15 +84,19 @@ export default function RootLayout({
         />
 
       </head>
-      <body className={`${geist.className} overflow-x-hidden`} suppressHydrationWarning>
+      <body
+        className={`${inter.variable} ${dmSans.variable} ${geistMono.variable} font-sans overflow-x-hidden`}
+        suppressHydrationWarning
+      >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange={false}
         >
           {children}
-          <SocialProofToast />
+          {/* SocialProofToast removed: it showed randomly generated "X from Y just
+              bought Pro" notifications, which read as fake and undermine trust. */}
           <WhatsAppFloat />
           <WhatsAppDialog />
           <ChatSupport />

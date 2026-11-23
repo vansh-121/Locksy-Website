@@ -1,191 +1,197 @@
-export default function Features() {
-  const features = [
-    {
-      icon: "🌐",
-      title: "Domain & URL Path Lock",
-      desc: "Lock entire domains or specific URL paths (e.g. notion.so/work/*) with wildcard patterns. Auto-lock new tabs matching locked rules with persistent protection.",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: "👆",
-      title: "Biometric Unlock",
-      desc: "Unlock protected tabs with your fingerprint or face — Touch ID, Windows Hello, Face ID, Android biometrics, or a USB security key. Your biometric data never leaves your device.",
-      gradient: "from-violet-500 to-indigo-500",
-    },
-    {
-      icon: "⏱️",
-      title: "Auto-Lock Timer",
-      desc: "Automatic protection after inactivity. Set your timeout duration (1-480 min) and let Locksy lock your tabs automatically when you step away. Smart activity detection won't interrupt video playback.",
-      gradient: "from-indigo-500 to-violet-500",
-    },
-    {
-      icon: "⌨️",
-      title: "Keyboard Shortcuts",
-      desc: "Lock the current tab (Alt+Shift+9), open the manager (Alt+Shift+0), lock every tab (Alt+Shift+8, 3 free uses then Pro), or hide Locksy with Stealth Mode (Alt+Shift+7). All shortcuts are customizable, and locked tabs show a lock icon plus a live badge counter.",
-      gradient: "from-violet-500 to-purple-500",
-    },
-    {
-      icon: "🛡️",
-      title: "Privacy Blur Shield",
-      desc: "Automatically masks passwords, credit cards, emails, and OTPs on web pages, plus instantly blurs the page overlay when switching windows or leaving your computer.",
-      gradient: "from-indigo-500 to-purple-500",
-    },
-    {
-      icon: "🎥",
-      title: "Screen Share Shield",
-      desc: "Presenting on Google Meet, Zoom, or Teams? Screen Share Shield automatically covers locked tabs, banking, webmail, and tab titles with an opaque shield so nothing sensitive leaks.",
-      gradient: "from-cyan-500 to-blue-500",
-    },
-    {
-      icon: "📅",
-      title: "Scheduled Locking",
-      desc: "Time-based security on autopilot. Lock tabs during specific hours and days automatically—perfect for work hours or sleep time. Overnight schedule support included.",
-      gradient: "from-emerald-500 to-teal-500",
-    },
-    {
-      icon: "🖱️",
-      title: "Right-Click Context Menus",
-      desc: "Lock tabs instantly from the right-click menu — no popup needed. Lock this tab, lock a domain, lock all tabs, or toggle stealth. Works on pages, links, images, and selected text.",
-      gradient: "from-indigo-500 to-violet-500",
-    },
-    {
-      icon: "🕵️",
-      title: "Stealth Mode",
-      desc: "Make Locksy completely invisible. Badge counter vanishes, notifications go silent, and locked tabs show a fake \"connection refused\" error page. Toggle via popup, Alt+Shift+7, or right-click.",
-      gradient: "from-purple-500 to-violet-500",
-    },
-    {
-      icon: "📸",
-      title: "Webcam Intruder Capture",
-      desc: "Silently captures a local-only webcam snapshot of snoopers trying to guess your password. Dedicated log page lets you review attempt histories and delete photos safely.",
-      gradient: "from-rose-500 to-red-500",
-    },
-    {
-      icon: "🚀",
-      title: "Startup Session Lock",
-      desc: "Automatically locks your session tabs when the browser launches, including tabs that restore a moment later. Requires Locksy Pro.",
-      gradient: "from-amber-500 to-yellow-500",
-    },
-    {
-      icon: "📊",
-      title: "Weekly Privacy Reports",
-      desc: "Local metrics dashboard tracking locks history, failed snooper attempts, and active security scores. 100% private and generated completely offline.",
-      gradient: "from-violet-600 to-indigo-600",
-    },
-    {
-      icon: "💬",
-      title: "Custom Lock Screen Messages",
-      desc: "Display personalized notes, reminders, or warning messages directly on the lock screen to deter snoopers.",
-      gradient: "from-teal-500 to-emerald-500",
-    },
-    {
-      icon: "🔓",
-      title: "1-Click Unlock All",
-      desc: "Unlock all currently protected tabs simultaneously by entering your master password once. Perfect for quick workflow resumption.",
-      gradient: "from-amber-500 to-orange-500",
-    },
-    {
-      icon: "🚨",
-      title: "Real-Time Intruder Alerts",
-      desc: "Get instant browser notifications and visual warnings on the lock screen when someone attempts to access protected tabs.",
-      gradient: "from-rose-500 to-red-500",
-    },
-    {
-      icon: "🔒",
-      title: "Strong Password Encryption",
-      desc: "Your master password is protected with heavy-duty hashing (PBKDF2, 600k rounds, SHA-256) — exceeding OWASP guidelines with timing-attack protection.",
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: "🛡️",
-      title: "Brute-Force Protection",
-      desc: "If someone keeps guessing your password, Locksy automatically slows them down with escalating delays — blocking automated cracking tools.",
-      gradient: "from-amber-500 to-orange-500",
-    },
-    {
-      icon: "🔑",
-      title: "Incognito Mode Support",
-      desc: "Works seamlessly in private browsing windows with same security.",
-      gradient: "from-green-500 to-emerald-500",
-    },
-    // {
-    //   icon: "🪶",
-    //   title: "Ultra Lightweight",
-    //   desc: "Zero performance impact on your browser. Optimized for speed.",
-    //   gradient: "from-yellow-500 to-orange-500",
-    // },
-    {
-      icon: "🔐",
-      title: "8+ Security Layers",
-      desc: "Multiple protection mechanisms prevent bypass attempts.",
-      gradient: "from-red-500 to-rose-500",
-    },
-    {
-      icon: "📴",
-      title: "100% Offline",
-      desc: "Everything stored locally on your device. No data sent to servers.",
-      gradient: "from-indigo-500 to-blue-500",
-    },
-    {
-      icon: "🎨",
-      title: "Locksy Themes Engine",
-      desc: "Personalize your tab protection with 6 distraction-free color palettes (Classic Light & Dark, Ocean, Forest, Ember, Rose) with zero-flicker instant rendering.",
-      gradient: "from-pink-500 to-purple-500",
-    },
-    {
-      icon: "🚫",
-      title: "No Account Required",
-      desc: "Install and start protecting tabs in 30 seconds.",
-      gradient: "from-orange-500 to-red-500",
-    },
-  ]
+import {
+  Globe,
+  Fingerprint,
+  Timer,
+  EyeOff,
+  ScreenShare,
+  Camera,
+  Keyboard,
+  MousePointerClick,
+  Rocket,
+  BarChart3,
+  MessageSquareText,
+  Unlock,
+  BellRing,
+  ShieldAlert,
+  VenetianMask,
+  WifiOff,
+  Palette,
+  UserX,
+  ScanEye,
+  CalendarClock,
+  Lock,
+} from "lucide-react"
+import SectionHeading from "@/components/section-heading"
 
+const MORE_FEATURES = [
+  { icon: ScanEye, title: "Privacy Blur Shield", desc: "Masks passwords, card numbers, emails and OTPs on pages, and blurs the screen when you switch windows." },
+  { icon: MousePointerClick, title: "Right-click menus", desc: "Lock a tab, a domain or every tab straight from the context menu, no popup needed." },
+  { icon: Rocket, title: "Startup session lock", desc: "Locks restored tabs the moment the browser launches, including ones that load a second later. Pro." },
+  { icon: BarChart3, title: "Weekly privacy reports", desc: "A local dashboard of lock history, failed attempts and your security score. Generated offline." },
+  { icon: MessageSquareText, title: "Custom lock messages", desc: "Show a personal note, reminder or warning on the lock screen." },
+  { icon: Unlock, title: "Unlock all in one go", desc: "Enter your master password once to unlock every protected tab." },
+  { icon: BellRing, title: "Intruder alerts", desc: "Browser notifications and on-screen warnings when someone tries to open a locked tab." },
+  { icon: ShieldAlert, title: "Brute-force protection", desc: "Repeated wrong guesses trigger escalating delays that stop automated cracking tools." },
+  { icon: VenetianMask, title: "Incognito support", desc: "Works in private windows with the same protection." },
+  { icon: WifiOff, title: "100% offline", desc: "Your password and settings are stored on your device. Nothing is sent to a server." },
+  { icon: Palette, title: "Six themes", desc: "Classic Light and Dark, Ocean, Forest, Ember and Rose, rendered without flicker." },
+  { icon: UserX, title: "No account required", desc: "Install, set a password and start locking tabs in about 30 seconds." },
+]
+
+function Card({ className = "", children, id }: { className?: string; children: React.ReactNode; id?: string }) {
   return (
-    <section id="features" className="py-24 md:py-32 bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      {/* Animated glow blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/5 w-96 h-96 bg-primary/8 dark:bg-primary/15 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-secondary/8 dark:bg-secondary/15 rounded-full blur-3xl animate-pulse delay-700" />
-        <div className="absolute top-2/3 left-1/2 w-72 h-72 bg-violet-500/6 dark:bg-violet-500/12 rounded-full blur-3xl animate-pulse delay-300" />
-      </div>
+    <div id={id} className={`surface flex flex-col overflow-hidden p-6 md:p-7 scroll-mt-28 ${className}`}>
+      {children}
+    </div>
+  )
+}
 
-      <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-6">
-            <span aria-hidden="true">✨</span>
-            Powerful Features
-          </div>
-          <h2 className="section-title">Everything You Need.<br />Nothing You Don't.</h2>
-          <p className="section-subtitle">
-            Built with security and simplicity in mind. Protect your sensitive tabs without compromising on performance.
-          </p>
+function CardIcon({ icon: Icon }: { icon: React.ComponentType<{ className?: string }> }) {
+  return (
+    <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted">
+      <Icon className="h-5 w-5 text-highlight" />
+    </span>
+  )
+}
+
+function CardText({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="mt-5">
+      <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{children}</p>
+    </div>
+  )
+}
+
+export default function Features() {
+  return (
+    <section id="features" className="relative scroll-mt-24 py-14 md:py-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <SectionHeading
+          eyebrow="Features"
+          title="Everything you need to keep tabs private"
+          description="Lock one tab, a whole website, or every tab at once. Unlock with your password, fingerprint or face."
+        />
+
+        <div className="mt-14 grid gap-4 md:grid-cols-6">
+          {/* Domain lock: wide card with URL rule mock */}
+          <Card id="domain-lock" className="md:col-span-4">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-sm">
+                <CardIcon icon={Globe} />
+                <CardText title="Lock whole websites">
+                  Lock entire domains or specific paths like <code className="rounded bg-muted px-1 py-0.5 text-xs text-foreground">notion.so/work/*</code>.
+                  Every new tab that matches a rule locks itself automatically.
+                </CardText>
+              </div>
+              <ul className="w-full space-y-2 md:max-w-[260px]" aria-label="Example lock rules">
+                {["mail.google.com", "*.bankofamerica.com", "notion.so/work/*", "web.whatsapp.com"].map((r) => (
+                  <li key={r} className="flex items-center justify-between rounded-xl border border-border bg-background px-3 py-2 text-xs">
+                    <span className="truncate font-mono text-foreground">{r}</span>
+                    <Lock className="h-3.5 w-3.5 flex-shrink-0 text-highlight" aria-hidden="true" />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Card>
+
+          {/* Biometrics */}
+          <Card id="biometric" className="md:col-span-2">
+            <CardIcon icon={Fingerprint} />
+            <CardText title="Unlock with your fingerprint">
+              Touch ID, Windows Hello, Face ID, Android biometrics or a USB security key. Biometric data never leaves your device.
+            </CardText>
+          </Card>
+
+          {/* Auto-lock + schedule */}
+          <Card className="md:col-span-2">
+            <CardIcon icon={Timer} />
+            <CardText title="Auto-lock and schedules">
+              Lock tabs after 1 to 480 minutes of inactivity, or on a schedule such as work hours or overnight. Video playback
+              doesn&apos;t count as idle.
+            </CardText>
+            <div className="mt-6 flex items-center gap-2 rounded-xl border border-border bg-background px-3 py-2.5 text-xs text-muted-foreground">
+              <CalendarClock className="h-4 w-4 text-highlight" aria-hidden="true" />
+              Mon–Fri · 09:00–18:00
+            </div>
+          </Card>
+
+          {/* Stealth */}
+          <Card className="md:col-span-2">
+            <CardIcon icon={EyeOff} />
+            <CardText title="Stealth mode">
+              Hides every sign of Locksy. The badge disappears, notifications go quiet, and locked tabs show a fake error page.
+            </CardText>
+            <div className="mt-6 rounded-xl border border-border bg-background px-3 py-2.5 font-mono text-[11px] text-muted-foreground">
+              This site can&apos;t be reached
+              <span className="block text-foreground/70">ERR_CONNECTION_REFUSED</span>
+            </div>
+          </Card>
+
+          {/* Screen share */}
+          <Card className="md:col-span-2">
+            <CardIcon icon={ScreenShare} />
+            <CardText title="Screen Share Shield">
+              Presenting on Meet, Zoom or Teams? Locked tabs, banking, webmail and tab titles get covered so nothing leaks on
+              screen.
+            </CardText>
+          </Card>
+
+          {/* Shortcuts */}
+          <Card className="md:col-span-3">
+            <CardIcon icon={Keyboard} />
+            <CardText title="Keyboard shortcuts">
+              Every shortcut can be changed in your browser&apos;s settings. Locked tabs show a lock icon and a live badge count.
+            </CardText>
+            <dl className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {[
+                { keys: ["Alt", "Shift", "9"], label: "Lock this tab" },
+                { keys: ["Alt", "Shift", "0"], label: "Open the manager" },
+                { keys: ["Alt", "Shift", "8"], label: "Lock all tabs" },
+                { keys: ["Alt", "Shift", "7"], label: "Toggle stealth" },
+              ].map((s) => (
+                <div key={s.label} className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background px-3 py-2">
+                  <dt className="text-xs text-muted-foreground">{s.label}</dt>
+                  <dd className="flex gap-1">
+                    {s.keys.map((k) => (
+                      <kbd key={k} className="kbd">{k}</kbd>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Card>
+
+          {/* Webcam */}
+          <Card className="md:col-span-3">
+            <CardIcon icon={Camera} />
+            <CardText title="Webcam intruder capture">
+              When someone guesses your password wrong, Locksy can take a webcam snapshot. Photos stay on your device, and you can
+              review or delete them from the intruder log.
+            </CardText>
+            <div className="mt-6 flex items-center gap-3 rounded-xl border border-border bg-background px-3 py-2.5">
+              <span className="h-2 w-2 rounded-full bg-red-500" aria-hidden="true" />
+              <span className="text-xs text-foreground">3 failed attempts</span>
+              <span className="ml-auto text-xs text-muted-foreground">Today, 14:32</span>
+            </div>
+          </Card>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, idx) => (
-            <div
-              key={idx}
-              className="group feature-card relative overflow-hidden"
-            >
-              {/* Gradient overlay on hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-
-              <div className="relative z-10">
-                <div className={`inline-flex w-16 h-16 items-center justify-center text-4xl mb-6 bg-gradient-to-br ${feature.gradient} rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-                  <span aria-hidden="true">{feature.icon}</span>
+        {/* Everything else */}
+        <div className="mt-16">
+          <h3 className="text-center text-sm font-medium text-muted-foreground">And a lot more built in</h3>
+          <ul className="mt-8 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {MORE_FEATURES.map(({ icon: Icon, title, desc }) => (
+              <li key={title} className="flex gap-4">
+                <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-highlight" aria-hidden="true" />
+                <div>
+                  <p className="text-[15px] font-medium text-foreground">{title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{desc}</p>
                 </div>
-                <h3 className="font-bold text-xl mb-3 text-foreground group-hover:text-primary transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
-              </div>
+              </li>
+            ))}
 
-              {/* Corner accent */}
-              <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500`} />
-            </div>
-          ))}
+          </ul>
         </div>
       </div>
     </section>

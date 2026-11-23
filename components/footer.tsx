@@ -1,363 +1,176 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import WhatsAppIcon from "./whatsapp-icon"
 import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
+import { CHROME_STORE_URL, EDGE_STORE_URL, FIREFOX_STORE_URL, LOCKSY_LOGO_URL } from "@/lib/browsers"
+
+type FooterLink = { label: string; href: string; external?: boolean; onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void }
+
+const COLUMNS: { title: string; links: FooterLink[] }[] = [
+  {
+    title: "Product",
+    links: [
+      { label: "Chrome Web Store", href: CHROME_STORE_URL, external: true },
+      { label: "Firefox Add-ons", href: FIREFOX_STORE_URL, external: true },
+      { label: "Edge Add-ons", href: EDGE_STORE_URL, external: true },
+      { label: "Features", href: "/#features" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Demo video", href: "https://www.youtube.com/watch?v=mZxIBLo9ezY", external: true },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "User guide", href: "/guide" },
+      { label: "Security", href: "/security" },
+      { label: "Free tools", href: "/tools" },
+      { label: "Blog", href: "/blog" },
+      { label: "Best tab lockers 2026", href: "/blog/best-tab-locking-extensions-2026" },
+      { label: "About", href: "/about" },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { label: "Contact us", href: "/contact" },
+      { label: "support@locksy.dev", href: "mailto:support@locksy.dev" },
+      { label: "WhatsApp channel", href: WHATSAPP_CHANNEL_URL, external: true, onClick: openWhatsAppChannel },
+      { label: "FAQ", href: "/#faq" },
+      { label: "Report an issue", href: "https://github.com/vansh-121/Locksy/issues/new?template=bug_report.md", external: true },
+      { label: "Discussions", href: "https://github.com/vansh-121/Locksy/discussions", external: true },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Terms of service", href: "/terms-of-service" },
+      { label: "Privacy policy", href: "/privacy-policy" },
+      { label: "Cookie policy", href: "/cookie-policy" },
+      { label: "Refund policy", href: "/refund-policy" },
+      { label: "Disclaimer", href: "/disclaimer" },
+      { label: "License", href: "https://github.com/vansh-121/Locksy/blob/main/LICENSE", external: true },
+    ],
+  },
+]
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 text-neutral-300 py-20 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      {/* Animated glow blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/5 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-        {/* Logo and Description */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
-              alt="Locksy"
-              width={48}
-              height={48}
-              className="h-12 w-auto"
-            />
-            <span className="font-black text-3xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Locksy
-            </span>
-          </div>
-          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
-            Privacy-first tab protection for everyone. Keep sensitive tabs safe from shoulder-surfing with just one click.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-16">
-          {/* Product */}
-          <div>
-            <h3 className="font-bold text-white text-lg mb-6 flex items-center gap-2">
-              <span className="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full" />
-              Product
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a
-                  href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Chrome Web Store
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://addons.mozilla.org/en-US/firefox/addon/locksy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Firefox Add-ons
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Edge Add-ons
-                </a>
-              </li>
-              <li>
-                <a href="/pricing" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="/#features" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Features
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.youtube.com/watch?v=mZxIBLo9ezY"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Watch Demo Video
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="font-bold text-white text-lg mb-6 flex items-center gap-2">
-              <span className="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full" />
-              Resources
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a href="/guide" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  User Guide
-                </a>
-              </li>
-              <li>
-                <a href="/security" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Security
-                </a>
-              </li>
-              <li>
-                <a href="/tools" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Free Security Tools
-                </a>
-              </li>
-              <li>
-                <a href="/blog" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="/blog/best-tab-locking-extensions-2026" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Best Tab Lockers 2026
-                </a>
-              </li>
-              <li>
-                <a href="/about" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  About Locksy
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Help & Support */}
-          <div>
-            <h3 className="font-bold text-white text-lg mb-6 flex items-center gap-2">
-              <span className="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full" />
-              Help & Support
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a href="/contact" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Contact Us
-                </a>
-              </li>
-              <li>
-                <a href="mailto:support@locksy.dev" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Contact Developer
-                </a>
-              </li>
-              <li>
-                <a
-                  href={WHATSAPP_CHANNEL_URL}
-                  onClick={openWhatsAppChannel}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  WhatsApp Channel
-                </a>
-              </li>
-              <li>
-                <a href="/#faq" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/vansh-121/Locksy/issues/new?template=bug_report.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Report Issue
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/vansh-121/Locksy/discussions"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Discussions
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="font-bold text-white text-lg mb-6 flex items-center gap-2">
-              <span className="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full" />
-              Legal
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a href="/terms-of-service" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a href="/privacy-policy" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="/disclaimer" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Disclaimer
-                </a>
-              </li>
-              <li>
-                <a href="/cookie-policy" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Cookie Policy
-                </a>
-              </li>
-              <li>
-                <a href="/refund-policy" className="hover:text-primary transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  Refund Policy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/vansh-121/Locksy/blob/main/LICENSE"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-neutral-600 rounded-full group-hover:bg-primary transition-colors" />
-                  License
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Browser Compatibility Section */}
-        <div className="mt-16 mb-12 text-center">
-          <h4 className="text-sm font-semibold text-neutral-400 mb-4">Compatible with All Major Browsers</h4>
-          <div className="flex flex-wrap items-center justify-center gap-8">
-            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/chrome.png" alt="Chrome" className="w-6 h-6 opacity-70 object-contain" />
-              <span className="text-sm">Chrome</span>
-            </div>
-            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/edge.png" alt="Edge" className="w-6 h-6 opacity-70 object-contain" />
-              <span className="text-sm">Edge</span>
-            </div>
-            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/brave.png" alt="Brave" className="w-6 h-6 opacity-70 object-contain" />
-              <span className="text-sm">Brave</span>
-            </div>
-            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/opera.png" alt="Opera" className="w-6 h-6 opacity-70 object-contain" />
-              <span className="text-sm">Opera</span>
-            </div>
-            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/vivaldi.png" alt="Vivaldi" className="w-6 h-6 opacity-70 object-contain" />
-              <span className="text-sm">Vivaldi</span>
-            </div>
-            <div className="flex items-center gap-2 text-neutral-400 hover:text-primary transition-colors">
-              <img src="/browsers/arc.png" alt="Arc" className="w-6 h-6 opacity-70 object-contain" />
-              <span className="text-sm">Arc</span>
-            </div>
-            <div className="flex items-center gap-2 text-neutral-400">
-              <span className="text-sm">+ More</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="border-t border-neutral-800/50 pt-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <p className="text-sm text-neutral-400 mb-1">© 2025–2026 Locksy - Tab Protection Extension</p>
-              <p className="text-xs text-neutral-500">Made with ❤️ for Privacy & Security</p>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center md:justify-end gap-4">
-              <a
-                href="https://peerpush.com/p/locksy-tab-locker-and-password-protection"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-opacity hover:opacity-90 inline-flex items-center"
-                title="Locksy: Launching Soon on PeerPush"
-              >
-                <img
-                  src="https://peerpush.com/p/locksy-tab-locker-and-password-protection/badge.png"
-                  alt="Locksy: Launching Soon on PeerPush"
-                  style={{ height: "40px", width: "auto" }}
-                />
-              </a>
-              <a
-                href="https://sellwithboost.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-opacity hover:opacity-90 inline-flex items-center"
-                title="Listed on Sell With boost"
-              >
-                <img
-                  src="https://sellwithboost.com/badge/listing-dark.svg"
-                  alt="Listed on Sell With boost"
-                  style={{ height: '40px', width: 'auto' }}
-                />
-              </a>
+    <footer className="relative border-t border-border">
+      <div className="mx-auto max-w-6xl px-4 pt-16 pb-10 md:px-6 md:pt-20">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr]">
+          <div className="max-w-xs">
+            <Link href="/" className="flex items-center gap-2.5">
+              <Image src={LOCKSY_LOGO_URL} alt="" width={36} height={36} className="h-8 w-8" />
+              <span className="font-display text-lg font-semibold tracking-tight text-foreground">Locksy</span>
+            </Link>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Password protection for your browser tabs. Private by design, fully offline, no account needed.
+            </p>
+            <div className="mt-6 flex items-center gap-2">
               <a
                 href={WHATSAPP_CHANNEL_URL}
                 onClick={openWhatsAppChannel}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800/50 hover:bg-gradient-to-r hover:from-green-600 hover:to-green-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
-                title="Follow Locksy Support on WhatsApp"
+                title="Follow Locksy on WhatsApp"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
               >
-                <WhatsAppIcon className="w-5 h-5" />
+                <WhatsAppIcon className="h-4 w-4" />
               </a>
               <a
                 href="https://www.youtube.com/watch?v=mZxIBLo9ezY"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800/50 hover:bg-gradient-to-r hover:from-red-600 hover:to-red-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
-                title="Watch Demo Video"
+                title="Watch the demo on YouTube"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+              </a>
+              <a
+                href="https://github.com/vansh-121/Locksy"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Locksy on GitHub"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+              >
+                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z" />
                 </svg>
               </a>
             </div>
           </div>
 
-          <div className="text-center mt-8 pt-8 border-t border-neutral-800/30">
-            <p className="text-sm text-neutral-500 italic">"Security is not a feature, it's a necessity."</p>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+            {COLUMNS.map((col) => (
+              <div key={col.title}>
+                <h3 className="font-sans text-sm font-medium tracking-normal text-foreground">{col.title}</h3>
+                <ul className="mt-4 space-y-2.5">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      <a
+                        href={l.href}
+                        onClick={l.onClick}
+                        {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors break-words"
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Supported browsers */}
+        <div className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-8 text-xs text-muted-foreground">
+          <span>Works on</span>
+          {[
+            ["chrome", "Chrome"],
+            ["edge", "Edge"],
+            ["firefox", "Firefox"],
+            ["brave", "Brave"],
+            ["opera", "Opera"],
+            ["vivaldi", "Vivaldi"],
+            ["arc", "Arc"],
+          ].map(([id, name]) => (
+            <span key={id} className="inline-flex items-center gap-1.5">
+              <img src={`/browsers/${id}.png`} alt="" className="h-4 w-4 object-contain opacity-80" />
+              {name}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+          <p className="text-xs text-muted-foreground">© 2025–2026 Locksy. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href="https://peerpush.com/p/locksy-tab-locker-and-password-protection"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-80 hover:opacity-100 transition-opacity"
+              title="Locksy on PeerPush"
+            >
+              <img
+                src="https://peerpush.com/p/locksy-tab-locker-and-password-protection/badge.png"
+                alt="Locksy on PeerPush"
+                style={{ height: "32px", width: "auto" }}
+              />
+            </a>
+            <a
+              href="https://sellwithboost.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-80 hover:opacity-100 transition-opacity"
+              title="Listed on Sell With Boost"
+            >
+              <img src="https://sellwithboost.com/badge/listing-dark.svg" alt="Listed on Sell With Boost" style={{ height: "32px", width: "auto" }} />
+            </a>
           </div>
         </div>
       </div>

@@ -3,91 +3,103 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ──────────────────────────────────────────────────────────────────────────
+   Design tokens
+   One neutral palette plus a single brand blue taken from the Locksy logo.
+   `secondary` and `gradient-via` are deliberately close to `primary`, so any
+   legacy `from-primary to-secondary` gradient elsewhere on the site renders as
+   a quiet blue instead of the old blue→purple rainbow.
+   ────────────────────────────────────────────────────────────────────────── */
 :root {
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.09 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.09 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.09 0 0);
-  --primary: oklch(0.45 0.24 264);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.55 0.22 300);
-  --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.50 0 0);
-  --accent: oklch(0.95 0.01 264);
-  --accent-foreground: oklch(0.45 0.24 264);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.90 0 0);
-  --input: oklch(0.90 0 0);
-  --ring: oklch(0.45 0.24 264);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.75rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.45 0.24 264);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-  --gradient-via: oklch(0.50 0.23 282);
+  --background: #fafafa;
+  --foreground: #0b0c0e;
+  --card: #ffffff;
+  --card-foreground: #0b0c0e;
+  --popover: #ffffff;
+  --popover-foreground: #0b0c0e;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #1d4ed8;
+  --secondary-foreground: #ffffff;
+  --muted: #f1f2f4;
+  --muted-foreground: #5b616b;
+  --accent: #eef3fe;
+  --accent-foreground: #1d4ed8;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e4e6ea;
+  --input: #e4e6ea;
+  --ring: #2563eb;
+  --chart-1: #2563eb;
+  --chart-2: #10b981;
+  --chart-3: #f59e0b;
+  --chart-4: #6366f1;
+  --chart-5: #ef4444;
+  --radius: 0.875rem;
+  --sidebar: #fafafa;
+  --sidebar-foreground: #0b0c0e;
+  --sidebar-primary: #2563eb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f2f4;
+  --sidebar-accent-foreground: #0b0c0e;
+  --sidebar-border: #e4e6ea;
+  --sidebar-ring: #2563eb;
+  --gradient-via: #2f6bf0;
 
-  /* Theme-INVARIANT brand blues, for text sitting on a hard-coded surface.
-     `text-primary` flips with the theme, so on a `bg-white` button or a
-     hard-coded navy panel it lands at only ~4.1-4.2:1 in one theme or the
-     other. These two are deliberately NOT redefined under `.dark`:
-       --primary-on-light  #063ad7  →  8.08:1 on #ffffff
-       --primary-on-dark   #4f8dff  →  5.38-5.80:1 on the #0a1329..#0c1a3b navies
-     Use them whenever the background does not follow the theme. */
-  --primary-on-light: oklch(0.45 0.24 264);
-  --primary-on-dark: oklch(0.68 0.22 264);
+  /* Accent used for small highlights (eyebrows, highlighted words, icons). */
+  --highlight: #2563eb;
+  /* Soft brand glow used behind hero/CTA surfaces. */
+  --glow: rgba(37, 99, 235, 0.14);
+
+  /* Theme-invariant brand blues for text on hard-coded light/dark surfaces. */
+  --primary-on-light: #1d4ed8;
+  --primary-on-dark: #8ab8ff;
 }
 
 .dark {
-  --background: oklch(0.12 0.02 270);
-  --foreground: oklch(0.96 0 0);
-  --card: oklch(0.15 0.02 270);
-  --card-foreground: oklch(0.96 0 0);
-  --popover: oklch(0.15 0.02 270);
-  --popover-foreground: oklch(0.96 0 0);
-  --primary: oklch(0.62 0.26 264);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.65 0.24 300);
-  --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.20 0.02 270);
-  --muted-foreground: oklch(0.68 0 0);
-  --accent: oklch(0.18 0.04 264);
-  --accent-foreground: oklch(0.62 0.26 264);
-  --destructive: oklch(0.65 0.25 27);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.24 0.03 270);
-  --input: oklch(0.20 0.03 270);
-  --ring: oklch(0.62 0.26 264);
-  --chart-1: oklch(0.62 0.26 264);
-  --chart-2: oklch(0.70 0.20 162);
-  --chart-3: oklch(0.78 0.20 70);
-  --chart-4: oklch(0.70 0.27 304);
-  --chart-5: oklch(0.70 0.25 16);
-  --sidebar: oklch(0.14 0.02 270);
-  --sidebar-foreground: oklch(0.96 0 0);
-  --sidebar-primary: oklch(0.62 0.26 264);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.20 0.03 270);
-  --sidebar-accent-foreground: oklch(0.96 0 0);
-  --sidebar-border: oklch(0.24 0.03 270);
-  --sidebar-ring: oklch(0.55 0.18 264);
-  --gradient-via: oklch(0.82 0.22 282);
+  --background: #060709;
+  --foreground: #f4f5f7;
+  --card: #0d0f12;
+  --card-foreground: #f4f5f7;
+  --popover: #101216;
+  --popover-foreground: #f4f5f7;
+  --primary: #4f8dff;
+  --primary-foreground: #ffffff;
+  --secondary: #3b74e8;
+  --secondary-foreground: #ffffff;
+  --muted: #14171b;
+  --muted-foreground: #9aa1ab;
+  --accent: #121a29;
+  --accent-foreground: #8ab8ff;
+  --destructive: #f05252;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #4f8dff;
+  --chart-1: #4f8dff;
+  --chart-2: #34d399;
+  --chart-3: #fbbf24;
+  --chart-4: #818cf8;
+  --chart-5: #f87171;
+  --sidebar: #0a0c0f;
+  --sidebar-foreground: #f4f5f7;
+  --sidebar-primary: #4f8dff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #14171b;
+  --sidebar-accent-foreground: #f4f5f7;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #4f8dff;
+  --gradient-via: #6a9fff;
+
+  --highlight: #8ab8ff;
+  --glow: rgba(79, 141, 255, 0.22);
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-dm-sans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -109,6 +121,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-highlight: var(--highlight);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -132,74 +145,84 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 35%, transparent);
   }
 }
 
 @layer components {
+  /* Primary CTA: solid, high-contrast pill (white on dark, black on light). */
   .btn-primary {
-    @apply px-4 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02];
+    @apply inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-foreground text-background text-sm sm:text-[15px] font-medium transition-[opacity,transform] duration-200 hover:opacity-90 active:scale-[0.98];
   }
 
-  .dark .btn-primary {
-    @apply shadow-primary/30 hover:shadow-primary/50;
-  }
-
+  /* Secondary CTA: quiet outlined pill. */
   .btn-secondary {
-    @apply px-4 py-3 sm:px-8 sm:py-4 bg-card border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+    @apply inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full border border-border bg-card/60 text-foreground text-sm sm:text-[15px] font-medium transition-colors duration-200 hover:bg-muted;
   }
 
-  .dark .btn-secondary {
-    @apply border-primary/30 hover:shadow-primary/20;
-  }
-
-  /* Size variants for CTAs (optional) */
   .btn-lg {
-    @apply px-6 py-4 sm:px-12 sm:py-5 text-base sm:text-lg;
+    @apply h-14 px-8 text-base;
   }
 
   .btn-sm {
-    @apply px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm;
+    @apply h-9 px-4 text-xs sm:text-sm;
   }
 
   .feature-card {
-    @apply p-8 bg-gradient-to-br from-card to-accent/30 rounded-2xl border border-primary/10 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 hover:border-primary/20 backdrop-blur-sm;
-  }
-
-  .dark .feature-card {
-    @apply border-primary/15 hover:border-primary/40 hover:shadow-primary/20 shadow-md shadow-primary/5;
+    @apply p-7 bg-card rounded-2xl border border-border transition-colors duration-300 hover:border-foreground/15;
   }
 
   .section-title {
-    @apply text-4xl md:text-6xl font-bold text-center mb-6 bg-clip-text text-transparent;
-    background-image: linear-gradient(to right, var(--primary), var(--gradient-via), var(--secondary));
+    @apply text-4xl md:text-5xl font-semibold text-center mb-5 text-foreground tracking-tight text-balance;
   }
 
   .section-subtitle {
-    @apply text-xl text-muted-foreground text-center mb-16 max-w-3xl mx-auto leading-relaxed;
+    @apply text-base md:text-lg text-muted-foreground text-center mb-14 max-w-2xl mx-auto leading-relaxed text-pretty;
+  }
+
+  /* Small uppercase label that sits above section headings. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3.5 py-1.5 text-xs font-medium text-muted-foreground;
+  }
+
+  .eyebrow-dot {
+    @apply h-1.5 w-1.5 rounded-full bg-highlight;
+  }
+
+  /* Card surface with a 1px top highlight, used across the new homepage. */
+  .surface {
+    @apply relative rounded-3xl border border-border bg-card;
+  }
+
+  .dark .surface {
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0) 40%);
+  }
+
+  .kbd {
+    @apply inline-flex items-center justify-center min-w-7 h-7 px-2 rounded-md border border-border bg-muted font-mono text-[11px] font-medium text-foreground;
   }
 }
 
-/* ── Dark mode glow enhancements ───────────────────────────────── */
-.dark .btn-primary {
-  text-shadow: 0 0 20px rgba(255 255 255 / 0.15);
-}
-
-/* Cards get a vibrant glow border in dark mode */
-.dark .feature-card:hover {
-  box-shadow: 0 0 40px oklch(0.62 0.26 264 / 0.18), 0 20px 40px oklch(0 0 0 / 0.3);
-}
-
-/* Neon glow on gradient text headings in dark mode */
-.dark .section-title {
-  filter: drop-shadow(0 0 24px oklch(0.62 0.26 264 / 0.45));
-}
-
-.dark h2[class*="bg-clip-text"],
-.dark h3[class*="bg-clip-text"],
-.dark span[class*="bg-clip-text"] {
-  filter: drop-shadow(0 0 20px oklch(0.62 0.26 264 / 0.35));
+/* Subtle dotted grid used behind hero and CTA. */
+.bg-grid {
+  background-image: radial-gradient(color-mix(in srgb, var(--foreground) 10%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
 /* Smooth theme transition */
@@ -210,67 +233,64 @@ html.transitioning *::after {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
 }
 
-/* Dynamic page offset below the fixed header (Globally synchronized with announcement banner) */
+/* Testimonial marquee */
+@keyframes marquee-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+.animate-marquee-up {
+  animation: marquee-up 40s linear infinite;
+}
+.marquee-paused:hover .animate-marquee-up {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-up { animation: none; }
+}
+
+/* ── Page offset below the fixed header ─────────────────────────────────
+   The early-bird announcement banner ended on Oct 1 2026, so the layout
+   script always adds `banner-dismissed`. The non-dismissed values are kept
+   for any future banner. */
 :root {
   --header-height: 108px;
-  --page-top-spacing: 8rem; /* 128px on mobile */
+  --page-top-spacing: 8rem;
 }
 
 @media (min-width: 768px) {
   :root {
     --header-height: 136px;
-    --page-top-spacing: 10rem; /* 160px on tablet/desktop */
+    --page-top-spacing: 10rem;
   }
 }
 
-/* When announcement banner is dismissed (per tab session) */
 html.banner-dismissed {
   --header-height: 72px;
-  --page-top-spacing: 5.75rem; /* 92px on mobile */
+  --page-top-spacing: 6.5rem;
 }
 
 @media (min-width: 768px) {
   html.banner-dismissed {
-    --header-height: 88px;
-    --page-top-spacing: 7rem; /* 112px on tablet/desktop */
+    --header-height: 80px;
+    --page-top-spacing: 8rem;
   }
 }
 
-/* Global page header offset applied across all pages */
 .page-top-offset {
   padding-top: var(--page-top-spacing) !important;
   transition: padding-top 0.25s ease-out;
 }
 
-/* Instantly suppress dismissed announcement banner before JS hydration */
 html.banner-dismissed #top-announcement-banner {
   display: none !important;
 }
 
-/* Adjust hero section top padding when announcement banner is dismissed */
-html.banner-dismissed #hero-section {
-  padding-top: 7rem !important; /* 112px on mobile */
-}
-
-@media (min-width: 768px) {
-  html.banner-dismissed #hero-section {
-    padding-top: 8rem !important; /* 128px on tablet */
-  }
-}
-
-@media (min-width: 1024px) {
-  html.banner-dismissed #hero-section {
-    padding-top: 8rem !important; /* 128px on desktop */
-  }
-}
-
 html.banner-dismissed .page-top-offset {
-  padding-top: 5.75rem !important;
+  padding-top: 6.5rem !important;
 }
 
 @media (min-width: 768px) {
   html.banner-dismissed .page-top-offset {
-    padding-top: 7rem !important;
+    padding-top: 8rem !important;
   }
 }
-

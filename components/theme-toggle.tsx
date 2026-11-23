@@ -14,7 +14,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="relative w-10 h-10 rounded-xl bg-accent/50 border border-border/50 flex items-center justify-center"
+        className="relative w-9 h-9 rounded-full border border-border flex items-center justify-center"
         aria-label="Toggle theme"
       >
         <div className="w-5 h-5" />
@@ -27,16 +27,16 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative w-10 h-10 rounded-xl bg-accent/50 border border-border/50 hover:bg-accent hover:border-primary/30 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/10 group"
+      className="relative w-9 h-9 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted flex items-center justify-center transition-colors duration-200"
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       title={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       {/* Sun icon (shown in dark mode) */}
       <svg
-        className={`w-5 h-5 absolute transition-all duration-500 ${
+        className={`w-4 h-4 absolute transition-all duration-500 ${
           isDark
-            ? "opacity-100 rotate-0 scale-100 text-amber-400"
-            : "opacity-0 rotate-90 scale-0 text-amber-400"
+            ? "opacity-100 rotate-0 scale-100"
+            : "opacity-0 rotate-90 scale-0"
         }`}
         fill="none"
         viewBox="0 0 24 24"
@@ -52,10 +52,10 @@ export function ThemeToggle() {
 
       {/* Moon icon (shown in light mode) */}
       <svg
-        className={`w-5 h-5 absolute transition-all duration-500 ${
+        className={`w-4 h-4 absolute transition-all duration-500 ${
           isDark
-            ? "opacity-0 -rotate-90 scale-0 text-primary"
-            : "opacity-100 rotate-0 scale-100 text-primary"
+            ? "opacity-0 -rotate-90 scale-0"
+            : "opacity-100 rotate-0 scale-100"
         }`}
         fill="none"
         viewBox="0 0 24 24"

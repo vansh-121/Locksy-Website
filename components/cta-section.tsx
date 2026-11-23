@@ -1,113 +1,63 @@
-import Link from "next/dist/client/link";
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+import { PRIMARY_BROWSERS } from "@/lib/browsers"
 
+/** Closing call-to-action, shared by the homepage, guide, security and tools pages. */
 export default function CTASection() {
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-r from-primary via-secondary to-primary">
-      <div className="max-w-4xl mx-auto px-4 md:px-6 text-center text-white">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Protect Your Tabs?</h2>
-        <p className="text-xl opacity-95 mb-8">
-          Join thousands of users securing their browsing privacy with Locksy. Start protecting your sensitive tabs in
-          30 seconds.
-        </p>
+    <section className="relative py-14 md:py-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <div className="surface relative overflow-hidden px-6 py-16 text-center md:px-12 md:py-24">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+            <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_60%_70%_at_50%_100%,black,transparent)]" />
+            <div
+              className="absolute inset-x-0 bottom-0 h-[70%]"
+              style={{ background: "radial-gradient(55% 80% at 50% 100%, var(--glow), transparent 70%)" }}
+            />
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 justify-items-center mb-8 max-w-3xl mx-auto">
-          <a
-            href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary-on-light font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
-          >
-            <img src="/browsers/chrome.png" alt="Chrome" className="w-5 h-5 flex-shrink-0" />
-            Get for Chrome
-          </a>
-          <a
-            href="https://addons.mozilla.org/en-US/firefox/addon/locksy/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary-on-light font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
-          >
-            <img src="/browsers/firefox.png" alt="Firefox" className="w-5 h-5 flex-shrink-0" />
-            Get for Firefox
-          </a>
-          <a
-            href="https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary-on-light font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
-          >
-            <img src="/browsers/edge.png" alt="Edge" className="w-5 h-5 flex-shrink-0" />
-            Get for Edge
-          </a>
+          <div className="relative mx-auto max-w-2xl">
+            <h2 className="text-3xl font-semibold leading-[1.1] text-foreground sm:text-4xl md:text-5xl text-balance">
+              Keep your private tabs private, starting today
+            </h2>
+            <p className="mx-auto mt-5 max-w-lg text-muted-foreground md:text-lg">
+              Install Locksy for free and lock your first tab in about 30 seconds. No account, no card.
+            </p>
 
-          {/* <a
-            href="https://www.youtube.com/watch?v=mZxIBLo9ezY"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition inline-flex items-center justify-center gap-2"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-            </svg>
-            Watch Demo
-          </a> */}
-          <Link
-            href="/contact"
-            className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
-          >
-            Contact Support
-          </Link>
+            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              {PRIMARY_BROWSERS.map((b, i) => (
+                <a
+                  key={b.id}
+                  href={b.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${i === 0 ? "btn-primary" : "btn-secondary"} w-full sm:w-auto`}
+                >
+                  <img src={b.icon} alt="" className="h-5 w-5 object-contain" />
+                  Add to {b.name}
+                  {i === 0 && <ArrowRight className="h-4 w-4" />}
+                </a>
+              ))}
+            </div>
 
-          <a
-            href="https://github.com/sponsors/vansh-121"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full px-5 py-3 bg-white text-primary-on-light font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 text-center inline-flex items-center justify-center gap-2"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
-            Sponsor Project
-          </a>
-          {/* <a
-            href="https://github.com/vansh-121/Locksy/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
-          >
-            Report Issue
-          </a> */}
-          {/* <Link
-            href="/contact"
-            className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
-          >
-            Contact Support
-          </Link> */}
-          <Link
-            href="/privacy-policy"
-            className="w-full px-5 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition text-center"
-          >
-            Privacy Policy
-          </Link>
-        </div>
+            <p className="mt-6 text-xs text-muted-foreground">
+              Also works on Brave, Opera, Vivaldi, Comet, Arc and other Chromium browsers.
+            </p>
 
-        <div className="max-w-2xl mx-auto mb-8 flex items-center justify-center gap-2 p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
-          <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-          </svg>
-          <p className="text-sm font-medium">
-            Want Locksy on Apple Safari? Sponsor the project to help cover Apple's $99/year developer fee.
-          </p>
-        </div>
-
-        <p className="text-sm opacity-80 mb-8">
-          Works on Firefox, Chrome, Edge, Brave, Opera, Comet, Vivaldi, Arc & more
-        </p>
-
-        <div className="grid md:grid-cols-4 gap-4 text-sm">
-          <div>✓ Install in 30 seconds</div>
-          <div>✓ No credit card needed</div>
-          <div>✓ No account required</div>
-          <div>✓ 100% privacy guaranteed</div>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact support</Link>
+              <Link href="/privacy-policy" className="hover:text-foreground transition-colors">Privacy policy</Link>
+              <a
+                href="https://github.com/sponsors/vansh-121"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+                title="Sponsoring helps cover Apple's $99/year developer fee for a Safari version"
+              >
+                Sponsor a Safari version
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,51 +1,96 @@
+import Link from "next/link"
+import { Check, KeyRound, FileX2, Hourglass, ServerOff, ArrowRight } from "lucide-react"
+import SectionHeading from "@/components/section-heading"
+
+const GUARANTEES = [
+  "No account, email or login",
+  "We never see, store or send your browsing data",
+  "All password checks happen inside your browser",
+  "No master override or admin backdoor",
+]
+
+const SPECS = [
+  {
+    icon: KeyRound,
+    title: "PBKDF2-HMAC-SHA256",
+    value: "600,000 rounds",
+    desc: "Your master password is hashed above OWASP's recommendation, with timing-attack-safe comparison.",
+  },
+  {
+    icon: FileX2,
+    title: "Page unloaded on lock",
+    value: "Nothing to delete",
+    desc: "Locksy navigates the tab away instead of drawing a CSS overlay, so there's no element to remove in DevTools.",
+  },
+  {
+    icon: Hourglass,
+    title: "Escalating lockouts",
+    value: "Rate limited",
+    desc: "Each wrong guess adds a longer delay, which stops automated guessing.",
+  },
+  {
+    icon: ServerOff,
+    title: "Local-only storage",
+    value: "Works offline",
+    desc: "Passwords, settings and intruder photos never leave your device.",
+  },
+]
+
 export default function Security() {
-  const guarantees = [
-    { icon: "✓", title: "No Account Required", desc: "Start using Locksy right away — no sign-up, no email, no login." },
-    { icon: "✓", title: "Zero Data Collection", desc: "We never see, store, or send your browsing data anywhere." },
-    { icon: "✓", title: "Everything Stays on Your Device", desc: "All password checks and locking happen locally inside your browser — nothing is uploaded." },
-    { icon: "✓", title: "Only You Can Unlock", desc: "Your password is secured with OWASP-recommended hashing (PBKDF2 with 600k iterations) and timing-attack protection." },
-    { icon: "✓", title: "Stops Password Guessing", desc: "Repeated wrong guesses are slowed and blocked automatically (rate limiting & brute-force protection)." },
-    { icon: "✓", title: "No Admin Backdoors", desc: "There's no master override — only you can unlock your tabs." },
-  ]
-
   return (
-    <section id="security" className="py-20 md:py-32 bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/10 dark:bg-secondary/20 rounded-full blur-3xl animate-pulse delay-500" />
-      </div>
+    <section id="security" className="relative scroll-mt-24 py-14 md:py-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <SectionHeading
+          eyebrow="Security"
+          title="Privacy you can check for yourself"
+          description="Locksy is built so there's nothing to trust but your own browser. Here is exactly how it works."
+        />
 
-      <div className="relative max-w-6xl mx-auto px-4 md:px-6">
-        <h2 className="section-title">Your Privacy is Our Priority</h2>
-        <p className="section-subtitle">Built with security-first principles. Zero compromises.</p>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {guarantees.map((item, idx) => (
-            <div key={idx} className="flex gap-4 p-6 bg-card rounded-lg border border-border/50">
-              <div className="text-2xl font-bold text-primary flex-shrink-0">{item.icon}</div>
-              <div>
-                <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
-                <p className="text-muted-foreground">{item.desc}</p>
-              </div>
+        <div className="mt-14 grid gap-4 lg:grid-cols-[1.1fr_1fr]">
+          {/* Main statement card */}
+          <div className="surface relative overflow-hidden p-8 md:p-10">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full blur-3xl"
+              style={{ background: "var(--glow)" }}
+            />
+            <h3 className="relative text-2xl font-semibold leading-snug text-foreground md:text-3xl text-balance">
+              Your password never leaves your browser
+            </h3>
+            <p className="relative mt-4 text-muted-foreground leading-relaxed">
+              Locking, unlocking and password checks all run locally. There is no Locksy server holding your data, so there is
+              nothing to breach.
+            </p>
+            <ul className="relative mt-8 space-y-3.5">
+              {GUARANTEES.map((g) => (
+                <li key={g} className="flex items-start gap-3 text-[15px] text-foreground">
+                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-highlight/15">
+                    <Check className="h-3 w-3 text-highlight" aria-hidden="true" />
+                  </span>
+                  {g}
+                </li>
+              ))}
+            </ul>
+            <div className="relative mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/security" className="btn-primary">
+                Read the security deep dive <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/privacy-policy" className="btn-secondary">
+                Privacy policy
+              </Link>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div className="text-center">
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/security"
-              className="btn-primary inline-block"
-            >
-              🛡️ Read Security Deep Dive
-            </a>
-            <a
-              href="/privacy-policy"
-              className="btn-secondary inline-block"
-            >
-              Privacy Policy
-            </a>
+          {/* Spec cards */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {SPECS.map(({ icon: Icon, title, value, desc }) => (
+              <div key={title} className="surface flex flex-col p-6">
+                <Icon className="h-5 w-5 text-highlight" aria-hidden="true" />
+                <p className="mt-6 font-display text-xl font-semibold text-foreground">{value}</p>
+                <p className="mt-1 text-sm font-medium text-foreground/80">{title}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,203 +1,95 @@
+import { Check, X } from "lucide-react"
+import SectionHeading from "@/components/section-heading"
+
+const DEVICE_LOCK = [
+  { device: "Locks the whole computer to hide one tab", locksy: "Locks only the tabs you choose" },
+  { device: "Everything is visible while you're logged in", locksy: "Protects tabs while you keep working" },
+  { device: "Interrupts screen sharing, calls and music", locksy: "Everything else keeps running" },
+  { device: "Takes 5–10 seconds to lock and unlock", locksy: "One click or one shortcut" },
+]
+
+const ROWS = [
+  "Lock individual tabs",
+  "Auto-lock whole websites",
+  "Fingerprint / face unlock",
+  "Strong password hashing",
+  "Auto-blur sensitive info",
+  "Re-lock tabs on browser startup",
+  "Hide that tabs are locked",
+  "Webcam photo of snoopers",
+  "Custom lock screen messages",
+  "Weekly privacy reports",
+]
+
+function Yes() {
+  return (
+    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-highlight/15" aria-label="Yes">
+      <Check className="h-3.5 w-3.5 text-highlight" />
+    </span>
+  )
+}
+
+function No() {
+  return (
+    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted" aria-label="No">
+      <X className="h-3.5 w-3.5 text-muted-foreground" />
+    </span>
+  )
+}
+
 export default function Comparison() {
   return (
-    <section id="comparison" className="scroll-mt-24 py-20 md:py-32 bg-gradient-to-b from-background to-accent/30 relative overflow-hidden">
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/8 dark:bg-primary/15 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/3 left-1/5 w-80 h-80 bg-secondary/8 dark:bg-secondary/15 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
+    <section id="comparison" className="relative scroll-mt-24 py-14 md:py-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <SectionHeading
+          eyebrow="Why Locksy"
+          title="Built for tab-level privacy"
+          description="Your operating system's lock screen protects the whole computer. Locksy protects exactly the tabs you need, while you keep working."
+        />
 
-      <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-        <h2 className="section-title">Why Choose Locksy?</h2>
-        <p className="section-subtitle">The only extension designed specifically for tab protection.</p>
-
-        {/* Locksy vs OS/Device Lock Comparison */}
-        <div className="mb-20 md:mb-32">
-          <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-12 md:mb-16">
-              {/* <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium backdrop-blur-sm mb-6">
-                <span className="text-2xl">🔐</span>
-                <span>The Core Difference</span>
-              </div> */}
-              <h3 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-purple-600 to-secondary dark:from-primary dark:via-purple-400 dark:to-secondary bg-clip-text text-transparent">
-                Locksy vs Device Lock
-              </h3>
-              <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                Device locks (Windows Lock, macOS Lock, etc.) protect your entire system, but <strong>Locksy gives you instant, selective protection</strong> exactly where you need it.
-              </p>
+        <div className="mt-14 grid items-start gap-4 lg:grid-cols-2">
+          {/* Device lock vs Locksy */}
+          <div className="surface overflow-hidden">
+            <div className="grid grid-cols-2 border-b border-border text-sm">
+              <div className="px-5 py-4 text-muted-foreground">Device lock</div>
+              <div className="border-l border-border px-5 py-4 font-medium text-foreground">Locksy</div>
             </div>
-
-            {/* Two Column Comparison */}
-            <div className="grid lg:grid-cols-2 gap-8 mb-12">
-              {/* Device Lock Limitations */}
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
-                <div className="relative bg-background/80 backdrop-blur-sm border-2 border-red-200/50 dark:border-red-900/50 rounded-2xl p-8 shadow-xl">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div aria-hidden="true" className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center text-2xl">
-                      ❌
-                    </div>
-                    <h4 className="text-xl md:text-2xl font-bold">Device Lock Limitations</h4>
-                  </div>
-                  <ul className="space-y-4">
-                    {[
-                      { title: "All-or-nothing approach", desc: "Must lock ENTIRE system to hide ONE tab" },
-                      { title: "No protection while working", desc: "When logged in, all tabs are visible to anyone nearby" },
-                      { title: "Kills active workflows", desc: "Stops screen sharing, downloads, music, and all processes" },
-                      { title: "Too slow for quick privacy", desc: "5-10 seconds to lock/unlock vs instant tab protection" },
-                      { title: "Can't work & protect simultaneously", desc: "Either everything is accessible or nothing is" },
-                      { title: "Inconvenient for brief moments", desc: "Overkill to lock device for 30-second coffee breaks" },
-                    ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3 group/item">
-                        <span className="text-red-500 font-bold mt-1 text-lg">×</span>
-                        <div>
-                          <strong className="text-foreground block">{item.title}</strong>
-                          <span className="text-sm text-muted-foreground">{item.desc}</span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+            {DEVICE_LOCK.map((r) => (
+              <div key={r.device} className="grid grid-cols-2 border-b border-border text-sm last:border-b-0">
+                <div className="flex gap-2.5 px-5 py-4 text-muted-foreground">
+                  <X className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                  {r.device}
+                </div>
+                <div className="flex gap-2.5 border-l border-border px-5 py-4 text-foreground">
+                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-highlight" aria-hidden="true" />
+                  {r.locksy}
                 </div>
               </div>
-
-              {/* Locksy Advantages */}
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
-                <div className="relative bg-background/80 backdrop-blur-sm border-2 border-green-200/50 dark:border-green-900/50 rounded-2xl p-8 shadow-xl">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-2xl">
-                      ✅
-                    </div>
-                    <h4 className="text-xl md:text-2xl font-bold">Locksy Solutions</h4>
-                  </div>
-                  <ul className="space-y-4">
-                    {[
-                      { title: "Tab-level protection", desc: "Lock sensitive tabs while actively working on others" },
-                      { title: "Works while logged in", desc: "Protect tabs from shoulder surfing even when using your PC" },
-                      { title: "Zero workflow disruption", desc: "Keep working, screen sharing, downloads all continue" },
-                      { title: "Instant 1-click protection", desc: "Hide sensitive tabs in 1 second, not 10" },
-                      { title: "Selective access control", desc: "Lock banking tab, keep Gmail and YouTube accessible" },
-                      { title: "Perfect for quick privacy", desc: "Ideal for brief moments away or someone walking by" },
-                    ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3 group/item">
-                        <span className="text-green-600 font-bold mt-1 text-lg">✓</span>
-                        <div>
-                          <strong className="text-foreground block">{item.title}</strong>
-                          <span className="text-sm text-muted-foreground">{item.desc}</span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Real-World Scenarios */}
-            {/* <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
-              <div className="relative bg-background/80 backdrop-blur-sm border-2 border-primary/20 rounded-2xl p-8 md:p-10 shadow-xl">
-                <div className="flex items-center gap-3 mb-8 justify-center">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-2xl shadow-lg">
-                    💡
-                  </div>
-                  <h4 className="text-2xl md:text-3xl font-bold text-center">Real-World Scenarios</h4>
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[
-                    { icon: "�", title: "Shoulder surfing", desc: "Someone walking by your desk can't peek at locked tabs" },
-                    { icon: "🖥️", title: "Screen sharing", desc: "Share your screen during meetings without exposing private tabs" },
-                    { icon: "☕", title: "Quick breaks", desc: "Lock tabs in 1 second for coffee runs, no need to lock entire PC" },
-                    { icon: "👨‍👩‍👧", title: "Shared computers", desc: "Family/roommate using PC can't access your locked tabs" },
-                    { icon: "💼", title: "Open office", desc: "Work with confidence knowing sensitive tabs are protected" },
-                    { icon: "📹", title: "Live demos", desc: "Present or record tutorials while keeping research tabs locked" },
-                  ].map((scenario, idx) => (
-                    <div key={idx} className="group/card relative">
-                      <div className="feature-card h-full hover:border-primary/40 transition-all">
-                        <div className="text-4xl mb-3">{scenario.icon}</div>
-                        <h5 className="font-bold text-lg mb-2">{scenario.title}</h5>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{scenario.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div> */}
-          </div>
-        </div>
-
-        {/* Comparison with Other Extensions */}
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 border border-secondary/20 rounded-full text-sm font-medium backdrop-blur-sm mb-6">
-              <span>⚡</span>
-              <span>Feature Comparison</span>
-            </div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">
-              Locksy vs Other Browser Solutions
-            </h3>
+            ))}
           </div>
 
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 rounded-2xl blur-xl" />
-            <div className="relative bg-background/80 backdrop-blur-sm border-2 border-primary/10 rounded-2xl p-6 md:p-8 shadow-xl overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm md:text-base">
-                  <thead>
-                    <tr className="border-b-2 border-primary/20">
-                      <th className="text-left py-5 px-4 md:px-6 font-bold text-lg">Feature</th>
-                      <th className="text-center py-5 px-4 md:px-6 font-bold text-lg">
-                        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-xl shadow-lg">
-                          <span>🔐</span>
-                          <span>Locksy</span>
-                        </div>
-                      </th>
-                      <th className="text-center py-5 px-4 md:px-6 font-bold text-muted-foreground">Browser<br />Profiles</th>
-                      <th className="text-center py-5 px-4 md:px-6 font-bold text-muted-foreground">Tab<br />Managers</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      ["Auto-blur sensitive info", true, false, false],
-                      ["Lock individual tabs", true, false, false],
-                      ["Auto-lock whole websites", true, false, false],
-                      ["Re-lock tabs on browser startup", true, false, false],
-                      ["Hide that tabs are locked", true, false, false],
-                      ["Webcam photo of snoopers", true, false, false],
-                      ["Custom lock screen messages", true, false, false],
-                      ["Weekly privacy reports", true, false, false],
-                      ["Fingerprint / face unlock", true, false, false],
-                      ["Strong password encryption", true, false, false],
-                    ].map((row, idx) => (
-                      <tr key={idx} className="border-b border-border/50 hover:bg-accent/30 transition-colors">
-                        <td className="py-4 px-4 md:px-6 font-medium">{row[0]}</td>
-                        <td className="py-4 px-4 md:px-6 text-center">
-                          {row[1] ? (
-                            <span aria-label="Yes" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold">✓</span>
-                          ) : (
-                            <span aria-label="No" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold">×</span>
-                          )}
-                        </td>
-                        <td className="py-4 px-4 md:px-6 text-center">
-                          {row[2] ? (
-                            <span aria-label="Yes" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold">✓</span>
-                          ) : (
-                            <span aria-label="No" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold">×</span>
-                          )}
-                        </td>
-                        <td className="py-4 px-4 md:px-6 text-center">
-                          {row[3] ? (
-                            <span aria-label="Yes" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 text-green-600 font-bold">✓</span>
-                          ) : (
-                            <span aria-label="No" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold">×</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          {/* Feature table */}
+          <div className="surface overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border">
+                  <th scope="col" className="px-5 py-4 text-left font-normal text-muted-foreground">Feature</th>
+                  <th scope="col" className="px-3 py-4 text-center font-medium text-foreground">Locksy</th>
+                  <th scope="col" className="px-3 py-4 text-center font-normal text-muted-foreground">Browser profiles</th>
+                  <th scope="col" className="px-3 py-4 text-center font-normal text-muted-foreground">Tab managers</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ROWS.map((row) => (
+                  <tr key={row} className="border-b border-border last:border-b-0">
+                    <td className="px-5 py-3 text-foreground">{row}</td>
+                    <td className="px-3 py-3 text-center"><Yes /></td>
+                    <td className="px-3 py-3 text-center"><No /></td>
+                    <td className="px-3 py-3 text-center"><No /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

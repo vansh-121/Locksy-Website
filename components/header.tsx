@@ -2,565 +2,197 @@
 
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
+import Link from "next/link"
+import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { PRO_CHECKOUT_URL, SALE_DEADLINE_UTC } from "@/lib/pro"
+import { PRO_CHECKOUT_URL } from "@/lib/pro"
+import { ALL_BROWSERS, LOCKSY_LOGO_URL } from "@/lib/browsers"
 
-const PRIMARY_BROWSERS = [
-  {
-    name: "Chrome",
-    icon: "/browsers/chrome.png",
-    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
-    storeName: "Chrome Web Store",
-  },
-  {
-    name: "Edge",
-    icon: "/browsers/edge.png",
-    url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
-    storeName: "Edge Add-ons",
-  },
-  {
-    name: "Firefox",
-    icon: "/browsers/firefox.png",
-    url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/",
-    storeName: "Firefox Add-ons",
-  },
+const NAV_LINKS = [
+  { label: "Features", href: "/#features" },
+  { label: "Security", href: "/security" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Guide", href: "/guide" },
+  { label: "Tools", href: "/tools" },
+  { label: "Blog", href: "/blog" },
 ]
 
-const SECONDARY_BROWSERS = [
-  {
-    name: "Brave",
-    icon: "/browsers/brave.png",
-    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
-  },
-  {
-    name: "Opera",
-    icon: "/browsers/opera.png",
-    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
-  },
-  {
-    name: "Comet",
-    icon: "/browsers/comet.png",
-    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
-  },
-  {
-    name: "Vivaldi",
-    icon: "/browsers/vivaldi.png",
-    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
-  },
-]
+function InstallMenu({ onSelect }: { onSelect?: () => void }) {
+  return (
+    <div className="p-1.5">
+      <p className="px-3 pt-2 pb-1.5 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+        Choose your browser
+      </p>
+      {ALL_BROWSERS.map((b) => (
+        <a
+          key={b.id}
+          href={b.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onSelect}
+          className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-muted transition-colors"
+        >
+          <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
+          <span className="flex-1 min-w-0">
+            <span className="block text-sm font-medium text-foreground">{b.name}</span>
+            <span className="block text-xs text-muted-foreground">{b.store}</span>
+          </span>
+          <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
+        </a>
+      ))}
+    </div>
+  )
+}
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [showDownloadDropdown, setShowDownloadDropdown] = useState(false)
-  const [saleTimeLeft, setSaleTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number } | null>(null)
-  
-  // Initialize to false so SSR HTML does not flash expired early bird banner
-  const [isBannerVisible, setIsBannerVisible] = useState(false)
+  const [showInstall, setShowInstall] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Clear any legacy cross-tab cookie so dismissal is strictly per-tab
-      try {
-        if (document.cookie.includes("locksy_banner_dismissed")) {
-          document.cookie = "locksy_banner_dismissed=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
-        }
-      } catch {}
-
-      const isExpired = Date.now() >= SALE_DEADLINE_UTC
-      const isDismissed =
-        isExpired ||
-        sessionStorage.getItem("locksy_banner_dismissed") === "true" ||
-        document.documentElement.classList.contains("banner-dismissed")
-
-      if (isDismissed) {
-        setIsBannerVisible(false)
-        if (isExpired) {
-          document.documentElement.classList.add("banner-dismissed")
-        }
-      } else {
-        setIsBannerVisible(true)
-      }
-    }
+    const onScroll = () => setIsScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const handleDismissBanner = () => {
-    setIsBannerVisible(false)
-    if (typeof window !== "undefined") {
-      try {
-        sessionStorage.setItem("locksy_banner_dismissed", "true")
-        document.documentElement.classList.add("banner-dismissed")
-        let style = document.getElementById("banner-dismiss-style")
-        if (!style) {
-          style = document.createElement("style")
-          style.id = "banner-dismiss-style"
-          document.head.appendChild(style)
-        }
-        style.textContent =
-          "#top-announcement-banner { display: none !important; } html.banner-dismissed #hero-section { padding-top: 7rem !important; } @media (min-width: 768px) { html.banner-dismissed #hero-section { padding-top: 8rem !important; } } @media (min-width: 1024px) { html.banner-dismissed #hero-section { padding-top: 8rem !important; } } html.banner-dismissed .page-top-offset { padding-top: 5.75rem !important; } @media (min-width: 768px) { html.banner-dismissed .page-top-offset { padding-top: 7rem !important; } }"
-        window.dispatchEvent(new CustomEvent("locksy-banner-dismissed"))
-      } catch {}
-    }
-  }
-
+  // Other components dispatch this to open the install menu (e.g. "Install" CTAs).
   useEffect(() => {
-    // If early-bird sale deadline has passed (Oct 1, 12:00 AM UTC), automatically hide
-    if (Date.now() >= SALE_DEADLINE_UTC) {
-      setIsBannerVisible(false)
-      return
-    }
-
-    const tick = () => {
-      const diff = SALE_DEADLINE_UTC - Date.now()
-      if (diff <= 0) {
-        // Sale just ended — automatically dismiss and hide the banner
-        setIsBannerVisible(false)
-        try {
-          document.documentElement.classList.add("banner-dismissed")
-          window.dispatchEvent(new CustomEvent("locksy-banner-dismissed"))
-        } catch {}
-        return
-      }
-
-      setSaleTimeLeft({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        mins: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-        secs: Math.floor((diff % (1000 * 60)) / 1000),
-      })
-    }
-
-    tick()
-    const timer = setInterval(tick, 1000)
-    return () => clearInterval(timer)
-  }, [])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
-    const handleOpenDropdown = () => {
+    const open = () => {
       window.scrollTo({ top: 0, behavior: "smooth" })
-      setShowDownloadDropdown(true)
+      setShowInstall(true)
     }
-    window.addEventListener("open-install-dropdown", handleOpenDropdown)
-    return () => window.removeEventListener("open-install-dropdown", handleOpenDropdown)
+    window.addEventListener("open-install-dropdown", open)
+    return () => window.removeEventListener("open-install-dropdown", open)
   }, [])
 
-  // Click outside handler for dropdown
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setShowDownloadDropdown(false)
-      }
+    if (!showInstall) return
+    const onDown = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) setShowInstall(false)
     }
-
-    if (showDownloadDropdown) {
-      document.addEventListener("mousedown", handleClickOutside)
-      return () => document.removeEventListener("mousedown", handleClickOutside)
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setShowInstall(false)
+    document.addEventListener("mousedown", onDown)
+    document.addEventListener("keydown", onKey)
+    return () => {
+      document.removeEventListener("mousedown", onDown)
+      document.removeEventListener("keydown", onKey)
     }
-  }, [showDownloadDropdown])
+  }, [showInstall])
 
   return (
-    <header
-      suppressHydrationWarning
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
-        : "bg-transparent"
+    <header suppressHydrationWarning className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
+      <div
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full border px-3 py-2 pl-4 transition-all duration-300 ${
+          isScrolled || isMenuOpen
+            ? "border-border bg-background/75 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl"
+            : "border-transparent bg-transparent"
         }`}
-    >
-      {/* Early Bird Sale Top Announcement Banner */}
-      {isBannerVisible && (
-        <div
-          id="top-announcement-banner"
-          suppressHydrationWarning
-          className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-purple-900 to-fuchsia-950 border-b border-violet-500/25 text-white py-2 sm:py-2.5 pl-3 pr-9 sm:pl-4 sm:pr-10 md:px-12 shadow-sm"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-fuchsia-500/15 to-cyan-500/10 pointer-events-none" />
-
-          {/* Mobile View (< sm: 640px) - Single sleek, compact line that fits 320px+ */}
-          <div className="relative z-10 flex sm:hidden items-center justify-center gap-1.5 sm:gap-2 text-xs">
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-violet-500/30 text-violet-200 border border-violet-400/35 flex-shrink-0">
-              🔥 40% OFF
-            </span>
-            <span className="font-semibold text-violet-100 text-[11px] truncate">
-              Lifetime <strong className="text-white font-extrabold text-xs">$2.99</strong>
-              <span className="hidden min-[380px]:inline line-through text-violet-300/60 text-[10px] ml-1">$4.99</span>
-            </span>
-            <a
-              href={PRO_CHECKOUT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-0.5 px-2.5 py-0.5 rounded-full bg-white text-violet-950 font-black text-[11px] shadow-xs hover:bg-violet-100 active:scale-95 transition-all flex-shrink-0"
-            >
-              <span>Get Pro</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
-
-          {/* Tablet & Desktop View (>= sm: 640px) - Adaptive single-line row */}
-          <div className="relative z-10 hidden sm:flex items-center justify-center gap-x-2 md:gap-x-4 lg:gap-x-6 text-xs sm:text-sm">
-            {/* Tag & Offer */}
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-500/25 text-violet-200 border border-violet-400/40 shadow-xs flex-shrink-0">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-fuchsia-300"></span>
-                </span>
-                <span>🔥 40% OFF</span>
-              </span>
-              <div className="flex items-center gap-1.5">
-                <span className="font-medium text-violet-100">
-                  Locksy Pro <strong className="text-white font-bold">Lifetime</strong> for{" "}
-                  <strong className="text-white font-extrabold text-sm">$2.99</strong>
-                </span>
-                <span className="line-through text-violet-300/60 font-semibold text-xs">$4.99</span>
-                <span className="hidden xl:inline text-violet-300/85 text-xs font-medium">
-                  (Price rises Oct 1)
-                </span>
-              </div>
-            </div>
-
-            {/* Divider (lg+) */}
-            <div className="hidden lg:block h-3.5 w-px bg-white/20" />
-
-            {/* Action Area: Countdown & CTA Button */}
-            <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
-              {/* Segmented Countdown (md+) */}
-              {saleTimeLeft && (
-                <div className="hidden md:flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/40 border border-white/20 backdrop-blur-md text-[11px] sm:text-xs shadow-inner">
-                  <span className="text-[11px]">⏳</span>
-                  <span className="text-violet-300/90 text-[10px] font-bold uppercase tracking-wider hidden lg:inline">Ends in</span>
-                  <div className="flex items-center gap-1 font-mono font-bold tracking-tight">
-                    <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{saleTimeLeft.days}d</span>
-                    <span className="text-violet-400 font-black">:</span>
-                    <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{String(saleTimeLeft.hours).padStart(2, "0")}h</span>
-                    <span className="text-violet-400 font-black">:</span>
-                    <span className="bg-white/10 px-1.5 py-0.5 rounded text-white font-black">{String(saleTimeLeft.mins).padStart(2, "0")}m</span>
-                    <span className="text-violet-400 font-black hidden lg:inline">:</span>
-                    <span className="bg-fuchsia-500/30 text-fuchsia-200 px-1.5 py-0.5 rounded font-black hidden lg:inline">{String(saleTimeLeft.secs).padStart(2, "0")}s</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Claim Button */}
-              <a
-                href={PRO_CHECKOUT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative inline-flex items-center gap-1 px-3 sm:px-3.5 md:px-4 py-1 sm:py-1.5 rounded-full bg-white text-violet-950 hover:bg-violet-50 text-xs font-black shadow-md shadow-white/10 transition-all duration-200 hover:scale-105 active:scale-95 group flex-shrink-0 overflow-hidden"
-              >
-                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-violet-200/40 to-transparent pointer-events-none" />
-                <span className="relative hidden md:inline">Get Lifetime Access</span>
-                <span className="relative md:hidden">Get Access</span>
-                <span className="relative inline-block transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Close / Dismiss Button */}
-          <button
-            type="button"
-            onClick={handleDismissBanner}
-            aria-label="Dismiss banner"
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-violet-300/80 hover:text-white hover:bg-white/10 transition-colors z-20 cursor-pointer"
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      )}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between gap-4">
+      >
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png"
-              alt="Locksy"
-              width={48}
-              height={48}
-              priority
-              className="relative h-10 md:h-12 w-auto"
-            />
-          </div>
-          <span className="font-black text-xl md:text-2xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Locksy
-          </span>
-        </a>
+        <Link href="/" className="flex items-center gap-2.5 flex-shrink-0" aria-label="Locksy home">
+          <Image src={LOCKSY_LOGO_URL} alt="" width={36} height={36} priority className="h-8 w-8" />
+          <span className="font-display text-lg font-semibold tracking-tight text-foreground">Locksy</span>
+        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
-          <a
-            href="/#features"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            Features
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a
-            href="/guide"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            Guide
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a
-            href="/security"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            Security
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a
-            href="/pricing"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            Pricing
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a
-            href="/#faq"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            FAQ
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a
-            href="/tools"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            Tools
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a>
-          <a
-            href="/blog"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            Blog
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a>
-          {/* <a
-            href="/about"
-            className="text-foreground/80 hover:text-primary font-medium transition-all hover:scale-105 relative group"
-          >
-            About
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-          </a> */}
+        {/* Desktop nav */}
+        <nav className="hidden lg:flex items-center gap-1" aria-label="Main">
+          {NAV_LINKS.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="rounded-full px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {l.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* CTA Buttons */}
-        <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
-          {/* Theme Toggle */}
+        {/* Desktop actions */}
+        <div className="hidden lg:flex items-center gap-2">
           <ThemeToggle />
-
-          {/* Pro Upgrade Button */}
           <a
             href={PRO_CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-card border-2 border-primary/20 text-primary font-semibold rounded-xl hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg text-sm xl:text-base cursor-pointer"
+            className="rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
           >
-            <span aria-hidden="true">💎</span>
-            <span className="hidden xl:inline">Get Pro</span>
-            <span className="xl:hidden">Pro</span>
+            Get Pro
           </a>
-
-          {/* Install Now Button with Dropdown */}
-          <div ref={dropdownRef} className="relative inline-block">
+          <div ref={dropdownRef} className="relative">
             <button
-              onClick={() => setShowDownloadDropdown(!showDownloadDropdown)}
-              className="inline-flex items-center gap-2 px-4 xl:px-6 py-2.5 xl:py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5 group text-sm xl:text-base"
+              type="button"
+              onClick={() => setShowInstall((v) => !v)}
+              aria-expanded={showInstall}
+              aria-haspopup="menu"
+              className="inline-flex h-10 items-center gap-1.5 rounded-full bg-foreground px-5 text-sm font-medium text-background hover:opacity-90 transition-opacity"
             >
-              <span className="hidden xl:inline">Install Now</span>
-              <span className="xl:hidden">Install</span>
-              <svg
-                className={`w-4 h-4 transition-transform ${showDownloadDropdown ? "rotate-180" : ""}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+              Add to browser
+              <ChevronDown className={`h-4 w-4 transition-transform ${showInstall ? "rotate-180" : ""}`} />
             </button>
-
-            {showDownloadDropdown && (
-              <div className="absolute right-0 mt-2 w-64 bg-card rounded-xl shadow-2xl border border-border/50 overflow-hidden z-50">
-                {/* Primary Browsers */}
-                {PRIMARY_BROWSERS.map((browser) => (
-                  <a
-                    key={browser.name}
-                    href={browser.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors border-b border-border/30"
-                  >
-                    <img src={browser.icon} alt={browser.name} className="w-8 h-8 object-contain" />
-                    <div className="flex-1">
-                      <div className="font-semibold text-foreground">{browser.name}</div>
-                      <div className="text-xs text-muted-foreground">{browser.storeName}</div>
-                    </div>
-                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                ))}
-                {/* Secondary Browsers */}
-                {SECONDARY_BROWSERS.map((browser, index) => (
-                  <a
-                    key={browser.name}
-                    href={browser.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-3 px-4 py-3 hover:bg-accent transition-colors ${index < SECONDARY_BROWSERS.length - 1 ? "border-b border-border/30" : ""
-                      }`}
-                  >
-                    <img src={browser.icon} alt={browser.name} className="w-8 h-8 object-contain" />
-                    <div className="flex-1">
-                      <div className="font-semibold text-foreground">{browser.name}</div>
-                      <div className="text-xs text-muted-foreground">Chrome Web Store</div>
-                    </div>
-                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                ))}
+            {showInstall && (
+              <div className="absolute right-0 mt-2 w-72 overflow-hidden rounded-2xl border border-border bg-popover shadow-2xl animate-in fade-in slide-in-from-top-1 duration-150">
+                <InstallMenu onSelect={() => setShowInstall(false)} />
               </div>
             )}
           </div>
         </div>
 
-        {/* Mobile: Get Pro + Theme Toggle + Menu Toggle */}
-        <div className="lg:hidden flex items-center gap-2">
-          <a
-            href={PRO_CHECKOUT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
-          >
-            <span aria-hidden="true">💎</span>
-            <span>Get Pro</span>
-          </a>
+        {/* Mobile actions */}
+        <div className="flex items-center gap-1.5 lg:hidden">
           <ThemeToggle />
           <button
-            className="p-2 rounded-lg hover:bg-accent transition-colors flex-shrink-0"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            type="button"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground"
+            onClick={() => setIsMenuOpen((v) => !v)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-xl lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
-            <div className="flex flex-col p-6">
-              {/* Navigation Section */}
-              <div className="space-y-1 mb-2">
-                <a
-                  href="/#features"
-                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Features
-                </a>
-                <a
-                  href="/guide"
-                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Guide
-                </a>
-                <a
-                  href="/security"
-                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Security
-                </a>
-                <a
-                  href="/pricing"
-                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Pricing
-                </a>
-                <a
-                  href="/#faq"
-                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  FAQ
-                </a>
-                <a
-                  href="/tools"
-                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Tools
-                </a>
-                <a
-                  href="/blog"
-                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Blog
-                </a>
-                <a
-                  href="/contact"
-                  className="text-foreground/80 hover:text-primary font-medium p-3 rounded-lg hover:bg-accent transition-all block"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Contact
-                </a>
-              </div>
-
-              {/* Divider */}
-              <div className="h-px bg-border/50 my-2" />
-
-              {/* CTA Section */}
-              <div className="space-y-2.5 mb-2">
-                <a
-                  href={PRO_CHECKOUT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg transition-all"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span aria-hidden="true">💎</span> Get Pro
-                </a>
-
-                <a
-                  href="https://github.com/sponsors/vansh-121"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20 border border-primary/20 text-primary font-semibold rounded-lg transition-all"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                  </svg>
-                  Sponsor Project
-                </a>
-              </div>
-
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="mx-auto mt-2 max-w-6xl overflow-y-auto rounded-3xl border border-border bg-background/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
+          <nav className="flex flex-col" aria-label="Mobile">
+            {[...NAV_LINKS, { label: "FAQ", href: "/#faq" }, { label: "Contact", href: "/contact" }].map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="rounded-2xl px-4 py-3 text-[15px] text-foreground hover:bg-muted transition-colors"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="my-2 h-px bg-border" />
+          <InstallMenu onSelect={() => setIsMenuOpen(false)} />
+          <div className="mt-2 grid grid-cols-2 gap-2 p-1.5">
+            <a
+              href={PRO_CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary h-11"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Get Pro
+            </a>
+            <a
+              href="https://github.com/sponsors/vansh-121"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary h-11"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Sponsor
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

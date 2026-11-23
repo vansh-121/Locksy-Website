@@ -1,100 +1,139 @@
-"use client"
+import { Star } from "lucide-react"
+import SectionHeading from "@/components/section-heading"
+import { CHROME_STORE_URL, EDGE_STORE_URL, FIREFOX_STORE_URL } from "@/lib/browsers"
 
-import { useState } from "react"
+const STORES = {
+  chrome: { label: "Chrome Web Store", icon: "/browsers/chrome.png" },
+  firefox: { label: "Firefox Add-ons", icon: "/browsers/firefox.png" },
+  edge: { label: "Edge Add-ons", icon: "/browsers/edge.png" },
+} as const
+
+// Verbatim reviews from the public store listings.
+const REVIEWS: { quote: string; author: string; store: keyof typeof STORES }[] = [
+  {
+    quote:
+      "It works really well, and usually the extension lets you right in on other tab lockers, but this one always asks for your pin, making it my favorite one. Recommend it to all of the people that consider this.",
+    author: "Anthony Moeller",
+    store: "chrome",
+  },
+  {
+    quote:
+      "It is really nice extension, happy to use it! Clean interface and works seamlessly across all my tabs. Highly recommended for anyone who values privacy.",
+    author: "Sai Smruti Ranjan Das",
+    store: "chrome",
+  },
+  {
+    quote:
+      "Domain lock feature is really helpful for shared computers. The extension provides peace of mind knowing my personal tabs stay private. Great work by the developer!",
+    author: "Avneet Singh",
+    store: "chrome",
+  },
+  { quote: "So now I do not have to worry about handing over my laptop :)", author: "Devansh Varshney", store: "chrome" },
+  { quote: "Amazing, Great Product. 100% Satisfied.", author: "Simran Singh", store: "firefox" },
+  { quote: "10/10 for personal security.", author: "Ratanveer", store: "edge" },
+]
+
+const COLUMNS = [
+  [REVIEWS[0], REVIEWS[3]],
+  [REVIEWS[1], REVIEWS[4]],
+  [REVIEWS[2], REVIEWS[5]],
+]
+
+function ReviewCard({ quote, author, store }: (typeof REVIEWS)[number]) {
+  const s = STORES[store]
+  const initials = author
+    .split(" ")
+    .map((p) => p[0])
+    .slice(0, 2)
+    .join("")
+  return (
+    <figure className="surface p-6">
+      <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" aria-hidden="true" />
+        ))}
+      </div>
+      <blockquote className="mt-4 text-[15px] leading-relaxed text-foreground">&ldquo;{quote}&rdquo;</blockquote>
+      <figcaption className="mt-6 flex items-center gap-3">
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-xs font-medium text-foreground">
+          {initials}
+        </span>
+        <span className="min-w-0">
+          <span className="block truncate text-sm font-medium text-foreground">{author}</span>
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <img src={s.icon} alt="" className="h-3.5 w-3.5 object-contain" />
+            {s.label}
+          </span>
+        </span>
+      </figcaption>
+    </figure>
+  )
+}
 
 export default function Testimonials() {
-  const testimonials = [
-    {
-      quote:
-        "It works really well, and usually the extension lets you right in on other tab lockers, but this one always asks for your pin, making it my favorite one. Recommend it to all of the people that consider this.",
-      author: "Anthony Moeller",
-      role: "Chrome Web Store",
-      rating: 5,
-    },
-    {
-      quote: "It is really nice extension, happy to use it! Clean interface and works seamlessly across all my tabs. Highly recommended for anyone who values privacy.",
-      author: "Sai Smruti Ranjan Das",
-      role: "Chrome Web Store",
-      rating: 5,
-    },
-    {
-      quote: "Domain lock feature is really helpful for shared computers. The extension provides peace of mind knowing my personal tabs stay private. Great work by the developer!",
-      author: "Avneet Singh",
-      role: "Chrome Web Store",
-      rating: 5,
-    },
-    {
-      quote: "So now I do not have to worry about handing over my laptop :)",
-      author: "Devansh Varshney",
-      role: "Chrome Web Store",
-      rating: 5,
-    },
-    {
-      quote: "Amazing, Great Product. 100% Satisfied.",
-      author: "Simran Singh",
-      role: "Firefox Add-ons",
-      rating: 5,
-    },
-    {
-      quote: "10/10 for personal security.",
-      author: "Ratanveer",
-      role: "Microsoft Edge Add-ons",
-      rating: 5,
-    },
-  ]
-
-  const [currentIdx, setCurrentIdx] = useState(0)
-
   return (
-    <section className="py-20 md:py-32 bg-muted relative overflow-hidden">
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 right-1/3 w-96 h-96 bg-primary/8 dark:bg-primary/15 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-secondary/8 dark:bg-secondary/15 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 right-1/5 w-72 h-72 bg-violet-500/6 dark:bg-violet-500/12 rounded-full blur-3xl animate-pulse delay-500" />
-      </div>
+    <section id="testimonials" className="relative scroll-mt-24 py-14 md:py-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <SectionHeading
+          eyebrow="Reviews"
+          title="What people say about Locksy"
+          description="Real reviews from the Chrome, Firefox and Edge stores."
+        />
 
-      <div className="relative max-w-6xl mx-auto px-4 md:px-6">
-        <h2 className="section-title">Trusted by Privacy-Conscious Users Worldwide</h2>
-        <p className="section-subtitle">See what real users are saying about Locksy.</p>
+        {/* Rating summary */}
+        <div className="mx-auto mt-10 flex max-w-xl flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm">
+          <div className="flex items-center gap-2">
+            <span className="font-display text-3xl font-semibold text-foreground">4.4</span>
+            <span className="text-muted-foreground">
+              average rating
+              <br />
+              across 3 stores
+            </span>
+          </div>
+          <span className="hidden h-10 w-px bg-border sm:block" />
+          <div className="flex items-center gap-3">
+            {[
+              { href: CHROME_STORE_URL, ...STORES.chrome },
+              { href: FIREFOX_STORE_URL, ...STORES.firefox },
+              { href: EDGE_STORE_URL, ...STORES.edge },
+            ].map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Read reviews on ${s.label}`}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card hover:bg-muted transition-colors"
+              >
+                <img src={s.icon} alt={s.label} className="h-5 w-5 object-contain" />
+              </a>
+            ))}
+          </div>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, idx) => (
-            <div key={idx} className="feature-card flex flex-col min-h-[240px]">
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-yellow-400">
-                    ⭐
-                  </span>
-                ))}
-              </div>
-              <p className="text-muted-foreground mb-6 italic flex-grow">"{testimonial.quote}"</p>
-              <div className="mt-auto pt-4 border-t border-border">
-                <p className="font-semibold">{testimonial.author}</p>
-                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-              </div>
-            </div>
+        {/* Mobile: simple stack. Desktop: slow vertical marquee per column. */}
+        <div className="mt-12 grid gap-4 md:hidden">
+          {REVIEWS.map((r) => (
+            <ReviewCard key={r.author} {...r} />
           ))}
         </div>
 
-        {/* Stats */}
-        <div className="grid md:grid-cols-4 gap-6 mt-16 text-center">
-          <div className="p-6 bg-card rounded-lg border border-border/50">
-            <div className="text-3xl font-bold text-primary mb-2">4.4</div>
-            <p className="text-muted-foreground">Average Rating</p>
-          </div>
-          <div className="p-6 bg-card rounded-lg border border-border/50">
-            <div className="text-3xl font-bold text-primary mb-2">100%</div>
-            <p className="text-muted-foreground">Privacy Score</p>
-          </div>
-          <div className="p-6 bg-card rounded-lg border border-border/50">
-            <div className="text-3xl font-bold text-primary mb-2">0</div>
-            <p className="text-muted-foreground">Data Breaches</p>
-          </div>
-          <div className="p-6 bg-card rounded-lg border border-border/50">
-            <div className="text-3xl font-bold text-primary mb-2">∞</div>
-            <p className="text-muted-foreground">Free Forever</p>
-          </div>
+        <div className="marquee-paused relative mt-12 hidden h-[560px] overflow-hidden md:grid md:grid-cols-3 md:gap-4 [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
+          {COLUMNS.map((col, ci) => (
+            <div key={ci} className="overflow-hidden">
+              <div
+                className="animate-marquee-up flex flex-col gap-4"
+                style={{ animationDuration: `${34 + ci * 8}s`, animationDirection: ci === 1 ? "reverse" : "normal" }}
+              >
+                {/* Repeated so the -50% translate loops seamlessly */}
+                {[...col, ...col, ...col, ...col].map((r, i) => (
+                  <div key={`${r.author}-${i}`} aria-hidden={i >= col.length ? true : undefined}>
+                    <ReviewCard {...r} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

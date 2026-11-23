@@ -1,398 +1,200 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { CheckCircle2, Zap, Shield, Sparkles, LayoutDashboard, Camera, ShieldAlert, Key, Globe, EyeOff, Clock, Fingerprint, ShieldCheck, Laptop, Calendar, ChevronDown, ExternalLink, ScreenShare, Palette } from "lucide-react"
-import { PRO_CHECKOUT_URL, SALE_DEADLINE_UTC, PRO_EARLY_BIRD_PRICE, PRO_REGULAR_PRICE } from "@/lib/pro"
+import { Check, Minus, ChevronDown, ArrowUpRight, ShieldCheck } from "lucide-react"
+import { PRO_CHECKOUT_URL, PRO_PRICE } from "@/lib/pro"
+import { ALL_BROWSERS } from "@/lib/browsers"
+import SectionHeading from "@/components/section-heading"
 
 interface PricingProps {
   hideHeader?: boolean
   className?: string
 }
 
-const INITIAL_VISIBLE_COUNT = 6
+const INITIAL_VISIBLE_COUNT = 7
 
-const BROWSER_DOWNLOADS = [
-  {
-    name: "Google Chrome",
-    store: "Chrome Web Store",
-    icon: "/browsers/chrome.png",
-    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
-  },
-  {
-    name: "Microsoft Edge",
-    store: "Edge Add-ons",
-    icon: "/browsers/edge.png",
-    url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
-  },
-  {
-    name: "Mozilla Firefox",
-    store: "Firefox Add-ons",
-    icon: "/browsers/firefox.png",
-    url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/",
-  },
-  {
-    name: "Brave / Opera / Vivaldi",
-    store: "Chrome Web Store",
-    icon: "/browsers/brave.png",
-    url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
-  },
+const FREE_FEATURES: { title: string; included: boolean }[] = [
+  { title: "Lock any tab with a password", included: true },
+  { title: "Auto-lock up to 3 websites", included: true },
+  { title: "5 biometric unlocks per day", included: true },
+  { title: "1 device / browser", included: true },
+  { title: "Auto re-lock after 10 minutes", included: true },
+  { title: "Lock All Tabs (3 total uses)", included: true },
+  { title: "Basic Privacy Blur Shield", included: true },
+  { title: "Manual Screen Share Shield", included: true },
+  { title: "Up to 3 stored intruder photos", included: true },
+  { title: "Classic Light & Dark themes", included: true },
+  { title: "Scheduled locking", included: false },
+  { title: "Startup session lock", included: false },
+  { title: "Stealth mode disguise", included: false },
+  { title: "Weekly privacy reports", included: false },
+  { title: "Custom lock screen messages", included: false },
+]
+
+const PRO_FEATURES = [
+  "Unlimited website auto-locks",
+  "Unlimited biometric unlocks",
+  "Use on up to 5 devices",
+  "Custom auto-lock timers up to 8 hours",
+  "Unlimited Lock All + 1-click Unlock All",
+  "Full Privacy Blur manager with whitelists",
+  "Automatic Screen Share Shield",
+  "Unlimited intruder photos",
+  "Scheduled locking",
+  "Startup session lock",
+  "Stealth mode disguise",
+  "Weekly privacy reports",
+  "Custom lock screen messages",
+  "All 6 themes",
 ]
 
 export default function Pricing({ hideHeader = false, className = "" }: PricingProps = {}) {
-  const [billingCycle, setBillingCycle] = useState<"lifetime">("lifetime")
-  const [showAllFeatures, setShowAllFeatures] = useState(false)
+  const [showAll, setShowAll] = useState(false)
   const [showInstallMenu, setShowInstallMenu] = useState(false)
-  const [isSaleActive, setIsSaleActive] = useState(false)
-  const [saleTimeLeft, setSaleTimeLeft] = useState({ days: 0, hours: 0, mins: 0, secs: 0 })
+  const installRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // If early-bird sale deadline has passed (Oct 1, 12:00 AM UTC), keep deactivated
-    if (Date.now() >= SALE_DEADLINE_UTC) {
-      setIsSaleActive(false)
-      return
+    if (!showInstallMenu) return
+    const onDown = (e: MouseEvent) => {
+      if (installRef.current && !installRef.current.contains(e.target as Node)) setShowInstallMenu(false)
     }
-
-    setIsSaleActive(true)
-
-    // Clear legacy relative localStorage key
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("locksy_early_bird_sale_end")
-    }
-
-    const tick = () => {
-      const diff = SALE_DEADLINE_UTC - Date.now()
-      if (diff <= 0) {
-        setIsSaleActive(false)
-        return
-      }
-      setSaleTimeLeft({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        mins: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-        secs: Math.floor((diff % (1000 * 60)) / 1000),
-      })
-    }
-
-    tick()
-    const timer = setInterval(tick, 1000)
-    return () => clearInterval(timer)
-  }, [])
-  const installDropdownRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (installDropdownRef.current && !installDropdownRef.current.contains(event.target as Node)) {
-        setShowInstallMenu(false)
-      }
-    }
-    if (showInstallMenu) {
-      document.addEventListener("mousedown", handleClickOutside)
-      return () => document.removeEventListener("mousedown", handleClickOutside)
-    }
+    document.addEventListener("mousedown", onDown)
+    return () => document.removeEventListener("mousedown", onDown)
   }, [showInstallMenu])
 
-  const proFeatures = [
-    { title: "Unlimited Domain Auto-Locks", desc: "Lock any number of banking, work & private websites automatically", icon: <Globe className="w-4 h-4" /> },
-    { title: "Unlimited Biometric Unlocks", desc: "Touch ID, Windows Hello & Face ID with zero daily limits", icon: <Fingerprint className="w-4 h-4" /> },
-    { title: "Use on Up to 5 Devices", desc: "Simultaneous access across 5 computers with built-in Device Manager", icon: <Laptop className="w-4 h-4" /> },
-    { title: "Custom Auto-Lock Timers", desc: "Configure custom inactivity re-lock intervals up to 8 hours", icon: <Clock className="w-4 h-4" /> },
-    { title: "Unlimited Lock & 1-Click Unlock All", desc: "Unlimited panic hotkey + unlock all tabs simultaneously", icon: <Key className="w-4 h-4" /> },
-    { title: "Full Privacy Blur Manager", desc: "Custom blur levels (Light to Solid), site categories & whitelists", icon: <EyeOff className="w-4 h-4" /> },
-    { title: "Automatic Screen Share Shield", desc: "Auto-masks private tabs & titles when presenting on Meet, Zoom & Teams", icon: <ScreenShare className="w-4 h-4" /> },
-    { title: "Unlimited Webcam Captures", desc: "Unlimited local snapshots of unauthorized access attempts", icon: <Camera className="w-4 h-4" /> },
-    { title: "Scheduled Locking Included", desc: "Automate tab locks by schedule (work hours, night, or custom days)", icon: <Calendar className="w-4 h-4" /> },
-    { title: "Startup Session Lock Included", desc: "Instantly lock all session-restored tabs on launch before rendering", icon: <Zap className="w-4 h-4" /> },
-    { title: "Stealth Mode Disguise Included", desc: "Disguise locked tabs as fake browser error (ERR_CONNECTION) pages", icon: <EyeOff className="w-4 h-4" /> },
-    { title: "Weekly Privacy Reports Included", desc: "Personalized offline dashboard & security score tracking", icon: <LayoutDashboard className="w-4 h-4" /> },
-    { title: "Custom Lock Messages Included", desc: "Display personal notes or warnings on the lock screen", icon: <ShieldAlert className="w-4 h-4" /> },
-    { title: "All 6 Handcrafted Themes", desc: "Unlock Ocean, Forest, Ember, and Rose palettes alongside Classic Light & Dark", icon: <Palette className="w-4 h-4" /> },
-  ]
-
-  const freeLimits = [
-    { title: "Domain Auto-Locks (Max 3)", desc: "Auto-lock up to 3 chosen websites (e.g. banking or email portal)", icon: <Globe className="w-4 h-4" /> },
-    { title: "Biometric Prompts (Max 5 / day)", desc: "Fingerprint or face recognition unlock via Touch ID & Windows Hello", icon: <Fingerprint className="w-4 h-4" /> },
-    { title: "Active Devices (1 device/browser)", desc: "Full protection on your primary personal or work computer", icon: <Laptop className="w-4 h-4" /> },
-    { title: "Auto Re-Lock Timer (Fixed 10 min)", desc: "Locksy automatically locks inactive tabs after 10 minutes", icon: <Clock className="w-4 h-4" /> },
-    { title: "Lock All Tabs (3 total uses)", desc: "Instant panic hotkey to lock all tabs with 3 total uses", icon: <Key className="w-4 h-4" /> },
-    { title: "Privacy Blur Shield (Basic)", desc: "Auto-mask passwords/cards & window focus loss blur", icon: <EyeOff className="w-4 h-4" /> },
-    { title: "Screen Share Shield (Manual)", desc: "1-click manual toggle to shield private tabs while screen sharing", icon: <ScreenShare className="w-4 h-4" /> },
-    { title: "Webcam Captures (Max 3 stored)", desc: "Store up to 3 local snapshots of failed access attempts", icon: <Camera className="w-4 h-4" /> },
-    { title: "Locksy Themes (Classic Only)", desc: "Includes signature Classic Light & Midnight Dark contrast palettes", icon: <Palette className="w-4 h-4" /> },
-    { title: "Scheduled Locking", desc: "Not included on free tier", icon: <Calendar className="w-4 h-4" /> },
-    { title: "Startup Session Lock", desc: "Not included on free tier", icon: <Zap className="w-4 h-4" /> },
-    { title: "Stealth Mode Disguise", desc: "Not included on free tier", icon: <EyeOff className="w-4 h-4" /> },
-    { title: "Weekly Privacy Reports", desc: "Not included on free tier", icon: <LayoutDashboard className="w-4 h-4" /> },
-    { title: "Custom Lock Screen Messages", desc: "Not included on free tier", icon: <ShieldAlert className="w-4 h-4" /> },
-  ]
-
-  const visibleFreeLimits = showAllFeatures ? freeLimits : freeLimits.slice(0, INITIAL_VISIBLE_COUNT)
-  const visibleProFeatures = showAllFeatures ? proFeatures : proFeatures.slice(0, INITIAL_VISIBLE_COUNT)
+  const free = showAll ? FREE_FEATURES : FREE_FEATURES.slice(0, INITIAL_VISIBLE_COUNT)
+  const pro = showAll ? PRO_FEATURES : PRO_FEATURES.slice(0, INITIAL_VISIBLE_COUNT)
 
   return (
-    <section
-      id="pricing"
-      className={className || "py-24 md:py-32 relative overflow-hidden"}
-    >
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1000px] bg-gradient-to-tr from-primary/10 via-secondary/10 to-primary/10 blur-3xl rounded-full" />
-        <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] opacity-20" />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-        {/* Section Header */}
+    <section id="pricing" className={className || "relative scroll-mt-24 py-14 md:py-20"}>
+      <div className="mx-auto max-w-5xl px-4 md:px-6">
         {!hideHeader && (
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-bold text-primary backdrop-blur-md mb-6 shadow-xs">
-              <Sparkles className="w-4 h-4" />
-              Simple Transparent Pricing
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent tracking-tight">
-              Choose Your Level of <br className="hidden md:block" />
-              <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">Protection</span>
-            </h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Start with our powerful core features for free, or unlock the ultimate privacy suite with a one-time lifetime license.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Pricing"
+            title="Free forever. Pro costs less than a coffee."
+            description="The free plan covers everyday tab locking. Pro is a one-time payment with no subscription."
+            className="mb-14"
+          />
         )}
 
-        {/* Early-Bird Sale Countdown Banner */}
-        {isSaleActive && (
-          <div className="max-w-2xl mx-auto mb-8 sm:mb-10 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-card/90 dark:bg-card/40 border border-violet-500/30 dark:border-violet-500/30 backdrop-blur-xl text-center shadow-xl shadow-violet-500/10 relative overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
-
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-violet-100 dark:bg-violet-950/60 text-violet-800 dark:text-violet-300 border border-violet-300 dark:border-violet-500/40 flex items-center gap-1.5 shadow-xs">
-                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-violet-600 dark:bg-violet-400 animate-ping" />
-                🔥 Early-Bird Launch Deal
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-foreground">
-                Locksy Pro increases to <span className="text-violet-700 dark:text-violet-300 font-black">$4.99</span> on Oct 1 (12:00 AM UTC)
-              </span>
-            </div>
-
-            <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 my-2 sm:my-2.5 font-mono">
-              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
-                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.days).padStart(2, '0')}</span>
-                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Days</span>
-              </div>
-              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
-              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
-                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.hours).padStart(2, '0')}</span>
-                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Hours</span>
-              </div>
-              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
-              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
-                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.mins).padStart(2, '0')}</span>
-                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Mins</span>
-              </div>
-              <span className="text-violet-600 dark:text-violet-400 font-black text-sm sm:text-base pb-1 sm:pb-2">:</span>
-              <div className="flex flex-col items-center bg-background border border-violet-200 dark:border-violet-500/30 rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-1 sm:py-1.5 min-w-[44px] sm:min-w-[50px] shadow-xs">
-                <span className="text-base sm:text-xl font-black text-foreground">{String(saleTimeLeft.secs).padStart(2, '0')}</span>
-                <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Secs</span>
-              </div>
-            </div>
-
-            <p className="text-[10px] sm:text-xs font-medium text-muted-foreground">
-              ⚡ Over 500+ lifetime licenses claimed • Lock in <strong className="text-foreground font-bold">$2.99 lifetime</strong> before Oct 1 (12:00 AM UTC)
+        <div className="grid items-stretch gap-4 md:grid-cols-2">
+          {/* Free */}
+          <div className="surface flex flex-col p-7 md:p-9">
+            <p className="text-sm font-medium text-muted-foreground">Free</p>
+            <p className="mt-4 flex items-baseline gap-2">
+              <span className="font-display text-5xl font-semibold tracking-tight text-foreground">$0</span>
+              <span className="text-sm text-muted-foreground">forever</span>
             </p>
-          </div>
-        )}
+            <p className="mt-2 text-sm text-muted-foreground">No credit card, no account.</p>
 
-        {/* Pricing Cards Grid */}
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto items-stretch">
-          {/* FREE PLAN */}
-          <div className="group relative flex flex-col justify-between bg-card/20 backdrop-blur-xl rounded-3xl sm:rounded-[2.5rem] border border-border/50 p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-300 hover:border-border hover:shadow-3xl hover:bg-card/40">
-            <div>
-              <div className="flex items-center justify-between mb-4 sm:mb-6 h-8">
-                <span className="text-lg sm:text-xl font-black text-foreground tracking-tight">Free Core</span>
-                <span className="text-xs px-3 py-1 sm:py-1.5 bg-muted text-muted-foreground rounded-full font-bold uppercase tracking-wider">Free Tier</span>
-              </div>
-              <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">$0</span>
-                </div>
-                <p className="text-muted-foreground mt-1.5 sm:mt-2 font-medium text-xs sm:text-sm">Free forever, no credit card required.</p>
-              </div>
-
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-6 sm:mb-8" />
-
-              {/* Checklist */}
-              <ul className={`space-y-3 sm:space-y-4 ${showAllFeatures ? "" : "lg:min-h-[420px]"}`}>
-                {visibleFreeLimits.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 sm:gap-4 min-h-0 lg:min-h-[54px]">
-                    <div className="mt-0.5 p-1 rounded-full bg-muted/50 border border-border/50 text-muted-foreground group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                      {item.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <strong className="text-xs sm:text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
-                      <span className="text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-2">{item.desc}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Expand / Collapse Button */}
+            <div className="relative mt-8" ref={installRef}>
               <button
                 type="button"
-                onClick={() => setShowAllFeatures(!showAllFeatures)}
-                className="mt-6 flex items-center justify-center gap-2 w-full h-10 sm:h-11 px-4 rounded-xl border border-border/60 bg-muted/30 hover:bg-muted/60 text-xs font-bold text-foreground transition-all duration-200 group/expand cursor-pointer"
+                onClick={() => setShowInstallMenu((v) => !v)}
+                aria-expanded={showInstallMenu}
+                className="btn-secondary w-full"
               >
-                <span>
-                  {showAllFeatures
-                    ? "Show fewer features"
-                    : `+${freeLimits.length - INITIAL_VISIBLE_COUNT} more features`}
-                </span>
-                <ChevronDown
-                  className={`w-4 h-4 text-muted-foreground group-hover/expand:text-foreground transition-transform duration-300 ${showAllFeatures ? "rotate-180" : ""
-                    }`}
-                />
+                Add to browser
+                <ChevronDown className={`h-4 w-4 transition-transform ${showInstallMenu ? "rotate-180" : ""}`} />
               </button>
-            </div>
-
-            <div className="mt-8 sm:mt-10 space-y-4 relative" ref={installDropdownRef}>
-              <button
-                type="button"
-                onClick={() => setShowInstallMenu((prev) => !prev)}
-                className="w-full h-12 sm:h-14 bg-muted text-foreground hover:bg-foreground hover:text-background font-bold rounded-2xl text-center flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] cursor-pointer text-sm sm:text-base shadow-sm"
-              >
-                <span>Download Free Version</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showInstallMenu ? "rotate-180" : ""}`} />
-              </button>
-
-              {/* Inline Browser Options Popover */}
               {showInstallMenu && (
-                <div className="absolute bottom-full left-0 right-0 mb-3 bg-card/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-border/80 overflow-hidden z-50 p-2 space-y-1 animate-in fade-in slide-in-from-bottom-2 duration-200">
-                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground border-b border-border/40">
-                    Choose Your Browser
-                  </div>
-                  {BROWSER_DOWNLOADS.map((browser) => (
+                <div className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-2xl border border-border bg-popover p-1.5 shadow-2xl animate-in fade-in slide-in-from-top-1 duration-150">
+                  {ALL_BROWSERS.map((b) => (
                     <a
-                      key={browser.name}
-                      href={browser.url}
+                      key={b.id}
+                      href={b.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-accent transition-colors group/store"
                       onClick={() => setShowInstallMenu(false)}
+                      className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-muted transition-colors"
                     >
-                      <img src={browser.icon} alt={browser.name} className="w-6 h-6 object-contain flex-shrink-0" />
-                      <div className="flex-1 text-left min-w-0">
-                        <div className="text-xs font-bold text-foreground group-hover/store:text-primary transition-colors truncate">{browser.name}</div>
-                        <div className="text-[10px] text-muted-foreground truncate">{browser.store}</div>
-                      </div>
-                      <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover/store:text-primary transition-colors flex-shrink-0" />
+                      <img src={b.icon} alt="" className="h-5 w-5 object-contain" />
+                      <span className="flex-1 text-sm text-foreground">{b.name}</span>
+                      <span className="text-xs text-muted-foreground">{b.store}</span>
+                      <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground" />
                     </a>
                   ))}
                 </div>
               )}
-
-              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium text-center">
-                <ShieldCheck className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>100% Free Forever • No Account Required</span>
-              </div>
             </div>
-          </div>
 
-          {/* PRO PLAN */}
-          <div className="group relative flex flex-col justify-between bg-card/60 backdrop-blur-2xl rounded-3xl sm:rounded-[2.5rem] border-2 border-primary/40 p-6 sm:p-8 md:p-10 shadow-[0_0_40px_rgba(37,99,235,0.15)] hover:shadow-[0_0_60px_rgba(37,99,235,0.25)] transition-all duration-300 z-10 overflow-hidden">
-
-            {/* Animated Glow Effect */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 pointer-events-none" />
-
-            <div className="relative z-10">
-              {/* Header with Title and Ribbon in single clean flex row */}
-              <div className="flex items-center justify-between mb-4 sm:mb-6 h-8">
-                <span className="text-lg sm:text-xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">Locksy Pro</span>
-                <span className="bg-gradient-to-r from-primary to-secondary text-white px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.4)] font-bold text-[11px] sm:text-xs uppercase tracking-wider animate-pulse">
-                  Most Popular
-                </span>
-              </div>
-
-              {/* Price section */}
-              <div className="mb-6 sm:mb-8 h-20 sm:h-24 flex flex-col justify-end">
-                <div className="flex items-center gap-2.5 sm:gap-3">
-                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight">
-                    {isSaleActive ? PRO_EARLY_BIRD_PRICE : PRO_REGULAR_PRICE}
+            <div className="my-8 h-px bg-border" />
+            <ul className="space-y-3.5">
+              {free.map((f) => (
+                <li key={f.title} className={`flex items-start gap-3 text-sm ${f.included ? "text-foreground" : "text-muted-foreground"}`}>
+                  {f.included ? (
+                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-foreground/70" aria-hidden="true" />
+                  ) : (
+                    <Minus className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                  )}
+                  <span>
+                    {f.title}
+                    {!f.included && <span className="sr-only"> (not included)</span>}
                   </span>
-                  <div className="flex flex-col justify-center gap-1">
-                    {isSaleActive ? (
-                      <>
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-700 dark:text-violet-300 text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs w-fit">
-                          <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-ping" />
-                          Early-Bird Price
-                        </span>
-                        <span className="text-[11px] sm:text-xs text-muted-foreground line-through font-semibold pl-1">
-                          Increases to {PRO_REGULAR_PRICE}
-                        </span>
-                      </>
-                    ) : (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-700 dark:text-violet-300 text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs w-fit">
-                        Lifetime License
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <p className="text-violet-600 dark:text-violet-400 mt-1.5 sm:mt-2 font-bold text-xs sm:text-sm">One-time payment. Valid on up to 5 devices forever.</p>
-              </div>
-
-              <div className="h-px w-full bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-transparent mb-6 sm:mb-8" />
-
-              {/* Checklist */}
-              <ul className={`space-y-3 sm:space-y-4 ${showAllFeatures ? "" : "lg:min-h-[420px]"}`}>
-                {visibleProFeatures.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 sm:gap-4 min-h-0 lg:min-h-[54px]">
-                    <div className="mt-0.5 p-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-violet-500 group-hover:to-fuchsia-500 group-hover:text-white dark:group-hover:text-white transition-all duration-300 shadow-sm shadow-violet-500/10 flex-shrink-0">
-                      {item.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <strong className="text-xs sm:text-sm font-bold text-foreground block mb-0.5">{item.title}</strong>
-                      <span className="text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-2">{item.desc}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Expand / Collapse Button */}
-              <button
-                type="button"
-                onClick={() => setShowAllFeatures(!showAllFeatures)}
-                className="mt-6 flex items-center justify-center gap-2 w-full h-10 sm:h-11 px-4 rounded-xl border border-violet-500/30 bg-violet-500/10 hover:bg-violet-500/20 text-xs font-bold text-violet-600 dark:text-violet-400 transition-all duration-200 group/expand cursor-pointer"
-              >
-                <span>
-                  {showAllFeatures
-                    ? "Show fewer features"
-                    : `+${proFeatures.length - INITIAL_VISIBLE_COUNT} more features`}
-                </span>
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-300 ${showAllFeatures ? "rotate-180" : ""
-                    }`}
-                />
-              </button>
-            </div>
-
-            <div className="mt-8 sm:mt-10 space-y-4 relative z-10">
-              <a
-                href={PRO_CHECKOUT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative w-full h-12 sm:h-14 bg-foreground text-background font-black rounded-2xl text-center flex items-center justify-center overflow-hidden transform transition-all duration-300 active:scale-[0.98] group/btn hover:shadow-xl hover:shadow-violet-500/20 text-sm sm:text-base"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                <span className="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
-                  Get Lifetime Pro — {isSaleActive ? PRO_EARLY_BIRD_PRICE : PRO_REGULAR_PRICE} <Zap className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" />
-                </span>
-              </a>
-              <div className="h-5 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium text-center">
-                <ShieldCheck className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>Secure payment via Polar.sh · 5 device slots included</span>
-              </div>
-            </div>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          {/* Pro */}
+          <div className="surface relative flex flex-col overflow-hidden p-7 md:p-9 ring-1 ring-highlight/40">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 -top-24 h-64"
+              style={{ background: "radial-gradient(60% 60% at 50% 0%, var(--glow), transparent 70%)" }}
+            />
+            <div className="relative flex items-center justify-between">
+              <p className="text-sm font-medium text-foreground">Locksy Pro</p>
+              <span className="rounded-full border border-highlight/30 bg-highlight/10 px-2.5 py-0.5 text-[11px] font-medium text-highlight">
+                Lifetime license
+              </span>
+            </div>
+            <p className="relative mt-4 flex items-baseline gap-2">
+              <span className="font-display text-5xl font-semibold tracking-tight text-foreground">{PRO_PRICE}</span>
+              <span className="text-sm text-muted-foreground">one-time</span>
+            </p>
+            <p className="relative mt-2 text-sm text-muted-foreground">Pay once, use on up to 5 devices for life.</p>
+
+            <a
+              href={PRO_CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary relative mt-8 w-full"
+            >
+              Get Locksy Pro for {PRO_PRICE}
+            </a>
+
+            <div className="relative my-8 h-px bg-border" />
+            <ul className="relative space-y-3.5">
+              {pro.map((f) => (
+                <li key={f} className="flex items-start gap-3 text-sm text-foreground">
+                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-highlight" aria-hidden="true" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-4">
+          <button
+            type="button"
+            onClick={() => setShowAll((v) => !v)}
+            aria-expanded={showAll}
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {showAll ? "Show fewer features" : "Compare all features"}
+            <ChevronDown className={`h-4 w-4 transition-transform ${showAll ? "rotate-180" : ""}`} />
+          </button>
+          <p className="flex items-center gap-2 text-xs text-muted-foreground">
+            <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+            Secure checkout via Polar.sh · See our{" "}
+            <a href="/refund-policy" className="underline underline-offset-4 hover:text-foreground">
+              refund policy
+            </a>
+          </p>
         </div>
       </div>
     </section>
   )
 }
-

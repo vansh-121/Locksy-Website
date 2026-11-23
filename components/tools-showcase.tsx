@@ -1,102 +1,64 @@
 import Link from "next/link"
-import { Sparkles, ArrowRight, Shield, Key, Eye, AlertTriangle } from "lucide-react"
+import { ArrowUpRight, KeyRound, Shuffle, ScanSearch, MailWarning } from "lucide-react"
+import SectionHeading from "@/components/section-heading"
+
+const TOOLS = [
+  {
+    title: "Password strength checker",
+    description: "See how strong a password is and roughly how long it would take to crack.",
+    icon: KeyRound,
+    url: "/tools/password-strength-checker",
+  },
+  {
+    title: "Password generator",
+    description: "Create strong, random passwords with the length and characters you choose.",
+    icon: Shuffle,
+    url: "/tools/password-generator",
+  },
+  {
+    title: "Browser privacy score",
+    description: "Check your browser for common privacy leaks and how easily you can be tracked.",
+    icon: ScanSearch,
+    url: "/tools/browser-privacy-score",
+  },
+  {
+    title: "Email breach checker",
+    description: "Find out whether your email address appears in known data breaches.",
+    icon: MailWarning,
+    url: "/tools/email-breach-checker",
+  },
+]
 
 export default function ToolsShowcase() {
-  const tools = [
-    {
-      title: "Password Strength Meter",
-      description: "See how strong your password really is and roughly how long it would take someone to crack it.",
-      icon: "🔑",
-      url: "/tools/password-strength-checker",
-      badge: "Popular"
-    },
-    {
-      title: "Password Generator",
-      description: "Create strong, random passwords with the length and characters you choose.",
-      icon: "🎲",
-      url: "/tools/password-generator",
-      badge: "100% Private"
-    },
-    {
-      title: "Browser Privacy Inspector",
-      description: "Check your browser for common privacy leaks and see how easily you can be tracked online.",
-      icon: "🛡️",
-      url: "/tools/browser-privacy-score",
-      badge: "Real-Time"
-    },
-    {
-      title: "Email Breach Inspector",
-      description: "Check whether your email address has turned up in known data breaches.",
-      icon: "⚠️",
-      url: "/tools/email-breach-checker",
-      badge: "Live API"
-    }
-  ]
-
   return (
-    <section className="py-20 bg-background relative overflow-hidden">
-      {/* Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary dark:text-primary-on-dark text-xs font-semibold mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            100% Free Web Utilities
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-4">
-            Free Online{" "}
-            <span className="block sm:inline bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
-              Security &amp; Privacy Tools
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-sm md:text-base">
-            No signup required. Everything runs right in your browser — nothing is uploaded, and there's no tracking.
-          </p>
-        </div>
-
-        {/* Tools Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {tools.map((tool, idx) => (
-            <Link
-              key={idx}
-              href={tool.url}
-              className="group p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/60 hover:border-primary/40 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-3xl">{tool.icon}</span>
-                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary dark:text-primary-on-dark border border-primary/20">
-                    {tool.badge}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {tool.title}
-                </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-                  {tool.description}
-                </p>
-              </div>
-
-              <div className="pt-3 border-t border-border/40 text-xs font-bold text-primary flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
-                Try Free Tool <ArrowRight className="w-3.5 h-3.5" />
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* View All Hub CTA */}
-        <div className="text-center">
-          <Link
-            href="/tools"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border hover:border-primary/40 text-foreground font-bold text-sm shadow-md hover:shadow-lg transition-all"
-          >
-            Explore Full Free Tools Hub <ArrowRight className="w-4 h-4 text-primary" />
+    <section className="relative py-14 md:py-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <SectionHeading
+            align="left"
+            eyebrow="Free tools"
+            title="Free security tools"
+            description="No sign-up. Everything runs in your browser and nothing you type is stored."
+          />
+          <Link href="/tools" className="btn-secondary h-10 flex-shrink-0 px-5">
+            All tools <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
 
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {TOOLS.map(({ title, description, icon: Icon, url }) => (
+            <Link key={url} href={url} className="surface group flex flex-col p-6 transition-colors hover:border-foreground/20">
+              <div className="flex items-center justify-between">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted">
+                  <Icon className="h-5 w-5 text-highlight" aria-hidden="true" />
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
+              </div>
+              <h3 className="mt-6 text-base font-semibold text-foreground">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   )
