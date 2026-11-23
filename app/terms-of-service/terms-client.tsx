@@ -3,13 +3,14 @@
 import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { Shield, FileText, Scale, AlertTriangle, CheckCircle, ArrowLeft, Users, Globe, Code2, Heart } from "lucide-react"
+import { Shield, FileText, Scale, AlertTriangle, CheckCircle, Users, Globe, Code2, Heart, BookOpen, Landmark } from "lucide-react"
+import { PageHero, DocLayout, DocSection, Callout } from "@/components/page-shell"
 
 export default function TermsOfServiceClient() {
     const sections = [
         {
+            id: "acceptance-of-terms",
             icon: FileText,
-            badge: "Acceptance",
             title: "Acceptance of Terms",
             content: [
                 'By installing, accessing, or using the Locksy browser extension ("the Extension") or visiting the Locksy website ("the Website") at locksy.dev, you agree to be bound by these Terms of Service ("Terms").',
@@ -17,8 +18,8 @@ export default function TermsOfServiceClient() {
             ]
         },
         {
+            id: "description-of-service",
             icon: Globe,
-            badge: "Description",
             title: "Description of Service",
             content: [
                 "Locksy is a browser extension that provides password-based tab protection for all major browsers, including Chrome, Edge, Firefox, Brave, Opera, and Vivaldi. It is available in a Free Core version with an optional lifetime Pro upgrade.",
@@ -27,16 +28,16 @@ export default function TermsOfServiceClient() {
             ]
         },
         {
+            id: "eligibility",
             icon: Users,
-            badge: "Eligibility",
             title: "Eligibility",
             content: [
                 "There are no age or geographic restrictions for using Locksy. The Extension is available to anyone with a supported web browser. No account creation or personal information is required."
             ]
         },
         {
+            id: "license-usage-rights",
             icon: Shield,
-            badge: "License",
             title: "License & Usage Rights",
             content: [
                 "Locksy is proprietary software. You are granted a non-exclusive, personal, non-transferable, revocable license to use the Extension for your personal, non-commercial security purposes subject to these Terms.",
@@ -44,8 +45,8 @@ export default function TermsOfServiceClient() {
             ]
         },
         {
+            id: "security-auditing",
             icon: Code2,
-            badge: "Auditing",
             title: "Security & Auditing",
             content: [
                 "While the extension's source code is proprietary, Locksy is built with strict privacy constraints. No personal data, passwords, or browsing activity is ever transmitted to any external server.",
@@ -53,8 +54,8 @@ export default function TermsOfServiceClient() {
             ]
         },
         {
+            id: "disclaimer-of-warranties",
             icon: Scale,
-            badge: "Disclaimer",
             title: "Disclaimer of Warranties",
             content: [
                 'THE EXTENSION IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.',
@@ -63,8 +64,8 @@ export default function TermsOfServiceClient() {
             ]
         },
         {
+            id: "limitation-of-liability",
             icon: AlertTriangle,
-            badge: "Liability",
             title: "Limitation of Liability",
             content: [
                 "To the maximum extent permitted by applicable law, the developer(s) of Locksy shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or data, arising out of or related to your use of the Extension or Website.",
@@ -73,226 +74,129 @@ export default function TermsOfServiceClient() {
         },
     ]
 
+    const quickVersion = [
+        "Free Core version with optional lifetime Pro Upgrade",
+        "No monthly recurring fees or subscriptions",
+        "Your data stays 100% on your device",
+        "No account needed to use Locksy",
+        "100% offline encryption and locking",
+    ]
+
+    const rights = [
+        { title: "Free Forever", desc: "Locksy's core features are free forever — we'll never charge you to keep using them. Pro is an optional one-time upgrade, not a subscription or recurring paywall." },
+        { title: "Data Ownership", desc: "All your data belongs to you and stays on your device. We never access or transmit it." },
+        { title: "Uninstall Anytime", desc: "Remove the Extension at any time. All locally stored data is automatically deleted." },
+        { title: "Full Transparency", desc: "Source code is public. Audit, inspect, and verify every claim we make." },
+    ]
+
+    const toc = [
+        { id: "the-quick-version", label: "The Quick Version" },
+        ...sections.map((s) => ({ id: s.id, label: s.title })),
+        { id: "your-rights", label: "Your Rights" },
+        { id: "website-content", label: "Website Content" },
+        { id: "governing-law", label: "Governing Law" },
+    ]
+
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
-                <Header />
-                <section className="relative page-top-offset pb-20 md:pb-28 overflow-hidden">
-                    <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-                        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
-                    </div>
-                    <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-                        <div className="text-center space-y-8">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
-                                <Scale className="h-4 w-4" />
-                                Legal
-                            </div>
-                            <div>
-                                <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6">
-                                    Terms of{" "}
-                                    <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary bg-clip-text text-transparent">
-                                        Service
-                                    </span>
-                                </h1>
-                                <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                                    Clear, fair, and transparent rules for using Locksy. No hidden catches.
-                                </p>
-                            </div>
+            <Header />
 
-                            {/* TL;DR Summary */}
-                            <div className="max-w-4xl mx-auto mt-12">
-                                <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-3xl p-8 md:p-10 backdrop-blur-sm shadow-2xl">
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <div className="bg-blue-500/20 p-3 rounded-2xl">
-                                            <CheckCircle className="h-8 w-8 text-blue-600" />
-                                        </div>
-                                        <h2 className="text-2xl md:text-3xl font-black">The Quick Version</h2>
-                                    </div>
-                                    <div className="grid md:grid-cols-2 gap-4">
-                                        {[
-                                            "Free Core version with optional lifetime Pro Upgrade",
-                                            "No monthly recurring fees or subscriptions",
-                                            "Your data stays 100% on your device",
-                                            "No account needed to use Locksy",
-                                            "100% offline encryption and locking",
-                                        ].map((item, idx) => (
-                                            <div key={idx} className="flex items-center gap-3 bg-white/80 dark:bg-card/80 backdrop-blur-sm rounded-xl p-4">
-                                                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                                                <span className="font-semibold text-sm">{item}</span>
-                                            </div>
-                                        ))}
-                                    </div>
+            <main className="relative">
+                <PageHero
+                    breadcrumbs={[{ label: "Home", href: "/" }, { label: "Terms of Service" }]}
+                    eyebrow="Legal"
+                    title="Terms of Service"
+                    description="Clear, fair, and transparent rules for using Locksy. No hidden catches."
+                    meta={<span>Last updated: April 20, 2026</span>}
+                />
+
+                <DocLayout toc={toc}>
+                    {/* TL;DR Summary */}
+                    <DocSection id="the-quick-version" icon={CheckCircle} title="The Quick Version">
+                        <div className="grid gap-3 sm:grid-cols-2">
+                            {quickVersion.map((item, idx) => (
+                                <div key={idx} className="flex items-center gap-3 rounded-xl border border-border bg-background p-4">
+                                    <CheckCircle className="h-4 w-4 flex-shrink-0 text-highlight" />
+                                    <span className="text-sm font-medium text-foreground">{item}</span>
                                 </div>
-                            </div>
+                            ))}
                         </div>
-                    </div>
-                </section>
+                    </DocSection>
 
-                {/* Main Content */}
-                <section className="py-20 md:py-32 bg-gradient-to-b from-background via-accent/30 to-background">
-                    <div className="max-w-6xl mx-auto px-4 md:px-6 space-y-16">
-                        {sections.map((section, idx) => {
-                            const Icon = section.icon
-                            return (
-                                <div key={idx}>
-                                    <div className="text-center mb-8">
-                                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-6">
-                                            <Icon className="h-4 w-4" />
-                                            {section.badge}
-                                        </div>
-                                        <h2 className="text-3xl md:text-4xl font-black">
-                                            {section.title.split(" ").slice(0, -1).join(" ")}{" "}
-                                            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                                {section.title.split(" ").slice(-1)}
-                                            </span>
-                                        </h2>
-                                    </div>
-                                    <div className="max-w-4xl mx-auto bg-card rounded-3xl p-8 md:p-10 shadow-xl border border-border space-y-4">
-                                        {section.content.map((paragraph, pIdx) => (
-                                            <p key={pIdx} className="text-muted-foreground leading-relaxed">
-                                                {paragraph}
-                                            </p>
-                                        ))}
-                                    </div>
-                                </div>
-                            )
-                        })}
+                    {sections.map((section) => (
+                        <DocSection key={section.id} id={section.id} icon={section.icon} title={section.title}>
+                            {section.content.map((paragraph, pIdx) => (
+                                <p key={pIdx}>{paragraph}</p>
+                            ))}
+                        </DocSection>
+                    ))}
 
-                        {/* Additional Sections */}
-                        <div>
-                            <div className="text-center mb-8">
-                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-6">
-                                    <Heart className="h-4 w-4" />
-                                    User Rights
+                    {/* Your Rights */}
+                    <DocSection id="your-rights" icon={Heart} title="Your Rights">
+                        <div className="grid gap-4 md:grid-cols-2">
+                            {rights.map((right, idx) => (
+                                <div key={idx} className="rounded-xl border border-border bg-background p-5">
+                                    <h3 className="!mt-0">{right.title}</h3>
+                                    <p className="mt-2">{right.desc}</p>
                                 </div>
-                                <h2 className="text-3xl md:text-4xl font-black">
-                                    Your{" "}
-                                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                        Rights
-                                    </span>
-                                </h2>
-                            </div>
-                            <div className="max-w-4xl mx-auto">
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    {[
-                                        { title: "Free Forever", desc: "Locksy's core features are free forever — we'll never charge you to keep using them. Pro is an optional one-time upgrade, not a subscription or recurring paywall." },
-                                        { title: "Data Ownership", desc: "All your data belongs to you and stays on your device. We never access or transmit it." },
-                                        { title: "Uninstall Anytime", desc: "Remove the Extension at any time. All locally stored data is automatically deleted." },
-                                        { title: "Full Transparency", desc: "Source code is public. Audit, inspect, and verify every claim we make." },
-                                    ].map((right, idx) => (
-                                        <div key={idx} className="bg-card rounded-3xl p-8 shadow-lg border border-border hover:border-primary/30 transition-colors">
-                                            <h3 className="font-bold text-xl mb-3">{right.title}</h3>
-                                            <p className="text-muted-foreground leading-relaxed">{right.desc}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            ))}
                         </div>
+                    </DocSection>
 
-                        {/* Website Content */}
-                        <div>
-                            <div className="text-center mb-8">
-                                <h2 className="text-3xl md:text-4xl font-black">
-                                    Website{" "}
-                                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                        Content
-                                    </span>
-                                </h2>
-                            </div>
-                            <div className="max-w-4xl mx-auto bg-card rounded-3xl p-8 md:p-10 shadow-xl border border-border space-y-4">
-                                <p className="text-muted-foreground leading-relaxed">
-                                    All content on locksy.dev, including blog posts, guides, and documentation, is the intellectual property of the Locksy project unless otherwise stated.
-                                </p>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    You may share and reference our blog content with proper attribution and a link back to the original article. Reproducing entire articles without permission is not permitted.
-                                </p>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    Third-party trademarks (Chrome, Firefox, Edge, etc.) mentioned on this Website are the property of their respective owners and are used for informational purposes only.
-                                </p>
-                            </div>
-                        </div>
+                    {/* Website Content */}
+                    <DocSection id="website-content" icon={BookOpen} title="Website Content">
+                        <p>
+                            All content on locksy.dev, including blog posts, guides, and documentation, is the intellectual property of the Locksy project unless otherwise stated.
+                        </p>
+                        <p>
+                            You may share and reference our blog content with proper attribution and a link back to the original article. Reproducing entire articles without permission is not permitted.
+                        </p>
+                        <p>
+                            Third-party trademarks (Chrome, Firefox, Edge, etc.) mentioned on this Website are the property of their respective owners and are used for informational purposes only.
+                        </p>
+                    </DocSection>
 
-                        {/* Governing Law */}
-                        <div>
-                            <div className="text-center mb-8">
-                                <h2 className="text-3xl md:text-4xl font-black">
-                                    Governing{" "}
-                                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                        Law
-                                    </span>
-                                </h2>
-                            </div>
-                            <div className="max-w-4xl mx-auto bg-card rounded-3xl p-8 md:p-10 shadow-xl border border-border space-y-4">
-                                <p className="text-muted-foreground leading-relaxed">
-                                    These Terms shall be governed by and construed in accordance with applicable laws. Any disputes arising from or relating to these Terms or the use of Locksy shall be resolved through good-faith negotiation first, and if necessary, through appropriate legal channels.
-                                </p>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect.
-                                </p>
-                            </div>
-                        </div>
+                    {/* Governing Law */}
+                    <DocSection id="governing-law" icon={Landmark} title="Governing Law">
+                        <p>
+                            These Terms shall be governed by and construed in accordance with applicable laws. Any disputes arising from or relating to these Terms or the use of Locksy shall be resolved through good-faith negotiation first, and if necessary, through appropriate legal channels.
+                        </p>
+                        <p>
+                            If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect.
+                        </p>
+                    </DocSection>
 
-                        {/* Contact */}
-                        <div className="max-w-3xl mx-auto">
-                            <div className="text-center mb-8">
-                                <h2 className="text-3xl md:text-4xl font-black">
-                                    Questions About These{" "}
-                                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                        Terms?
-                                    </span>
-                                </h2>
-                            </div>
-                            <div className="bg-card rounded-3xl p-8 shadow-lg border border-border text-center space-y-4">
-                                <p className="text-muted-foreground leading-relaxed">
-                                    If you have any questions about these Terms of Service, please reach out:
-                                </p>
-                                <div className="flex flex-wrap items-center justify-center gap-4">
-                                    <Link
-                                        href="/contact"
-                                        className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl hover:shadow-xl transition-all hover:scale-105 font-bold"
-                                    >
-                                        Contact Us
-                                    </Link>
-                                    <a
-                                        href="https://github.com/vansh-121/Locksy/issues"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 bg-card border-2 border-primary/20 text-primary px-6 py-3 rounded-xl hover:bg-primary hover:text-white hover:border-primary transition-all font-bold"
-                                    >
-                                        <Code2 className="h-5 w-5" />
-                                        GitHub Issues
-                                    </a>
-                                </div>
-                            </div>
+                    {/* Contact */}
+                    <div className="surface p-6 text-center md:p-9">
+                        <h2 className="text-xl font-semibold leading-snug text-foreground md:text-2xl text-balance">Questions About These Terms?</h2>
+                        <p className="mx-auto mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+                            If you have any questions about these Terms of Service, please reach out:
+                        </p>
+                        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                            <Link href="/contact" className="btn-primary">
+                                Contact Us
+                            </Link>
+                            <a
+                                href="https://github.com/vansh-121/Locksy/issues"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-secondary"
+                            >
+                                <Code2 className="h-4 w-4" />
+                                GitHub Issues
+                            </a>
                         </div>
                     </div>
-                </section>
 
-                {/* Final Notice */}
-                <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
-                    <div className="max-w-5xl mx-auto px-4 md:px-6">
-                        <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary/30 rounded-3xl p-10 md:p-14 text-center">
-                            <div className="inline-flex p-4 bg-primary/20 rounded-3xl mb-6">
-                                <Scale className="h-16 w-16 text-primary" />
-                            </div>
-                            <h2 className="text-3xl md:text-4xl font-black mb-4">
-                                By using Locksy, you acknowledge that you have read and agree to these Terms of Service.
-                            </h2>
-                            <p className="text-lg text-muted-foreground mb-8">
-                                Last updated: April 20, 2026
-                            </p>
-                            <div className="pt-8 border-t border-border/50">
-                                <p className="text-2xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                    Fair, free, and transparent — always. ⚖️
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                    {/* Final Notice */}
+                    <Callout icon={Scale} title="By using Locksy, you acknowledge that you have read and agree to these Terms of Service.">
+                        <p>Last updated: April 20, 2026</p>
+                        <p className="mt-2">Fair, free, and transparent — always.</p>
+                    </Callout>
+                </DocLayout>
+            </main>
 
-                <Footer />
-            </div>
+            <Footer />
         </>
     )
 }

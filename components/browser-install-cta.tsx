@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Sparkles } from 'lucide-react'
+import { Lock } from 'lucide-react'
 
 export interface BrowserStore {
     key: 'chrome' | 'edge' | 'firefox' | 'brave'
@@ -77,18 +77,18 @@ export function MidArticleInstallCta() {
     return (
         <aside
             aria-label="Locksy Extension Download"
-            className="my-10 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-card/75 to-secondary/10 p-6 md:p-8 shadow-lg backdrop-blur-sm not-prose"
+            className="surface my-12 p-6 md:p-8 not-prose"
         >
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div className="space-y-2">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 border border-primary/25 text-xs font-semibold text-primary">
-                        <Sparkles className="h-3.5 w-3.5" />
+                <div>
+                    <span className="eyebrow">
+                        <span className="eyebrow-dot" aria-hidden="true" />
                         Instant Tab Protection
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                    </span>
+                    <h3 className="mt-4 text-xl font-semibold leading-snug text-foreground md:text-2xl text-balance">
                         Lock Sensitive Browser Tabs with Locksy
                     </h3>
-                    <p className="text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed">
+                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-[15px]">
                         Never leak open sessions or private tabs again. Protect your browsing with on-device PBKDF2 encryption, title-masking, and automated idle lock.
                     </p>
                 </div>
@@ -98,7 +98,7 @@ export function MidArticleInstallCta() {
                         href={detected.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm shadow-md hover:opacity-95 hover:scale-[1.02] active:scale-[0.98] transition-all w-full md:w-auto text-center"
+                        className="btn-primary h-11 w-full md:w-auto"
                     >
                         {detected.buttonLabel}
                     </a>
@@ -111,11 +111,11 @@ export function MidArticleInstallCta() {
                                     href={other.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="font-medium text-primary hover:underline underline-offset-2 transition-colors"
+                                    className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
                                 >
                                     {other.shortName}
                                 </a>
-                                {idx < others.length - 1 && <span className="text-border">·</span>}
+                                {idx < others.length - 1 && <span aria-hidden="true">·</span>}
                             </React.Fragment>
                         ))}
                     </div>
@@ -135,23 +135,24 @@ export function TocInstallWidget() {
     )
 
     return (
-        <div className="mt-5 pt-4 border-t border-border/50">
-            <div className="rounded-xl bg-gradient-to-br from-primary/15 to-secondary/10 border border-primary/20 p-3.5 text-center">
-                <p className="text-xs font-semibold text-foreground mb-1">
-                    🔒 Lock Active Tabs
+        <div className="mt-8">
+            <div className="rounded-2xl border border-border bg-card p-4">
+                <p className="mb-1 flex items-center gap-1.5 text-sm font-medium text-foreground">
+                    <Lock className="h-3.5 w-3.5 text-highlight" aria-hidden="true" />
+                    Lock Active Tabs
                 </p>
-                <p className="text-[11px] text-muted-foreground mb-3 leading-snug">
+                <p className="mb-4 text-xs leading-snug text-muted-foreground">
                     Free on-device encryption for Chrome, Edge &amp; Firefox.
                 </p>
                 <a
                     href={detected.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full py-2 px-3 rounded-lg bg-primary text-primary-foreground font-medium text-xs shadow hover:bg-primary/90 transition-all hover:scale-[1.01]"
+                    className="btn-primary btn-sm w-full"
                 >
                     {detected.buttonLabel}
                 </a>
-                <div className="mt-2.5 flex justify-center items-center gap-1.5 text-[11px] text-muted-foreground">
+                <div className="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground">
                     <span>Also for:</span>
                     {others.map((other, idx) => (
                         <React.Fragment key={other.key}>
@@ -159,7 +160,7 @@ export function TocInstallWidget() {
                                 href={other.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-medium text-primary hover:underline transition-colors"
+                                className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
                             >
                                 {other.shortName}
                             </a>

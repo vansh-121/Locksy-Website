@@ -4,43 +4,46 @@
 // Block shapes are defined in lib/guide-data.ts and the content lives in
 // lib/guide-content.json.
 
+import { ArrowUpRight, Lightbulb, Sparkles, TriangleAlert } from "lucide-react"
 import type { GuideBlock } from "@/lib/guide-data"
 
+// Same look as the shared `Callout` in components/page-shell.tsx, but rendered
+// here so the callout title can stay an <h3> (Callout renders its title as <p>).
 const CALLOUT_STYLES = {
-  tip: {
-    wrapper: "border-sky-500/30 bg-sky-500/5",
-    badge: "bg-sky-500/15 text-sky-700 dark:text-sky-300",
-    icon: "💡",
-    label: "Tip",
-  },
-  warning: {
-    wrapper: "border-amber-500/40 bg-amber-500/5",
-    badge: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
-    icon: "⚠️",
-    label: "Important",
-  },
-  pro: {
-    wrapper: "border-violet-500/30 bg-violet-500/5",
-    badge: "bg-violet-500/15 text-violet-700 dark:text-violet-300",
-    icon: "💎",
-    label: "Plans",
-  },
+  tip: { icon: Lightbulb, color: "text-highlight", label: "Tip" },
+  warning: { icon: TriangleAlert, color: "text-amber-500", label: "Important" },
+  pro: { icon: Sparkles, color: "text-highlight", label: "Plans" },
 } as const
+
+// Matches cells like "Alt + Shift + 9" / "Option + Shift + 0" so they render as keys.
+const SHORTCUT_RE = /^(?:(?:Alt|Shift|Option|Ctrl|Control|Cmd|Command|Meta)\s*\+\s*)+[A-Za-z0-9]+$/i
+
+function CellContent({ value }: { value: string }) {
+  if (!SHORTCUT_RE.test(value)) return <>{value}</>
+  const keys = value.split("+").map((k) => k.trim())
+  return (
+    <span className="inline-flex flex-wrap items-center gap-1" aria-label={value}>
+      {keys.map((k, i) => (
+        <span key={`${k}-${i}`} className="inline-flex items-center gap-1" aria-hidden="true">
+          {i > 0 && <span className="text-xs text-muted-foreground">+</span>}
+          <kbd className="kbd">{k}</kbd>
+        </span>
+      ))}
+    </span>
+  )
+}
 
 function Steps({ items }: { items: { title: string; body: string }[] }) {
   return (
-    <ol className="space-y-4">
+    <ol className="space-y-3">
       {items.map((item, idx) => (
-        <li
-          key={item.title}
-          className="flex gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm"
-        >
-          <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-sm font-bold text-white shadow-md">
-            {idx + 1}
+        <li key={item.title} className="surface flex gap-5 p-6">
+          <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-border bg-background font-mono text-xs text-foreground">
+            {String(idx + 1).padStart(2, "0")}
           </span>
-          <div className="min-w-0">
-            <h3 className="font-bold text-foreground">{item.title}</h3>
-            <p className="mt-1 leading-relaxed text-muted-foreground">{item.body}</p>
+          <div className="min-w-0 pt-1.5">
+            <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
+            <p className="mt-1.5 text-[15px] leading-relaxed text-muted-foreground">{item.body}</p>
           </div>
         </li>
       ))}
@@ -57,23 +60,20 @@ function Downloads({ items }: { items: { name: string; store: string; url: strin
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md hover:shadow-primary/10"
+          className="surface group flex items-center gap-3 p-4 transition-colors hover:border-foreground/20"
         >
-          <img src={item.icon} alt={item.name} className="h-10 w-10 flex-shrink-0 object-contain" />
+          <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-border bg-background">
+            <img src={item.icon} alt={item.name} className="h-7 w-7 object-contain" />
+          </span>
           <div className="min-w-0">
-            <p className="text-xs font-medium text-muted-foreground">Get it for</p>
-            <p className="font-bold text-foreground">{item.name}</p>
+            <p className="text-xs text-muted-foreground">Get it for</p>
+            <p className="font-medium text-foreground">{item.name}</p>
             <p className="truncate text-xs text-muted-foreground">{item.store}</p>
           </div>
-          <svg
+          <ArrowUpRight
             aria-hidden="true"
-            className="ml-auto h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
+            className="ml-auto h-4 w-4 flex-shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
+          />
         </a>
       ))}
     </div>
@@ -85,17 +85,13 @@ function Table({ caption, head, rows }: { caption: string; head: string[]; rows:
     <div>
       {/* Desktop: a real table. Mobile gets the stacked cards below instead,
           because a 3-column table at 375px is unreadable either way. */}
-      <div className="hidden overflow-hidden rounded-2xl border border-border/60 bg-card shadow-lg shadow-primary/5 md:block">
+      <div className="hidden overflow-hidden rounded-2xl border border-border bg-card md:block">
         <table className="w-full border-collapse text-left">
           <caption className="sr-only">{caption}</caption>
           <thead>
-            <tr className="border-b border-border/60 bg-gradient-to-r from-primary/10 to-secondary/10">
+            <tr className="border-b border-border bg-muted/50">
               {head.map((cell) => (
-                <th
-                  key={cell}
-                  scope="col"
-                  className="px-5 py-3.5 text-[11px] font-bold uppercase tracking-widest text-muted-foreground"
-                >
+                <th key={cell} scope="col" className="px-5 py-3.5 text-xs font-medium text-muted-foreground">
                   {cell}
                 </th>
               ))}
@@ -103,18 +99,15 @@ function Table({ caption, head, rows }: { caption: string; head: string[]; rows:
           </thead>
           <tbody>
             {rows.map((row, rowIdx) => (
-              <tr
-                key={row[0]}
-                className={rowIdx < rows.length - 1 ? "border-b border-border/40" : undefined}
-              >
+              <tr key={row[0]} className={rowIdx < rows.length - 1 ? "border-b border-border" : undefined}>
                 {row.map((cell, cellIdx) => (
                   <td
                     key={`${row[0]}-${head[cellIdx]}`}
                     className={`px-5 py-4 align-top text-sm leading-relaxed ${
-                      cellIdx === 0 ? "font-semibold text-foreground" : "text-muted-foreground"
+                      cellIdx === 0 ? "font-medium text-foreground" : "text-muted-foreground"
                     }`}
                   >
-                    {cell}
+                    <CellContent value={cell} />
                   </td>
                 ))}
               </tr>
@@ -125,15 +118,17 @@ function Table({ caption, head, rows }: { caption: string; head: string[]; rows:
 
       <div className="space-y-3 md:hidden">
         {rows.map((row) => (
-          <div key={row[0]} className="rounded-2xl border border-border/60 bg-card p-4 shadow-sm">
-            <p className="font-bold text-foreground">{row[0]}</p>
+          <div key={row[0]} className="rounded-2xl border border-border bg-card p-4">
+            <p className="font-medium text-foreground">
+              <CellContent value={row[0]} />
+            </p>
             <dl className="mt-2 space-y-1.5">
               {row.slice(1).map((cell, idx) => (
                 <div key={head[idx + 1]} className="flex gap-2 text-sm">
-                  <dt className="flex-shrink-0 font-medium text-muted-foreground/80">
-                    {head[idx + 1]}:
-                  </dt>
-                  <dd className="text-muted-foreground">{cell}</dd>
+                  <dt className="flex-shrink-0 text-muted-foreground/80">{head[idx + 1]}:</dt>
+                  <dd className="text-muted-foreground">
+                    <CellContent value={cell} />
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -151,7 +146,7 @@ export default function GuideBlocks({ blocks }: { blocks: GuideBlock[] }) {
         switch (block.type) {
           case "prose":
             return (
-              <p key={idx} className="leading-relaxed text-muted-foreground">
+              <p key={idx} className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
                 {block.body}
               </p>
             )
@@ -167,32 +162,26 @@ export default function GuideBlocks({ blocks }: { blocks: GuideBlock[] }) {
 
           case "callout": {
             const style = CALLOUT_STYLES[block.tone]
+            const Icon = style.icon
             return (
-              <aside key={idx} className={`rounded-2xl border p-5 ${style.wrapper}`}>
-                <div className="mb-2 flex items-center gap-2">
-                  <span aria-hidden="true">{style.icon}</span>
-                  <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${style.badge}`}
-                  >
-                    {style.label}
-                  </span>
+              <aside key={idx} className="flex gap-3 rounded-2xl border border-border bg-muted/50 p-5">
+                <Icon className={`mt-0.5 h-5 w-5 flex-shrink-0 ${style.color}`} aria-hidden="true" />
+                <div className="min-w-0 text-sm leading-relaxed text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">{style.label}</p>
+                  <h3 className="mt-0.5 font-sans text-[15px] font-medium tracking-normal text-foreground">{block.title}</h3>
+                  <p className="mt-1">{block.body}</p>
                 </div>
-                <h3 className="font-bold text-foreground">{block.title}</h3>
-                <p className="mt-1 leading-relaxed text-muted-foreground">{block.body}</p>
               </aside>
             )
           }
 
           case "qa":
             return (
-              <dl key={idx} className="space-y-5">
+              <dl key={idx} className="divide-y divide-border border-y border-border">
                 {block.items.map((item) => (
-                  <div
-                    key={item.q}
-                    className="rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm"
-                  >
-                    <dt className="font-bold text-foreground">{item.q}</dt>
-                    <dd className="mt-1.5 leading-relaxed text-muted-foreground">{item.a}</dd>
+                  <div key={item.q} className="py-5">
+                    <dt className="font-medium text-foreground">{item.q}</dt>
+                    <dd className="mt-1.5 text-[15px] leading-relaxed text-muted-foreground">{item.a}</dd>
                   </div>
                 ))}
               </dl>

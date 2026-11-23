@@ -1,158 +1,111 @@
 import Link from "next/link"
 import {
-    Blend,
-    Camera,
-    Clock,
-    EyeOff,
-    Fingerprint,
-    Globe,
-    KeyRound,
-    LayoutDashboard,
-    ScreenShare,
-    ShieldCheck,
-    Laptop,
-    Calendar,
-    Sparkles,
-    Zap,
+  Blend,
+  Camera,
+  Clock,
+  EyeOff,
+  Fingerprint,
+  Globe,
+  KeyRound,
+  LayoutDashboard,
+  ScreenShare,
+  ShieldCheck,
+  Laptop,
+  Calendar,
+  Zap,
 } from "lucide-react"
 
 import { PRO_CHECKOUT_URL, PRO_PRICE } from "@/lib/pro"
 
 /**
- * Every Pro unlock that maps onto a free-tier limit someone can actually feel,
- * ordered so the `was` column tells its own story: the caps that disappear
- * first, then the caps that get raised, then what free never had at all.
- *
- * Both label and `was` trace to the two lists in components/pricing.tsx — if a
- * free limit changes there, it has to change here. The only Pro entry
- * deliberately left out is Master Recovery Key Backup, because the free tier
- * gets a recovery key too and it isn't an honest differentiator.
+ * Every Pro unlock that maps onto a free-tier limit, ordered so the `was`
+ * column tells the story. Both columns trace to components/pricing.tsx; if a
+ * free limit changes there, change it here too.
  */
 const PRO_UNLOCKS = [
-    { icon: Laptop, label: "Use on up to 5 devices", was: "1 device on free" },
-    { icon: Globe, label: "Unlimited domain locks", was: "3 on free" },
-    { icon: Fingerprint, label: "Unlimited biometric unlocks", was: "5 a day on free" },
-    { icon: Camera, label: "Unlimited intruder snapshots", was: "3 on free" },
-    { icon: KeyRound, label: "1-click lock & unlock all", was: "3 total uses on free" },
-    { icon: Clock, label: "Custom auto-lock timers", was: "10 minutes on free" },
-    { icon: Blend, label: "Full privacy blur manager", was: "Basic blur on free" },
-    { icon: ScreenShare, label: "Automatic screen share shield", was: "Manual toggle on free" },
-    { icon: EyeOff, label: "Stealth-mode disguise", was: "Not on free" },
-    { icon: Calendar, label: "Scheduled locking", was: "Not on free" },
-    { icon: Zap, label: "Startup session lock", was: "Not on free" },
-    { icon: LayoutDashboard, label: "Weekly privacy reports", was: "Not on free" },
+  { icon: Laptop, label: "Use on up to 5 devices", was: "1 device on free" },
+  { icon: Globe, label: "Unlimited domain locks", was: "3 on free" },
+  { icon: Fingerprint, label: "Unlimited biometric unlocks", was: "5 a day on free" },
+  { icon: Camera, label: "Unlimited intruder snapshots", was: "3 on free" },
+  { icon: KeyRound, label: "1-click lock & unlock all", was: "3 total uses on free" },
+  { icon: Clock, label: "Custom auto-lock timers", was: "10 minutes on free" },
+  { icon: Blend, label: "Full privacy blur manager", was: "Basic blur on free" },
+  { icon: ScreenShare, label: "Automatic screen share shield", was: "Manual toggle on free" },
+  { icon: EyeOff, label: "Stealth-mode disguise", was: "Not on free" },
+  { icon: Calendar, label: "Scheduled locking", was: "Not on free" },
+  { icon: Zap, label: "Startup session lock", was: "Not on free" },
+  { icon: LayoutDashboard, label: "Weekly privacy reports", was: "Not on free" },
 ]
 
 interface ProUpgradeCardProps {
-    /** Small badge above the heading. Override it to answer the page's own context. */
-    eyebrow?: string
-    /** Adds the lit ring — use when the page has evidence this person wants Pro. */
-    highlighted?: boolean
-    /** Extra classes on the outer <section> (spacing, borders, background). */
-    className?: string
+  /** Small label above the heading. Override it to match the page's context. */
+  eyebrow?: string
+  /** Adds the brand ring, for pages where the reader has shown interest in Pro. */
+  highlighted?: boolean
+  /** Extra classes on the outer <section>. */
+  className?: string
 }
 
-/**
- * The $4.99 lifetime offer as a drop-in section.
- *
- * Kept as a server component so /guide (a server page) renders it with zero
- * client JS; the /tools pages import it from inside their client boundary,
- * where it rides along with the CTASection they already ship. The full
- * free-vs-Pro table stays on the homepage (components/pricing.tsx) — this is
- * the short version for pages where the reader is already deep in the product.
- */
+/** The lifetime Pro offer as a drop-in section. Server component, no client JS. */
 export default function ProUpgradeCard({
-    eyebrow = "Locksy Pro",
-    highlighted = false,
-    className = "relative overflow-hidden py-16 md:py-20",
+  eyebrow = "Locksy Pro",
+  highlighted = false,
+  className = "relative py-14 md:py-20",
 }: ProUpgradeCardProps) {
-    return (
-        <section className={className}>
-            <div className="pointer-events-none absolute inset-0">
-                <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/10 via-secondary/10 to-primary/10 blur-3xl" />
-            </div>
+  return (
+    <section className={className}>
+      <div className="relative mx-auto max-w-6xl px-4 md:px-6">
+        <div className={`surface relative overflow-hidden ${highlighted ? "ring-1 ring-highlight/40" : ""}`}>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full blur-3xl"
+            style={{ background: "var(--glow)" }}
+          />
 
-            <div className="relative mx-auto max-w-5xl px-4 md:px-6">
-                <div
-                    className={`overflow-hidden rounded-[2rem] border bg-card/60 shadow-2xl backdrop-blur-xl transition-all duration-500 ${
-                        highlighted
-                            ? "border-primary/50 shadow-[0_0_60px_rgba(37,99,235,0.2)]"
-                            : "border-primary/25"
-                    }`}
-                >
-                    <div className="h-1 bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary" />
+          <div className="relative grid gap-10 p-7 md:p-12 lg:grid-cols-[1fr_280px] lg:gap-14">
+            <div>
+              <span className="eyebrow">
+                <span className="eyebrow-dot" aria-hidden="true" />
+                {eyebrow}
+              </span>
+              <h2 className="mt-5 max-w-md text-3xl font-semibold leading-[1.1] text-foreground md:text-4xl text-balance">
+                Every limit removed, for {PRO_PRICE} once
+              </h2>
+              <p className="mt-4 max-w-xl text-muted-foreground">
+                No subscription and no trial. One payment unlocks everything, for good.
+              </p>
 
-                    <div className="grid gap-10 p-8 md:p-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
-                        <div className="space-y-6">
-                            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-gradient-to-r from-violet-600/10 via-fuchsia-600/10 to-cyan-600/10 px-4 py-2 text-sm font-bold text-violet-600 dark:text-violet-400 shadow-sm backdrop-blur-md">
-                                <Sparkles className="h-4 w-4 text-violet-500" />
-                                {eyebrow}
-                            </div>
-
-                            <h2 className="max-w-md text-3xl font-black tracking-tight md:text-4xl">
-                                Everything unlimited, for{" "}
-                                <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
-                                    {PRO_PRICE} once
-                                </span>
-                            </h2>
-                            <p className="max-w-xl text-muted-foreground">
-                                Not a subscription. Not a trial. One payment, every limit gone, yours
-                                for good.
-                            </p>
-
-                            <div className="grid gap-3 sm:grid-cols-2">
-                                {PRO_UNLOCKS.map(({ icon: Icon, label, was }) => (
-                                    <div key={label} className="flex items-start gap-3">
-                                        <span className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-violet-500/20 bg-violet-500/10 text-violet-600 dark:text-violet-400">
-                                            <Icon className="h-3.5 w-3.5" />
-                                        </span>
-                                        <div className="min-w-0">
-                                            <p className="text-sm font-bold leading-snug">{label}</p>
-                                            <p className="text-xs text-muted-foreground line-through">{was}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col items-center gap-4 lg:min-w-[240px]">
-                            <div className="text-center">
-                                <div className="flex items-baseline justify-center gap-2">
-                                    <span className="text-6xl font-black tracking-tighter">{PRO_PRICE}</span>
-                                </div>
-                                <div className="inline-block mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">
-                                    Lifetime License
-                                </div>
-                                <p className="mt-1 text-sm font-bold text-violet-600 dark:text-violet-400">
-                                    One-time · Lifetime (5 devices)
-                                </p>
-                            </div>
-                            <a
-                                href={PRO_CHECKOUT_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group/btn relative block w-full overflow-hidden rounded-2xl bg-foreground py-4 text-center font-black text-background transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/20 active:scale-[0.98]"
-                            >
-                                <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100" />
-                                <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover/btn:text-white">
-                                    Get Pro
-                                    <Zap className="h-5 w-5 animate-pulse" />
-                                </span>
-                            </a>
-                            <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                                <ShieldCheck className="h-4 w-4 flex-shrink-0 text-green-500" />
-                                Secure payment via Polar.sh
-                            </p>
-                            <Link
-                                href="/pricing"
-                                className="text-xs font-semibold text-muted-foreground hover:text-primary hover:underline"
-                            >
-                                Compare free vs Pro
-                            </Link>
-                        </div>
+              <ul className="mt-8 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+                {PRO_UNLOCKS.map(({ icon: Icon, label, was }) => (
+                  <li key={label} className="flex items-start gap-3">
+                    <Icon className="mt-0.5 h-4 w-4 flex-shrink-0 text-highlight" aria-hidden="true" />
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium leading-snug text-foreground">{label}</p>
+                      <p className="text-xs text-muted-foreground">{was}</p>
                     </div>
-                </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-        </section>
-    )
+
+            <div className="flex flex-col justify-center rounded-2xl border border-border bg-background/60 p-6 text-center">
+              <p className="text-sm text-muted-foreground">Lifetime license</p>
+              <p className="mt-2 font-display text-5xl font-semibold tracking-tight text-foreground">{PRO_PRICE}</p>
+              <p className="mt-1 text-sm text-muted-foreground">One-time · up to 5 devices</p>
+              <a href={PRO_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="btn-primary mt-6 w-full">
+                Get Locksy Pro
+              </a>
+              <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+                <ShieldCheck className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                Secure payment via Polar.sh
+              </p>
+              <Link href="/pricing" className="mt-3 text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground">
+                Compare free and Pro
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }

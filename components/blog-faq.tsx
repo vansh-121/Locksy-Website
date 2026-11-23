@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { ChevronDown, HelpCircle } from 'lucide-react'
+import { Plus } from 'lucide-react'
 
 interface BlogFaqItem {
     question: string
@@ -26,27 +26,29 @@ export default function BlogFaq({ items }: BlogFaqProps) {
     if (!items || items.length === 0) return null
 
     return (
-        <div className="rounded-2xl border border-border/30 bg-card/60 backdrop-blur-sm p-2 md:p-4">
+        <div className="divide-y divide-border border-y border-border">
             {items.map((item, i) => (
                 <details
                     key={i}
                     name="post-faq"
-                    className="group border-b border-border/40 px-4 last:border-b-0"
+                    className="group"
                 >
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 text-left text-base font-semibold text-foreground md:text-lg [&::-webkit-details-marker]:hidden">
-                        <span className="flex items-start gap-3">
-                            <HelpCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                            {item.question}
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-base font-medium text-foreground md:text-[17px] [&::-webkit-details-marker]:hidden">
+                        <span>{item.question}</span>
+                        <span
+                            aria-hidden="true"
+                            className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-transform duration-200 group-open:rotate-45"
+                        >
+                            <Plus className="h-3.5 w-3.5" />
                         </span>
-                        <ChevronDown className="h-5 w-5 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180" />
                     </summary>
                     <div className="overflow-hidden group-open:animate-in group-open:fade-in-0 group-open:slide-in-from-top-1 group-open:duration-200">
-                        <div className="pb-4 pl-8 text-base leading-7 text-foreground/90">
+                        <div className="pb-6 pr-12 text-[15px] leading-relaxed text-muted-foreground">
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
                                     p: ({ children }) => (
-                                        <p className="mb-3 leading-7 last:mb-0">{children}</p>
+                                        <p className="mb-3 last:mb-0">{children}</p>
                                     ),
                                     a: ({ children, href }) => {
                                         const safeHref =
@@ -55,7 +57,7 @@ export default function BlogFaq({ items }: BlogFaqProps) {
                                         return (
                                             <a
                                                 href={safeHref}
-                                                className="font-medium text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+                                                className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
                                                 target={external ? '_blank' : undefined}
                                                 rel={external ? 'noopener noreferrer' : undefined}
                                             >
@@ -64,20 +66,20 @@ export default function BlogFaq({ items }: BlogFaqProps) {
                                         )
                                     },
                                     code: ({ children }) => (
-                                        <code className="rounded-md border border-primary/20 bg-primary/10 px-1.5 py-0.5 font-mono text-sm text-primary">
+                                        <code className="rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">
                                             {children}
                                         </code>
                                     ),
                                     strong: ({ children }) => (
-                                        <strong className="font-bold text-foreground">{children}</strong>
+                                        <strong className="font-semibold text-foreground">{children}</strong>
                                     ),
                                     ul: ({ children }) => (
-                                        <ul className="my-2 ml-5 list-disc space-y-1">{children}</ul>
+                                        <ul className="my-2 ml-5 list-disc space-y-1 marker:text-highlight">{children}</ul>
                                     ),
                                     ol: ({ children }) => (
-                                        <ol className="my-2 ml-5 list-decimal space-y-1">{children}</ol>
+                                        <ol className="my-2 ml-5 list-decimal space-y-1 marker:text-highlight">{children}</ol>
                                     ),
-                                    li: ({ children }) => <li className="leading-7">{children}</li>,
+                                    li: ({ children }) => <li>{children}</li>,
                                 }}
                             >
                                 {item.answer}

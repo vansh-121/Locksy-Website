@@ -4,66 +4,56 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 
 export default function CookieConsent() {
-    const [showBanner, setShowBanner] = useState(false)
+  const [showBanner, setShowBanner] = useState(false)
 
-    useEffect(() => {
-        // Check if user has already made a cookie consent choice
-        const consent = localStorage.getItem("locksy-cookie-consent")
-        if (!consent) {
-            // Small delay so banner doesn't flash on page load
-            const timer = setTimeout(() => setShowBanner(true), 1500)
-            return () => clearTimeout(timer)
-        }
-    }, [])
-
-    const acceptAll = () => {
-        localStorage.setItem("locksy-cookie-consent", "accepted")
-        setShowBanner(false)
+  useEffect(() => {
+    const consent = localStorage.getItem("locksy-cookie-consent")
+    if (!consent) {
+      // Small delay so the banner doesn't flash on page load
+      const timer = setTimeout(() => setShowBanner(true), 1500)
+      return () => clearTimeout(timer)
     }
+  }, [])
 
-    const acceptEssential = () => {
-        localStorage.setItem("locksy-cookie-consent", "essential-only")
-        setShowBanner(false)
-    }
+  const choose = (value: "accepted" | "essential-only") => {
+    localStorage.setItem("locksy-cookie-consent", value)
+    setShowBanner(false)
+  }
 
-    if (!showBanner) return null
+  if (!showBanner) return null
 
-    return (
-        <div className="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6 animate-in slide-in-from-bottom-5 duration-500">
-            <div className="max-w-4xl mx-auto bg-card/95 backdrop-blur-xl border-2 border-border/50 rounded-2xl shadow-2xl shadow-black/20 p-6 md:p-8">
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                    {/* Icon & Text */}
-                    <div className="flex-1 space-y-2">
-                        <div className="flex items-center gap-2">
-                            <span className="text-2xl">🍪</span>
-                            <h3 className="font-bold text-lg">Cookie Consent</h3>
-                        </div>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            We use essential cookies to make this site work properly, and optional cookies from third-party embeds (YouTube, Google AdSense).
-                            We do <strong>not</strong> use analytics tracking cookies.{" "}
-                            <Link href="/cookie-policy" className="text-primary hover:underline font-medium">
-                                Read our Cookie Policy
-                            </Link>
-                        </p>
-                    </div>
-
-                    {/* Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full md:w-auto">
-                        <button
-                            onClick={acceptEssential}
-                            className="px-6 py-3 text-sm font-semibold text-foreground bg-accent border border-border rounded-xl hover:bg-accent/80 transition-all"
-                        >
-                            Essential Only
-                        </button>
-                        <button
-                            onClick={acceptAll}
-                            className="px-6 py-3 text-sm font-bold text-white bg-gradient-to-r from-primary to-secondary rounded-xl hover:shadow-lg hover:shadow-primary/20 transition-all hover:-translate-y-0.5"
-                        >
-                            Accept All
-                        </button>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div
+      role="dialog"
+      aria-label="Cookie preferences"
+      className="fixed inset-x-3 bottom-3 z-[100] animate-in fade-in slide-in-from-bottom-3 duration-300 sm:inset-x-auto sm:right-5 sm:bottom-5 sm:w-[380px]"
+    >
+      <div className="rounded-2xl border border-border bg-popover/95 p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+        <p className="text-sm font-medium text-foreground">Cookies</p>
+        <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+          We use essential cookies to run the site, plus optional ones from YouTube and Google AdSense embeds. No analytics
+          tracking cookies.{" "}
+          <Link href="/cookie-policy" className="text-foreground underline underline-offset-4">
+            Cookie policy
+          </Link>
+        </p>
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => choose("essential-only")}
+            className="h-9 rounded-full border border-border text-[13px] font-medium text-foreground hover:bg-muted transition-colors"
+          >
+            Essential only
+          </button>
+          <button
+            type="button"
+            onClick={() => choose("accepted")}
+            className="h-9 rounded-full bg-foreground text-[13px] font-medium text-background hover:opacity-90 transition-opacity"
+          >
+            Accept all
+          </button>
         </div>
-    )
+      </div>
+    </div>
+  )
 }

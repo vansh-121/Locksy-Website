@@ -25,14 +25,17 @@ import {
     ShieldOff,
     Sparkles,
     Star,
+    Check,
+    X,
 } from "lucide-react"
-import { Textarea } from "@/components/ui/textarea"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import ProUpgradeCard from "@/components/pro-upgrade-card"
 import WhatsAppIcon from "@/components/whatsapp-icon"
 import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 import { PRO_CHECKOUT_URL } from "@/lib/pro"
+import SectionHeading from "@/components/section-heading"
+import { PageHero, PageSection, IconTile } from "@/components/page-shell"
 
 const BROWSERS = [
     {
@@ -304,152 +307,111 @@ export default function UninstallClient({
             <Header />
 
             {/* ══ 1. HERO — the loss, stated as a present-tense fact ═════════ */}
-            <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent via-background to-accent page-top-offset pb-16 md:pb-20">
-                {/* Same wash as the marketing hero (components/hero.tsx) so the page
-                    still reads as Locksy. The alarm is carried in red by the badge,
-                    the headline and the unlocked-tabs mockup — the colour this site
-                    already uses for "unprotected" in comparison.tsx and
-                    see-it-in-action.tsx. */}
-                <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-primary/10 blur-3xl dark:bg-primary/20" />
-                    <div className="absolute -bottom-32 right-1/4 h-96 w-96 rounded-full bg-secondary/10 blur-3xl dark:bg-secondary/20" />
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+            <PageHero
+                eyebrow="Locksy has been removed"
+                title="Your tabs are unprotected now."
+                description="Every tab you were protecting — banking, email, work — is open to anyone who picks up your device. Putting that back takes about thirty seconds."
+            >
+                {/* Primary CTA. Until detection resolves it points at the browser
+                    picker, so it still works with JS disabled. */}
+                <a
+                    href={restoreHref}
+                    {...restoreProps}
+                    className="btn-primary btn-lg group w-full sm:w-auto"
+                >
+                    {browser ? (
+                        <img src={browser.icon} alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
+                    ) : (
+                        <RotateCcw className="h-4 w-4" />
+                    )}
+                    {browser ? `Restore Locksy to ${browser.name}` : "Restore Locksy"}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </a>
+
+                <div className="flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+                    <span className="flex items-center gap-1.5">
+                        <Check className="h-4 w-4 flex-shrink-0 text-highlight" />
+                        Free forever
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                        <Check className="h-4 w-4 flex-shrink-0 text-highlight" />
+                        No account
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                        <Check className="h-4 w-4 flex-shrink-0 text-highlight" />
+                        Nothing leaves your device
+                    </span>
                 </div>
 
-                <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-                    {/* Left: the pitch */}
-                    <div className="space-y-8">
-                        <div className="inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-600 backdrop-blur-sm dark:text-red-400">
-                            <span className="relative flex h-2 w-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-                                <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
-                            </span>
-                            Locksy has been removed
-                        </div>
+                <p className="w-full text-sm text-muted-foreground">
+                    {browser ? "Different browser? " : "Chrome, Edge or Firefox — "}
+                    <a href="#restore" className="text-foreground underline underline-offset-4">
+                        pick yours here
+                    </a>
+                    . Or{" "}
+                    <a href="#why" className="text-foreground underline underline-offset-4">
+                        tell us what went wrong
+                    </a>{" "}
+                    first.
+                </p>
+            </PageHero>
 
-                        <div className="space-y-5">
-                            <h1 className="text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-                                Your tabs are{" "}
-                                <span className="bg-gradient-to-r from-rose-500 to-red-600 bg-clip-text text-transparent">
-                                    unprotected
-                                </span>{" "}
-                                now.
-                            </h1>
-                            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-                                Every tab you were protecting — banking, email, work — is open to
-                                anyone who picks up your device. Putting that back takes about thirty
-                                seconds.
-                            </p>
-                        </div>
+            {/* A browser mockup with the locks now open. The abstract point
+                ("you are less protected") lands harder as a picture of three
+                familiar tabs sitting wide open. */}
+            <div className="mx-auto max-w-2xl px-4 pb-4 md:px-6" aria-hidden="true">
+                <div className="surface overflow-hidden">
+                    <div className="flex items-center gap-2 border-b border-border bg-muted/50 px-4 py-3">
+                        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
+                        <span className="ml-3 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                            <ShieldOff className="h-3.5 w-3.5 text-red-500" />
+                            Unprotected
+                        </span>
+                    </div>
 
-                        {/* Primary CTA. Until detection resolves it points at the browser
-                            picker, so it still works with JS disabled. */}
-                        <div className="space-y-4">
-                            <a
-                                href={restoreHref}
-                                {...restoreProps}
-                                className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary px-5 py-4 text-base font-black text-white shadow-xl shadow-primary/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 sm:w-auto sm:gap-3 sm:px-8 sm:py-5 sm:text-lg"
+                    <div className="space-y-2.5 p-4 sm:p-5">
+                        {EXPOSED_TABS.map((tab) => (
+                            <div
+                                key={tab.host}
+                                className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-3"
                             >
-                                {browser ? (
-                                    <img src={browser.icon} alt="" aria-hidden="true" className="h-6 w-6" />
-                                ) : (
-                                    <RotateCcw className="h-5 w-5" />
-                                )}
-                                {browser ? `Restore Locksy to ${browser.name}` : "Restore Locksy"}
-                                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                            </a>
-
-                            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                                <span className="flex items-center gap-1.5">
-                                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-500" />
-                                    Free forever
+                                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-border bg-muted">
+                                    <LockOpen className="h-4 w-4 text-red-500" />
                                 </span>
-                                <span className="flex items-center gap-1.5">
-                                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-500" />
-                                    No account
-                                </span>
-                                <span className="flex items-center gap-1.5">
-                                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-500" />
-                                    Nothing leaves your device
-                                </span>
-                            </div>
-
-                            <p className="text-sm text-muted-foreground">
-                                {browser ? "Different browser? " : "Chrome, Edge or Firefox — "}
-                                <a href="#restore" className="font-semibold text-primary hover:underline">
-                                    pick yours here
-                                </a>
-                                . Or{" "}
-                                <a href="#why" className="font-semibold text-primary hover:underline">
-                                    tell us what went wrong
-                                </a>{" "}
-                                first.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Right: a browser mockup with the locks now open. The abstract
-                        point ("you are less protected") lands harder as a picture of
-                        three familiar tabs sitting wide open. */}
-                    <div className="relative" aria-hidden="true">
-                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-rose-500/20 to-red-500/20 blur-2xl" />
-                        <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
-                            <div className="flex items-center gap-2 border-b border-border bg-muted/60 px-4 py-3">
-                                <span className="h-3 w-3 rounded-full bg-red-400" />
-                                <span className="h-3 w-3 rounded-full bg-yellow-400" />
-                                <span className="h-3 w-3 rounded-full bg-green-400" />
-                                <span className="ml-3 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                                    <ShieldOff className="h-3.5 w-3.5 text-red-500" />
-                                    Unprotected
-                                </span>
-                            </div>
-
-                            <div className="space-y-3 p-4 sm:p-5">
-                                {EXPOSED_TABS.map((tab) => (
-                                    <div
-                                        key={tab.host}
-                                        className="flex items-center gap-3 rounded-xl border border-red-500/25 bg-red-500/5 px-4 py-3.5"
-                                    >
-                                        <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-red-500/15">
-                                            <LockOpen className="h-4 w-4 text-red-500" />
-                                        </div>
-                                        <div className="min-w-0 flex-1">
-                                            <p className="truncate text-sm font-semibold">{tab.label}</p>
-                                            <p className="truncate text-xs text-muted-foreground">{tab.host}</p>
-                                        </div>
-                                        <span className="flex-shrink-0 rounded-full bg-red-500/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
-                                            Open
-                                        </span>
-                                    </div>
-                                ))}
-
-                                <div className="flex items-center gap-2 rounded-xl border border-dashed border-border px-4 py-3 text-xs text-muted-foreground">
-                                    <ShieldOff className="h-4 w-4 flex-shrink-0" />
-                                    No tab protection active on this browser
+                                <div className="min-w-0 flex-1">
+                                    <p className="truncate text-sm font-medium text-foreground">{tab.label}</p>
+                                    <p className="truncate font-mono text-xs text-muted-foreground">{tab.host}</p>
                                 </div>
+                                <span className="flex-shrink-0 rounded-full border border-red-500/25 bg-red-500/10 px-2.5 py-0.5 text-[11px] font-medium text-red-600 dark:text-red-400">
+                                    Open
+                                </span>
                             </div>
+                        ))}
+
+                        <div className="flex items-center gap-2 rounded-xl border border-dashed border-border px-4 py-3 text-xs text-muted-foreground">
+                            <ShieldOff className="h-4 w-4 flex-shrink-0" />
+                            No tab protection active on this browser
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
             {/* ══ 2. WHY — the reason picker that answers back ══════════════ */}
-            <section id="why" className="relative scroll-mt-24 pt-16 pb-8 md:pt-20 md:pb-10">
-                <div className="mx-auto max-w-5xl px-4 md:px-6">
-                    <div className="mb-12 text-center">
-                        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur-sm">
-                            <MessageCircle className="h-4 w-4" />
-                            One question
-                        </div>
-                        <h2 className="mb-4 text-3xl font-black tracking-tight md:text-5xl">
-                            What made you remove it?
-                        </h2>
-                        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            <PageSection id="why" width="narrow" className="md:pt-20">
+                <SectionHeading
+                    eyebrow="One question"
+                    title="What made you remove it?"
+                    description={
+                        <>
                             Pick whatever applies. We&apos;ll tell you straight away whether it was
                             something you could have fixed — and we read every one of these.
-                        </p>
-                    </div>
+                        </>
+                    }
+                />
 
+                <div className="mt-12">
                     {!submitted ? (
                         <>
                             <div className="grid gap-3 sm:grid-cols-2">
@@ -462,27 +424,20 @@ export default function UninstallClient({
                                             type="button"
                                             onClick={() => toggle(reason.id)}
                                             aria-pressed={on}
-                                            className={`group flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all duration-300 ${on
-                                                ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
-                                                : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                                            className={`flex items-center gap-4 rounded-2xl border p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${on
+                                                ? "border-foreground/40 bg-muted ring-1 ring-highlight/40"
+                                                : "border-border bg-card hover:border-foreground/20"
                                                 }`}
                                         >
-                                            <span
-                                                className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-colors ${on
-                                                    ? "bg-gradient-to-br from-primary to-secondary text-white"
-                                                    : "bg-muted text-muted-foreground group-hover:text-primary"
-                                                    }`}
-                                            >
-                                                <Icon className="h-5 w-5" />
-                                            </span>
-                                            <span className="flex-1 text-sm font-semibold leading-snug sm:text-base">
+                                            <IconTile icon={Icon} />
+                                            <span className="flex-1 text-sm font-medium leading-snug text-foreground sm:text-[15px]">
                                                 {reason.label}
                                             </span>
                                             <span
-                                                className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all ${on ? "border-primary bg-primary" : "border-border"
+                                                className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border transition-colors ${on ? "border-highlight/50 bg-highlight/10" : "border-border"
                                                     }`}
                                             >
-                                                {on && <CheckCircle2 className="h-4 w-4 text-white" />}
+                                                {on && <Check className="h-3.5 w-3.5 text-highlight" />}
                                             </span>
                                         </button>
                                     )
@@ -495,7 +450,7 @@ export default function UninstallClient({
                                 <div className="mt-10 space-y-4">
                                     <div className="flex items-center gap-3">
                                         <div className="h-px flex-1 bg-border" />
-                                        <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                                        <span className="text-xs font-medium text-muted-foreground">
                                             {answers.length === 1 ? "Our answer" : "Our answers"}
                                         </span>
                                         <div className="h-px flex-1 bg-border" />
@@ -504,19 +459,14 @@ export default function UninstallClient({
                                     {answers.map((reason) => {
                                         const Icon = reason.icon
                                         return (
-                                            <div
-                                                key={reason.id}
-                                                className="overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-card to-accent/40 shadow-sm"
-                                            >
-                                                <div className="flex flex-col gap-4 p-5 sm:flex-row sm:p-6">
-                                                    <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary shadow-md">
-                                                        <Icon className="h-5 w-5 text-white" />
-                                                    </div>
+                                            <div key={reason.id} className="surface p-5 sm:p-6">
+                                                <div className="flex flex-col gap-4 sm:flex-row">
+                                                    <IconTile icon={Icon} />
                                                     <div className="min-w-0 flex-1 space-y-2">
-                                                        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                                        <p className="text-xs font-medium text-muted-foreground">
                                                             {reason.label}
                                                         </p>
-                                                        <h3 className="text-lg font-bold leading-snug md:text-xl">
+                                                        <h3 className="text-lg font-semibold leading-snug text-foreground">
                                                             {reason.headline}
                                                         </h3>
                                                         <p className="text-sm leading-relaxed text-muted-foreground">
@@ -527,9 +477,9 @@ export default function UninstallClient({
                                                             {reason.chapter && (
                                                                 <Link
                                                                     href={`/guide#${reason.chapter}`}
-                                                                    className="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:underline"
+                                                                    className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline underline-offset-4"
                                                                 >
-                                                                    <BookOpen className="h-4 w-4 flex-shrink-0" />
+                                                                    <BookOpen className="h-4 w-4 flex-shrink-0 text-highlight" />
                                                                     {reason.chapterTitle}
                                                                     <ArrowRight className="h-3.5 w-3.5 flex-shrink-0" />
                                                                 </Link>
@@ -539,7 +489,7 @@ export default function UninstallClient({
                                                                     href={PRO_CHECKOUT_URL}
                                                                     target="_blank"
                                                                     rel="noopener noreferrer"
-                                                                    className="inline-flex items-center gap-1.5 text-sm font-bold text-violet-600 hover:underline dark:text-violet-400"
+                                                                    className="inline-flex items-center gap-1.5 text-sm font-medium text-highlight underline underline-offset-4"
                                                                 >
                                                                     <Sparkles className="h-4 w-4 flex-shrink-0" />
                                                                     Get Pro — $4.99 once
@@ -553,13 +503,13 @@ export default function UninstallClient({
                                         )
                                     })}
 
-                                    <div className="rounded-2xl border border-border bg-muted/40 p-5 text-center">
+                                    <div className="rounded-2xl border border-border bg-muted/50 p-5 text-center">
                                         <p className="text-sm text-muted-foreground">
                                             Changed your mind?{" "}
                                             <a
                                                 href={restoreHref}
                                                 {...restoreProps}
-                                                className="font-bold text-primary hover:underline"
+                                                className="font-medium text-foreground underline underline-offset-4"
                                             >
                                                 {browser
                                                     ? `Put Locksy back on ${browser.name}`
@@ -572,22 +522,22 @@ export default function UninstallClient({
                             )}
 
                             {/* Free text + submit */}
-                            <div className="mt-10 space-y-4 rounded-2xl border border-border bg-card p-5 sm:p-6">
-                                <label htmlFor="feedback" className="block text-sm font-bold">
+                            <div className="surface mt-10 space-y-4 p-5 sm:p-6">
+                                <label htmlFor="feedback" className="block text-sm font-medium text-foreground">
                                     Anything else?{" "}
                                     <span className="font-normal text-muted-foreground">(optional)</span>
                                 </label>
-                                <Textarea
+                                <textarea
                                     id="feedback"
                                     placeholder="The thing that annoyed you, the feature that was missing, the bug that made you give up…"
                                     value={feedback}
                                     onChange={(e) => setFeedback(e.target.value)}
                                     rows={4}
-                                    className="resize-none border-2 focus:border-primary"
+                                    className="block w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                                 />
 
                                 {error && (
-                                    <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-4 text-sm text-destructive">
+                                    <div className="rounded-xl border border-destructive/25 bg-destructive/10 p-4 text-sm text-destructive">
                                         {error}
                                     </div>
                                 )}
@@ -596,7 +546,7 @@ export default function UninstallClient({
                                     type="button"
                                     onClick={handleSubmit}
                                     disabled={isSubmitting || (selected.length === 0 && !feedback.trim())}
-                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-6 py-4 font-bold text-background transition-all duration-300 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+                                    className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-40"
                                 >
                                     {isSubmitting ? "Sending…" : "Send feedback"}
                                     {!isSubmitting && <ArrowRight className="h-4 w-4" />}
@@ -607,21 +557,21 @@ export default function UninstallClient({
                             </div>
                         </>
                     ) : (
-                        <div className="rounded-3xl border-2 border-green-500/30 bg-green-500/5 p-8 text-center md:p-12">
-                            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 shadow-lg">
-                                <CheckCircle2 className="h-8 w-8 text-white" />
-                            </div>
-                            <h2 className="mb-3 text-3xl font-black">Got it — thank you.</h2>
-                            <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">
+                        <div className="surface p-8 text-center md:p-12">
+                            <IconTile icon={CheckCircle2} className="mx-auto" />
+                            <h2 className="mt-6 text-2xl font-semibold leading-tight text-foreground md:text-3xl text-balance">
+                                Got it — thank you.
+                            </h2>
+                            <p className="mx-auto mt-3 max-w-md leading-relaxed text-muted-foreground">
                                 That goes straight to the developer, and it genuinely shapes what gets
                                 built next. The door stays open.
                             </p>
 
-                            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                                 <a
                                     href={restoreHref}
                                     {...restoreProps}
-                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-secondary px-6 py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl sm:w-auto"
+                                    className="btn-primary w-full sm:w-auto"
                                 >
                                     <RotateCcw className="h-4 w-4" />
                                     {browser ? `Reinstall on ${browser.name}` : "Reinstall Locksy"}
@@ -631,175 +581,157 @@ export default function UninstallClient({
                                     onClick={openWhatsAppChannel}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-xl sm:w-auto"
+                                    className="btn-secondary w-full sm:w-auto"
                                 >
-                                    <WhatsAppIcon className="h-4 w-4" />
+                                    <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
                                     Get notified when it&apos;s fixed
                                 </a>
                             </div>
                         </div>
                     )}
                 </div>
-            </section>
+            </PageSection>
 
             {/* ══ 3. COMPARE — for anyone who left for an alternative ══════ */}
-            <section className="px-4 pt-4 pb-16 md:px-6 md:pt-6 md:pb-20">
-                <div className="mx-auto max-w-4xl">
-                    <div className="mb-8 text-center">
-                        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary dark:text-primary-on-dark">
-                            <ArrowLeftRight className="h-4 w-4" />
-                            Switching to something else?
-                        </div>
-                        <h2 className="mb-3 text-2xl font-black tracking-tight md:text-3xl">
-                            Check the replacement does these six
-                        </h2>
-                        <p className="mx-auto max-w-xl text-muted-foreground">
-                            The two things people usually move to instead are a separate browser
-                            profile or a tab manager. Neither is built to keep one tab shut while
-                            you keep working in the others.
-                        </p>
-                    </div>
+            <PageSection width="narrow">
+                <SectionHeading
+                    eyebrow="Switching to something else?"
+                    title="Check the replacement does these six"
+                    description="The two things people usually move to instead are a separate browser profile or a tab manager. Neither is built to keep one tab shut while you keep working in the others."
+                />
 
-                    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-                        {/* min-w is what makes the overflow-x-auto above actually
-                            engage. With `w-full` alone the table just squashes four
-                            columns into a 375px viewport instead of scrolling. */}
-                        <div className="overflow-x-auto">
-                            <table className="w-full min-w-[560px] text-left text-sm">
-                                <caption className="sr-only">
-                                    Locksy compared with browser profiles and tab managers
-                                </caption>
-                                <thead>
-                                    <tr className="border-b border-border bg-muted/50">
-                                        <th scope="col" className="px-5 py-4 font-bold">
-                                            Feature
+                <div className="surface mt-10 overflow-hidden">
+                    {/* min-w is what makes the overflow-x-auto above actually
+                        engage. With `w-full` alone the table just squashes four
+                        columns into a 375px viewport instead of scrolling. */}
+                    <div className="overflow-x-auto">
+                        <table className="w-full min-w-[560px] text-left text-sm">
+                            <caption className="sr-only">
+                                Locksy compared with browser profiles and tab managers
+                            </caption>
+                            <thead>
+                                <tr className="border-b border-border bg-muted/50">
+                                    <th scope="col" className="px-5 py-4 font-medium text-muted-foreground">
+                                        Feature
+                                    </th>
+                                    {COMPARE_COLUMNS.map((col, i) => (
+                                        <th
+                                            key={col}
+                                            scope="col"
+                                            className={`px-4 py-4 text-center font-medium ${i === 0 ? "text-foreground" : "text-muted-foreground"
+                                                }`}
+                                        >
+                                            {col}
                                         </th>
-                                        {COMPARE_COLUMNS.map((col, i) => (
-                                            <th
-                                                key={col}
-                                                scope="col"
-                                                className={`px-4 py-4 text-center font-bold ${i === 0
-                                                    ? "text-primary dark:text-primary-on-dark"
-                                                    : "font-semibold text-muted-foreground"
-                                                    }`}
-                                            >
-                                                {col}
-                                            </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {COMPARE_ROWS.map(([feature, ...cells]) => (
+                                    <tr
+                                        key={feature}
+                                        className="border-b border-border last:border-0"
+                                    >
+                                        <th
+                                            scope="row"
+                                            className="px-5 py-4 text-left font-normal text-foreground"
+                                        >
+                                            {feature}
+                                        </th>
+                                        {cells.map((has, i) => (
+                                            <td key={i} className="px-4 py-4 text-center">
+                                                {has ? (
+                                                    <span
+                                                        role="img"
+                                                        aria-label="Yes"
+                                                        className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-highlight/10"
+                                                    >
+                                                        <Check className="h-4 w-4 text-highlight" aria-hidden="true" />
+                                                    </span>
+                                                ) : (
+                                                    <span
+                                                        role="img"
+                                                        aria-label="No"
+                                                        className="inline-flex h-7 w-7 items-center justify-center rounded-full"
+                                                    >
+                                                        <X className="h-4 w-4 text-muted-foreground/60" aria-hidden="true" />
+                                                    </span>
+                                                )}
+                                            </td>
                                         ))}
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {COMPARE_ROWS.map(([feature, ...cells]) => (
-                                        <tr
-                                            key={feature}
-                                            className="border-b border-border/60 last:border-0 hover:bg-muted/30"
-                                        >
-                                            <th
-                                                scope="row"
-                                                className="px-5 py-4 text-left font-medium"
-                                            >
-                                                {feature}
-                                            </th>
-                                            {cells.map((has, i) => (
-                                                <td key={i} className="px-4 py-4 text-center">
-                                                    {has ? (
-                                                        <span
-                                                            role="img"
-                                                            aria-label="Yes"
-                                                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-500/15 font-bold text-green-600 dark:text-green-400"
-                                                        >
-                                                            ✓
-                                                        </span>
-                                                    ) : (
-                                                        <span
-                                                            role="img"
-                                                            aria-label="No"
-                                                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-red-500/15 font-bold text-red-600 dark:text-red-400"
-                                                        >
-                                                            ×
-                                                        </span>
-                                                    )}
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-
-                    <p className="mt-4 text-center text-sm text-muted-foreground">
-                        Most of these are free.{" "}
-                        <Link
-                            href="/#comparison"
-                            className="font-semibold text-primary hover:underline"
-                        >
-                            See the full comparison
-                        </Link>
-                        .
-                    </p>
                 </div>
-            </section>
+
+                <p className="mt-4 text-center text-sm text-muted-foreground">
+                    Most of these are free.{" "}
+                    <Link
+                        href="/#comparison"
+                        className="text-foreground underline underline-offset-4"
+                    >
+                        See the full comparison
+                    </Link>
+                    .
+                </p>
+            </PageSection>
 
             {/* ══ 4. PROOF — what you're walking away from ═════════════════ */}
-            <section className="border-y border-border/60 bg-muted/40 py-16 md:py-20">
-                <div className="mx-auto max-w-6xl px-4 md:px-6">
-                    <div className="mb-12 text-center">
-                        <div className="mb-5 inline-flex items-center gap-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-2">
+            <PageSection>
+                <div className="mx-auto max-w-2xl text-center">
+                    <span className="eyebrow">
+                        <span className="flex gap-0.5" aria-hidden="true">
                             {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                                <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
                             ))}
-                            <span className="ml-2 text-sm font-bold text-yellow-700 dark:text-yellow-300">
-                                4.4 average (30 reviews)
-                            </span>
-                        </div>
-                        <h2 className="text-3xl font-black tracking-tight md:text-5xl">
-                            The people who stayed
-                        </h2>
-                    </div>
-
-                    <div className="grid gap-6 md:grid-cols-3">
-                        {PROOF.map((t) => (
-                            <figure
-                                key={t.author}
-                                className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
-                            >
-                                <div className="mb-4 flex gap-0.5">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                                    ))}
-                                </div>
-                                <blockquote className="flex-1 text-sm leading-relaxed text-muted-foreground">
-                                    &ldquo;{t.quote}&rdquo;
-                                </blockquote>
-                                <figcaption className="mt-5 border-t border-border pt-4">
-                                    <p className="text-sm font-bold">{t.author}</p>
-                                    <p className="text-xs text-muted-foreground">{t.source}</p>
-                                </figcaption>
-                            </figure>
-                        ))}
-                    </div>
-
-                    <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
-                        {[
-                            { value: "4.4", label: "Average rating" },
-                            { value: "0", label: "Data breaches" },
-                            { value: "100%", label: "Runs offline" },
-                            { value: "$0", label: "Core features, forever" },
-                        ].map((s) => (
-                            <div
-                                key={s.label}
-                                className="rounded-2xl border border-border bg-card p-6 text-center"
-                            >
-                                <div className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-3xl font-black text-transparent md:text-4xl">
-                                    {s.value}
-                                </div>
-                                <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
-                            </div>
-                        ))}
-                    </div>
+                        </span>
+                        4.4 average (30 reviews)
+                    </span>
+                    <h2 className="mt-5 text-3xl font-semibold leading-[1.1] text-foreground sm:text-4xl md:text-5xl text-balance">
+                        The people who stayed
+                    </h2>
                 </div>
-            </section>
+
+                <div className="mt-12 grid gap-4 md:grid-cols-3">
+                    {PROOF.map((t) => (
+                        <figure key={t.author} className="surface flex flex-col p-6">
+                            <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+                                {[...Array(5)].map((_, i) => (
+                                    <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" aria-hidden="true" />
+                                ))}
+                            </div>
+                            <blockquote className="mt-4 flex-1 text-[15px] leading-relaxed text-foreground/90">
+                                &ldquo;{t.quote}&rdquo;
+                            </blockquote>
+                            <figcaption className="mt-5 border-t border-border pt-4">
+                                <p className="text-sm font-medium text-foreground">{t.author}</p>
+                                <p className="text-xs text-muted-foreground">{t.source}</p>
+                            </figcaption>
+                        </figure>
+                    ))}
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
+                    {[
+                        { value: "4.4", label: "Average rating" },
+                        { value: "0", label: "Data breaches" },
+                        { value: "100%", label: "Runs offline" },
+                        { value: "$0", label: "Core features, forever" },
+                    ].map((s) => (
+                        <div
+                            key={s.label}
+                            className="rounded-2xl border border-border bg-card p-6 text-center"
+                        >
+                            <div className="text-3xl font-semibold text-foreground md:text-4xl">
+                                {s.value}
+                            </div>
+                            <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+                        </div>
+                    ))}
+                </div>
+            </PageSection>
 
             {/* ══ 5. PRO — the offer, for anyone who left over the limits ══ */}
             {/* `highlighted` lights the card when "I hit the free limits" is one
@@ -811,230 +743,209 @@ export default function UninstallClient({
             />
 
             {/* ══ 6. AFTERMATH — the question nobody answers for them ═════ */}
-            <section className="border-y border-border/60 bg-muted/40 px-4 py-16 md:px-6 md:py-20">
-                <div className="mx-auto max-w-5xl">
-                    <div className="mb-10 text-center">
-                        <h2 className="mb-3 text-2xl font-black tracking-tight md:text-3xl">
-                            Now that it&apos;s gone, where is your data?
-                        </h2>
-                        <p className="mx-auto max-w-xl text-muted-foreground">
-                            Worth knowing whether or not you come back.
-                        </p>
-                    </div>
+            <PageSection>
+                <SectionHeading
+                    title={<>Now that it&apos;s gone, where is your data?</>}
+                    description="Worth knowing whether or not you come back."
+                />
 
-                    <div className="grid gap-4 md:grid-cols-3">
-                        {AFTERMATH.map((item) => {
-                            const Icon = item.icon
-                            const warn = item.tone === "warn"
-                            return (
-                                <div
-                                    key={item.title}
-                                    className={`rounded-2xl border p-6 ${warn
-                                        ? "border-red-500/25 bg-red-500/5"
-                                        : "border-border bg-card"
-                                        }`}
-                                >
-                                    <span
-                                        className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl ${warn
-                                            ? "bg-red-500/15 text-red-600 dark:text-red-400"
-                                            : "bg-green-500/15 text-green-600 dark:text-green-400"
-                                            }`}
-                                    >
-                                        <Icon className="h-5 w-5" />
+                <div className="mt-12 grid gap-4 md:grid-cols-3">
+                    {AFTERMATH.map((item) => {
+                        const Icon = item.icon
+                        const warn = item.tone === "warn"
+                        return (
+                            <div key={item.title} className="surface p-6">
+                                {warn ? (
+                                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-red-500/25 bg-red-500/10">
+                                        <Icon className="h-5 w-5 text-red-600 dark:text-red-400" />
                                     </span>
-                                    <h3 className="mb-2 text-base font-bold leading-snug">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-sm leading-relaxed text-muted-foreground">
-                                        {item.body}
-                                    </p>
-                                </div>
-                            )
-                        })}
-                    </div>
-
-                    <p className="mt-6 text-center text-sm text-muted-foreground">
-                        The full detail is in{" "}
-                        <Link
-                            href="/guide#privacy"
-                            className="font-semibold text-primary hover:underline"
-                        >
-                            How your data is handled
-                        </Link>{" "}
-                        — or read our{" "}
-                        <Link
-                            href="/privacy-policy"
-                            className="font-semibold text-primary hover:underline"
-                        >
-                            privacy policy
-                        </Link>
-                        .
-                    </p>
+                                ) : (
+                                    <IconTile icon={Icon} />
+                                )}
+                                <h3 className="mt-5 text-lg font-semibold leading-snug text-foreground">
+                                    {item.title}
+                                </h3>
+                                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                                    {item.body}
+                                </p>
+                            </div>
+                        )
+                    })}
                 </div>
-            </section>
+
+                <p className="mt-6 text-center text-sm text-muted-foreground">
+                    The full detail is in{" "}
+                    <Link
+                        href="/guide#privacy"
+                        className="text-foreground underline underline-offset-4"
+                    >
+                        How your data is handled
+                    </Link>{" "}
+                    — or read our{" "}
+                    <Link
+                        href="/privacy-policy"
+                        className="text-foreground underline underline-offset-4"
+                    >
+                        privacy policy
+                    </Link>
+                    .
+                </p>
+            </PageSection>
 
             {/* ══ 7. RESTORE — the closing ask ════════════════════════════ */}
-            <section id="restore" className="scroll-mt-24 px-4 pb-16 md:px-6 md:pb-20">
-                <div className="relative mx-auto max-w-5xl">
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-secondary to-primary opacity-20 blur-2xl" />
-
-                    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-[oklch(0.50_0.23_282)] to-secondary p-8 text-center text-white shadow-2xl shadow-primary/20 md:p-10">
-                        <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
-                            <ShieldCheck className="h-6 w-6" />
+            <section id="restore" className="relative scroll-mt-24 py-14 md:py-20">
+                <div className="mx-auto max-w-6xl px-4 md:px-6">
+                    <div className="surface relative overflow-hidden px-6 py-16 text-center md:px-12 md:py-20">
+                        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+                            <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_60%_70%_at_50%_100%,black,transparent)]" />
+                            <div
+                                className="absolute inset-x-0 bottom-0 h-[70%]"
+                                style={{ background: "radial-gradient(55% 80% at 50% 100%, var(--glow), transparent 70%)" }}
+                            />
                         </div>
 
-                        <h2 className="mb-4 text-2xl font-black tracking-tight md:text-3xl">
-                            Put the locks back on
-                        </h2>
-                        <p className="mx-auto mb-8 max-w-xl opacity-95">
-                            Thirty seconds, no account, no card. Pick your browser and your tabs are
-                            protected again.
-                        </p>
+                        <div className="relative mx-auto max-w-2xl">
+                            <IconTile icon={ShieldCheck} className="mx-auto" />
 
-                        <div className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-3">
-                            {BROWSERS.map((b) => (
-                                <a
-                                    key={b.key}
-                                    href={b.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`group/btn flex items-center justify-center gap-3 rounded-2xl bg-white px-5 py-4 font-bold text-primary-on-light shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${browser?.key === b.key ? "ring-4 ring-white/60" : ""
-                                        }`}
-                                >
-                                    <img src={b.icon} alt="" aria-hidden="true" className="h-6 w-6" />
-                                    <span>{b.name}</span>
-                                    <Download className="h-4 w-4 opacity-60 group-hover/btn:animate-bounce" />
-                                </a>
-                            ))}
-                        </div>
+                            <h2 className="mt-6 text-3xl font-semibold leading-[1.1] text-foreground sm:text-4xl md:text-5xl text-balance">
+                                Put the locks back on
+                            </h2>
+                            <p className="mx-auto mt-5 max-w-lg text-muted-foreground md:text-lg">
+                                Thirty seconds, no account, no card. Pick your browser and your tabs are
+                                protected again.
+                            </p>
 
-                        <p className="mt-5 text-sm opacity-80">
-                            Brave, Opera and Vivaldi install from the Chrome Web Store.
-                        </p>
+                            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                                {BROWSERS.map((b, i) => (
+                                    <a
+                                        key={b.key}
+                                        href={b.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`${i === 0 ? "btn-primary" : "btn-secondary"} w-full sm:w-auto ${browser?.key === b.key ? "ring-2 ring-highlight/40 ring-offset-2 ring-offset-card" : ""
+                                            }`}
+                                    >
+                                        <img src={b.icon} alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
+                                        <span>{b.name}</span>
+                                        <Download className="h-4 w-4 opacity-60" />
+                                    </a>
+                                ))}
+                            </div>
 
-                        <div className="mt-8 grid grid-cols-2 gap-4 border-t border-white/20 pt-6 text-sm md:grid-cols-4">
-                            {["30-second install", "No credit card", "No account required", "100% offline"].map(
-                                (b) => (
-                                    <div key={b} className="flex items-center justify-center gap-2">
-                                        <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
-                                        <span>{b}</span>
-                                    </div>
-                                )
-                            )}
+                            <p className="mt-6 text-xs text-muted-foreground">
+                                Brave, Opera and Vivaldi install from the Chrome Web Store.
+                            </p>
+
+                            <div className="mt-10 grid grid-cols-2 gap-4 border-t border-border pt-6 text-sm text-muted-foreground md:grid-cols-4">
+                                {["30-second install", "No credit card", "No account required", "100% offline"].map(
+                                    (b) => (
+                                        <div key={b} className="flex items-center justify-center gap-2">
+                                            <Check className="h-4 w-4 flex-shrink-0 text-highlight" />
+                                            <span>{b}</span>
+                                        </div>
+                                    )
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* ══ 8. HELP — every way to reach a human ════════════════════ */}
-            <section className="border-t border-border/60 bg-muted/40 py-16 md:py-20">
-                <div className="mx-auto max-w-5xl px-4 md:px-6">
-                    <div className="mb-10 text-center">
-                        <h2 className="mb-3 text-2xl font-black tracking-tight md:text-3xl">
-                            Still stuck on something?
-                        </h2>
-                        <p className="text-muted-foreground">
+            <PageSection className="pb-20 md:pb-24">
+                <SectionHeading
+                    title="Still stuck on something?"
+                    description={
+                        <>
                             If you left because of a problem, we&apos;d still like to fix it — whether
                             you come back or not.
-                        </p>
-                    </div>
+                        </>
+                    }
+                />
 
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                        <button
-                            type="button"
-                            onClick={openChat}
-                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-                        >
-                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-white">
-                                <MessageCircle className="h-5 w-5" />
+                <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    <button
+                        type="button"
+                        onClick={openChat}
+                        className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 text-left transition-colors hover:border-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                        <IconTile icon={MessageCircle} />
+                        <span className="min-w-0">
+                            <span className="block text-sm font-medium text-foreground">Live chat</span>
+                            <span className="block text-xs text-muted-foreground">
+                                Usually a few hours
                             </span>
-                            <span className="min-w-0">
-                                <span className="block text-sm font-bold">Live chat</span>
-                                <span className="block text-xs text-muted-foreground">
-                                    Usually a few hours
-                                </span>
-                            </span>
-                        </button>
+                        </span>
+                    </button>
 
-                        <a
-                            href={WHATSAPP_CHANNEL_URL}
-                            onClick={openWhatsAppChannel}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#25D366]/50 hover:shadow-md"
-                        >
-                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white">
-                                <WhatsAppIcon className="h-5 w-5" />
+                    <a
+                        href={WHATSAPP_CHANNEL_URL}
+                        onClick={openWhatsAppChannel}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/20"
+                    >
+                        <IconTile icon={WhatsAppIcon} />
+                        <span className="min-w-0">
+                            <span className="block text-sm font-medium text-foreground">WhatsApp channel</span>
+                            <span className="block text-xs text-muted-foreground">
+                                Fixes &amp; updates first
                             </span>
-                            <span className="min-w-0">
-                                <span className="block text-sm font-bold">WhatsApp channel</span>
-                                <span className="block text-xs text-muted-foreground">
-                                    Fixes &amp; updates first
-                                </span>
-                            </span>
-                        </a>
+                        </span>
+                    </a>
 
-                        <Link
-                            href="/guide"
-                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-                        >
-                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
-                                <BookOpen className="h-5 w-5" />
+                    <Link
+                        href="/guide"
+                        className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/20"
+                    >
+                        <IconTile icon={BookOpen} />
+                        <span className="min-w-0">
+                            <span className="block text-sm font-medium text-foreground">User guide</span>
+                            <span className="block text-xs text-muted-foreground">
+                                {chapterCount} chapters, plain English
                             </span>
-                            <span className="min-w-0">
-                                <span className="block text-sm font-bold">User guide</span>
-                                <span className="block text-xs text-muted-foreground">
-                                    {chapterCount} chapters, plain English
-                                </span>
-                            </span>
-                        </Link>
+                        </span>
+                    </Link>
 
-                        <a
-                            href={guidePdfPath}
-                            download
-                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-                        >
-                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-slate-600 to-slate-800 text-white">
-                                <Download className="h-5 w-5" />
-                            </span>
-                            <span className="min-w-0">
-                                <span className="block text-sm font-bold">Guide as PDF</span>
-                                <span className="block text-xs text-muted-foreground">Read it offline</span>
-                            </span>
-                        </a>
+                    <a
+                        href={guidePdfPath}
+                        download
+                        className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/20"
+                    >
+                        <IconTile icon={Download} />
+                        <span className="min-w-0">
+                            <span className="block text-sm font-medium text-foreground">Guide as PDF</span>
+                            <span className="block text-xs text-muted-foreground">Read it offline</span>
+                        </span>
+                    </a>
 
-                        <a
-                            href="https://github.com/vansh-121/locksy"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-                        >
-                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 text-white">
-                                <Github className="h-5 w-5" />
-                            </span>
-                            <span className="min-w-0">
-                                <span className="block text-sm font-bold">Report a bug</span>
-                                <span className="block text-xs text-muted-foreground">GitHub issues</span>
-                            </span>
-                        </a>
+                    <a
+                        href="https://github.com/vansh-121/locksy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/20"
+                    >
+                        <IconTile icon={Github} />
+                        <span className="min-w-0">
+                            <span className="block text-sm font-medium text-foreground">Report a bug</span>
+                            <span className="block text-xs text-muted-foreground">GitHub issues</span>
+                        </span>
+                    </a>
 
-                        <a
-                            href="mailto:support@locksy.dev"
-                            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-                        >
-                            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white">
-                                <Mail className="h-5 w-5" />
+                    <a
+                        href="mailto:support@locksy.dev"
+                        className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-foreground/20"
+                    >
+                        <IconTile icon={Mail} />
+                        <span className="min-w-0">
+                            <span className="block text-sm font-medium text-foreground">Email the developer</span>
+                            <span className="block text-xs text-muted-foreground">
+                                Straight to the inbox
                             </span>
-                            <span className="min-w-0">
-                                <span className="block text-sm font-bold">Email the developer</span>
-                                <span className="block text-xs text-muted-foreground">
-                                    Straight to the inbox
-                                </span>
-                            </span>
-                        </a>
-                    </div>
+                        </span>
+                    </a>
                 </div>
-            </section>
+            </PageSection>
 
             <Footer />
         </div>

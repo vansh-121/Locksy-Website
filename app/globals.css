@@ -219,6 +219,32 @@
   }
 }
 
+@layer components {
+  /* Body copy inside DocSection (legal/policy pages). Plain elements only. */
+  .doc-body {
+    color: var(--muted-foreground);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .doc-body > * + * { margin-top: 1rem; }
+  .doc-body h3 {
+    margin-top: 1.75rem;
+    color: var(--foreground);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .doc-body strong { color: var(--foreground); font-weight: 600; }
+  .doc-body a { color: var(--foreground); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--border); }
+  .doc-body a:hover { text-decoration-color: var(--foreground); }
+  .doc-body ul, .doc-body ol { padding-left: 1.25rem; }
+  .doc-body ul { list-style: disc; }
+  .doc-body ol { list-style: decimal; }
+  .doc-body li + li { margin-top: 0.4rem; }
+  .doc-body li::marker { color: var(--highlight); }
+  .doc-body code { font-family: var(--font-mono); font-size: 0.85em; background: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 0.1rem 0.35rem; color: var(--foreground); }
+}
+
 /* Subtle dotted grid used behind hero and CTA. */
 .bg-grid {
   background-image: radial-gradient(color-mix(in srgb, var(--foreground) 10%, transparent) 1px, transparent 1px);

@@ -16,8 +16,8 @@ export default function SuccessPage() {
         <Suspense fallback={
             <div className="min-h-screen flex items-center justify-center bg-background">
                 <div className="flex flex-col items-center gap-3">
-                    <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-                    <p className="text-sm text-muted-foreground font-medium">Verifying order details...</p>
+                    <div className="h-7 w-7 animate-spin rounded-full border-2 border-border border-t-foreground" aria-hidden="true" />
+                    <p className="text-sm text-muted-foreground" role="status">Verifying order details...</p>
                 </div>
             </div>
         }>

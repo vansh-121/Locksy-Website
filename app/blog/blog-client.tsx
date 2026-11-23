@@ -3,13 +3,10 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { BlogPost, BlogPostSummary } from '@/lib/blog-data'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Clock, Calendar, Filter, Search, BookOpen, ArrowRight, Eye } from 'lucide-react'
+import { Filter, Search, BookOpen, ArrowUpRight, Eye, X, ChevronDown } from 'lucide-react'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import { PageHero } from '@/components/page-shell'
 
 interface BlogClientProps {
     posts: (BlogPost | BlogPostSummary)[]
@@ -17,10 +14,18 @@ interface BlogClientProps {
     tags: string[]
 }
 
+const formatDate = (date: string) =>
+    new Date(date.replace(/-/g, '/')).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    })
+
 export function BlogClient({ posts, categories, tags }: BlogClientProps) {
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
     const [selectedTag, setSelectedTag] = useState<string | null>(null)
+    const [showTags, setShowTags] = useState(false)
     // Real view counts, batch-fetched once for all posts (read-only — the listing
     // never increments). Empty until loaded, or if Upstash isn't configured.
     const [views, setViews] = useState<Record<string, number>>({})
@@ -66,251 +71,240 @@ export function BlogClient({ posts, categories, tags }: BlogClientProps) {
         setSearchQuery('')
     }
 
-    return (
-        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
+    const hasFilters = Boolean(selectedCategory || selectedTag || searchQuery)
+    // The newest post is featured only on the unfiltered listing; once the
+    // reader filters, every match goes into the grid.
+    const featuredPost = !hasFilters ? sortedPosts[0] : undefined
+    const gridPosts = featuredPost ? sortedPosts.slice(1) : sortedPosts
 
+    const pill = (active: boolean) =>
+        `inline-flex h-9 items-center rounded-full border px-4 text-sm transition-colors ${active
+            ? 'bg-foreground text-background border-foreground'
+            : 'border-border text-muted-foreground hover:text-foreground hover:bg-muted'
+        }`
+
+    const viewsBadge = (slug: string) =>
+        views[slug] != null && (
+            <>
+                <span aria-hidden="true">·</span>
+                <span className="flex items-center gap-1" title={`${views[slug].toLocaleString('en-US')} views`}>
+                    <Eye className="h-3 w-3" aria-hidden="true" />
+                    {formatViews(views[slug])}
+                </span>
+            </>
+        )
+
+    return (
+        <div className="min-h-screen bg-background">
             <Header />
 
-            <main className="relative max-w-7xl mx-auto px-4 md:px-6 page-top-offset pb-12 md:pb-20">
-                {/* Hero Section */}
-                <div className="text-center space-y-6 mb-16">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
-                        <BookOpen className="h-4 w-4" />
-                        Browser Security Blog
-                    </div>
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                        Locksy Security Insights
-                    </h1>
-                    <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-                        Expert guides, tutorials, and best practices for securing your browser tabs and protecting your online privacy
-                    </p>
-                </div>
+            <main>
+                <PageHero
+                    eyebrow="Blog"
+                    title="Locksy Security Insights"
+                    description="Expert guides, tutorials, and best practices for securing your browser tabs and protecting your online privacy"
+                />
 
-                {/* Search & Filters */}
-                <div className="max-w-4xl mx-auto mb-12 space-y-6">
-                    {/* Search */}
-                    <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-50 group-hover:opacity-75 transition-opacity rounded-2xl" />
-                        <div className="relative bg-card/80 backdrop-blur-sm border-2 border-primary/10 rounded-2xl p-4 shadow-lg">
-                            <div className="relative">
-                                <Search className="absolute left-4 top-3.5 h-5 w-5 text-muted-foreground" />
-                                <Input
-                                    placeholder="Search articles by title, topic, or tag..."
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="pl-12 h-12 text-base border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-                                />
+                <div className="mx-auto max-w-6xl px-4 pb-16 md:px-6 md:pb-24">
+                    {/* Search & Filters */}
+                    <div className="mx-auto mb-12 max-w-4xl space-y-6">
+                        <div className="relative">
+                            <Search className="pointer-events-none absolute left-5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+                            <input
+                                type="search"
+                                aria-label="Search articles"
+                                placeholder="Search articles by title, topic, or tag..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="h-11 w-full rounded-full border border-border bg-card pl-12 pr-5 text-[15px] text-foreground placeholder:text-muted-foreground outline-none transition-colors focus-visible:border-foreground/30 focus-visible:ring-2 focus-visible:ring-highlight/40"
+                            />
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-2">
+                            <span className="mr-1 text-sm text-muted-foreground">Categories:</span>
+                            {categories.map((category) => (
+                                <button
+                                    key={category}
+                                    type="button"
+                                    aria-pressed={selectedCategory === category}
+                                    onClick={() => setSelectedCategory(
+                                        selectedCategory === category ? null : category
+                                    )}
+                                    className={pill(selectedCategory === category)}
+                                >
+                                    {category}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* The full tag list is long, so it stays collapsed until asked for. */}
+                        <button
+                            type="button"
+                            onClick={() => setShowTags((v) => !v)}
+                            aria-expanded={showTags}
+                            aria-controls="blog-tag-list"
+                            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                            {showTags ? 'Hide tags' : `Browse all ${tags.length} tags`}
+                            <ChevronDown className={`h-4 w-4 transition-transform ${showTags ? 'rotate-180' : ''}`} aria-hidden="true" />
+                        </button>
+
+                        {showTags && (
+                        <div id="blog-tag-list" className="flex flex-wrap items-center gap-1.5">
+                            {tags.map((tag) => (
+                                <button
+                                    key={tag}
+                                    type="button"
+                                    aria-pressed={selectedTag === tag}
+                                    onClick={() => setSelectedTag(
+                                        selectedTag === tag ? null : tag
+                                    )}
+                                    className={`inline-flex h-7 items-center rounded-full border px-3 text-xs transition-colors ${selectedTag === tag
+                                        ? 'bg-foreground text-background border-foreground'
+                                        : 'border-border text-muted-foreground hover:text-foreground hover:bg-muted'
+                                        }`}
+                                >
+                                    {tag}
+                                </button>
+                            ))}
+                        </div>
+                        )}
+
+                        {/* Active Filters */}
+                        {hasFilters && (
+                            <div className="flex flex-wrap items-center gap-2">
+                                <span className="text-sm text-muted-foreground">Active filters:</span>
+                                {selectedCategory && (
+                                    <span className="inline-flex h-7 items-center gap-1 rounded-full border border-border bg-muted px-3 text-xs text-foreground">
+                                        {selectedCategory} <X className="h-3 w-3" aria-hidden="true" />
+                                    </span>
+                                )}
+                                {selectedTag && (
+                                    <span className="inline-flex h-7 items-center gap-1 rounded-full border border-border bg-muted px-3 text-xs text-foreground">
+                                        {selectedTag} <X className="h-3 w-3" aria-hidden="true" />
+                                    </span>
+                                )}
+                                <button
+                                    type="button"
+                                    onClick={handleClearFilters}
+                                    className="inline-flex h-7 items-center gap-1 px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                                >
+                                    <Filter className="h-3 w-3" aria-hidden="true" />
+                                    Clear all
+                                </button>
                             </div>
-                        </div>
+                        )}
                     </div>
 
-                    {/* Category & Tag Filters */}
-                    <div className="flex flex-wrap items-center gap-3">
-                        <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Categories:</span>
-                        {categories.map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setSelectedCategory(
-                                    selectedCategory === category ? null : category
-                                )}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === category
-                                    ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/20'
-                                    : 'bg-card/80 border border-border/50 hover:border-primary/30 hover:bg-primary/5'
-                                    }`}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mr-1">Tags:</span>
-                        {tags.map((tag) => (
-                            <button
-                                key={tag}
-                                onClick={() => setSelectedTag(
-                                    selectedTag === tag ? null : tag
-                                )}
-                                className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-all duration-300 cursor-pointer ${selectedTag === tag
-                                    ? 'bg-gradient-to-r from-primary to-secondary text-white border-0'
-                                    : 'border-border/50 hover:border-primary/30'
-                                    }`}
-                            >
-                                {tag}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Active Filters */}
-                    {(selectedCategory || selectedTag || searchQuery) && (
-                        <div className="flex items-center gap-2">
-                            <span className="text-sm text-muted-foreground">Active filters:</span>
-                            {selectedCategory && (
-                                <Badge className="bg-primary/10 text-primary border border-primary/20">
-                                    {selectedCategory} ×
-                                </Badge>
-                            )}
-                            {selectedTag && (
-                                <Badge className="bg-secondary/10 text-secondary border border-secondary/20">
-                                    {selectedTag} ×
-                                </Badge>
-                            )}
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={handleClearFilters}
-                                className="text-muted-foreground hover:text-foreground"
-                            >
-                                <Filter className="mr-1 h-3 w-3" />
-                                Clear all
-                            </Button>
-                        </div>
-                    )}
-                </div>
-
-                {/* Results Count */}
-                <div className="max-w-7xl mx-auto mb-8">
-                    <p className="text-sm text-muted-foreground">
+                    {/* Results Count */}
+                    <p className="mb-6 text-sm text-muted-foreground">
                         {sortedPosts.length} {sortedPosts.length === 1 ? 'article' : 'articles'} found
                     </p>
-                </div>
 
-                {/* Blog Posts Grid */}
-                {sortedPosts.length === 0 ? (
-                    <div className="max-w-2xl mx-auto">
-                        <Card className="border-2 border-dashed border-border/50 bg-card/50 backdrop-blur-sm">
-                            <CardContent className="py-16 text-center">
-                                <BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
-                                <p className="text-xl font-semibold mb-2">No articles found</p>
-                                <p className="text-muted-foreground mb-6">
-                                    Try adjusting your search or clearing filters
-                                </p>
-                                <Button
-                                    variant="outline"
-                                    onClick={handleClearFilters}
-                                    className="gap-2"
+                    {sortedPosts.length === 0 ? (
+                        <div className="surface mx-auto max-w-2xl px-6 py-16 text-center">
+                            <BookOpen className="mx-auto mb-4 h-10 w-10 text-muted-foreground/60" aria-hidden="true" />
+                            <p className="mb-2 text-lg font-semibold text-foreground">No articles found</p>
+                            <p className="mb-6 text-muted-foreground">
+                                Try adjusting your search or clearing filters
+                            </p>
+                            <button type="button" onClick={handleClearFilters} className="btn-secondary btn-sm">
+                                <Filter className="h-4 w-4" aria-hidden="true" />
+                                Clear Filters
+                            </button>
+                        </div>
+                    ) : (
+                        <>
+                            {/* Featured post */}
+                            {featuredPost && (
+                                <Link
+                                    href={`/blog/${featuredPost.slug}`}
+                                    className="surface group mb-4 grid overflow-hidden transition-colors hover:border-foreground/20 md:grid-cols-2"
                                 >
-                                    <Filter className="h-4 w-4" />
-                                    Clear Filters
-                                </Button>
-                            </CardContent>
-                        </Card>
-                    </div>
-                ) : (
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                        {sortedPosts.map((post) => (
-                            <div key={post.slug} className="group relative">
-                                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 blur-xl opacity-0 group-hover:opacity-50 transition-opacity rounded-2xl" />
-                                <Card className="relative border-2 border-border/50 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/20 hover:-translate-y-1 h-full flex flex-col overflow-hidden">
-                                    {/* Cover Image */}
-                                    <div className="relative h-48 overflow-hidden">
+                                    <div className="m-2 aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-muted md:mr-0 md:aspect-auto md:min-h-[320px]">
                                         <img
-                                            src={post.image}
-                                            alt={post.imageAlt}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                            loading="lazy"
+                                            src={featuredPost.image}
+                                            alt={featuredPost.imageAlt}
+                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
                                     </div>
-
-                                    <CardHeader className="pb-3">
-                                        <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
-                                            <Badge
-                                                variant="secondary"
-                                                className="bg-gradient-to-r from-primary to-secondary border-0 text-white"
-                                            >
-                                                {post.category}
-                                            </Badge>
-                                            <span className="flex items-center gap-1">
-                                                <Clock className="h-3 w-3" />
-                                                {post.readTime}
-                                            </span>
+                                    <div className="flex flex-col justify-center p-6 md:p-10">
+                                        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                                            <span className="text-foreground/80">{featuredPost.category}</span>
+                                            <span aria-hidden="true">·</span>
+                                            <time dateTime={featuredPost.publishDate}>{formatDate(featuredPost.publishDate)}</time>
+                                            <span aria-hidden="true">·</span>
+                                            <span>{featuredPost.readTime}</span>
+                                            {viewsBadge(featuredPost.slug)}
                                         </div>
-                                        <CardTitle className="line-clamp-2 text-lg leading-snug">
-                                            <Link
-                                                href={`/blog/${post.slug}`}
-                                                className="hover:text-primary transition-colors"
-                                            >
-                                                {post.title}
-                                            </Link>
-                                        </CardTitle>
-                                        <CardDescription className="line-clamp-3 mt-2">
-                                            {post.description}
-                                        </CardDescription>
-                                    </CardHeader>
-
-                                    <CardContent className="flex-1 pb-3">
-                                        <div className="flex flex-wrap gap-1.5">
-                                            {post.tags.slice(0, 3).map((tag) => (
-                                                <Badge key={tag} variant="outline" className="text-xs">
-                                                    {tag}
-                                                </Badge>
-                                            ))}
-                                            {post.tags.length > 3 && (
-                                                <Badge variant="outline" className="text-xs">
-                                                    +{post.tags.length - 3}
-                                                </Badge>
-                                            )}
-                                        </div>
-                                    </CardContent>
-
-                                    <CardFooter className="flex items-center justify-between pt-3 border-t border-border/30">
-                                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                                            <span className="flex items-center gap-1">
-                                                <Calendar className="h-3 w-3" />
-                                                {new Date(post.publishDate.replace(/-/g, '/')).toLocaleDateString('en-US', {
-                                                    year: 'numeric',
-                                                    month: 'short',
-                                                    day: 'numeric'
-                                                })}
-                                            </span>
-                                            {views[post.slug] != null && (
-                                                <span className="flex items-center gap-1" title={`${views[post.slug].toLocaleString('en-US')} views`}>
-                                                    <Eye className="h-3 w-3" />
-                                                    {formatViews(views[post.slug])}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <Link href={`/blog/${post.slug}`}>
-                                            <Button variant="ghost" size="sm" className="gap-1 group-hover:text-primary transition-colors">
-                                                Read
-                                                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-                                            </Button>
-                                        </Link>
-                                    </CardFooter>
-                                </Card>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {/* Newsletter CTA Section */}
-                <div className="max-w-3xl mx-auto mt-20">
-                    <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-                        <Card className="relative border-2 border-primary/20 bg-card/50 backdrop-blur-sm shadow-xl overflow-hidden">
-                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
-                            <CardHeader className="text-center pt-10">
-                                <CardTitle className="text-3xl font-bold">Stay Updated on Browser Security</CardTitle>
-                                <CardDescription className="text-base max-w-xl mx-auto">
-                                    Get the latest security guides, tips, and Locksy updates delivered to your inbox
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="flex flex-col sm:flex-row justify-center gap-4 pb-10 px-8">
-                                <Link href="/">
-                                    <Button
-                                        size="lg"
-                                        className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg shadow-primary/20"
-                                    >
-                                        Install Locksy Free
-                                    </Button>
+                                        <h2 className="mt-4 text-2xl font-semibold leading-tight text-foreground md:text-3xl text-balance">
+                                            {featuredPost.title}
+                                        </h2>
+                                        <p className="mt-4 line-clamp-3 leading-relaxed text-muted-foreground">
+                                            {featuredPost.description}
+                                        </p>
+                                        <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
+                                            Read
+                                            <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
+                                        </span>
+                                    </div>
                                 </Link>
-                            </CardContent>
-                        </Card>
+                            )}
+
+                            {/* Blog Posts Grid */}
+                            {gridPosts.length > 0 && (
+                                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                                    {gridPosts.map((post) => (
+                                        <Link
+                                            key={post.slug}
+                                            href={`/blog/${post.slug}`}
+                                            className="surface group flex flex-col overflow-hidden transition-colors hover:border-foreground/20"
+                                        >
+                                            <div className="m-2 mb-0 aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-muted">
+                                                <img
+                                                    src={post.image}
+                                                    alt={post.imageAlt}
+                                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                                                    loading="lazy"
+                                                />
+                                            </div>
+                                            <div className="flex flex-1 flex-col p-6">
+                                                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                                                    <span className="text-foreground/80">{post.category}</span>
+                                                    <span aria-hidden="true">·</span>
+                                                    <time dateTime={post.publishDate}>{formatDate(post.publishDate)}</time>
+                                                    <span aria-hidden="true">·</span>
+                                                    <span>{post.readTime}</span>
+                                                    {viewsBadge(post.slug)}
+                                                </div>
+                                                <h3 className="mt-3 line-clamp-2 text-base font-semibold leading-snug text-foreground">{post.title}</h3>
+                                                <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground">{post.description}</p>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
+                        </>
+                    )}
+
+                    {/* Newsletter CTA Section */}
+                    <div className="surface relative mx-auto mt-20 max-w-3xl overflow-hidden px-6 py-12 text-center md:px-10">
+                        <div
+                            aria-hidden="true"
+                            className="pointer-events-none absolute inset-x-0 top-0 h-48"
+                            style={{ background: 'radial-gradient(50% 60% at 50% 0%, var(--glow), transparent 70%)' }}
+                        />
+                        <div className="relative">
+                            <h2 className="text-2xl font-semibold text-foreground md:text-3xl text-balance">Stay Updated on Browser Security</h2>
+                            <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">
+                                Get the latest security guides, tips, and Locksy updates delivered to your inbox
+                            </p>
+                            <div className="mt-8 flex justify-center">
+                                <Link href="/" className="btn-primary">
+                                    Install Locksy Free
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>

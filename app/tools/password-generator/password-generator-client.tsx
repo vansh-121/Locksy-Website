@@ -1,13 +1,15 @@
 "use client"
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import ProUpgradeCard from "@/components/pro-upgrade-card"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
+import { PageHero, PageSection } from "@/components/page-shell"
+import SectionHeading from "@/components/section-heading"
 import Link from 'next/link'
-import { Copy, Check, RefreshCw, Sparkles, Shield, Key } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 
 export default function PasswordGeneratorClient() {
   const [length, setLength] = useState(16)
@@ -41,13 +43,15 @@ export default function PasswordGeneratorClient() {
     return result
   }, [length, includeUppercase, includeLowercase, includeNumbers, includeSymbols, avoidAmbiguous])
 
-  const [passwords, setPasswords] = useState<string[]>(() => [
-    generateSinglePassword(),
-    generateSinglePassword(),
-    generateSinglePassword(),
-    generateSinglePassword(),
-    generateSinglePassword()
-  ])
+  // Generate only in the browser. Generating during server render put real
+  // passwords into the cached HTML (identical for every visitor) and caused a
+  // hydration mismatch because the client then generated different ones.
+  const [passwords, setPasswords] = useState<string[]>([])
+  useEffect(() => {
+    setPasswords(Array.from({ length: 5 }, () => generateSinglePassword()))
+    // Initial fill only; later changes go through the Generate button.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleRegenerate = () => {
     setPasswords([
@@ -65,278 +69,262 @@ export default function PasswordGeneratorClient() {
     setTimeout(() => setCopiedIndex(null), 2000)
   }
 
+  const options = [
+    { label: "Uppercase (A-Z)", checked: includeUppercase, set: setIncludeUppercase },
+    { label: "Lowercase (a-z)", checked: includeLowercase, set: setIncludeLowercase },
+    { label: "Numbers (0-9)", checked: includeNumbers, set: setIncludeNumbers },
+    { label: "Symbols (!@#$)", checked: includeSymbols, set: setIncludeSymbols },
+    { label: "Avoid Ambiguous Characters (l, 1, O, 0)", checked: avoidAmbiguous, set: setAvoidAmbiguous },
+  ]
+
   return (
     <>
       <Header />
 
-      <main className="min-h-screen bg-background relative overflow-hidden page-top-offset pb-24">
-        {/* Glows */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/6 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-secondary/10 rounded-full blur-[120px] animate-pulse delay-700" />
-        </div>
+      <main className="min-h-screen bg-background">
+        <PageHero
+          eyebrow="Cryptographically Secure (Uint32 Array)"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Password Generator" },
+          ]}
+          title={
+            <>
+              Random Password <span className="text-highlight">Generator</span>
+            </>
+          }
+          description={
+            <>
+              Generate uncrackable, high-entropy passwords natively using{" "}
+              <code className="rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">crypto.getRandomValues()</code>.
+            </>
+          }
+        />
 
-        <div className="relative max-w-4xl mx-auto px-4 md:px-6">
-          
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-sm font-semibold mb-4">
-              <Sparkles className="w-4 h-4" />
-              Cryptographically Secure (Uint32 Array)
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight mb-4">
-              Random Password <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">Generator</span>
-            </h1>
-            <p className="text-muted-foreground text-sm sm:text-base">
-              Generate uncrackable, high-entropy passwords natively using <code className="text-primary font-mono text-xs">crypto.getRandomValues()</code>.
-            </p>
-          </div>
-
-          {/* Controls Card */}
-          <div className="p-5 sm:p-8 rounded-3xl bg-card/80 backdrop-blur-xl border border-border/60 shadow-2xl mb-8">
-            
-            {/* Length Slider */}
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  Password Length: <strong className="text-primary text-base font-black ml-1">{length} Characters</strong>
-                </label>
-                <span className="text-xs text-emerald-500 font-bold">High Entropy</span>
+        {/* Controls Card */}
+        <section className="relative pb-12 md:pb-16">
+          <div className="mx-auto max-w-3xl px-4 md:px-6">
+            <div className="surface p-6 md:p-8">
+              {/* Length Slider */}
+              <div>
+                <div className="flex flex-wrap items-end justify-between gap-3">
+                  <label htmlFor="password-length" className="block">
+                    <span className="text-xs text-muted-foreground">Password Length:</span>
+                    <strong className="mt-1 block font-display text-4xl font-semibold leading-none text-foreground">
+                      {length} <span className="text-base font-medium text-muted-foreground">Characters</span>
+                    </strong>
+                  </label>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+                    High Entropy
+                  </span>
+                </div>
+                <input
+                  id="password-length"
+                  type="range"
+                  min="8"
+                  max="64"
+                  value={length}
+                  onChange={(e) => setLength(Number(e.target.value))}
+                  className="mt-5 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-card [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-4 [&::-moz-range-thumb]:border-solid [&::-moz-range-thumb]:border-card [&::-moz-range-thumb]:bg-foreground [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-solid [&::-webkit-slider-thumb]:border-card [&::-webkit-slider-thumb]:bg-foreground"
+                />
+                <div className="mt-2 flex justify-between font-mono text-[11px] text-muted-foreground">
+                  <span>8</span>
+                  <span>64</span>
+                </div>
               </div>
-              <input
-                type="range"
-                min="8"
-                max="64"
-                value={length}
-                onChange={(e) => setLength(Number(e.target.value))}
-                className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
-              />
+
+              {/* Options Checkboxes */}
+              <div className="mt-6 divide-y divide-border overflow-hidden rounded-xl border border-border bg-background">
+                {options.map(({ label, checked, set }) => (
+                  <label
+                    key={label}
+                    className="flex cursor-pointer items-center justify-between gap-4 px-4 py-3.5 text-sm text-foreground transition-colors hover:bg-muted/50"
+                  >
+                    <span>{label}</span>
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(e) => set(e.target.checked)}
+                      className="h-4 w-4 flex-shrink-0 cursor-pointer rounded accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    />
+                  </label>
+                ))}
+              </div>
+
+              <button type="button" onClick={handleRegenerate} className="btn-primary mt-6 w-full">
+                <RefreshCw className="h-4 w-4" aria-hidden="true" /> Generate New Passwords
+              </button>
+
+              {/* Generated List */}
+              <div className="mt-8 border-t border-border pt-6">
+                <h2 className="font-sans text-sm font-medium tracking-normal text-muted-foreground">Generated Passwords (Click to Copy):</h2>
+                <div className="mt-3 divide-y divide-border overflow-hidden rounded-xl border border-border bg-background">
+                  {passwords.map((pwd, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => handleCopy(pwd, idx)}
+                      className="group flex cursor-pointer items-center justify-between gap-4 px-4 py-3.5 transition-colors hover:bg-muted/50"
+                    >
+                      <code className="break-all font-mono text-sm text-foreground select-all sm:text-base">
+                        {pwd}
+                      </code>
+                      <button
+                        type="button"
+                        aria-label={copiedIndex === idx ? "Copied" : "Copy password"}
+                        className={`inline-flex h-8 flex-shrink-0 items-center justify-center rounded-full border px-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                          copiedIndex === idx
+                            ? "border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                            : "border-border text-muted-foreground group-hover:bg-muted group-hover:text-foreground"
+                        }`}
+                      >
+                        {copiedIndex === idx ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-
-            {/* Options Checkboxes */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
-              <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/40 border border-border/40 cursor-pointer text-xs font-bold">
-                <input
-                  type="checkbox"
-                  checked={includeUppercase}
-                  onChange={(e) => setIncludeUppercase(e.target.checked)}
-                  className="rounded text-primary focus:ring-0"
-                />
-                <span>Uppercase (A-Z)</span>
-              </label>
-
-              <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/40 border border-border/40 cursor-pointer text-xs font-bold">
-                <input
-                  type="checkbox"
-                  checked={includeLowercase}
-                  onChange={(e) => setIncludeLowercase(e.target.checked)}
-                  className="rounded text-primary focus:ring-0"
-                />
-                <span>Lowercase (a-z)</span>
-              </label>
-
-              <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/40 border border-border/40 cursor-pointer text-xs font-bold">
-                <input
-                  type="checkbox"
-                  checked={includeNumbers}
-                  onChange={(e) => setIncludeNumbers(e.target.checked)}
-                  className="rounded text-primary focus:ring-0"
-                />
-                <span>Numbers (0-9)</span>
-              </label>
-
-              <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/40 border border-border/40 cursor-pointer text-xs font-bold">
-                <input
-                  type="checkbox"
-                  checked={includeSymbols}
-                  onChange={(e) => setIncludeSymbols(e.target.checked)}
-                  className="rounded text-primary focus:ring-0"
-                />
-                <span>Symbols (!@#$)</span>
-              </label>
-
-              <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/40 border border-border/40 cursor-pointer text-xs font-bold sm:col-span-2">
-                <input
-                  type="checkbox"
-                  checked={avoidAmbiguous}
-                  onChange={(e) => setAvoidAmbiguous(e.target.checked)}
-                  className="rounded text-primary focus:ring-0"
-                />
-                <span>Avoid Ambiguous Characters (l, 1, O, 0)</span>
-              </label>
-            </div>
-
-            <button
-              onClick={handleRegenerate}
-              className="w-full py-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer text-sm"
-            >
-              <RefreshCw className="w-4 h-4" /> Generate New Passwords
-            </button>
           </div>
+        </section>
 
-          {/* Generated List */}
-          <div className="space-y-3 mb-12">
-            <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">Generated Passwords (Click to Copy):</h2>
-            {passwords.map((pwd, idx) => (
-              <div
-                key={idx}
-                onClick={() => handleCopy(pwd, idx)}
-                className="p-4 rounded-2xl bg-card/80 backdrop-blur-xl border border-border/60 hover:border-emerald-500/50 transition-all flex items-center justify-between cursor-pointer group shadow-sm"
-              >
-                <code className="text-foreground font-mono text-sm sm:text-base font-bold tracking-wider break-all select-all">
-                  {pwd}
-                </code>
-                <button
-                  type="button"
-                  className="ml-4 p-2 rounded-xl bg-muted group-hover:bg-emerald-500 group-hover:text-white transition-colors text-muted-foreground flex-shrink-0"
-                >
-                  {copiedIndex === idx ? <Check className="w-4 h-4 text-emerald-500 group-hover:text-white" /> : <Copy className="w-4 h-4" />}
-                </button>
+        {/* ── Password Security Guidelines ───────────────────────── */}
+        <PageSection width="narrow">
+          <SectionHeading
+            align="left"
+            title="Password Security Guidelines"
+            description="Creating strong, unique passwords is one of the most effective ways to defend your online accounts against unauthorized access and data breaches."
+          />
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="surface p-6">
+              <h3 className="text-lg font-semibold text-foreground">Use 16+ Characters</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Longer passwords exponentially increase the time required for automated tools to guess your credentials.
+              </p>
+            </div>
+            <div className="surface p-6">
+              <h3 className="text-lg font-semibold text-foreground">Mix Character Types</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Include lowercase letters, uppercase letters, digits, and special symbols to maximize password complexity.
+              </p>
+            </div>
+          </div>
+        </PageSection>
+
+        {/* ── Length guidance ───────────────────────────────────────── */}
+        <PageSection width="narrow">
+          <SectionHeading
+            align="left"
+            title="Recommended Password Length"
+            description="Use this quick reference guide to select the right length for your security needs:"
+          />
+
+          <div className="surface mt-8 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="border-b border-border">
+                <tr className="text-left">
+                  <th className="px-5 py-3.5 text-xs font-medium text-muted-foreground">Length</th>
+                  <th className="px-5 py-3.5 text-xs font-medium text-muted-foreground">Complexity</th>
+                  <th className="px-5 py-3.5 text-xs font-medium text-muted-foreground">Recommended Use Case</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {[
+                  { len: "8–10 chars", dot: "bg-amber-500", level: "Basic", use: "Temporary or disposable signups.", recommended: false },
+                  { len: "12–14 chars", dot: "bg-highlight", level: "Good", use: "Standard everyday accounts and non-critical services.", recommended: false },
+                  { len: "16–20 chars", dot: "bg-emerald-500", level: "Strong (Recommended)", use: "Recommended for primary email, financial portals, and work tools.", recommended: true },
+                  { len: "24+ chars", dot: "bg-foreground", level: "Maximum Security", use: "Master passwords, password vault master keys, and root accounts.", recommended: false },
+                ].map((row) => (
+                  <tr key={row.len} className={row.recommended ? "bg-highlight/5" : ""}>
+                    <td className="whitespace-nowrap px-5 py-3.5 font-mono text-foreground">{row.len}</td>
+                    <td className="px-5 py-3.5">
+                      <span className="inline-flex items-center gap-2 text-foreground">
+                        <span className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${row.dot}`} aria-hidden="true" />
+                        {row.level}
+                      </span>
+                    </td>
+                    <td className="px-5 py-3.5 text-muted-foreground">{row.use}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </PageSection>
+
+        {/* ── Best Practices ────────────────────────────────────────── */}
+        <PageSection width="narrow">
+          <SectionHeading align="left" title="Password Hygiene Best Practices" />
+
+          <div className="mt-8 grid gap-4">
+            {[
+              {
+                title: "Use a Password Manager",
+                text: "Avoid memorizing complex passwords. Let a dedicated password manager securely store and autofill them across your devices.",
+              },
+              {
+                title: "Never Reuse Passwords",
+                text: "Always use a unique password for each website. If one service is compromised, your other accounts will remain completely safe.",
+              },
+              {
+                title: "Protect Active Sessions",
+                text: "A strong password protects the login screen, but active tabs remain open while you work. Use Locksy to lock open tabs whenever you step away from your workstation.",
+              },
+            ].map((tip) => (
+              <div key={tip.title} className="surface p-6">
+                <h3 className="text-lg font-semibold text-foreground">{tip.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tip.text}</p>
               </div>
             ))}
           </div>
+        </PageSection>
 
-          {/* ── Password Security Guidelines ───────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Password Security Guidelines</h2>
+        {/* ── FAQ ───────────────────────────────────────────────────── */}
+        <PageSection width="narrow">
+          <SectionHeading align="left" eyebrow="FAQ" title="Frequently Asked Questions" />
 
-            <div className="space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-              <p>
-                Creating strong, unique passwords is one of the most effective ways to defend your online accounts against unauthorized access and data breaches.
+          <div className="mt-8 divide-y divide-border border-y border-border">
+            <div className="py-5">
+              <h3 className="font-sans text-base font-medium tracking-normal text-foreground">Are these passwords sent to a server?</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                No. All generation happens locally inside your browser memory. Nothing is sent over the internet or logged on any server.
               </p>
-
-              <div className="grid sm:grid-cols-2 gap-4 not-italic">
-                <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                  <h3 className="font-bold text-foreground mb-1.5 text-sm">Use 16+ Characters</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    Longer passwords exponentially increase the time required for automated tools to guess your credentials.
-                  </p>
-                </div>
-                <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                  <h3 className="font-bold text-foreground mb-1.5 text-sm">Mix Character Types</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    Include lowercase letters, uppercase letters, digits, and special symbols to maximize password complexity.
-                  </p>
-                </div>
-              </div>
             </div>
-          </section>
 
-          {/* ── Length guidance ───────────────────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Recommended Password Length</h2>
-
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              Use this quick reference guide to select the right length for your security needs:
-            </p>
-
-            <div className="overflow-x-auto rounded-2xl border border-border/60 mb-6">
-              <table className="w-full text-xs sm:text-sm">
-                <thead className="bg-muted/40">
-                  <tr className="text-left">
-                    <th className="px-4 py-3 font-bold text-foreground">Length</th>
-                    <th className="px-4 py-3 font-bold text-foreground">Complexity</th>
-                    <th className="px-4 py-3 font-bold text-foreground">Recommended Use Case</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border/40">
-                  <tr>
-                    <td className="px-4 py-3 font-mono font-bold">8–10 chars</td>
-                    <td className="px-4 py-3 text-amber-500 font-semibold">Basic</td>
-                    <td className="px-4 py-3 text-muted-foreground">Temporary or disposable signups.</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-mono font-bold">12–14 chars</td>
-                    <td className="px-4 py-3 text-blue-500 font-semibold">Good</td>
-                    <td className="px-4 py-3 text-muted-foreground">Standard everyday accounts and non-critical services.</td>
-                  </tr>
-                  <tr className="bg-primary/5">
-                    <td className="px-4 py-3 font-mono font-bold">16–20 chars</td>
-                    <td className="px-4 py-3 text-emerald-500 font-semibold">Strong (Recommended)</td>
-                    <td className="px-4 py-3 text-muted-foreground">Recommended for primary email, financial portals, and work tools.</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-mono font-bold">24+ chars</td>
-                    <td className="px-4 py-3 text-purple-500 font-semibold">Maximum Security</td>
-                    <td className="px-4 py-3 text-muted-foreground">Master passwords, password vault master keys, and root accounts.</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="py-5">
+              <h3 className="font-sans text-base font-medium tracking-normal text-foreground">Should I enable &ldquo;Avoid ambiguous characters&rdquo;?</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                Enable this setting if you plan to write down or manually re-type the password. It excludes lookalike characters like &ldquo;1&rdquo; and &ldquo;l&rdquo;, or &ldquo;0&rdquo; and &ldquo;O&rdquo;.
+              </p>
             </div>
-          </section>
 
-          {/* ── Best Practices ────────────────────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Password Hygiene Best Practices</h2>
-
-            <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Use a Password Manager</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Avoid memorizing complex passwords. Let a dedicated password manager securely store and autofill them across your devices.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Never Reuse Passwords</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Always use a unique password for each website. If one service is compromised, your other accounts will remain completely safe.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Protect Active Sessions</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  A strong password protects the login screen, but active tabs remain open while you work. Use Locksy to lock open tabs whenever you step away from your workstation.
-                </p>
-              </div>
+            <div className="py-5">
+              <h3 className="font-sans text-base font-medium tracking-normal text-foreground">How do I test the strength of an existing password?</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                You can use our free <Link href="/tools/password-strength-checker" className="text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground">Password Strength Checker</Link> to inspect entropy and estimated crack times.
+              </p>
             </div>
-          </section>
+          </div>
+        </PageSection>
 
-          {/* ── FAQ ───────────────────────────────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently Asked Questions</h2>
-
-            <div className="space-y-3">
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Are these passwords sent to a server?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  No. All generation happens locally inside your browser memory. Nothing is sent over the internet or logged on any server.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Should I enable &ldquo;Avoid ambiguous characters&rdquo;?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Enable this setting if you plan to write down or manually re-type the password. It excludes lookalike characters like &ldquo;1&rdquo; and &ldquo;l&rdquo;, or &ldquo;0&rdquo; and &ldquo;O&rdquo;.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">How do I test the strength of an existing password?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  You can use our free <Link href="/tools/password-strength-checker" className="text-primary hover:underline font-semibold">Password Strength Checker</Link> to inspect entropy and estimated crack times.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA */}
-          <div className="p-8 rounded-3xl bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-primary/10 border border-emerald-500/20 text-center">
-            <h3 className="text-xl font-bold mb-2">Protect Your Logged-In Browser Sessions with Locksy</h3>
-            <p className="text-xs text-muted-foreground mb-6 max-w-lg mx-auto">
+        {/* CTA */}
+        <PageSection width="narrow">
+          <div className="surface px-6 py-10 text-center md:px-10">
+            <h3 className="text-2xl font-semibold text-foreground text-balance">Protect Your Logged-In Browser Sessions with Locksy</h3>
+            <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-muted-foreground">
               Lock and encrypt sensitive open browser tabs with master password protection and biometric unlock.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/#download" className="btn-primary text-xs py-3 px-6">
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link href="/#download" className="btn-primary">
                 Install Locksy Free
               </Link>
-              <Link href="/tools/password-strength-checker" className="btn-secondary text-xs py-3 px-6">
+              <Link href="/tools/password-strength-checker" className="btn-secondary">
                 Test Password Strength Meter
               </Link>
             </div>
           </div>
-
-        </div>
+        </PageSection>
       </main>
 
       {/* Free tool -> paid extension. Same card as /uninstall and /guide, with an

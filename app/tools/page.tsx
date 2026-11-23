@@ -4,9 +4,11 @@ import Footer from "@/components/footer"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
 import ProUpgradeCard from "@/components/pro-upgrade-card"
+import { PageHero, PageSection, IconTile } from "@/components/page-shell"
+import SectionHeading from "@/components/section-heading"
 import { generatePageMetadata, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/metadata"
 import Link from 'next/link'
-import { Shield, Key, Eye, Lock, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowUpRight, KeyRound, Shuffle, ScanSearch, MailWarning, Lock, Zap, ShieldCheck } from 'lucide-react'
 
 export const metadata: Metadata = generatePageMetadata(
   // Brand omitted — generatePageMetadata feeds this into `title`, which the root
@@ -52,39 +54,99 @@ export default function ToolsHubPage() {
     {
       title: "Password Strength Checker",
       description: "Test your password strength, entropy rating, and estimated brute-force resistance in real time.",
-      icon: "🔑",
+      icon: KeyRound,
       url: "/tools/password-strength-checker",
       badge: "Popular Tool",
-      gradient: "from-blue-500/10 via-indigo-500/10 to-purple-500/10",
-      border: "border-blue-500/30"
     },
     {
       title: "Password Generator",
       description: "Instantly create strong, random, and secure passwords with customizable length and character sets.",
-      icon: "🎲",
+      icon: Shuffle,
       url: "/tools/password-generator",
       badge: "100% Client-Side",
-      gradient: "from-emerald-500/10 via-teal-500/10 to-cyan-500/10",
-      border: "border-emerald-500/30"
     },
     {
       title: "Browser Privacy Score Inspector",
       description: "Scan your browser setup for tracker protection, WebRTC privacy, and active privacy headers.",
-      icon: "🛡️",
+      icon: ScanSearch,
       url: "/tools/browser-privacy-score",
       badge: "Instant Audit",
-      gradient: "from-violet-500/10 via-purple-500/10 to-fuchsia-500/10",
-      border: "border-violet-500/30"
     },
     {
       title: "Email Breach Checker",
       description: "Check if your email address has appeared in known public data breaches and security incidents.",
-      icon: "⚠️",
+      icon: MailWarning,
       url: "/tools/email-breach-checker",
       badge: "Security Check",
-      gradient: "from-amber-500/10 via-orange-500/10 to-red-500/10",
-      border: "border-amber-500/30"
     }
+  ]
+
+  const reasons = [
+    {
+      icon: Lock,
+      title: "Privacy First",
+      text: "Tools operate safely inside your browser session without storing or logging your personal data.",
+    },
+    {
+      icon: Zap,
+      title: "Instant & Free",
+      text: "No registration, credit cards, or signups required. Instant access whenever you need it.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Actionable Protection",
+      text: "Get clear recommendations to immediately strengthen your online security and browser defenses.",
+    },
+  ]
+
+  const routine = [
+    {
+      icon: MailWarning,
+      lead: "1. Check for Compromised Credentials with",
+      href: "/tools/email-breach-checker",
+      label: "Email Breach Checker",
+      text: "Regularly verify if your email address has appeared in public security incidents so you can proactively update compromised passwords.",
+    },
+    {
+      icon: KeyRound,
+      lead: "2. Evaluate Password Strength with",
+      href: "/tools/password-strength-checker",
+      label: "Password Strength Checker",
+      text: "Ensure your master passwords and critical account credentials meet robust length and entropy standards.",
+    },
+    {
+      icon: Shuffle,
+      lead: "3. Create Unique Passwords with",
+      href: "/tools/password-generator",
+      label: "Password Generator",
+      text: "Generate unique, high-entropy passwords for every service so that a breach on one site never puts your other accounts at risk.",
+    },
+    {
+      icon: ScanSearch,
+      lead: "4. Audit Browser Privacy with",
+      href: "/tools/browser-privacy-score",
+      label: "Browser Privacy Score",
+      text: "Check your browser configuration to ensure tracking prevention and privacy protections are functioning properly.",
+    },
+  ]
+
+  const faqs = [
+    {
+      q: "Are these tools really free?",
+      a: "Yes, all our online security and privacy tools are completely free to use without any account creation or subscriptions.",
+    },
+    {
+      q: "Do I need to install the extension to use them?",
+      a: "No. These tools run directly on the web and work in any standard web browser without needing any extension or download.",
+    },
+    {
+      q: "Are my generated passwords stored anywhere?",
+      a: "No. Passwords and strength checks are processed entirely locally on your device inside your browser. We never store, transmit, or log your passwords.",
+    },
+    {
+      q: "Can I use these tools for team or organizational security?",
+      a: "Yes, individuals, developers, and organizations are welcome to use these tools for security audits and password hygiene.",
+    },
   ]
 
   return (
@@ -100,179 +162,118 @@ export default function ToolsHubPage() {
 
       <Header />
 
-      <main className="min-h-screen bg-background relative overflow-hidden page-top-offset pb-24">
-        {/* Ambient Glows */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/6 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-secondary/10 rounded-full blur-[120px] animate-pulse delay-700" />
-        </div>
+      <main className="min-h-screen bg-background">
+        <PageHero
+          eyebrow="100% Free & Privacy-Preserving Web Tools"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Tools" }]}
+          title={
+            <>
+              Free Online <span className="text-highlight">Security &amp; Privacy Tools</span>
+            </>
+          }
+          description="Explore our collection of free tools designed to help you secure your online presence, generate strong credentials, and protect your digital privacy."
+        />
 
-        <div className="relative max-w-6xl mx-auto px-4 md:px-6">
-          
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 text-primary text-sm font-semibold mb-6">
-              <Sparkles className="w-4 h-4" />
-              100% Free & Privacy-Preserving Web Tools
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
-              Free Online{" "}
-              <span className="block sm:inline bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
-                Security &amp; Privacy Tools
-              </span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Explore our collection of free tools designed to help you secure your online presence, generate strong credentials, and protect your digital privacy.
-            </p>
-          </div>
-
-          {/* Tools Grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-20">
-            {tools.map((tool, idx) => (
+        {/* Tools Grid */}
+        <section className="relative pb-12 md:pb-16">
+          <div className="mx-auto grid max-w-6xl gap-4 px-4 sm:grid-cols-2 md:px-6">
+            {tools.map(({ title, description, icon: Icon, url, badge }) => (
               <Link
-                key={idx}
-                href={tool.url}
-                className={`group p-8 rounded-3xl bg-card/80 backdrop-blur-xl border ${tool.border} shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative overflow-hidden`}
+                key={url}
+                href={url}
+                className="surface group flex flex-col p-6 transition-colors hover:border-foreground/20 md:p-8"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-50 group-hover:opacity-100 transition-opacity`} />
-                
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-card border border-border/80 flex items-center justify-center text-3xl shadow-sm group-hover:scale-110 transition-transform">
-                      {tool.icon}
-                    </div>
-                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-                      {tool.badge}
+                <div className="flex items-center justify-between gap-4">
+                  <IconTile icon={Icon} />
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-full border border-border bg-muted px-2.5 py-1 text-xs text-muted-foreground">
+                      {badge}
                     </span>
+                    <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" aria-hidden="true" />
                   </div>
-
-                  <h2 className="text-2xl font-black text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {tool.title}
-                  </h2>
-                  
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    {tool.description}
-                  </p>
                 </div>
 
-                <div className="relative z-10 pt-4 border-t border-border/40 text-sm font-bold text-primary flex items-center gap-2 group-hover:translate-x-2 transition-transform">
-                  Launch Free Tool <ArrowRight className="w-4 h-4" />
-                </div>
+                <h2 className="mt-6 text-xl font-semibold text-foreground">{title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
+
+                <span className="mt-auto pt-6 text-sm font-medium text-foreground">
+                  Launch Free Tool <span aria-hidden="true">→</span>
+                </span>
               </Link>
             ))}
           </div>
+        </section>
 
-          {/* Why Free Security Tools Section */}
-          <section className="p-10 md:p-14 rounded-3xl bg-card/60 backdrop-blur-xl border border-border/60 shadow-xl mb-16">
-            <h2 className="text-2xl font-bold text-foreground mb-6 text-center">Why Use Locksy Free Tools?</h2>
-            <div className="grid sm:grid-cols-3 gap-6 text-center">
-              <div className="p-4">
-                <div className="text-3xl mb-2">🔒</div>
-                <h3 className="font-bold text-foreground mb-1">Privacy First</h3>
-                <p className="text-xs text-muted-foreground">Tools operate safely inside your browser session without storing or logging your personal data.</p>
+        {/* Why Free Security Tools Section */}
+        <PageSection>
+          <SectionHeading title="Why Use Locksy Free Tools?" />
+          <div className="mt-12 grid gap-4 sm:grid-cols-3">
+            {reasons.map(({ icon, title, text }) => (
+              <div key={title} className="surface p-6">
+                <IconTile icon={icon} />
+                <h3 className="mt-5 text-lg font-semibold text-foreground">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
               </div>
-              <div className="p-4">
-                <div className="text-3xl mb-2">🚀</div>
-                <h3 className="font-bold text-foreground mb-1">Instant & Free</h3>
-                <p className="text-xs text-muted-foreground">No registration, credit cards, or signups required. Instant access whenever you need it.</p>
+            ))}
+          </div>
+        </PageSection>
+
+        {/* ── Security Best Practices Guide ─────────────────────────────────── */}
+        <PageSection>
+          <SectionHeading
+            align="left"
+            title="Recommended Security Routine"
+            description="Maintaining strong online security is simple when you follow a few essential habits:"
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {routine.map(({ icon, lead, href, label, text }) => (
+              <div key={href} className="surface flex gap-4 p-6">
+                <IconTile icon={icon} />
+                <div className="min-w-0">
+                  <h3 className="text-base font-semibold leading-snug text-foreground">
+                    {lead}{" "}
+                    <Link href={href} className="text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground">
+                      {label}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
+                </div>
               </div>
-              <div className="p-4">
-                <div className="text-3xl mb-2">🛡️</div>
-                <h3 className="font-bold text-foreground mb-1">Actionable Protection</h3>
-                <p className="text-xs text-muted-foreground">Get clear recommendations to immediately strengthen your online security and browser defenses.</p>
-              </div>
+            ))}
+          </div>
+        </PageSection>
+
+        {/* ── FAQ ────────────────────────────────────────────────────── */}
+        <PageSection>
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
+            <div>
+              <span className="eyebrow">
+                <span className="eyebrow-dot" aria-hidden="true" />
+                FAQ
+              </span>
+              <h2 className="mt-5 text-3xl font-semibold leading-[1.1] text-foreground sm:text-4xl text-balance">
+                Frequently Asked Questions
+              </h2>
             </div>
-          </section>
-
-          {/* ── Security Best Practices Guide ─────────────────────────────────── */}
-          <section className="mb-16">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Recommended Security Routine</h2>
-
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              Maintaining strong online security is simple when you follow a few essential habits:
-            </p>
-
-            <div className="space-y-4">
-              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
-                  1. Check for Compromised Credentials with <Link href="/tools/email-breach-checker" className="text-primary hover:underline">Email Breach Checker</Link>
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Regularly verify if your email address has appeared in public security incidents so you can proactively update compromised passwords.
-                </p>
-              </div>
-
-              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
-                  2. Evaluate Password Strength with <Link href="/tools/password-strength-checker" className="text-primary hover:underline">Password Strength Checker</Link>
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Ensure your master passwords and critical account credentials meet robust length and entropy standards.
-                </p>
-              </div>
-
-              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
-                  3. Create Unique Passwords with <Link href="/tools/password-generator" className="text-primary hover:underline">Password Generator</Link>
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Generate unique, high-entropy passwords for every service so that a breach on one site never puts your other accounts at risk.
-                </p>
-              </div>
-
-              <div className="p-5 sm:p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">
-                  4. Audit Browser Privacy with <Link href="/tools/browser-privacy-score" className="text-primary hover:underline">Browser Privacy Score</Link>
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Check your browser configuration to ensure tracking prevention and privacy protections are functioning properly.
-                </p>
-              </div>
+            <div className="divide-y divide-border border-y border-border">
+              {faqs.map(({ q, a }) => (
+                <div key={q} className="py-5">
+                  <h3 className="font-sans text-base font-medium tracking-normal text-foreground">{q}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{a}</p>
+                </div>
+              ))}
             </div>
-          </section>
+          </div>
+        </PageSection>
 
-          {/* ── FAQ ────────────────────────────────────────────────────── */}
-          <section className="mb-16">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently Asked Questions</h2>
-
-            <div className="space-y-3">
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Are these tools really free?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Yes, all our online security and privacy tools are completely free to use without any account creation or subscriptions.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Do I need to install the extension to use them?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  No. These tools run directly on the web and work in any standard web browser without needing any extension or download.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Are my generated passwords stored anywhere?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  No. Passwords and strength checks are processed entirely locally on your device inside your browser. We never store, transmit, or log your passwords.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Can I use these tools for team or organizational security?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Yes, individuals, developers, and organizations are welcome to use these tools for security audits and password hygiene.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Banner */}
-          <div className="p-10 rounded-3xl bg-gradient-to-r from-primary/15 via-purple-500/10 to-secondary/15 border border-primary/30 text-center">
-            <h3 className="text-2xl font-bold mb-2">Protect Your Open Tabs with Locksy</h3>
-            <p className="text-muted-foreground text-sm max-w-xl mx-auto mb-6">
+        {/* CTA Banner */}
+        <PageSection>
+          <div className="surface px-6 py-12 text-center md:px-12">
+            <h3 className="text-2xl font-semibold text-foreground md:text-3xl text-balance">Protect Your Open Tabs with Locksy</h3>
+            <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
               Lock sensitive open tabs with password protection and biometric unlock.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link href="/#download" className="btn-primary">
                 Install Locksy Extension Free
               </Link>
@@ -281,8 +282,7 @@ export default function ToolsHubPage() {
               </Link>
             </div>
           </div>
-
-        </div>
+        </PageSection>
       </main>
 
       {/* Free tool -> paid extension. Same card as /uninstall and /guide, with an

@@ -23,7 +23,8 @@ export const metadata: Metadata = {
 
 export default function VerifyPage() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+    <div className="flex min-h-screen flex-col items-center justify-center gap-5 bg-background">
+      {/* Third-party badge images are kept as-is; only the page wrapper uses theme tokens. */}
       <a
         href="https://peerpush.com/p/locksy-tab-locker-and-password-protection"
         target="_blank"

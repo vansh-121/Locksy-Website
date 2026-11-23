@@ -56,19 +56,17 @@ export default function WhatsAppFloat() {
         <div
           role="dialog"
           aria-label="WhatsApp Channel QR Code"
-          className="absolute bottom-16 left-0 w-72 sm:w-80 rounded-2xl bg-card/95 border border-emerald-500/30 p-4 shadow-2xl backdrop-blur-xl animate-in fade-in-0 zoom-in-95 duration-200"
+          className="absolute bottom-14 left-0 w-72 rounded-2xl border border-border bg-popover/95 p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] backdrop-blur-xl animate-in fade-in-0 zoom-in-95 duration-200"
         >
-          {/* Top Accent Line */}
-          <div className="absolute top-0 left-6 right-6 h-1 bg-gradient-to-r from-emerald-500 via-[#25D366] to-teal-400 rounded-full" />
 
           {/* Header */}
-          <div className="flex items-center justify-between gap-2 pb-3 border-b border-border/60">
+          <div className="flex items-center justify-between gap-2 pb-3 border-b border-border">
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#25D366] text-white">
                 <WhatsAppIcon className="h-4 w-4" />
               </div>
               <div className="text-left leading-tight">
-                <h4 className="text-xs font-bold text-foreground">Locksy Channel</h4>
+                <h4 className="font-sans text-xs font-medium tracking-normal text-foreground">Locksy Channel</h4>
                 <p className="text-[10px] text-muted-foreground">Official WhatsApp broadcast</p>
               </div>
             </div>
@@ -85,7 +83,7 @@ export default function WhatsAppFloat() {
 
           {/* QR Code */}
           <div className="my-3 flex flex-col items-center">
-            <div className="p-2.5 bg-white rounded-xl border border-emerald-500/20 shadow-md">
+            <div className="rounded-xl bg-white p-2.5">
               <Image
                 src="/whatsapp-channel-qr.svg"
                 alt="Locksy WhatsApp Channel QR Code"
@@ -96,8 +94,8 @@ export default function WhatsAppFloat() {
               />
             </div>
 
-            <div className="mt-2.5 flex items-center gap-1.5 text-[11px] text-muted-foreground font-medium text-center">
-              <Smartphone className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+            <div className="mt-2.5 flex items-center gap-1.5 text-[11px] text-muted-foreground text-center">
+              <Smartphone className="w-3.5 h-3.5 flex-shrink-0" />
               <span>Scan with your phone to join in 1 tap</span>
             </div>
           </div>
@@ -108,7 +106,7 @@ export default function WhatsAppFloat() {
               href={WHATSAPP_CHANNEL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-xs py-2.5 px-3 shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] group"
+              className="group inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-full bg-foreground px-3 text-xs font-medium text-background transition-opacity hover:opacity-90"
             >
               <WhatsAppIcon className="w-3.5 h-3.5" />
               <span>Open in WhatsApp Web</span>
@@ -130,12 +128,10 @@ export default function WhatsAppFloat() {
         rel="noopener noreferrer"
         aria-label="Follow the Locksy Support channel on WhatsApp"
         title="Follow Locksy Support on WhatsApp"
-        className={`group flex items-center rounded-full bg-[#25D366] p-3 text-white shadow-lg shadow-black/20 transition-all duration-300 hover:bg-[#1ebe5b] hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] ${
-          isOpen ? "ring-4 ring-emerald-400/40 scale-105" : ""
-        }`}
+        className={`group flex h-11 items-center rounded-full border border-border bg-popover/90 px-3 text-foreground shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${isOpen ? "bg-muted" : ""}`}
       >
-        <WhatsAppIcon className="h-6 w-6 flex-shrink-0" />
-        <span className="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-all duration-300 group-hover:ml-2 group-hover:max-w-[12rem] group-hover:opacity-100">
+        <WhatsAppIcon className="h-5 w-5 flex-shrink-0 text-[#25D366]" />
+        <span className="ml-0 max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium opacity-0 transition-all duration-300 group-hover:ml-2 group-hover:max-w-[12rem] group-hover:opacity-100">
           Join our WhatsApp Channel
         </span>
       </a>

@@ -2,11 +2,8 @@
 
 import Link from 'next/link'
 import type { BlogPost, BlogPostSummary } from '@/lib/blog-data'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import BlogFaq from '@/components/blog-faq'
-import { ArrowLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, BookOpen, User, Sparkles, CheckCircle2 } from 'lucide-react'
+import { Share2, Twitter, Facebook, Linkedin, Check, ArrowUpRight } from 'lucide-react'
 import React, { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -15,6 +12,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import BlogViewCounter from '@/components/blog-view-counter'
 import BlogToc, { extractHeadings } from '@/components/blog-toc'
+import { Breadcrumbs } from '@/components/page-shell'
 import { slugify } from '@/lib/utils'
 import { MidArticleInstallCta, useDetectedBrowser, BROWSER_STORES } from '@/components/browser-install-cta'
 
@@ -33,6 +31,9 @@ function nodeToText(node: React.ReactNode): string {
     if (React.isValidElement(node)) return nodeToText((node.props as { children?: React.ReactNode }).children)
     return ''
 }
+
+const shareBtn =
+    'inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
 
 export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
     const [currentUrl, setCurrentUrl] = useState('')
@@ -104,60 +105,49 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
         }
     }
 
-    return (
-        <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-x-clip">
-            {/* Background decoration */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
+    const bodyText = 'text-[17px] leading-[1.8] text-foreground/85'
 
+    return (
+        <div className="min-h-screen bg-background">
             <Header />
 
-            <main className="relative max-w-7xl mx-auto px-4 md:px-6 page-top-offset pb-12 md:pb-20">
-                {/* Breadcrumb */}
-                <div className="max-w-4xl mx-auto mb-8">
-                    <Link href="/blog">
-                        <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-primary transition-colors">
-                            <ArrowLeft className="h-4 w-4" />
-                            Back to Blog
-                        </Button>
-                    </Link>
-                </div>
+            <main className="page-top-offset pb-16 md:pb-24">
+                <div className="mx-auto max-w-[1080px] px-4 md:px-6">
+                    {/* Article Header */}
+                    <header className="max-w-[720px]">
+                        <Breadcrumbs
+                            centered={false}
+                            items={[
+                                { label: 'Home', href: '/' },
+                                { label: 'Blog', href: '/blog' },
+                                { label: post.title },
+                            ]}
+                        />
 
-                {/* Article Header */}
-                <div className="max-w-4xl mx-auto mb-12">
-                    <div className="space-y-6">
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                            <Badge
-                                variant="secondary"
-                                className="bg-gradient-to-r from-primary to-secondary border-0 text-white"
-                            >
-                                {post.category}
-                            </Badge>
-                            <span className="flex items-center gap-1">
-                                <Calendar className="h-4 w-4" />
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+                            <span className="text-foreground/80">{post.category}</span>
+                            <span aria-hidden="true">·</span>
+                            <time dateTime={post.publishDate}>
                                 {new Date(post.publishDate.replace(/-/g, '/')).toLocaleDateString('en-US', {
                                     year: 'numeric',
                                     month: 'long',
                                     day: 'numeric'
                                 })}
-                            </span>
-                            <span className="flex items-center gap-1">
-                                <Clock className="h-4 w-4" />
-                                {post.readTime}
-                            </span>
-                            <Link href="/about" className="flex items-center gap-1 hover:text-primary transition-colors">
-                                <User className="h-4 w-4" />
+                            </time>
+                            <span aria-hidden="true">·</span>
+                            <span>{post.readTime}</span>
+                            <span aria-hidden="true">·</span>
+                            <Link href="/about" className="transition-colors hover:text-foreground">
                                 By {post.author}
                             </Link>
-                            <BlogViewCounter slug={post.slug} />
+                            <BlogViewCounter slug={post.slug} className="ml-1" />
                         </div>
 
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                        <h1 className="mt-5 text-4xl font-semibold leading-[1.1] text-foreground md:text-5xl text-balance">
                             {post.title}
                         </h1>
 
-                        <p className="blog-description text-xl text-muted-foreground">
+                        <p className="blog-description mt-5 text-lg leading-relaxed text-muted-foreground md:text-xl text-pretty">
                             {post.description}
                         </p>
 
@@ -166,51 +156,48 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                             engines (GEO) and adds rendered words. The .blog-tldr class
                             is the speakable target declared in page.tsx. */}
                         {post.tldr && (
-                            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5 md:p-6">
-                                <div className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary">
-                                    <Sparkles className="h-4 w-4" />
+                            <div className="surface mt-8 p-6">
+                                <span className="eyebrow">
+                                    <span className="eyebrow-dot" aria-hidden="true" />
                                     TL;DR
-                                </div>
-                                <p className="blog-tldr text-base md:text-lg leading-relaxed text-foreground/90">
+                                </span>
+                                <p className="blog-tldr mt-4 text-base leading-relaxed text-foreground/90 md:text-[17px]">
                                     {post.tldr}
                                 </p>
                             </div>
                         )}
 
-                        <div className="flex flex-wrap gap-2">
+                        <div className="mt-6 flex flex-wrap gap-1.5">
                             {post.tags.map((tag) => (
-                                <Badge key={tag} variant="outline" className="hover:border-primary/30 transition-colors">
+                                <span
+                                    key={tag}
+                                    className="inline-flex h-7 items-center rounded-full border border-border px-3 text-xs text-muted-foreground"
+                                >
                                     {tag}
-                                </Badge>
+                                </span>
                             ))}
                         </div>
 
                         {/* Share Bar */}
-                        <div className="flex flex-wrap items-center gap-2 pt-2">
-                            <span className="text-sm font-medium text-muted-foreground">Share:</span>
-                            <Button variant="outline" size="sm" onClick={shareToTwitter} className="gap-2 hover:border-primary/30">
-                                <Twitter className="h-4 w-4" />
-                                <span className="hidden sm:inline">Twitter</span>
-                            </Button>
-                            <Button variant="outline" size="sm" onClick={shareToFacebook} className="gap-2 hover:border-primary/30">
-                                <Facebook className="h-4 w-4" />
-                                <span className="hidden sm:inline">Facebook</span>
-                            </Button>
-                            <Button variant="outline" size="sm" onClick={shareToLinkedIn} className="gap-2 hover:border-primary/30">
-                                <Linkedin className="h-4 w-4" />
-                                <span className="hidden sm:inline">LinkedIn</span>
-                            </Button>
-                            <Button variant="outline" size="sm" onClick={copyLink} className="gap-2 hover:border-primary/30">
-                                <Share2 className="h-4 w-4" />
-                                <span className="hidden sm:inline">Copy</span>
-                            </Button>
+                        <div className="mt-6 flex flex-wrap items-center gap-2">
+                            <span className="mr-1 text-sm text-muted-foreground">Share:</span>
+                            <button type="button" onClick={shareToTwitter} className={shareBtn} aria-label="Share on Twitter" title="Twitter">
+                                <Twitter className="h-4 w-4" aria-hidden="true" />
+                            </button>
+                            <button type="button" onClick={shareToFacebook} className={shareBtn} aria-label="Share on Facebook" title="Facebook">
+                                <Facebook className="h-4 w-4" aria-hidden="true" />
+                            </button>
+                            <button type="button" onClick={shareToLinkedIn} className={shareBtn} aria-label="Share on LinkedIn" title="LinkedIn">
+                                <Linkedin className="h-4 w-4" aria-hidden="true" />
+                            </button>
+                            <button type="button" onClick={copyLink} className={shareBtn} aria-label="Copy link" title="Copy">
+                                <Share2 className="h-4 w-4" aria-hidden="true" />
+                            </button>
                         </div>
-                    </div>
-                </div>
+                    </header>
 
-                {/* Hero Image */}
-                <div className="max-w-4xl mx-auto mb-10">
-                    <div className="relative rounded-2xl overflow-hidden shadow-xl border border-border/30">
+                    {/* Hero Image */}
+                    <div className="mt-10 overflow-hidden rounded-3xl border border-border bg-muted">
                         <img
                             src={post.image}
                             alt={post.imageAlt}
@@ -218,380 +205,346 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                             height={630}
                             fetchPriority="high"
                             decoding="async"
-                            className="w-full h-64 md:h-[420px] object-cover"
+                            className="h-64 w-full object-cover md:h-[460px]"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
                     </div>
-                </div>
 
-                {/* Key Takeaways — scannable bullets for answer engines (AEO).
-                    Rendered from props, present in server HTML. */}
-                {post.keyTakeaways && post.keyTakeaways.length > 0 && (
-                    <div className="max-w-4xl mx-auto mb-12">
-                        <div className="rounded-2xl border border-border/50 bg-card/60 p-6 md:p-8 backdrop-blur-sm">
-                            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-foreground">
-                                <CheckCircle2 className="h-5 w-5 text-primary" />
-                                Key Takeaways
-                            </h2>
-                            <ul className="space-y-2.5">
-                                {post.keyTakeaways.map((point, i) => (
-                                    <li key={i} className="flex items-start gap-3 text-foreground/90">
-                                        <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-primary/70" />
-                                        <span className="leading-7 text-base md:text-lg">{point}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                )}
+                    {/* Body column + sticky Table of Contents. The TOC renders its
+                        full list in the server HTML (never null) so it survives
+                        before hydration. On desktop it sits in the right column; on
+                        smaller screens BlogToc's collapsible panel renders in-flow
+                        above the article. */}
+                    <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,720px)_220px] lg:justify-between lg:gap-12">
+                        {headings.length > 0 && (
+                            <aside className="lg:order-2">
+                                <BlogToc headings={headings} />
+                            </aside>
+                        )}
 
-                {/* Divider */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent mb-12" />
-                </div>
+                        <div className="min-w-0 lg:order-1">
+                            {/* Key Takeaways — scannable bullets for answer engines (AEO).
+                                Rendered from props, present in server HTML. */}
+                            {post.keyTakeaways && post.keyTakeaways.length > 0 && (
+                                <div className="surface mb-10 p-6 md:p-8">
+                                    <h2 className="eyebrow font-sans tracking-normal">
+                                        <span className="eyebrow-dot" aria-hidden="true" />
+                                        Key Takeaways
+                                    </h2>
+                                    <ul className="mt-5 space-y-3">
+                                        {post.keyTakeaways.map((point, i) => (
+                                            <li key={i} className="flex items-start gap-3 text-foreground/85">
+                                                <Check className="mt-1 h-4 w-4 flex-shrink-0 text-highlight" aria-hidden="true" />
+                                                <span className="text-base leading-relaxed">{point}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
 
-                {/* Article Content — with a sticky Table of Contents sidebar on
-                    large screens. The TOC renders its full list in the server HTML
-                    (never null) so it survives before hydration. */}
-                <div className="max-w-4xl mx-auto relative">
-                    {/* TOC: on wide screens (>=1400px) it floats in the left margin via absolute positioning
-                        so the article content stays perfectly aligned with the header/hero/takeaways above.
-                        On smaller screens (<1400px: laptops, tablets, mobile), BlogToc's collapsible panel renders in-flow. */}
-                    {headings.length > 0 && (
-                        <div className="min-[1400px]:absolute min-[1400px]:-left-[15.5rem] min-[1400px]:top-0 min-[1400px]:bottom-0 min-[1400px]:w-[13.5rem]">
-                            <BlogToc headings={headings} />
-                        </div>
-                    )}
-                    <article className="min-w-0">
-                    <div className="relative">
-                        <div className="relative">
-                            <ReactMarkdown
-                                remarkPlugins={[remarkGfm]}
-                                components={{
-                                    h1: ({ children }) => (
-                                        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl mt-10 mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                                            {children}
-                                        </h1>
-                                    ),
-                                    h2: ({ children }) => {
-                                        const headingId = idForHeading(nodeToText(children))
-                                        const isMidArticle = midH2Id && headingId === midH2Id
+                            <article className="min-w-0">
+                                <ReactMarkdown
+                                    remarkPlugins={[remarkGfm]}
+                                    components={{
+                                        h1: ({ children }) => (
+                                            <h1 className="mt-14 mb-5 text-3xl font-semibold leading-tight text-foreground md:text-4xl text-balance">
+                                                {children}
+                                            </h1>
+                                        ),
+                                        h2: ({ children }) => {
+                                            const headingId = idForHeading(nodeToText(children))
+                                            const isMidArticle = midH2Id && headingId === midH2Id
 
-                                        return (
-                                            <>
-                                                {isMidArticle && <MidArticleInstallCta />}
-                                                <h2 id={headingId} className="scroll-mt-24 text-2xl font-bold tracking-tight sm:text-3xl mt-10 mb-4 text-foreground flex items-center gap-3">
-                                                    <span className="w-1 h-7 bg-gradient-to-b from-primary to-secondary rounded-full flex-shrink-0" />
-                                                    {children}
-                                                </h2>
-                                            </>
-                                        )
-                                    },
-                                    h3: ({ children }) => (
-                                        <h3 id={idForHeading(nodeToText(children))} className="scroll-mt-24 text-xl font-semibold tracking-tight sm:text-2xl mt-8 mb-3 text-foreground">
-                                            {children}
-                                        </h3>
-                                    ),
-                                    h4: ({ children }) => (
-                                        <h4 className="text-lg font-semibold tracking-tight mt-6 mb-2 text-foreground">
-                                            {children}
-                                        </h4>
-                                    ),
-                                    p: ({ children, node }) => {
-                                        // If paragraph contains an image, render as div to avoid invalid <figure> inside <p>
-                                        const hasImage = node?.children?.some(
-                                            (child: any) => child.tagName === 'img' || child.type === 'element' && child.tagName === 'img'
-                                        )
-                                        if (hasImage) {
                                             return (
-                                                <div className="mb-4 leading-8 text-foreground/90 text-base md:text-lg">
-                                                    {children}
-                                                </div>
+                                                <>
+                                                    {isMidArticle && <MidArticleInstallCta />}
+                                                    <h2 id={headingId} className="mt-14 mb-4 scroll-mt-28 text-2xl font-semibold leading-tight text-foreground md:text-3xl text-balance">
+                                                        {children}
+                                                    </h2>
+                                                </>
                                             )
-                                        }
-                                        return (
-                                            <p className="mb-4 leading-8 text-foreground/90 text-base md:text-lg">
+                                        },
+                                        h3: ({ children }) => (
+                                            <h3 id={idForHeading(nodeToText(children))} className="mt-10 mb-3 scroll-mt-28 text-xl font-semibold leading-snug text-foreground">
                                                 {children}
-                                            </p>
-                                        )
-                                    },
-                                    ul: ({ children }) => (
-                                        <ul className="my-4 ml-6 list-disc space-y-2 text-foreground/90">
-                                            {children}
-                                        </ul>
-                                    ),
-                                    ol: ({ children }) => (
-                                        <ol className="my-4 ml-6 list-decimal space-y-2 text-foreground/90">
-                                            {children}
-                                        </ol>
-                                    ),
-                                    li: ({ children }) => (
-                                        <li className="leading-7 text-base md:text-lg">
-                                            {children}
-                                        </li>
-                                    ),
-                                    code: ({ children, className }) => {
-                                        const isInline = !className
-                                        return isInline ? (
-                                            <code className="rounded-md bg-primary/10 text-primary px-2 py-0.5 font-mono text-sm border border-primary/20">
+                                            </h3>
+                                        ),
+                                        h4: ({ children }) => (
+                                            <h4 className="mt-8 mb-2 text-lg font-semibold text-foreground">
                                                 {children}
-                                            </code>
-                                        ) : (
-                                            <code className={`block rounded-lg bg-neutral-900 text-neutral-100 p-4 font-mono text-sm overflow-x-auto ${className}`}>
+                                            </h4>
+                                        ),
+                                        p: ({ children, node }) => {
+                                            // If paragraph contains an image, render as div to avoid invalid <figure> inside <p>
+                                            const hasImage = node?.children?.some(
+                                                (child: any) => child.tagName === 'img' || child.type === 'element' && child.tagName === 'img'
+                                            )
+                                            if (hasImage) {
+                                                return (
+                                                    <div className={`my-5 ${bodyText}`}>
+                                                        {children}
+                                                    </div>
+                                                )
+                                            }
+                                            return (
+                                                <p className={`my-5 ${bodyText}`}>
+                                                    {children}
+                                                </p>
+                                            )
+                                        },
+                                        ul: ({ children }) => (
+                                            <ul className={`my-5 ml-6 list-disc space-y-2 marker:text-highlight ${bodyText}`}>
                                                 {children}
-                                            </code>
-                                        )
-                                    },
-                                    pre: ({ children }) => (
-                                        <pre className="my-6 overflow-x-auto rounded-xl bg-neutral-900 text-neutral-100 p-5 shadow-lg border border-neutral-800">
-                                            {children}
-                                        </pre>
-                                    ),
-                                    blockquote: ({ children }) => (
-                                        <blockquote className="border-l-4 border-primary bg-primary/5 pl-6 pr-4 py-3 italic my-6 rounded-r-lg">
-                                            {children}
-                                        </blockquote>
-                                    ),
-                                    table: ({ children }) => (
-                                        <div className="my-6 overflow-x-auto rounded-xl border border-border/50 shadow-sm">
-                                            <table className="w-full border-collapse">
+                                            </ul>
+                                        ),
+                                        ol: ({ children }) => (
+                                            <ol className={`my-5 ml-6 list-decimal space-y-2 marker:text-highlight ${bodyText}`}>
                                                 {children}
-                                            </table>
+                                            </ol>
+                                        ),
+                                        li: ({ children }) => (
+                                            <li className="pl-1">
+                                                {children}
+                                            </li>
+                                        ),
+                                        code: ({ children, className }) => {
+                                            const isInline = !className
+                                            return isInline ? (
+                                                <code className="rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">
+                                                    {children}
+                                                </code>
+                                            ) : (
+                                                <code className={`block font-mono text-sm leading-relaxed text-foreground ${className}`}>
+                                                    {children}
+                                                </code>
+                                            )
+                                        },
+                                        pre: ({ children }) => (
+                                            // Fenced blocks without a language reach the inline `code`
+                                            // renderer; the child resets strip its pill styling here.
+                                            <pre className="my-8 overflow-x-auto rounded-2xl border border-border bg-muted/40 p-5 text-sm text-foreground [&>code]:border-0 [&>code]:bg-transparent [&>code]:p-0 [&>code]:text-sm">
+                                                {children}
+                                            </pre>
+                                        ),
+                                        blockquote: ({ children }) => (
+                                            <blockquote className="my-8 border-l-2 border-highlight pl-5 italic text-foreground/80 [&>p]:text-foreground/80">
+                                                {children}
+                                            </blockquote>
+                                        ),
+                                        table: ({ children }) => (
+                                            <div className="my-8 overflow-x-auto rounded-2xl border border-border">
+                                                <table className="w-full border-collapse text-[15px] [&_tbody_tr:last-child>td]:border-b-0">
+                                                    {children}
+                                                </table>
+                                            </div>
+                                        ),
+                                        th: ({ children }) => (
+                                            <th className="border-b border-border bg-muted/50 px-4 py-3 text-left font-semibold text-foreground">
+                                                {children}
+                                            </th>
+                                        ),
+                                        td: ({ children }) => (
+                                            <td className="border-b border-border px-4 py-3 align-top leading-relaxed text-foreground/85">
+                                                {children}
+                                            </td>
+                                        ),
+                                        a: ({ children, href }) => {
+                                            const textContent = nodeToText(children)
+                                            const isExplicitStoreLabel = /Firefox Add-ons|Edge Add-ons|Chrome Web Store/i.test(textContent)
+
+                                            const isLocksyStoreLink = href && (
+                                                href.includes('chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim') ||
+                                                href.includes('microsoftedge.microsoft.com/addons/detail/locksy') ||
+                                                href.includes('addons.mozilla.org/en-US/firefox/addon/locksy') ||
+                                                href === '/install' ||
+                                                href === 'https://www.locksy.dev/install'
+                                            )
+
+                                            // Route in-article Locksy store links to the visitor's detected browser store
+                                            const targetHref = (isLocksyStoreLink && !isExplicitStoreLabel) ? detected.url : href
+                                            const safeHref = targetHref && /^(https?:|mailto:|tel:|\/|#)/.test(targetHref) ? targetHref : undefined
+
+                                            return (
+                                                <a
+                                                    href={safeHref}
+                                                    className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
+                                                    target={safeHref?.startsWith('http') ? '_blank' : undefined}
+                                                    rel={safeHref?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                                >
+                                                    {children}
+                                                </a>
+                                            )
+                                        },
+                                        hr: () => (
+                                            <hr className="my-12 border-border" />
+                                        ),
+                                        img: ({ src, alt }) => {
+                                            const safeSrc = typeof src === 'string' && (/^https?:\/\//.test(src) || src.startsWith('/')) ? src : undefined
+                                            if (!safeSrc) return null
+                                            return (
+                                                <figure className="my-8">
+                                                    <div className="overflow-hidden rounded-2xl border border-border">
+                                                        <img
+                                                            src={safeSrc}
+                                                            alt={alt || ''}
+                                                            className="h-auto w-full object-cover"
+                                                            loading="lazy"
+                                                        />
+                                                    </div>
+                                                    {alt && (
+                                                        <figcaption className="mt-3 text-center text-sm text-muted-foreground">
+                                                            {alt}
+                                                        </figcaption>
+                                                    )}
+                                                </figure>
+                                            )
+                                        },
+                                        strong: ({ children }) => (
+                                            <strong className="font-semibold text-foreground">{children}</strong>
+                                        ),
+                                    }}
+                                >
+                                    {post.content}
+                                </ReactMarkdown>
+                            </article>
+
+                            {/* FAQ — per-post Q&A. Rendered when present; also emitted as
+                                FAQPage JSON-LD from page.tsx for rich results (AEO). */}
+                            {post.faq && post.faq.length > 0 && (
+                                <section className="mt-16" aria-labelledby="faq-heading">
+                                    <h2 id="faq-heading" className="mb-6 scroll-mt-28 text-2xl font-semibold text-foreground md:text-3xl">
+                                        Frequently Asked Questions
+                                    </h2>
+                                    <BlogFaq items={post.faq} />
+                                </section>
+                            )}
+
+                            {/* Author Bio Card — E-E-A-T signal for AdSense & Google */}
+                            <div className="surface mt-12 p-6 md:p-8">
+                                <div className="flex flex-col gap-5 sm:flex-row">
+                                    {/* Avatar */}
+                                    <div className="flex-shrink-0">
+                                        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-muted">
+                                            <span className="text-base font-semibold text-foreground">VS</span>
                                         </div>
-                                    ),
-                                    th: ({ children }) => (
-                                        <th className="border-b border-border bg-gradient-to-r from-primary/5 to-secondary/5 px-4 py-3 text-left font-semibold text-foreground">
-                                            {children}
-                                        </th>
-                                    ),
-                                    td: ({ children }) => (
-                                        <td className="border-b border-border/30 px-4 py-3 text-foreground/90">
-                                            {children}
-                                        </td>
-                                    ),
-                                    a: ({ children, href }) => {
-                                        const textContent = nodeToText(children)
-                                        const isExplicitStoreLabel = /Firefox Add-ons|Edge Add-ons|Chrome Web Store/i.test(textContent)
-
-                                        const isLocksyStoreLink = href && (
-                                            href.includes('chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim') ||
-                                            href.includes('microsoftedge.microsoft.com/addons/detail/locksy') ||
-                                            href.includes('addons.mozilla.org/en-US/firefox/addon/locksy') ||
-                                            href === '/install' ||
-                                            href === 'https://www.locksy.dev/install'
-                                        )
-
-                                        // Route in-article Locksy store links to the visitor's detected browser store
-                                        const targetHref = (isLocksyStoreLink && !isExplicitStoreLabel) ? detected.url : href
-                                        const safeHref = targetHref && /^(https?:|mailto:|tel:|\/|#)/.test(targetHref) ? targetHref : undefined
-
-                                        return (
-                                            <a
-                                                href={safeHref}
-                                                className="text-primary font-medium underline decoration-primary/30 underline-offset-4 hover:decoration-primary transition-colors"
-                                                target={safeHref?.startsWith('http') ? '_blank' : undefined}
-                                                rel={safeHref?.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                            >
-                                                {children}
-                                            </a>
-                                        )
-                                    },
-                                    hr: () => (
-                                        <div className="my-10 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-                                    ),
-                                    img: ({ src, alt }) => {
-                                        const safeSrc = typeof src === 'string' && (/^https?:\/\//.test(src) || src.startsWith('/')) ? src : undefined
-                                        if (!safeSrc) return null
-                                        return (
-                                            <figure className="my-8">
-                                                <div className="relative rounded-xl overflow-hidden shadow-lg border border-border/30">
-                                                    <img
-                                                        src={safeSrc}
-                                                        alt={alt || ''}
-                                                        className="w-full h-auto object-cover"
-                                                        loading="lazy"
-                                                    />
-                                                </div>
-                                                {alt && (
-                                                    <figcaption className="text-center text-sm text-muted-foreground mt-3 italic">
-                                                        {alt}
-                                                    </figcaption>
-                                                )}
-                                            </figure>
-                                        )
-                                    },
-                                    strong: ({ children }) => (
-                                        <strong className="font-bold text-foreground">{children}</strong>
-                                    ),
-                                }}
-                            >
-                                {post.content}
-                            </ReactMarkdown>
-                        </div>
-                    </div>
-                    </article>
-                </div>
-
-                {/* FAQ — per-post Q&A. Rendered when present; also emitted as
-                    FAQPage JSON-LD from page.tsx for rich results (AEO). */}
-                {post.faq && post.faq.length > 0 && (
-                    <section className="max-w-4xl mx-auto mt-16" aria-labelledby="faq-heading">
-                        <h2 id="faq-heading" className="scroll-mt-24 text-2xl md:text-3xl font-bold tracking-tight mb-8 flex items-center gap-3">
-                            <span className="w-1 h-7 bg-gradient-to-b from-primary to-secondary rounded-full" />
-                            Frequently Asked Questions
-                        </h2>
-                        <BlogFaq items={post.faq} />
-                    </section>
-                )}
-
-                {/* Author Bio Card — E-E-A-T signal for AdSense & Google */}
-                <div className="max-w-4xl mx-auto mt-10">
-                    <div className="bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-6 md:p-8">
-                        <div className="flex flex-col sm:flex-row gap-5">
-                            {/* Avatar */}
-                            <div className="flex-shrink-0">
-                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
-                                    <span className="text-white font-bold text-xl">VS</span>
+                                    </div>
+                                    {/* Bio */}
+                                    <div className="min-w-0 flex-1">
+                                        <div className="mb-1 flex flex-wrap items-center gap-2">
+                                            <Link href="/about" className="text-lg font-semibold text-foreground transition-colors hover:text-foreground/80">
+                                                {post.author}
+                                            </Link>
+                                            <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">Author</span>
+                                        </div>
+                                        <p className="mb-2 text-sm text-muted-foreground">Developer &amp; Founder of Locksy</p>
+                                        <p className="text-sm leading-relaxed text-muted-foreground">
+                                            Vansh is the developer and founder of Locksy — a privacy-first browser tab security extension trusted by 5,000+ users across Chrome, Edge, Firefox, and Brave. He writes about browser security, privacy, and developer tools.
+                                        </p>
+                                        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
+                                            <Link href="/about" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground">About Locksy</Link>
+                                            <a href="https://github.com/vansh-121" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground">GitHub</a>
+                                            <span className="text-muted-foreground">
+                                                Last updated {new Date(post.lastModified.replace(/-/g, '/')).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    {/* Share buttons */}
+                                    <div className="flex flex-shrink-0 gap-2 sm:flex-col">
+                                        <button type="button" onClick={shareToTwitter} className={shareBtn} aria-label="Share on Twitter" title="Share">
+                                            <Twitter className="h-4 w-4" aria-hidden="true" />
+                                        </button>
+                                        <button type="button" onClick={copyLink} className={shareBtn} aria-label="Copy link" title="Copy">
+                                            <Share2 className="h-4 w-4" aria-hidden="true" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            {/* Bio */}
-                            <div className="flex-1 min-w-0">
-                                <div className="flex flex-wrap items-center gap-2 mb-1">
-                                    <Link href="/about" className="font-bold text-lg text-foreground hover:text-primary transition-colors">
-                                        {post.author}
-                                    </Link>
-                                    <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-foreground border-0 font-medium">Author</span>
-                                </div>
-                                <p className="text-sm font-medium text-muted-foreground mb-2">Developer &amp; Founder of Locksy</p>
-                                <p className="text-sm text-foreground/80 leading-relaxed">
-                                    Vansh is the developer and founder of Locksy — a privacy-first browser tab security extension trusted by 5,000+ users across Chrome, Edge, Firefox, and Brave. He writes about browser security, privacy, and developer tools.
-                                </p>
-                                <div className="flex flex-wrap gap-3 mt-4">
-                                    <Link href="/about" className="text-xs text-primary hover:underline font-medium">About Locksy</Link>
-                                    <a href="https://github.com/vansh-121" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-medium">GitHub</a>
-                                    <span className="text-xs text-muted-foreground">
-                                        Last updated {new Date(post.lastModified.replace(/-/g, '/')).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                                    </span>
-                                </div>
-                            </div>
-                            {/* Share buttons */}
-                            <div className="flex sm:flex-col gap-2 flex-shrink-0">
-                                <Button variant="outline" size="sm" onClick={shareToTwitter} className="gap-2">
-                                    <Twitter className="h-4 w-4" /> <span className="hidden sm:inline">Share</span>
-                                </Button>
-                                <Button variant="outline" size="sm" onClick={copyLink} className="gap-2">
-                                    <Share2 className="h-4 w-4" /> <span className="hidden sm:inline">Copy</span>
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                {/* CTA */}
-                <div className="max-w-3xl mx-auto mt-16">
-                    <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-                        <Card className="relative border-2 border-primary/20 bg-card/50 backdrop-blur-sm shadow-xl overflow-hidden">
-                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
-                            <CardHeader className="text-center pt-10">
-                                <CardTitle className="text-3xl font-bold">Ready to Secure Your Browser Tabs?</CardTitle>
-                                <CardDescription className="text-base max-w-xl mx-auto">
-                                    Get started with Locksy today — free core version, trusted by thousands
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="flex flex-col items-center gap-4 pb-10 px-8">
-                                <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
-                                    <a
-                                        href={detected.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-full sm:w-auto"
-                                    >
-                                        <Button
-                                            size="lg"
-                                            className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg shadow-primary/20"
+                            {/* CTA */}
+                            <div className="surface relative mt-12 overflow-hidden px-6 py-12 text-center md:px-10">
+                                <div
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute inset-x-0 top-0 h-48"
+                                    style={{ background: 'radial-gradient(50% 60% at 50% 0%, var(--glow), transparent 70%)' }}
+                                />
+                                <div className="relative">
+                                    <h2 className="text-2xl font-semibold text-foreground md:text-3xl text-balance">Ready to Secure Your Browser Tabs?</h2>
+                                    <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">
+                                        Get started with Locksy today — free core version, trusted by thousands
+                                    </p>
+                                    <div className="mt-8 flex w-full flex-col justify-center gap-3 sm:flex-row">
+                                        <a
+                                            href={detected.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="btn-primary"
                                         >
                                             {detected.buttonLabel}
-                                        </Button>
-                                    </a>
-                                    <Link href="/pricing" className="w-full sm:w-auto">
-                                        <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                                        </a>
+                                        <Link href="/pricing" className="btn-secondary">
                                             View Pro Features
-                                        </Button>
-                                    </Link>
+                                        </Link>
+                                    </div>
+                                    <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
+                                        <span>Also available for:</span>
+                                        {bottomOthers.map((other, idx) => (
+                                            <React.Fragment key={other.key}>
+                                                <a
+                                                    href={other.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
+                                                >
+                                                    {other.shortName}
+                                                </a>
+                                                {idx < bottomOthers.length - 1 && <span aria-hidden="true">·</span>}
+                                            </React.Fragment>
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground mt-1">
-                                    <span>Also available for:</span>
-                                    {bottomOthers.map((other, idx) => (
-                                        <React.Fragment key={other.key}>
-                                            <a
-                                                href={other.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="font-medium text-primary hover:underline underline-offset-2 transition-colors"
-                                            >
-                                                {other.shortName}
-                                            </a>
-                                            {idx < bottomOthers.length - 1 && <span className="text-border">·</span>}
-                                        </React.Fragment>
-                                    ))}
-                                </div>
-                            </CardContent>
-                        </Card>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                {/* Related Posts */}
-                {relatedPosts.length > 0 && (
-                    <div className="max-w-4xl mx-auto mt-16">
-                        <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8 flex items-center gap-3">
-                            <span className="w-1 h-7 bg-gradient-to-b from-primary to-secondary rounded-full" />
-                            Related Articles
-                        </h2>
-                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {relatedPosts.map((relatedPost) => (
-                                <div key={relatedPost.slug} className="group relative">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 blur-xl opacity-0 group-hover:opacity-50 transition-opacity rounded-2xl" />
-                                    <Card className="relative border-2 border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col overflow-hidden">
-                                        <div className="relative h-36 overflow-hidden">
+                    {/* Related Posts */}
+                    {relatedPosts.length > 0 && (
+                        <section className="mt-20 border-t border-border pt-14">
+                            <h2 className="text-2xl font-semibold text-foreground md:text-3xl">
+                                Related Articles
+                            </h2>
+                            <div className="mt-8 grid gap-4 md:grid-cols-3">
+                                {relatedPosts.map((relatedPost) => (
+                                    <Link
+                                        key={relatedPost.slug}
+                                        href={`/blog/${relatedPost.slug}`}
+                                        className="surface group flex flex-col overflow-hidden transition-colors hover:border-foreground/20"
+                                    >
+                                        <div className="m-2 mb-0 aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-muted">
                                             <img
                                                 src={relatedPost.image}
                                                 alt={relatedPost.imageAlt}
-                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                                                 loading="lazy"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent" />
                                         </div>
-                                        <CardHeader>
-                                            <Badge variant="secondary" className="w-fit mb-2 bg-muted/80 hover:bg-muted text-foreground border-0 transition-colors">
-                                                {relatedPost.category}
-                                            </Badge>
-                                            <CardTitle className="line-clamp-2 text-lg">
-                                                <Link
-                                                    href={`/blog/${relatedPost.slug}`}
-                                                    className="hover:text-primary transition-colors"
-                                                >
-                                                    {relatedPost.title}
-                                                </Link>
-                                            </CardTitle>
-                                            <CardDescription className="line-clamp-2">
-                                                {relatedPost.description}
-                                            </CardDescription>
-                                        </CardHeader>
-                                        <CardFooter className="mt-auto">
-                                            <Link href={`/blog/${relatedPost.slug}`} className="w-full">
-                                                <Button variant="outline" size="sm" className="w-full gap-2">
-                                                    Read More
-                                                    <ArrowLeft className="h-3 w-3 rotate-180" />
-                                                </Button>
-                                            </Link>
-                                        </CardFooter>
-                                    </Card>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                                        <div className="flex flex-1 flex-col p-6">
+                                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                <span className="text-foreground/80">{relatedPost.category}</span>
+                                                <span aria-hidden="true">·</span>
+                                                <span>{relatedPost.readTime}</span>
+                                            </div>
+                                            <h3 className="mt-3 line-clamp-2 text-base font-semibold leading-snug text-foreground">{relatedPost.title}</h3>
+                                            <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground">{relatedPost.description}</p>
+                                            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
+                                                Read More
+                                                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
+                                            </span>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                </div>
             </main>
 
             <Footer />

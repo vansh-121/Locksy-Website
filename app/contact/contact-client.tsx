@@ -1,10 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import {
     Mail,
     Github,
@@ -13,13 +9,17 @@ import {
     MessageSquare,
     Code2,
     Heart,
-    ExternalLink,
+    ArrowUpRight,
     CheckCircle2,
+    CircleAlert,
+    LoaderCircle,
     User,
     MessageCircle
 } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { Callout, IconTile, PageHero, PageSection } from "@/components/page-shell"
+import SectionHeading from "@/components/section-heading"
 import WhatsAppIcon from "@/components/whatsapp-icon"
 import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 
@@ -30,8 +30,6 @@ const SOCIAL_LINKS = [
         href: "mailto:support@locksy.dev",
         username: "support@locksy.dev",
         description: "Direct email for inquiries and support",
-        color: "from-red-500 to-orange-500",
-        hoverColor: "hover:from-red-600 hover:to-orange-600",
     },
     {
         name: "GitHub",
@@ -39,8 +37,6 @@ const SOCIAL_LINKS = [
         href: "https://github.com/vansh-121",
         username: "@vansh-121",
         description: "View projects and contribute",
-        color: "from-gray-700 to-gray-900",
-        hoverColor: "hover:from-gray-800 hover:to-black",
     },
     {
         name: "LinkedIn",
@@ -48,8 +44,6 @@ const SOCIAL_LINKS = [
         href: "https://www.linkedin.com/in/vansh-sethi-vs",
         username: "Vansh Sethi",
         description: "Professional network and updates",
-        color: "from-blue-600 to-blue-800",
-        hoverColor: "hover:from-blue-700 hover:to-blue-900",
     },
     {
         name: "Sponsor",
@@ -57,8 +51,6 @@ const SOCIAL_LINKS = [
         href: "https://github.com/sponsors/vansh-121",
         username: "GitHub Sponsors",
         description: "Support the project development",
-        color: "from-primary to-secondary",
-        hoverColor: "hover:from-primary hover:to-secondary",
     },
 ]
 
@@ -68,28 +60,24 @@ const QUICK_ACTIONS = [
         description: "Found an issue? Let me know",
         icon: Code2,
         href: "https://github.com/vansh-121/Locksy/issues",
-        color: "from-red-500 to-pink-500",
     },
     {
         title: "Request Feature",
         description: "Have an idea? Share it",
         icon: MessageSquare,
         href: "https://github.com/vansh-121/Locksy/issues",
-        color: "from-purple-500 to-indigo-500",
     },
     {
         title: "General Support",
         description: "Need help with Locksy?",
         icon: Heart,
         href: "mailto:support@locksy.dev",
-        color: "from-green-500 to-emerald-500",
     },
     {
         title: "WhatsApp Channel",
         description: "Follow Locksy Support for updates",
         icon: WhatsAppIcon,
         href: WHATSAPP_CHANNEL_URL,
-        color: "from-[#25D366] to-[#128C7E]",
     },
 ]
 
@@ -160,134 +148,102 @@ Timestamp: ${new Date().toISOString()}
         }
     }
 
+    const inputClass =
+        "h-11 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    const labelClass = "flex items-center gap-2 text-sm font-medium text-foreground"
+
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-background via-accent/30 to-background relative overflow-hidden">
-                {/* Background decoration */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
-
+            <div className="min-h-screen bg-background">
                 {/* Header */}
                 <Header />
 
-                <main className="relative max-w-7xl mx-auto px-4 md:px-6 page-top-offset pb-12 md:pb-20">
+                <main className="relative">
                     {/* Hero Section */}
-                    <div className="text-center space-y-6 mb-16">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
-                            <MessageCircle className="h-4 w-4" />
-                            Get in Touch
-                        </div>
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                            Contact Developer
-                        </h1>
-                        <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-                            Have questions, feedback, or just want to say hi? I'd love to hear from you!
-                        </p>
-                    </div>
+                    <PageHero
+                        eyebrow="Get in Touch"
+                        title="Contact Developer"
+                        description="Have questions, feedback, or just want to say hi? I'd love to hear from you!"
+                    />
 
                     {/* Social Media Links */}
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 max-w-6xl mx-auto">
-                        {SOCIAL_LINKS.map((social) => {
-                            const Icon = social.icon
-                            return (
+                    <PageSection className="!pt-0">
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                            {SOCIAL_LINKS.map((social) => (
                                 <a
                                     key={social.name}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group relative"
+                                    className="surface group flex h-full flex-col p-6 transition-colors hover:border-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-20 blur-xl transition-opacity" />
-                                    <Card className="relative border-2 border-border hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-card/50 backdrop-blur-sm h-full">
-                                        <CardContent className="pt-6 pb-6 space-y-4">
-                                            <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${social.color} ${social.hoverColor} shadow-lg transition-all duration-300 group-hover:scale-110`}>
-                                                <Icon className="h-7 w-7 text-white" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <div className="flex items-center gap-2">
-                                                    <h3 className="text-xl font-bold">{social.name}</h3>
-                                                    <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                                                </div>
-                                                <p className="text-sm font-mono text-primary">{social.username}</p>
-                                                <p className="text-sm text-muted-foreground">{social.description}</p>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
+                                    <span className="flex items-start justify-between">
+                                        <IconTile icon={social.icon} />
+                                        <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
+                                    </span>
+                                    <h3 className="mt-5 text-lg font-semibold text-foreground">{social.name}</h3>
+                                    <p className="mt-1 font-mono text-sm text-foreground/80">{social.username}</p>
+                                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{social.description}</p>
                                 </a>
-                            )
-                        })}
-                    </div>
+                            ))}
+                        </div>
+                    </PageSection>
 
                     {/* Quick Actions */}
-                    <div className="mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Quick Actions</h2>
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                            {QUICK_ACTIONS.map((action) => {
-                                const Icon = action.icon
-                                return (
-                                    <a
-                                        key={action.title}
-                                        href={action.href}
-                                        onClick={action.href === WHATSAPP_CHANNEL_URL ? openWhatsAppChannel : undefined}
-                                        target={action.href.startsWith("http") || action.href.startsWith("mailto") ? "_blank" : undefined}
-                                        rel={action.href.startsWith("http") || action.href.startsWith("mailto") ? "noopener noreferrer" : undefined}
-                                        className="group"
-                                    >
-                                        <Card className="border-2 border-border hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-card/50 backdrop-blur-sm h-full">
-                                            <CardContent className="pt-6 pb-6 text-center space-y-3">
-                                                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${action.color} shadow-lg group-hover:scale-110 transition-all duration-300`}>
-                                                    <Icon className="h-6 w-6 text-white" />
-                                                </div>
-                                                <h3 className="text-lg font-bold">{action.title}</h3>
-                                                <p className="text-sm text-muted-foreground">{action.description}</p>
-                                            </CardContent>
-                                        </Card>
-                                    </a>
-                                )
-                            })}
+                    <PageSection>
+                        <SectionHeading title="Quick Actions" />
+                        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                            {QUICK_ACTIONS.map((action) => (
+                                <a
+                                    key={action.title}
+                                    href={action.href}
+                                    onClick={action.href === WHATSAPP_CHANNEL_URL ? openWhatsAppChannel : undefined}
+                                    target={action.href.startsWith("http") || action.href.startsWith("mailto") ? "_blank" : undefined}
+                                    rel={action.href.startsWith("http") || action.href.startsWith("mailto") ? "noopener noreferrer" : undefined}
+                                    className="surface group flex h-full flex-col items-center p-6 text-center transition-colors hover:border-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                >
+                                    <IconTile icon={action.icon} />
+                                    <h3 className="mt-4 text-lg font-semibold text-foreground">{action.title}</h3>
+                                    <p className="mt-1.5 text-sm text-muted-foreground">{action.description}</p>
+                                </a>
+                            ))}
                         </div>
-                    </div>
-
-
+                    </PageSection>
 
                     {/* Contact Form */}
-                    <div id="contact-form" className="max-w-3xl mx-auto scroll-mt-24">
-                        <div className="text-center space-y-4 mb-8">
-                            <h2 className="text-3xl md:text-4xl font-bold">Send a Message</h2>
-                            <p className="text-muted-foreground">
-                                Fill out the form below and I'll get back to you as soon as possible
-                            </p>
-                        </div>
+                    <PageSection width="narrow">
+                        <div id="contact-form" className="scroll-mt-24">
+                            <SectionHeading
+                                title="Send a Message"
+                                description="Fill out the form below and I'll get back to you as soon as possible"
+                            />
 
-                        {!submitted ? (
-                            <div className="relative group">
-                                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-                                <Card className="relative border-2 border-primary/20 bg-card/50 backdrop-blur-sm shadow-xl">
-                                    <CardContent className="pt-8 pb-8">
+                            <div className="mt-10">
+                                {!submitted ? (
+                                    <div className="surface p-6 md:p-8">
                                         <form onSubmit={handleSubmit} className="space-y-6">
-                                            <div className="grid md:grid-cols-2 gap-6">
+                                            <div className="grid gap-6 md:grid-cols-2">
                                                 <div className="space-y-2">
-                                                    <label htmlFor="name" className="text-sm font-semibold flex items-center gap-2">
-                                                        <User className="h-4 w-4" />
+                                                    <label htmlFor="name" className={labelClass}>
+                                                        <User className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                                                         Name
                                                     </label>
-                                                    <Input
+                                                    <input
                                                         id="name"
                                                         name="name"
                                                         placeholder="Your name"
                                                         value={formData.name}
                                                         onChange={handleChange}
                                                         required
-                                                        className="border-2 focus:border-primary"
+                                                        className={inputClass}
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <label htmlFor="email" className="text-sm font-semibold flex items-center gap-2">
-                                                        <Mail className="h-4 w-4" />
+                                                    <label htmlFor="email" className={labelClass}>
+                                                        <Mail className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                                                         Email
                                                     </label>
-                                                    <Input
+                                                    <input
                                                         id="email"
                                                         name="email"
                                                         type="email"
@@ -295,33 +251,33 @@ Timestamp: ${new Date().toISOString()}
                                                         value={formData.email}
                                                         onChange={handleChange}
                                                         required
-                                                        className="border-2 focus:border-primary"
+                                                        className={inputClass}
                                                     />
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2">
-                                                <label htmlFor="subject" className="text-sm font-semibold flex items-center gap-2">
-                                                    <MessageSquare className="h-4 w-4" />
+                                                <label htmlFor="subject" className={labelClass}>
+                                                    <MessageSquare className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                                                     Subject
                                                 </label>
-                                                <Input
+                                                <input
                                                     id="subject"
                                                     name="subject"
                                                     placeholder="What's this about?"
                                                     value={formData.subject}
                                                     onChange={handleChange}
                                                     required
-                                                    className="border-2 focus:border-primary"
+                                                    className={inputClass}
                                                 />
                                             </div>
 
                                             <div className="space-y-2">
-                                                <label htmlFor="message" className="text-sm font-semibold flex items-center gap-2">
-                                                    <MessageCircle className="h-4 w-4" />
+                                                <label htmlFor="message" className={labelClass}>
+                                                    <MessageCircle className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                                                     Message
                                                 </label>
-                                                <Textarea
+                                                <textarea
                                                     id="message"
                                                     name="message"
                                                     placeholder="Tell me more..."
@@ -329,79 +285,61 @@ Timestamp: ${new Date().toISOString()}
                                                     onChange={handleChange}
                                                     required
                                                     rows={6}
-                                                    className="resize-none border-2 focus:border-primary"
+                                                    className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                                                 />
                                             </div>
 
                                             {error && (
-                                                <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
-                                                    {error}
+                                                <div role="alert">
+                                                    <Callout tone="danger" icon={CircleAlert}>
+                                                        {error}
+                                                    </Callout>
                                                 </div>
                                             )}
 
-                                            <Button
+                                            <button
                                                 type="submit"
-                                                className="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
-                                                size="lg"
+                                                className="btn-primary w-full disabled:pointer-events-none disabled:opacity-60"
                                                 disabled={isSubmitting}
                                             >
                                                 {isSubmitting ? (
                                                     <>
-                                                        <span className="animate-spin mr-2">⏳</span>
+                                                        <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" />
                                                         Sending...
                                                     </>
                                                 ) : (
                                                     <>
                                                         Send Message
-                                                        <Send className="ml-2 h-4 w-4" />
+                                                        <Send className="h-4 w-4" aria-hidden="true" />
                                                     </>
                                                 )}
-                                            </Button>
+                                            </button>
                                         </form>
-                                    </CardContent>
-                                </Card>
-                            </div>
-                        ) : (
-                            <div className="relative group">
-                                <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 blur-xl opacity-50" />
-                                <Card className="relative border-2 border-green-500/30 bg-green-500/5 backdrop-blur-sm shadow-xl">
-                                    <CardContent className="pt-8 pb-8">
-                                        <div className="text-center space-y-6">
-                                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 shadow-lg">
-                                                <CheckCircle2 className="h-8 w-8 text-white" />
-                                            </div>
-                                            <h3 className="text-3xl font-bold">Message Sent! 🎉</h3>
-                                            <p className="text-lg text-muted-foreground max-w-md mx-auto">
-                                                Thanks for reaching out! I'll get back to you as soon as possible.
-                                            </p>
-                                            <Button
-                                                onClick={() => setSubmitted(false)}
-                                                variant="outline"
-                                                className="mt-4"
-                                            >
+                                    </div>
+                                ) : (
+                                    <div className="surface p-6 md:p-8" role="status">
+                                        <Callout tone="success" icon={CheckCircle2} title={<span className="text-base">Message Sent!</span>}>
+                                            Thanks for reaching out! I'll get back to you as soon as possible.
+                                        </Callout>
+                                        <div className="mt-6 flex justify-center">
+                                            <button type="button" onClick={() => setSubmitted(false)} className="btn-secondary">
                                                 Send Another Message
-                                            </Button>
+                                            </button>
                                         </div>
-                                    </CardContent>
-                                </Card>
+                                    </div>
+                                )}
                             </div>
-                        )}
-                    </div>
+                        </div>
 
-
-
-                    {/* Additional Info */}
-                    <div className="mt-16 text-center space-y-4">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/50 border border-border rounded-full text-sm">
-                            <Heart className="h-4 w-4 text-primary" />
-                            <span className="text-muted-foreground">
+                        {/* Additional Info */}
+                        <div className="mt-14 space-y-3 text-center">
+                            <span className="eyebrow">
+                                <Heart className="h-3.5 w-3.5 text-highlight" aria-hidden="true" />
                                 Made with passion by Vansh Sethi
                             </span>
+                            <p className="text-sm text-muted-foreground">Typically responds within 24-48 hours</p>
                         </div>
-                        <p className="text-sm text-muted-foreground">
-                            Typically responds within 24-48 hours
-                        </p>
-                    </div>
+                    </PageSection>
                 </main>
 
                 <Footer />

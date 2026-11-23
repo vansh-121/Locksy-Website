@@ -1,95 +1,70 @@
 "use client"
 
-import { MessageCircle, Clock, Shield, Zap } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { MessageCircle, Mail, BookOpen } from "lucide-react"
 import WhatsAppIcon from "@/components/whatsapp-icon"
 import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 
+/** "Still have questions?" band with the real support channels. */
 export default function SupportChatCTA() {
   const openChat = () => {
-    if (typeof window !== 'undefined' && (window as any).$crisp) {
-      (window as any).$crisp.push(['do', 'chat:open']);
+    if (typeof window !== "undefined" && (window as any).$crisp) {
+      ;(window as any).$crisp.push(["do", "chat:open"])
     }
   }
 
+  const channels = [
+    { icon: BookOpen, title: "User guide", desc: "Step-by-step setup for every feature.", href: "/guide" },
+    { icon: Mail, title: "Email", desc: "support@locksy.dev, answered by the developer.", href: "mailto:support@locksy.dev" },
+    { icon: MessageCircle, title: "Contact form", desc: "Bug reports, feature ideas and licence help.", href: "/contact" },
+  ]
+
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-background to-accent/30 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl" />
-
-      <div className="relative max-w-5xl mx-auto px-4 md:px-6">
-        <div className="text-center space-y-6 mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-lg mb-6">
-            <MessageCircle className="h-8 w-8 text-white" />
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-2">
-            Still Have Questions?
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Our support team is ready to help you with setup, troubleshooting, or any questions about Locksy.
-          </p>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
-          <div className="flex flex-col items-center text-center p-6 rounded-xl bg-card/50 border border-border hover:border-primary/30 transition-all">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <Clock className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="font-semibold mb-2">Quick Response</h3>
-            <p className="text-sm text-muted-foreground">
-              Get answers within a few hours
+    <section className="relative py-14 md:py-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <div className="surface grid gap-10 p-7 md:p-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+          <div>
+            <span className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              Support
+            </span>
+            <h2 className="mt-5 text-3xl font-semibold leading-[1.1] text-foreground md:text-4xl text-balance">
+              Still have questions?
+            </h2>
+            <p className="mt-4 max-w-md text-muted-foreground">
+              Locksy is built and supported by its developer. Ask about setup, troubleshooting or your Pro licence.
             </p>
-          </div>
-
-          <div className="flex flex-col items-center text-center p-6 rounded-xl bg-card/50 border border-border hover:border-primary/30 transition-all">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <Shield className="h-6 w-6 text-primary" />
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <button type="button" onClick={openChat} className="btn-primary">
+                <MessageCircle className="h-4 w-4" />
+                Start a chat
+              </button>
+              <a
+                href={WHATSAPP_CHANNEL_URL}
+                onClick={openWhatsAppChannel}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                WhatsApp channel
+              </a>
             </div>
-            <h3 className="font-semibold mb-2">Expert Help</h3>
-            <p className="text-sm text-muted-foreground">
-              Direct support from our team
-            </p>
           </div>
 
-          <div className="flex flex-col items-center text-center p-6 rounded-xl bg-card/50 border border-border hover:border-primary/30 transition-all">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <Zap className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="font-semibold mb-2">Available 24/7</h3>
-            <p className="text-sm text-muted-foreground">
-              Reach out anytime, anywhere
-            </p>
-          </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              onClick={openChat}
-              size="lg"
-              className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 px-6 group"
-            >
-              <MessageCircle className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              Chat With Us Now
-            </Button>
-
-            <a
-              href={WHATSAPP_CHANNEL_URL}
-              onClick={openWhatsAppChannel}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2 rounded-md bg-[#25D366] px-6 h-10 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1ebe5b] hover:shadow-xl"
-            >
-              <WhatsAppIcon className="h-5 w-5 transition-transform group-hover:scale-110" />
-              Follow on WhatsApp
-            </a>
-          </div>
-          <p className="text-sm text-muted-foreground mt-4">
-            No account needed • Instant connection • Updates on our WhatsApp channel
-          </p>
+          <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border">
+            {channels.map(({ icon: Icon, title, desc, href }) => (
+              <li key={title}>
+                <Link href={href} className="flex items-center gap-4 bg-background/40 p-5 hover:bg-muted transition-colors">
+                  <Icon className="h-5 w-5 flex-shrink-0 text-highlight" aria-hidden="true" />
+                  <span className="min-w-0">
+                    <span className="block text-[15px] font-medium text-foreground">{title}</span>
+                    <span className="block text-sm text-muted-foreground">{desc}</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

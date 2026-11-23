@@ -1,8 +1,6 @@
 ﻿import { Metadata } from "next"
 import { generateBreadcrumbSchema } from "@/lib/metadata"
 import PrivacyPolicyClient from "./privacy-client"
-import fs from "fs"
-import path from "path"
 
 export const metadata: Metadata = {
     // No "| Locksy" suffix here — app/layout.tsx applies `template: '%s | Locksy'`
@@ -49,21 +47,10 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ])
 
 export default function PrivacyPolicyPage() {
-    // Get the last modified date of this file
-    const filePath = path.join(process.cwd(), 'app', 'privacy-policy', 'privacy-client.tsx')
-    let lastUpdated = 'January 24, 2026'
-
-    try {
-        const stats = fs.statSync(filePath)
-        const date = new Date(stats.mtime)
-        lastUpdated = date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        })
-    } catch (error) {
-        console.error('Error reading file stats:', error)
-    }
+    // Pinned date of the last change to the policy wording. Update this by hand
+    // when the policy text changes. (It used to read the file's mtime, which
+    // moved on every restyle or fresh deploy even when the policy didn't.)
+    const lastUpdated = 'November 12, 2026'
 
     return (
         <>

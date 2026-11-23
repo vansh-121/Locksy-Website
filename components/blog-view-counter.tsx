@@ -75,10 +75,10 @@ export default function BlogViewCounter({ slug, mode = 'increment', count, class
             title={views === undefined ? undefined : `${views.toLocaleString('en-US')} views`}
             aria-label={label}
         >
-            <Eye className="h-4 w-4" aria-hidden="true" />
+            <Eye className="h-3.5 w-3.5" aria-hidden="true" />
             {views === undefined ? (
-                // Fixed-width skeleton to avoid layout shift while loading.
-                <span className="inline-block h-3.5 w-8 animate-pulse rounded bg-muted-foreground/20" aria-hidden="true" />
+                // Fixed-width placeholder to avoid layout shift while loading.
+                <span className="inline-block h-3 w-8 rounded bg-muted" aria-hidden="true" />
             ) : (
                 <span>{formatCount(views)}</span>
             )}

@@ -6,8 +6,10 @@ import Footer from "@/components/footer"
 import ProUpgradeCard from "@/components/pro-upgrade-card"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
+import { PageHero, PageSection } from "@/components/page-shell"
+import SectionHeading from "@/components/section-heading"
 import Link from 'next/link'
-import { Eye, EyeOff, Sparkles, Check, X, AlertCircle } from 'lucide-react'
+import { Eye, EyeOff, Check, X, AlertCircle, Lock } from 'lucide-react'
 
 export default function PasswordStrengthCheckerClient() {
   const [password, setPassword] = useState("")
@@ -75,6 +77,18 @@ export default function PasswordStrengthCheckerClient() {
 
   const rating = getScoreRating()
 
+  // Display-only colours for the meter, derived from the rating band above.
+  const meter =
+    rating.width === 100
+      ? { bar: "bg-emerald-500", text: "text-emerald-600 dark:text-emerald-400" }
+      : rating.width === 75
+        ? { bar: "bg-highlight", text: "text-highlight" }
+        : rating.width === 50
+          ? { bar: "bg-amber-500", text: "text-amber-600 dark:text-amber-400" }
+          : rating.width === 25
+            ? { bar: "bg-red-500", text: "text-red-600 dark:text-red-400" }
+            : { bar: "bg-muted", text: "text-muted-foreground" }
+
   // Workstation Health Score
   const healthScore = (() => {
     let score = 100
@@ -86,389 +100,383 @@ export default function PasswordStrengthCheckerClient() {
     return Math.max(score, 0)
   })()
 
+  const healthBar = healthScore > 75 ? "bg-emerald-500" : healthScore > 50 ? "bg-amber-500" : "bg-red-500"
+  const healthText =
+    healthScore > 75
+      ? "text-emerald-600 dark:text-emerald-400"
+      : healthScore > 50
+        ? "text-amber-600 dark:text-amber-400"
+        : "text-red-600 dark:text-red-400"
+
+  const complexity = [
+    { ok: hasLower, label: "Lowercase" },
+    { ok: hasUpper, label: "Uppercase" },
+    { ok: hasNumber, label: "Numbers" },
+    { ok: hasSymbol, label: "Symbols" },
+    { ok: isLongEnough, label: "12+ Chars" },
+  ]
+
+  const checklistItems: { key: keyof typeof checklist; label: string }[] = [
+    { key: "sharedComputer", label: "This is a shared computer or an open-plan office workstation" },
+    { key: "unattendedTabs", label: "I leave tabs open when I step away for coffee or a meeting" },
+    { key: "autoLockTimer", label: "An inactivity auto-lock timer is already active on my browser" },
+    { key: "biometrics", label: "I can unlock with biometrics (Touch ID, Windows Hello, security key)" },
+    { key: "stealthMode", label: "Sensitive tabs are disguised so titles and favicons do not give them away" },
+  ]
+
   return (
     <>
       <Header />
 
-      <main className="min-h-screen bg-background relative overflow-hidden page-top-offset pb-24">
-        {/* Glows */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/6 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-secondary/10 rounded-full blur-[120px] animate-pulse delay-700" />
-        </div>
+      <main className="min-h-screen bg-background">
+        <PageHero
+          eyebrow="100% Client-Side Memory Calculation"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Tools", href: "/tools" },
+            { label: "Password Strength Checker" },
+          ]}
+          title={
+            <>
+              Password Strength &amp; <span className="text-highlight">Entropy Meter</span>
+            </>
+          }
+          description={
+            <>
+              Test your password&apos;s brute-force resistance against standard attacks vs{" "}
+              <strong className="font-medium text-foreground">600,000 PBKDF2 iterations</strong>.
+            </>
+          }
+        />
 
-        <div className="relative max-w-4xl mx-auto px-4 md:px-6">
-
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-4">
-              <Sparkles className="w-4 h-4" />
-              100% Client-Side Memory Calculation
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight mb-4">
-              Password Strength & <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Entropy Meter</span>
-            </h1>
-            <p className="text-muted-foreground text-sm sm:text-base">
-              Test your password&apos;s brute-force resistance against standard attacks vs <strong>600,000 PBKDF2 iterations</strong>.
-            </p>
-          </div>
-
-          {/* Main Card */}
-          <div className="p-5 sm:p-8 rounded-3xl bg-card/80 backdrop-blur-xl border border-border/60 shadow-2xl mb-12">
-
-            {/* Input */}
-            <div className="mb-6">
-              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
+        {/* Main Card */}
+        <section className="relative pb-12 md:pb-16">
+          <div className="mx-auto max-w-3xl px-4 md:px-6">
+            <div className="surface p-6 md:p-8">
+              {/* Input */}
+              <label htmlFor="strength-password-input" className="block text-sm font-medium text-foreground">
                 Type or Paste Test Password:
               </label>
-              <div className="relative">
+              <div className="relative mt-2">
                 <input
+                  id="strength-password-input"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your master password or phrase..."
-                  className="w-full px-5 py-4 rounded-2xl bg-muted/40 border border-border text-foreground font-mono text-base focus:outline-none focus:border-primary pr-14 shadow-inner"
+                  autoComplete="off"
+                  className="h-12 w-full rounded-xl border border-border bg-background px-4 pr-12 font-mono text-base text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
+
+              {/* Gauge */}
+              <div className="mt-8">
+                <div className="flex flex-wrap items-end justify-between gap-3">
+                  <div>
+                    <div className="text-xs text-muted-foreground">Entropy Score:</div>
+                    <div className="mt-1 font-display text-5xl font-semibold leading-none text-foreground">
+                      {entropy} <span className="text-lg font-medium text-muted-foreground">Bits</span>
+                    </div>
+                  </div>
+                  <span className={`text-sm font-medium ${meter.text}`}>{rating.label}</span>
+                </div>
+                <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ${meter.bar}`}
+                    style={{ width: `${rating.width}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Crack Time Comparison Grid */}
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border border-border bg-background p-5">
+                  <div className="text-xs text-muted-foreground">Standard MD5 / SHA-1 Crack Time</div>
+                  <div className="mt-2 font-display text-2xl font-semibold text-foreground">{standardTime}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">Unprotected single-hash brute force</div>
+                </div>
+
+                <div className="rounded-xl border border-highlight/30 bg-highlight/10 p-5">
+                  <div className="text-xs text-highlight">Locksy PBKDF2 600,000 Iteration Time</div>
+                  <div className="mt-2 font-display text-2xl font-semibold text-foreground">{pbkdf2Time}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">High-entropy key derivation protection</div>
+                </div>
+              </div>
+
+              {/* Character Complexity Checklist */}
+              <ul className="mt-8 flex flex-wrap gap-2 border-t border-border pt-6">
+                {complexity.map(({ ok, label }) => (
+                  <li
+                    key={label}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium ${
+                      ok
+                        ? "border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                        : "border-border bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {ok ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <X className="h-3.5 w-3.5" aria-hidden="true" />}
+                    <span>{label}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {isCommon && (
+                <div className="mt-6 flex items-start gap-3 rounded-xl border border-red-500/25 bg-red-500/10 p-4 text-sm text-red-600 dark:text-red-400">
+                  <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                  <span><strong>Warning:</strong> This password matches common leaked dictionary words. Avoid using it for your master password.</span>
+                </div>
+              )}
+
+              <p className="mt-6 flex items-start gap-2 border-t border-border pt-5 text-xs leading-relaxed text-muted-foreground">
+                <Lock className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-highlight" aria-hidden="true" />
+                <span>
+                  Nothing you type here is saved, logged, or sent over the network. The entropy maths runs in
+                  JavaScript on this page and the value is discarded the moment you close the tab.
+                </span>
+              </p>
             </div>
-
-            {/* Gauge */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center text-sm font-bold mb-2">
-                <span className="text-muted-foreground">Entropy Score: <strong className="text-foreground">{entropy} Bits</strong></span>
-                <span className={rating.text}>{rating.label}</span>
-              </div>
-              <div className="w-full h-4 rounded-full bg-muted overflow-hidden">
-                <div
-                  className={`h-full transition-all duration-500 ${rating.color}`}
-                  style={{ width: `${rating.width}%` }}
-                />
-              </div>
-            </div>
-
-            {/* Crack Time Comparison Grid */}
-            <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              <div className="p-5 rounded-2xl bg-muted/30 border border-border/40 text-center">
-                <div className="text-xs text-muted-foreground font-bold uppercase mb-1">Standard MD5 / SHA-1 Crack Time</div>
-                <div className="text-2xl font-black text-foreground mb-1">{standardTime}</div>
-                <div className="text-[11px] text-muted-foreground">Unprotected single-hash brute force</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-primary/10 border border-primary/30 text-center">
-                <div className="text-xs text-primary font-bold uppercase mb-1">Locksy PBKDF2 600,000 Iteration Time</div>
-                <div className="text-2xl font-black text-primary mb-1">{pbkdf2Time}</div>
-                <div className="text-[11px] text-muted-foreground">High-entropy key derivation protection</div>
-              </div>
-            </div>
-
-            {/* Character Complexity Checklist */}
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-6 border-t border-border/50 text-xs font-semibold">
-              <div className={`flex items-center gap-2 p-2.5 rounded-xl border ${hasLower ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400' : 'bg-muted/40 border-border/40 text-muted-foreground'}`}>
-                {hasLower ? <Check className="w-4 h-4" /> : <X className="w-4 h-4" />}
-                <span>Lowercase</span>
-              </div>
-              <div className={`flex items-center gap-2 p-2.5 rounded-xl border ${hasUpper ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400' : 'bg-muted/40 border-border/40 text-muted-foreground'}`}>
-                {hasUpper ? <Check className="w-4 h-4" /> : <X className="w-4 h-4" />}
-                <span>Uppercase</span>
-              </div>
-              <div className={`flex items-center gap-2 p-2.5 rounded-xl border ${hasNumber ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400' : 'bg-muted/40 border-border/40 text-muted-foreground'}`}>
-                {hasNumber ? <Check className="w-4 h-4" /> : <X className="w-4 h-4" />}
-                <span>Numbers</span>
-              </div>
-              <div className={`flex items-center gap-2 p-2.5 rounded-xl border ${hasSymbol ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400' : 'bg-muted/40 border-border/40 text-muted-foreground'}`}>
-                {hasSymbol ? <Check className="w-4 h-4" /> : <X className="w-4 h-4" />}
-                <span>Symbols</span>
-              </div>
-              <div className={`flex items-center gap-2 p-2.5 rounded-xl border ${isLongEnough ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400' : 'bg-muted/40 border-border/40 text-muted-foreground'}`}>
-                {isLongEnough ? <Check className="w-4 h-4" /> : <X className="w-4 h-4" />}
-                <span>12+ Chars</span>
-              </div>
-            </div>
-
-            {isCommon && (
-              <div className="mt-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-xs flex items-center gap-3">
-                <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                <span><strong>Warning:</strong> This password matches common leaked dictionary words. Avoid using it for your master password.</span>
-              </div>
-            )}
-
-            <div className="mt-6 text-[11px] text-muted-foreground italic border-t border-border/40 pt-4">
-              🔒 Nothing you type here is saved, logged, or sent over the network. The entropy maths runs in
-              JavaScript on this page and the value is discarded the moment you close the tab.
-            </div>
-
           </div>
+        </section>
 
-          {/* ── How the score is calculated ───────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">How this calculator works</h2>
+        {/* ── How the score is calculated ───────────────────────────── */}
+        <PageSection width="narrow">
+          <SectionHeading align="left" title="How this calculator works" />
 
-            <div className="space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-              <p>
-                Most strength meters hand you a vague colour bar. This one shows the actual number it is reasoning
-                about, so you can check the arithmetic yourself. The calculation has two steps.
-              </p>
-
-              <p>
-                <strong className="text-foreground">Step one: measure the search space.</strong> The tool inspects
-                which character classes your password draws on and adds up the corresponding alphabet sizes —
-                lowercase adds 26, uppercase adds 26, digits add 10, and symbols add 32. That total is the
-                <em> pool</em>. A password using lowercase, uppercase and digits has a pool of 62 possible
-                characters in every position.
-              </p>
-
-              <div className="p-5 rounded-2xl bg-muted/30 border border-border/40 font-mono text-xs sm:text-sm text-foreground my-6">
-                entropy (bits) = length × log₂(pool)
-              </div>
-
-              <p>
-                A 16-character password over a 62-character pool works out to 16 × log₂(62) ≈ <strong className="text-foreground">95 bits</strong>.
-                Each additional bit doubles the number of guesses an attacker must make, which is why length moves
-                the needle far more than sprinkling in punctuation. Going from 12 to 20 characters buys you more
-                than adding a single <code className="text-primary">!</code> to the end ever will.
-              </p>
-
-              <p>
-                <strong className="text-foreground">Step two: convert bits into time.</strong> The tool assumes a
-                well-funded attacker running roughly <strong className="text-foreground">10 billion guesses per
-                second</strong> — a realistic figure for a rented multi-GPU rig attacking a fast, unsalted hash
-                such as MD5 or SHA-1. That produces the left-hand number. The right-hand number divides that rate
-                by 600,000 to model what happens when the same password is stretched through PBKDF2 at Locksy&apos;s
-                iteration count.
-              </p>
-
-              <p>
-                That division is the entire point of key stretching. The attacker&apos;s hardware has not changed;
-                the cost of testing a single candidate has. Six hundred thousand rounds of HMAC-SHA-256 makes each
-                guess about 600,000 times more expensive, which turns an afternoon into a geological era without
-                you having to memorise a longer password.
-              </p>
-            </div>
-          </section>
-
-          {/* ── Reading your result ───────────────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">How to read your result</h2>
-
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              The four bands below are the exact thresholds the meter uses. They are deliberately conservative:
-              a password scoring &ldquo;Strong&rdquo; here is comfortably beyond what opportunistic attacks will
-              chew through.
+          <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
+            <p>
+              Most strength meters hand you a vague colour bar. This one shows the actual number it is reasoning
+              about, so you can check the arithmetic yourself. The calculation has two steps.
             </p>
 
-            <div className="space-y-3">
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-red-500/30">
-                <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                  <h3 className="font-bold text-red-500">Very Weak — under 30 bits</h3>
-                  <span className="text-[11px] font-mono text-muted-foreground flex-shrink-0">entropy &lt; 30</span>
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Falls in minutes to a laptop, never mind a GPU. Short passwords and anything containing a
-                  recognisable dictionary word land here. Do not use one of these as a master password — it is
-                  the single key protecting everything else.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-amber-500/30">
-                <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                  <h3 className="font-bold text-amber-500">Moderate — 30 to 54 bits</h3>
-                  <span className="text-[11px] font-mono text-muted-foreground flex-shrink-0">30 ≤ entropy &lt; 55</span>
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Survives casual guessing but not a targeted, funded attempt. Acceptable for a throwaway forum
-                  login. Not acceptable for email, banking, or anything that can be used to reset other accounts.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-blue-500/30">
-                <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                  <h3 className="font-bold text-blue-500">Strong — 55 to 79 bits</h3>
-                  <span className="text-[11px] font-mono text-muted-foreground flex-shrink-0">55 ≤ entropy &lt; 80</span>
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  The sensible target for everyday accounts. Brute force stops being the cheapest way in, which
-                  means an attacker will switch to phishing or malware instead — a useful sign that your password
-                  is no longer the weak link.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-emerald-500/30">
-                <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                  <h3 className="font-bold text-emerald-500">Maximum — 80 bits and above</h3>
-                  <span className="text-[11px] font-mono text-muted-foreground flex-shrink-0">entropy ≥ 80</span>
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Brute force is off the table for the foreseeable future, even before key stretching is applied.
-                  Aim here for a master password. A four or five word passphrase reaches this range easily and is
-                  far easier to type than random characters.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* ── Workstation audit (ported from /tools/security-checker) ─ */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Workstation exposure audit</h2>
-
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              A perfect password protects the moment you log in. It does nothing about the hours afterwards, when
-              the session is already open and authenticated on your screen. Tick whatever describes your setup to
-              see how exposed your <em>logged-in</em> tabs are.
+            <p>
+              <strong className="font-medium text-foreground">Step one: measure the search space.</strong> The tool inspects
+              which character classes your password draws on and adds up the corresponding alphabet sizes —
+              lowercase adds 26, uppercase adds 26, digits add 10, and symbols add 32. That total is the
+              <em> pool</em>. A password using lowercase, uppercase and digits has a pool of 62 possible
+              characters in every position.
             </p>
 
-            <div className="p-6 sm:p-8 rounded-3xl bg-card/80 backdrop-blur-xl border border-border/60 shadow-xl">
-              <div className="space-y-3 mb-6">
-                <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/30 border border-border/40 cursor-pointer text-xs sm:text-sm">
-                  <input
-                    type="checkbox"
-                    checked={checklist.sharedComputer}
-                    onChange={(e) => setChecklist({ ...checklist, sharedComputer: e.target.checked })}
-                    className="rounded text-primary focus:ring-0"
-                  />
-                  <span>This is a shared computer or an open-plan office workstation</span>
-                </label>
-
-                <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/30 border border-border/40 cursor-pointer text-xs sm:text-sm">
-                  <input
-                    type="checkbox"
-                    checked={checklist.unattendedTabs}
-                    onChange={(e) => setChecklist({ ...checklist, unattendedTabs: e.target.checked })}
-                    className="rounded text-primary focus:ring-0"
-                  />
-                  <span>I leave tabs open when I step away for coffee or a meeting</span>
-                </label>
-
-                <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/30 border border-border/40 cursor-pointer text-xs sm:text-sm">
-                  <input
-                    type="checkbox"
-                    checked={checklist.autoLockTimer}
-                    onChange={(e) => setChecklist({ ...checklist, autoLockTimer: e.target.checked })}
-                    className="rounded text-primary focus:ring-0"
-                  />
-                  <span>An inactivity auto-lock timer is already active on my browser</span>
-                </label>
-
-                <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/30 border border-border/40 cursor-pointer text-xs sm:text-sm">
-                  <input
-                    type="checkbox"
-                    checked={checklist.biometrics}
-                    onChange={(e) => setChecklist({ ...checklist, biometrics: e.target.checked })}
-                    className="rounded text-primary focus:ring-0"
-                  />
-                  <span>I can unlock with biometrics (Touch ID, Windows Hello, security key)</span>
-                </label>
-
-                <label className="flex items-center gap-3 p-3.5 rounded-xl bg-muted/30 border border-border/40 cursor-pointer text-xs sm:text-sm">
-                  <input
-                    type="checkbox"
-                    checked={checklist.stealthMode}
-                    onChange={(e) => setChecklist({ ...checklist, stealthMode: e.target.checked })}
-                    className="rounded text-primary focus:ring-0"
-                  />
-                  <span>Sensitive tabs are disguised so titles and favicons do not give them away</span>
-                </label>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-primary/5 border border-primary/20 text-center">
-                <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1">
-                  Workstation Exposure Score
-                </div>
-                <div className={`text-4xl font-black mb-1 ${healthScore > 75 ? 'text-emerald-500' : healthScore > 50 ? 'text-amber-500' : 'text-red-500'}`}>
-                  {healthScore} / 100
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {healthScore > 75
-                    ? 'Solid. Your open sessions are not the easiest way into your accounts.'
-                    : 'Your logged-in tabs are reachable by anyone who touches this keyboard.'}
-                </div>
-              </div>
-
-              <p className="mt-5 text-[11px] text-muted-foreground italic">
-                This score is a self-assessment aid, not a scan. It weights the answers you gave — unattended tabs
-                cost the most, a missing auto-lock timer next — and nothing is transmitted anywhere.
-              </p>
+            <div className="rounded-xl border border-border bg-card px-5 py-4 font-mono text-sm text-foreground">
+              entropy (bits) = length × log₂(pool)
             </div>
-          </section>
 
-          {/* ── Password Security Tips ───────────────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Tips for Creating Strong Passwords</h2>
+            <p>
+              A 16-character password over a 62-character pool works out to 16 × log₂(62) ≈ <strong className="font-medium text-foreground">95 bits</strong>.
+              Each additional bit doubles the number of guesses an attacker must make, which is why length moves
+              the needle far more than sprinkling in punctuation. Going from 12 to 20 characters buys you more
+              than adding a single <code className="rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">!</code> to the end ever will.
+            </p>
 
-            <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Length is Your Best Defense</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Every additional character drastically increases the number of combinations an attacker must test. Aim for at least 16 characters for critical master passwords.
-                </p>
+            <p>
+              <strong className="font-medium text-foreground">Step two: convert bits into time.</strong> The tool assumes a
+              well-funded attacker running roughly <strong className="font-medium text-foreground">10 billion guesses per
+              second</strong> — a realistic figure for a rented multi-GPU rig attacking a fast, unsalted hash
+              such as MD5 or SHA-1. That produces the left-hand number. The right-hand number divides that rate
+              by 600,000 to model what happens when the same password is stretched through PBKDF2 at Locksy&apos;s
+              iteration count.
+            </p>
+
+            <p>
+              That division is the entire point of key stretching. The attacker&apos;s hardware has not changed;
+              the cost of testing a single candidate has. Six hundred thousand rounds of HMAC-SHA-256 makes each
+              guess about 600,000 times more expensive, which turns an afternoon into a geological era without
+              you having to memorise a longer password.
+            </p>
+          </div>
+        </PageSection>
+
+        {/* ── Reading your result ───────────────────────────────────── */}
+        <PageSection width="narrow">
+          <SectionHeading
+            align="left"
+            title="How to read your result"
+            description={
+              <>
+                The four bands below are the exact thresholds the meter uses. They are deliberately conservative:
+                a password scoring &ldquo;Strong&rdquo; here is comfortably beyond what opportunistic attacks will
+                chew through.
+              </>
+            }
+          />
+
+          <div className="surface mt-8 divide-y divide-border overflow-hidden">
+            {[
+              {
+                dot: "bg-red-500",
+                title: "Very Weak — under 30 bits",
+                range: "entropy < 30",
+                text: "Falls in minutes to a laptop, never mind a GPU. Short passwords and anything containing a recognisable dictionary word land here. Do not use one of these as a master password — it is the single key protecting everything else.",
+              },
+              {
+                dot: "bg-amber-500",
+                title: "Moderate — 30 to 54 bits",
+                range: "30 ≤ entropy < 55",
+                text: "Survives casual guessing but not a targeted, funded attempt. Acceptable for a throwaway forum login. Not acceptable for email, banking, or anything that can be used to reset other accounts.",
+              },
+              {
+                dot: "bg-highlight",
+                title: "Strong — 55 to 79 bits",
+                range: "55 ≤ entropy < 80",
+                text: "The sensible target for everyday accounts. Brute force stops being the cheapest way in, which means an attacker will switch to phishing or malware instead — a useful sign that your password is no longer the weak link.",
+              },
+              {
+                dot: "bg-emerald-500",
+                title: "Maximum — 80 bits and above",
+                range: "entropy ≥ 80",
+                text: "Brute force is off the table for the foreseeable future, even before key stretching is applied. Aim here for a master password. A four or five word passphrase reaches this range easily and is far easier to type than random characters.",
+              },
+            ].map((band) => (
+              <div key={band.title} className="p-6">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="flex items-center gap-2.5 text-base font-semibold text-foreground">
+                    <span className={`h-2 w-2 flex-shrink-0 rounded-full ${band.dot}`} aria-hidden="true" />
+                    {band.title}
+                  </h3>
+                  <span className="flex-shrink-0 font-mono text-xs text-muted-foreground">{band.range}</span>
+                </div>
+                <p className="mt-2 pl-[18px] text-sm leading-relaxed text-muted-foreground">{band.text}</p>
               </div>
+            ))}
+          </div>
+        </PageSection>
 
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Consider Using a Passphrase</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Combining 4 to 5 random words creates a password that is virtually impossible to brute-force while remaining significantly easier to remember and type.
-                </p>
+        {/* ── Workstation audit (ported from /tools/security-checker) ─ */}
+        <PageSection width="narrow">
+          <SectionHeading
+            align="left"
+            title="Workstation exposure audit"
+            description={
+              <>
+                A perfect password protects the moment you log in. It does nothing about the hours afterwards, when
+                the session is already open and authenticated on your screen. Tick whatever describes your setup to
+                see how exposed your <em>logged-in</em> tabs are.
+              </>
+            }
+          />
+
+          <div className="surface mt-8 p-6 md:p-8">
+            <div className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-background">
+              {checklistItems.map(({ key, label }) => (
+                <label
+                  key={key}
+                  className="flex cursor-pointer items-center gap-3 px-4 py-3.5 text-sm text-foreground transition-colors hover:bg-muted/50"
+                >
+                  <input
+                    type="checkbox"
+                    checked={checklist[key]}
+                    onChange={(e) => setChecklist({ ...checklist, [key]: e.target.checked })}
+                    className="h-4 w-4 flex-shrink-0 cursor-pointer rounded accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  />
+                  <span>{label}</span>
+                </label>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-xl border border-border bg-background p-5">
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <div className="text-xs text-muted-foreground">Workstation Exposure Score</div>
+                  <div className={`mt-1 font-display text-4xl font-semibold leading-none ${healthText}`}>
+                    {healthScore} / 100
+                  </div>
+                </div>
               </div>
-
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-1.5 text-sm sm:text-base">Avoid Common Patterns and Personal Info</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Never use dictionary words, birthdates, predictable replacements (such as @ for a), or repeated sequences that automated password crackers test first.
-                </p>
+              <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                <div className={`h-full rounded-full transition-all duration-500 ${healthBar}`} style={{ width: `${healthScore}%` }} />
+              </div>
+              <div className="mt-3 text-sm text-muted-foreground">
+                {healthScore > 75
+                  ? 'Solid. Your open sessions are not the easiest way into your accounts.'
+                  : 'Your logged-in tabs are reachable by anyone who touches this keyboard.'}
               </div>
             </div>
-          </section>
 
-          {/* ── FAQ ───────────────────────────────────────────────────── */}
-          <section className="mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-5">Frequently Asked Questions</h2>
+            <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+              This score is a self-assessment aid, not a scan. It weights the answers you gave — unattended tabs
+              cost the most, a missing auto-lock timer next — and nothing is transmitted anywhere.
+            </p>
+          </div>
+        </PageSection>
 
-            <div className="space-y-3">
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Is it safe to test my password here?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Yes. Calculations run locally inside your browser memory. Your password is never sent across the internet, saved, or logged.
-                </p>
+        {/* ── Password Security Tips ───────────────────────────────────── */}
+        <PageSection width="narrow">
+          <SectionHeading align="left" title="Tips for Creating Strong Passwords" />
+
+          <div className="mt-8 grid gap-4">
+            {[
+              {
+                title: "Length is Your Best Defense",
+                text: "Every additional character drastically increases the number of combinations an attacker must test. Aim for at least 16 characters for critical master passwords.",
+              },
+              {
+                title: "Consider Using a Passphrase",
+                text: "Combining 4 to 5 random words creates a password that is virtually impossible to brute-force while remaining significantly easier to remember and type.",
+              },
+              {
+                title: "Avoid Common Patterns and Personal Info",
+                text: "Never use dictionary words, birthdates, predictable replacements (such as @ for a), or repeated sequences that automated password crackers test first.",
+              },
+            ].map((tip) => (
+              <div key={tip.title} className="surface p-6">
+                <h3 className="text-lg font-semibold text-foreground">{tip.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tip.text}</p>
               </div>
+            ))}
+          </div>
+        </PageSection>
 
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Why is length better than adding symbols?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Length exponentially multiplies the total search space, whereas adding a symbol only slightly increases the pool of characters.
-                </p>
+        {/* ── FAQ ───────────────────────────────────────────────────── */}
+        <PageSection width="narrow">
+          <SectionHeading align="left" eyebrow="FAQ" title="Frequently Asked Questions" />
+
+          <div className="mt-8 divide-y divide-border border-y border-border">
+            {[
+              {
+                q: "Is it safe to test my password here?",
+                a: "Yes. Calculations run locally inside your browser memory. Your password is never sent across the internet, saved, or logged.",
+              },
+              {
+                q: "Why is length better than adding symbols?",
+                a: "Length exponentially multiplies the total search space, whereas adding a symbol only slightly increases the pool of characters.",
+              },
+              {
+                q: "What is PBKDF2 encryption?",
+                a: "PBKDF2 is an industry-standard key stretching function that makes brute-force guessing attacks exponentially slower and computationally expensive for attackers.",
+              },
+            ].map(({ q, a }) => (
+              <div key={q} className="py-5">
+                <h3 className="font-sans text-base font-medium tracking-normal text-foreground">{q}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{a}</p>
               </div>
+            ))}
+          </div>
+        </PageSection>
 
-              <div className="p-5 rounded-2xl bg-card/60 backdrop-blur-xl border border-border/50">
-                <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">What is PBKDF2 encryption?</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  PBKDF2 is an industry-standard key stretching function that makes brute-force guessing attacks exponentially slower and computationally expensive for attackers.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* Call to Action */}
-          <div className="p-8 rounded-3xl bg-gradient-to-r from-primary/10 via-purple-500/10 to-secondary/10 border border-primary/20 text-center">
-            <h3 className="text-xl font-bold mb-2">Protect Open Tabs with Locksy</h3>
-            <p className="text-xs text-muted-foreground mb-6 max-w-lg mx-auto">
+        {/* Call to Action */}
+        <PageSection width="narrow">
+          <div className="surface px-6 py-10 text-center md:px-10">
+            <h3 className="text-2xl font-semibold text-foreground text-balance">Protect Open Tabs with Locksy</h3>
+            <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-muted-foreground">
               Lock and encrypt active browser tabs with PBKDF2 encryption, master password security, and biometric unlock.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/#download" className="btn-primary text-xs py-3 px-6">
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link href="/#download" className="btn-primary">
                 Install Locksy Free
               </Link>
-              <Link href="/tools/password-generator" className="btn-secondary text-xs py-3 px-6">
+              <Link href="/tools/password-generator" className="btn-secondary">
                 Generate Secure Password
               </Link>
             </div>
           </div>
-
-        </div>
+        </PageSection>
       </main>
 
       {/* Free tool -> paid extension. Same card as /uninstall and /guide, with an

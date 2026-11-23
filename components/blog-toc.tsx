@@ -11,7 +11,7 @@
 // as the article's heading renderers, so anchors always match.
 
 import { useEffect, useState } from 'react'
-import { List } from 'lucide-react'
+import { ChevronDown, List } from 'lucide-react'
 import { slugify } from '@/lib/utils'
 import { TocInstallWidget } from './browser-install-cta'
 
@@ -83,7 +83,7 @@ export default function BlogToc({ headings }: { headings: TocHeading[] }) {
     if (headings.length === 0) return null
 
     const links = (
-        <ol className="space-y-1">
+        <ol className="space-y-0.5 border-l border-border">
             {headings.map((heading) => {
                 const isActive = heading.id === activeId
                 return (
@@ -92,15 +92,15 @@ export default function BlogToc({ headings }: { headings: TocHeading[] }) {
                             href={`#${heading.id}`}
                             onClick={() => setIsOpen(false)}
                             aria-current={isActive ? 'location' : undefined}
-                            className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
-                                heading.level === 3 ? 'pl-6' : ''
+                            className={`-ml-px block border-l py-1.5 text-sm leading-snug transition-colors ${
+                                heading.level === 3 ? 'pl-7 text-[13px]' : 'pl-4'
                             } ${
                                 isActive
-                                    ? 'bg-primary/10 font-semibold text-primary'
-                                    : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground'
+                                    ? 'border-foreground text-foreground'
+                                    : 'border-transparent text-muted-foreground hover:border-foreground/40 hover:text-foreground'
                             }`}
                         >
-                            <span className="leading-snug">{heading.text}</span>
+                            {heading.text}
                         </a>
                     </li>
                 )
@@ -110,42 +110,40 @@ export default function BlogToc({ headings }: { headings: TocHeading[] }) {
 
     return (
         <>
-            {/* Desktop: sticky sidebar on wide viewports (>=1400px) */}
+            {/* Desktop: sticky sidebar (lg and up) */}
             <nav
                 aria-label="Table of contents"
-                className="hidden min-[1400px]:block sticky top-24 self-start max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-border/60 bg-card/60 p-4 backdrop-blur-sm"
+                className="hidden lg:block sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pb-4"
             >
-                <p className="mb-3 flex items-center gap-2 px-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-                    <List className="h-3.5 w-3.5" />
+                <p className="mb-4 flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                    <List className="h-3.5 w-3.5" aria-hidden="true" />
                     On this page
                 </p>
                 {links}
                 <TocInstallWidget />
             </nav>
 
-            {/* Mobile / Tablet / Laptop: collapsible panel above the content (<1400px) */}
-            <div className="min-[1400px]:hidden mb-8 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm">
+            {/* Mobile / Tablet: collapsible panel above the content */}
+            <div className="lg:hidden rounded-2xl border border-border bg-card">
                 <button
                     type="button"
                     onClick={() => setIsOpen((open) => !open)}
                     aria-expanded={isOpen}
                     className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
                 >
-                    <span className="flex items-center gap-2 font-semibold text-foreground">
-                        <List className="h-4 w-4" />
+                    <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+                        <List className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                         On this page
-                        <span className="ml-1 text-sm font-normal text-muted-foreground">
+                        <span className="ml-1 font-normal text-muted-foreground">
                             {headings.length} sections
                         </span>
                     </span>
-                    <span
+                    <ChevronDown
                         aria-hidden="true"
-                        className={`text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`}
-                    >
-                        ▾
-                    </span>
+                        className={`h-4 w-4 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                    />
                 </button>
-                {isOpen && <div className="border-t border-border/60 p-3">{links}</div>}
+                {isOpen && <div className="border-t border-border px-5 py-4">{links}</div>}
             </div>
         </>
     )

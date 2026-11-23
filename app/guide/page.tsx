@@ -14,6 +14,8 @@ import {
 import { guide, guideToc, guideFaqItems, GUIDE_PDF_PATH } from "@/lib/guide-data"
 import GuideToc from "./guide-toc"
 import GuideBlocks from "./guide-blocks"
+import { PageHero } from "@/components/page-shell"
+import { Download } from "lucide-react"
 
 export const metadata: Metadata = generatePageMetadata(
   // 77 chars with the layout's " | Locksy" template — the longest on the site
@@ -68,86 +70,51 @@ export default function GuidePage() {
 
       <Header />
 
-      <main className="min-h-screen bg-background page-top-offset pb-24">
+      <main className="min-h-screen bg-background pb-24">
         {/* ── Page header ─────────────────────────────────────────────── */}
-        <div className="relative overflow-hidden border-b border-border/50">
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute -top-24 left-1/4 h-80 w-80 rounded-full bg-primary/10 blur-3xl dark:bg-primary/20" />
-            <div className="absolute -bottom-24 right-1/4 h-72 w-72 rounded-full bg-secondary/10 blur-3xl dark:bg-secondary/20" />
-          </div>
-
-          <div className="relative mx-auto max-w-6xl px-4 pb-14 md:px-6">
-            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-primary">
-                Home
-              </Link>
-              <span className="mx-2" aria-hidden="true">
-                /
-              </span>
-              <span className="text-foreground">User Guide</span>
-            </nav>
-
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary backdrop-blur-sm">
-              <span aria-hidden="true">📖</span>
-              {guide.chapters.length} chapters · v{guide.version}
-            </div>
-
-            <h1 className="text-4xl font-black leading-tight text-foreground md:text-6xl">
-              {guide.title}
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              {guide.tagline}
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a
-                href={GUIDE_PDF_PATH}
-                download
-                className="btn-primary inline-flex items-center justify-center gap-2 text-base"
-              >
-                <span aria-hidden="true">⬇️</span>
-                Download as PDF
-              </a>
-              <a
-                href="#install"
-                className="btn-secondary inline-flex items-center justify-center gap-2 text-base"
-              >
-                Start reading
-              </a>
-            </div>
-
-            <p className="mt-5 text-sm text-muted-foreground">
-              Last updated {lastUpdated}. Covers Locksy v{guide.version}.
-            </p>
-          </div>
-        </div>
+        <PageHero
+          align="left"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "User Guide" }]}
+          eyebrow={`${guide.chapters.length} chapters · v${guide.version}`}
+          title={guide.title}
+          description={guide.tagline}
+          meta={<span>Last updated {lastUpdated}. Covers Locksy v{guide.version}.</span>}
+        >
+          <a href={GUIDE_PDF_PATH} download className="btn-primary">
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Download as PDF
+          </a>
+          <a href="#install" className="btn-secondary">
+            Start reading
+          </a>
+        </PageHero>
 
         {/* ── Contents + chapters ─────────────────────────────────────── */}
-        <div className="mx-auto max-w-6xl px-4 pt-12 md:px-6">
-          <div className="gap-12 lg:grid lg:grid-cols-[16rem_minmax(0,1fr)]">
+        <div className="mx-auto max-w-6xl border-t border-border px-4 pt-12 md:px-6 md:pt-16">
+          <div className="gap-16 lg:grid lg:grid-cols-[15rem_minmax(0,1fr)]">
             <GuideToc entries={guideToc} />
 
-            <div className="min-w-0 space-y-16">
+            <div className="min-w-0 max-w-3xl space-y-20">
               {guide.chapters.map((chapter) => (
                 <section key={chapter.id} aria-labelledby={chapter.id} className="scroll-mt-28">
                   <div className="mb-5 flex items-start gap-4">
-                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-2xl shadow-lg">
-                      <span aria-hidden="true">{chapter.icon}</span>
-                    </div>
+                    <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-border bg-background font-mono text-xs text-foreground">
+                      {String(chapter.num).padStart(2, "0")}
+                    </span>
                     <div className="min-w-0">
-                      <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+                      <p className="text-xs font-medium text-muted-foreground">
                         Chapter {chapter.num}
                       </p>
                       <h2
                         id={chapter.id}
-                        className="mt-1 text-2xl font-black leading-tight text-foreground md:text-3xl"
+                        className="mt-1 scroll-mt-28 text-2xl font-semibold leading-tight text-foreground md:text-3xl text-balance"
                       >
                         {chapter.title}
                       </h2>
                     </div>
                   </div>
 
-                  <p className="mb-6 border-l-2 border-primary/30 pl-4 text-lg leading-relaxed text-muted-foreground">
+                  <p className="mb-8 border-l-2 border-highlight pl-4 text-base leading-relaxed text-foreground/80 md:text-lg">
                     {chapter.summary}
                   </p>
 
@@ -171,16 +138,17 @@ export default function GuidePage() {
             immediately below already owns "Still Have Questions?", and the two
             collided. This block's real job is the offline copy of the guide. */}
         <div className="mx-auto max-w-2xl px-4 pt-16 md:px-6">
-          <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5 p-8 text-center">
-            <h2 className="text-2xl font-black text-foreground">Prefer it offline?</h2>
+          <div className="surface p-8 text-center md:p-10">
+            <h2 className="text-2xl font-semibold text-foreground md:text-3xl">Prefer it offline?</h2>
             <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">
               Take the guide with you as a PDF, or get in touch, we&apos;ll walk you through it.
             </p>
-            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a href={GUIDE_PDF_PATH} download className="btn-primary text-base">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a href={GUIDE_PDF_PATH} download className="btn-primary">
+                <Download className="h-4 w-4" aria-hidden="true" />
                 Download the PDF
               </a>
-              <Link href="/contact" className="btn-secondary text-base">
+              <Link href="/contact" className="btn-secondary">
                 Contact support
               </Link>
             </div>

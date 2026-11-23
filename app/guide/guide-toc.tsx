@@ -8,6 +8,7 @@
 // server component, which keeps 100% of the prose in the initial response.
 
 import { useEffect, useState } from "react"
+import { ChevronDown } from "lucide-react"
 
 interface TocEntry {
   id: string
@@ -45,7 +46,7 @@ export default function GuideToc({ entries }: { entries: TocEntry[] }) {
   }, [entries])
 
   const links = (
-    <ol className="space-y-1">
+    <ol className="space-y-0.5 border-l border-border">
       {entries.map((entry) => {
         const isActive = entry.id === activeId
         return (
@@ -54,20 +55,20 @@ export default function GuideToc({ entries }: { entries: TocEntry[] }) {
               href={`#${entry.id}`}
               onClick={() => setIsOpen(false)}
               aria-current={isActive ? "location" : undefined}
-              className={`flex items-start gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
+              className={`-ml-px flex items-start gap-2.5 border-l py-1.5 pl-4 text-sm leading-snug transition-colors ${
                 isActive
-                  ? "bg-primary/10 font-semibold text-primary"
-                  : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
+                  ? "border-foreground text-foreground"
+                  : "border-transparent text-muted-foreground hover:border-foreground/40 hover:text-foreground"
               }`}
             >
               <span
-                className={`mt-px w-5 flex-shrink-0 text-right text-xs font-bold tabular-nums ${
-                  isActive ? "text-primary" : "text-muted-foreground/60"
+                className={`mt-px w-5 flex-shrink-0 font-mono text-xs tabular-nums ${
+                  isActive ? "text-highlight" : "text-muted-foreground/70"
                 }`}
               >
-                {entry.num}
+                {String(entry.num).padStart(2, "0")}
               </span>
-              <span className="leading-snug">{entry.title}</span>
+              <span>{entry.title}</span>
             </a>
           </li>
         )
@@ -80,36 +81,32 @@ export default function GuideToc({ entries }: { entries: TocEntry[] }) {
       {/* Desktop: sticky sidebar */}
       <nav
         aria-label="Guide contents"
-        className="hidden lg:block sticky top-24 self-start max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-border/60 bg-card/60 p-4 backdrop-blur-sm"
+        className="hidden lg:block sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto pb-4"
       >
-        <p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-          Contents
-        </p>
+        <p className="mb-4 text-xs font-medium text-muted-foreground">Contents</p>
         {links}
       </nav>
 
       {/* Mobile: collapsible panel above the content */}
-      <div className="lg:hidden mb-8 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm">
+      <div className="lg:hidden mb-8 rounded-2xl border border-border bg-card">
         <button
           type="button"
           onClick={() => setIsOpen((open) => !open)}
           aria-expanded={isOpen}
           className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
         >
-          <span className="font-semibold text-foreground">
+          <span className="text-sm font-medium text-foreground">
             Contents
-            <span className="ml-2 text-sm font-normal text-muted-foreground">
+            <span className="ml-2 font-normal text-muted-foreground">
               {entries.length} chapters
             </span>
           </span>
-          <span
+          <ChevronDown
             aria-hidden="true"
-            className={`text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`}
-          >
-            ▾
-          </span>
+            className={`h-4 w-4 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`}
+          />
         </button>
-        {isOpen && <div className="border-t border-border/60 p-3">{links}</div>}
+        {isOpen && <div className="border-t border-border px-5 py-4">{links}</div>}
       </div>
     </>
   )

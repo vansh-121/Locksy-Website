@@ -6,6 +6,21 @@ import CTASection from "@/components/cta-section"
 import { generatePageMetadata, generateBreadcrumbSchema } from "@/lib/metadata"
 import Link from 'next/link'
 import { PRO_CHECKOUT_URL } from '@/lib/pro'
+import { PageHero, PageSection, IconTile } from "@/components/page-shell"
+import SectionHeading from "@/components/section-heading"
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Eye,
+  KeyRound,
+  Landmark,
+  LockOpen,
+  Quote,
+  ShieldCheck,
+  TriangleAlert,
+  Zap,
+} from "lucide-react"
 
 export const metadata: Metadata = generatePageMetadata(
   // "Locksy" dropped from the front — the layout's title template re-adds it,
@@ -22,6 +37,9 @@ export const metadata: Metadata = generatePageMetadata(
     "zero knowledge tab locker"
   ]
 )
+
+const codeClass = "rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground"
+const linkClass = "text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground"
 
 export default function SecurityPage() {
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -51,11 +69,11 @@ export default function SecurityPage() {
   }
 
   const statisticalFacts = [
-    { stat: "82%", label: "Visual Privacy Leaks", desc: "Of office workers report experiencing accidental visual privacy exposure from shoulder surfing.", icon: "👁️" },
-    { stat: "73%", label: "Device Intrusions", desc: "Of workplace security incidents originate from briefly unattended unlocked browser sessions.", icon: "🔓" },
-    { stat: "600,000", label: "PBKDF2 Iterations", desc: "Exceeds OWASP 2023 minimum recommendation for password key derivation by 2x.", icon: "⚡" },
-    { stat: "0 Bytes", label: "Remote Requests", desc: "Zero outbound network telemetry requests sent during tab locking or password checks.", icon: "🛡️" },
-    { stat: "OWASP+", label: "Derivation Standard", desc: "600,000 PBKDF2 iterations exceeding industry security baselines.", icon: "🔐" }
+    { stat: "82%", label: "Visual Privacy Leaks", desc: "Of office workers report experiencing accidental visual privacy exposure from shoulder surfing.", icon: Eye },
+    { stat: "73%", label: "Device Intrusions", desc: "Of workplace security incidents originate from briefly unattended unlocked browser sessions.", icon: LockOpen },
+    { stat: "600,000", label: "PBKDF2 Iterations", desc: "Exceeds OWASP 2023 minimum recommendation for password key derivation by 2x.", icon: Zap },
+    { stat: "0 Bytes", label: "Remote Requests", desc: "Zero outbound network telemetry requests sent during tab locking or password checks.", icon: ShieldCheck },
+    { stat: "OWASP+", label: "Derivation Standard", desc: "600,000 PBKDF2 iterations exceeding industry security baselines.", icon: KeyRound }
   ]
 
   const comparisonData = [
@@ -107,31 +125,90 @@ export default function SecurityPage() {
     {
       title: "OWASP Password Storage Cheat Sheet",
       subtitle: "PBKDF2 SHA-256 cryptographic guidelines",
-      icon: "📘",
       url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
       badge: "OWASP Standard"
     },
     {
       title: "W3C Web Cryptography Specification",
       subtitle: "Native browser crypto API standards",
-      icon: "🌐",
       url: "https://www.w3.org/TR/WebCryptoAPI/",
       badge: "W3C Spec"
     },
     {
       title: "NIST Special Publication 800-132",
       subtitle: "Recommendation for Password-Based Key Derivation",
-      icon: "🏛️",
       url: "https://csrc.nist.gov/publications/detail/sp/800-132/final",
       badge: "NIST Standard"
     },
     {
       title: "Chrome Extension MV3 Architecture",
       subtitle: "Google Chrome Manifest V3 extension security model",
-      icon: "⚡",
       url: "https://developer.chrome.com/docs/extensions/mv3/intro/",
       badge: "Google Security"
     }
+  ]
+
+  const jumpLinks = [
+    { href: "#tldr", label: "TL;DR Summary" },
+    { href: "#threat-model", label: "Threat Model & Scope" },
+    { href: "#metrics", label: "Statistical Metrics" },
+    { href: "#primitives", label: "Key Derivation" },
+    { href: "#matrix", label: "Feature Matrix" },
+    { href: "#citations", label: "Citations" },
+  ]
+
+  const tldrItems = [
+    {
+      title: "100% Client-Side Web Cryptography",
+      body: (
+        <>
+          Encryption, hash generation, and password validations run exclusively inside your local browser sandbox via native <a href="https://www.w3.org/TR/WebCryptoAPI/" target="_blank" rel="noopener noreferrer" className={linkClass}>W3C Web Cryptography API</a>.
+        </>
+      ),
+    },
+    {
+      title: "600,000 PBKDF2 Iterations",
+      body: (
+        <>
+          Derives master keys using HMAC-SHA-256 with 600k rounds—exceeding <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer" className={linkClass}>OWASP standards</a> to render offline brute-force cracking mathematically infeasible.
+        </>
+      ),
+    },
+    {
+      title: "Zero Network Telemetry & Zero Cloud",
+      body: (
+        <>
+          Locksy contains zero analytics tracking, zero remote database connections, and makes zero telemetry requests. Your passwords never leave your physical hardware.
+        </>
+      ),
+    },
+    {
+      title: "8+ Defense-in-Depth Bypass Guarding",
+      body: (
+        <>
+          Protects against DevTools inspection, tab URL replacement, script injection, and browser session restoration exploits.
+        </>
+      ),
+    },
+  ]
+
+  const isolationItems = [
+    {
+      title: "Full-Tab Navigation Isolation",
+      desc: "The protected page is not hidden behind an overlay — the tab is navigated to an internal extension page, so the original document is no longer loaded at all.",
+    },
+    {
+      title: "Navigation Re-Enforcement",
+      desc: "Any attempt to navigate a locked tab back to its page is intercepted by the background service and returned to the lock screen.",
+    },
+    {
+      title: "Address Concealment",
+      desc: "The original address is held in local extension storage and never rendered on the lock screen, so it stays hidden from anyone looking at the tab.",
+    },
+    {
+      title: "Startup Session Lock (Pro)",
+      desc: "Locks tabs restored by the browser at launch, with a 30-second catch-up window so tabs that finish loading late are still caught.",
+    },
   ]
 
   return (
@@ -147,508 +224,432 @@ export default function SecurityPage() {
 
       <Header />
 
-      <main className="min-h-screen bg-background relative overflow-hidden page-top-offset pb-24">
-        {/* Animated Background Blobs */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/6 left-1/4 w-[500px] h-[500px] bg-primary/10 dark:bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-secondary/10 dark:bg-secondary/20 rounded-full blur-[120px] animate-pulse delay-700" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[140px]" />
-        </div>
+      <main className="min-h-screen bg-background">
+        <PageHero
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Security Architecture" }]}
+          eyebrow="Verified Zero-Knowledge Security Model"
+          title={
+            <>
+              Locksy Security Architecture &amp;{" "}
+              <span className="text-highlight">Cryptographic Deep Dive</span>
+            </>
+          }
+          description={
+            <>
+              Discover how Locksy safeguards your private browser tabs using client-side <strong className="font-medium text-foreground">PBKDF2 600,000-iteration key derivation</strong>, constant-time password verification, and zero network data exposure.
+            </>
+          }
+        >
+          {jumpLinks.map((l) => (
+            <a key={l.href} href={l.href} className="btn-secondary btn-sm">
+              {l.label}
+            </a>
+          ))}
+        </PageHero>
 
-        <div className="relative max-w-6xl mx-auto px-4 md:px-6">
-
-          {/* Hero Section */}
-          <div className="text-center max-w-4xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/10 via-purple-500/10 to-secondary/10 border border-primary/20 text-primary text-sm font-semibold mb-6 shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        {/* TL;DR Executive Summary Block */}
+        <PageSection id="tldr" className="!pt-0">
+          <div className="surface p-6 sm:p-8 md:p-10">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex items-start gap-4">
+                <IconTile icon={Zap} />
+                <div>
+                  <h2 className="text-2xl font-semibold leading-snug text-foreground text-balance">Executive Summary & Core Guarantees</h2>
+                  <p className="mt-1 text-sm text-muted-foreground">Local-first, zero-knowledge browser tab security at a glance.</p>
+                </div>
+              </div>
+              <span className="eyebrow self-start">
+                <span className="eyebrow-dot" aria-hidden="true" />
+                TL;DR Key Takeaways
               </span>
-              Verified Zero-Knowledge Security Model
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6 leading-tight">
-              Locksy Security Architecture &{" "}
-              <span className="bg-gradient-to-r from-primary via-[oklch(0.50_0.23_282)] to-secondary dark:from-primary dark:via-[oklch(0.82_0.22_282)] dark:to-secondary bg-clip-text text-transparent">
-                Cryptographic Deep Dive
-              </span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Discover how Locksy safeguards your private browser tabs using client-side <strong>PBKDF2 600,000-iteration key derivation</strong>, constant-time password verification, and zero network data exposure.
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
-              <a href="#tldr" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-border hover:border-primary/50 text-foreground transition-all">
-                ⚡ TL;DR Summary
-              </a>
-              <a href="#threat-model" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-primary/40 text-primary hover:bg-primary/10 transition-all">
-                🎯 Threat Model & Scope
-              </a>
-              <a href="#metrics" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-border hover:border-primary/50 text-foreground transition-all">
-                📊 Statistical Metrics
-              </a>
-              <a href="#primitives" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-border hover:border-primary/50 text-foreground transition-all">
-                🔐 Key Derivation
-              </a>
-              <a href="#matrix" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-border hover:border-primary/50 text-foreground transition-all">
-                📋 Feature Matrix
-              </a>
-              <a href="#citations" className="px-4 py-2 text-xs font-semibold rounded-lg bg-card border border-border hover:border-primary/50 text-foreground transition-all">
-                🔗 Citations
-              </a>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {tldrItems.map((item, i) => (
+                <div key={item.title} className="rounded-xl border border-border bg-background p-5">
+                  <div className="flex items-center gap-3 text-[15px] font-medium text-foreground">
+                    <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-border font-mono text-xs text-foreground">
+                      {i + 1}
+                    </span>
+                    {item.title}
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+                </div>
+              ))}
             </div>
           </div>
+        </PageSection>
 
-          {/* TL;DR Executive Summary Block */}
-          <section id="tldr" className="mb-20">
-            <div className="relative p-6 sm:p-8 md:p-10 rounded-3xl bg-card/80 backdrop-blur-xl border border-primary/30 shadow-2xl shadow-primary/10 overflow-hidden group">
-              <div className="sm:absolute top-0 right-0 bg-gradient-to-l from-primary to-secondary text-white text-xs font-black uppercase tracking-wider px-5 py-2 rounded-bl-2xl shadow-md inline-block mb-4 sm:mb-0">
-                TL;DR Key Takeaways
-              </div>
+        {/* Statistical Security Metrics Grid */}
+        <PageSection id="metrics">
+          <SectionHeading
+            title="Statistical Grounding & Security Metrics"
+            description="Empirical risk data and cryptographic benchmarks."
+          />
 
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-2xl">
-                  ⚡
-                </div>
-                <div>
-                  <h2 className="text-2xl font-black text-foreground">Executive Summary & Core Guarantees</h2>
-                  <p className="text-sm text-muted-foreground">Local-first, zero-knowledge browser tab security at a glance.</p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="p-5 rounded-2xl bg-muted/40 border border-border/50 hover:border-primary/30 transition-all">
-                  <div className="flex items-center gap-3 font-bold text-foreground mb-2">
-                    <span className="w-7 h-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-xs font-black">1</span>
-                    100% Client-Side Web Cryptography
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Encryption, hash generation, and password validations run exclusively inside your local browser sandbox via native <a href="https://www.w3.org/TR/WebCryptoAPI/" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium">W3C Web Cryptography API</a>.
-                  </p>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-muted/40 border border-border/50 hover:border-primary/30 transition-all">
-                  <div className="flex items-center gap-3 font-bold text-foreground mb-2">
-                    <span className="w-7 h-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-xs font-black">2</span>
-                    600,000 PBKDF2 Iterations
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Derives master keys using HMAC-SHA-256 with 600k rounds—exceeding <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium">OWASP standards</a> to render offline brute-force cracking mathematically infeasible.
-                  </p>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-muted/40 border border-border/50 hover:border-primary/30 transition-all">
-                  <div className="flex items-center gap-3 font-bold text-foreground mb-2">
-                    <span className="w-7 h-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-xs font-black">3</span>
-                    Zero Network Telemetry & Zero Cloud
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Locksy contains zero analytics tracking, zero remote database connections, and makes zero telemetry requests. Your passwords never leave your physical hardware.
-                  </p>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-muted/40 border border-border/50 hover:border-primary/30 transition-all">
-                  <div className="flex items-center gap-3 font-bold text-foreground mb-2">
-                    <span className="w-7 h-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-xs font-black">4</span>
-                    8+ Defense-in-Depth Bypass Guarding
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Protects against DevTools inspection, tab URL replacement, script injection, and browser session restoration exploits.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Statistical Security Metrics Grid */}
-          <section id="metrics" className="mb-20">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-extrabold text-foreground mb-2">Statistical Grounding & Security Metrics</h2>
-              <p className="text-muted-foreground text-sm">Empirical risk data and cryptographic benchmarks.</p>
-            </div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
-              {statisticalFacts.map((item, i) => (
-                <div key={i} className="p-4 sm:p-6 rounded-2xl bg-card/80 backdrop-blur-lg border border-border/60 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 shadow-lg text-center flex flex-col justify-between group overflow-hidden">
-                  <div>
-                    <div className="text-2xl sm:text-3xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform">{item.icon}</div>
-                    <div className="text-xl sm:text-3xl lg:text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 tracking-tight">
-                      {item.stat}
-                    </div>
-                    <div className="text-[10px] sm:text-xs font-bold text-foreground mb-2 uppercase tracking-wider">{item.label}</div>
-                  </div>
-                  <div className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/40">
-                    {item.desc}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Industry Standards & Quotes */}
-          <section className="mb-20">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-extrabold text-foreground mb-2">Industry Standards & Expert Quotations</h2>
-              <p className="text-muted-foreground text-sm">Guided by established global security benchmarks.</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <blockquote className="p-8 rounded-3xl bg-card/80 backdrop-blur-xl border-l-4 border-primary border-t border-r border-b border-border/60 shadow-xl relative">
-                <div className="text-4xl text-primary/20 font-serif absolute top-4 right-6">&ldquo;</div>
-                <p className="italic text-foreground/90 mb-6 text-base leading-relaxed">
-                  &ldquo;Password-based key derivation functions (PBKDF2) with high iteration counts are essential for turning low-entropy user passwords into cryptographic keys resistant to specialized hardware cracking.&rdquo;
-                </p>
-                <div className="flex items-center gap-3 border-t border-border/50 pt-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-lg">
-                    🏛️
-                  </div>
-                  <div>
-                    <cite className="not-italic text-sm font-bold text-foreground block">
-                      NIST Special Publication 800-132
-                    </cite>
-                    <a href="https://csrc.nist.gov/publications/detail/sp/800-132/final" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline">
-                      Read Official NIST Standard →
-                    </a>
-                  </div>
-                </div>
-              </blockquote>
-
-              <blockquote className="p-8 rounded-3xl bg-card/80 backdrop-blur-xl border-l-4 border-secondary border-t border-r border-b border-border/60 shadow-xl relative">
-                <div className="text-4xl text-secondary/20 font-serif absolute top-4 right-6">&ldquo;</div>
-                <p className="italic text-foreground/90 mb-6 text-base leading-relaxed">
-                  &ldquo;Local-first zero-knowledge software ensures that user credentials and private state remain immune to cloud data breaches, third-party server compromises, and man-in-the-middle interception.&rdquo;
-                </p>
-                <div className="flex items-center gap-3 border-t border-border/50 pt-4">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 border border-secondary/20 flex items-center justify-center text-lg">
-                    🛡️
-                  </div>
-                  <div>
-                    <cite className="not-italic text-sm font-bold text-foreground block">
-                      Electronic Frontier Foundation (EFF)
-                    </cite>
-                    <a href="https://www.eff.org/wp/privacy-best-practices" target="_blank" rel="noopener noreferrer" className="text-xs text-secondary hover:underline">
-                      Read EFF Privacy Guidelines →
-                    </a>
-                  </div>
-                </div>
-              </blockquote>
-            </div>
-          </section>
-
-          {/* Cryptographic Architecture Deep Dive */}
-          <section id="primitives" className="mb-20">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl font-extrabold text-foreground mb-3">Architectural Pillars & Technical Specifications</h2>
-              <p className="text-muted-foreground text-base">In-depth technical breakdown of Locksy&apos;s defense mechanisms.</p>
-            </div>
-
-            <div className="space-y-8">
-              {/* Card 1 */}
-              <div className="p-8 rounded-3xl bg-card/80 backdrop-blur-xl border border-border/60 shadow-xl hover:border-primary/40 transition-all">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 border border-primary/30 flex items-center justify-center text-2xl flex-shrink-0">
-                    🔑
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-primary uppercase tracking-wider">Pillar 1</span>
-                    <h3 className="text-2xl font-bold text-foreground">1. Key Derivation & Cryptographic Primitives</h3>
-                  </div>
-                </div>
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  Locksy relies exclusively on standard implementations of the W3C Web Cryptography API (<code className="px-2 py-1 rounded bg-muted text-primary font-mono text-xs">crypto.subtle</code>) provided natively by Chromium and Gecko browser engines.
-                  When you set your master password, Locksy executes a cryptographic key derivation function (KDF) using <strong>PBKDF2 with 600,000 SHA-256 iterations</strong> and a unique 128-bit cryptographic salt generated via <code className="px-2 py-1 rounded bg-muted text-primary font-mono text-xs">crypto.getRandomValues()</code>.
-                </p>
-                <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                  <div className="p-3 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-muted-foreground block mb-1">Algorithm</span>
-                    <span className="font-bold text-foreground">PBKDF2 HMAC-SHA-256</span>
-                  </div>
-                  <div className="p-3 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-muted-foreground block mb-1">Iterations</span>
-                    <span className="font-bold text-primary">600,000 Rounds</span>
-                  </div>
-                  <div className="p-3 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-muted-foreground block mb-1">Verification</span>
-                    <span className="font-bold text-foreground">Constant-Time Compare</span>
-                  </div>
-                  <div className="p-3 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-muted-foreground block mb-1">Execution Sandbox</span>
-                    <span className="font-bold text-foreground">Local W3C WebCrypto</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2 */}
-              <div className="p-8 rounded-3xl bg-card/80 backdrop-blur-xl border border-border/60 shadow-xl hover:border-primary/40 transition-all">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-secondary/20 to-teal-500/20 border border-secondary/30 flex items-center justify-center text-2xl flex-shrink-0">
-                    🛡️
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-secondary uppercase tracking-wider">Pillar 2</span>
-                    <h3 className="text-2xl font-bold text-foreground">2. Per-Tab Isolation & Anti-Bypass Guarding</h3>
-                  </div>
-                </div>
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  Unlike basic extension utilities that overlay a simple CSS <code className="px-2 py-1 rounded bg-muted text-primary font-mono text-xs">display: none</code> div over active pages (which can easily be unhidden via DevTools or DOM deletion), Locksy isolates protected tabs at the extension framework level:
-                </p>
-                <div className="grid md:grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-emerald-500 text-lg font-bold">✓</span>
-                    <div>
-                      <strong className="text-foreground block mb-1">Full-Tab Navigation Isolation</strong>
-                      <span className="text-muted-foreground text-xs">The protected page is not hidden behind an overlay — the tab is navigated to an internal extension page, so the original document is no longer loaded at all.</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-emerald-500 text-lg font-bold">✓</span>
-                    <div>
-                      <strong className="text-foreground block mb-1">Navigation Re-Enforcement</strong>
-                      <span className="text-muted-foreground text-xs">Any attempt to navigate a locked tab back to its page is intercepted by the background service and returned to the lock screen.</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-emerald-500 text-lg font-bold">✓</span>
-                    <div>
-                      <strong className="text-foreground block mb-1">Address Concealment</strong>
-                      <span className="text-muted-foreground text-xs">The original address is held in local extension storage and never rendered on the lock screen, so it stays hidden from anyone looking at the tab.</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 border border-border/40">
-                    <span className="text-emerald-500 text-lg font-bold">✓</span>
-                    <div>
-                      <strong className="text-foreground block mb-1">Startup Session Lock (Pro)</strong>
-                      <span className="text-muted-foreground text-xs">Locks tabs restored by the browser at launch, with a 30-second catch-up window so tabs that finish loading late are still caught.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Cryptographic Feature Comparison Table */}
-          <section id="matrix" className="mb-20">
-            <div className="text-center max-w-3xl mx-auto mb-10">
-              <h2 className="text-3xl font-extrabold text-foreground mb-3">Cryptographic Feature Comparison Matrix</h2>
-              <p className="text-muted-foreground text-sm">Compare Locksy&apos;s architectural guarantees against alternative tools.</p>
-            </div>
-
-            <div className="overflow-hidden rounded-3xl border border-border/70 shadow-2xl bg-card/80 backdrop-blur-xl">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm border-collapse">
-                  <thead>
-                    <tr className="bg-gradient-to-r from-muted/80 via-muted/50 to-muted/80 text-foreground border-b border-border font-extrabold">
-                      <th className="p-4 md:p-5 min-w-[200px]">Security Feature / Metric</th>
-                      <th className="p-4 md:p-5 text-primary bg-primary/10 font-black min-w-[220px]">Locksy Tab Locker</th>
-                      <th className="p-4 md:p-5 min-w-[180px]">Password Managers</th>
-                      <th className="p-4 md:p-5 min-w-[180px]">Native Browser Lock</th>
-                      <th className="p-4 md:p-5 min-w-[180px]">Basic Overlay Extensions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border/60 text-muted-foreground">
-                    {comparisonData.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-primary/5 transition-colors">
-                        <td className="p-4 md:p-5 font-bold text-foreground">{row.feature}</td>
-                        <td className="p-4 md:p-5 font-bold text-primary bg-primary/5 border-x border-primary/10">
-                          <span className="flex items-center gap-1.5">
-                            <span className="text-emerald-500">✓</span> {row.locksy}
-                          </span>
-                        </td>
-                        <td className="p-4 md:p-5">{row.pwdManager}</td>
-                        <td className="p-4 md:p-5">{row.nativeLock}</td>
-                        <td className="p-4 md:p-5">{row.basicOverlay}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-
-          {/* Threat Model & Operational Boundaries Section */}
-          <section id="threat-model" className="mb-20">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-3">
-                Radical Transparency
-              </div>
-              <h2 className="text-3xl font-extrabold text-foreground mb-3">Threat Model & Architectural Scope</h2>
-              <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
-                Security tools are only as trustworthy as their honesty about what they protect against — and what they don&apos;t. Here is Locksy&apos;s realistic threat model.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* What Locksy Protects Against */}
-              <div className="p-8 rounded-3xl bg-card/90 backdrop-blur-xl border border-emerald-500/30 shadow-xl relative overflow-hidden">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center text-xl font-bold">
-                    ✓
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-black text-foreground">What Locksy Protects Against</h3>
-                    <p className="text-xs text-muted-foreground">Primary design targets and real-world scenarios</p>
-                  </div>
-                </div>
-
-                <ul className="space-y-4 text-sm">
-                  <li className="flex items-start gap-3">
-                    <span className="text-emerald-500 font-bold text-base mt-0.5">•</span>
-                    <div>
-                      <strong className="text-foreground block">Visual Privacy & Shoulder Surfing</strong>
-                      <span className="text-muted-foreground text-xs leading-relaxed">
-                        Colleagues, classmates, or strangers in cafes, trains, and open offices glancing at sensitive tabs (WhatsApp, banking, personal email, medical portals).
-                      </span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-emerald-500 font-bold text-base mt-0.5">•</span>
-                    <div>
-                      <strong className="text-foreground block">Casual Laptop Borrowing</strong>
-                      <span className="text-muted-foreground text-xs leading-relaxed">
-                        Handing your unlocked computer to a coworker, friend, or child for 2 minutes to Google something or play a video without exposing private open work or conversations.
-                      </span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-emerald-500 font-bold text-base mt-0.5">•</span>
-                    <div>
-                      <strong className="text-foreground block">Screen-Sharing Leaks During Video Calls</strong>
-                      <span className="text-muted-foreground text-xs leading-relaxed">
-                        Preventing confidential tabs from flashing on screen during Zoom, Google Meet, or Microsoft Teams window shares.
-                      </span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-emerald-500 font-bold text-base mt-0.5">•</span>
-                    <div>
-                      <strong className="text-foreground block">Zero-Knowledge Offline Privacy</strong>
-                      <span className="text-muted-foreground text-xs leading-relaxed">
-                        Zero telemetry, zero servers, and zero cloud backups. All hashing and verification occur strictly within your local browser runtime.
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              {/* What Locksy Does Not Claim to Replace */}
-              <div className="p-8 rounded-3xl bg-card/90 backdrop-blur-xl border border-amber-500/30 shadow-xl relative overflow-hidden">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center text-xl font-bold">
-                    !
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-black text-foreground">Operational Boundaries</h3>
-                    <p className="text-xs text-muted-foreground">What a browser extension cannot and should not promise</p>
-                  </div>
-                </div>
-
-                <ul className="space-y-4 text-sm">
-                  <li className="flex items-start gap-3">
-                    <span className="text-amber-500 font-bold text-base mt-0.5">•</span>
-                    <div>
-                      <strong className="text-foreground block">Not an OS-Level Lock Screen Replacement</strong>
-                      <span className="text-muted-foreground text-xs leading-relaxed">
-                        Locksy runs within the browser sandbox. When leaving your laptop completely unattended in untrusted environments, always lock your operating system (<kbd className="px-1.5 py-0.5 text-[10px] bg-muted rounded font-mono">Win + L</kbd> or <kbd className="px-1.5 py-0.5 text-[10px] bg-muted rounded font-mono">Cmd + Ctrl + Q</kbd>).
-                      </span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-amber-500 font-bold text-base mt-0.5">•</span>
-                    <div>
-                      <strong className="text-foreground block">Physical Console Access with DevTools</strong>
-                      <span className="text-muted-foreground text-xs leading-relaxed">
-                        In any modern browser, a user with active physical access to your logged-in machine can open <code className="px-1 py-0.5 text-[10px] bg-muted rounded font-mono">chrome://extensions</code> or use developer tools. Locksy is a privacy deterrent against casual snooping, not a defense against adversaries with physical administrative control.
-                      </span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-amber-500 font-bold text-base mt-0.5">•</span>
-                    <div>
-                      <strong className="text-foreground block">Not Anti-Malware or Keylogger Protection</strong>
-                      <span className="text-muted-foreground text-xs leading-relaxed">
-                        Locksy does not inspect network packets, scan disks, or prevent hardware keyloggers. If your host operating system is compromised by malware, no browser extension can guarantee privacy.
-                      </span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-amber-500 font-bold text-base mt-0.5">•</span>
-                    <div>
-                      <strong className="text-foreground block">Defense-in-Depth Principle</strong>
-                      <span className="text-muted-foreground text-xs leading-relaxed">
-                        Locksy is best used as a layer in defense-in-depth: combine a reputable password manager, full-disk encryption (BitLocker/FileVault), and Locksy for everyday tab-level privacy.
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* Official Citations Grid */}
-          <section id="citations" className="mb-20">
-            <div className="text-center max-w-3xl mx-auto mb-10">
-              <h2 className="text-3xl font-extrabold text-foreground mb-3">Official Technical Citations & References</h2>
-              <p className="text-muted-foreground text-sm">Verified technical standards powering Locksy.</p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {citations.map((item, idx) => (
-                <a
-                  key={idx}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-6 rounded-2xl bg-card/80 backdrop-blur-lg border border-border/60 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 shadow-lg group flex flex-col justify-between"
+          {/* gap-px over a border-coloured background draws the hairline grid */}
+          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-border bg-border lg:grid-cols-5">
+            {statisticalFacts.map((item, i) => {
+              const Icon = item.icon
+              return (
+                <div
+                  key={i}
+                  className={`flex flex-col bg-background p-6 md:p-8 ${i === statisticalFacts.length - 1 ? "col-span-2 lg:col-span-1" : ""}`}
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-3xl group-hover:scale-110 transition-transform">{item.icon}</span>
-                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-                        {item.badge}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-foreground text-base mb-1 group-hover:text-primary transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-border/40 text-xs font-semibold text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                    View Specification ↗
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
+                  <dt className="sr-only">{item.label}</dt>
+                  <dd className="flex flex-1 flex-col">
+                    <Icon className="h-5 w-5 text-highlight" aria-hidden="true" />
+                    <span className="mt-6 block font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                      {item.stat}
+                    </span>
+                    <span className="mt-2 block text-sm font-medium text-foreground/80">{item.label}</span>
+                    <span className="mt-3 block text-sm leading-relaxed text-muted-foreground">{item.desc}</span>
+                  </dd>
+                </div>
+              )
+            })}
+          </dl>
+        </PageSection>
 
-          {/* Banner Call to Action */}
-          <div className="p-10 md:p-14 rounded-3xl bg-gradient-to-r from-primary/15 via-purple-500/10 to-secondary/15 border border-primary/30 text-center shadow-2xl relative overflow-hidden">
-            <div className="relative z-10 max-w-2xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-black mb-4 tracking-tight">
+        {/* Industry Standards & Quotes */}
+        <PageSection>
+          <SectionHeading
+            title="Industry Standards & Expert Quotations"
+            description="Guided by established global security benchmarks."
+          />
+
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            <blockquote className="surface flex flex-col p-8">
+              <Quote className="h-5 w-5 text-highlight" aria-hidden="true" />
+              <p className="mt-5 flex-1 text-base leading-relaxed text-foreground/90">
+                &ldquo;Password-based key derivation functions (PBKDF2) with high iteration counts are essential for turning low-entropy user passwords into cryptographic keys resistant to specialized hardware cracking.&rdquo;
+              </p>
+              <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                <IconTile icon={Landmark} />
+                <div>
+                  <cite className="block text-sm font-medium not-italic text-foreground">
+                    NIST Special Publication 800-132
+                  </cite>
+                  <a href="https://csrc.nist.gov/publications/detail/sp/800-132/final" target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                    Read Official NIST Standard →
+                  </a>
+                </div>
+              </div>
+            </blockquote>
+
+            <blockquote className="surface flex flex-col p-8">
+              <Quote className="h-5 w-5 text-highlight" aria-hidden="true" />
+              <p className="mt-5 flex-1 text-base leading-relaxed text-foreground/90">
+                &ldquo;Local-first zero-knowledge software ensures that user credentials and private state remain immune to cloud data breaches, third-party server compromises, and man-in-the-middle interception.&rdquo;
+              </p>
+              <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                <IconTile icon={ShieldCheck} />
+                <div>
+                  <cite className="block text-sm font-medium not-italic text-foreground">
+                    Electronic Frontier Foundation (EFF)
+                  </cite>
+                  <a href="https://www.eff.org/wp/privacy-best-practices" target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                    Read EFF Privacy Guidelines →
+                  </a>
+                </div>
+              </div>
+            </blockquote>
+          </div>
+        </PageSection>
+
+        {/* Cryptographic Architecture Deep Dive */}
+        <PageSection id="primitives">
+          <SectionHeading
+            title="Architectural Pillars & Technical Specifications"
+            description={<>In-depth technical breakdown of Locksy&apos;s defense mechanisms.</>}
+          />
+
+          <div className="mt-12 space-y-4">
+            {/* Card 1 */}
+            <div className="surface p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <IconTile icon={KeyRound} />
+                <div>
+                  <span className="text-xs font-medium text-muted-foreground">Pillar 1</span>
+                  <h3 className="mt-0.5 text-xl font-semibold leading-snug text-foreground md:text-2xl">1. Key Derivation & Cryptographic Primitives</h3>
+                </div>
+              </div>
+              <p className="mt-5 leading-relaxed text-muted-foreground">
+                Locksy relies exclusively on standard implementations of the W3C Web Cryptography API (<code className={codeClass}>crypto.subtle</code>) provided natively by Chromium and Gecko browser engines.
+                When you set your master password, Locksy executes a cryptographic key derivation function (KDF) using <strong className="font-medium text-foreground">PBKDF2 with 600,000 SHA-256 iterations</strong> and a unique 128-bit cryptographic salt generated via <code className={codeClass}>crypto.getRandomValues()</code>.
+              </p>
+              <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 md:grid-cols-4">
+                <div className="bg-background p-4">
+                  <dt className="text-xs text-muted-foreground">Algorithm</dt>
+                  <dd className="mt-1 font-mono text-sm text-foreground">PBKDF2 HMAC-SHA-256</dd>
+                </div>
+                <div className="bg-background p-4">
+                  <dt className="text-xs text-muted-foreground">Iterations</dt>
+                  <dd className="mt-1 font-mono text-sm text-highlight">600,000 Rounds</dd>
+                </div>
+                <div className="bg-background p-4">
+                  <dt className="text-xs text-muted-foreground">Verification</dt>
+                  <dd className="mt-1 font-mono text-sm text-foreground">Constant-Time Compare</dd>
+                </div>
+                <div className="bg-background p-4">
+                  <dt className="text-xs text-muted-foreground">Execution Sandbox</dt>
+                  <dd className="mt-1 font-mono text-sm text-foreground">Local W3C WebCrypto</dd>
+                </div>
+              </dl>
+            </div>
+
+            {/* Card 2 */}
+            <div className="surface p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <IconTile icon={ShieldCheck} />
+                <div>
+                  <span className="text-xs font-medium text-muted-foreground">Pillar 2</span>
+                  <h3 className="mt-0.5 text-xl font-semibold leading-snug text-foreground md:text-2xl">2. Per-Tab Isolation & Anti-Bypass Guarding</h3>
+                </div>
+              </div>
+              <p className="mt-5 leading-relaxed text-muted-foreground">
+                Unlike basic extension utilities that overlay a simple CSS <code className={codeClass}>display: none</code> div over active pages (which can easily be unhidden via DevTools or DOM deletion), Locksy isolates protected tabs at the extension framework level:
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {isolationItems.map((item) => (
+                  <div key={item.title} className="flex items-start gap-3 rounded-xl border border-border bg-background p-4">
+                    <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-highlight/15">
+                      <Check className="h-3 w-3 text-highlight" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <strong className="block text-sm font-medium text-foreground">{item.title}</strong>
+                      <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </PageSection>
+
+        {/* Cryptographic Feature Comparison Table */}
+        <PageSection id="matrix">
+          <SectionHeading
+            title="Cryptographic Feature Comparison Matrix"
+            description={<>Compare Locksy&apos;s architectural guarantees against alternative tools.</>}
+          />
+
+          <div className="surface mt-12 overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-border">
+                  <th scope="col" className="min-w-[200px] px-5 py-4 font-normal text-muted-foreground">Security Feature / Metric</th>
+                  <th scope="col" className="min-w-[220px] border-x border-border bg-muted/40 px-5 py-4 font-medium text-foreground">Locksy Tab Locker</th>
+                  <th scope="col" className="min-w-[180px] px-5 py-4 font-normal text-muted-foreground">Password Managers</th>
+                  <th scope="col" className="min-w-[180px] px-5 py-4 font-normal text-muted-foreground">Native Browser Lock</th>
+                  <th scope="col" className="min-w-[180px] px-5 py-4 font-normal text-muted-foreground">Basic Overlay Extensions</th>
+                </tr>
+              </thead>
+              <tbody className="text-muted-foreground">
+                {comparisonData.map((row, idx) => (
+                  <tr key={idx} className="border-b border-border last:border-b-0">
+                    <th scope="row" className="px-5 py-4 font-medium text-foreground">{row.feature}</th>
+                    <td className="border-x border-border bg-muted/40 px-5 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-highlight" aria-hidden="true" />
+                        {row.locksy}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4">{row.pwdManager}</td>
+                    <td className="px-5 py-4">{row.nativeLock}</td>
+                    <td className="px-5 py-4">{row.basicOverlay}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </PageSection>
+
+        {/* Threat Model & Operational Boundaries Section */}
+        <PageSection id="threat-model">
+          <SectionHeading
+            eyebrow="Radical Transparency"
+            title="Threat Model & Architectural Scope"
+            description={
+              <>
+                Security tools are only as trustworthy as their honesty about what they protect against — and what they don&apos;t. Here is Locksy&apos;s realistic threat model.
+              </>
+            }
+          />
+
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {/* What Locksy Protects Against */}
+            <div className="surface p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-emerald-500/25 bg-emerald-500/10">
+                  <Check className="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">What Locksy Protects Against</h3>
+                  <p className="mt-0.5 text-xs text-muted-foreground">Primary design targets and real-world scenarios</p>
+                </div>
+              </div>
+
+              <ul className="mt-6 space-y-5 text-sm">
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" aria-hidden="true" />
+                  <div>
+                    <strong className="block font-medium text-foreground">Visual Privacy & Shoulder Surfing</strong>
+                    <span className="mt-1 block leading-relaxed text-muted-foreground">
+                      Colleagues, classmates, or strangers in cafes, trains, and open offices glancing at sensitive tabs (WhatsApp, banking, personal email, medical portals).
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" aria-hidden="true" />
+                  <div>
+                    <strong className="block font-medium text-foreground">Casual Laptop Borrowing</strong>
+                    <span className="mt-1 block leading-relaxed text-muted-foreground">
+                      Handing your unlocked computer to a coworker, friend, or child for 2 minutes to Google something or play a video without exposing private open work or conversations.
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" aria-hidden="true" />
+                  <div>
+                    <strong className="block font-medium text-foreground">Screen-Sharing Leaks During Video Calls</strong>
+                    <span className="mt-1 block leading-relaxed text-muted-foreground">
+                      Preventing confidential tabs from flashing on screen during Zoom, Google Meet, or Microsoft Teams window shares.
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" aria-hidden="true" />
+                  <div>
+                    <strong className="block font-medium text-foreground">Zero-Knowledge Offline Privacy</strong>
+                    <span className="mt-1 block leading-relaxed text-muted-foreground">
+                      Zero telemetry, zero servers, and zero cloud backups. All hashing and verification occur strictly within your local browser runtime.
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* What Locksy Does Not Claim to Replace */}
+            <div className="surface p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-amber-500/25 bg-amber-500/10">
+                  <TriangleAlert className="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">Operational Boundaries</h3>
+                  <p className="mt-0.5 text-xs text-muted-foreground">What a browser extension cannot and should not promise</p>
+                </div>
+              </div>
+
+              <ul className="mt-6 space-y-5 text-sm">
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" aria-hidden="true" />
+                  <div>
+                    <strong className="block font-medium text-foreground">Not an OS-Level Lock Screen Replacement</strong>
+                    <span className="mt-1 block leading-relaxed text-muted-foreground">
+                      Locksy runs within the browser sandbox. When leaving your laptop completely unattended in untrusted environments, always lock your operating system (<kbd className="kbd">Win + L</kbd> or <kbd className="kbd">Cmd + Ctrl + Q</kbd>).
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" aria-hidden="true" />
+                  <div>
+                    <strong className="block font-medium text-foreground">Physical Console Access with DevTools</strong>
+                    <span className="mt-1 block leading-relaxed text-muted-foreground">
+                      In any modern browser, a user with active physical access to your logged-in machine can open <code className={codeClass}>chrome://extensions</code> or use developer tools. Locksy is a privacy deterrent against casual snooping, not a defense against adversaries with physical administrative control.
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" aria-hidden="true" />
+                  <div>
+                    <strong className="block font-medium text-foreground">Not Anti-Malware or Keylogger Protection</strong>
+                    <span className="mt-1 block leading-relaxed text-muted-foreground">
+                      Locksy does not inspect network packets, scan disks, or prevent hardware keyloggers. If your host operating system is compromised by malware, no browser extension can guarantee privacy.
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" aria-hidden="true" />
+                  <div>
+                    <strong className="block font-medium text-foreground">Defense-in-Depth Principle</strong>
+                    <span className="mt-1 block leading-relaxed text-muted-foreground">
+                      Locksy is best used as a layer in defense-in-depth: combine a reputable password manager, full-disk encryption (BitLocker/FileVault), and Locksy for everyday tab-level privacy.
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </PageSection>
+
+        {/* Official Citations */}
+        <PageSection id="citations" width="narrow">
+          <SectionHeading
+            title="Official Technical Citations & References"
+            description="Verified technical standards powering Locksy."
+          />
+
+          <ol className="mt-10 divide-y divide-border border-y border-border">
+            {citations.map((item, idx) => (
+              <li key={idx} className="flex gap-4 py-5">
+                <span className="w-6 flex-shrink-0 pt-0.5 font-mono text-xs text-muted-foreground">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <h3 className="text-[15px] font-medium text-foreground">{item.title}</h3>
+                    <span className="rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground">
+                      {item.badge}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm text-muted-foreground">{item.subtitle}</p>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-flex items-center gap-1 text-sm text-muted-foreground underline underline-offset-4 decoration-border hover:text-foreground hover:decoration-foreground transition-colors"
+                  >
+                    View Specification <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </PageSection>
+
+        {/* Banner Call to Action */}
+        <PageSection className="pb-24">
+          <div className="surface relative overflow-hidden px-6 py-12 text-center md:px-12 md:py-16">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-0 h-[320px] w-[700px] -translate-x-1/2 -translate-y-1/2"
+              style={{ background: "radial-gradient(50% 50% at 50% 50%, var(--glow), transparent 70%)" }}
+            />
+            <div className="relative mx-auto max-w-2xl">
+              <h2 className="text-3xl font-semibold leading-[1.1] text-foreground md:text-4xl text-balance">
                 Ready to Secure Your Open Browser Tabs?
               </h2>
-              <p className="text-muted-foreground text-base mb-8">
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
                 Get zero-knowledge tab locking, biometric unlock, and auto-lock protection in under 30 seconds. Free forever.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/#download" className="btn-primary text-base py-3.5 px-8">
-                  Install Locksy Free Now
+              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                <Link href="/#download" className="btn-primary btn-lg">
+                  Install Locksy Free Now <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
                 <a
                   href={PRO_CHECKOUT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary text-base py-3.5 px-8 inline-flex items-center justify-center gap-2"
+                  className="btn-secondary btn-lg"
                 >
                   Get Locksy Pro
                 </a>
               </div>
             </div>
           </div>
-
-        </div>
+        </PageSection>
       </main>
 
       <SupportChatCTA />
