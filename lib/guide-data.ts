@@ -84,5 +84,5 @@ export const guideFaqItems: { question: string; answer: string }[] = guide.chapt
 /** Chapter id/title/num triples for the table of contents. */
 export const guideToc = guide.chapters.map(({ id, num, title, icon }) => ({ id, num, title, icon }))
 
-/** Public path of the generated PDF, kept next to the content it mirrors. */
-export const GUIDE_PDF_PATH = "/locksy-user-guide.pdf"
+/** Public path of the generated PDF (defined in lib/guide-paths.ts for client use). */
+export { GUIDE_PDF_PATH } from "./guide-paths"

@@ -20,6 +20,9 @@ import {
   ScanEye,
   CalendarClock,
   Lock,
+  KeyRound,
+  TimerReset,
+  AppWindow,
 } from "lucide-react"
 import SectionHeading from "@/components/section-heading"
 
@@ -36,6 +39,9 @@ const MORE_FEATURES = [
   { icon: WifiOff, title: "100% offline", desc: "Your password and settings are stored on your device. Nothing is sent to a server." },
   { icon: Palette, title: "Six themes", desc: "Classic Light and Dark, Ocean, Forest, Ember and Rose, rendered without flicker." },
   { icon: UserX, title: "No account required", desc: "Install, set a password and start locking tabs in about 30 seconds." },
+  { icon: KeyRound, title: "Master Recovery Key", desc: "A 16-character key resets a forgotten password, fully offline. Save it when you set up." },
+  { icon: TimerReset, title: "Smart Sessions", desc: "Choose how long the popup stays unlocked, up to 60 minutes. Sensitive actions still ask again. Pro." },
+  { icon: AppWindow, title: "Window Scope Control", desc: "Make Lock All and Unlock All apply to this window only, or to every open window." },
 ]
 
 function Card({ className = "", children, id }: { className?: string; children: React.ReactNode; id?: string }) {

@@ -1,127 +1,61 @@
-// A single, compact replacement for the old stack of six "What's New" / feature
-// announcement sections. Rendered entirely on the server (no tabs / client state),
-// so every fact below is in the initial HTML — good for readers and for the
-// rendered-word-count requirement. Each card keeps the substantive detail from the
-// section it replaces, in plain language.
-const updates = [
-  {
-    version: "v3.7.0",
-    icon: "🎨",
-    title: "Locksy Themes Engine",
-    desc: "Personalize your tab protection with 6 handcrafted palettes — Classic Light & Dark (Free), plus Ocean, Forest, Ember, and Rose (Pro). Zero-flicker pre-rendering applies your theme instantly across all lock screens and popups.",
-  },
-  {
-    version: "v3.6.5",
-    icon: "🪟",
-    title: "Window Scope Control",
-    desc: "By popular demand: choose whether Lock All and Unlock All apply strictly to your active window or across all open browser windows at once, with persistent memory across sessions.",
-  },
-  {
-    version: "v3.6.0",
-    icon: "🎥",
-    title: "Screen Share Shield",
-    desc: "Opaque shield automatically blanks sensitive tabs, banking, webmail, tab titles, and favicons when presenting on Google Meet, Zoom, or Teams. Click to peek, auto-hides when you switch away.",
-  },
-  {
-    version: "v3.5.5",
-    icon: "🔗",
-    title: "URL Path Locking",
-    desc: "Lock specific pages or sub-directories (like notion.so/work/*) instead of entire websites. Support for wildcards, custom path reach, and scoped unlocking.",
-  },
-  {
-    version: "v3.4.0",
-    icon: "🔑",
-    title: "Master Recovery Key",
-    desc: "Create a 16-character emergency key so you can reset your master password offline if you ever forget it. It's hashed and stored safely on your own device.",
-  },
-  {
-    version: "v3.4.0",
-    icon: "⏳",
-    title: "Smart Sessions",
-    desc: "Decide how long Locksy waits before asking for your password again — from strict (every time) up to 60 minutes — with an extra check before sensitive actions.",
-  },
-  {
-    version: "v3.1.0",
-    icon: "🛡️",
-    title: "Privacy Blur Shield & Manager",
-    desc: "Automatically blurs passwords, card numbers and one-time codes, and hides the whole page when you switch windows. Pro adds custom blur strength, per-site rules, and a trusted-sites list.",
-  },
-  {
-    version: "v3.0.0",
-    icon: "📊",
-    title: "Weekly Privacy Reports",
-    desc: "A private, offline dashboard showing your locks, blocked snooping attempts, and a simple security score. Nothing is ever uploaded.",
-  },
-  {
-    version: "v3.0.0",
-    icon: "📸",
-    title: "Startup Lock & Webcam Alerts",
-    desc: "Re-locks your tabs when the browser reopens, and can quietly take a webcam photo of anyone who fails your password too many times — saved locally, only for you.",
-  },
-  {
-    version: "v2.5.0",
-    icon: "🕵️",
-    title: "Stealth Mode",
-    desc: "Makes Locksy invisible: the badge disappears and locked tabs look like an ordinary “this site can’t be reached” error. Toggle it with Alt+Shift+7 or the right-click menu.",
-  },
-  {
-    version: "v2.5.0",
-    icon: "🖱️",
-    title: "Right-Click Menus & Themes",
-    desc: "Lock a tab, a whole site, or every tab straight from the right-click menu — no popup needed. Plus a built-in light/dark theme switch.",
-  },
-  {
-    version: "v2.2.0",
-    icon: "⏱️",
-    title: "Auto-Lock & Scheduled Locking",
-    desc: "Locks your tabs automatically after you step away, or on a schedule you set by day and time (even overnight). Smart enough not to interrupt a video you're watching.",
-  },
-]
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+import { RELEASES, formatReleaseDate } from "@/lib/changelog"
 
+/**
+ * Homepage "Recently shipped" strip: the three newest releases from
+ * lib/changelog.ts, linking through to the full /changelog page.
+ */
 export default function WhatsNew() {
+  const recent = RELEASES.slice(0, 3)
+
   return (
-    <section
-      id="whats-new"
-      className="py-20 md:py-28 bg-gradient-to-b from-background via-accent/20 to-background relative overflow-hidden"
-    >
-      {/* Soft background glow to match the rest of the page */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-primary/6 dark:bg-primary/12 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/5 w-72 h-72 bg-secondary/6 dark:bg-secondary/12 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 md:px-6">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary backdrop-blur-sm mb-6">
-            <span aria-hidden="true">✨</span>
-            Always improving
+    <section id="whats-new" className="relative scroll-mt-24 py-14 md:py-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <span className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              What&apos;s new
+            </span>
+            <h2 className="mt-5 text-3xl font-semibold leading-[1.1] text-foreground sm:text-4xl md:text-5xl text-balance">
+              Updated every few weeks
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+              {RELEASES.length} releases since {formatReleaseDate(RELEASES[RELEASES.length - 1].date)}. Here&apos;s what shipped most
+              recently.
+            </p>
           </div>
-          <h2 className="section-title">Recently Added to Locksy</h2>
-          <p className="section-subtitle">
-            Locksy keeps getting better. Here are the newest ways it helps keep your tabs private —
-            all included in the free version unless noted as Pro.
-          </p>
+          <Link href="/changelog" className="btn-secondary h-10 flex-shrink-0 px-5">
+            Full changelog <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {updates.map((item) => (
-            <div
-              key={item.title}
-              className="relative bg-card/60 backdrop-blur-sm border border-border/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/10 flex items-center justify-center text-2xl">
-                  <span aria-hidden="true">{item.icon}</span>
+        <ol className="mt-12 grid gap-4 md:grid-cols-3">
+          {recent.map((r, i) => (
+            <li key={r.version}>
+              <Link
+                href={`/changelog#v${r.version.replace(/\./g, "-")}`}
+                className={`surface group flex h-full flex-col p-6 transition-colors hover:border-foreground/20 ${
+                  i === 0 ? "ring-1 ring-highlight/30" : ""
+                }`}
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-mono text-xs text-foreground">v{r.version}</span>
+                  <time dateTime={r.date} className="text-xs text-muted-foreground">
+                    {formatReleaseDate(r.date)}
+                  </time>
                 </div>
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-muted text-muted-foreground">
-                  {item.version}
+                <h3 className="mt-6 text-lg font-semibold text-foreground">{r.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{r.summary}</p>
+                <span className="mt-6 inline-flex items-center gap-1 text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                  Read release notes
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </span>
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-foreground">{item.title}</h3>
-              <p className="text-muted-foreground text-[15px] leading-relaxed">{item.desc}</p>
-            </div>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )

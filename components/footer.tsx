@@ -17,6 +17,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { label: "Edge Add-ons", href: EDGE_STORE_URL, external: true },
       { label: "Features", href: "/#features" },
       { label: "Pricing", href: "/pricing" },
+      { label: "Changelog", href: "/changelog" },
       { label: "Demo video", href: "https://www.youtube.com/watch?v=mZxIBLo9ezY", external: true },
     ],
   },

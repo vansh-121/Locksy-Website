@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { blogPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
+import { RELEASES } from '@/lib/changelog'
 
 const siteUrl = 'https://www.locksy.dev'
 
@@ -120,6 +121,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date(LAST_UPDATED),
             changeFrequency: 'weekly',
             priority: 0.9,
+        },
+        {
+            // Last-modified follows the newest release in lib/changelog.ts.
+            url: `${siteUrl}/changelog`,
+            lastModified: new Date(RELEASES[0].date),
+            changeFrequency: 'weekly',
+            priority: 0.7,
         },
     ]
 

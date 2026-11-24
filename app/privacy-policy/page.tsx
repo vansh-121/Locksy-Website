@@ -47,10 +47,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ])
 
 export default function PrivacyPolicyPage() {
-    // Pinned date of the last change to the policy wording. Update this by hand
-    // when the policy text changes. (It used to read the file's mtime, which
-    // moved on every restyle or fresh deploy even when the policy didn't.)
-    const lastUpdated = 'November 12, 2026'
+    // Pinned date of the last change to the policy wording; keep it in step with
+    // the privacy-policy entry in app/sitemap.ts. (It used to read the file's
+    // mtime, which moved on every restyle or fresh deploy even when the policy
+    // didn't.)
+    const lastUpdated = 'July 31, 2026'
 
     return (
         <>

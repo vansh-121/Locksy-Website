@@ -3,7 +3,9 @@ import Hero from "@/components/hero"
 import StatsStrip from "@/components/stats-strip"
 import SeeItInAction from "@/components/see-it-in-action"
 import Features from "@/components/features"
-import HowItWorks from "@/components/how-it-works"
+import GettingStarted from "@/components/getting-started"
+import BiometricUnlock from "@/components/biometric-unlock"
+import WhatsNew from "@/components/whats-new"
 import Security from "@/components/security"
 import Comparison from "@/components/comparison"
 import Testimonials from "@/components/testimonials"
@@ -27,12 +29,15 @@ export default function Home() {
         <Hero />
         <StatsStrip />
         <SeeItInAction />
+        {/* First-run walkthrough for new users (replaces the 3-step HowItWorks; keeps #how-it-works) */}
+        <GettingStarted />
         <Features />
-        <HowItWorks />
+        <BiometricUnlock />
         <Security />
         <Comparison />
         <Testimonials />
         <Pricing />
+        <WhatsNew />
         <FAQ />
         <ToolsShowcase />
         <LatestBlogPosts posts={blogPostSummaries.slice(0, 3)} />
