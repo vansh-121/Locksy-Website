@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { onConsentDecided } from "@/lib/consent"
 
 export default function ChatSupport() {
   useEffect(() => {
@@ -13,20 +14,25 @@ export default function ChatSupport() {
       return
     }
 
-    // Load Crisp Chat widget
-    (window as any).$crisp = []
+    let script: HTMLScriptElement | null = null
+
+    // Wait for the cookie choice so the chat launcher never sits on top of the
+    // cookie card in the same corner. "Open chat" buttons still work before
+    // then, because $crisp queues commands until the widget loads.
+    ;(window as any).$crisp = (window as any).$crisp || []
     ;(window as any).CRISP_WEBSITE_ID = crispWebsiteId
 
-    const script = document.createElement("script")
-    script.src = "https://client.crisp.chat/l.js"
-    script.async = true
-    document.head.appendChild(script)
+    const unsubscribe = onConsentDecided(() => {
+      if (document.querySelector('script[src="https://client.crisp.chat/l.js"]')) return
+      script = document.createElement("script")
+      script.src = "https://client.crisp.chat/l.js"
+      script.async = true
+      document.head.appendChild(script)
+    })
 
     return () => {
-      // Cleanup
-      if (document.head.contains(script)) {
-        document.head.removeChild(script)
-      }
+      unsubscribe()
+      if (script && document.head.contains(script)) document.head.removeChild(script)
     }
   }, [])
 

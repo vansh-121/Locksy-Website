@@ -1,13 +1,9 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import ProductShot from "@/components/product-shot"
 import {
-  Fingerprint,
   ShieldCheck,
   Link2,
   KeyRound,
-  Check,
   Lock,
   Laptop,
   Monitor,
@@ -52,66 +48,11 @@ const PLATFORMS = [
   { icon: Usb, label: "Security key", sub: "YubiKey, SoloKey, Titan" },
 ]
 
-type DemoState = "locked" | "scanning" | "unlocked"
-
-function UnlockDemo() {
-  const [state, setState] = useState<DemoState>("locked")
-  const [progress, setProgress] = useState(0)
-  const ref = useRef<HTMLDivElement>(null)
-  const ran = useRef(false)
-  const timers = useRef<ReturnType<typeof setTimeout>[]>([])
-
-  const clear = () => {
-    timers.current.forEach(clearTimeout)
-    timers.current = []
-  }
-
-  const run = () => {
-    if (state === "scanning") return
-    clear()
-    setState("scanning")
-    setProgress(0)
-    const steps = 20
-    for (let i = 1; i <= steps; i++) {
-      timers.current.push(setTimeout(() => setProgress((i / steps) * 100), i * 55))
-    }
-    timers.current.push(setTimeout(() => setState("unlocked"), steps * 55 + 120))
-    timers.current.push(
-      setTimeout(() => {
-        setState("locked")
-        setProgress(0)
-      }, steps * 55 + 3200),
-    )
-  }
-
-  // Play once when it scrolls into view (skipped for reduced-motion users).
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && !ran.current) {
-          ran.current = true
-          timers.current.push(setTimeout(run, 700))
-        }
-      },
-      { threshold: 0.5 },
-    )
-    io.observe(el)
-    return () => {
-      io.disconnect()
-      clear()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const unlocked = state === "unlocked"
-
+/** The real Locksy lock screen with biometric unlock switched on. */
+function RealLockScreen() {
   return (
-    <div ref={ref} className="surface relative overflow-hidden p-2 md:p-3">
+    <figure className="surface relative overflow-hidden p-2 md:p-3">
       <div className="overflow-hidden rounded-[1.25rem] border border-border bg-background">
-        {/* Browser chrome */}
         <div className="flex items-center gap-3 border-b border-border px-4 py-3">
           <div className="flex gap-1.5" aria-hidden="true">
             <span className="h-2.5 w-2.5 rounded-full bg-foreground/15" />
@@ -119,76 +60,22 @@ function UnlockDemo() {
             <span className="h-2.5 w-2.5 rounded-full bg-foreground/15" />
           </div>
           <div className="flex flex-1 items-center gap-1.5 truncate rounded-full bg-muted px-3 py-1 text-[11px] text-muted-foreground">
-            {unlocked ? <Check className="h-3 w-3 text-emerald-500" /> : <Lock className="h-3 w-3 text-highlight" />}
+            <Lock className="h-3 w-3 text-highlight" aria-hidden="true" />
             mybank.com
           </div>
         </div>
-
-        <div
-          className="flex min-h-[360px] flex-col items-center justify-center gap-5 px-8 py-10 text-center"
-          style={{ background: "radial-gradient(70% 60% at 50% 40%, var(--glow), transparent 70%)" }}
-          aria-live="polite"
-        >
-          <div className="relative flex h-20 w-20 items-center justify-center">
-            {/* Progress ring */}
-            <svg className="absolute inset-0 -rotate-90" viewBox="0 0 80 80" aria-hidden="true">
-              <circle cx="40" cy="40" r="37" fill="none" stroke="var(--border)" strokeWidth="2" />
-              <circle
-                cx="40"
-                cy="40"
-                r="37"
-                fill="none"
-                stroke={unlocked ? "#10b981" : "var(--highlight)"}
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeDasharray={2 * Math.PI * 37}
-                strokeDashoffset={2 * Math.PI * 37 * (1 - (unlocked ? 100 : progress) / 100)}
-                style={{ transition: "stroke-dashoffset 80ms linear" }}
-              />
-            </svg>
-            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-card">
-              {unlocked ? (
-                <Check className="h-6 w-6 text-emerald-500" aria-hidden="true" />
-              ) : (
-                <Fingerprint className="h-7 w-7 text-highlight" aria-hidden="true" />
-              )}
-            </span>
-          </div>
-
-          <div>
-            <p className="font-display text-lg font-semibold text-foreground">
-              {state === "locked" && "This tab is locked"}
-              {state === "scanning" && "Verifying…"}
-              {unlocked && "Unlocked"}
-            </p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {state === "locked" && "Touch your fingerprint sensor to continue"}
-              {state === "scanning" && "Your device is checking your fingerprint"}
-              {unlocked && "Verified with Windows Hello"}
-            </p>
-          </div>
-
-          <div className="w-full max-w-[260px] space-y-2.5">
-            <button
-              type="button"
-              onClick={run}
-              disabled={state === "scanning"}
-              className="btn-primary h-10 w-full disabled:opacity-60"
-            >
-              <Fingerprint className="h-4 w-4" aria-hidden="true" />
-              {unlocked ? "Run the demo again" : "Unlock with fingerprint"}
-            </button>
-            <div className="flex h-10 items-center justify-center rounded-full border border-border text-xs text-muted-foreground" aria-hidden="true">
-              Use password instead
-            </div>
-          </div>
-          <p className="text-[11px] text-muted-foreground">Simulated demo. No real biometric data is used.</p>
-        </div>
+        <ProductShot
+          name="biometric"
+          alt="Locksy lock screen asking you to touch your fingerprint sensor, with a Use Password Instead button"
+          className="h-auto w-full"
+        />
       </div>
-    </div>
+      <figcaption className="px-2 pt-3 pb-1 text-center text-xs text-muted-foreground">
+        The actual Locksy lock screen with fingerprint unlock turned on.
+      </figcaption>
+    </figure>
   )
 }
-
 /** Homepage spotlight for biometric unlock, laid out like the reference's two-column privacy section. */
 export default function BiometricUnlock() {
   return (
@@ -223,7 +110,7 @@ export default function BiometricUnlock() {
             </ul>
           </div>
 
-          <UnlockDemo />
+          <RealLockScreen />
         </div>
 
         {/* Platforms + setup */}

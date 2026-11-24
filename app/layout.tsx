@@ -45,6 +45,12 @@ export default function RootLayout({
           title="Locksy Blog RSS Feed"
           href="https://www.locksy.dev/feed.xml"
         />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Locksy Changelog RSS Feed"
+          href="https://www.locksy.dev/changelog/feed.xml"
+        />
         {/* LLM & AI Context Auto-Discovery */}
         <link
           rel="alternate"

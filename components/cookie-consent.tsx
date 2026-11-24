@@ -2,21 +2,22 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { getConsent, setConsent, type ConsentChoice } from "@/lib/consent"
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false)
 
   useEffect(() => {
-    const consent = localStorage.getItem("locksy-cookie-consent")
-    if (!consent) {
+    if (!getConsent()) {
       // Small delay so the banner doesn't flash on page load
       const timer = setTimeout(() => setShowBanner(true), 1500)
       return () => clearTimeout(timer)
     }
   }, [])
 
-  const choose = (value: "accepted" | "essential-only") => {
-    localStorage.setItem("locksy-cookie-consent", value)
+  const choose = (value: ConsentChoice) => {
+    // Also tells the chat launcher and WhatsApp button they may appear now.
+    setConsent(value)
     setShowBanner(false)
   }
 

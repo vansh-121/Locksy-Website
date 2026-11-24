@@ -120,6 +120,12 @@ export default function ChangelogPage() {
             </ol>
 
             <p className="mt-4 text-center text-sm text-muted-foreground">
+              Get new releases in your feed reader:{" "}
+              <a href="/changelog/feed.xml" className="text-foreground underline underline-offset-4">
+                changelog RSS
+              </a>
+            </p>
+            <p className="mt-2 text-center text-sm text-muted-foreground">
               Found a bug or want a feature?{" "}
               <a
                 href="https://github.com/vansh-121/Locksy/issues"

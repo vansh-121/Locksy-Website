@@ -7,19 +7,16 @@ import {
   ArrowRight,
   BookOpen,
   Check,
-  Copy,
   Download,
-  Fingerprint,
   Lock,
   MousePointerClick,
   Pin,
   Puzzle,
   Keyboard,
-  Unlock,
-  TriangleAlert,
 } from "lucide-react"
 import { PRIMARY_BROWSERS, detectBrowser, type BrowserLink } from "@/lib/browsers"
 import { GUIDE_PDF_PATH } from "@/lib/guide-paths"
+import ProductShot from "@/components/product-shot"
 
 /*
  * First-run walkthrough for people who have never used a browser extension
@@ -185,26 +182,18 @@ const STEPS: Step[] = [
       </>
     ),
     visual: () => (
-      <div className="py-4">
-        <Popup>
-          <p className="text-sm font-medium text-foreground">Your recovery key</p>
-          <div className="mt-4 rounded-lg border border-border bg-background px-3 py-3 text-center font-mono text-sm tracking-wider text-foreground">
-            LOCKSY-7K2P-Q9XD-M4WT
-          </div>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            <div className="flex h-9 items-center justify-center gap-1.5 rounded-full border border-border text-xs text-foreground">
-              <Copy className="h-3.5 w-3.5" aria-hidden="true" /> Copy
-            </div>
-            <div className="flex h-9 items-center justify-center gap-1.5 rounded-full border border-border text-xs text-foreground">
-              <Download className="h-3.5 w-3.5" aria-hidden="true" /> Download
-            </div>
-          </div>
-          <p className="mt-4 flex gap-2 text-[11px] leading-relaxed text-muted-foreground">
-            <TriangleAlert className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-amber-500" aria-hidden="true" />
-            Example key. Yours will be different.
-          </p>
-        </Popup>
-      </div>
+      <figure className="mx-auto max-w-[300px]">
+        <div className="overflow-hidden rounded-2xl border border-border">
+          <ProductShot
+            name="recovery"
+            alt="Locksy's Emergency Recovery Key screen with Copy Key, Download Key and I've Saved It buttons"
+            className="h-auto w-full"
+          />
+        </div>
+        <figcaption className="mt-3 text-center text-xs text-muted-foreground">
+          The real screen, with a demo key. Yours is unique and shown only once.
+        </figcaption>
+      </figure>
     ),
   },
   {
@@ -218,33 +207,38 @@ const STEPS: Step[] = [
       </>
     ),
     visual: () => (
-      <div className="grid gap-3 py-2">
-        {[
-          { icon: MousePointerClick, title: "Locksy icon", detail: <span className="rounded-full bg-foreground px-3 py-1 text-[11px] font-medium text-background">Lock Current Tab</span> },
-          {
-            icon: Keyboard,
-            title: "Keyboard shortcut",
-            detail: (
-              <span className="flex gap-1">
-                <kbd className="kbd">Alt</kbd>
-                <kbd className="kbd">Shift</kbd>
-                <kbd className="kbd">9</kbd>
+      <div className="grid items-start gap-4 sm:grid-cols-[1fr_200px]">
+        <div className="grid gap-2.5">
+          {[
+            { icon: MousePointerClick, title: "Locksy icon", detail: <span className="text-xs text-muted-foreground">Current Tab</span> },
+            {
+              icon: Keyboard,
+              title: "Shortcut",
+              detail: (
+                <span className="flex gap-1">
+                  <kbd className="kbd">Alt</kbd>
+                  <kbd className="kbd">Shift</kbd>
+                  <kbd className="kbd">9</kbd>
+                </span>
+              ),
+            },
+            { icon: MousePointerClick, title: "Right-click", detail: <span className="text-xs text-muted-foreground">Lock this tab</span> },
+          ].map(({ icon: Icon, title, detail }) => (
+            <div key={title} className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-background px-4 py-3.5">
+              <span className="flex items-center gap-3 text-sm text-foreground">
+                <Icon className="h-4 w-4 text-highlight" aria-hidden="true" />
+                {title}
               </span>
-            ),
-          },
-          { icon: MousePointerClick, title: "Right-click menu", detail: <span className="text-xs text-muted-foreground">Locksy → Lock this tab</span> },
-        ].map(({ icon: Icon, title, detail }) => (
-          <div key={title} className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-background px-4 py-4">
-            <span className="flex items-center gap-3 text-sm text-foreground">
-              <Icon className="h-4 w-4 text-highlight" aria-hidden="true" />
-              {title}
-            </span>
-            {detail}
-          </div>
-        ))}
-        <p className="px-1 text-xs leading-relaxed text-muted-foreground">
-          The page is taken off the screen and a small red padlock appears on the tab.
-        </p>
+              {detail}
+            </div>
+          ))}
+          <p className="px-1 text-xs leading-relaxed text-muted-foreground">
+            The page is taken off the screen and a small red padlock appears on the tab.
+          </p>
+        </div>
+        <div className="mx-auto w-full max-w-[220px] overflow-hidden rounded-2xl border border-border">
+          <ProductShot name="popup" alt="The Locksy popup with Current Tab, All Tabs, Unlock All Tabs and Domain Lock buttons" className="h-auto w-full" />
+        </div>
       </div>
     ),
   },
@@ -260,28 +254,11 @@ const STEPS: Step[] = [
     ),
     visual: () => (
       <Window url="mail.example.com">
-        <div
-          className="flex flex-col items-center gap-4 px-6 py-8 text-center"
-          style={{ background: "radial-gradient(70% 60% at 50% 40%, var(--glow), transparent 70%)" }}
-        >
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card">
-            <Lock className="h-5 w-5 text-highlight" aria-hidden="true" />
-          </span>
-          <p className="font-display text-base font-semibold text-foreground">This tab is locked</p>
-          <div className="w-full max-w-[240px] space-y-2">
-            <div className="flex h-9 items-center justify-center rounded-full border border-border bg-card text-sm tracking-[0.3em] text-muted-foreground">
-              ••••••••
-            </div>
-            <div className="flex gap-2">
-              <div className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-full bg-foreground text-sm font-medium text-background">
-                <Unlock className="h-3.5 w-3.5" aria-hidden="true" /> Unlock
-              </div>
-              <div className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card">
-                <Fingerprint className="h-4 w-4 text-foreground" aria-hidden="true" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProductShot
+          name="locked"
+          alt="Locksy's lock screen: Tab Secured, with a password field and Unlock Tab button"
+          className="h-auto w-full"
+        />
       </Window>
     ),
   },

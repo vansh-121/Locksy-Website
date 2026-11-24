@@ -2,8 +2,9 @@
 // (readable by anyone nearby) and with Locksy (a password lock screen).
 // Server-rendered, so every word is in the initial HTML.
 
-import { Lock, Fingerprint, Search, ArrowRight } from "lucide-react"
+import { Lock, Search, ArrowRight } from "lucide-react"
 import SectionHeading from "@/components/section-heading"
+import ProductShot from "@/components/product-shot"
 
 function InboxRow({ initials, sender, subject, time }: { initials: string; sender: string; subject: string; time: string }) {
   return (
@@ -92,30 +93,13 @@ export default function SeeItInAction() {
             </figcaption>
             <div className="mx-5 mb-5 flex h-[380px] flex-col overflow-hidden rounded-2xl border border-border bg-background">
               <BrowserChrome url="mail.example.com" locked={true} />
-              <div
-                className="flex flex-1 flex-col items-center justify-center gap-5 px-8 text-center"
-                style={{ background: "radial-gradient(70% 60% at 50% 40%, var(--glow), transparent 70%)" }}
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-card">
-                  <Lock className="h-6 w-6 text-highlight" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="font-display text-lg font-semibold text-foreground">This tab is locked</p>
-                  <p className="mt-1 text-sm text-muted-foreground">Enter your master password to unlock it.</p>
-                </div>
-                <div className="w-full max-w-[260px] space-y-2.5" aria-hidden="true">
-                  <div className="flex h-10 items-center justify-center rounded-full border border-border bg-card text-lg tracking-[0.3em] text-muted-foreground">
-                    ••••••••
-                  </div>
-                  <div className="flex gap-2">
-                    <div className="flex h-10 flex-1 items-center justify-center rounded-full bg-foreground text-sm font-medium text-background">
-                      Unlock
-                    </div>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card">
-                      <Fingerprint className="h-4 w-4 text-foreground" />
-                    </div>
-                  </div>
-                </div>
+              {/* Real Locksy lock screen, not a drawing */}
+              <div className="relative flex-1 overflow-hidden">
+                <ProductShot
+                  name="locked"
+                  alt="Locksy's lock screen: Tab Secured, with a password field and Unlock Tab button"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                />
               </div>
             </div>
             <p className="px-5 pb-6 text-sm text-muted-foreground">

@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  Source for public/video-poster.jpg (1280x720) and public/og-image.jpg (1200x630).
+  Rendered by scripts/brand-assets/render-brand-assets.ps1 with headless Edge.
+  ?asset=poster | ?asset=og
+  Screenshots are real renders of the extension (D:\Locksy Extension, theme tests
+  run with --screenshots) copied into public/screens/.
+-->
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,600&family=Inter:wght@400;500&display=block" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #060709; color: #f4f5f7; font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .canvas { position: relative; overflow: hidden; background: #060709; }
+  .grid { position: absolute; inset: 0; background-image: radial-gradient(rgba(244,245,247,0.09) 1px, transparent 1px); background-size: 22px 22px; }
+  .glow { position: absolute; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(79,141,255,0.30), transparent 70%); }
+  .brand { display: flex; align-items: center; gap: 14px; font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: -0.02em; }
+  .brand img { width: 44px; height: 44px; }
+  h1 { font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; }
+  .hl { color: #8ab8ff; }
+  .muted { color: #9aa1ab; }
+  .frame { position: absolute; padding: 10px; border-radius: 26px; border: 1px solid rgba(255,255,255,0.09);
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); box-shadow: 0 40px 90px -20px rgba(0,0,0,0.7); }
+  .frame .win { border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0a0b0e; }
+  .chrome { height: 34px; display: flex; align-items: center; gap: 12px; padding: 0 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .dots { display: flex; gap: 6px; } .dots span { width: 9px; height: 9px; border-radius: 50%; background: rgba(244,245,247,0.16); }
+  .url { flex: 1; height: 20px; border-radius: 999px; background: #14171b; color: #9aa1ab; font-size: 11px; display: flex; align-items: center; padding: 0 10px; gap: 6px; }
+  .url svg { width: 10px; height: 10px; }
+  .frame img.shot { display: block; width: 100%; }
+  .pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(13,15,18,0.8); font-size: 15px; color: #d6dae0; }
+  .pill i { width: 6px; height: 6px; border-radius: 50%; background: #8ab8ff; display: block; }
+  .popup { position: absolute; border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8); }
+  .popup img { display: block; width: 100%; }
+</style>
+</head>
+<body>
+<script>
+  const asset = new URLSearchParams(location.search).get('asset') || 'poster';
+  const LOGO = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/locksy_-_new_logo-removebg-preview-A7nNuNJNkO21eb9DgcS0wIKSIINL9U.png';
+  const lock = '<svg viewBox="0 0 24 24" fill="none" stroke="#8ab8ff" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+  const win = (src, url) => `<div class="win"><div class="chrome"><div class="dots"><span></span><span></span><span></span></div><div class="url">${lock}${url}</div></div><img class="shot" src="${src}"></div>`;
+
+  if (asset === 'poster') {
+    document.write(`
+      <div class="canvas" style="width:1280px;height:720px">
+        <div class="grid" style="-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent)"></div>
+        <div class="glow" style="width:1100px;height:700px;left:90px;top:40px"></div>
+        <div class="brand" style="position:absolute;left:56px;top:46px;font-size:26px"><img src="${LOGO}">Locksy</div>
+        <div class="frame" style="left:220px;top:118px;width:840px">${win('../../public/screens/locked-dark.png', 'mail.google.com')}</div>
+      </div>`);
+  } else {
+    document.write(`
+      <div class="canvas" style="width:1200px;height:630px">
+        <div class="grid" style="-webkit-mask-image:radial-gradient(ellipse 60% 80% at 75% 50%, black, transparent)"></div>
+        <div class="glow" style="width:900px;height:760px;left:520px;top:-80px"></div>
+        <div style="position:absolute;left:72px;top:64px;width:560px">
+          <div class="brand" style="font-size:28px"><img src="${LOGO}">Locksy</div>
+          <h1 style="font-size:66px;margin-top:54px">Password protect your <span class="hl">browser tabs</span></h1>
+          <p class="muted" style="font-size:22px;line-height:1.45;margin-top:24px">Lock any tab or website behind your password or fingerprint. Free, offline, no account.</p>
+          <div class="pills" style="margin-top:36px"><span class="pill"><i></i>Chrome</span><span class="pill"><i></i>Edge</span><span class="pill"><i></i>Firefox</span><span class="pill"><i></i>4.4 rating</span></div>
+        </div>
+        <div class="popup" style="left:770px;top:92px;width:350px">
+          <img src="../../public/screens/popup-dark.png">
+        </div>
+      </div>`);
+  }
+</script>
+</body>
+</html>

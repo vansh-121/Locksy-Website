@@ -1,6 +1,10 @@
 import { MetadataRoute } from 'next'
 import { blogPosts, NOINDEX_SLUGS } from '@/lib/blog-data'
 import { RELEASES } from '@/lib/changelog'
+import { COMPARISONS } from '@/lib/comparisons'
+
+// Bump when lib/comparisons.ts content changes.
+const COMPARE_UPDATED = '2026-11-24'
 
 const siteUrl = 'https://www.locksy.dev'
 
@@ -122,6 +126,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 0.9,
         },
+        {
+            url: `${siteUrl}/compare`,
+            lastModified: new Date(COMPARE_UPDATED),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        ...COMPARISONS.map((c) => ({
+            url: `${siteUrl}/compare/${c.slug}`,
+            lastModified: new Date(COMPARE_UPDATED),
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        })),
         {
             // Last-modified follows the newest release in lib/changelog.ts.
             url: `${siteUrl}/changelog`,

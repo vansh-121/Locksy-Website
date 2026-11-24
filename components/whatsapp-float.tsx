@@ -5,10 +5,26 @@ import Image from "next/image"
 import { ExternalLink, Smartphone, X } from "lucide-react"
 import WhatsAppIcon from "./whatsapp-icon"
 import { WHATSAPP_CHANNEL_URL } from "@/lib/social-links"
+import { onConsentDecided } from "@/lib/consent"
 
 export default function WhatsAppFloat() {
   const [isOpen, setIsOpen] = useState(false)
+  // Hidden until the cookie choice is made and the visitor has scrolled past
+  // the first screen, so the hero isn't crowded by floating buttons.
+  const [consented, setConsented] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => onConsentDecided(() => setConsented(true)), [])
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.6)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  const visible = consented && (scrolled || isOpen)
 
   // Close on Escape or click outside
   useEffect(() => {
@@ -50,7 +66,13 @@ export default function WhatsAppFloat() {
   }
 
   return (
-    <div ref={containerRef} className="fixed bottom-4 left-4 z-40 print:hidden">
+    <div
+      ref={containerRef}
+      aria-hidden={!visible}
+      className={`fixed bottom-4 left-4 z-40 transition-all duration-300 print:hidden ${
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
+      }`}
+    >
       {/* Floating QR Popover (Desktop) */}
       {isOpen && (
         <div
@@ -122,6 +144,7 @@ export default function WhatsAppFloat() {
 
       {/* Floating Trigger Button */}
       <a
+        tabIndex={visible ? undefined : -1}
         href={WHATSAPP_CHANNEL_URL}
         onClick={handleClick}
         target="_blank"

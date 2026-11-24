@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import WhatsAppIcon from "./whatsapp-icon"
+import ProductHuntBadge from "./product-hunt-badge"
 import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 import { CHROME_STORE_URL, EDGE_STORE_URL, FIREFOX_STORE_URL, LOCKSY_LOGO_URL } from "@/lib/browsers"
 
@@ -28,6 +29,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { label: "Security", href: "/security" },
       { label: "Free tools", href: "/tools" },
       { label: "Blog", href: "/blog" },
+      { label: "Compare Locksy", href: "/compare" },
       { label: "Best tab lockers 2026", href: "/blog/best-tab-locking-extensions-2026" },
       { label: "About", href: "/about" },
     ],
@@ -150,6 +152,7 @@ export default function Footer() {
         <div className="mt-8 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <p className="text-xs text-muted-foreground">© 2025–2026 Locksy. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-3">
+            <ProductHuntBadge />
             <a
               href="https://peerpush.com/p/locksy-tab-locker-and-password-protection"
               target="_blank"

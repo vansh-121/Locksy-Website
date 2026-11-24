@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Check, X } from "lucide-react"
 import SectionHeading from "@/components/section-heading"
 
@@ -46,6 +47,11 @@ export default function Comparison() {
           title="Built for tab-level privacy"
           description="Your operating system's lock screen protects the whole computer. Locksy protects exactly the tabs you need, while you keep working."
         />
+        <p className="mt-5 text-center text-sm">
+          <Link href="/compare" className="text-muted-foreground underline decoration-border underline-offset-4 hover:text-foreground hover:decoration-foreground">
+            Detailed comparisons, including when you don&apos;t need Locksy
+          </Link>
+        </p>
 
         <div className="mt-14 grid items-start gap-4 lg:grid-cols-2">
           {/* Device lock vs Locksy */}
