@@ -36,48 +36,12 @@ import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
 import { PRO_CHECKOUT_URL } from "@/lib/pro"
 import SectionHeading from "@/components/section-heading"
 import { PageHero, PageSection, IconTile } from "@/components/page-shell"
+import { useVisitorBrowser, StoreNote } from "@/components/install-buttons"
+import { orderedStores } from "@/lib/browsers"
 
-const BROWSERS = [
-    {
-        key: "chrome",
-        name: "Chrome",
-        icon: "/browsers/chrome.png",
-        url: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim",
-    },
-    {
-        key: "edge",
-        name: "Edge",
-        icon: "/browsers/edge.png",
-        url: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn",
-    },
-    {
-        key: "firefox",
-        name: "Firefox",
-        icon: "/browsers/firefox.png",
-        url: "https://addons.mozilla.org/en-US/firefox/addon/locksy/",
-    },
-] as const
-
-type Browser = (typeof BROWSERS)[number]
-
-// Which store to send this visitor to, so the hero can offer one button instead
-// of three. Chromium forks (Brave, Opera, Vivaldi) all install from the Chrome
-// Web Store, so falling through to "chrome" still sends them to the right place.
-// Anything unrecognised returns null and the hero degrades to the browser picker
-// further down the page — which is also what a visitor without JS gets.
-function detectBrowser(): Browser | null {
-    if (typeof navigator === "undefined") return null
-    const ua = navigator.userAgent
-    const key = /Edg\//.test(ua)
-        ? "edge"
-        : /Firefox\//.test(ua)
-            ? "firefox"
-            : /Chrome\//.test(ua)
-                ? "chrome"
-                : null
-    return BROWSERS.find((b) => b.key === key) ?? null
-}
-
+// Store links and detection are shared with the rest of the site
+// (lib/browsers.ts). Brave, Opera, Vivaldi and Arc resolve to the Chrome Web
+// Store; Safari and iOS are flagged as unsupported.
 // Every reason someone leaves, paired with the argument against it.
 //
 // This is the retention engine of the page. The visitor has *already*
@@ -237,18 +201,16 @@ export default function UninstallClient({
     chapterCount: number
     guidePdfPath: string
 }) {
-    const [browser, setBrowser] = useState<Browser | null>(null)
+    const visitor = useVisitorBrowser()
+    // null until detection has run, so the first render matches the server.
+    const browser = visitor.detected && visitor.supported ? visitor.browser : null
+    const restoreStores = orderedStores(visitor.browser)
     const [selected, setSelected] = useState<string[]>([])
     const [feedback, setFeedback] = useState("")
     const [submitted, setSubmitted] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState("")
 
-    // Detection has to happen after mount: reading navigator during render would
-    // make the server and client markup disagree.
-    useEffect(() => {
-        setBrowser(detectBrowser())
-    }, [])
 
     const toggle = (id: string) =>
         setSelected((prev) => (prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]))
@@ -317,7 +279,7 @@ export default function UninstallClient({
                 <a
                     href={restoreHref}
                     {...restoreProps}
-                    className="btn-primary btn-lg group w-full sm:w-auto"
+                    className="btn-primary btn-glow btn-lg group w-full sm:w-auto"
                 >
                     {browser ? (
                         <img src={browser.icon} alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
@@ -816,25 +778,30 @@ export default function UninstallClient({
                             </p>
 
                             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                                {BROWSERS.map((b, i) => (
+                                {restoreStores.map((b, i) => (
                                     <a
-                                        key={b.key}
+                                        key={b.id}
                                         href={b.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`${i === 0 ? "btn-primary" : "btn-secondary"} w-full sm:w-auto ${browser?.key === b.key ? "ring-2 ring-highlight/40 ring-offset-2 ring-offset-card" : ""
-                                            }`}
+                                        className={`${i === 0 ? "btn-primary btn-glow" : "btn-secondary"} w-full sm:w-auto`}
                                     >
                                         <img src={b.icon} alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
                                         <span>{b.name}</span>
+                                        {i === 0 && visitor.detected && (
+                                            <span className="sr-only"> (your browser)</span>
+                                        )}
                                         <Download className="h-4 w-4 opacity-60" />
                                     </a>
                                 ))}
                             </div>
 
-                            <p className="mt-6 text-xs text-muted-foreground">
-                                Brave, Opera and Vivaldi install from the Chrome Web Store.
-                            </p>
+                            <StoreNote visitor={visitor} className="mt-6 text-center" />
+                            {!visitor.note && (
+                                <p className="mt-2 text-xs text-muted-foreground">
+                                    Brave, Opera, Vivaldi and Arc install from the Chrome Web Store.
+                                </p>
+                            )}
 
                             <div className="mt-10 grid grid-cols-2 gap-4 border-t border-border pt-6 text-sm text-muted-foreground md:grid-cols-4">
                                 {["30-second install", "No credit card", "No account required", "100% offline"].map(

@@ -1,85 +1,51 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
 import { Lock } from 'lucide-react'
+import { useVisitorBrowser, OtherStoreLinks, StoreNote } from '@/components/install-buttons'
+import { getBrowser, type BrowserLink } from '@/lib/browsers'
+
+/**
+ * Blog install helpers. Detection and store links come from lib/browsers.ts via
+ * useVisitorBrowser, the same source as every other install button on the site.
+ */
 
 export interface BrowserStore {
-    key: 'chrome' | 'edge' | 'firefox' | 'brave'
+    key: BrowserLink['id']
     name: string
     buttonLabel: string
     shortName: string
     url: string
 }
 
-export const BROWSER_STORES: Record<'chrome' | 'edge' | 'firefox' | 'brave', BrowserStore> = {
-    chrome: {
-        key: 'chrome',
-        name: 'Google Chrome',
-        buttonLabel: 'Add to Chrome Free',
-        shortName: 'Chrome',
-        url: 'https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim',
-    },
-    edge: {
-        key: 'edge',
-        name: 'Microsoft Edge',
-        buttonLabel: 'Add to Edge Free',
-        shortName: 'Edge',
-        url: 'https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn',
-    },
-    firefox: {
-        key: 'firefox',
-        name: 'Mozilla Firefox',
-        buttonLabel: 'Add to Firefox Free',
-        shortName: 'Firefox',
-        url: 'https://addons.mozilla.org/en-US/firefox/addon/locksy/',
-    },
-    brave: {
-        key: 'brave',
-        name: 'Brave Browser',
-        buttonLabel: 'Add to Brave Free',
-        shortName: 'Brave',
-        url: 'https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim',
-    },
+const toStore = (b: BrowserLink): BrowserStore => ({
+    key: b.id,
+    name: b.name,
+    buttonLabel: `Add to ${b.name}, it's free`,
+    shortName: b.name,
+    url: b.url,
+})
+
+/** Kept for existing imports; prefer `getBrowser` from lib/browsers. */
+export const BROWSER_STORES = {
+    chrome: toStore(getBrowser('chrome')),
+    edge: toStore(getBrowser('edge')),
+    firefox: toStore(getBrowser('firefox')),
+    brave: toStore(getBrowser('brave')),
 }
 
+/** The visitor's store as a BrowserStore (Brave, Opera, Vivaldi… resolve to the Chrome Web Store). */
 export function useDetectedBrowser(): BrowserStore {
-    const [store, setStore] = useState<BrowserStore>(BROWSER_STORES.chrome)
-
-    useEffect(() => {
-        if (typeof navigator === 'undefined') return
-        const ua = navigator.userAgent
-        if (/Edg\//i.test(ua)) {
-            setStore(BROWSER_STORES.edge)
-        } else if (/Firefox\//i.test(ua)) {
-            setStore(BROWSER_STORES.firefox)
-        } else if ((navigator as any).brave && typeof (navigator as any).brave.isBrave === 'function') {
-            setStore(BROWSER_STORES.brave)
-        } else {
-            setStore(BROWSER_STORES.chrome)
-        }
-    }, [])
-
-    return store
+    return toStore(useVisitorBrowser().browser)
 }
 
-/**
- * Mid-article Callout Box: Displays a primary 1-click button tailored to the visitor's browser,
- * with subtle links to the other 2 stores below it.
- */
+/** Mid-article callout: one button for the visitor's browser, text links to the other stores. */
 export function MidArticleInstallCta() {
-    const detected = useDetectedBrowser()
-
-    // Get the other two primary browser stores for alternative links
-    const others = [BROWSER_STORES.chrome, BROWSER_STORES.edge, BROWSER_STORES.firefox].filter(
-        (b) => b.key !== (detected.key === 'brave' ? 'chrome' : detected.key)
-    )
+    const visitor = useVisitorBrowser()
+    const b = visitor.browser
 
     return (
-        <aside
-            aria-label="Locksy Extension Download"
-            className="surface my-12 p-6 md:p-8 not-prose"
-        >
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <aside aria-label="Locksy Extension Download" className="surface my-12 p-6 md:p-8 not-prose">
+            <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
                 <div>
                     <span className="eyebrow">
                         <span className="eyebrow-dot" aria-hidden="true" />
@@ -93,46 +59,29 @@ export function MidArticleInstallCta() {
                     </p>
                 </div>
 
-                <div className="flex flex-col gap-3 w-full md:w-auto flex-shrink-0 items-start md:items-end">
+                <div className="flex w-full flex-shrink-0 flex-col items-start gap-3 md:w-auto md:items-end">
                     <a
-                        href={detected.url}
+                        href={b.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-primary h-11 w-full md:w-auto"
+                        className="btn-primary btn-glow h-11 w-full md:w-auto"
+                        data-browser={b.id}
                     >
-                        {detected.buttonLabel}
+                        <img src={b.icon} alt="" className="h-5 w-5 object-contain" />
+                        Add to {b.name}, it&apos;s free
                     </a>
-
-                    <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                        <span>Also for:</span>
-                        {others.map((other, idx) => (
-                            <React.Fragment key={other.key}>
-                                <a
-                                    href={other.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
-                                >
-                                    {other.shortName}
-                                </a>
-                                {idx < others.length - 1 && <span aria-hidden="true">·</span>}
-                            </React.Fragment>
-                        ))}
-                    </div>
+                    <OtherStoreLinks className="text-xs text-muted-foreground" />
+                    <StoreNote visitor={visitor} className="max-w-xs md:text-right" />
                 </div>
             </div>
         </aside>
     )
 }
 
-/**
- * Desktop sticky TOC install widget
- */
+/** Desktop sticky TOC install widget. */
 export function TocInstallWidget() {
-    const detected = useDetectedBrowser()
-    const others = [BROWSER_STORES.chrome, BROWSER_STORES.edge, BROWSER_STORES.firefox].filter(
-        (b) => b.key !== (detected.key === 'brave' ? 'chrome' : detected.key)
-    )
+    const visitor = useVisitorBrowser()
+    const b = visitor.browser
 
     return (
         <div className="mt-8">
@@ -145,29 +94,16 @@ export function TocInstallWidget() {
                     Free on-device encryption for Chrome, Edge &amp; Firefox.
                 </p>
                 <a
-                    href={detected.url}
+                    href={b.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary btn-sm w-full"
+                    className="btn-primary btn-glow btn-sm w-full"
+                    data-browser={b.id}
                 >
-                    {detected.buttonLabel}
+                    <img src={b.icon} alt="" className="h-4 w-4 object-contain" />
+                    Add to {b.name}
                 </a>
-                <div className="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground">
-                    <span>Also for:</span>
-                    {others.map((other, idx) => (
-                        <React.Fragment key={other.key}>
-                            <a
-                                href={other.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
-                            >
-                                {other.shortName}
-                            </a>
-                            {idx < others.length - 1 && <span>·</span>}
-                        </React.Fragment>
-                    ))}
-                </div>
+                <OtherStoreLinks className="mt-3 w-full justify-center text-[11px] text-muted-foreground" />
             </div>
         </div>
     )

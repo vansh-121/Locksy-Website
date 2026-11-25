@@ -19,6 +19,8 @@ export interface TocHeading {
     id: string
     text: string
     level: 2 | 3
+    /** 1-based line in the markdown source; matches ReactMarkdown's node.position.start.line. */
+    line: number
 }
 
 // Parse ## and ### headings out of markdown. Fenced code blocks are skipped so
@@ -29,7 +31,8 @@ export function extractHeadings(markdown: string): TocHeading[] {
     const seen = new Map<string, number>()
     let inFence = false
 
-    for (const line of lines) {
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i]
         if (/^\s*(```|~~~)/.test(line)) {
             inFence = !inFence
             continue
@@ -50,7 +53,7 @@ export function extractHeadings(markdown: string): TocHeading[] {
         seen.set(id, count + 1)
         if (count > 0) id = `${id}-${count}`
 
-        headings.push({ id, text, level })
+        headings.push({ id, text, level, line: i + 1 })
     }
 
     return headings

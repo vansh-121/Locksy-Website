@@ -1,5 +1,6 @@
 "use client"
 
+import InstallButtons from "@/components/install-buttons"
 import { useState } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
@@ -14,7 +15,6 @@ import {
     Copy,
     Check,
     ArrowRight,
-    ExternalLink,
     Zap,
     Laptop,
     Lock,
@@ -187,11 +187,6 @@ export default function SuccessClient() {
         { id: "automation", label: "Automation & Devices" },
     ]
 
-    const STORE_LINKS = [
-        { label: "Chrome Store", href: "https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim" },
-        { label: "Edge Add-ons", href: "https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn" },
-        { label: "Firefox Add-ons", href: "https://addons.mozilla.org/en-US/firefox/addon/locksy/" },
-    ]
 
     return (
         <div className="flex min-h-screen flex-col justify-between bg-background" suppressHydrationWarning>
@@ -283,20 +278,9 @@ export default function SuccessClient() {
                                 </p>
                             </div>
 
-                            <div className="flex flex-wrap items-center justify-center gap-2">
-                                {STORE_LINKS.map((store) => (
-                                    <a
-                                        key={store.label}
-                                        href={store.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="btn-secondary btn-sm"
-                                    >
-                                        <span>{store.label}</span>
-                                        <ExternalLink className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
-                                    </a>
-                                ))}
-                            </div>
+                            {/* Visitor's browser first (with glow), other stores beside it */}
+                            <InstallButtons size="sm" primaryLabel="{name}" secondaryLabel="{name}" fullWidthOnMobile={false} />
+
                         </div>
                     </div>
                 </PageSection>

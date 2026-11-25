@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 import { ArrowRight, Play, Star, Check } from "lucide-react"
-import { ALL_BROWSERS, PRIMARY_BROWSERS, detectBrowser, type BrowserLink } from "@/lib/browsers"
+import { ALL_BROWSERS, PRIMARY_BROWSERS } from "@/lib/browsers"
+import { useVisitorBrowser, StoreNote } from "@/components/install-buttons"
 
 declare global {
   interface Window {
@@ -221,10 +222,10 @@ function DemoVideo() {
 }
 
 export default function Hero() {
-  // Default to Chrome on the server; swap to the visitor's browser after mount.
-  const [browser, setBrowser] = useState<BrowserLink>(PRIMARY_BROWSERS[0])
-  useEffect(() => setBrowser(detectBrowser()), [])
-
+  // Chrome on the server and first render; the visitor's browser after mount.
+  const visitor = useVisitorBrowser()
+  const browser = visitor.browser
+  // Other browsers, minus any that share this visitor's store page.
   const others = ALL_BROWSERS.filter((b) => b.id !== browser.id)
 
   return (
@@ -271,7 +272,13 @@ export default function Hero() {
 
           {/* CTAs */}
           <div id="download" className="mt-9 flex scroll-mt-32 flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href={browser.url} target="_blank" rel="noopener noreferrer" className="btn-primary btn-lg w-full sm:w-auto">
+            <a
+              href={browser.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary btn-glow btn-lg w-full sm:w-auto"
+              data-browser={browser.id}
+            >
               <img src={browser.icon} alt="" className="h-5 w-5 object-contain" />
               Add to {browser.name}, it&apos;s free
               <ArrowRight className="h-4 w-4" />
@@ -281,6 +288,8 @@ export default function Hero() {
               Watch demo
             </a>
           </div>
+
+          <StoreNote visitor={visitor} className="mx-auto mt-4 max-w-md text-center" />
 
           {/* Other browsers */}
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-1 gap-y-2 text-xs text-muted-foreground">

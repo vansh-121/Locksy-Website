@@ -1,5 +1,6 @@
 "use client"
 
+import { SmartInstallButton } from "@/components/install-buttons"
 import { useState } from 'react'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -414,9 +415,7 @@ export default function BrowserPrivacyScoreClient() {
               Locksy locks and encrypts your active browser tabs with master password protection and biometric unlock.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href="/#download" className="btn-primary">
-                Install Locksy Free
-              </Link>
+              <SmartInstallButton label="Add Locksy to {name}, free" />
               <Link href="/security" className="btn-secondary">
                 Read Security Overview
               </Link>

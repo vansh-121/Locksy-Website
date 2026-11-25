@@ -14,7 +14,8 @@ import BlogViewCounter from '@/components/blog-view-counter'
 import BlogToc, { extractHeadings } from '@/components/blog-toc'
 import { Breadcrumbs } from '@/components/page-shell'
 import { slugify } from '@/lib/utils'
-import { MidArticleInstallCta, useDetectedBrowser, BROWSER_STORES } from '@/components/browser-install-cta'
+import { MidArticleInstallCta, useDetectedBrowser } from '@/components/browser-install-cta'
+import InstallButtons from '@/components/install-buttons'
 
 interface BlogPostClientProps {
     post: BlogPost
@@ -48,27 +49,22 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
         return h2s[Math.floor(h2s.length / 2)]?.id ?? null
     }, [headings])
 
+    // In-article store links are rewritten to the visitor's own store.
     const detected = useDetectedBrowser()
-    const bottomOthers = useMemo(() => {
-        const primaryKey = detected.key === 'brave' ? 'chrome' : detected.key
-        return [BROWSER_STORES.chrome, BROWSER_STORES.edge, BROWSER_STORES.firefox].filter(
-            (b) => b.key !== primaryKey
-        )
-    }, [detected])
 
     useEffect(() => {
         setCurrentUrl(window.location.href)
     }, [])
 
-    // Per-render id assigner: mirrors extractHeadings' dedupe so the Nth "## Foo"
-    // gets the same `foo`, `foo-1`, … id the TOC links to.
-    const headingCounts = new Map<string, number>()
-    const idForHeading = (text: string): string => {
-        const base = slugify(text)
-        if (!base) return ''
-        const count = headingCounts.get(base) ?? 0
-        headingCounts.set(base, count + 1)
-        return count > 0 ? `${base}-${count}` : base
+    // Heading ids come from extractHeadings (the same list the TOC uses), keyed
+    // by the heading's line in the markdown. A render-time counter gave
+    // duplicated ids ("foo-1") whenever React rendered the tree twice, which
+    // broke hydration and TOC links.
+    const idsByLine = useMemo(() => new Map(headings.map((h) => [h.line, h.id])), [headings])
+    const idForHeading = (text: string, node?: { position?: { start?: { line?: number } } }): string => {
+        const line = node?.position?.start?.line
+        const known = line !== undefined ? idsByLine.get(line) : undefined
+        return known ?? slugify(text)
     }
 
     const shareToTwitter = () => {
@@ -250,8 +246,8 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                                 {children}
                                             </h1>
                                         ),
-                                        h2: ({ children }) => {
-                                            const headingId = idForHeading(nodeToText(children))
+                                        h2: ({ children, node }) => {
+                                            const headingId = idForHeading(nodeToText(children), node)
                                             const isMidArticle = midH2Id && headingId === midH2Id
 
                                             return (
@@ -263,8 +259,8 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                                 </>
                                             )
                                         },
-                                        h3: ({ children }) => (
-                                            <h3 id={idForHeading(nodeToText(children))} className="mt-10 mb-3 scroll-mt-28 text-xl font-semibold leading-snug text-foreground">
+                                        h3: ({ children, node }) => (
+                                            <h3 id={idForHeading(nodeToText(children), node)} className="mt-10 mb-3 scroll-mt-28 text-xl font-semibold leading-snug text-foreground">
                                                 {children}
                                             </h3>
                                         ),
@@ -471,35 +467,14 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                                     <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">
                                         Get started with Locksy today — free core version, trusted by thousands
                                     </p>
-                                    <div className="mt-8 flex w-full flex-col justify-center gap-3 sm:flex-row">
-                                        <a
-                                            href={detected.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="btn-primary"
-                                        >
-                                            {detected.buttonLabel}
-                                        </a>
-                                        <Link href="/pricing" className="btn-secondary">
-                                            View Pro Features
-                                        </Link>
-                                    </div>
-                                    <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
-                                        <span>Also available for:</span>
-                                        {bottomOthers.map((other, idx) => (
-                                            <React.Fragment key={other.key}>
-                                                <a
-                                                    href={other.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
-                                                >
-                                                    {other.shortName}
-                                                </a>
-                                                {idx < bottomOthers.length - 1 && <span aria-hidden="true">·</span>}
-                                            </React.Fragment>
-                                        ))}
-                                    </div>
+                                    {/* Visitor's browser first (with glow), other stores beside it */}
+                                    <InstallButtons className="mt-8" primaryLabel="Add to {name}, it's free" />
+                                    <Link
+                                        href="/pricing"
+                                        className="mt-5 inline-block text-sm text-muted-foreground underline decoration-border underline-offset-4 hover:text-foreground hover:decoration-foreground"
+                                    >
+                                        View Pro features
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 "use client"
 
+import { SmartInstallButton } from "@/components/install-buttons"
 import { useState } from "react"
 import Link from "next/link"
 import Header from "@/components/header"
@@ -141,15 +142,8 @@ export default function RefundPolicyClient() {
                             </p>
                         </div>
                         <div className="flex flex-shrink-0 flex-col gap-3 sm:flex-row">
-                            <a
-                                href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn-primary"
-                            >
-                                <Download className="h-4 w-4" />
-                                <span>Install Free Extension</span>
-                            </a>
+                            {/* Points at the visitor's own store */}
+                            <SmartInstallButton label="Add to {name}, it's free" arrow={false} />
                             <Link href="/pricing" className="btn-secondary">
                                 <span>Compare Plans</span>
                                 <ArrowRight className="h-4 w-4" />

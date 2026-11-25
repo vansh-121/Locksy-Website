@@ -1,6 +1,5 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { PRIMARY_BROWSERS } from "@/lib/browsers"
+import InstallButtons from "@/components/install-buttons"
 
 /** Closing call-to-action, shared by the homepage, guide, security and tools pages. */
 export default function CTASection() {
@@ -24,21 +23,8 @@ export default function CTASection() {
               Install Locksy for free and lock your first tab in about 30 seconds. No account, no card.
             </p>
 
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              {PRIMARY_BROWSERS.map((b, i) => (
-                <a
-                  key={b.id}
-                  href={b.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${i === 0 ? "btn-primary" : "btn-secondary"} w-full sm:w-auto`}
-                >
-                  <img src={b.icon} alt="" className="h-5 w-5 object-contain" />
-                  Add to {b.name}
-                  {i === 0 && <ArrowRight className="h-4 w-4" />}
-                </a>
-              ))}
-            </div>
+            {/* Visitor's browser first (with glow), other stores beside it */}
+            <InstallButtons className="mt-9" />
 
             <p className="mt-6 text-xs text-muted-foreground">
               Also works on Brave, Opera, Vivaldi, Comet, Arc and other Chromium browsers.

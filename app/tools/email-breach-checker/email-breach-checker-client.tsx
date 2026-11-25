@@ -1,5 +1,6 @@
 "use client"
 
+import { SmartInstallButton } from "@/components/install-buttons"
 import { useState } from 'react'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -265,9 +266,7 @@ export default function EmailBreachCheckerClient() {
               Locksy prevents unauthorized access to active open browser tabs with password encryption and biometric unlock.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href="/#download" className="btn-primary">
-                Install Locksy Free
-              </Link>
+              <SmartInstallButton label="Add Locksy to {name}, free" />
               <Link href="/tools/password-generator" className="btn-secondary">
                 Generate Secure Passwords
               </Link>

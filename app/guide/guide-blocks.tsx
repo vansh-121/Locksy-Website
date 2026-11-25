@@ -4,8 +4,9 @@
 // Block shapes are defined in lib/guide-data.ts and the content lives in
 // lib/guide-content.json.
 
-import { ArrowUpRight, Lightbulb, Sparkles, TriangleAlert } from "lucide-react"
+import { Lightbulb, Sparkles, TriangleAlert } from "lucide-react"
 import type { GuideBlock } from "@/lib/guide-data"
+import GuideDownloads from "@/components/guide-downloads"
 
 // Same look as the shared `Callout` in components/page-shell.tsx, but rendered
 // here so the callout title can stay an <h3> (Callout renders its title as <p>).
@@ -48,35 +49,6 @@ function Steps({ items }: { items: { title: string; body: string }[] }) {
         </li>
       ))}
     </ol>
-  )
-}
-
-function Downloads({ items }: { items: { name: string; store: string; url: string; icon: string }[] }) {
-  return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-      {items.map((item) => (
-        <a
-          key={item.name}
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="surface group flex items-center gap-3 p-4 transition-colors hover:border-foreground/20"
-        >
-          <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-border bg-background">
-            <img src={item.icon} alt={item.name} className="h-7 w-7 object-contain" />
-          </span>
-          <div className="min-w-0">
-            <p className="text-xs text-muted-foreground">Get it for</p>
-            <p className="font-medium text-foreground">{item.name}</p>
-            <p className="truncate text-xs text-muted-foreground">{item.store}</p>
-          </div>
-          <ArrowUpRight
-            aria-hidden="true"
-            className="ml-auto h-4 w-4 flex-shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
-          />
-        </a>
-      ))}
-    </div>
   )
 }
 
@@ -155,7 +127,8 @@ export default function GuideBlocks({ blocks }: { blocks: GuideBlock[] }) {
             return <Steps key={idx} items={block.items} />
 
           case "downloads":
-            return <Downloads key={idx} items={block.items} />
+            // Reordered client-side so the visitor's browser comes first.
+            return <GuideDownloads key={idx} />
 
           case "table":
             return <Table key={idx} caption={block.caption} head={block.head} rows={block.rows} />

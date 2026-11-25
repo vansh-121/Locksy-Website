@@ -1,24 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-const CHROME_STORE_URL = 'https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim'
-const EDGE_STORE_URL = 'https://microsoftedge.microsoft.com/addons/detail/locksy/igobelagfjckjogmmmgcngpdcccnohmn'
-const FIREFOX_STORE_URL = 'https://addons.mozilla.org/en-US/firefox/addon/locksy/'
+import { CHROME_STORE_URL, EDGE_STORE_URL, FIREFOX_STORE_URL } from '@/lib/browsers'
 
 /**
- * Universal smart redirect endpoint: /install
- * Detects visitor user-agent on the server side and forwards directly to the right browser store.
+ * Universal smart redirect: /install
+ * Sends the visitor straight to the right extension store.
+ *
+ * - Edge -> Edge Add-ons. Firefox (desktop or Android) -> Firefox Add-ons.
+ * - Brave, Opera, Vivaldi, Arc, Comet and Chrome -> Chrome Web Store.
+ *   Brave is identified from the Sec-CH-UA client hint, since its user agent
+ *   matches Chrome's; either way it lands on the Chrome Web Store.
+ * - Android browsers other than Firefox -> Firefox Add-ons, because on Android
+ *   Locksy runs in Firefox.
+ * - iPhone/iPad and desktop Safari can't run Locksy -> the homepage install
+ *   section, which explains the options instead of opening a dead-end store page.
  */
 export function GET(request: NextRequest) {
-    const userAgent = request.headers.get('user-agent') || ''
+    const ua = request.headers.get('user-agent') || ''
+    const hints = request.headers.get('sec-ch-ua') || ''
 
-    if (/Edg\//i.test(userAgent)) {
-        return NextResponse.redirect(EDGE_STORE_URL, 307)
-    }
+    const isIOS = /iPhone|iPad|iPod/i.test(ua)
+    if (isIOS) return NextResponse.redirect(new URL('/#download', request.url), 307)
 
-    if (/Firefox\//i.test(userAgent)) {
-        return NextResponse.redirect(FIREFOX_STORE_URL, 307)
-    }
+    if (/Edg\//i.test(ua) || /Microsoft Edge/i.test(hints)) return NextResponse.redirect(EDGE_STORE_URL, 307)
+    if (/Firefox\//i.test(ua)) return NextResponse.redirect(FIREFOX_STORE_URL, 307)
+    if (/Android/i.test(ua)) return NextResponse.redirect(FIREFOX_STORE_URL, 307)
 
-    // Chrome, Brave, Opera, Vivaldi, and generic desktop/mobile default to Chrome Web Store
+    const isChromium = /Chrome\/|Chromium\//i.test(ua) || /Chromium|Brave|Opera/i.test(hints)
+    if (!isChromium && /Safari\//i.test(ua)) return NextResponse.redirect(new URL('/#download', request.url), 307)
+
     return NextResponse.redirect(CHROME_STORE_URL, 307)
 }

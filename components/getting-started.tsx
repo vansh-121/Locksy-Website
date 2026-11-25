@@ -14,7 +14,8 @@ import {
   Puzzle,
   Keyboard,
 } from "lucide-react"
-import { PRIMARY_BROWSERS, detectBrowser, type BrowserLink } from "@/lib/browsers"
+import { type BrowserLink } from "@/lib/browsers"
+import { useVisitorBrowser } from "@/components/install-buttons"
 import { GUIDE_PDF_PATH } from "@/lib/guide-paths"
 import ProductShot from "@/components/product-shot"
 
@@ -97,7 +98,7 @@ const STEPS: Step[] = [
             <p className="font-display text-base font-semibold text-foreground">Locksy: Tab Locker</p>
             <p className="mt-1 text-xs text-muted-foreground">{browser.store}</p>
           </div>
-          <a href={browser.url} target="_blank" rel="noopener noreferrer" className="btn-primary h-10 px-5">
+          <a href={browser.url} target="_blank" rel="noopener noreferrer" className="btn-primary btn-glow h-10 px-5">
             Add to {browser.name}
           </a>
         </div>
@@ -268,10 +269,9 @@ const STEPS: Step[] = [
 
 export default function GettingStarted() {
   const [active, setActive] = useState(0)
-  const [browser, setBrowser] = useState<BrowserLink>(PRIMARY_BROWSERS[0])
+  const { browser } = useVisitorBrowser()
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 
-  useEffect(() => setBrowser(detectBrowser()), [])
 
   const go = (i: number, focus = false) => {
     const next = (i + STEPS.length) % STEPS.length

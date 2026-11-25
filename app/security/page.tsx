@@ -1,15 +1,14 @@
+import { SmartInstallButton } from "@/components/install-buttons"
 import type { Metadata } from 'next'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import SupportChatCTA from "@/components/support-chat-cta"
 import CTASection from "@/components/cta-section"
 import { generatePageMetadata, generateBreadcrumbSchema } from "@/lib/metadata"
-import Link from 'next/link'
 import { PRO_CHECKOUT_URL } from '@/lib/pro'
 import { PageHero, PageSection, IconTile } from "@/components/page-shell"
 import SectionHeading from "@/components/section-heading"
 import {
-  ArrowRight,
   ArrowUpRight,
   Check,
   Eye,
@@ -635,9 +634,7 @@ export default function SecurityPage() {
                 Get zero-knowledge tab locking, biometric unlock, and auto-lock protection in under 30 seconds. Free forever.
               </p>
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                <Link href="/#download" className="btn-primary btn-lg">
-                  Install Locksy Free Now <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
+                <SmartInstallButton label="Add to {name}, it's free" size="lg" />
                 <a
                   href={PRO_CHECKOUT_URL}
                   target="_blank"

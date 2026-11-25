@@ -6,7 +6,8 @@ import Link from "next/link"
 import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { PRO_CHECKOUT_URL } from "@/lib/pro"
-import { ALL_BROWSERS, LOCKSY_LOGO_URL } from "@/lib/browsers"
+import { ALL_BROWSERS, LOCKSY_LOGO_URL, type BrowserLink } from "@/lib/browsers"
+import { useVisitorBrowser } from "@/components/install-buttons"
 
 const NAV_LINKS = [
   { label: "Features", href: "/#features" },
@@ -17,24 +18,35 @@ const NAV_LINKS = [
   { label: "Blog", href: "/blog" },
 ]
 
-function InstallMenu({ onSelect }: { onSelect?: () => void }) {
+function InstallMenu({ onSelect, current }: { onSelect?: () => void; current: BrowserLink }) {
+  // The visitor's browser first, then everything else.
+  const list = [current, ...ALL_BROWSERS.filter((b) => b.id !== current.id)]
   return (
     <div className="p-1.5">
       <p className="px-3 pt-2 pb-1.5 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
         Choose your browser
       </p>
-      {ALL_BROWSERS.map((b) => (
+      {list.map((b, i) => (
         <a
           key={b.id}
           href={b.url}
           target="_blank"
           rel="noopener noreferrer"
           onClick={onSelect}
-          className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-muted transition-colors"
+          className={`flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors ${
+            i === 0 ? "bg-highlight/10 ring-1 ring-highlight/30 hover:bg-highlight/15" : "hover:bg-muted"
+          }`}
         >
           <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
           <span className="flex-1 min-w-0">
-            <span className="block text-sm font-medium text-foreground">{b.name}</span>
+            <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+              {b.name}
+              {i === 0 && (
+                <span className="rounded-full bg-highlight/15 px-1.5 py-px text-[10px] font-medium text-highlight">
+                  Your browser
+                </span>
+              )}
+            </span>
             <span className="block text-xs text-muted-foreground">{b.store}</span>
           </span>
           <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
@@ -49,6 +61,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [showInstall, setShowInstall] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const { browser } = useVisitorBrowser()
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12)
@@ -126,14 +139,15 @@ export default function Header() {
               onClick={() => setShowInstall((v) => !v)}
               aria-expanded={showInstall}
               aria-haspopup="menu"
-              className="inline-flex h-10 items-center gap-1.5 rounded-full bg-foreground px-5 text-sm font-medium text-background hover:opacity-90 transition-opacity"
+              className="inline-flex h-10 items-center gap-2 rounded-full bg-foreground pl-3.5 pr-4 text-sm font-medium text-background hover:opacity-90 transition-opacity"
             >
-              Add to browser
+              <img src={browser.icon} alt="" className="h-4 w-4 object-contain" />
+              Add to {browser.name}
               <ChevronDown className={`h-4 w-4 transition-transform ${showInstall ? "rotate-180" : ""}`} />
             </button>
             {showInstall && (
               <div className="absolute right-0 mt-2 w-72 overflow-hidden rounded-2xl border border-border bg-popover shadow-2xl animate-in fade-in slide-in-from-top-1 duration-150">
-                <InstallMenu onSelect={() => setShowInstall(false)} />
+                <InstallMenu current={browser} onSelect={() => setShowInstall(false)} />
               </div>
             )}
           </div>
@@ -170,7 +184,7 @@ export default function Header() {
             ))}
           </nav>
           <div className="my-2 h-px bg-border" />
-          <InstallMenu onSelect={() => setIsMenuOpen(false)} />
+          <InstallMenu current={browser} onSelect={() => setIsMenuOpen(false)} />
           <div className="mt-2 grid grid-cols-2 gap-2 p-1.5">
             <a
               href={PRO_CHECKOUT_URL}

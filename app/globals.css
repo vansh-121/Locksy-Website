@@ -176,6 +176,14 @@
     @apply inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full border border-border bg-card/60 text-foreground text-sm sm:text-[15px] font-medium transition-colors duration-200 hover:bg-muted;
   }
 
+  /* Soft brand glow on the install button for the visitor's own browser. */
+  .btn-glow {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--highlight) 45%, transparent),
+      0 0 0 5px color-mix(in srgb, var(--highlight) 14%, transparent),
+      0 12px 40px -8px color-mix(in srgb, var(--highlight) 65%, transparent);
+  }
+
   .btn-lg {
     @apply h-14 px-8 text-base;
   }

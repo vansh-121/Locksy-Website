@@ -1,7 +1,8 @@
 "use client"
 
+import { SmartInstallButton } from "@/components/install-buttons"
 import Link from "next/link"
-import { Shield, Lock, Github, Heart, Code2, Globe, Zap, ArrowRight } from "lucide-react"
+import { Shield, Lock, Github, Heart, Code2, Globe, Zap } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { PageHero, PageSection, IconTile } from "@/components/page-shell"
@@ -383,15 +384,8 @@ export default function AboutClient({ guideCount }: { guideCount: number }) {
                                     Free forever, no account needed.
                                 </p>
                                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                                    <a
-                                        href="https://chromewebstore.google.com/detail/kiediieibclgkcnkkmjlhmdainpoidim"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="btn-primary btn-lg"
-                                    >
-                                        Install Locksy — Free
-                                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                                    </a>
+                                    {/* Points at the visitor's own store */}
+                                    <SmartInstallButton label="Add to {name}, it's free" size="lg" />
                                     <a
                                         href="https://github.com/vansh-121/Locksy"
                                         target="_blank"

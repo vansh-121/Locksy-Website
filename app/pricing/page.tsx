@@ -1,3 +1,4 @@
+import { SmartInstallButton } from "@/components/install-buttons"
 import type { Metadata } from "next"
 import Link from "next/link"
 import {
@@ -606,9 +607,7 @@ export default function PricingPage() {
                                     Get Locksy Pro — {PRO_PRICE} Lifetime
                                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                                 </a>
-                                <Link href="/#download" className="btn-secondary w-full sm:w-auto">
-                                    Install Free Extension
-                                </Link>
+                                <SmartInstallButton label="Add to {name}, free" variant="secondary" arrow={false} className="w-full sm:w-auto" />
                             </div>
 
                             <p className="mt-6 text-xs text-muted-foreground">

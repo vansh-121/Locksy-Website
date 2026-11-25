@@ -1,5 +1,6 @@
 "use client"
 
+import { SmartInstallButton } from "@/components/install-buttons"
 import { useState, useCallback, useEffect } from 'react'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -316,9 +317,7 @@ export default function PasswordGeneratorClient() {
               Lock and encrypt sensitive open browser tabs with master password protection and biometric unlock.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href="/#download" className="btn-primary">
-                Install Locksy Free
-              </Link>
+              <SmartInstallButton label="Add Locksy to {name}, free" />
               <Link href="/tools/password-strength-checker" className="btn-secondary">
                 Test Password Strength Meter
               </Link>

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { Check, Minus, ChevronDown, ArrowUpRight, ShieldCheck } from "lucide-react"
 import { PRO_CHECKOUT_URL, PRO_PRICE } from "@/lib/pro"
 import { ALL_BROWSERS } from "@/lib/browsers"
+import { useVisitorBrowser } from "@/components/install-buttons"
 import SectionHeading from "@/components/section-heading"
 
 interface PricingProps {
@@ -52,6 +53,9 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
   const [showAll, setShowAll] = useState(false)
   const [showInstallMenu, setShowInstallMenu] = useState(false)
   const installRef = useRef<HTMLDivElement>(null)
+  const { browser } = useVisitorBrowser()
+  // The visitor's browser first in the store menu.
+  const storeList = [browser, ...ALL_BROWSERS.filter((b) => b.id !== browser.id)]
 
   useEffect(() => {
     if (!showInstallMenu) return
@@ -94,19 +98,20 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                 aria-expanded={showInstallMenu}
                 className="btn-secondary w-full"
               >
-                Add to browser
+                <img src={browser.icon} alt="" className="h-4 w-4 object-contain" />
+                Add to {browser.name}
                 <ChevronDown className={`h-4 w-4 transition-transform ${showInstallMenu ? "rotate-180" : ""}`} />
               </button>
               {showInstallMenu && (
                 <div className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-2xl border border-border bg-popover p-1.5 shadow-2xl animate-in fade-in slide-in-from-top-1 duration-150">
-                  {ALL_BROWSERS.map((b) => (
+                  {storeList.map((b, i) => (
                     <a
                       key={b.id}
                       href={b.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setShowInstallMenu(false)}
-                      className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-muted transition-colors"
+                      className={`flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors ${i === 0 ? "bg-highlight/10 ring-1 ring-highlight/30" : "hover:bg-muted"}`}
                     >
                       <img src={b.icon} alt="" className="h-5 w-5 object-contain" />
                       <span className="flex-1 text-sm text-foreground">{b.name}</span>
