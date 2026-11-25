@@ -5,7 +5,7 @@ import Link from "next/link"
 import WhatsAppIcon from "./whatsapp-icon"
 import ProductHuntBadge from "./product-hunt-badge"
 import { WHATSAPP_CHANNEL_URL, openWhatsAppChannel } from "@/lib/social-links"
-import { CHROME_STORE_URL, EDGE_STORE_URL, FIREFOX_STORE_URL, LOCKSY_LOGO_URL } from "@/lib/browsers"
+import { CHROME_STORE_URL, EDGE_STORE_URL, FIREFOX_STORE_URL, LOCKSY_LOGO_URL, MIN_CHROMIUM, MIN_GECKO } from "@/lib/browsers"
 
 type FooterLink = { label: string; href: string; external?: boolean; onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void }
 
@@ -141,12 +141,16 @@ export default function Footer() {
             ["opera", "Opera"],
             ["vivaldi", "Vivaldi"],
             ["arc", "Arc"],
+            ["comet", "Comet"],
           ].map(([id, name]) => (
             <span key={id} className="inline-flex items-center gap-1.5">
               <img src={`/browsers/${id}.png`} alt="" className="h-4 w-4 object-contain opacity-80" />
               {name}
             </span>
           ))}
+          <Link href="/guide#install" className="underline decoration-border underline-offset-4 hover:text-foreground">
+            + any Chromium {MIN_CHROMIUM}+ or Firefox {MIN_GECKO}+ browser
+          </Link>
         </div>
 
         <div className="mt-8 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">

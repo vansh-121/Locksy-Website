@@ -87,7 +87,7 @@ const STEPS: Step[] = [
     body: (
       <>
         Open your browser&apos;s extension store and click <strong>Add</strong>. Chrome, Edge and Firefox each have their own store.
-        Brave, Opera, Vivaldi, Arc and Comet install from the Chrome Web Store.
+        Brave, Opera, Vivaldi, Arc, Comet, Yandex and other Chromium browsers install from the Chrome Web Store; Zen, LibreWolf, Floorp and Waterfox use Firefox Add-ons.
       </>
     ),
     visual: (browser) => (

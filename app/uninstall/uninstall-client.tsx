@@ -799,7 +799,7 @@ export default function UninstallClient({
                             <StoreNote visitor={visitor} className="mt-6 text-center" />
                             {!visitor.note && (
                                 <p className="mt-2 text-xs text-muted-foreground">
-                                    Brave, Opera, Vivaldi and Arc install from the Chrome Web Store.
+                                    Brave, Opera, Vivaldi, Arc, Comet and Yandex install from the Chrome Web Store. Zen, LibreWolf, Floorp and Waterfox install from Firefox Add-ons.
                                 </p>
                             )}
 

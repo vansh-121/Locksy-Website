@@ -66,11 +66,16 @@
           "caption": "Which browsers Locksy works on",
           "head": ["Browser", "Supported", "Install from"],
           "rows": [
-            ["Google Chrome", "Yes", "Chrome Web Store"],
-            ["Microsoft Edge", "Yes", "Edge Add-ons"],
-            ["Firefox", "Yes", "Firefox Add-ons"],
-            ["Brave, Opera, Vivaldi, Arc, Comet", "Yes", "Chrome Web Store"],
-            ["Safari", "Not yet", "—"]
+            ["Google Chrome (Windows, macOS, Linux, ChromeOS)", "Yes", "Chrome Web Store"],
+            ["Microsoft Edge (Windows, macOS, Linux)", "Yes", "Edge Add-ons"],
+            ["Brave, Opera, Opera GX, Vivaldi, Arc, Comet, Yandex", "Yes, desktop", "Chrome Web Store"],
+            ["Chromium, Ungoogled Chromium, Thorium and other Chromium 111+ browsers", "Yes, desktop", "Chrome Web Store"],
+            ["Firefox (desktop) and Firefox for Android", "Yes", "Firefox Add-ons"],
+            ["Zen, LibreWolf, Floorp, Waterfox", "Yes", "Firefox Add-ons"],
+            ["Chrome, Brave, Opera, Vivaldi or Samsung Internet on Android", "No, use Firefox for Android", "—"],
+            ["Any browser on iPhone or iPad", "No", "—"],
+            ["DuckDuckGo Browser", "No, no extension support", "—"],
+            ["Safari (macOS)", "Not yet", "—"]
           ]
         },
         {

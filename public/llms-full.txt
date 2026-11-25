@@ -43,7 +43,7 @@ Q: Can I lock browser tabs during specific hours automatically?
 A: Yes. Locksy's Scheduled Locking feature enforces time-based tab locks. Set custom start/end times (24-hour format), choose which days of the week to apply, and Locksy automatically locks tabs during those hours. Example: lock social media tabs during work hours (9 AM – 5 PM).
 
 Q: Does Locksy work on Edge, Firefox, Brave, and Opera?
-A: Yes. Locksy works on Chrome, Microsoft Edge, Firefox, Brave, Opera, Vivaldi, Arc, Comet, and all Chromium-based browsers. Install links: Chrome Web Store, Edge Add-ons, Firefox Add-ons.
+A: Yes. Locksy runs in desktop Chromium 111+ browsers (Chrome, Microsoft Edge, Brave, Opera, Opera GX, Vivaldi, Arc, Perplexity Comet, Yandex, Chromium, Ungoogled Chromium, Thorium) and in Firefox 109+ and Gecko forks (Firefox desktop and Android, Zen, LibreWolf, Floorp, Waterfox). It does not run in Safari, on iPhone/iPad, in Chromium browsers on Android, or in DuckDuckGo Browser. Install links: Chrome Web Store, Edge Add-ons, Firefox Add-ons.
 
 Q: What happens if someone tries to guess my Locksy password?
 A: Locksy implements rate limiting with exponential backoff. After 3 failed attempts, the extension captures a local webcam snapshot (intruder snap). After 10 failed attempts, a 5-minute lockout is enforced. The rate limiting runs in the background service worker, so opening additional tabs cannot reset it.

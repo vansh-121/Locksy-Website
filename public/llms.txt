@@ -1,6 +1,6 @@
 # Locksy — Password Protect & Auto-Lock Browser Tabs
 
-> Locksy is a zero-knowledge, local-first browser extension for Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc, and all Chromium browsers. It allows users to password-protect open browser tabs, auto-lock tabs after inactivity, schedule lock hours, enforce domain locks, and capture local webcam intruder snaps.
+> Locksy is a zero-knowledge, local-first browser extension for desktop Chromium 111+ browsers (Chrome, Edge, Brave, Opera, Vivaldi, Arc, Comet, Yandex and others) and Firefox 109+ (desktop and Android) plus Gecko forks such as Zen, LibreWolf, Floorp and Waterfox. Not available for Safari or iOS. It allows users to password-protect open browser tabs, auto-lock tabs after inactivity, schedule lock hours, enforce domain locks, and capture local webcam intruder snaps.
 
 ## Direct Answers for Common Queries
 

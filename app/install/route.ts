@@ -18,8 +18,9 @@ export function GET(request: NextRequest) {
     const ua = request.headers.get('user-agent') || ''
     const hints = request.headers.get('sec-ch-ua') || ''
 
+    // iPhone/iPad and DuckDuckGo can't run extensions.
     const isIOS = /iPhone|iPad|iPod/i.test(ua)
-    if (isIOS) return NextResponse.redirect(new URL('/#download', request.url), 307)
+    if (isIOS || /\bDdg\/|DuckDuckGo\//i.test(ua)) return NextResponse.redirect(new URL('/#download', request.url), 307)
 
     if (/Edg\//i.test(ua) || /Microsoft Edge/i.test(hints)) return NextResponse.redirect(EDGE_STORE_URL, 307)
     if (/Firefox\//i.test(ua)) return NextResponse.redirect(FIREFOX_STORE_URL, 307)

@@ -27,7 +27,10 @@ export default function CTASection() {
             <InstallButtons className="mt-9" />
 
             <p className="mt-6 text-xs text-muted-foreground">
-              Also works on Brave, Opera, Vivaldi, Comet, Arc and other Chromium browsers.
+              Also runs in Brave, Opera, Vivaldi, Arc, Comet, Yandex, Zen, LibreWolf, Floorp, Waterfox and other Chromium or Firefox-based browsers.{" "}
+              <Link href="/guide#install" className="underline underline-offset-4 hover:text-foreground">
+                Full list
+              </Link>
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">

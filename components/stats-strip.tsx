@@ -1,7 +1,9 @@
+import { NAMED_SUPPORTED_COUNT } from "@/lib/browsers"
+
 const STATS = [
   { value: "5,000+", label: "People protecting their tabs" },
   { value: "4.4 / 5", label: "Average store rating" },
-  { value: "7", label: "Supported browsers" },
+  { value: `${NAMED_SUPPORTED_COUNT}+`, label: "Browsers it runs in" },
   { value: "600k", label: "PBKDF2 hashing rounds" },
   { value: "0", label: "Accounts or sign-ups" },
   { value: "30 sec", label: "From install to first lock" },

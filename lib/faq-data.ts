@@ -78,7 +78,7 @@ export const faqData: FAQItem[] = [
   },
   {
     question: "Which browsers are supported?",
-    answer: "Locksy works on all major browsers including Firefox, Google Chrome, Microsoft Edge, Brave, Opera, Comet, Vivaldi, Arc, and many more. You can install it from the Firefox Add-ons, Chrome Web Store or Edge Add-ons store.",
+    answer: "Locksy runs in any desktop browser based on Chromium 111 or newer, including Google Chrome, Microsoft Edge, Brave, Opera and Opera GX, Vivaldi, Arc, Perplexity Comet, Yandex Browser, Chromium, Ungoogled Chromium and Thorium. It also runs in Firefox 109+ and Gecko-based browsers: Firefox (desktop and Android), Zen, LibreWolf, Floorp and Waterfox. Edge installs from Edge Add-ons, Firefox and its forks from Firefox Add-ons, and every other Chromium browser from the Chrome Web Store. It does not work in Safari, in any browser on iPhone or iPad, in Chromium browsers on Android (use Firefox for Android instead), or in DuckDuckGo Browser.",
   },
   {
     question: "How do I password protect a tab in Chrome?",

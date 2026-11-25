@@ -240,7 +240,7 @@ export const jsonLdSoftwareApplication = {
     softwareVersion: '3.6.5',
     description: siteDescription,
     url: siteUrl,
-    browserRequirements: 'Works on Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Comet, Arc, and all Chromium-based browsers',
+    browserRequirements: 'Requires a desktop Chromium 111+ browser (Chrome, Edge, Brave, Opera, Vivaldi, Arc, Comet, Yandex) or Firefox 109+ (desktop or Android) and Gecko forks (Zen, LibreWolf, Floorp, Waterfox). Not available for Safari or iOS.',
     screenshot: `${siteUrl}/web-app-manifest-512x512.png`,
     // Verified Chrome Web Store, Edge Add-ons & Firefox Add-ons rating aggregation
     // Calculation: (4.3 * 23 + 4.4 * 5 + 5.0 * 2) / 30 = 130.9 / 30 = 4.363 -> 4.4

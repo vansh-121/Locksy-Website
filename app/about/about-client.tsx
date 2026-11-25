@@ -116,7 +116,7 @@ export default function AboutClient({ guideCount }: { guideCount: number }) {
                                     Locksy set out to be different: <strong className="font-medium text-foreground">100% free, completely offline, and privacy-first from day one</strong>.
                                 </p>
                                 <p className="text-base leading-relaxed text-muted-foreground md:text-[17px]">
-                                    Today, Locksy protects thousands of users across Chrome, Edge, Firefox, Brave, Opera, Vivaldi, and more —
+                                    Today, Locksy protects thousands of users across Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc, Zen and other Chromium and Firefox-based browsers —
                                     all while keeping your data entirely on your device.
                                 </p>
                             </div>
