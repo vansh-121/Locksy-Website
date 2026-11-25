@@ -40,8 +40,8 @@ function InstallMenu({ onSelect, current }: { onSelect?: () => void; current: Br
           <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
           <span className="flex-1 min-w-0">
             <span className="flex items-center gap-2 text-sm font-medium text-foreground">
-              {b.name}
-              {i === 0 && (
+              {b.name === "your browser" ? "This browser" : b.name}
+              {i === 0 && b.name !== "your browser" && (
                 <span className="rounded-full bg-highlight/15 px-1.5 py-px text-[10px] font-medium text-highlight">
                   Your browser
                 </span>

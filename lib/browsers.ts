@@ -64,7 +64,7 @@ export const COMPATIBILITY = {
 /** Number of browsers named as supported above (for the homepage stat). */
 export const NAMED_SUPPORTED_COUNT = 18
 
-export type BrowserId = "chrome" | "edge" | "firefox" | "brave" | "opera" | "vivaldi" | "arc" | "comet" | "yandex"
+export type BrowserId = "chrome" | "edge" | "firefox" | "brave" | "opera" | "vivaldi" | "arc" | "comet" | "yandex" | "chromium"
 
 export interface BrowserLink {
   id: BrowserId
@@ -93,6 +93,34 @@ export const ALL_BROWSERS: BrowserLink[] = [...PRIMARY_BROWSERS, ...SECONDARY_BR
 /** Detected-only browsers: supported, but without an icon in the browser lists. */
 const DETECT_ONLY: BrowserLink[] = [
   { id: "yandex", name: "Yandex Browser", icon: "/browsers/chrome-web-store.png", url: CHROME_STORE_URL, store: "Chrome Web Store" },
+  // A Chromium browser we can't name (e.g. one that reports only "Chromium").
+  // Shown as "Add to your browser" rather than wrongly saying "Chrome".
+  { id: "chromium", name: "your browser", icon: "/browsers/chrome-web-store.png", url: CHROME_STORE_URL, store: "Chrome Web Store" },
+]
+
+/**
+ * Browser name from the User-Agent Client Hints brand list. Most Chromium
+ * browsers report their own brand here (real Chrome reports "Google Chrome",
+ * Thorium, Opera, Brave, Edge etc. report theirs). Returns null when the list
+ * only contains the generic "Chromium" / "Not A Brand" entries, or when the
+ * API isn't available (Firefox, Safari, insecure pages).
+ */
+function brandName(): string | null {
+  const data = (navigator as Navigator & { userAgentData?: { brands?: { brand: string }[] } }).userAgentData
+  const brands = data?.brands?.map((b) => b.brand.trim()).filter(Boolean) ?? []
+  const own = brands.find((b) => !/^(Chromium|Not.?A.?Brand.*|Not\)A;Brand)$/i.test(b))
+  return own ?? null
+}
+
+const KNOWN_BRANDS: [RegExp, BrowserId][] = [
+  [/^Google Chrome$/i, "chrome"],
+  [/^Microsoft Edge$/i, "edge"],
+  [/^Brave$/i, "brave"],
+  [/^Opera/i, "opera"],
+  [/^Vivaldi$/i, "vivaldi"],
+  [/^Yandex/i, "yandex"],
+  [/^Arc$/i, "arc"],
+  [/Comet/i, "comet"],
 ]
 
 export const getBrowser = (id: BrowserId) => [...ALL_BROWSERS, ...DETECT_ONLY].find((b) => b.id === id)!
@@ -185,8 +213,20 @@ export function detectVisitor(): VisitorBrowser {
   } catch {
     /* not in a document yet */
   }
-  // Chrome, Chromium, Ungoogled Chromium, Thorium, Comet and other Chromium browsers.
-  if (!Number.isNaN(chromiumVersion)) return done("chrome")
+  // Any other Chromium browser: name it from its brand if it reports one,
+  // otherwise use a neutral "your browser" label. Only real Google Chrome
+  // (brand "Google Chrome") is called Chrome.
+  if (!Number.isNaN(chromiumVersion)) {
+    const brand = brandName()
+    if (brand) {
+      const known = KNOWN_BRANDS.find(([re]) => re.test(brand))
+      if (known) return done(known[1])
+      return { browser: { ...getBrowser("chromium"), name: brand }, detected: true, supported: true }
+    }
+    // No brand info (API unavailable): the user agent is Chrome's, but forks
+    // like Vivaldi send the same string, so stay neutral.
+    return done("chromium")
+  }
 
   // Desktop Safari and anything else.
   if (/Safari\//.test(ua)) {

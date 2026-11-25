@@ -114,7 +114,7 @@ export default function Pricing({ hideHeader = false, className = "" }: PricingP
                       className={`flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors ${i === 0 ? "bg-highlight/10 ring-1 ring-highlight/30" : "hover:bg-muted"}`}
                     >
                       <img src={b.icon} alt="" className="h-5 w-5 object-contain" />
-                      <span className="flex-1 text-sm text-foreground">{b.name}</span>
+                      <span className="flex-1 text-sm text-foreground">{b.name === "your browser" ? "This browser" : b.name}</span>
                       <span className="text-xs text-muted-foreground">{b.store}</span>
                       <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground" />
                     </a>

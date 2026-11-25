@@ -76,9 +76,12 @@ function StoreNote({ visitor, className = "" }: { visitor: VisitorBrowser; class
     )
   }
   if (usesChromeStore(visitor.browser)) {
+    const unnamed = visitor.browser.name === "your browser"
     return (
       <p className={`text-xs text-muted-foreground ${className}`}>
-        {visitor.browser.name} installs Locksy from the Chrome Web Store.
+        {unnamed
+          ? "Your browser installs Locksy from the Chrome Web Store."
+          : `${visitor.browser.name} installs Locksy from the Chrome Web Store.`}
       </p>
     )
   }

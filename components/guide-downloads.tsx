@@ -31,7 +31,7 @@ export default function GuideDownloads() {
             </span>
             <div className="min-w-0">
               <p className="text-xs text-muted-foreground">{i === 0 && visitor.detected ? "Your browser" : "Get it for"}</p>
-              <p className="font-medium text-foreground">{b.name}</p>
+              <p className="font-medium text-foreground">{b.name === "your browser" ? "This browser" : b.name}</p>
               <p className="truncate text-xs text-muted-foreground">{b.store}</p>
             </div>
             <ArrowUpRight
