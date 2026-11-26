@@ -49,7 +49,7 @@ const buildStats = (guideCount: number) => [
     { number: "5,000+", label: "Active Users" },
     { number: `${guideCount}`, label: "In-Depth Guides" },
     { number: "8+", label: "Security Layers" },
-    { number: "7+", label: "Browsers Supported" },
+    { number: "18+", label: "Browsers Supported" },
 ]
 
 const inlineLink = "text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors"

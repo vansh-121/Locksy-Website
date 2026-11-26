@@ -322,7 +322,7 @@ export default function Hero() {
             href="#how-it-works"
             className="mt-5 inline-flex items-center gap-1.5 text-sm text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
           >
-            New to tab lockers? Follow the six-step setup
+            New to Locksy? Follow the six-step setup
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </a>
         </div>
