@@ -137,7 +137,7 @@ function DemoVideo() {
     "pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md transition-colors hover:bg-black/70"
 
   return (
-    <div ref={containerRef} id="demo" className="relative mx-auto mt-16 max-w-5xl scroll-mt-28 md:mt-20">
+    <div ref={containerRef} id="demo" className="relative mx-auto mt-16 max-w-4xl scroll-mt-28 md:mt-20">
       {/* Brand glow behind the frame */}
       <div
         aria-hidden="true"

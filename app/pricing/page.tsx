@@ -453,6 +453,7 @@ export default function PricingPage() {
                         </div>
 
                         {/* Scrollable Container on Mobile */}
+                        <p className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground md:hidden" aria-hidden="true">Swipe sideways to see every column <span>&rarr;</span></p>
                         <div className="overflow-x-auto">
                             <div className="min-w-[620px] md:min-w-0">
                                 {/* Table Header */}

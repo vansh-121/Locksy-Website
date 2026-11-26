@@ -562,7 +562,8 @@ export default function UninstallClient({
                     description="The two things people usually move to instead are a separate browser profile or a tab manager. Neither is built to keep one tab shut while you keep working in the others."
                 />
 
-                <div className="surface mt-10 overflow-hidden">
+                <div className="mt-10"><p className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground md:hidden" aria-hidden="true">Swipe sideways to see every column <span>&rarr;</span></p></div>
+                <div className="surface overflow-hidden">
                     {/* min-w is what makes the overflow-x-auto above actually
                         engage. With `w-full` alone the table just squashes four
                         columns into a 375px viewport instead of scrolling. */}

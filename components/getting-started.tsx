@@ -208,7 +208,7 @@ const STEPS: Step[] = [
       </>
     ),
     visual: () => (
-      <div className="grid items-start gap-4 sm:grid-cols-[1fr_200px]">
+      <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 sm:grid-cols-[minmax(0,1fr)_200px]">
         <div className="grid gap-2.5">
           {[
             { icon: MousePointerClick, title: "Locksy icon", detail: <span className="text-xs text-muted-foreground">Current Tab</span> },
@@ -315,7 +315,7 @@ export default function GettingStarted() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]">
+        <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]">
           {/* Step list */}
           <div role="tablist" aria-label="Setup steps" aria-orientation="vertical" className="surface p-2">
             {STEPS.map((s, i) => {

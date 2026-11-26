@@ -433,7 +433,8 @@ export default function SecurityPage() {
             description={<>Compare Locksy&apos;s architectural guarantees against alternative tools.</>}
           />
 
-          <div className="surface mt-12 overflow-x-auto">
+          <div className="mt-12"><p className="mb-2 px-1 flex items-center gap-1.5 text-xs text-muted-foreground md:hidden" aria-hidden="true">Swipe sideways to see every column <span>&rarr;</span></p></div>
+          <div className="surface mt-0 overflow-x-auto md:mt-0">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-border">

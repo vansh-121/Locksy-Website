@@ -1,6 +1,7 @@
 import type React from "react"
 import { Inter, DM_Sans, Geist_Mono } from "next/font/google"
 import "./globals.css"
+import Script from "next/script"
 import {
   metadata as seoMetadata,
   jsonLdWebsite,
@@ -89,12 +90,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHowToInstall) }}
         />
-        {/* Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8214980075451384"
-          crossOrigin="anonymous"
-        />
+        {/* AdSense site verification (works without the script being in <head>). */}
+        <meta name="google-adsense-account" content="ca-pub-8214980075451384" />
 
       </head>
       <body
@@ -108,6 +105,16 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           {children}
+          {/* Google AdSense. Loaded after hydration: as a raw <head> script it
+              injected its own <script> into <head> before React hydrated,
+              causing intermittent hydration-mismatch errors. Also keeps it off
+              the critical rendering path. */}
+          <Script
+            id="adsense"
+            strategy="afterInteractive"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8214980075451384"
+            crossOrigin="anonymous"
+          />
           <SocialProofToast />
           <WhatsAppFloat />
           <WhatsAppDialog />

@@ -112,12 +112,12 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1" aria-label="Main">
+        <nav className="hidden xl:flex items-center gap-1" aria-label="Main">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-full px-2.5 xl:px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+              className="rounded-full px-3 2xl:px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
             >
               {l.label}
             </Link>
@@ -125,13 +125,13 @@ export default function Header() {
         </nav>
 
         {/* Desktop actions */}
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden xl:flex items-center gap-2">
           <ThemeToggle />
           <a
             href={PRO_CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
+            className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
           >
             Get Pro
           </a>
@@ -141,7 +141,7 @@ export default function Header() {
               onClick={() => setShowInstall((v) => !v)}
               aria-expanded={showInstall}
               aria-haspopup="menu"
-              className="inline-flex h-10 items-center gap-2 rounded-full bg-foreground pl-3.5 pr-4 text-sm font-medium text-background hover:opacity-90 transition-opacity"
+              className="inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-full bg-foreground pl-3.5 pr-4 text-sm font-medium text-background hover:opacity-90 transition-opacity"
             >
               <img src={browser.icon} alt="" className="h-4 w-4 object-contain" />
               Add to {browser.name}
@@ -156,7 +156,17 @@ export default function Header() {
         </div>
 
         {/* Mobile actions */}
-        <div className="flex items-center gap-1.5 lg:hidden">
+        <div className="flex items-center gap-1.5 xl:hidden">
+          {/* Tablets have room for the install button next to the menu */}
+          <a
+            href={browser.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden h-9 items-center gap-2 whitespace-nowrap rounded-full bg-foreground pl-3 pr-4 text-sm font-medium text-background hover:opacity-90 transition-opacity sm:inline-flex"
+          >
+            <img src={browser.icon} alt="" className="h-4 w-4 object-contain" />
+            Add to {browser.name}
+          </a>
           <ThemeToggle />
           <button
             type="button"
@@ -172,7 +182,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="mx-auto mt-2 max-w-6xl overflow-y-auto rounded-3xl border border-black/[0.08] bg-white/85 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/[0.14] dark:bg-[#101218]/80 dark:shadow-[0_20px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] lg:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="mx-auto mt-2 max-w-6xl overflow-y-auto rounded-3xl border border-black/[0.08] bg-white/85 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/[0.14] dark:bg-[#101218]/80 dark:shadow-[0_20px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] xl:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
           <nav className="flex flex-col" aria-label="Mobile">
             {[...NAV_LINKS, { label: "FAQ", href: "/#faq" }].map((l) => (
               <Link
