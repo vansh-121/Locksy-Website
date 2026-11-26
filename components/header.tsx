@@ -133,7 +133,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1" aria-label="Main">
+        <nav className="hidden min-[1180px]:flex items-center gap-0.5 min-[1280px]:gap-1" aria-label="Main">
           {NAV_LINKS.map((l) => {
             const active = isLinkActive(l.href, pathname)
             return (
@@ -196,7 +196,7 @@ export default function Header() {
         </nav>
 
         {/* Desktop actions */}
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden min-[1180px]:flex items-center gap-2">
           <ThemeToggle />
           <a
             href={PRO_CHECKOUT_URL}
@@ -230,7 +230,7 @@ export default function Header() {
         </div>
 
         {/* Mobile actions */}
-        <div className="flex items-center gap-1.5 lg:hidden">
+        <div className="flex items-center gap-1.5 min-[1180px]:hidden">
           {/* Tablets have room for the install button next to the menu */}
           <a
             href={browser.url}
@@ -256,7 +256,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="mx-auto mt-2 max-w-5xl overflow-y-auto rounded-3xl border border-black/[0.08] bg-white/85 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/[0.14] dark:bg-[#101218]/80 dark:shadow-[0_20px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] lg:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="mx-auto mt-2 max-w-5xl overflow-y-auto rounded-3xl border border-black/[0.08] bg-white/85 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/[0.14] dark:bg-[#101218]/80 dark:shadow-[0_20px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] min-[1180px]:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
           <nav className="flex flex-col" aria-label="Mobile">
             {[...NAV_LINKS, ...RESOURCE_LINKS].map((l) => {
               const active = isLinkActive(l.href, pathname)
