@@ -108,9 +108,9 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
             <Header />
 
             <main className="page-top-offset pb-16 md:pb-24">
-                <div className="mx-auto max-w-[1080px] px-4 md:px-6">
+                <div className="mx-auto max-w-[1280px] px-4 md:px-6">
                     {/* Article Header */}
-                    <header className="max-w-[720px]">
+                    <header className="mx-auto max-w-[720px]">
                         <Breadcrumbs
                             centered={false}
                             items={[
@@ -193,7 +193,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                     </header>
 
                     {/* Hero Image */}
-                    <div className="mt-10 overflow-hidden rounded-3xl border border-border bg-muted">
+                    <div className="mx-auto mt-10 max-w-[1000px] overflow-hidden rounded-3xl border border-border bg-muted">
                         <img
                             src={post.image}
                             alt={post.imageAlt}
@@ -210,14 +210,14 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                         before hydration. On desktop it sits in the right column; on
                         smaller screens BlogToc's collapsible panel renders in-flow
                         above the article. */}
-                    <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,720px)_220px] lg:justify-between lg:gap-12">
+                    <div className="mx-auto mt-12 grid max-w-[720px] gap-10 xl:max-w-none xl:grid-cols-[minmax(0,1fr)_minmax(0,720px)_minmax(0,1fr)] xl:gap-12">
                         {headings.length > 0 && (
-                            <aside className="lg:order-2">
+                            <aside className="xl:col-start-3 xl:row-start-1 xl:max-w-[240px]">
                                 <BlogToc headings={headings} />
                             </aside>
                         )}
 
-                        <div className="min-w-0 lg:order-1">
+                        <div className="min-w-0 xl:col-start-2 xl:row-start-1">
                             {/* Key Takeaways — scannable bullets for answer engines (AEO).
                                 Rendered from props, present in server HTML. */}
                             {post.keyTakeaways && post.keyTakeaways.length > 0 && (
@@ -482,7 +482,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
 
                     {/* Related Posts */}
                     {relatedPosts.length > 0 && (
-                        <section className="mt-20 border-t border-border pt-14">
+                        <section className="mx-auto mt-20 max-w-[1000px] border-t border-border pt-14">
                             <h2 className="text-2xl font-semibold text-foreground md:text-3xl">
                                 Related Articles
                             </h2>

@@ -113,10 +113,10 @@ export default function BlogToc({ headings }: { headings: TocHeading[] }) {
 
     return (
         <>
-            {/* Desktop: sticky sidebar (lg and up) */}
+            {/* Desktop: sticky sidebar in the right margin (xl and up) */}
             <nav
                 aria-label="Table of contents"
-                className="hidden lg:block sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pb-4"
+                className="hidden xl:block sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pb-4"
             >
                 <p className="mb-4 flex items-center gap-2 text-xs font-medium text-muted-foreground">
                     <List className="h-3.5 w-3.5" aria-hidden="true" />
@@ -127,7 +127,7 @@ export default function BlogToc({ headings }: { headings: TocHeading[] }) {
             </nav>
 
             {/* Mobile / Tablet: collapsible panel above the content */}
-            <div className="lg:hidden rounded-2xl border border-border bg-card">
+            <div className="xl:hidden rounded-2xl border border-border bg-card">
                 <button
                     type="button"
                     onClick={() => setIsOpen((open) => !open)}

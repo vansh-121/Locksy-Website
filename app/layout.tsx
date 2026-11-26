@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="overflow-x-hidden" suppressHydrationWarning>
+    <html lang="en" className="overflow-x-clip" suppressHydrationWarning>
       <head>
         {/* Prevent flash of dismissed sale banner & maintain hero spacing before React hydration */}
         <script
@@ -98,7 +98,7 @@ export default function RootLayout({
 
       </head>
       <body
-        className={`${inter.variable} ${dmSans.variable} ${geistMono.variable} font-sans overflow-x-hidden`}
+        className={`${inter.variable} ${dmSans.variable} ${geistMono.variable} font-sans overflow-x-clip`}
         suppressHydrationWarning
       >
         <ThemeProvider
