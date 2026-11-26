@@ -13,9 +13,11 @@ const NAV_LINKS = [
   { label: "Features", href: "/#features" },
   { label: "Security", href: "/security" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Compare", href: "/compare" },
   { label: "Guide", href: "/guide" },
   { label: "Tools", href: "/tools" },
   { label: "Blog", href: "/blog" },
+  { label: "Support", href: "/contact" },
 ]
 
 function InstallMenu({ onSelect, current }: { onSelect?: () => void; current: BrowserLink }) {
@@ -110,12 +112,12 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1" aria-label="Main">
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1" aria-label="Main">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-full px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="rounded-full px-2.5 xl:px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
             >
               {l.label}
             </Link>
@@ -172,7 +174,7 @@ export default function Header() {
       {isMenuOpen && (
         <div className="mx-auto mt-2 max-w-6xl overflow-y-auto rounded-3xl border border-border bg-background/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
           <nav className="flex flex-col" aria-label="Mobile">
-            {[...NAV_LINKS, { label: "FAQ", href: "/#faq" }, { label: "Contact", href: "/contact" }].map((l) => (
+            {[...NAV_LINKS, { label: "FAQ", href: "/#faq" }].map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
