@@ -193,7 +193,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                     </header>
 
                     {/* Hero Image */}
-                    <div className="mx-auto mt-10 max-w-[1000px] overflow-hidden rounded-3xl border border-border bg-muted">
+                    <div className="mx-auto mt-10 max-w-[720px] overflow-hidden rounded-3xl border border-border bg-muted">
                         <img
                             src={post.image}
                             alt={post.imageAlt}
@@ -201,7 +201,7 @@ export function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
                             height={630}
                             fetchPriority="high"
                             decoding="async"
-                            className="h-64 w-full object-cover md:h-[460px]"
+                            className="block h-auto w-full"
                         />
                     </div>
 
