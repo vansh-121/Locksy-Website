@@ -228,7 +228,7 @@ export default function Hero() {
   const others = ALL_BROWSERS.filter((b) => b.id !== browser.id)
 
   return (
-    <section id="hero-section" className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+    <section id="hero-section" className="relative overflow-hidden pt-24 pb-20 md:pt-28 md:pb-28">
       {/* Background: dotted grid fading out + top brand glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_70%_55%_at_50%_0%,black,transparent)]" />
