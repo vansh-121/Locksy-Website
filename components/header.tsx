@@ -27,6 +27,12 @@ const RESOURCE_LINKS = [
   { label: "Support", href: "/contact", description: "Help, feedback & contact", icon: LifeBuoy },
 ]
 
+const MOBILE_LINKS = [
+  ...NAV_LINKS,
+  { label: "Tools", href: "/tools" },
+  { label: "Support", href: "/contact" },
+]
+
 function isLinkActive(href: string, pathname: string) {
   if (href.startsWith("/#")) return false
   return pathname === href || pathname.startsWith(`${href}/`)
@@ -258,7 +264,7 @@ export default function Header() {
       {isMenuOpen && (
         <div className="mx-auto mt-2 max-w-5xl overflow-y-auto rounded-3xl border border-black/[0.08] bg-white/85 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/[0.14] dark:bg-[#101218]/80 dark:shadow-[0_20px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] min-[1180px]:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
           <nav className="flex flex-col" aria-label="Mobile">
-            {[...NAV_LINKS, ...RESOURCE_LINKS].map((l) => {
+            {MOBILE_LINKS.map((l) => {
               const active = isLinkActive(l.href, pathname)
               return (
                 <Link
@@ -266,7 +272,7 @@ export default function Header() {
                   href={l.href}
                   aria-current={active ? "page" : undefined}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`rounded-2xl px-4 py-3 text-[15px] transition-colors ${
+                  className={`rounded-2xl px-4 py-2.5 text-[15px] transition-colors ${
                     active ? "bg-muted font-medium text-foreground" : "text-foreground hover:bg-muted"
                   }`}
                 >
