@@ -181,9 +181,8 @@ function DemoVideo() {
 
           {hasActivated && (
             <div
-              className={`pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-opacity duration-300 ${
-                showControls || !isPlaying ? "opacity-100" : "opacity-0"
-              }`}
+              className={`pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-opacity duration-300 ${showControls || !isPlaying ? "opacity-100" : "opacity-0"
+                }`}
             >
               {!isPlaying && (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -283,9 +282,9 @@ export default function Hero() {
               Add to {browser.name}, it&apos;s free
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="#demo" className="btn-secondary btn-lg w-full sm:w-auto">
-              <Play className="h-4 w-4 fill-current" />
-              Watch demo
+            <a href="#how-it-works" className="btn-secondary btn-lg w-full sm:w-auto">
+              How it works
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
 
@@ -317,14 +316,6 @@ export default function Hero() {
               </li>
             ))}
           </ul>
-
-          <a
-            href="#how-it-works"
-            className="mt-7 inline-flex items-center gap-1.5 text-sm text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
-          >
-            New to Locksy? Follow the six-step setup
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-          </a>
         </div>
 
         <DemoVideo />
