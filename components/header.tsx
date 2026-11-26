@@ -276,7 +276,6 @@ export default function Header() {
             })}
           </nav>
           <div className="my-2 h-px bg-border" />
-          <InstallMenu current={browser} onSelect={() => setIsMenuOpen(false)} />
           <div className="mt-2 grid grid-cols-2 gap-2 p-1.5">
             <a
               href={PRO_CHECKOUT_URL}
