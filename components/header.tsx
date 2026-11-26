@@ -99,10 +99,10 @@ export default function Header() {
   return (
     <header suppressHydrationWarning className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
       <div
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full border px-3 py-2 pl-4 transition-all duration-300 ${
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full border px-3 py-2 pl-4 backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300 ${
           isScrolled || isMenuOpen
-            ? "border-border bg-background/75 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl"
-            : "border-transparent bg-transparent"
+            ? "border-black/[0.08] bg-white/75 shadow-[0_10px_34px_rgba(0,0,0,0.10),inset_0_1px_0_rgba(255,255,255,0.75)] dark:border-white/[0.14] dark:bg-[#0d0f14]/70 dark:shadow-[0_12px_36px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.14)]"
+            : "border-black/[0.05] bg-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] dark:border-white/[0.09] dark:bg-[#0d0f14]/45 dark:shadow-[0_4px_24px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.10)]"
         }`}
       >
         {/* Logo */}
@@ -148,7 +148,7 @@ export default function Header() {
               <ChevronDown className={`h-4 w-4 transition-transform ${showInstall ? "rotate-180" : ""}`} />
             </button>
             {showInstall && (
-              <div className="absolute right-0 mt-2 w-72 overflow-hidden rounded-2xl border border-border bg-popover shadow-2xl animate-in fade-in slide-in-from-top-1 duration-150">
+              <div className="absolute right-0 mt-2 w-72 overflow-hidden rounded-2xl border border-black/[0.08] bg-white/85 shadow-[0_16px_40px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/[0.14] dark:bg-[#101218]/80 dark:shadow-[0_20px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] animate-in fade-in slide-in-from-top-1 duration-150">
                 <InstallMenu current={browser} onSelect={() => setShowInstall(false)} />
               </div>
             )}
@@ -172,7 +172,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="mx-auto mt-2 max-w-6xl overflow-y-auto rounded-3xl border border-border bg-background/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="mx-auto mt-2 max-w-6xl overflow-y-auto rounded-3xl border border-black/[0.08] bg-white/85 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/[0.14] dark:bg-[#101218]/80 dark:shadow-[0_20px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] lg:hidden max-h-[calc(100vh-6rem)] animate-in fade-in slide-in-from-top-2 duration-200">
           <nav className="flex flex-col" aria-label="Mobile">
             {[...NAV_LINKS, { label: "FAQ", href: "/#faq" }].map((l) => (
               <Link
